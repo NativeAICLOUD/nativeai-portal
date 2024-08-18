@@ -7,12 +7,16 @@ import Image from 'next/image';
 import styles from './page.module.css';
 
 export async function fetchBlogs() {
-  const res = await fetch('http://localhost:3000/api/blog', { cache: 'no-store' });
-  return res.json();
+  try {
+    const res = await fetch('http://localhost:3000/api/blog', { cache: 'no-store' });
+    return res.json();
+  } catch (error) {
+    return [];    
+  }
 }
 
 export default async function Home() {
-  const blogs = await fetchBlogs();
+  // const blogs = await fetchBlogs();
 
   return (
     <div>
