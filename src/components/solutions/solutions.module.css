@@ -1,0 +1,113 @@
+/* styles/solutions.module.css */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.frameContainer {
+  position: relative;
+  width: 2000px; /* Updated width */
+  height: 1600px; /* Updated height */
+}
+
+
+.frame {
+  position: absolute;
+  top: 70px; /* Set the top position */
+  left: 1200px; /* Set the left position */
+  width: 859px;
+  height: 674px;
+  z-index: -1; /* Ensure the frame stays behind the content */
+}
+
+.partner {
+  position: absolute;
+  top: 452px;
+  left: 240px;
+  width: 662px;
+  height: 90px;
+  z-index: -1;/* Ensure the frame stays behind the content */
+}
+.content {
+  position: relative;
+  text-align: center;
+  z-index: 1;
+}
+
+.title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 62px;
+  background: linear-gradient(90deg, #1E1E1E, #2573BA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: 880px;
+  height: 150px;
+  margin-top: 230px;
+  margin-left: 188px;
+
+}
+
+.description {
+  max-width: 833px; /* Set the width */
+  height: 107px; /* Set the height */
+  margin: 20px 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 400; /* Set the font weight */
+  margin-left: 188px;
+}
+
+.icons {
+  display: flex;
+  justify-content: center;
+  width: 1920px; /* Set the width */
+  height: 417px; /* Set the height */
+  margin: 20px 0;
+}
+
+.services {
+  display: flex;
+  justify-content: space-around;
+  width: 1920px; /* Ensure services section spans full width */
+  margin: 50px 0;
+}
+
+.service {
+  text-align: center;
+  width: 367px; /* Set the width */
+  height: 519px; /* Adjust the height to accommodate the text section */
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.serviceText {
+  width: 467px; /* Set the width */
+  height: 265px; /* Set the height for the text section */
+  margin-top: 30px; /* Space between image and text */
+}
+
+.service h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  margin: 20px 0;
+}
+
+.service p {
+  margin: 20px 0;
+}
+
+.service button {
+  padding: 10px 20px;
+  background-color: #1b3b58;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.service button:hover {
+  background-color: #1E1E1E;
+}

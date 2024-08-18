@@ -1,0 +1,148 @@
+/* CloudServicesSection.module.css */
+
+.cloudServicesSection {
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: #ffffff;
+  color: #000000;
+  
+}
+
+.cloudDescription {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  background: linear-gradient(90deg, #e8ffff  0%, #0167b8 20%, #e8fffe  100%);
+}
+
+.servicesContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+.serviceItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+  text-align: center;
+  position: relative;
+}
+
+.iconWrapper {
+  position: relative;
+  width: 109px;
+  height: 89px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconCircle {
+  position: absolute;
+  width: 89px;
+  height: 89px;
+  background-color: #ffeacbfb;
+  border-radius: 50%;
+  z-index: 0; /* Changed from -1 to 0 */
+}
+
+/* Specific icon dimensions */
+.icon-Cloud {
+  width: 93px;
+  height: 68px;
+}
+
+.icon-Layer_1 {
+  width: 95px;
+  height: 90px;
+}
+
+.icon-Layer_2 {
+  width: 89px;
+  height: 81px;
+}
+
+.icon-Layer_3 {
+  width: 89px;
+  height: 67px;
+}
+
+.icon-Layer_4 {
+  width: 77px;
+  height: 77px;
+}
+
+.icon-Layer_5 {
+  width: 88px;
+  height: 89px;
+}
+
+.icon-Layer_6 {
+  width: 101px;
+  height: 79px;
+}
+
+.icon-DevOps {
+  width: 77px;
+  height: 74px;
+}
+
+.icon-Layer_8 {
+  width: 90px;
+  height: 90px;
+}
+
+.icon-Layer_9 {
+  width: 140px;
+  height: 112px;
+}
+
+.serviceItem img {
+  position: relative;
+  z-index: 1;
+}
+
+.serviceItem p {
+  margin-top: 1rem;
+  font-size: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.descriptionSection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(90deg, #203d5d 0%, #003140 00%, #003262 100%);
+  -webkit-text-fill-color: #ffffff;
+  color: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.centeredText {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  color: #ffffff;
+  font-size: 28px;
+}
+
+.descriptionText {
+  width: 48%;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  color: #ffffff;
+}
