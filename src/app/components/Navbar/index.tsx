@@ -6,7 +6,6 @@ import { Constants } from '@/Constants';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { Each } from '../helpers/Each';
-import { ConnectButton } from '../ui/ConnectButton';
 
 function Navbar() {
   const [openSide, setOpenSide] = useState(false);
@@ -65,8 +64,6 @@ function Navbar() {
         </div>
 
         <div className="actions flex items-center gap-2 sm:gap-4">
-          <ConnectButton />
-
           <button
             className="btn-action svg-hover w-[40px] h-[40px] md:w-[48px] md:h-[48px] bg-black/5 shadow-inner rounded-full grid sm:hidden place-items-center"
             onClick={() => setOpenSide(!openSide)}

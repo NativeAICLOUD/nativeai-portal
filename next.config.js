@@ -21,6 +21,7 @@ const nextConfig = {
   reactStrictMode: false,
   experimental: {
     scrollRestoration: true,
+    serverComponentsExternalPackages: ["mongoose"],
   },
   async headers() {
     return [
@@ -37,6 +38,11 @@ const nextConfig = {
   },
   eslint: {
     ignoreDuringBuilds: true,
+  },
+  images: {
+      remotePatterns: [
+          { hostname: 'res.cloudinary.com', protocol: 'https', port: '' }
+      ]
   },
 };
 
