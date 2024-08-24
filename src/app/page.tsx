@@ -1,16 +1,35 @@
-import Image from "next/image";
+import CloudServicesSection from "./components/partials/home/CloudServicesSection";
+import HomeHeader from "./components/partials/home/Header";
+import HomeLowerSection from "./components/partials/home/HomeLowerSection";
+import HomePartner from "./components/partials/home/homepartner";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <h2 className="mb-3 text-2xl font-semibold">
-          Docs{" "}
-          <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-            -&gt;
-          </span>
-        </h2>
+    <main className="min-h-screen">
+      <HomeHeader />
+
+      {/* Cloud Services Section */}
+      <CloudServicesSection />
+
+      {/* Existing Blog Section */}
+      <HomeLowerSection />
+
+      {/* Home Partner Section */}
+      <HomePartner />
+
+      {/*
+      <div className={styles.container}>
+        {blogs?.length > 0 && <h2>WebDevMania&apos;s Blog Website</h2>}
+        <div className={styles.wrapper}>
+          {blogs?.length > 0 
+            ? blogs.map((blog) => (
+                <BlogCard key={blog._id} blog={blog} />
+              )) 
+            : <h3 className={styles.noBlogs}>No blogs are currently in the</h3>
+          }
+        </div>
       </div>
+      */}
     </main>
   );
 }

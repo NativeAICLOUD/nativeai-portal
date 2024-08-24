@@ -13,7 +13,6 @@ function SocialIcons({ className = '' }: { className: string; }) {
     { icon: 'icon-discord', url: Constants.SOCIALS.DISCORD, name: 'Discord' },
     // { icon: 'icon-telegram', url: Constants.SOCIALS.TELEGRAM, name: 'Telegram' },
     { icon: 'icon-x', url: Constants.SOCIALS.X, name: 'X' },
-    { icon: 'icon-mirror', url: Constants.SOCIALS.MIRROR, name: 'Mirror' },
   ];
 
   return (

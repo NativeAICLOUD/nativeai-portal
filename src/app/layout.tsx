@@ -1,9 +1,13 @@
 import { Inter } from "next/font/google";
 import seoConfig from "../../seo.config";
 import "./globals.css";
+
 import { ViewTransitions } from "next-view-transitions";
 
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import Navbar from "./components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +22,7 @@ export default function RootLayout({
     <ViewTransitions>
       <html lang="en">
         <body className={inter.className}>
-          {/* <Navbar /> */}
+          <Navbar />
           {children}
           {/* <Footer /> */}
           <ToastContainer

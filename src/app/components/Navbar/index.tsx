@@ -7,17 +7,23 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { Each } from '../helpers/Each';
 
+type Pages = {
+  url: string;
+  title: string;
+  children?: Pages[];
+}
+
 function Navbar() {
   const [openSide, setOpenSide] = useState(false);
   const [show, setShow] = useState(false);
   const lastScrollY = useRef(0);
 
-  const pages = [
-    { url: Constants.PAGES.ABOUT, title: 'About' },
-    { url: Constants.PAGES.DOCS, title: 'Docs' },
-    { url: Constants.PAGES.BLOG, title: 'Blog' },
-    // { url: '#', title: 'Privacy' },
-    // { url: '#', title: 'Terms' },
+  const pages: Pages[] = [
+    { url: Constants.PAGES.SOLUTIONS, title: 'Solutions', children: [] },
+    { url: Constants.PAGES.WORKSHOPS, title: 'Workshops' },
+    { url: Constants.PAGES.KNOWLEDGE_BASE, title: 'Knowledge base' },
+    { url: Constants.PAGES.ABOUT_US, title: 'About us' },
+    { url: Constants.PAGES.GET_IN_TOUCH, title: 'Get in touch' },
   ];
 
   useEffect(() => {
@@ -40,8 +46,8 @@ function Navbar() {
   return (
     <header
       className={`navbar overflow-x-clip w-full z-999 border-b ${show
-          ? `fixed bg-step1/10 border-b-border-line/20 backdrop-blur-2xl sm:top-8`
-          : 'absolute border-b-border-line/5 top-20 sm:top-8'
+        ? `fixed bg-step1/10 border-b-border-line/20 backdrop-blur-2xl sm:top-8`
+        : 'absolute border-b-border-line/5 top-20 sm:top-8'
         } transition-all`}
     >
       <nav
@@ -51,7 +57,7 @@ function Navbar() {
         <div className="main-logo flex items-center flex-col sm:flex-row gap-1.5">
           <Link href={'/'}>
             <Image
-              src="/img/logo/black.svg"
+              src="/logo.svg"
               alt="Logo"
               className="logo"
               width={100}

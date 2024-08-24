@@ -8,13 +8,24 @@ import { useRef } from "react";
 import { Constants } from "@/Constants";
 
 function Footer() {
-  const pages = [
-    { url: Constants.PAGES.ABOUT, title: 'About' },
-    { url: Constants.PAGES.DOCS, title: 'Docs' },
-    { url: Constants.PAGES.BLOG, title: 'Blog' },
-    // { url: '#', title: 'Privacy' },
-    // { url: '#', title: 'Terms' },
-  ];
+  const pages = {
+    solutions: [
+      { url: Constants.PAGES.AZURE_CLOUDIFY, title: 'Azure Cloudify' },
+      { url: Constants.PAGES.MANAGED_SERVICES, title: 'Managed Services' },
+      { url: Constants.PAGES.CLOUD_NATIVE_SD, title: 'Cloud Native Software Development' },
+      { url: Constants.PAGES.DATA_LIFECYCLE_MANAGEMENT, title: 'Data Lifecycle Management' },
+      { url: Constants.PAGES.CSP_ENTERPRISE, title: 'CSP Enterprise' },
+    ],
+    workshops: [],
+    about: [
+      { url: Constants.PAGES.AZURE_FUNDAMENTALS_FOR_ISVS, title: 'Azure Fundamentals for ISVs' },
+      { url: Constants.PAGES.AZURE_COST_MANAGEMENT, title: 'Azure Cost Management' },
+      { url: Constants.PAGES.DEVOPS_ON_AZURE, title: 'DevOps on Azure' },
+      { url: Constants.PAGES.AZURE_KUBERNETES_SERVICES, title: 'Azure Kubernetes Services (AKS)' },
+      { url: Constants.PAGES.APPLICATION_INSIGHTS, title: 'Application Insights' },
+      { url: Constants.PAGES.WORKSHOP_DATA_AI_SECURITY, title: 'Workshop Data & AI security' },
+    ],
+  };
   
   return (
     <footer
