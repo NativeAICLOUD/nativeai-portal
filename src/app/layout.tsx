@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +25,7 @@ export default function RootLayout({
         <body className={inter.className}>
           <Navbar />
           {children}
-          {/* <Footer /> */}
+          <Footer />
           <ToastContainer
             position="top-right"
             autoClose={8000}
