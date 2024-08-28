@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { showToast } from '../components/controls/Toast'
 
-const Register = () => {
+const SignUpPage = () => {
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -77,4 +77,4 @@ const Register = () => {
     )
 }
 
-export default Register
+export default SignUpPage

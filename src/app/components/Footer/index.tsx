@@ -15,14 +15,17 @@ function Footer() {
       { url: Constants.PAGES.DATA_LIFECYCLE_MANAGEMENT, title: 'Data Lifecycle Management' },
       { url: Constants.PAGES.CSP_ENTERPRISE, title: 'CSP Enterprise' },
     ],
-    workshops: [],
-    about: [
+    workshops: [
       { url: Constants.PAGES.AZURE_FUNDAMENTALS_FOR_ISVS, title: 'Azure Fundamentals for ISVs' },
       { url: Constants.PAGES.AZURE_COST_MANAGEMENT, title: 'Azure Cost Management' },
       { url: Constants.PAGES.DEVOPS_ON_AZURE, title: 'DevOps on Azure' },
-      { url: Constants.PAGES.AZURE_KUBERNETES_SERVICES, title: 'Azure Kubernetes Services (AKS)' },
+      { url: Constants.PAGES.AZURE_KUBERNETES_SERVICES, title: 'Azure Kubernetes Services (AKS' },
       { url: Constants.PAGES.APPLICATION_INSIGHTS, title: 'Application Insights' },
       { url: Constants.PAGES.WORKSHOP_DATA_AI_SECURITY, title: 'Workshop Data & AI security' },
+    ],
+    about: [
+      { url: Constants.PAGES.KNOWLEDGE_BASE, title: 'Knowledge Base' },
+      { url: Constants.PAGES.CERTIFICATIONS, title: 'Certifications' },
     ],
   };
 
@@ -39,29 +42,46 @@ function Footer() {
         <div className={'section flex-1 mx-4 flex flex-col items-start'}>
           <h3 className="text-xl mb-4 font-bold">Solutions</h3>
           <ul className="list-none p-0 flex flex-col gap-2">
-            <li>Azure Cloudify</li>
-            <li>Managed Services</li>
-            <li>Cloud Native Software Development</li>
-            <li>Data Lifecycle Management</li>
-            <li>CSP Enterprise</li>
+            <Each
+              of={pages.solutions}
+              render={(item: any) => (
+                <li className="text-white font-light">
+                  <Link className="flex items-center gap-1" href={item.url}>
+                    {item.title}
+                  </Link>
+                </li>
+              )}
+            />
           </ul>
         </div>
         <div className={'section flex-1 mx-4 flex flex-col items-start'}>
           <h3 className="text-xl mb-4 font-bold">Workshops</h3>
           <ul className="list-none p-0 flex flex-col gap-2">
-            <li>Azure Fundamentals for ISVs</li>
-            <li>Azure Cost Management</li>
-            <li>DevOps on Azure</li>
-            <li>Azure Kubernetes Services (AKS)</li>
-            <li>Application Insights</li>
-            <li>Workshop Data & AI security</li>
+            <Each
+              of={pages.workshops}
+              render={(item: any) => (
+                <li className="text-white font-light">
+                  <Link className="flex items-center gap-1" href={item.url}>
+                    {item.title}
+                  </Link>
+                </li>
+              )}
+            />
           </ul>
         </div>
         <div className={'section flex-1 mx-4 flex flex-col items-start'}>
           <h3 className="text-xl mb-4 font-bold">About Native Cloud</h3>
           <ul className="list-none p-0 flex flex-col gap-2">
-            <li>Knowledge Base</li>
-            <li>Certifications</li>
+            <Each
+              of={pages.about}
+              render={(item: any) => (
+                <li className="text-white font-light">
+                  <Link className="flex items-center gap-1" href={item.url}>
+                    {item.title}
+                  </Link>
+                </li>
+              )}
+            />
           </ul>
           <button className={'bg-[#232f3e] text-white p-2 px-4 rounded-full ml-2 absolute right-[857px] bottom-[60rem]'}>Get in Touch</button>
         </div>

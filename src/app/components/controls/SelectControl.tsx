@@ -54,7 +54,7 @@ const SelectControl = ({
         {!hideArrow && (
           <Select.Icon className="SelectIcon absolute right-2 top-0 bottom-0 grid place-items-center">
             <svg className="icon-select-bottom" width={14} height={14}>
-              <use href={`/icons/icons.svg#icon-select-bottom`}></use>
+              <use href={`/icons/all-icons.svg#icon-select-bottom`}></use>
             </svg>
           </Select.Icon>
         )}
@@ -70,7 +70,7 @@ const SelectControl = ({
         >
           <Select.ScrollUpButton className="SelectScrollButton flex justify-center">
             <svg className="icon-select-up" width={24} height={24}>
-              <use href={`/icons/icons.svg#icon-select-up`}></use>
+              <use href={`/icons/all-icons.svg#icon-select-up`}></use>
             </svg>
           </Select.ScrollUpButton>
 
@@ -101,7 +101,7 @@ const SelectControl = ({
 
           <Select.ScrollDownButton className="SelectScrollButton flex justify-center">
             <svg className="icon-select-bottom" width={24} height={24}>
-              <use href={`/icons/icons.svg#icon-select-bottom`}></use>
+              <use href={`/icons/all-icons.svg#icon-select-bottom`}></use>
             </svg>
           </Select.ScrollDownButton>
         </Select.Content>
@@ -114,7 +114,7 @@ const BadgeIcon = ({ icon }: { icon: string }) => (
   <Select.Icon className="SelectIcon relative min-w-8 h-8 m-0.5 grid place-content-center">
     <Image src={icon} alt="Logo" width={24} height={24} />
     {/* <svg className="icon-select-arrow" width={24} height={24}>
-      <use href={`/icons/icons.svg#icon-select-arrow`}></use>
+      <use href={`/icons/all-icons.svg#icon-select-arrow`}></use>
     </svg> */}
   </Select.Icon>
 );

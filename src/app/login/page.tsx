@@ -6,7 +6,7 @@ import React, { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { showToast } from '../components/controls/Toast'
 
-const Login = () => {
+const LoginPage = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const router = useRouter()
@@ -63,4 +63,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default LoginPage

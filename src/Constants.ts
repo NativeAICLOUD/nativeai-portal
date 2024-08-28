@@ -22,6 +22,10 @@ export const Constants = {
     ABOUT_US: '/about-us',
     GET_IN_TOUCH: '/get-in-touch',
     CERTIFICATIONS: '/certifications',
+    
+    LOGIN: '/login',
+    SIGN_UP: '/sign-up',
+
     TERMS: '/terms',
     PRIVACY: '/privacy-policy',
   },

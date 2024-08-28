@@ -2,10 +2,13 @@
 
 import { Link } from 'next-view-transitions';
 
+import Flag from 'react-flagpack'
+
 import { Constants } from '@/Constants';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { Each } from '../helpers/Each';
+import { CaretDownIcon } from '@radix-ui/react-icons';
 
 type Pages = {
   url: string;
@@ -19,7 +22,31 @@ function Navbar() {
   const lastScrollY = useRef(0);
 
   const pages: Pages[] = [
-    { url: Constants.PAGES.SOLUTIONS, title: 'Solutions', children: [] },
+    {
+      url: Constants.PAGES.SOLUTIONS, title: 'Solutions', children: [
+        {
+          url: '', title: 'Solutions', children: [
+            { url: Constants.PAGES.AZURE_CLOUDIFY, title: 'Azure Cloudify' },
+            { url: Constants.PAGES.MANAGED_SERVICES, title: 'Managed Services' }
+          ]
+        },
+        {
+          url: '', title: 'Data Lifecycle Management', children: [
+            { url: Constants.PAGES.MANAGED_SERVICES, title: 'Managed Services' }
+          ]
+        },
+        {
+          url: '', title: 'Cloud Native', children: [
+            { url: Constants.PAGES.CLOUD_NATIVE_SD, title: 'Software Development' },
+          ]
+        },
+        {
+          url: '', title: 'CSP Services', children: [
+            { url: Constants.PAGES.CSP_ENTERPRISE, title: 'CSP Enterprise' },
+          ]
+        }
+      ]
+    },
     { url: Constants.PAGES.WORKSHOPS, title: 'Workshops' },
     { url: Constants.PAGES.KNOWLEDGE_BASE, title: 'Knowledge base' },
     { url: Constants.PAGES.ABOUT_US, title: 'About us' },
@@ -46,8 +73,8 @@ function Navbar() {
   return (
     <header
       className={`navbar overflow-x-clip w-full z-999 border-b ${show
-        ? `fixed bg-step1/10 border-b-border-line/20 backdrop-blur-2xl sm:top-8`
-        : 'absolute border-b-border-line/5 top-20 sm:top-8'
+        ? `fixed bg-step1/10 border-b-border-line/20 backdrop-blur-2xl`
+        : 'absolute border-b-border-line/5'
         } transition-all`}
     >
       <nav
@@ -60,8 +87,8 @@ function Navbar() {
               src="/logo.svg"
               alt="Logo"
               className="logo"
-              width={100}
-              height={24}
+              width={195}
+              height={95}
               priority
               sizes="(max-width: 768px) 100vw, 100vw"
               quality={100}
@@ -69,14 +96,51 @@ function Navbar() {
           </Link>
         </div>
 
+        <ul className="flex items-center justify-center gap-6">
+          <Each
+            of={pages}
+            render={(item: any) => (
+              <li className="text-black font-light">
+                <Link className="flex items-center gap-1" href={item.url}>
+                  {item.title}
+                  {
+                    item.children &&
+                    <CaretDownIcon
+                      className="text-violet10 relative top-[1px] transition-transform duration-[250] ease-in group-data-[state=open]:-rotate-180"
+                      aria-hidden
+                    />
+                  }
+                </Link>
+              </li>
+            )}
+          />
+        </ul>
+
         <div className="actions flex items-center gap-2 sm:gap-4">
+          
+          <svg className="icon-search" width={24} height={24}>
+            <use href={`/icons/all-icons.svg#icon-search`}></use>
+          </svg> 
+
+          <Flag code="GB-UKM" size="m" />
+          <Flag code="ES" size="m" />
+          <Flag code="FR" size="m" />
+
+          <div className="login flex items-center gap-0.5">
+            <svg className="icon-login" width={18} height={18}>
+              <use href={`/icons/all-icons.svg#icon-login`}></use>
+            </svg> 
+            Login
+          </div>
+
+
           <button
             className="btn-action svg-hover w-[40px] h-[40px] md:w-[48px] md:h-[48px] bg-black/5 shadow-inner rounded-full grid sm:hidden place-items-center"
             onClick={() => setOpenSide(!openSide)}
           >
             <svg className="icon-nav fill-black" width={24} height={24}>
               <use
-                href={`/icons/icons.svg#${openSide ? 'icon-nav-close' : 'icon-nav-menu'
+                href={`/icons/all-icons.svg#${openSide ? 'icon-nav-close' : 'icon-nav-menu'
                   }`}
               ></use>
             </svg>
@@ -89,6 +153,7 @@ function Navbar() {
           } aside-backdrop z-[99] h-full fixed inset-0 transition backdrop-blur-sm bg-black-opacity-2`}
         onClick={() => setOpenSide(false)}
       ></div>
+
       <aside
         className={`${openSide ? 'translate-x-[0]' : 'translate-x-[100%]'
           } sidebar  z-[100] bg-white/90 backdrop:blur-2xl text-black w-full min-h-screen md:w-[350px] p-2.5 fixed inset-y-0 right-0 transform transition duration-500 ease-in-out overflow-y-auto`}
@@ -98,7 +163,7 @@ function Navbar() {
           onClick={() => setOpenSide(false)}
         >
           <svg className="icon-nav-close" width={24} height={24}>
-            <use href={`/icons/icons.svg#icon-nav-close`}></use>
+            <use href={`/icons/all-icons.svg#icon-nav-close`}></use>
           </svg>
         </button>
 

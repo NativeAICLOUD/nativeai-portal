@@ -59,7 +59,7 @@ showToast({
   type: 'error',
   icon: (
     <svg className="icon-arrow-up-curve h-10 dark:fill-white" xmlns="http://www.w3.org/2000/svg">
-      <use xlinkHref="/icons/icons.svg#icon-arrow-up-curve" />
+      <use xlinkHref="/icons/all-icons.svg#icon-arrow-up-curve" />
     </svg>
   ),
   action: (
@@ -67,7 +67,7 @@ showToast({
     onClick={
       () => console.log('Action click')
     }>
-      <use xlinkHref="/icons/icons.svg#icon-rocket" />
+      <use xlinkHref="/icons/all-icons.svg#icon-rocket" />
     </svg>
   )
 });
