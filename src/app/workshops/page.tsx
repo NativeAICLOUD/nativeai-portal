@@ -7,7 +7,7 @@ const WorkshopPage = () => {
       <div className={`flex flex-col items-center`}>
         <div className={'relative w-[2000px] h-[1600px]'}>
           <Image
-            src="/Solutions.png"
+            src="/img/Solutions.png"
             alt="Background Frame"
             width={759}
             height={574}
@@ -22,13 +22,13 @@ const WorkshopPage = () => {
             </p>
             <div className={'flex justify-center w-[1920px] h-[417px] my-[20px]'}>
               <div className={''}>
-                <Image src="/MSP-Azure.png" alt="Microsoft Solutions Partner" width={762} height={95}
+                <Image src="/img/MSP-Azure.png" alt="Microsoft Solutions Partner" width={762} height={95}
                   className={'absolute top-[452px] left-[240px] w-[662px] h-[90px] z-[-1]'} />
               </div>
             </div>
             <div className={'flex justify-around w-[1920px] my-[50px]'}>
               <div className={'text-center w-[367px] h-[519px] my-[20px] flex flex-col items-center'}>
-                <Image src="/Isolation_1.png" alt="Going to Azure" width={160} height={110} />
+                <Image src="/img/Isolation_1.png" alt="Going to Azure" width={160} height={110} />
                 <div className={'serviceText w-[467px] h-[265px] mt-[30px]'}>
                   <h3 className="font-montserrat text-[24px] my-[20px]">Going to Azure</h3>
                   <p className='my-[20px]'>
@@ -38,7 +38,7 @@ const WorkshopPage = () => {
                 </div>
               </div>
               <div className={'text-center w-[367px] h-[519px] my-[20px] flex flex-col items-center'}>
-                <Image src="/Isolation_2.png" alt="Accelerate with Azure" width={190} height={130} />
+                <Image src="/img/Isolation_2.png" alt="Accelerate with Azure" width={190} height={130} />
                 <div className={'serviceText w-[467px] h-[265px] mt-[30px]'}>
                   <h3 className="font-montserrat text-[24px] my-[20px]">Accelerate with Azure</h3>
                   <p className='my-[20px]'>
@@ -48,7 +48,7 @@ const WorkshopPage = () => {
                 </div>
               </div>
               <div className={'text-center w-[367px] h-[519px] my-[20px] flex flex-col items-center'}>
-                <Image src="/Isolation_3.png" alt="Managed Services" width={142} height={131} />
+                <Image src="/img/Isolation_3.png" alt="Managed Services" width={142} height={131} />
                 <div className={'serviceText w-[467px] h-[265px] mt-[30px]'}>
                   <h3 className="font-montserrat text-[24px] my-[20px]">Managed Services</h3>
                   <p className='my-[20px]'>

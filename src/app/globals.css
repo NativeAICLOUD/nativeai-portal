@@ -31,3 +31,7 @@ body {
     text-wrap: balance;
   }
 }
+
+div[data-radix-popper-content-wrapper] {
+  z-index: 999 !important;
+}

@@ -2,13 +2,14 @@
 
 import { Link } from 'next-view-transitions';
 
-import Flag from 'react-flagpack'
-
 import { Constants } from '@/Constants';
+import { CaretDownIcon } from '@radix-ui/react-icons';
+import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { Each } from '../helpers/Each';
-import { CaretDownIcon } from '@radix-ui/react-icons';
+import LanguageSwitch from '../ui/LanguageSwitch';
+import { usePathname } from 'next/navigation';
 
 type Pages = {
   url: string;
@@ -16,8 +17,27 @@ type Pages = {
   children?: Pages[];
 }
 
+const motionContainer = {
+  hidden: { opacity: 0, },
+  show: {
+    opacity: 1,
+    duration: .5,
+    transition: {
+      staggerChildren: .5
+    }
+  }
+};
+
+const motionItem = {
+  hidden: { opacity: 0, y: -20 },
+  show: { opacity: 1, y: 0 }
+}
+
 function Navbar() {
+  const pathname = usePathname();
+
   const [openSide, setOpenSide] = useState(false);
+  const [slideMenu, setSlideMenu] = useState(false);
   const [show, setShow] = useState(false);
   const lastScrollY = useRef(0);
 
@@ -56,7 +76,6 @@ function Navbar() {
   useEffect(() => {
     const onScroll = (e: any) => {
       const scrollTop = e.target.documentElement.scrollTop;
-      setShow(!(scrollTop > lastScrollY.current));
 
       // remember current page location to use in the next move
       lastScrollY.current = scrollTop;
@@ -64,72 +83,79 @@ function Navbar() {
       if (scrollTop <= 0) {
         setShow(false);
       }
+
+      if (!show && scrollTop > 0) {
+        return setShow(true);
+      }
     };
     window.addEventListener('scroll', onScroll);
 
     return () => window.removeEventListener('scroll', onScroll);
   }, [lastScrollY.current]);
 
+
   return (
     <header
-      className={`navbar overflow-x-clip w-full z-999 border-b ${show
-        ? `fixed bg-step1/10 border-b-border-line/20 backdrop-blur-2xl`
-        : 'absolute border-b-border-line/5'
+      className={`navbar overflow-x-clip w-full z-999 fixed ${show
+        ? `bg-white/80 backdrop-blur-2xl`
+        : ''
         } transition-all`}
     >
       <nav
-        className={`nav-items flex justify-between gap-6 items-center px-4 sm:px-6 max-w-9xl mx-auto ${show ? 'min-h-20' : 'min-h-28'
-          } transition-all`}
+        className={`relative nav-items flex justify-between gap-6 items-center px-4 sm:px-6 max-w-9xl mx-auto ${show ? 'min-h-20' : 'min-h-28'
+          } ${slideMenu ? 'z-1 border-b border-b-black' : ''} transition-all`}
       >
-        <div className="main-logo flex items-center flex-col sm:flex-row gap-1.5">
-          <Link href={'/'}>
-            <Image
-              src="/logo.svg"
-              alt="Logo"
-              className="logo"
-              width={195}
-              height={95}
-              priority
-              sizes="(max-width: 768px) 100vw, 100vw"
-              quality={100}
+        <div className="left flex items-center gap-20">
+          <div className="main-logo py-2 flex items-center flex-col sm:flex-row gap-1.5">
+            <Link href={'/'}>
+              <Image
+                src="/logo.svg"
+                alt="Logo"
+                className="logo min-w-[145px]"
+                width={145}
+                height={45}
+                priority
+                sizes="(max-width: 768px) 100vw, 100vw"
+                quality={100}
+              />
+            </Link>
+          </div>
+
+          <ul className="flex items-center justify-center gap-10">
+            <Each
+              of={pages}
+              render={(item: Pages) => (
+                <li className={`relative flex items-center text-black font-light transition-all ${show ? 'h-20 before:-bottom-1' : 'h-28 before:-bottom-0'} ${
+                  pathname === item.url ? 'before:absolute before:w-full before:h-0.5 before:bg-native' : ''}`}>
+                  <Link className="flex items-center gap-1" href={item.url}
+                    onMouseEnter={() => setSlideMenu(true)}>
+                    {item.title}
+                    {
+                      item.children &&
+                      <CaretDownIcon
+                        className="text-violet10 relative top-[1px] transition-transform duration-[250] ease-in group-data-[state=open]:-rotate-180"
+                        aria-hidden
+                      />
+                    }
+                  </Link>
+                </li>
+              )}
             />
-          </Link>
+          </ul>
         </div>
 
-        <ul className="flex items-center justify-center gap-6">
-          <Each
-            of={pages}
-            render={(item: any) => (
-              <li className="text-black font-light">
-                <Link className="flex items-center gap-1" href={item.url}>
-                  {item.title}
-                  {
-                    item.children &&
-                    <CaretDownIcon
-                      className="text-violet10 relative top-[1px] transition-transform duration-[250] ease-in group-data-[state=open]:-rotate-180"
-                      aria-hidden
-                    />
-                  }
-                </Link>
-              </li>
-            )}
-          />
-        </ul>
+        <div className="actions flex items-center gap-4 sm:gap-8">
 
-        <div className="actions flex items-center gap-2 sm:gap-4">
-          
-          <svg className="icon-search" width={24} height={24}>
+          <svg className={`icon-search ${slideMenu ? 'text-native' : 'text-black'}`} width={24} height={24}>
             <use href={`/icons/all-icons.svg#icon-search`}></use>
-          </svg> 
+          </svg>
 
-          <Flag code="GB-UKM" size="m" />
-          <Flag code="ES" size="m" />
-          <Flag code="FR" size="m" />
+          <LanguageSwitch />
 
-          <div className="login flex items-center gap-0.5">
+          <div className={`login flex items-center gap-1 ${slideMenu ? 'text-native' : 'text-black'}`}>
             <svg className="icon-login" width={18} height={18}>
-              <use href={`/icons/all-icons.svg#icon-login`}></use>
-            </svg> 
+              <use href={`/icons/all-icons.svg#icon-login`} />
+            </svg>
             Login
           </div>
 
@@ -148,6 +174,7 @@ function Navbar() {
         </div>
       </nav>
 
+      {/* Sidebar */}
       <div
         className={`${openSide ? 'w-full' : 'w-0'
           } aside-backdrop z-[99] h-full fixed inset-0 transition backdrop-blur-sm bg-black-opacity-2`}
@@ -172,13 +199,59 @@ function Navbar() {
         <ul className="flex flex-col items-center justify-center gap-6">
           <Each
             of={pages}
-            render={(item: any) => (
+            render={(item: Pages) => (
               <li className="text-black font-light">
                 <Link href={item.url}>{item.title}</Link>
               </li>
             )}
           />
         </ul>
+      </aside>
+
+      {/* Slide menu */}
+      <div
+        className={`${slideMenu ? 'h-full' : 'h-0'
+          } aside-backdrop w-full fixed inset-0 transition bg-black/20`}
+        onClick={() => setSlideMenu(false)}
+      ></div>
+
+      <aside
+        className={`${slideMenu ? `translate-y-[0] ${show ? 'pt-20 h-[250px]' : 'pt-28 h-[300px]'}` : 'h-[300px] -translate-y-[100%]'
+          } sidebar bg-white backdrop:blur-2xl text-black w-full p-2.5 fixed inset-y-0 right-0 transform transition-all duration-500 ease-in-out overflow-y-auto`}
+      >
+
+        <AnimatePresence>
+          {slideMenu && (
+            <motion.div
+              className="relative grid grid-cols-4 gap-4 max-w-[55rem] ml-64 2xl:ml-[18.6rem] mt-10"
+              initial="hidden"
+              animate="show"
+              transition={{ delay: 1 }}
+              variants={motionContainer}
+            >
+              <Each
+                of={pages[0].children}
+                render={(item: Pages) => (
+                  <motion.div className="relative"
+                    variants={motionItem}>
+                    <h2 className="mb-2 cursor-default">{item.title}</h2>
+                    <ul className="flex flex-col gap-2">
+                      <Each
+                        of={item.children}
+                        render={(item: Pages) => (
+                          <li className="text-black font-light opacity-70">
+                            <Link href={item.url}>{item.title}</Link>
+                          </li>
+                        )}
+                      />
+                    </ul>
+                  </motion.div>
+                )}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
       </aside>
     </header>
   );
