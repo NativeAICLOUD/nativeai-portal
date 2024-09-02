@@ -13,7 +13,7 @@ export async function PUT(req: NextRequest, res: any) {
 
     console.log(token)
 
-    const decodedToken = verifyJwtToken(token)
+    const decodedToken: any = verifyJwtToken(token)
 
     if (!accessToken || !decodedToken) {
         return new Response(JSON.stringify({ error: "unauthorized (wrong or expired token)" }), { status: 403 })
