@@ -97,16 +97,16 @@ function Navbar() {
 
   return (
     <header
-      className={`navbar overflow-x-clip w-full z-999 fixed ${show
-        ? `bg-white/80 backdrop-blur-2xl`
-        : ''
-        } transition-all`}
+      className={`navbar overflow-x-clip w-full z-999 fixed transition-all ${slideMenu ? 'h-full' : ''}`}
     >
       <nav
-        className={`relative nav-items flex justify-between gap-6 items-center px-4 sm:px-6 max-w-9xl mx-auto ${show ? 'min-h-20' : 'min-h-28'
-          } ${slideMenu ? 'z-1 border-b border-b-black' : ''} transition-all`}
+        className={`relative nav-items flex justify-between gap-6 items-center px-4 sm:px-6 max-w-9xl mx-auto ${
+          show
+            ? 'min-h-20 before:bg-white before:absolute before:-left-4 sm:before:-left-6 inset-y-0 before:w-[calc(100%+2rem)] sm:before:w-[calc(100%+3rem)] before:h-full z-0'
+            : 'min-h-28'
+        } ${slideMenu ? 'z-1 border-b border-b-black' : ''} transition-all`}
       >
-        <div className="left flex items-center gap-20">
+        <div className="relative left flex items-center gap-20">
           <div className="main-logo py-2 flex items-center flex-col sm:flex-row gap-1.5">
             <Link href={'/'}>
               <Image
@@ -145,7 +145,7 @@ function Navbar() {
           </ul>
         </div>
 
-        <div className="actions flex items-center gap-4 sm:gap-8">
+        <div className="relative actions flex items-center gap-4 sm:gap-8">
 
           <svg className={`icon-search ${slideMenu ? 'text-native' : 'text-black'}`} width={24} height={24}>
             <use href={`/icons/all-icons.svg#icon-search`}></use>

@@ -1,7 +1,7 @@
 import { tv } from 'tailwind-variants';
 
 export const button = tv({
-  base: 'active:scale-99 font-medium no-underline inline-flex items-center justify-center select-none transition-color transition-all focus:outline-none disabled:opacity-50 disabled:pointer-events-none',
+  base: 'active:scale-99 font-semibold no-underline inline-flex items-center justify-center select-none transition-color transition-all focus:outline-none disabled:opacity-50 disabled:pointer-events-none',
   variants: {
     color: {
       primary: "bg-btn-color text-white",

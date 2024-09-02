@@ -20,9 +20,11 @@ const config: Config = {
         "border-color": '#283D3B'
       },
       backgroundImage: {
-        'thumb-bg': "url('/img/bg-thumb.png')",
+        'orange-gradient': "url('/img/BG.png')",
         'h1-linear': 'linear-gradient(90deg, #2a3a4a 0%, #0a3d6d 50%, #232f3e 100%)',
         'h2-linear': 'linear-gradient(90deg, #232f3e 0%, #0a3d6d 50%, #0a3d6d 100%)',
+        'main-gradient': 'linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%)',
+        'main-card': 'linear-gradient(to right, #003140, #203d5d), url(/img/noise-background.jpg)'
       },
       fontSize: {
         'xxxs': ['8px', '1'],

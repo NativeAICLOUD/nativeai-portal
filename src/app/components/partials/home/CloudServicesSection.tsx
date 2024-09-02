@@ -4,73 +4,59 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 const services = [
-  { w:'93px', h:'68px', src: '/img/Cloud.png', title: 'Cloud Solutions & Services' },
-  { w:'95px', h:'90px', src: '/img/Layer_1.png', title: 'Platform Development' },
-  { w:'89px', h:'81px', src: '/img/Layer_2.png', title: 'SaaS app development' },
-  { w:'89px', h:'67px', src: '/img/Layer_3.png', title: 'End-to-end business solutions' },
-  { w:'77px', h:'77px', src: '/img/Layer_4.png', title: 'App modernization' },
-  { w:'88px', h:'89px', src: '/img/Layer_5.png', title: 'Enterprise application development' },
-  { w:'101px', h:'79px', src: '/img/Layer_6.png', title: 'Digital transformation services' },
-  { w:'77px', h:'74px', src: '/img/DevOps.png', title: 'Cloud & DevOps' },
-  { w:'90px', h:'90px', src: '/img/Layer_8.png', title: 'UI/UX design' },
-  { w:'140px', h:'112px', src: '/img/Layer_9.png', title: 'Cloud Migrations' }
+  { w: 93, h: 68, src: '/img/Cloud.png', title: 'Cloud Solutions & Services' },
+  { w: 95, h: 90, src: '/img/Layer_1.png', title: 'Platform Development' },
+  { w: 89, h: 81, src: '/img/Layer_2.png', title: 'SaaS app development' },
+  { w: 89, h: 67, src: '/img/Layer_3.png', title: 'End-to-end business solutions' },
+  { w: 77, h: 77, src: '/img/Layer_4.png', title: 'App modernization' },
+  { w: 88, h: 89, src: '/img/Layer_5.png', title: 'Enterprise application development' },
+  { w: 101, h: 79, src: '/img/Layer_6.png', title: 'Digital transformation services' },
+  { w: 77, h: 74, src: '/img/DevOps.png', title: 'Cloud & DevOps' },
+  { w: 90, h: 90, src: '/img/Layer_8.png', title: 'UI/UX design' },
+  { w: 140, h: 112, src: '/img/Layer_9.png', title: 'Cloud Migrations' }
 ];
 
 const CloudServicesSection = () => {
-  const [description, setDescription] = useState([]);
-
-  useEffect(() => {
-    fetch('/description.json')
-      .then(response => response.json())
-      .then(data => setDescription(data.description));
-  }, []);
-
-  const topRowServices = services.slice(0, 5);
-  const bottomRowServices = services.slice(5);
-
   return (
-    <section className={'text-center p-8 bg-white text-black'}>
-      <div className={'flex flex-wrap justify-between font-montserrat bg-gradient-to-r from-[#203d5d] via-[#003140] to-[#003262] text-white p-4 rounded-lg mb-8'}>
-        {description.length > 0 && (
-          <p className={'w-full text-center mb-4 leading-[1.5] text-white text-2xl'} dangerouslySetInnerHTML={{ __html: description[0] }} />
-        )}
-        {description.slice(1).map((text, index) => (
-          <p key={index} className={'w-[48%] mb-4 leading-[1.5] text-white'} dangerouslySetInnerHTML={{ __html: text }} />
-        ))}
-      </div>
-      <h2 className={'text-2xl mb-8 bg-gradient-to-r from-[#e8ffff] via-[#0167b8] to-[#e8fffe]'}>A Complete Range of End-to-End Azure and AWS Cloud Services</h2>
-      <div className={'flex flex-col items-center gap-8'}>
-        <div className={'flex justify-center gap-8 w-full'}>
-          {topRowServices.map((service, index) => (
-            <div key={index} className={'flex flex-col items-center w-36 text-center relative'}>
-              <div className={'relative w-[109px] h-[89px] flex items-center justify-center'}>
-                <div className={'absolute w-[89px] h-[89px] bg-[#ffeacbfb] rounded-full z-0'}></div>
-                <Image
-                  src={service.src}
-                  alt={service.title}
-                  width={service.src === '/Cloud.png' ? 93 : service.src === '/Layer_1.png' ? 95 : service.src === '/Layer_2.png' ? 89 : service.src === '/Layer_3.png' ? 89 : service.src === '/Layer_4.png' ? 77 : service.src === '/Layer_5.png' ? 88 : service.src === '/Layer_6.png' ? 101 : service.src === '/DevOps.png' ? 77 : service.src === '/Layer_8.png' ? 90 : service.src === '/Layer_9.png' ? 140 : 50}
-                  height={service.src === '/Cloud.png' ? 68 : service.src === '/Layer_1.png' ? 90 : service.src === '/Layer_2.png' ? 81 : service.src === '/Layer_3.png' ? 67 : service.src === '/Layer_4.png' ? 77 : service.src === '/Layer_5.png' ? 89 : service.src === '/Layer_6.png' ? 79 : service.src === '/DevOps.png' ? 74 : service.src === '/Layer_8.png' ? 90 : service.src === '/Layer_9.png' ? 112 : 50}
-                />
-              </div>
-              <p>{service.title}</p>
-            </div>
-          ))}
+    <section className={'-mt-38 bg-white'}>
+      <div className={'relative max-w-9xl mx-auto bg-main-card text-white pt-24 px-4 sm:px-16 pb-16 rounded-2xl'}>
+        <h2 className='relative flex text-3.5xl leading-snug text-left before:bg-white before:w-3 before:h-auto before:my-2 before:mr-5'>
+          NativeCloud specializes in delivering smart, innovative, <br /> and highly resilient cloud solutions to support our customers to achieve their business transformation initiatives.
+        </h2>
+        <div className="relative grid grid-cols-2 gap-10 mt-12">
+          <p>
+            Our core focus lies in Microsoft Azure, and we`re proud to hold certification from Microsoft as an Azure Expert Managed Service Provider. We empower businesses with cutting-edge cloud services designed for maximum efficiency and reliability.
+            <br /><br />
+            Azure provides essential tools enabling organizations to securely access their critical applications and data from anywhere, swiftly and securely. Through daily design, implementation, and management of infrastructures and workloads on Azure, we have amassed invaluable knowledge and expertise on the platform.
+          </p>
+          <p>
+            Our continuous engagement with Azure empowers us to deliver tailored solutions that optimize performance, security, and accessibility for our clients. Continuous refinement of designs and robust Managed Services have made us leaders in integrating new Azure features into customer solutions.
+            <br /><br />
+            We ensure clients leverage Azure`s latest innovations for enhanced efficiency and competitiveness. As a result of the continuous improvement of these designs and our Managed Services, we have become a leader in integrating new Azure functionalities into customer solutions.
+          </p>
         </div>
-        <div className={'flex justify-center gap-8 w-full'}>
-          {bottomRowServices.map((service, index) => (
-            <div key={index} className={'flex flex-col items-center w-36 text-center relative'}>
-              <div className={'relative w-[109px] h-[89px] flex items-center justify-center'}>
-                <div className={'absolute w-[89px] h-[89px] bg-[#ffeacbfb] rounded-full z-0'}></div>
-                <Image
-                  src={service.src}
-                  alt={service.title}
-                  width={service.src === '/Cloud.png' ? 93 : service.src === '/Layer_1.png' ? 95 : service.src === '/Layer_2.png' ? 89 : service.src === '/Layer_3.png' ? 89 : service.src === '/Layer_4.png' ? 77 : service.src === '/Layer_5.png' ? 88 : service.src === '/Layer_6.png' ? 101 : service.src === '/DevOps.png' ? 77 : service.src === '/Layer_8.png' ? 90 : service.src === '/Layer_9.png' ? 140 : 50}
-                  height={service.src === '/Cloud.png' ? 68 : service.src === '/Layer_1.png' ? 90 : service.src === '/Layer_2.png' ? 81 : service.src === '/Layer_3.png' ? 67 : service.src === '/Layer_4.png' ? 77 : service.src === '/Layer_5.png' ? 89 : service.src === '/Layer_6.png' ? 79 : service.src === '/DevOps.png' ? 74 : service.src === '/Layer_8.png' ? 90 : service.src === '/Layer_9.png' ? 112 : 50}
-                />
+      </div>
+
+      <div className="relative services mb-4 mt-15">
+        <h2 className={'text-4.5xl text-center font-semibold leading-snug pb-6'}>A Complete Range of End-to-End Azure and AWS Cloud Services</h2>
+        <div className="relative py-8 content before:absolute before:inset-0 before:bg-orange-gradient before:w-full before:h-full before:bg-cover before:bg-center before:opacity-80">
+          <div className={'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 max-w-8xl mx-auto'}>
+            {services.map((service, index) => (
+              <div key={index} className={'flex flex-col items-center max-w-48 text-center relative'}>
+                <div className={'relative w-[109px] h-[89px] flex items-center justify-center'}>
+                  <div className={'absolute w-[89px] h-[89px] bg-[#ffeacbfb] rounded-full z-0'}></div>
+                  <Image
+                    src={service.src}
+                    alt={service.title}
+                    width={service.w}
+                    height={service.h}
+                    className='z-1 opacity-70'
+                  />
+                </div>
+                <p className="font-sm sm:text-base">{service.title}</p>
               </div>
-              <p>{service.title}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

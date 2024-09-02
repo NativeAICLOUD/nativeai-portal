@@ -20,7 +20,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const accessToken = req.headers.get("authorization")
     const token = accessToken ? accessToken?.split(" ")[1] : '';
 
-    const decodedToken = verifyJwtToken(token)
+    const decodedToken: any = verifyJwtToken(token)
 
     if (!accessToken || !decodedToken) {
         return new Response(JSON.stringify({ error: "unauthorized (wrong or expired token)" }), { status: 403 })

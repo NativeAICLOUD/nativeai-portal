@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import AppProviders from "./components/AppProviders";
 
 const montserrat = Montserrat({
   weight: '400',
@@ -27,9 +28,11 @@ export default function RootLayout({
     <ViewTransitions>
       <html lang="en">
         <body className={montserrat.className}>
-          <Navbar />
-          {children}
-          <Footer />
+          <AppProviders>
+            <Navbar />
+            {children}
+            <Footer />
+          </AppProviders>
           <ToastContainer
             position="top-right"
             autoClose={8000}
