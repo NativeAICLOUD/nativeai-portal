@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { format } from 'timeago.js'
-import person from '../../../public/person.jpg'
+import person from '../../../../../public/img/person.jpg'
 
 const BlogComment = ({ comment, setComments }: { comment: any, setComments: any }) => {
   const { data: session } = useSession()

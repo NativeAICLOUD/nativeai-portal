@@ -23,6 +23,7 @@ const motionContainer = {
     opacity: 1,
     duration: .5,
     transition: {
+      delay: .3,
       staggerChildren: .5
     }
   }

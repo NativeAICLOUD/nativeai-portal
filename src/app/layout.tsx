@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import seoConfig from "../../seo.config";
 import "./globals.css";
 
@@ -10,7 +10,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const montserrat = Montserrat({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-montserrat'
+})
 
 export const metadata = seoConfig;
 
@@ -22,7 +26,7 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html lang="en">
-        <body className={inter.className}>
+        <body className={montserrat.className}>
           <Navbar />
           {children}
           <Footer />

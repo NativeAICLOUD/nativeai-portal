@@ -30,6 +30,7 @@ const config: Config = {
         '3.5xl': ['32px', '1'],
         '4.5xl': ['2.5rem', '1'],
         '5.5xl': ['3.5rem', '1'],
+        '6xl': ['3.875rem', '1'],
         '7.5xl': ['5rem', '1'],
       },
       minHeight: {

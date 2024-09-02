@@ -6,7 +6,7 @@ import { Link } from 'next-view-transitions'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { format } from 'timeago.js'
-import person from '../../../../public/person.jpg'
+import person from '../../../../public/img/person.jpg'
 import BlogComment from '@/app/components/partials/blog/BlogComment'
 
 const BlogDetails = (ctx: any) => {
