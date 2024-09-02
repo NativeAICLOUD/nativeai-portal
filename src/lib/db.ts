@@ -1,8 +1,6 @@
 import mongoose from 'mongoose';
 
-const connection = {};
-
-
+const connection = {} as any;
 
 async function connect() {
     if (connection.isConnected) {
@@ -15,7 +13,7 @@ async function connect() {
         }
         await mongoose.disconnect();
     }
-    const db = await mongoose.connect(process.env.MONGO_URL);
+    const db = await mongoose.connect(process.env.MONGO_URL!);
     connection.isConnected = db.connections[0].readyState;
 }
 

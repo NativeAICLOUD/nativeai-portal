@@ -1,7 +1,7 @@
-import img1 from '../../public/nature1.jpg'
-import img2 from '../../public/nature2.jpg'
-import img3 from '../../public/nature3.jpg'
-import img4 from '../../public/nature4.jpg'
+import img1 from '../../public/img/nature1.jpg'
+import img2 from '../../public/img/nature2.jpg'
+import img3 from '../../public/img/nature3.jpg'
+import img4 from '../../public/img/nature4.jpg'
 
 
 export const blogs = [

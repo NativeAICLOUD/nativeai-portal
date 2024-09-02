@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 
 // signing jwt
-export function signJwtToken(payload, options = {}) {
+export function signJwtToken(payload: any, options = {}) {
     const secret = process.env.JWT_SECRET;
     const token = jwt.sign(payload, secret, options);
     return token;
@@ -9,7 +9,7 @@ export function signJwtToken(payload, options = {}) {
 
 
 // verifying jwt
-export function verifyJwtToken(token) {
+export function verifyJwtToken(token: any) {
     try {
         const secret = process.env.JWT_SECRET;
         const payload = jwt.verify(token, secret);
