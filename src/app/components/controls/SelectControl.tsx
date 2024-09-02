@@ -1,7 +1,7 @@
-import { Dispatch, ForwardedRef, SetStateAction, forwardRef } from 'react';
-import Image from 'next/image';
-import { twMerge } from 'tailwind-merge';
 import * as Select from '@radix-ui/react-select';
+import Image from 'next/image';
+import { Dispatch, SetStateAction } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 type SelectItem = {
   id: number | string;
@@ -77,8 +77,8 @@ const SelectControl = ({
           <Select.Viewport className="SelectViewport">
             <Select.Group className="">
               {data.map((item: SelectItem, idx) => (
-                <SelectItem
-                  value={item}
+                <Select.Item
+                  value={item.value}
                   key={item.id ?? idx}
                   disabled={item?.disabled}
                   className={`${
@@ -94,7 +94,7 @@ const SelectControl = ({
                   {item?.icon && <BadgeIcon icon={item?.icon} />}
                   {item?.img && <Img src={item?.img} />}
                   {item?.value || ''}
-                </SelectItem>
+                </Select.Item>
               ))}
             </Select.Group>
           </Select.Viewport>
@@ -118,27 +118,6 @@ const BadgeIcon = ({ icon }: { icon: string }) => (
     </svg> */}
   </Select.Icon>
 );
-
-const SelectItem = forwardRef<any, any>(
-  (
-    { children, className, ...props },
-    forwardedRef: ForwardedRef<HTMLSelectElement>
-  ) => {
-    return (
-      <Select.Item
-        className={twMerge('SelectItem', className)}
-        {...props}
-        ref={forwardedRef}
-      >
-        <Select.ItemText>{children}</Select.ItemText>
-        {/* <Select.ItemIndicator className="SelectItemIndicator">
-        YES
-      </Select.ItemIndicator> */}
-      </Select.Item>
-    );
-  }
-);
-SelectItem.displayName = 'SelectItem';
 
 const Img = ({ src }: { src: string }) => (
   <Image src={src} alt="" width={18} height={18} priority />

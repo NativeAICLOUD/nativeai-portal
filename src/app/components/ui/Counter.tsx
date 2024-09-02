@@ -1,7 +1,6 @@
 import { animate } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Each } from '../helpers/Each';
-import { localeValue } from '@/utils/helpers';
 
 type IProps = {
   from: string;
@@ -32,5 +31,9 @@ function Counter({ from, to, cls, decimal = 2, delay = 1 }: IProps) {
     </>
   );
 }
+
+const localeValue = (value: number, decimal: number) => {
+  return value.toLocaleString('en-US', { maximumFractionDigits: decimal });
+};
 
 export default Counter;
