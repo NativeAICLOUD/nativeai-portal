@@ -9,7 +9,7 @@ const HomeLowerSection = () => {
   return (
     <section className={'relative pt-10'}>
       <h2 className={'text-4.5xl mb-4 text-center font-semibold leading-snug'}>Cloud DevOps Services</h2>
-      <div className="relative text-white bg-main-card rounded-2xl content w-full p-4 box-border mx-auto max-w-[1440px]">
+      <div className="relative text-white bg-main-card rounded-2xl content w-full p-4 box-border mx-auto max-w-9xl">
         <h2 className={'font-montserrat font-semibold text-[40px] text-center pt-4 mb-12'}>Achieve More With NativeCloud</h2>
         <div className={'grid grid-cols-3 gap-16 max-w-6xl mx-auto'}>
           <div className={'flex flex-col gap-10 items-center text-center'}>

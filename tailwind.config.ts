@@ -16,15 +16,22 @@ const config: Config = {
         primary: '#283D3B',
         secondary: '#031526',
         native: '#F89201',
+        'native-text': '#162435',
+        'native-btn': '#0A1624',
+        'native-btn-text': '#383838',
         'btn-color': "#031526",
-        "border-color": '#283D3B'
+        "border-color": '#283D3B',
+        'circle-grey': '#48515E'
       },
       backgroundImage: {
         'orange-gradient': "url('/img/BG.png')",
+        'text-linear': 'linear-gradient(90deg, #E5A003 0%, #FCC980 50%, #F89201 100%)',
         'h1-linear': 'linear-gradient(90deg, #2a3a4a 0%, #0a3d6d 50%, #232f3e 100%)',
         'h2-linear': 'linear-gradient(90deg, #232f3e 0%, #0a3d6d 50%, #0a3d6d 100%)',
         'main-gradient': 'linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%)',
-        'main-card': 'linear-gradient(to right, #003140, #203d5d), url(/img/noise-background.jpg)'
+        'main-card': 'linear-gradient(to right, #003140, #203d5d), url(/img/noise-background.jpg)',
+        'main-light-card': 'linear-gradient(to right, #37424f, #35404e), url(/img/noise-background.jpg)',
+        'two-color': 'linear-gradient(to bottom, #232F3E 50%, #283647 50%)'
       },
       fontSize: {
         'xxxs': ['8px', '1'],

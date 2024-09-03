@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 const services = [
@@ -38,7 +37,9 @@ const CloudServicesSection = () => {
       </div>
 
       <div className="relative services mb-4 mt-15">
-        <h2 className={'text-4.5xl text-center font-semibold leading-snug pb-6'}>A Complete Range of End-to-End Azure and AWS Cloud Services</h2>
+        <h2 className={'text-4.5xl text-center font-semibold leading-snug pb-6'}>
+          A Complete Range of End-to-End Azure and AWS Cloud Services
+        </h2>
         <div className="relative py-8 content before:absolute before:inset-0 before:bg-orange-gradient before:w-full before:h-full before:bg-cover before:bg-center before:opacity-80">
           <div className={'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 max-w-8xl mx-auto'}>
             {services.map((service, index) => (

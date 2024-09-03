@@ -34,4 +34,5 @@ export const Constants = {
     TELEGRAM: '',
     X: '',
   },
+  MAIL: 'info@nativecloud.com'
 };

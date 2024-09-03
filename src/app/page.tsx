@@ -2,6 +2,7 @@ import CloudServicesSection from "./components/partials/home/CloudServicesSectio
 import HomeHeader from "./components/partials/home/Header";
 import HomeLowerSection from "./components/partials/home/HomeLowerSection";
 import HomePartner from "./components/partials/home/homepartner";
+import IndustriesBusinessDomain from "./components/partials/home/IndustriesBusinessDomain";
 
 export default function Home() {
   return (
@@ -17,19 +18,8 @@ export default function Home() {
       {/* Home Partner Section */}
       <HomePartner />
 
-      {/*
-      <div className={styles.container}>
-        {blogs?.length > 0 && <h2>WebDevMania&apos;s Blog Website</h2>}
-        <div className={styles.wrapper}>
-          {blogs?.length > 0 
-            ? blogs.map((blog) => (
-                <BlogCard key={blog._id} blog={blog} />
-              )) 
-            : <h3 className={styles.noBlogs}>No blogs are currently in the</h3>
-          }
-        </div>
-      </div>
-      */}
+      {/* Industries Section */}
+      <IndustriesBusinessDomain />
     </main>
   );
 }
