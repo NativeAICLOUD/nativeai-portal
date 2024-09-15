@@ -101,7 +101,7 @@ function Navbar() {
       className={`navbar overflow-x-clip w-full fixed transition-all ${
         show
           ? 'h-[88px] z-999 before:bg-white before:absolute before:-left-4 sm:before:-left-6 inset-y-0 before:w-[calc(100%+2rem)] sm:before:w-[calc(100%+3rem)] before:h-[88px]'
-          : ''
+          : 'z-999'
       } ${slideMenu ? 'h-full' : ''}`}
     >
       <nav
