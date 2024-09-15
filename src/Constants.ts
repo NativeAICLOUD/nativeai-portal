@@ -30,9 +30,10 @@ export const Constants = {
     PRIVACY: '/privacy-policy',
   },
   SOCIALS: {
-    DISCORD: 'https://discord.com',
-    TELEGRAM: '',
-    X: '',
+    INSTAGRAM: 'https://instagram.com',
+    FACEBOOK: 'https://facebook.com',
+    LINKEDIN: 'https://linkedin.com',
   },
-  MAIL: 'info@nativecloud.com'
+  MAIL: 'info@nativecloud.com',
+  PHONE: '+389 70 226 432',
 };

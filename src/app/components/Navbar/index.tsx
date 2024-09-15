@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Each } from '../helpers/Each';
 import LanguageSwitch from '../ui/LanguageSwitch';
 import { usePathname } from 'next/navigation';
+import Logo from '../ui/Logo';
 
 type Pages = {
   url: string;
@@ -97,29 +98,22 @@ function Navbar() {
 
   return (
     <header
-      className={`navbar overflow-x-clip w-full z-999 fixed transition-all ${slideMenu ? 'h-full' : ''}`}
+      className={`navbar overflow-x-clip w-full fixed transition-all ${
+        show
+          ? 'h-[88px] z-999 before:bg-white before:absolute before:-left-4 sm:before:-left-6 inset-y-0 before:w-[calc(100%+2rem)] sm:before:w-[calc(100%+3rem)] before:h-[88px]'
+          : ''
+      } ${slideMenu ? 'h-full' : ''}`}
     >
       <nav
-        className={`relative nav-items flex justify-between gap-6 items-center px-4 sm:px-6 max-w-9xl mx-auto ${
+        className={`relative nav-items flex justify-between gap-6 items-center px-4 sm:px-6 max-w-9xl mx-auto z-1 ${
           show
-            ? 'min-h-20 before:bg-white before:absolute before:-left-4 sm:before:-left-6 inset-y-0 before:w-[calc(100%+2rem)] sm:before:w-[calc(100%+3rem)] before:h-full z-0'
+            ? 'min-h-20'
             : 'min-h-28'
         } ${slideMenu ? 'z-1 border-b border-b-black' : ''} transition-all`}
       >
         <div className="relative left flex items-center gap-20">
           <div className="main-logo py-2 flex items-center flex-col sm:flex-row gap-1.5">
-            <Link href={'/'}>
-              <Image
-                src="/logo.svg"
-                alt="Logo"
-                className="logo min-w-[145px]"
-                width={145}
-                height={45}
-                priority
-                sizes="(max-width: 768px) 100vw, 100vw"
-                quality={100}
-              />
-            </Link>
+            <Logo />
           </div>
 
           <ul className="flex items-center justify-center gap-10">
@@ -147,13 +141,15 @@ function Navbar() {
 
         <div className="relative actions flex items-center gap-4 sm:gap-8">
 
-          <svg className={`icon-search ${slideMenu ? 'text-native' : 'text-black'}`} width={24} height={24}>
-            <use href={`/icons/all-icons.svg#icon-search`}></use>
-          </svg>
+          <div className="search cursor-pointer">
+            <svg className={`icon-search ${slideMenu ? 'text-native' : 'text-black'}`} width={24} height={24}>
+              <use href={`/icons/all-icons.svg#icon-search`}></use>
+            </svg>
+          </div>
 
           <LanguageSwitch />
 
-          <div className={`login flex items-center gap-1 ${slideMenu ? 'text-native' : 'text-black'}`}>
+          <div className={`login flex items-center cursor-pointer gap-1 ${slideMenu ? 'text-native' : 'text-black'}`}>
             <svg className="icon-login" width={18} height={18}>
               <use href={`/icons/all-icons.svg#icon-login`} />
             </svg>
