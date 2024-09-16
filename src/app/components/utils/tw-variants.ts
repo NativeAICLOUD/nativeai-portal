@@ -4,7 +4,8 @@ export const button = tv({
   base: 'active:scale-99 font-semibold no-underline inline-flex items-center justify-center select-none transition-color transition-all focus:outline-none disabled:opacity-50 disabled:pointer-events-none',
   variants: {
     color: {
-      primary: "bg-btn-color text-white",
+      primary: "bg-btn-color text-white hover:bg-btn-color-hover",
+      blue: "bg-native-btn-blue text-white hover:bg-native-btn-blue-hover",
       secondary: "bg-white text-secondary border-2 border-solid border-border-color",
       outline: "bg-white/20 hover:bg-white/30 hover:shadow-md border border-black/30 text-black rounded-40",
       social: "bg-white rounded-28 shadow-social hover:shadow-md border border-social-border",

@@ -19,7 +19,10 @@ const config: Config = {
         'native-text': '#162435',
         'native-btn': '#0A1624',
         'native-btn-text': '#383838',
+        'native-btn-blue': '#1b3b58',
+        'native-btn-blue-hover': '#1E1E1E',
         'btn-color': "#031526",
+        'btn-color-hover': "#001c3d",
         "border-color": '#283D3B',
         'circle-grey': '#48515E'
       },
@@ -28,6 +31,7 @@ const config: Config = {
         'text-linear': 'linear-gradient(90deg, #E5A003 0%, #FCC980 50%, #F89201 100%)',
         'h1-linear': 'linear-gradient(90deg, #2a3a4a 0%, #0a3d6d 50%, #232f3e 100%)',
         'h2-linear': 'linear-gradient(90deg, #232f3e 0%, #0a3d6d 50%, #0a3d6d 100%)',
+        'solution-text-linear': 'linear-gradient(90deg, #1E1E1E 0%, #2573BA 100%)',
         'main-gradient': 'linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%)',
         'main-card': 'linear-gradient(to right, #003140, #203d5d), url(/img/noise-background.jpg)',
         'main-light-card': 'linear-gradient(to right, #37424f, #35404e), url(/img/noise-background.jpg)',
@@ -78,6 +82,7 @@ const config: Config = {
       boxShadow: {
         tooltip: 'hsl(206 22% 7% / 35%) 0px 6px 18px -6px, hsl(206 22% 7% / 20%) 0px 6px 12px -15px',
         'tooltip-dark': 'hsl(0deg 1.72% 48.91% / 35%) 0px 10px 38px -10px, hsl(0deg 0% 100% / 20%) 0px 10px 20px -15px',
+        partner: '0 1px 6px 4px rgb(83 83 83 / 10%), 0 2px 4px -2px rgb(0 0 0 / 0.1)'
       },
       zIndex: {
         1: '1',
