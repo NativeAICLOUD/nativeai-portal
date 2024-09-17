@@ -1,68 +1,94 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { Each } from '../components/helpers/Each';
+import { twMerge } from 'tailwind-merge';
+import { button } from '../components/utils/tw-variants';
+
+import AboutHeader from '../../../public/img/about-img.png';
+
+const cards = [
+  { img: '/img/msp.png', link: '', title: '3x Microsoft Most Valuable Professionals (MVP)', desc: 'MVP status is given by Microsoft to technology experts who passionately share their knowledge with the community.' },
+  { img: '/img/msp.png', link: '', title: '3x Microsoft Most Valuable Professionals (MVP)', desc: 'MVP status is given by Microsoft to technology experts who passionately share their knowledge with the community.' },
+  { img: '/img/msp.png', link: '', title: '3x Microsoft Most Valuable Professionals (MVP)', desc: 'MVP status is given by Microsoft to technology experts who passionately share their knowledge with the community.' },
+]
+
+type TCard = typeof cards[0];
+
 const AboutUsPage = () => {
   return (
-    <div>
-      <div className={`flex flex-col items-center`}>
-        <div className={'relative w-[2000px] h-[1600px]'}>
-          <Image
-            src="/img/Solutions.png"
-            alt="Background Frame"
-            width={759}
-            height={574}
-            className={'absolute top-[70px] left-[1200px] w-[859px] h-[674px] z-[-1]'}
-          />
-          <div className={'relative text-center z-[1]'}>
-            <h1 className={'font-montserrat text-[62px] bg-gradient-to-r from-[#1E1E1E] to-[#2573BA] bg-clip-text text-transparent w-[880px] h-[150px] mt-[230px] ml-[188px]'}>
-              The best cloud <span>Solutions</span> for your organization
+    <div className={`relative min-h-full before:bg-orange3-gradient before:size-full before:absolute before:inset-0 before:bg-cover`}>
+      <div className={'relative mx-auto max-w-9xl'}>
+        <div className="top flex items-start justify-between pt-36">
+          <div className="side pt-28">
+            <h1 className={'text-6xl pb-6 leading-none font-bold bg-solution-text-linear bg-clip-text text-transparent max-w-[800px]'}>
+              About Native Cloud
             </h1>
-            <p className={'max-w-[833px] h-[107px] my-[20px] font-montserrat text-[16px] font-normal ml-[188px]'}>
-              Regardless of your current infrastructure, we empower you to get the most out of your cloud experience. Find our top 3 solutions below and let us help you along your cloud journey.
+            <p className={'max-w-[800px] pt-3 pb-16 text-lg font-normal'}>
+              Master Microsoft Azure in hands-on sessions. Accelerate your cloud proficiency!
             </p>
-            <div className={'flex justify-center w-[1920px] h-[417px] my-[20px]'}>
-              <div className={''}>
-                <Image src="/img/MSP-Azure.png" alt="Microsoft Solutions Partner" width={762} height={95}
-                  className={'absolute top-[452px] left-[240px] w-[662px] h-[90px] z-[-1]'} />
-              </div>
+
+            <div className="about-info">
+              <h2 className="font-medium text-3.5xl leading-tight">
+                NativeCloud specializes in delivering <span className="text-native font-bold">smart, innovative</span>, and <span className="text-native font-bold">highly resilient cloud solutions</span> to support organizations.
+              </h2>
             </div>
-            <div className={'flex justify-around w-[1920px] my-[50px]'}>
-              <div className={'text-center w-[367px] h-[519px] my-[20px] flex flex-col items-center'}>
-                <Image src="/img/Isolation_1.png" alt="Going to Azure" width={160} height={110} />
-                <div className={'serviceText w-[467px] h-[265px] mt-[30px]'}>
-                  <h3 className="font-montserrat text-[24px] my-[20px]">Going to Azure</h3>
-                  <p className='my-[20px]'>
-                    Once you`ve decided to start working with Azure, the cloud migration process begins. Several complex decisions play a role in this, so it makes sense to work according to a carefully designed migration strategy.
-                  </p>
-                  <Link href="#"><button className={'py-[10px] px-[20px] bg-[#1b3b58] text-white border-none cursor-pointer rounded-[20px] transition-colors duration-300 hover:bg-[#1E1E1E]'}>Going to Azure</button></Link>
-                </div>
-              </div>
-              <div className={'text-center w-[367px] h-[519px] my-[20px] flex flex-col items-center'}>
-                <Image src="/img/Isolation_2.png" alt="Accelerate with Azure" width={190} height={130} />
-                <div className={'serviceText w-[467px] h-[265px] mt-[30px]'}>
-                  <h3 className="font-montserrat text-[24px] my-[20px]">Accelerate with Azure</h3>
-                  <p className='my-[20px]'>
-                    Improving your application and infrastructure environment is a continuous process. The first step to achieving this is already done when you have chosen the public cloud. The next step is moving to a cloud-native application.
-                  </p>
-                  <Link href="#"><button className={'py-[10px] px-[20px] bg-[#1b3b58] text-white border-none cursor-pointer rounded-[20px] transition-colors duration-300 hover:bg-[#1E1E1E]'}>Accelerate with Azure</button></Link>
-                </div>
-              </div>
-              <div className={'text-center w-[367px] h-[519px] my-[20px] flex flex-col items-center'}>
-                <Image src="/img/Isolation_3.png" alt="Managed Services" width={142} height={131} />
-                <div className={'serviceText w-[467px] h-[265px] mt-[30px]'}>
-                  <h3 className="font-montserrat text-[24px] my-[20px]">Managed Services</h3>
-                  <p className='my-[20px]'>
-                    Besides renewing or recoding the application, making your application more cloud-native, or helping you kickstart your application on the public cloud, we have extensive support packages available if you would like us to manage the application as well.
-                  </p>
-                  <Link href="#"><button className={'py-[10px] px-[20px] bg-[#1b3b58] text-white border-none cursor-pointer rounded-[20px] transition-colors duration-300 hover:bg-[#1E1E1E]'}>Managed Services</button></Link>
-                </div>
-              </div>
-            </div>
+          </div>
+
+          <Image
+            src={AboutHeader}
+            alt="About Image"
+            priority
+            className={'max-w-lg object-contain'}
+          />
+        </div>
+
+
+        <div className="about-info mt-8">
+          <div className={'flex items-center gap-6'}>
+            <p>
+              Our core focus lies in Microsoft Azure, and we`re proud to hold certification from Microsoft as an Azure Expert Managed Service Provider. We empower businesses with cutting-edge cloud services designed for maximum efficiency and reliability. Azure provides essential tools enabling organizations to securely access their critical applications and data from anywhere, swiftly and securely. Through daily design, implementation, and management of infrastructures and workloads on Azure, we have amassed invaluable knowledge and expertise on the platform.
+            </p>
+            <p>
+              Our continuous engagement with Azure empowers us to deliver tailored solutions that optimize performance, security, and accessibility for our clients. Continuous refinement of designs and robust Managed Services have made us leaders in integrating new Azure features into customer solutions. We ensure clients leverage Azure`s latest innovations for enhanced efficiency and competitiveness. As a result of the continuous improvement of these designs and our Managed Services, we have become a leader in integrating new Azure functionalities into customer solutions.
+            </p>
+          </div>
+        </div>
+
+        <div className="about-cards mt-20">
+          <h2 className="text-2xl font-bold">
+            To underline this we share some achievements that we are proud of
+          </h2>
+          <div className={'flex justify-around gap-6 mt-14 pb-24'}>
+            <Each
+              of={cards}
+              render={(item: TCard) => (
+                <Card
+                  img={item.img}
+                  title={item.title}
+                  desc={item.desc}
+                  link={item.link} />
+              )}
+            />
           </div>
         </div>
       </div>
     </div>
   );
 };
+
+const Card = ({ img, title, desc, link }: TCard) => {
+  return (
+    <div className={'flex flex-col bg-white shadow-about rounded-lg p-6 text-center'}>
+      <Image src={img} alt={title} className='object-contain rounded-full border w-20 min-h-20 mx-auto mb-4' width={160} height={110} />
+      <div className={'serviceText w-full max-w-[467px]'}>
+        <h3 className="text-2xl mt-4">{title}</h3>
+        <p className='my-5 text-sm sm:text-base pb-6'>
+          {desc}
+        </p>
+      </div>
+    </div>
+  )
+}
 
 export default AboutUsPage;

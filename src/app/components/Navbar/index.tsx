@@ -123,7 +123,7 @@ function Navbar() {
                 <li className={`relative flex items-center text-black font-light transition-all ${show ? 'h-20 before:-bottom-1' : 'h-28 before:-bottom-0'} ${
                   pathname === item.url ? 'before:absolute before:w-full before:h-0.5 before:bg-native' : ''}`}>
                   <Link className="flex items-center gap-1" href={item.url}
-                    onMouseEnter={() => setSlideMenu(true)}>
+                    onMouseEnter={() => item.url === Constants.PAGES.SOLUTIONS ? setSlideMenu(true) : {}}>
                     {item.title}
                     {
                       item.children &&
