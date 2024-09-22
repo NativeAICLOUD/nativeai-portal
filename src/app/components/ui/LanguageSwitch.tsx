@@ -5,6 +5,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import Flag from 'react-flagpack'
 import { Each } from '../helpers/Each';
 import { useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 const LanguageList = [
   { name: 'EN', icon: <Flag code="GB-UKM" size="m" /> },
@@ -14,7 +15,11 @@ const LanguageList = [
 
 type Language = typeof LanguageList[0];
 
-function LanguageSwitch() {
+function LanguageSwitch({
+  className
+}: {
+  className?: string
+}) {
 
   const [lng, setLanguage] = useState(LanguageList[0]);
 
@@ -22,7 +27,7 @@ function LanguageSwitch() {
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
         <button
-          className="flex items-center gap-2"
+          className={twMerge('flex items-center gap-2', className || '')}
           aria-label="Language value"
         >
           {lng.icon} {lng.name}

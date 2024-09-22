@@ -31,9 +31,9 @@
             <title>Icon Arrow Bottom</title>
             <path xmlns="http://www.w3.org/2000/svg" fill="#4EB700" d="M10,17.41a.68.68,0,0,1-.52-.26l-4-3.94a.67.67,0,0,1,1-.94l2.86,2.86V3.41a.67.67,0,1,1,1.33,0V15.14l2.86-2.87a.67.67,0,0,1,.88-.06l.07.06a.66.66,0,0,1,0,.94l-4,4a.69.69,0,0,1-.48.2Z" transform="translate(-5.34 -2.74)"/>
         </symbol>
-        <symbol id="icon-nav-menu" viewBox="0 0 16 16">
+        <symbol id="icon-nav-menu" viewBox="0 0 18 12">
             <title>Nav Menu</title>
-            <path d="M3.333 9.333a1.333 1.333 0 1 0 0-2.666 1.333 1.333 0 0 0 0 2.666zm4.667 0a1.333 1.333 0 1 0 0-2.666 1.333 1.333 0 0 0 0 2.666zm4.667 0a1.333 1.333 0 1 0 0-2.666 1.333 1.333 0 0 0 0 2.666z" fill="currentColor" fill-rule="evenodd"/>
+            <path d="M1 12H17C17.55 12 18 11.55 18 11C18 10.45 17.55 10 17 10H1C0.45 10 0 10.45 0 11C0 11.55 0.45 12 1 12ZM1 7H17C17.55 7 18 6.55 18 6C18 5.45 17.55 5 17 5H1C0.45 5 0 5.45 0 6C0 6.55 0.45 7 1 7ZM0 1C0 1.55 0.45 2 1 2H17C17.55 2 18 1.55 18 1C18 0.45 17.55 0 17 0H1C0.45 0 0 0.45 0 1Z" fill="currentColor"/>
         </symbol>
         <symbol id="icon-nav-close" viewBox="0 0 24 24">
             <title>Nav Close</title>
@@ -57,6 +57,10 @@
         <symbol id="icon-arrow-right" viewBox="0 0 30 20">
             <title>Arrow Right</title>
             <path xmlns="http://www.w3.org/2000/svg" d="M28.3333 9.86907L29.1357 10.6715L29.9358 9.86907L29.1357 9.06667L28.3333 9.86907ZM27.5309 9.06667L18.4642 18.1333L20.069 19.7381L29.1357 10.6715L27.5309 9.06667ZM29.1357 9.06667L20.069 -4.31291e-07L18.4642 1.6048L27.5309 10.6715L29.1357 9.06667ZM28.3333 8.73573L-7.47684e-05 8.73573L-7.48675e-05 11.0024L28.3333 11.0024L28.3333 8.73573Z" fill="currentColor"/>
+        </symbol>
+        <symbol id="icon-caret" viewBox="0 0 24 24">
+            <title>Arrow Caret</title>
+            <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/>
         </symbol>
     </defs>
 </svg>

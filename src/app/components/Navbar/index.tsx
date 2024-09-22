@@ -11,6 +11,7 @@ import { Each } from '../helpers/Each';
 import LanguageSwitch from '../ui/LanguageSwitch';
 import { usePathname } from 'next/navigation';
 import Logo from '../ui/Logo';
+import { Transition } from '@headlessui/react';
 
 type Pages = {
   url: string;
@@ -41,6 +42,7 @@ function Navbar() {
   const [openSide, setOpenSide] = useState(false);
   const [slideMenu, setSlideMenu] = useState(false);
   const [show, setShow] = useState(false);
+  const [isExpanded, setExpanded] = useState(false);
   const lastScrollY = useRef(0);
 
   const pages: Pages[] = [
@@ -98,37 +100,34 @@ function Navbar() {
 
   return (
     <header
-      className={`navbar overflow-x-clip w-full fixed transition-all ${
-        show
-          ? 'h-[88px] z-999 before:bg-white before:absolute before:-left-4 sm:before:-left-6 inset-y-0 before:w-[calc(100%+2rem)] sm:before:w-[calc(100%+3rem)] before:h-[88px]'
-          : 'z-999'
-      } ${slideMenu ? 'h-full' : ''}`}
+      className={`navbar overflow-x-clip w-full fixed transition-all ${show
+        ? 'h-[88px] z-999 before:bg-white before:absolute before:-left-4 sm:before:-left-6 inset-y-0 before:w-[calc(100%+2rem)] sm:before:w-[calc(100%+3rem)] before:h-[88px]'
+        : 'z-999'
+        } ${slideMenu ? 'h-full' : ''}`}
     >
       <nav
-        className={`relative nav-items flex justify-between gap-6 items-center px-4 sm:px-6 max-w-9xl mx-auto z-1 ${
-          show
-            ? 'min-h-20'
-            : 'min-h-28'
-        } ${slideMenu ? 'z-1 border-b border-b-black' : ''} transition-all`}
+        className={`relative nav-items flex justify-between gap-6 items-center px-4 sm:px-6 max-w-9xl mx-auto z-1 ${show
+          ? 'min-h-20'
+          : 'min-h-28'
+          } ${slideMenu ? 'z-1 border-b border-b-black' : ''} transition-all`}
       >
-        <div className="relative left flex items-center gap-20">
+        <div className="relative left flex items-center gap-16 xl:gap-20">
           <div className="main-logo py-2 flex items-center flex-col sm:flex-row gap-1.5">
             <Logo />
           </div>
 
-          <ul className="flex items-center justify-center gap-10">
+          <ul className="hidden lg:flex items-center justify-center gap-6 xl:gap-10">
             <Each
               of={pages}
               render={(item: Pages) => (
-                <li className={`relative flex items-center text-black font-light transition-all ${show ? 'h-20 before:-bottom-1' : 'h-28 before:-bottom-0'} ${
-                  pathname === item.url ? 'before:absolute before:w-full before:h-0.5 before:bg-native' : ''}`}>
+                <li className={`relative flex items-center text-black font-light transition-all ${show ? 'h-20 before:-bottom-1' : 'h-28 before:-bottom-0'} ${pathname === item.url ? 'before:absolute before:w-full before:h-0.5 before:bg-native' : ''}`}>
                   <Link className="flex items-center gap-1" href={item.url}
                     onMouseEnter={() => item.url === Constants.PAGES.SOLUTIONS ? setSlideMenu(true) : {}}>
                     {item.title}
                     {
                       item.children &&
                       <CaretDownIcon
-                        className="text-violet10 relative top-[1px] transition-transform duration-[250] ease-in group-data-[state=open]:-rotate-180"
+                        className="relative top-[1px] transition-transform duration-[250] ease-in group-data-[state=open]:-rotate-180"
                         aria-hidden
                       />
                     }
@@ -141,27 +140,13 @@ function Navbar() {
 
         <div className="relative actions flex items-center gap-4 sm:gap-8">
 
-          <div className="search cursor-pointer">
-            <svg className={`icon-search ${slideMenu ? 'text-native' : 'text-black'}`} width={24} height={24}>
-              <use href={`/icons/all-icons.svg#icon-search`}></use>
-            </svg>
-          </div>
-
-          <LanguageSwitch />
-
-          <div className={`login flex items-center cursor-pointer gap-1 ${slideMenu ? 'text-native' : 'text-black'}`}>
-            <svg className="icon-login" width={18} height={18}>
-              <use href={`/icons/all-icons.svg#icon-login`} />
-            </svg>
-            Login
-          </div>
-
+          <NavSettigns slideMenu={slideMenu} />
 
           <button
-            className="btn-action svg-hover w-[40px] h-[40px] md:w-[48px] md:h-[48px] bg-black/5 shadow-inner rounded-full grid sm:hidden place-items-center"
+            className="btn-action svg-hover w-[40px] h-[40px] md:w-[48px] md:h-[48px] hover:bg-black/5 hover:shadow-inner rounded-full grid lg:hidden place-items-center"
             onClick={() => setOpenSide(!openSide)}
           >
-            <svg className="icon-nav fill-black" width={24} height={24}>
+            <svg className="icon-nav transition-colors text-black hover:text-native" width={24} height={18}>
               <use
                 href={`/icons/all-icons.svg#${openSide ? 'icon-nav-close' : 'icon-nav-menu'
                   }`}
@@ -182,14 +167,20 @@ function Navbar() {
         className={`${openSide ? 'translate-x-[0]' : 'translate-x-[100%]'
           } sidebar  z-[100] bg-white/90 backdrop:blur-2xl text-black w-full min-h-screen md:w-[350px] p-2.5 fixed inset-y-0 right-0 transform transition duration-500 ease-in-out overflow-y-auto`}
       >
-        <button
-          className="svg-hover w-[50px] h-[50px] bg-black/5 shadow-inner rounded-full grid place-items-center m-2"
-          onClick={() => setOpenSide(false)}
-        >
-          <svg className="icon-nav-close" width={24} height={24}>
-            <use href={`/icons/all-icons.svg#icon-nav-close`}></use>
-          </svg>
-        </button>
+        <div className="header flex items-center justify-between">
+          <button
+            className="svg-hover w-[40px] h-[40px] bg-black/5 shadow-inner rounded-full grid place-items-center m-2"
+            onClick={() => setOpenSide(false)}
+          >
+            <svg className="icon-nav-close" width={24} height={24}>
+              <use href={`/icons/all-icons.svg#icon-nav-close`}></use>
+            </svg>
+          </button>
+
+          <div className="icons flex items-center gap-6">
+            <NavSettigns isMobile slideMenu={slideMenu} />
+          </div>
+        </div>
 
         <hr className="nav mt-10 mb-10 opacity-10" />
 
@@ -197,9 +188,45 @@ function Navbar() {
           <Each
             of={pages}
             render={(item: Pages) => (
-              <li className="text-black font-light">
-                <Link href={item.url}>{item.title}</Link>
-              </li>
+              <>
+                <li className="text-black font-light flex items-center">
+                  <Link href={item.url}>{item.title}</Link>
+                  {item.children && (
+                    <button
+                      className="expanded w-[40px] h-[40px] grid place-items-center m-2"
+                      onClick={() => setExpanded(!isExpanded)}
+                    >
+                      <svg className={`icon-caret text-black} ${isExpanded ? 'rotate-90' : ''}`} width={24} height={24}>
+                        <use href={`/icons/all-icons.svg#icon-caret`}></use>
+                      </svg>
+                    </button>
+                  )}
+                </li>
+                {
+                  item.children && (
+                    <Transition
+                      className={"-mt-6 flex flex-col gap-2"}
+                      appear={true}
+                      show={isExpanded}
+                      enter="transition-opacity duration-75"
+                      enterFrom="opacity-0"
+                      enterTo="opacity-100"
+                      leave="transition-opacity duration-150"
+                      leaveFrom="opacity-100"
+                      leaveTo="opacity-0"
+                    >
+                      <Each
+                        of={item.children}
+                        render={(item: Pages) => (
+                          <li className="text-black font-light">
+                            <Link href={item.url}>{item.title}</Link>
+                          </li>
+                        )}
+                      />
+                    </Transition>
+                  )
+                }
+              </>
             )}
           />
         </ul>
@@ -252,6 +279,34 @@ function Navbar() {
       </aside>
     </header>
   );
+}
+
+const NavSettigns = ({
+  slideMenu,
+  isMobile = false
+}: {
+  slideMenu: boolean;
+  isMobile?: boolean
+}) => {
+
+  return (
+    <>
+      <div className={`search cursor-pointer ${isMobile ? '' : 'hidden sm:block'}`}>
+        <svg className={`icon-search ${slideMenu ? 'text-native' : 'text-black'}`} width={24} height={24}>
+          <use href={`/icons/all-icons.svg#icon-search`}></use>
+        </svg>
+      </div>
+
+      <LanguageSwitch className={`${isMobile ? '' : 'hidden sm:flex'}`} />
+
+      <div className={`login ${isMobile ? 'flex' : 'hidden sm:flex'} items-center cursor-pointer gap-1 ${slideMenu ? 'text-native' : 'text-black'}`}>
+        <svg className="icon-login" width={18} height={18}>
+          <use href={`/icons/all-icons.svg#icon-login`} />
+        </svg>
+        Login
+      </div>
+    </>
+  )
 }
 
 export default Navbar;

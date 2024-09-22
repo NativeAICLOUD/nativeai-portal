@@ -8,30 +8,30 @@ import { twMerge } from 'tailwind-merge';
 const HomeLowerSection = () => {
   return (
     <section className={'relative pt-10'}>
-      <h2 className={'text-4.5xl mb-4 text-center font-semibold leading-snug'}>Cloud DevOps Services</h2>
-      <div className="relative text-white bg-main-card rounded-2xl content w-full p-4 box-border mx-auto max-w-9xl">
-        <h2 className={'font-montserrat font-semibold text-[40px] text-center pt-4 mb-12'}>Achieve More With NativeCloud</h2>
-        <div className={'grid grid-cols-3 gap-16 max-w-6xl mx-auto'}>
-          <div className={'flex flex-col gap-10 items-center text-center'}>
-            <div className="box-img h-20">
+      <h2 className={'text-2.5xl sm:text-3.5xl lg:text-4.5xl mb-4 text-center font-semibold leading-snug px-2 lg:px-0'}>Cloud DevOps Services</h2>
+      <div className="relative text-white bg-main-card 2xl:rounded-2xl content w-full p-4 box-border mx-auto max-w-9xl">
+        <h2 className={'font-montserrat font-semibold text-2xl sm:text-3.5xl lg:text-4.5xl text-center pt-4 mb-12'}>Achieve More With NativeCloud</h2>
+        <div className={'grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 max-w-6xl mx-auto'}>
+          <div className={'flex flex-col gap-4 md:gap-10 items-center text-center max-w-sm mx-auto md:max-w-full md:mx-0'}>
+            <div className="box-img md:h-20">
               <Image src="/img/icon-innovate.png" alt="Innovate Faster" width={89} height={67} />
             </div>
             <h3 className="text-xl">Innovate Faster</h3>
-            <p>Decrease time to market and enable continuous delivery for mission-critical apps, products, and services.</p>
+            <p className="text-sm sm:text-base">Decrease time to market and enable continuous delivery for mission-critical apps, products, and services.</p>
           </div>
-          <div className={'flex flex-col gap-10 items-center text-center'}>
-            <div className="box-img h-20">
+          <div className={'flex flex-col gap-4 md:gap-10 items-center text-center max-w-sm mx-auto md:max-w-full md:mx-0'}>
+            <div className="box-img md:h-20">
               <Image src="/img/icon-tasks.png" alt="Automate Release Pipeline" width={80} height={67} />
             </div>
             <h3 className="text-xl">Automate Release Pipeline</h3>
-            <p>Deliver innovative products and services to market quickly by automatically managing, monitoring, and provisioning AWS resources using IaC.</p>
+            <p className="text-sm sm:text-base">Deliver innovative products and services to market quickly by automatically managing, monitoring, and provisioning AWS resources using IaC.</p>
           </div>
-          <div className={'flex flex-col gap-10 items-center text-center'}>
-            <div className="box-img h-20">
+          <div className={'flex flex-col gap-4 md:gap-10 items-center text-center max-w-sm mx-auto md:max-w-full md:mx-0'}>
+            <div className="box-img md:h-20">
               <Image src="/img/icon-stability.png" alt="Improve Stability" width={89} height={67} />
             </div>
             <h3 className="text-xl">Improve Stability</h3>
-            <p>Align your development and ops teams around a shared code base to identify problems early in the deployment process, and improve the resiliency and security of your apps.</p>
+            <p className="text-sm sm:text-base">Align your development and ops teams around a shared code base to identify problems early in the deployment process, and improve the resiliency and security of your apps.</p>
           </div>
         </div>
         <div className="card-footer-text mt-20">

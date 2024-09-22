@@ -20,10 +20,10 @@ const IndustriesBusinessDomain = () => {
   return (
     <section className="relative text-white bg-main-light-card p-4">
       <div className="content w-full mx-auto max-w-9xl mb-20">
-        <h2 className={'text-4.5xl text-center font-semibold leading-snug mt-10 mb-16'}>
+        <h2 className={'text-2xl sm:text-3.5xl lg:text-4.5xl text-center font-semibold leading-snug mt-10 mb-16'}>
           Industries & Business Domains We Serve
         </h2>
-        <div className={'flex flex-wrap justify-center gap-y-20 gap-x-36 max-w-7xl mx-auto items-center text-center'}>
+        <div className={'grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-y-12 gap-x-4 sm:gap-y-20 sm:gap-x-36 max-w-7xl mx-auto items-center text-center'}>
           {services.map((service, index) => (
             <div key={index} className={'flex flex-col items-center max-w-48 text-center relative'}>
               <div className={'relative h-[89px] flex items-center justify-center'}>

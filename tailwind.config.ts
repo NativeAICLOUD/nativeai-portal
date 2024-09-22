@@ -41,6 +41,7 @@ const config: Config = {
       fontSize: {
         'xxxs': ['8px', '1'],
         'xxs': ['0.625rem', '1'],
+        '2.5xl': ['26px', '1'],
         '3.5xl': ['32px', '1'],
         '4.5xl': ['2.5rem', '1'],
         '5.5xl': ['3.5rem', '1'],
