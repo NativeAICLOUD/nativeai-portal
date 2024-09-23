@@ -12,6 +12,7 @@ import { twMerge } from "tailwind-merge";
 import { button } from "../utils/tw-variants";
 import Logo from "../ui/Logo";
 import Newsletter from "../ui/Newsletter";
+import CoomingSoon from "../ui/CoomingSoon";
 
 const pages = {
   solutions: [
@@ -54,9 +55,11 @@ function Footer() {
           <RenderPageItems title="Workshops" pages={pages.workshops} />
           <div className="last text-center sm:text-left">
             <RenderPageItems title="About Native Cloud" pages={pages.about} />
-            <button className={twMerge(`${button({ size: 'md', color: 'primary', icon: 'md' })} mt-4`)}>
-              Get in Touch
-            </button>
+            <CoomingSoon>
+              <button className={twMerge(`${button({ size: 'md', color: 'primary', icon: 'md' })} mt-4`)}>
+                Get in Touch
+              </button>
+            </CoomingSoon>
             <SocialCol className="hidden sm:flex lg:hidden mt-4" />
           </div>
           <InfoAbout className="hidden sm:flex lg:hidden" />
