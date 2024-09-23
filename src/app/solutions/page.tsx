@@ -22,21 +22,21 @@ const SolutionsPage = () => {
   return (
     <div className={`relative min-h-full`}>
       <div className={'relative mx-auto max-w-9xl px-2 sm:px-4 md:px-6 2xl:px-0'}>
-        <div className="top flex items-start justify-between pt-36">
+        <div className="top flex items-start pt-36 gap-10">
           <div className="relative side pt-28 z-1 px-10 md:px-0 text-center md:text-left">
-            <h1 className={'text-4xl md:text-5xl xl:text-6xl pb-6 leading-none font-bold bg-solution-text-linear bg-clip-text text-transparent md:max-w-[800px]'}>
+            <h1 className={'text-4xl md:text-5xl xl:text-6xl pb-6 leading-none font-bold bg-solution-text-linear bg-clip-text text-transparent md:max-w-[600px] xl:max-w-[800px]'}>
               The best cloud Solutions for your organization
             </h1>
             <p className={'md:max-w-[600px] xl:max-w-[800px] pt-3 pb-16 text-base lg:text-lg font-normal'}>
               Regardless of your current infrastructure, we empower you to get the most out of your cloud experience. Find our top 3 solutions below and let us help you along your cloud journey.
             </p>
-            <CardGroup className="hidden xl:flex" />
+            <CardGroup className="hidden xl:flex flex-wrap" />
           </div>
           <Image
             src={SolutionHeader}
             alt="Solutions Image"
             priority
-            className={'opacity-80 md:opacity-100 absolute md:relative object-contain sm:max-w-md lg:max-w-xl xl:max-w-full'}
+            className={'opacity-80 md:opacity-100 absolute md:relative object-contain w-full sm:max-w-md lg:max-w-xl xl:max-w-3xl'}
           />
         </div>
         <CardGroup className="xl:hidden" />

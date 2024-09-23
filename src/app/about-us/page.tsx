@@ -17,7 +17,7 @@ const AboutUsPage = () => {
   return (
     <div className={`relative min-h-full before:bg-orange3-gradient before:size-full before:absolute before:inset-0 before:bg-cover`}>
       <div className={'relative mx-auto max-w-9xl px-4 md:px-6 2xl:px-0'}>
-        <div className="top flex items-start justify-between pt-36">
+        <div className="top flex items-start justify-center pt-36">
           <div className="relative side pt-28 z-1 px-10 md:px-0 text-center md:text-left">
             <h1 className={'text-6xl pb-6 leading-none font-bold bg-solution-text-linear bg-clip-text text-transparent md:max-w-[800px]'}>
               About Native Cloud
@@ -33,13 +33,13 @@ const AboutUsPage = () => {
             src={AboutHeader}
             alt="About Image"
             priority
-            className={'opacity-80 md:opacity-100 absolute inset-x-0 md:relative object-contain sm:max-w-md lg:max-w-xl xl:max-w-full'}
+            className={'opacity-80 md:opacity-100 absolute md:relative object-contain w-full sm:max-w-md lg:max-w-xl xl:max-w-3xl xl:-mt-20'}
           />
         </div>
 
         <HeaderText className="block xl:hidden text-center sm:text-left" />
 
-        <div className="about-info mt-8">
+        <div className="about-info mt-8 2xl:mt-0">
           <div className={'flex flex-col md:flex-row items-center gap-6 text-center sm:text-left'}>
             <p>
               Our core focus lies in Microsoft Azure, and we`re proud to hold certification from Microsoft as an Azure Expert Managed Service Provider. We empower businesses with cutting-edge cloud services designed for maximum efficiency and reliability. Azure provides essential tools enabling organizations to securely access their critical applications and data from anywhere, swiftly and securely. Through daily design, implementation, and management of infrastructures and workloads on Azure, we have amassed invaluable knowledge and expertise on the platform.
@@ -89,7 +89,7 @@ const Card = ({ img, title, desc, link }: TCard) => {
 const HeaderText = ({ className }: { className: string }) => {
   return (
     <div className={twMerge('about-info', className || '')}>
-      <h2 className="font-medium text-2xl sm:text-3xl md:text-3.5xl leading-tight">
+      <h2 className="font-medium text-2xl sm:text-3xl md:text-3.5xl !leading-tight">
         NativeCloud specializes in delivering <span className="text-native font-bold">smart, innovative</span>, and <span className="text-native font-bold">highly resilient cloud solutions</span> to support organizations.
       </h2>
     </div>
