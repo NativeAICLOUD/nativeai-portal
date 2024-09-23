@@ -1,9 +1,9 @@
 "use client";
 
-import React from 'react';
 import Image from 'next/image';
-import { button } from '../../utils/tw-variants';
 import { twMerge } from 'tailwind-merge';
+import CoomingSoon from '../../ui/CoomingSoon';
+import { button } from '../../utils/tw-variants';
 
 const HomeLowerSection = () => {
   return (
@@ -43,9 +43,13 @@ const HomeLowerSection = () => {
           </p>
         </div>
         <div className={'flex justify-center mt-12 mb-8'}>
-          <button className={twMerge(`${button({ size: 'lg', color: 'primary', icon: 'md' })} border-2 border-white`)}>
-            Let`s get started
-          </button>
+          <CoomingSoon>
+            <span>
+              <button className={twMerge(`${button({ size: 'lg', color: 'primary', icon: 'md' })} border-2 border-white`)}>
+                Let`s get started
+              </button>
+            </span>
+          </CoomingSoon>
         </div>
       </div>
     </section>

@@ -16,23 +16,23 @@ import CoomingSoon from "../ui/CoomingSoon";
 
 const pages = {
   solutions: [
-    { url: Constants.PAGES.AZURE_CLOUDIFY, title: 'Azure Cloudify' },
-    { url: Constants.PAGES.MANAGED_SERVICES, title: 'Managed Services' },
-    { url: Constants.PAGES.CLOUD_NATIVE_SD, title: 'Cloud Native Software Development' },
-    { url: Constants.PAGES.DATA_LIFECYCLE_MANAGEMENT, title: 'Data Lifecycle Management' },
-    { url: Constants.PAGES.CSP_ENTERPRISE, title: 'CSP Enterprise' },
+    { url: Constants.PAGES.AZURE_CLOUDIFY, title: 'Azure Cloudify', soon: true },
+    { url: Constants.PAGES.MANAGED_SERVICES, title: 'Managed Services', soon: true },
+    { url: Constants.PAGES.CLOUD_NATIVE_SD, title: 'Cloud Native Software Development', soon: true },
+    { url: Constants.PAGES.DATA_LIFECYCLE_MANAGEMENT, title: 'Data Lifecycle Management', soon: true },
+    { url: Constants.PAGES.CSP_ENTERPRISE, title: 'CSP Enterprise', soon: true },
   ],
   workshops: [
-    { url: Constants.PAGES.AZURE_FUNDAMENTALS_FOR_ISVS, title: 'Azure Fundamentals for ISVs' },
-    { url: Constants.PAGES.AZURE_COST_MANAGEMENT, title: 'Azure Cost Management' },
-    { url: Constants.PAGES.DEVOPS_ON_AZURE, title: 'DevOps on Azure' },
-    { url: Constants.PAGES.AZURE_KUBERNETES_SERVICES, title: 'Azure Kubernetes Services (AKS' },
-    { url: Constants.PAGES.APPLICATION_INSIGHTS, title: 'Application Insights' },
-    { url: Constants.PAGES.WORKSHOP_DATA_AI_SECURITY, title: 'Workshop Data & AI security' },
+    { url: Constants.PAGES.AZURE_FUNDAMENTALS_FOR_ISVS, title: 'Azure Fundamentals for ISVs', soon: true },
+    { url: Constants.PAGES.AZURE_COST_MANAGEMENT, title: 'Azure Cost Management', soon: true },
+    { url: Constants.PAGES.DEVOPS_ON_AZURE, title: 'DevOps on Azure', soon: true },
+    { url: Constants.PAGES.AZURE_KUBERNETES_SERVICES, title: 'Azure Kubernetes Services (AKS', soon: true },
+    { url: Constants.PAGES.APPLICATION_INSIGHTS, title: 'Application Insights', soon: true },
+    { url: Constants.PAGES.WORKSHOP_DATA_AI_SECURITY, title: 'Workshop Data & AI security', soon: true },
   ],
   about: [
-    { url: Constants.PAGES.KNOWLEDGE_BASE, title: 'Knowledge Base' },
-    { url: Constants.PAGES.CERTIFICATIONS, title: 'Certifications' },
+    { url: Constants.PAGES.KNOWLEDGE_BASE, title: 'Knowledge Base', soon: true },
+    { url: Constants.PAGES.CERTIFICATIONS, title: 'Certifications', soon: true },
   ],
 };
 
@@ -94,11 +94,25 @@ const RenderPageItems = ({ title, pages }: { title: string; pages: PageLink[] })
         <Each
           of={pages}
           render={(item: PageLink) => (
-            <li className="text-white font-light">
-              <Link className="flex text-sm text-center sm:text-left items-center gap-1" href={item.url}>
-                {item.title}
-              </Link>
-            </li>
+            <>
+              {
+                item.soon ? (
+                  <CoomingSoon>
+                    <li className="text-white font-light">
+                      <Link className="flex text-sm text-center sm:text-left items-center gap-1" href={''}>
+                        {item.title}
+                      </Link>
+                    </li>
+                  </CoomingSoon>
+                ) : (
+                  <li className="text-white font-light">
+                    <Link className="flex text-sm text-center sm:text-left items-center gap-1" href={item.url}>
+                      {item.title}
+                    </Link>
+                  </li>
+                )
+              }
+            </>
           )}
         />
       </ul>

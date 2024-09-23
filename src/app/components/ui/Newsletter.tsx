@@ -1,5 +1,6 @@
 import { twMerge } from "tailwind-merge";
 import { button } from "../utils/tw-variants";
+import CoomingSoon from "./CoomingSoon";
 
 function Newsletter() {
   return (
@@ -13,9 +14,11 @@ function Newsletter() {
           <input type="checkbox" className="mr-2" /> Accept native.cloud <a href="privacy-policy" target="_blank" className="ml-1 underline">privacy policy</a>.
         </label>
 
-        <button type="submit" className={twMerge(`${button({ size: 'md', color: 'primary', icon: 'md' })}`, 'min-w-0 px-6 md:px-10')}>
-          Sign Up
-        </button>
+        <CoomingSoon>
+          <button type="submit" className={twMerge(`${button({ size: 'md', color: 'primary', icon: 'md' })}`, 'min-w-0 px-6 md:px-10')}>
+            Sign Up
+          </button>
+        </CoomingSoon>
       </div>
     </form>
   );

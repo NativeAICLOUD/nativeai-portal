@@ -3,19 +3,20 @@
 import { Link } from 'next-view-transitions';
 
 import { Constants } from '@/Constants';
+import { Transition } from '@headlessui/react';
 import { CaretDownIcon } from '@radix-ui/react-icons';
 import { AnimatePresence, motion } from 'framer-motion';
-import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { Each } from '../helpers/Each';
+import CoomingSoon from '../ui/CoomingSoon';
 import LanguageSwitch from '../ui/LanguageSwitch';
-import { usePathname } from 'next/navigation';
 import Logo from '../ui/Logo';
-import { Transition } from '@headlessui/react';
 
 type Pages = {
   url: string;
   title: string;
+  soon?: true;
   children?: Pages[];
 }
 
@@ -36,6 +37,38 @@ const motionItem = {
   show: { opacity: 1, y: 0 }
 }
 
+const pages: Pages[] = [
+  {
+    url: Constants.PAGES.SOLUTIONS, title: 'Solutions', children: [
+      {
+        url: '', title: 'Solutions', children: [
+          { url: Constants.PAGES.AZURE_CLOUDIFY, title: 'Azure Cloudify', soon: true },
+          { url: Constants.PAGES.MANAGED_SERVICES, title: 'Managed Services', soon: true }
+        ]
+      },
+      {
+        url: '', title: 'Data Lifecycle Management', children: [
+          { url: Constants.PAGES.MANAGED_SERVICES, title: 'Managed Services', soon: true }
+        ]
+      },
+      {
+        url: '', title: 'Cloud Native', children: [
+          { url: Constants.PAGES.CLOUD_NATIVE_SD, title: 'Software Development', soon: true },
+        ]
+      },
+      {
+        url: '', title: 'CSP Services', children: [
+          { url: Constants.PAGES.CSP_ENTERPRISE, title: 'CSP Enterprise', soon: true },
+        ]
+      }
+    ]
+  },
+  { url: Constants.PAGES.WORKSHOPS, title: 'Workshops', soon: true },
+  { url: Constants.PAGES.KNOWLEDGE_BASE, title: 'Knowledge base', soon: true },
+  { url: Constants.PAGES.ABOUT_US, title: 'About us' },
+  { url: Constants.PAGES.GET_IN_TOUCH, title: 'Get in touch', soon: true },
+];
+
 function Navbar() {
   const pathname = usePathname();
 
@@ -44,38 +77,6 @@ function Navbar() {
   const [show, setShow] = useState(false);
   const [isExpanded, setExpanded] = useState(false);
   const lastScrollY = useRef(0);
-
-  const pages: Pages[] = [
-    {
-      url: Constants.PAGES.SOLUTIONS, title: 'Solutions', children: [
-        {
-          url: '', title: 'Solutions', children: [
-            { url: Constants.PAGES.AZURE_CLOUDIFY, title: 'Azure Cloudify' },
-            { url: Constants.PAGES.MANAGED_SERVICES, title: 'Managed Services' }
-          ]
-        },
-        {
-          url: '', title: 'Data Lifecycle Management', children: [
-            { url: Constants.PAGES.MANAGED_SERVICES, title: 'Managed Services' }
-          ]
-        },
-        {
-          url: '', title: 'Cloud Native', children: [
-            { url: Constants.PAGES.CLOUD_NATIVE_SD, title: 'Software Development' },
-          ]
-        },
-        {
-          url: '', title: 'CSP Services', children: [
-            { url: Constants.PAGES.CSP_ENTERPRISE, title: 'CSP Enterprise' },
-          ]
-        }
-      ]
-    },
-    { url: Constants.PAGES.WORKSHOPS, title: 'Workshops' },
-    { url: Constants.PAGES.KNOWLEDGE_BASE, title: 'Knowledge base' },
-    { url: Constants.PAGES.ABOUT_US, title: 'About us' },
-    { url: Constants.PAGES.GET_IN_TOUCH, title: 'Get in touch' },
-  ];
 
   useEffect(() => {
     const onScroll = (e: any) => {
@@ -112,7 +113,7 @@ function Navbar() {
           } ${slideMenu ? 'z-1 border-b border-b-black' : ''} transition-all`}
       >
         <div className="relative left flex items-center gap-16 xl:gap-20">
-          <div className="main-logo py-2 flex items-center flex-col sm:flex-row gap-1.5">
+          <div className="main-logo py-2 flex items-center flex-col sm:flex-row gap-1.5" onClick={() => setSlideMenu(false)}>
             <Logo />
           </div>
 
@@ -120,19 +121,33 @@ function Navbar() {
             <Each
               of={pages}
               render={(item: Pages) => (
-                <li className={`relative flex items-center text-black font-light transition-all ${show ? 'h-20 before:-bottom-1' : 'h-28 before:-bottom-0'} ${pathname === item.url ? 'before:absolute before:w-full before:h-0.5 before:bg-native' : ''}`}>
-                  <Link className="flex items-center gap-1" href={item.url}
-                    onMouseEnter={() => item.url === Constants.PAGES.SOLUTIONS ? setSlideMenu(true) : {}}>
-                    {item.title}
-                    {
-                      item.children &&
-                      <CaretDownIcon
-                        className="relative top-[1px] transition-transform duration-[250] ease-in group-data-[state=open]:-rotate-180"
-                        aria-hidden
-                      />
-                    }
-                  </Link>
-                </li>
+                <>
+                  {
+                    item.soon ? (
+                      <CoomingSoon>
+                        <li className={`relative flex items-center text-black font-light transition-all ${show ? 'h-20 before:-bottom-1' : 'h-28 before:-bottom-0'} ${pathname === item.url ? 'before:absolute before:w-full before:h-0.5 before:bg-native' : ''}`}>
+                          <Link className="flex items-center gap-1" href={''}>
+                            {item.title}
+                          </Link>
+                        </li>
+                      </CoomingSoon>
+                    ) : (
+                      <li className={`relative flex items-center text-black font-light transition-all ${show ? 'h-20 before:-bottom-1' : 'h-28 before:-bottom-0'} ${pathname === item.url ? 'before:absolute before:w-full before:h-0.5 before:bg-native' : ''}`}>
+                        <Link className="flex items-center gap-1" href={item.url} onClick={() => setSlideMenu(false)}
+                          onMouseEnter={() => item.url === Constants.PAGES.SOLUTIONS ? setSlideMenu(true) : {}}>
+                          {item.title}
+                          {
+                            item.children &&
+                            <CaretDownIcon
+                              className="relative top-[1px] transition-transform duration-[250] ease-in group-data-[state=open]:-rotate-180"
+                              aria-hidden
+                            />
+                          }
+                        </Link>
+                      </li>
+                    )
+                  }
+                </>
               )}
             />
           </ul>
@@ -189,19 +204,39 @@ function Navbar() {
             of={pages}
             render={(item: Pages) => (
               <>
-                <li className="text-black font-light flex items-center">
-                  <Link href={item.url}>{item.title}</Link>
-                  {item.children && (
-                    <button
-                      className="expanded w-[40px] h-[40px] grid place-items-center m-2"
-                      onClick={() => setExpanded(!isExpanded)}
-                    >
-                      <svg className={`icon-caret text-black} ${isExpanded ? 'rotate-90' : ''}`} width={24} height={24}>
-                        <use href={`/icons/all-icons.svg#icon-caret`}></use>
-                      </svg>
-                    </button>
-                  )}
-                </li>
+                {
+                  item.soon ? (
+                    <CoomingSoon>
+                      <li className="text-black font-light flex items-center">
+                        <Link href={item.url}>{item.title}</Link>
+                        {item.children && (
+                          <button
+                            className="expanded w-[40px] h-[40px] grid place-items-center m-2"
+                            onClick={() => setExpanded(!isExpanded)}
+                          >
+                            <svg className={`icon-caret text-black} ${isExpanded ? 'rotate-90' : ''}`} width={24} height={24}>
+                              <use href={`/icons/all-icons.svg#icon-caret`}></use>
+                            </svg>
+                          </button>
+                        )}
+                      </li>
+                    </CoomingSoon>
+                  ) : (
+                    <li className={`relative flex items-center text-black font-light transition-all ${show ? 'h-20 before:-bottom-1' : 'h-28 before:-bottom-0'} ${pathname === item.url ? 'before:absolute before:w-full before:h-0.5 before:bg-native' : ''}`}>
+                      <Link className="flex items-center gap-1" href={item.url}
+                        onMouseEnter={() => item.url === Constants.PAGES.SOLUTIONS ? setSlideMenu(true) : {}}>
+                        {item.title}
+                        {
+                          item.children &&
+                          <CaretDownIcon
+                            className="relative top-[1px] transition-transform duration-[250] ease-in group-data-[state=open]:-rotate-180"
+                            aria-hidden
+                          />
+                        }
+                      </Link>
+                    </li>
+                  )
+                }
                 {
                   item.children && (
                     <Transition
@@ -218,15 +253,66 @@ function Navbar() {
                       <Each
                         of={item.children}
                         render={(item: Pages) => (
-                          <li className="text-black font-light">
-                            <Link href={item.url}>{item.title}</Link>
-                          </li>
+                          <>
+                            {
+                              item.soon ? (
+                                <CoomingSoon>
+                                  <li className="text-black font-light">
+                                    <Link href={item.url}>{item.title}</Link>
+                                  </li>
+                                </CoomingSoon>
+                              ) : (
+                                <li className="text-black font-light">
+                                  <Link href={item.url}>{item.title}</Link>
+                                </li>
+                              )
+                            }
+                          </>
                         )}
                       />
                     </Transition>
                   )
                 }
               </>
+              // <>
+              //   <li className="text-black font-light flex items-center">
+              //     <Link href={item.url}>{item.title}</Link>
+              //     {item.children && (
+              //       <button
+              //         className="expanded w-[40px] h-[40px] grid place-items-center m-2"
+              //         onClick={() => setExpanded(!isExpanded)}
+              //       >
+              //         <svg className={`icon-caret text-black} ${isExpanded ? 'rotate-90' : ''}`} width={24} height={24}>
+              //           <use href={`/icons/all-icons.svg#icon-caret`}></use>
+              //         </svg>
+              //       </button>
+              //     )}
+              //   </li>
+              //   {
+              //     item.children && (
+              //       <Transition
+              //         className={"-mt-6 flex flex-col gap-2"}
+              //         appear={true}
+              //         show={isExpanded}
+              //         enter="transition-opacity duration-75"
+              //         enterFrom="opacity-0"
+              //         enterTo="opacity-100"
+              //         leave="transition-opacity duration-150"
+              //         leaveFrom="opacity-100"
+              //         leaveTo="opacity-0"
+              //       >
+              //         <Each
+              //           of={item.children}
+              //           render={(item: Pages) => (
+              //             <li className="text-black font-light">
+              //               <Link href={item.url}>{item.title}</Link>
+              //             </li>
+              //           )}
+              //         />
+              //       </Transition>
+              //     )
+              //   }
+              // </>
             )}
           />
         </ul>
@@ -247,7 +333,7 @@ function Navbar() {
         <AnimatePresence>
           {slideMenu && (
             <motion.div
-              className="relative grid grid-cols-4 gap-4 max-w-[55rem] ml-64 2xl:ml-[18.6rem] mt-10"
+              className="relative grid grid-cols-4 gap-4 max-w-[55rem] ml-56 xl:ml-64 2xl:ml-[18.6rem] mt-10"
               initial="hidden"
               animate="show"
               transition={{ delay: 1 }}
@@ -263,9 +349,21 @@ function Navbar() {
                       <Each
                         of={item.children}
                         render={(item: Pages) => (
-                          <li className="text-black font-light opacity-70">
-                            <Link href={item.url}>{item.title}</Link>
-                          </li>
+                          <>
+                            {
+                              item.soon ? (
+                                <CoomingSoon>
+                                  <li className="text-black font-light opacity-70">
+                                    <Link href={item.url}>{item.title}</Link>
+                                  </li>
+                                </CoomingSoon>
+                              ) : (
+                                <li className="text-black font-light opacity-70">
+                                  <Link href={item.url}>{item.title}</Link>
+                                </li>
+                              )
+                            }
+                          </>
                         )}
                       />
                     </ul>

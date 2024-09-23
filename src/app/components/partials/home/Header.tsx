@@ -6,6 +6,7 @@ import Image from "next/image";
 
 import AzureHeroIMG from "../../../../../public/img/azure-hero.png";
 import { button } from "../../utils/tw-variants";
+import CoomingSoon from "../../ui/CoomingSoon";
 
 function HomeHeader() {
   return (
@@ -19,13 +20,21 @@ function HomeHeader() {
           <h1 className="text-xl sm:text-2xl ml-1.5 mb-[0.5em] sm:mb-5 bg-clip h1-linear font-semibold text-center lg:text-left">Azure & AWS Consulting Company</h1>
           <h2 className="text-3.5xl sm:text-4xl lg:text-6xl mb-[1.5em] sm:mb-8 font-black bg-clip h2-linear !leading-tight text-center lg:text-left max-w-lg lg:max-w-full mx-auto">Beyond Limits, <br /> Empowering Azure Clouds Solutions</h2>
           <div className="flex justify-start gap-5 flex-col lg:flex-row items-center">
-            <Link href={Constants.PAGES.AZURE} className={`${button({ size: 'lg', color: 'primary' })}`}>Going to Azure</Link>
-            <Link href={Constants.PAGES.ACCELERATE_AZURE} className={`${button({ size: 'lg', color: 'secondary', icon: 'md' })} whitespace-nowrap w-full max-w-sm lg:w-auto lg:max-w-fit`}>
-              <svg className={`icon-arrow-right text-secondary`} width={30} height={20}>
-                <use href={`/icons/all-icons.svg#icon-arrow-right`}></use>
-              </svg>
-              Accelerate with Azure
-            </Link>
+            <CoomingSoon>
+              <span>
+                <Link href={Constants.PAGES.AZURE} className={`${button({ size: 'lg', color: 'primary' })}`}>Going to Azure</Link>
+              </span>
+            </CoomingSoon>
+            <CoomingSoon>
+              <span>
+                <Link href={Constants.PAGES.ACCELERATE_AZURE} className={`${button({ size: 'lg', color: 'secondary', icon: 'md' })} whitespace-nowrap w-full max-w-sm lg:w-auto lg:max-w-fit`}>
+                  <svg className={`icon-arrow-right text-secondary`} width={30} height={20}>
+                    <use href={`/icons/all-icons.svg#icon-arrow-right`}></use>
+                  </svg>
+                  Accelerate with Azure
+                </Link>
+              </span>
+            </CoomingSoon>
           </div>
         </div>
         <Image src={AzureHeroIMG} alt="Azure Hero" className="absolute opacity-70 top-0 z-0 inset-x-0 mx-auto lg:relative lg:-translate-y-16 lg:opacity-100 max-h-2xl lg:max-h-max" />
