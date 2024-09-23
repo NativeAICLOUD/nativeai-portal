@@ -24,7 +24,8 @@ const config: Config = {
         'btn-color': "#031526",
         'btn-color-hover': "#001c3d",
         "border-color": '#283D3B',
-        'circle-grey': '#48515E'
+        'circle-grey': '#48515E',
+        'footer': '#203d5d'
       },
       backgroundImage: {
         'orange-gradient': "url('/img/BG.png')",
