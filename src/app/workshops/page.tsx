@@ -22,7 +22,7 @@ const WorkshopPage = () => {
             </p>
             <div className={'flex justify-center w-[1920px] h-[417px] my-[20px]'}>
               <div className={''}>
-                <Image src="/img/MSP-Azure.png" alt="Microsoft Solutions Partner" width={762} height={95}
+                <Image src="/img/MSP-Azure.png" alt="Microsoft Solutions Partner" width={962} height={95}
                   className={'absolute top-[452px] left-[240px] w-[662px] h-[90px] z-[-1]'} />
               </div>
             </div>

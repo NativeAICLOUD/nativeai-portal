@@ -57,8 +57,10 @@ const pages: Pages[] = [
         ]
       },
       {
-        url: '', title: 'CSP Services', children: [
-          { url: Constants.PAGES.CSP_ENTERPRISE, title: 'CSP Enterprise', soon: true },
+        url: '', title: 'DevOps', children: [
+          { url: Constants.PAGES.CSP_ENTERPRISE, title: 'Software as a service', soon: true },
+          { url: Constants.PAGES.CSP_ENTERPRISE, title: 'Cloud Migrations', soon: true },
+          { url: Constants.PAGES.CSP_ENTERPRISE, title: 'Microsoft Modernization', soon: true },
         ]
       }
     ]

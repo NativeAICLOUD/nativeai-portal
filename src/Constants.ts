@@ -34,6 +34,6 @@ export const Constants = {
     FACEBOOK: 'https://facebook.com',
     LINKEDIN: 'https://linkedin.com',
   },
-  MAIL: 'info@nativecloud.com',
+  MAIL: 'artan@nativeai.cloud',
   PHONE: '+389 70 226 432',
 };
