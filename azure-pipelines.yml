@@ -37,7 +37,7 @@ steps:
 - task: AzureWebApp@1
   inputs:
     azureSubscription: 'native-portal-connection'  # Replace with your actual service connection name
-    appName: 'native=portal'
+    appName: 'native-portal'
     package: '$(Pipeline.Workspace)/nextjs-artifact/**/*.zip'
     resourceGroupName: 'rg-nativecloud-web'
   displayName: 'Deploy to Azure App Service'
