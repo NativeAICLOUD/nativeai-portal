@@ -15,9 +15,10 @@ steps:
     npm run build
   displayName: 'Install npm dependencies and build'
 
+# Copy necessary files to staging directory
 - task: CopyFiles@2
   inputs:
-    SourceFolder: '$(System.DefaultWorkingDirectory)'  # Adjust if needed
+    SourceFolder: '$(System.DefaultWorkingDirectory)'
     Contents: |
       .next/**
       public/**
@@ -27,17 +28,29 @@ steps:
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
   displayName: 'Copy files to staging directory'
 
+# Create a .zip file from the staged files
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/nextjs-artifact.zip'
+    replaceExistingArchive: true
+  displayName: 'Archive files into a .zip'
+
+# Publish the .zip as a build artifact
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/nextjs-artifact.zip'
     ArtifactName: 'nextjs-artifact'
     publishLocation: 'Container'
   displayName: 'Publish Build Artifacts'
 
+# Deploy the .zip package to Azure Web App
 - task: AzureWebApp@1
   inputs:
     azureSubscription: 'native-portal-connection'  # Replace with your actual service connection name
     appName: 'native-portal'
-    package: '$(Pipeline.Workspace)/nextjs-artifact/**/*.zip'
+    package: '$(Build.ArtifactStagingDirectory)/nextjs-artifact.zip'
     resourceGroupName: 'rg-nativecloud-web'
   displayName: 'Deploy to Azure App Service'
