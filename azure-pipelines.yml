@@ -5,13 +5,15 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+# Install Node.js
 - task: NodeTool@0
   inputs:
     versionSpec: '20.x'
   displayName: 'Install Node.js'
 
+# Install production npm dependencies and build the app
 - script: |
-    npm install
+    npm ci --production
     npm run build
   displayName: 'Install npm dependencies and build'
 
@@ -22,9 +24,9 @@ steps:
     Contents: |
       .next/**
       public/**
+      node_modules/**    # Added node_modules to ensure dependencies are included
       package.json
       package-lock.json
-      # Include any other files necessary for your app
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
   displayName: 'Copy files to staging directory'
 
@@ -54,3 +56,8 @@ steps:
     package: '$(Build.ArtifactStagingDirectory)/nextjs-artifact.zip'
     resourceGroupName: 'rg-nativecloud-web'
   displayName: 'Deploy to Azure App Service'
+
+# Ensure the app starts on port 8080 (required for Azure)
+- script: |
+    PORT=8080 npm start
+  displayName: 'Start application on port 8080'
