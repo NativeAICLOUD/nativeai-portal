@@ -5,16 +5,19 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+# Install Node.js
 - task: NodeTool@0
   inputs:
     versionSpec: '20.x'
   displayName: 'Install Node.js'
 
+# Install dependencies and build the app
 - script: |
     npm install
     npm run build
   displayName: 'Install npm dependencies and build'
 
+# Copy necessary files to staging directory
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(System.DefaultWorkingDirectory)'  # Adjust if needed
@@ -24,20 +27,31 @@ steps:
       package.json
       package-lock.json
       node_modules/**
-      # Include any other files necessary for your app
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
   displayName: 'Copy files to staging directory'
 
+# Archive files into a .zip package
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/nextjs-artifact.zip'
+    replaceExistingArchive: true
+  displayName: 'Archive files into a .zip'
+
+# Publish the .zip as a build artifact
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/nextjs-artifact.zip'
     ArtifactName: 'nextjs-artifact'
     publishLocation: 'Container'
   displayName: 'Publish Build Artifacts'
 
+# Deploy the .zip package to Azure Web App
 - task: AzureWebApp@1
   inputs:
     azureSubscription: 'native-portal-connection'  # Replace with your actual service connection name
     appName: 'native-portal'
-    package: '$(Pipeline.Workspace)/nextjs-artifact/**/*.zip'
+    package: '$(Build.ArtifactStagingDirectory)/nextjs-artifact.zip'
   displayName: 'Deploy to Azure App Service'
