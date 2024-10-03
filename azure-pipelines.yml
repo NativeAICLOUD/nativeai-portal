@@ -11,9 +11,8 @@ steps:
     versionSpec: '20.x'
   displayName: 'Install Node.js'
 
-# Install production npm dependencies and build the app
 - script: |
-    npm ci --production
+    npm install
     npm run build
   displayName: 'Install npm dependencies and build'
 
