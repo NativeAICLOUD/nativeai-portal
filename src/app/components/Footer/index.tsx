@@ -48,7 +48,7 @@ function Footer() {
         <Image src={MicrosoftPartner} className="max-w-[270]" alt="Microsoft Azure" />
         <Image src={AWSPartner} className="max-w-[80]" alt="AWS" />
       </div>
-      <Image src={'/img/line.png'} width={400} height={10} className="w-full my-8 max-w-8xl mx-auto" alt="AWS" />
+      <Image src={'/img/line.png'} width={400} height={10} className="w-full my-8 max-w-8xl mx-auto" alt="Line" />
       <div className={'content mt-8 sm:mt-20 max-w-2xl lg:max-w-4xl mx-auto px-4 lg:px-0'}>
         <div className="content-body grid grid-cols-1 sm:grid-cols-2 lg:flex items-start gap-x-4 gap-y-8 lg:gap-4">
           <RenderPageItems title="Solutions" pages={pages.solutions} />

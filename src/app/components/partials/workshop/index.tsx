@@ -19,7 +19,6 @@ const workshopList = [
   { icon: 'icon-world', title: 'English' },
   { icon: 'icon-camera', title: 'Online' },
 ];
-
 type IWorkshopList = typeof workshopList[0];
 
 function WorkshopCards({ data }: { data: TCard[] }) {
