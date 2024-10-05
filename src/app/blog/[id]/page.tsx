@@ -2,7 +2,7 @@
 import { showToast } from '@/app/components/controls/Toast'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
-import { Link } from 'next-view-transitions'
+import { Link } from 'react-transition-progress/next'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { format } from 'timeago.js'

@@ -1,4 +1,4 @@
-import { Link } from 'next-view-transitions';
+import { Link } from 'react-transition-progress/next';
 import Image from 'next/image';
 
 import LogoSvg from '../../../../public/logo.svg';

@@ -1,66 +1,42 @@
+import { BG3Img, BG_INVERSE } from '@/ImagePath';
+import WorkshopCards from '../components/partials/workshop';
 import Image from 'next/image';
-import Link from 'next/link';
+
+const cards = [
+  { id: 1, color: 'orange', link: '', title: 'Basic', desc: 'Once you`ve decided to start working with Azure, the cloud migration process begins. Several complex decisions play a role in this, so it makes sense to work according to a carefully designed migration strategy.' },
+  { id: 2, color: 'red', link: '', title: 'Deep dive', desc: 'Improving your application and infrastructure environment is a continuous process. The first step to achieving this is already done when you have chosen the public cloud. The next step is moving to a cloud-native application.' },
+  { id: 3, color: 'blue', link: '', title: 'Special', desc: 'Besides renewing or recoding the application, making your application more cloud-native, or helping you kickstart your application on the public cloud, we have extensive support packages available if you would like us to manage the application as well.' },
+  { id: 4, color: 'orange-80', link: '', title: 'Basic', desc: 'Once you`ve decided to start working with Azure, the cloud migration process begins. Several complex decisions play a role in this, so it makes sense to work according to a carefully designed migration strategy.' },
+  { id: 5, color: 'red-80', link: '', title: 'Deep dive', desc: 'Improving your application and infrastructure environment is a continuous process. The first step to achieving this is already done when you have chosen the public cloud. The next step is moving to a cloud-native application.' },
+  { id: 6, color: 'blue-80', link: '', title: 'Special', desc: 'Besides renewing or recoding the application, making your application more cloud-native, or helping you kickstart your application on the public cloud, we have extensive support packages available if you would like us to manage the application as well.' },
+  { id: 7, color: 'orange-50', link: '', title: 'Basic', desc: 'Once you`ve decided to start working with Azure, the cloud migration process begins. Several complex decisions play a role in this, so it makes sense to work according to a carefully designed migration strategy.' },
+  { id: 8, color: 'red-50', link: '', title: 'Deep dive', desc: 'Improving your application and infrastructure environment is a continuous process. The first step to achieving this is already done when you have chosen the public cloud. The next step is moving to a cloud-native application.' },
+  { id: 9, color: 'blue-50', link: '', title: 'Special', desc: 'Besides renewing or recoding the application, making your application more cloud-native, or helping you kickstart your application on the public cloud, we have extensive support packages available if you would like us to manage the application as well.' },
+]
 
 const WorkshopPage = () => {
   return (
-    <div>
-      <div className={`flex flex-col items-center`}>
-        <div className={'relative w-[2000px] h-[1600px]'}>
-          <Image
-            src="/img/Solutions.png"
-            alt="Background Frame"
-            width={759}
-            height={574}
-            className={'absolute top-[70px] left-[1200px] w-[859px] h-[674px] z-[-1]'}
-          />
-          <div className={'relative text-center z-[1]'}>
-            <h1 className={'font-montserrat text-[62px] bg-gradient-to-r from-[#1E1E1E] to-[#2573BA] bg-clip-text text-transparent w-[880px] h-[150px] mt-[230px] ml-[188px]'}>
-              The best cloud <span>Solutions</span> for your organization
-            </h1>
-            <p className={'max-w-[833px] h-[107px] my-[20px] font-montserrat text-[16px] font-normal ml-[188px]'}>
-              Regardless of your current infrastructure, we empower you to get the most out of your cloud experience. Find our top 3 solutions below and let us help you along your cloud journey.
-            </p>
-            <div className={'flex justify-center w-[1920px] h-[417px] my-[20px]'}>
-              <div className={''}>
-                <Image src="/img/MSP-Azure.png" alt="Microsoft Solutions Partner" width={962} height={95}
-                  className={'absolute top-[452px] left-[240px] w-[662px] h-[90px] z-[-1]'} />
-              </div>
-            </div>
-            <div className={'flex justify-around w-[1920px] my-[50px]'}>
-              <div className={'text-center w-[367px] h-[519px] my-[20px] flex flex-col items-center'}>
-                <Image src="/img/Isolation_1.png" alt="Going to Azure" width={160} height={110} />
-                <div className={'serviceText w-[467px] h-[265px] mt-[30px]'}>
-                  <h3 className="font-montserrat text-[24px] my-[20px]">Going to Azure</h3>
-                  <p className='my-[20px]'>
-                    Once you`ve decided to start working with Azure, the cloud migration process begins. Several complex decisions play a role in this, so it makes sense to work according to a carefully designed migration strategy.
-                  </p>
-                  <Link href="#"><button className={'py-[10px] px-[20px] bg-[#1b3b58] text-white border-none cursor-pointer rounded-[20px] transition-colors duration-300 hover:bg-[#1E1E1E]'}>Going to Azure</button></Link>
-                </div>
-              </div>
-              <div className={'text-center w-[367px] h-[519px] my-[20px] flex flex-col items-center'}>
-                <Image src="/img/Isolation_2.png" alt="Accelerate with Azure" width={190} height={130} />
-                <div className={'serviceText w-[467px] h-[265px] mt-[30px]'}>
-                  <h3 className="font-montserrat text-[24px] my-[20px]">Accelerate with Azure</h3>
-                  <p className='my-[20px]'>
-                    Improving your application and infrastructure environment is a continuous process. The first step to achieving this is already done when you have chosen the public cloud. The next step is moving to a cloud-native application.
-                  </p>
-                  <Link href="#"><button className={'py-[10px] px-[20px] bg-[#1b3b58] text-white border-none cursor-pointer rounded-[20px] transition-colors duration-300 hover:bg-[#1E1E1E]'}>Accelerate with Azure</button></Link>
-                </div>
-              </div>
-              <div className={'text-center w-[367px] h-[519px] my-[20px] flex flex-col items-center'}>
-                <Image src="/img/Isolation_3.png" alt="Managed Services" width={142} height={131} />
-                <div className={'serviceText w-[467px] h-[265px] mt-[30px]'}>
-                  <h3 className="font-montserrat text-[24px] my-[20px]">Managed Services</h3>
-                  <p className='my-[20px]'>
-                    Besides renewing or recoding the application, making your application more cloud-native, or helping you kickstart your application on the public cloud, we have extensive support packages available if you would like us to manage the application as well.
-                  </p>
-                  <Link href="#"><button className={'py-[10px] px-[20px] bg-[#1b3b58] text-white border-none cursor-pointer rounded-[20px] transition-colors duration-300 hover:bg-[#1E1E1E]'}>Managed Services</button></Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div className={`relative min-h-full`}>
+      <div className="absolute w-full h-full z-[-1] top-16 inset-x-0">
+        <Image src={BG3Img} alt="Background" className="!h-auto !-top-36" layout="fill" objectFit="cover" objectPosition='top' quality={100} />
+        <Image src="/img/Group 31.png" alt="Design Element" layout="fill" objectFit="contain" objectPosition='top right' quality={100} />
       </div>
+      <div className={'relative mx-auto max-w-9xl px-2 sm:px-4 md:px-6 2xl:px-0'}>
+        <div className="relative side pt-60 z-1 px-10 md:px-0 text-center md:text-left mb-6">
+          <h1 className={'text-4xl md:text-5xl xl:text-6xl pb-6 leading-none font-bold bg-workshop-text-linear bg-clip-text text-transparent md:max-w-[600px] xl:max-w-[800px]'}>
+            Dive into our workshops
+          </h1>
+          <p className={'md:max-w-[600px] xl:max-w-[800px] sm:ml-1.5 pt-2 pb-16 text-base lg:text-lg font-normal'}>
+            Master Microsoft Azure in hands-on sessions. Accelerate your cloud proficiency!
+          </p>
+        </div>
+        <WorkshopCards data={cards} />
+      </div>
+      <Image
+        src={BG_INVERSE}
+        alt="Design Element" 
+        className="absolute bottom-0 left-0 w-full h-full max-w-[800px] z-[-1] object-contain object-left-bottom"
+        quality={100} />
     </div>
   );
 };

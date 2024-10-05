@@ -3,6 +3,7 @@ import seoConfig from "../../seo.config";
 import "./globals.css";
 
 import { ViewTransitions } from "next-view-transitions";
+import { ProgressBar, ProgressBarProvider } from "react-transition-progress";
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -30,11 +31,14 @@ export default function RootLayout({
     <ViewTransitions>
       <html lang="en">
         <body className={montserrat.className}>
-          <AppProviders>
-            <Navbar />
-            {children}
-            <Footer />
-          </AppProviders>
+          <ProgressBarProvider>
+            <ProgressBar className="fixed z-[100] h-1 shadow-lg shadow-native/20 bg-native top-0" />
+            <AppProviders>
+              <Navbar />
+              {children}
+              <Footer />
+            </AppProviders>
+          </ProgressBarProvider>
           <ToastContainer
             position="top-right"
             autoClose={8000}

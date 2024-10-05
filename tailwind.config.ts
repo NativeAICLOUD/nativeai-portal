@@ -36,6 +36,7 @@ const config: Config = {
         'h1-linear': 'linear-gradient(90deg, #2a3a4a 0%, #0a3d6d 50%, #232f3e 100%)',
         'h2-linear': 'linear-gradient(90deg, #232f3e 0%, #0a3d6d 50%, #0a3d6d 100%)',
         'solution-text-linear': 'linear-gradient(90deg, #1E1E1E 0%, #2573BA 100%)',
+        'workshop-text-linear': 'linear-gradient(90deg, #3A506B 0%, #131C28 100%)',
         'main-gradient': 'linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%)',
         'main-card': 'linear-gradient(to right, #003140, #203d5d), url(/img/noise-background.jpg)',
         'main-light-card': 'linear-gradient(to right, #37424f, #35404e), url(/img/noise-background.jpg)',

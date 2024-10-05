@@ -1,6 +1,6 @@
 'use client';
 
-import { Link } from 'next-view-transitions';
+import { Link } from 'react-transition-progress/next';
 
 import { Constants } from '@/Constants';
 import { Transition } from '@headlessui/react';
@@ -63,7 +63,7 @@ const pages: Pages[] = [
       }
     ]
   },
-  { url: Constants.PAGES.WORKSHOPS, title: 'Workshops', soon: true },
+  { url: Constants.PAGES.WORKSHOPS, title: 'Workshops' },
   { url: Constants.PAGES.KNOWLEDGE_BASE, title: 'Knowledge base', soon: true },
   { url: Constants.PAGES.ABOUT_US, title: 'About us' },
   { url: Constants.PAGES.GET_IN_TOUCH, title: 'Get in touch', soon: true },

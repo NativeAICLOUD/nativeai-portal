@@ -1,10 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
-import { Link } from 'next-view-transitions';
+import { Link } from 'react-transition-progress/next';
 
-import MicrosotPartnerImg from '../../../../../public/img/microsoft-partner.png';
-import AWSPartnerImg from '../../../../../public/img/aws-partner.png';
 import { Constants } from '@/Constants';
+import { AWSPartnerImg, MicrosotPartnerImg } from '@/ImagePath';
 
 const HomePartner = () => {
   return (

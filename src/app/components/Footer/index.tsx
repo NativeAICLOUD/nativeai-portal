@@ -1,7 +1,7 @@
 'use client';
 
 import Image from "next/image";
-import { Link } from "next-view-transitions";
+import { Link } from 'react-transition-progress/next';
 import { Each } from "../helpers/Each";
 import SocialIcons from "../ui/SocialIcons";
 import { Constants } from "@/Constants";
@@ -93,10 +93,10 @@ const RenderPageItems = ({ title, pages }: { title: string; pages: PageLink[] })
       <ul className="list-none p-0 flex flex-col items-center sm:items-start gap-2">
         <Each
           of={pages}
-          render={(item: PageLink) => (
-            <>
-              {
-                item.soon ? (
+          render={(item: PageLink) => {
+            return (
+              <>
+                {item.soon ? (
                   <CoomingSoon>
                     <li className="text-white font-light">
                       <Link className="flex text-sm text-center sm:text-left items-center gap-1" href={''}>
@@ -110,10 +110,10 @@ const RenderPageItems = ({ title, pages }: { title: string; pages: PageLink[] })
                       {item.title}
                     </Link>
                   </li>
-                )
-              }
-            </>
-          )}
+                )}
+              </>
+            );
+          }}
         />
       </ul>
     </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import { Constants } from "@/Constants";
-import { Link } from 'next-view-transitions'
+import { Link } from 'react-transition-progress/next'
 import Image from "next/image";
 
 import AzureHeroIMG from "../../../../../public/img/azure-hero.png";
