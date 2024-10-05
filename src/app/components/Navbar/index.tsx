@@ -57,10 +57,8 @@ const pages: Pages[] = [
         ]
       },
       {
-        url: '', title: 'DevOps', children: [
-          { url: Constants.PAGES.CSP_ENTERPRISE, title: 'Software as a service', soon: true },
-          { url: Constants.PAGES.CSP_ENTERPRISE, title: 'Cloud Migrations', soon: true },
-          { url: Constants.PAGES.CSP_ENTERPRISE, title: 'Microsoft Modernization', soon: true },
+        url: '', title: 'CSP Services', children: [
+          { url: Constants.PAGES.CSP_ENTERPRISE, title: 'CSP Enterprise', soon: true },
         ]
       }
     ]
@@ -77,7 +75,7 @@ function Navbar() {
   const [openSide, setOpenSide] = useState(false);
   const [slideMenu, setSlideMenu] = useState(false);
   const [show, setShow] = useState(false);
-  const [isExpanded, setExpanded] = useState(false);
+  const [isExpanded, setExpanded] = useState<string | null>(null);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -99,7 +97,6 @@ function Navbar() {
 
     return () => window.removeEventListener('scroll', onScroll);
   }, [lastScrollY.current]);
-
 
   return (
     <header
@@ -184,24 +181,24 @@ function Navbar() {
         className={`${openSide ? 'translate-x-[0]' : 'translate-x-[100%]'
           } sidebar  z-[100] bg-white/90 backdrop:blur-2xl text-black w-full min-h-screen md:w-[350px] p-2.5 fixed inset-y-0 right-0 transform transition duration-500 ease-in-out overflow-y-auto`}
       >
-        <div className="header flex items-center justify-between">
+        <div className="header flex items-center justify-between px-4">
+          <div className="main-logo py-2 flex items-center flex-col sm:flex-row gap-1.5" onClick={() => setSlideMenu(false)}>
+            <Logo />
+          </div>
+
           <button
-            className="svg-hover w-[40px] h-[40px] bg-black/5 shadow-inner rounded-full grid place-items-center m-2"
+            className="svg-hover w-[40px] h-[40px] hover:bg-black/5 shadow-inner rounded-full grid place-items-center m-2"
             onClick={() => setOpenSide(false)}
           >
             <svg className="icon-nav-close" width={24} height={24}>
               <use href={`/icons/all-icons.svg#icon-nav-close`}></use>
             </svg>
           </button>
-
-          <div className="icons flex items-center gap-6">
-            <NavSettigns isMobile slideMenu={slideMenu} />
-          </div>
         </div>
 
-        <hr className="nav mt-10 mb-10 opacity-10" />
+        <hr className="nav my-6 opacity-10 border-native" />
 
-        <ul className="flex flex-col items-center justify-center gap-6">
+        <ul className="flex flex-col px-4 gap-4">
           <Each
             of={pages}
             render={(item: Pages) => (
@@ -210,13 +207,12 @@ function Navbar() {
                   item.soon ? (
                     <CoomingSoon>
                       <li className="text-black font-light flex items-center">
-                        <Link href={item.url}>{item.title}</Link>
+                        <Link href={item.url} onClick={() => setOpenSide(false)}>{item.title}</Link>
                         {item.children && (
                           <button
                             className="expanded w-[40px] h-[40px] grid place-items-center m-2"
-                            onClick={() => setExpanded(!isExpanded)}
                           >
-                            <svg className={`icon-caret text-black} ${isExpanded ? 'rotate-90' : ''}`} width={24} height={24}>
+                            <svg className={`icon-caret text-black} ${item.url ? 'rotate-90' : ''}`} width={24} height={24}>
                               <use href={`/icons/all-icons.svg#icon-caret`}></use>
                             </svg>
                           </button>
@@ -224,27 +220,27 @@ function Navbar() {
                       </li>
                     </CoomingSoon>
                   ) : (
-                    <li className={`relative flex items-center text-black font-light transition-all ${show ? 'h-20 before:-bottom-1' : 'h-28 before:-bottom-0'} ${pathname === item.url ? 'before:absolute before:w-full before:h-0.5 before:bg-native' : ''}`}>
-                      <Link className="flex items-center gap-1" href={item.url}
-                        onMouseEnter={() => item.url === Constants.PAGES.SOLUTIONS ? setSlideMenu(true) : {}}>
-                        {item.title}
-                        {
-                          item.children &&
+                    <li className={`relative flex items-center text-black font-light transition-all ${pathname === item.url ? 'text-native' : ''}`}>
+                      <>
+                        <Link className="flex items-center gap-1" href={item.url}>
+                          {item.title}
+                        </Link>
+                        {item.children &&
                           <CaretDownIcon
-                            className="relative top-[1px] transition-transform duration-[250] ease-in group-data-[state=open]:-rotate-180"
+                            onClick={() => setExpanded(isExpanded === item.url ? null : item.url)}
+                            className={`ml-2 relative top-[1px] transition-transform duration-[250] ease-in ${!!isExpanded ? '-rotate-180' : ''} cursor-pointer`}
                             aria-hidden
-                          />
-                        }
-                      </Link>
+                          />}
+                      </>
                     </li>
                   )
                 }
                 {
                   item.children && (
                     <Transition
-                      className={"-mt-6 flex flex-col gap-2"}
+                      className={"ml-4 flex flex-col gap-2"}
                       appear={true}
-                      show={isExpanded}
+                      show={!!isExpanded}
                       enter="transition-opacity duration-75"
                       enterFrom="opacity-0"
                       enterTo="opacity-100"
@@ -265,7 +261,9 @@ function Navbar() {
                                 </CoomingSoon>
                               ) : (
                                 <li className="text-black font-light">
-                                  <Link href={item.url}>{item.title}</Link>
+                                  <Link href={item.url} onClick={() => setOpenSide(false)}>
+                                    {item.title}
+                                  </Link>
                                 </li>
                               )
                             }

@@ -30,7 +30,7 @@ const SolutionsPage = () => {
             <p className={'md:max-w-[600px] xl:max-w-[800px] pt-3 pb-16 text-base lg:text-lg font-normal'}>
               Regardless of your current infrastructure, we empower you to get the most out of your cloud experience. Find our top 3 solutions below and let us help you along your cloud journey.
             </p>
-            <CardGroup className="hidden xl:flex flex-wrap" />
+            <CardGroup className="hidden 2xl:flex flex-nowrap" />
           </div>
           <Image
             src={SolutionHeader}
@@ -39,7 +39,7 @@ const SolutionsPage = () => {
             className={'opacity-80 md:opacity-100 absolute md:relative object-contain w-full sm:max-w-md lg:max-w-xl xl:max-w-3xl'}
           />
         </div>
-        <CardGroup className="xl:hidden" />
+        <CardGroup className="2xl:hidden" />
 
         <div className={'flex text-center sm:text-left flex-col sm:flex-row flex-wrap justify-around px-6 gap-16 sm:gap-6 mt-16 mb-24'}>
           <Each
@@ -78,7 +78,7 @@ const Card = ({ img, title, desc, link }: TCard) => {
 
 const CardGroup = ({ className }: { className: string }) => {
   return (
-    <div className={twMerge('flex items-center flex-col sm:flex-row gap-6', className || '')}>
+    <div className={twMerge('relative z-1 flex items-center flex-col sm:flex-row gap-6', className || '')}>
         <Image src={MSP} alt="Microsoft Solutions Partner" className={'max-w-56 shadow-partner rounded-md'} />
         <Image src={KCSP} alt="Kubernetes Certified Service Provider" className={'max-w-56 shadow-partner rounded-md'} />
         <Image src={KTP} alt="Kubernetes Training Partner" className={'max-w-56 shadow-partner rounded-md'} />
