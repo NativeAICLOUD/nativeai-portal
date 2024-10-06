@@ -1,14 +1,10 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
 import { Each } from '../components/helpers/Each';
 import { twMerge } from 'tailwind-merge';
 import { button } from '../components/utils/tw-variants';
-
-import SolutionHeader from '../../../public/img/Solutions.png';
-import MSP from '../../../public/img/msp.png';
-import KCSP from '../../../public/img/kcsp.png';
-import KTP from '../../../public/img/ktp.png';
+import { KCSP, KTP, MSP, SolutionHeader } from '@/ImagePath';
+import { Link } from 'react-transition-progress/next';
 
 const cards = [
   { img: '/img/Isolation_1.png', link: '', title: 'Going to Azure', desc: 'Once you`ve decided to start working with Azure, the cloud migration process begins. Several complex decisions play a role in this, so it makes sense to work according to a carefully designed migration strategy.' },

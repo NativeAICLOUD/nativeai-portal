@@ -1,10 +1,10 @@
 'use client'
 
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { showToast } from '../components/controls/Toast'
+import { Link } from 'react-transition-progress/next'
 
 const LoginPage = () => {
     const [email, setEmail] = useState("")

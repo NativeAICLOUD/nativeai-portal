@@ -1,64 +1,72 @@
+import { Constants } from '@/Constants';
+import { BG3Img, Location, Phone, PinMarker, Telephone } from '@/ImagePath';
 import Image from 'next/image';
-import Link from 'next/link';
+import ContactUsForm from '../components/partials/ContactForm';
 
 const GetInTouchPage = () => {
   return (
-    <div>
-      <div className={`flex flex-col items-center`}>
-        <div className={'relative w-[2000px] h-[1600px]'}>
-          <Image
-            src="/img/Solutions.png"
-            alt="Background Frame"
-            width={759}
-            height={574}
-            className={'absolute top-[70px] left-[1200px] w-[859px] h-[674px] z-[-1]'}
-          />
-          <div className={'relative text-center z-[1]'}>
-            <h1 className={'font-montserrat text-[62px] bg-gradient-to-r from-[#1E1E1E] to-[#2573BA] bg-clip-text text-transparent w-[880px] h-[150px] mt-[230px] ml-[188px]'}>
-              The best cloud <span>Solutions</span> for your organization
+    <div className={`relative min-h-full`}>
+      <div className="absolute w-full h-full z-[-1] top-16 inset-x-0">
+        <Image src={BG3Img} alt="Background" className="!h-auto md:!-top-36" layout="fill" objectFit="cover" objectPosition='top' quality={100} />
+        <Image src="/img/Group 31.png" alt="Design Element" layout="fill" objectFit="contain" objectPosition='top right' quality={100} />
+      </div>
+      <div className={'relative mx-auto max-w-9xl px-2 sm:px-4 md:px-6 2xl:px-0'}>
+        <div className="top flex items-start lg:justify-between pt-36 gap-10">
+          <div className="relative side xl:pl-4 pt-28 z-1 px-10 md:px-0 text-center md:text-left">
+            <h1 className={'text-4xl md:text-5xl xl:text-6xl pb-6 leading-none font-bold bg-workshop-text-linear bg-clip-text text-transparent md:max-w-[600px] xl:max-w-[800px]'}>
+              Get in touch with us
             </h1>
-            <p className={'max-w-[833px] h-[107px] my-[20px] font-montserrat text-[16px] font-normal ml-[188px]'}>
-              Regardless of your current infrastructure, we empower you to get the most out of your cloud experience. Find our top 3 solutions below and let us help you along your cloud journey.
+            <p className={'md:max-w-[600px] xl:max-w-[800px] pt-3 pb-16 text-base lg:text-lg font-normal'}>
+              We`re always happy to help! Please choose a way to contact us below.
             </p>
-            <div className={'flex justify-center w-[1920px] h-[417px] my-[20px]'}>
-              <div className={''}>
-                <Image src="/img/MSP-Azure.png" alt="Microsoft Solutions Partner" width={762} height={95}
-                  className={'absolute top-[452px] left-[240px] w-[662px] h-[90px] z-[-1]'} />
-              </div>
-            </div>
-            <div className={'flex justify-around w-[1920px] my-[50px]'}>
-              <div className={'text-center w-[367px] h-[519px] my-[20px] flex flex-col items-center'}>
-                <Image src="/img/Isolation_1.png" alt="Going to Azure" width={160} height={110} />
-                <div className={'serviceText w-[467px] h-[265px] mt-[30px]'}>
-                  <h3 className="font-montserrat text-[24px] my-[20px]">Going to Azure</h3>
-                  <p className='my-[20px]'>
-                    Once you`ve decided to start working with Azure, the cloud migration process begins. Several complex decisions play a role in this, so it makes sense to work according to a carefully designed migration strategy.
-                  </p>
-                  <Link href="#"><button className={'py-[10px] px-[20px] bg-[#1b3b58] text-white border-none cursor-pointer rounded-[20px] transition-colors duration-300 hover:bg-[#1E1E1E]'}>Going to Azure</button></Link>
-                </div>
-              </div>
-              <div className={'text-center w-[367px] h-[519px] my-[20px] flex flex-col items-center'}>
-                <Image src="/img/Isolation_2.png" alt="Accelerate with Azure" width={190} height={130} />
-                <div className={'serviceText w-[467px] h-[265px] mt-[30px]'}>
-                  <h3 className="font-montserrat text-[24px] my-[20px]">Accelerate with Azure</h3>
-                  <p className='my-[20px]'>
-                    Improving your application and infrastructure environment is a continuous process. The first step to achieving this is already done when you have chosen the public cloud. The next step is moving to a cloud-native application.
-                  </p>
-                  <Link href="#"><button className={'py-[10px] px-[20px] bg-[#1b3b58] text-white border-none cursor-pointer rounded-[20px] transition-colors duration-300 hover:bg-[#1E1E1E]'}>Accelerate with Azure</button></Link>
-                </div>
-              </div>
-              <div className={'text-center w-[367px] h-[519px] my-[20px] flex flex-col items-center'}>
-                <Image src="/img/Isolation_3.png" alt="Managed Services" width={142} height={131} />
-                <div className={'serviceText w-[467px] h-[265px] mt-[30px]'}>
-                  <h3 className="font-montserrat text-[24px] my-[20px]">Managed Services</h3>
-                  <p className='my-[20px]'>
-                    Besides renewing or recoding the application, making your application more cloud-native, or helping you kickstart your application on the public cloud, we have extensive support packages available if you would like us to manage the application as well.
-                  </p>
-                  <Link href="#"><button className={'py-[10px] px-[20px] bg-[#1b3b58] text-white border-none cursor-pointer rounded-[20px] transition-colors duration-300 hover:bg-[#1E1E1E]'}>Managed Services</button></Link>
-                </div>
-              </div>
-            </div>
           </div>
+          <Image
+            src={Telephone}
+            alt="About Image"
+            priority
+            className={'opacity-80 md:opacity-100 absolute md:relative object-contain w-full max-w-sm md:max-w-md xl:-translate-x-28'}
+          />
+        </div>
+
+      </div>
+      <div className="section mt-8 sm:mt-20 md:mt-8 mx-auto max-w-9xl">
+        <div className="relative w-full h-[300px] sm:h-auto sm:aspect-video">
+          <Image
+            src={Location}
+            alt="Location Image"
+            priority
+            className={'relative w-full h-full 2xl:rounded-20 object-cover'}
+          />
+          <div className="info absolute inset-0 top-[4.5rem] left-[34%] sm:top-[27.5%] sm:left-[34%] md:top-[29.5%] md:left-[36%] lg:top-[30%] lg:left-[36.4%] xl:top-[31%]">
+            <div className="content absolute text-black px-3 py-2 bg-white/80 rounded-14 -translate-x-16 -translate-y-[4.5rem] before:absolute before:bottom-[-6px] before:left-2/4 before:-translate-x-2.5 before:z-[-1] before:border-x-8 before:rotate-180 before:border-x-transparent before:border-b-8 before:border-b-white/7 before:size-0">
+              <div className="list text-sm">
+                <a href={Constants.MAPS} target='_blank' className='flex mb-1 gap-2 items-center hover:text-primary'>
+                  <Image
+                    src={PinMarker}
+                    alt="PinMarker"
+                    className='pin size-4'
+                  />
+                  {Constants.ADDRESS}
+                </a>
+                <a href={`tel:${Constants.PHONE}`} target='_blank' className='flex gap-2 items-center hover:text-primary'>
+                  <Image
+                    src={Phone}
+                    alt="PinMarker"
+                    className='pin size-4'
+                  />
+                  {Constants.PHONE}
+                </a>
+              </div>
+            </div>
+            <Image
+              src={PinMarker}
+              alt="PinMarker"
+              className='pin cursor-pointer'
+            />
+          </div>
+        </div>
+        <div className="relative bg-gtouch-bg-linear 2xl:bg-none lg:-mb-20 px-2">
+          <ContactUsForm className='-translate-y-20 lg:-translate-y-48 border-2 border-footer' />
         </div>
       </div>
     </div>

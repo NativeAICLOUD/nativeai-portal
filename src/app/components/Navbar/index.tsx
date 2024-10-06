@@ -64,9 +64,9 @@ const pages: Pages[] = [
     ]
   },
   { url: Constants.PAGES.WORKSHOPS, title: 'Workshops' },
-  { url: Constants.PAGES.KNOWLEDGE_BASE, title: 'Knowledge base', soon: true },
+  { url: Constants.PAGES.KNOWLEDGE_BASE, title: 'Knowledge base' },
   { url: Constants.PAGES.ABOUT_US, title: 'About us' },
-  { url: Constants.PAGES.GET_IN_TOUCH, title: 'Get in touch', soon: true },
+  { url: Constants.PAGES.GET_IN_TOUCH, title: 'Get in touch' },
 ];
 
 function Navbar() {
@@ -112,7 +112,8 @@ function Navbar() {
           } ${slideMenu ? 'z-1 border-b border-b-black' : ''} transition-all`}
       >
         <div className="relative left flex items-center gap-16 xl:gap-20">
-          <div className="main-logo py-2 flex items-center flex-col sm:flex-row gap-1.5" onClick={() => setSlideMenu(false)}>
+          <div className="main-logo py-2 flex items-center flex-col sm:flex-row gap-1.5"
+            onClick={() => setSlideMenu(false)}>
             <Logo />
           </div>
 
@@ -132,7 +133,8 @@ function Navbar() {
                       </CoomingSoon>
                     ) : (
                       <li className={`relative flex items-center text-black font-light transition-all ${show ? 'h-20 before:-bottom-1' : 'h-28 before:-bottom-0'} ${pathname === item.url ? 'before:absolute before:w-full before:h-0.5 before:bg-native' : ''}`}>
-                        <Link className="flex items-center gap-1" href={item.url} onClick={() => setSlideMenu(false)}
+                        <Link className="flex items-center gap-1" href={item.url}
+                          onClick={() => setSlideMenu(false)}
                           onMouseEnter={() => item.url === Constants.PAGES.SOLUTIONS ? setSlideMenu(true) : {}}>
                           {item.title}
                           {
@@ -355,7 +357,7 @@ function Navbar() {
                   <motion.div className="relative"
                     variants={motionItem}>
                     <h2 className="mb-2 cursor-default">
-                      <Link href={item.url}>{item.title}</Link>
+                      <Link href={item.url} onClick={() => setSlideMenu(false)}>{item.title}</Link>
                     </h2>
                     <ul className="flex flex-col gap-2">
                       <Each
@@ -371,7 +373,7 @@ function Navbar() {
                                 </CoomingSoon>
                               ) : (
                                 <li className="text-black font-light opacity-70">
-                                  <Link href={item.url}>{item.title}</Link>
+                                  <Link href={item.url} onClick={() => setSlideMenu(false)}>{item.title}</Link>
                                 </li>
                               )
                             }
