@@ -14,8 +14,7 @@ const workshopList = [
 ];
 type IWorkshopList = typeof workshopList[0];
 
-
-export const ListData = [
+const ListData = [
     {
         title: "Introduction to Microsoft Azure",
         desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi eveniet incidunt doloribus delectus tempore alias consequatur placeat velit beatae consequuntur qui voluptas quo iste et, enim atque. Incidunt, quisquam! Similique!"
