@@ -22,6 +22,18 @@ const CloudServicesSection = () => {
         <h2 className='relative flex text-lg sm:text-2xl md:text-3xl xl:text-3.5xl !leading-snug text-left before:bg-white before:w-3 before:h-auto before:my-1 sm:before:my-2 before:mr-5'>
           NativeCloud specializes in delivering smart, innovative, <br className='hidden xl:block' /> and highly resilient cloud solutions to support our customers to achieve their business transformation initiatives.
         </h2>
+        <div className="relative text-sm sm:text-base grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mt-8 sm:mt-12">
+          <p>
+            Our core focus lies in Microsoft Azure, and we`re proud to hold certification from Microsoft as an Azure Expert Managed Service Provider. We empower businesses with cutting-edge cloud services designed for maximum efficiency and reliability.
+            <br className="hidden sm:block" /><br className="hidden sm:block" />
+            Azure provides essential tools enabling organizations to securely access their critical applications and data from anywhere, swiftly and securely. Through daily design, implementation, and management of infrastructures and workloads on Azure, we have amassed invaluable knowledge and expertise on the platform.
+          </p>
+          <p>
+            Our continuous engagement with Azure empowers us to deliver tailored solutions that optimize performance, security, and accessibility for our clients. Continuous refinement of designs and robust Managed Services have made us leaders in integrating new Azure features into customer solutions.
+            <br className="hidden sm:block" /><br className="hidden sm:block" />
+            We ensure clients leverage Azure`s latest innovations for enhanced efficiency and competitiveness. As a result of the continuous improvement of these designs and our Managed Services, we have become a leader in integrating new Azure functionalities into customer solutions.
+          </p>
+        </div>
       </div>
 
       <div className="relative services mb-4 mt-15">

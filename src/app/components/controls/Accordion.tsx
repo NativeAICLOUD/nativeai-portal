@@ -5,11 +5,10 @@ import React from 'react';
 import { twMerge } from 'tailwind-merge';
 import RenderHTML from './RenderHtml';
 import { MinusIcon, PlusIcon } from '@radix-ui/react-icons';
-import dynamic from 'next/dynamic';
 
 export type TData = {
   title: string;
-  desc: string | any;
+  desc: string;
 };
 
 type Props = {
@@ -19,7 +18,7 @@ type Props = {
   spanCls?: string;
   defaultValue?: string;
 } & {
-  data: TData[];
+  data?: TData[];
   showCaret?: boolean;
 };
 
@@ -97,7 +96,4 @@ const AccordionItem = ({ idx, isLast, header, children, title, spanCls, desc, sh
   </Accordion.Item>
 );
 
-
-export default dynamic(() => Promise.resolve(MyAccordion), {
-  ssr: false
-});
+export default MyAccordion;
