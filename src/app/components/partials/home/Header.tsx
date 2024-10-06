@@ -1,7 +1,8 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { Constants } from "@/Constants";
-import { Link } from 'react-transition-progress/next'
+import { Link } from 'react-transition-progress/next';
 import Image from "next/image";
 
 import AzureHeroIMG from "../../../../../public/img/azure-hero.png";
@@ -9,6 +10,22 @@ import { button } from "../../utils/tw-variants";
 import CoomingSoon from "../../ui/CoomingSoon";
 
 function HomeHeader() {
+  const [descriptions, setDescriptions] = useState({
+    title1: '',
+    subtitle: '',
+    description: ''
+  });
+
+  // Fetching data from description.json
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch('/description.json');  
+      const data = await res.json();
+      setDescriptions(data);
+    }
+    fetchData();
+  }, []);
+
   return (
     <main className="relative lg:h-screen overflow-hidden flex items-center lg:pl-[50px] pt-40 lg:pt-0 pb-16 sm:pb-40 lg:pb-0">
       <div className="absolute w-full h-full z-[-1] left-0 top-0 after:absolute after:bottom-0 after:bg-main-gradient after:w-full after:h-1/5">
@@ -17,8 +34,9 @@ function HomeHeader() {
       </div>
       <div className="relative max-w-9xl mx-auto w-full flex justify-center lg:justify-between text-left text-[#2A3A4A] mt-0 lg:mt-36">
         <div className="group relative z-1">
-          <h1 className="text-xl sm:text-2xl ml-1.5 mb-[0.5em] sm:mb-5 bg-clip h1-linear font-semibold text-center lg:text-left">Azure & AWS Consulting Company</h1>
-          <h2 className="text-3.5xl sm:text-4xl lg:text-6xl mb-[1.5em] sm:mb-8 font-black bg-clip h2-linear !leading-tight text-center lg:text-left max-w-lg lg:max-w-full mx-auto">Beyond Limits, <br /> Empowering Azure Clouds Solutions</h2>
+          <h1 className="text-xl sm:text-2xl ml-1.5 mb-[0.5em] sm:mb-5 bg-clip h1-linear font-semibold text-center lg:text-left">{descriptions.title1}</h1>
+          <h2 className="text-3.5xl sm:text-4xl lg:text-6xl mb-[1.5em] sm:mb-8 font-black bg-clip h2-linear !leading-tight text-center lg:text-left max-w-lg lg:max-w-full mx-auto">{descriptions.subtitle}</h2>
+          <h1 className="text-xl sm:text-2xl ml-1.5 mb-[0.5em] sm:mb-5 bg-clip h1-linear font-semibold text-center lg:text-left">{descriptions.description}</h1>
           <div className="flex justify-start gap-5 flex-col lg:flex-row items-center">
             <CoomingSoon>
               <span>
