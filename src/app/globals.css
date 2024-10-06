@@ -123,3 +123,55 @@ div[data-radix-popper-content-wrapper] {
 
 /* End Toooltip */
 /* Gradient Avatar */
+
+
+/* Accordion */
+.AccordionItem {
+  overflow: hidden;
+  margin-top: 1px;
+}
+
+.AccordionItem:focus-within {
+  position: relative;
+  z-index: 1;
+}
+
+.AccordionHeader {
+  display: flex;
+}
+
+.AccordionTrigger {
+  font-family: inherit;
+  background-color: transparent;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 15px;
+  line-height: 1;
+}
+
+.AccordionItem[data-state='open'] .AccordionContent {
+  visibility: visible;
+  max-height: 4000px;
+  transition: all 1.4s cubic-bezier(.56,.33,.65,.61);
+}
+.AccordionItem[data-state='closed'] .AccordionContent {
+  visibility: hidden;
+  max-height: 0;
+  transition: all .4s cubic-bezier(.01,.7,.06,.99);
+}
+
+.AccordionContentText {
+  padding: 15px 20px;
+}
+
+.AccordionTrigger[data-state='open'] .plus-icon {
+  display: none;
+}
+
+.AccordionTrigger[data-state='closed'] .minus-icon {
+  display: none;
+}
+
+/* End Accordion */

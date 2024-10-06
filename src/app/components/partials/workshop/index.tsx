@@ -29,19 +29,21 @@ function WorkshopCards({ data }: { data: TCard[] }) {
     <div className="workshops pb-32">
       <div className="options flex items-center gap-4 mb-4">
         <button
-          className="btn-action mr-2 svg-hover w-[40px] h-[40px] md:w-[48px] md:h-[48px] hover:bg-black/5 hover:shadow-inner rounded-full grid place-items-center"
+          className="btn-action mr-2 svg-hover min-w-[40px] h-[40px] md:w-[48px] md:h-[48px] hover:bg-black/5 hover:shadow-inner rounded-full grid place-items-center"
           onClick={() => setOpenFilter(true)}
         >
-          <svg className="icon fill-primary" width={32} height={22}>
+          <svg className="icon fill-primary size-6 sm:size-8">
             <use href={`/icons/all-icons.svg#icon-filter`}></use>
           </svg>
         </button>
-        <Checkbox label="Basic" onChange={(checked) => console.log(checked)} />
-        <Checkbox label="Special" onChange={(checked) => console.log(checked)} />
-        <Checkbox label="Deep Dive" onChange={(checked) => console.log(checked)} />
-        <Checkbox label="Workshops" onChange={(checked) => console.log(checked)} />
+        <div className="overflow-x-auto flex items-center flex-nowrap gap-4 whitespace-nowrap">
+          <Checkbox label="Basic" onChange={(checked) => console.log(checked)} />
+          <Checkbox label="Special" onChange={(checked) => console.log(checked)} />
+          <Checkbox label="Deep Dive" onChange={(checked) => console.log(checked)} />
+          <Checkbox label="Workshops" onChange={(checked) => console.log(checked)} />
+        </div>
       </div>
-      <div className={'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16 sm:gap-6'}>
+      <div className={'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'}>
         <Each
           of={data || []}
           render={(item: TCard) => (

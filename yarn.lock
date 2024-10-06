@@ -1193,12 +1193,41 @@
   "resolved" "https://registry.npmjs.org/@radix-ui/primitive/-/primitive-1.1.0.tgz"
   "version" "1.1.0"
 
+"@radix-ui/react-accordion@^1.2.1":
+  "integrity" "sha512-bg/l7l5QzUjgsh8kjwDFommzAshnUsuVMV5NM56QVCm+7ZckYdd9P/ExR8xG/Oup0OajVxNLaHJ1tb8mXk+nzQ=="
+  "resolved" "https://registry.npmjs.org/@radix-ui/react-accordion/-/react-accordion-1.2.1.tgz"
+  "version" "1.2.1"
+  dependencies:
+    "@radix-ui/primitive" "1.1.0"
+    "@radix-ui/react-collapsible" "1.1.1"
+    "@radix-ui/react-collection" "1.1.0"
+    "@radix-ui/react-compose-refs" "1.1.0"
+    "@radix-ui/react-context" "1.1.1"
+    "@radix-ui/react-direction" "1.1.0"
+    "@radix-ui/react-id" "1.1.0"
+    "@radix-ui/react-primitive" "2.0.0"
+    "@radix-ui/react-use-controllable-state" "1.1.0"
+
 "@radix-ui/react-arrow@1.1.0":
   "integrity" "sha512-FmlW1rCg7hBpEBwFbjHwCW6AmWLQM6g/v0Sn8XbP9NvmSZ2San1FpQeyPtufzOMSIx7Y4dzjlHoifhp+7NkZhw=="
   "resolved" "https://registry.npmjs.org/@radix-ui/react-arrow/-/react-arrow-1.1.0.tgz"
   "version" "1.1.0"
   dependencies:
     "@radix-ui/react-primitive" "2.0.0"
+
+"@radix-ui/react-collapsible@1.1.1":
+  "integrity" "sha512-1///SnrfQHJEofLokyczERxQbWfCGQlQ2XsCZMucVs6it+lq9iw4vXy+uDn1edlb58cOZOWSldnfPAYcT4O/Yg=="
+  "resolved" "https://registry.npmjs.org/@radix-ui/react-collapsible/-/react-collapsible-1.1.1.tgz"
+  "version" "1.1.1"
+  dependencies:
+    "@radix-ui/primitive" "1.1.0"
+    "@radix-ui/react-compose-refs" "1.1.0"
+    "@radix-ui/react-context" "1.1.1"
+    "@radix-ui/react-id" "1.1.0"
+    "@radix-ui/react-presence" "1.1.1"
+    "@radix-ui/react-primitive" "2.0.0"
+    "@radix-ui/react-use-controllable-state" "1.1.0"
+    "@radix-ui/react-use-layout-effect" "1.1.0"
 
 "@radix-ui/react-collection@1.1.0":
   "integrity" "sha512-GZsZslMJEyo1VKm5L1ZJY8tGDxZNPAoUeQUIbKeJfoi7Q4kmig5AsgLMYYuyYbfjd8fBmFORAIwYAkXMnXZgZw=="
@@ -1219,6 +1248,11 @@
   "integrity" "sha512-OKrckBy+sMEgYM/sMmqmErVn0kZqrHPJze+Ql3DzYsDDp0hl0L62nx/2122/Bvps1qz645jlcu2tD9lrRSdf8A=="
   "resolved" "https://registry.npmjs.org/@radix-ui/react-context/-/react-context-1.1.0.tgz"
   "version" "1.1.0"
+
+"@radix-ui/react-context@1.1.1":
+  "integrity" "sha512-UASk9zi+crv9WteK/NU4PLvOoL3OuE6BWVKNF6hPRBtYBDXQ2u5iu3O59zUlJiTVvkyuycnqrztsHVJwcK9K+Q=="
+  "resolved" "https://registry.npmjs.org/@radix-ui/react-context/-/react-context-1.1.1.tgz"
+  "version" "1.1.1"
 
 "@radix-ui/react-direction@1.1.0":
   "integrity" "sha512-BUuBvgThEiAXh2DWu93XsT+a3aWrGqolGlqqw5VU1kG7p/ZH2cuDlM1sRLNnY3QcBS69UIz2mcKhMxDsdewhjg=="
@@ -1348,6 +1382,14 @@
   "integrity" "sha512-Gq6wuRN/asf9H/E/VzdKoUtT8GC9PQc9z40/vEr0VCJ4u5XvvhWIrSsCB6vD2/cH7ugTdSfYq9fLJCcM00acrQ=="
   "resolved" "https://registry.npmjs.org/@radix-ui/react-presence/-/react-presence-1.1.0.tgz"
   "version" "1.1.0"
+  dependencies:
+    "@radix-ui/react-compose-refs" "1.1.0"
+    "@radix-ui/react-use-layout-effect" "1.1.0"
+
+"@radix-ui/react-presence@1.1.1":
+  "integrity" "sha512-IeFXVi4YS1K0wVZzXNrbaaUvIJ3qdY+/Ih4eHFhWA9SwGR9UDX7Ck8abvL57C4cv3wwMvUE0OG69Qc3NCcTe/A=="
+  "resolved" "https://registry.npmjs.org/@radix-ui/react-presence/-/react-presence-1.1.1.tgz"
+  "version" "1.1.1"
   dependencies:
     "@radix-ui/react-compose-refs" "1.1.0"
     "@radix-ui/react-use-layout-effect" "1.1.0"
@@ -1565,6 +1607,13 @@
   dependencies:
     "@types/node" "*"
 
+"@types/dompurify@^3.0.5":
+  "integrity" "sha512-1Wg0g3BtQF7sSb27fJQAKck1HECM6zV1EB66j8JH9i3LCjYabJa0FSdiSgsD5K/RbrsR0SiraKacLB+T8ZVYAg=="
+  "resolved" "https://registry.npmjs.org/@types/dompurify/-/dompurify-3.0.5.tgz"
+  "version" "3.0.5"
+  dependencies:
+    "@types/trusted-types" "*"
+
 "@types/estree@^1.0.5":
   "integrity" "sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw=="
   "resolved" "https://registry.npmjs.org/@types/estree/-/estree-1.0.6.tgz"
@@ -1644,7 +1693,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/trusted-types@^2.0.2":
+"@types/trusted-types@*", "@types/trusted-types@^2.0.2":
   "integrity" "sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw=="
   "resolved" "https://registry.npmjs.org/@types/trusted-types/-/trusted-types-2.0.7.tgz"
   "version" "2.0.7"
@@ -2609,6 +2658,11 @@
   "version" "3.0.0"
   dependencies:
     "esutils" "^2.0.2"
+
+"dompurify@^3.1.7":
+  "integrity" "sha512-VaTstWtsneJY8xzy7DekmYWEOZcmzIe3Qb3zPd4STve1OBTa+e+WmS1ITQec1fZYXI3HCsOZZiSMpG6oxoWMWQ=="
+  "resolved" "https://registry.npmjs.org/dompurify/-/dompurify-3.1.7.tgz"
+  "version" "3.1.7"
 
 "duplexer@^0.1.2":
   "integrity" "sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg=="

@@ -4,7 +4,7 @@ import { Link } from 'react-transition-progress/next';
 
 import { Constants } from '@/Constants';
 import { Transition } from '@headlessui/react';
-import { CaretDownIcon } from '@radix-ui/react-icons';
+import { PlusIcon, MinusIcon, CaretDownIcon } from '@radix-ui/react-icons';
 import { AnimatePresence, motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
@@ -41,23 +41,23 @@ const pages: Pages[] = [
   {
     url: Constants.PAGES.SOLUTIONS, title: 'Solutions', children: [
       {
-        url: '', title: 'Solutions', children: [
+        url: Constants.PAGES.SOLUTIONS, title: 'Solutions', children: [
           { url: Constants.PAGES.AZURE_CLOUDIFY, title: 'Azure Cloudify', soon: true },
           { url: Constants.PAGES.MANAGED_SERVICES, title: 'Managed Services', soon: true }
         ]
       },
       {
-        url: '', title: 'Data Lifecycle Management', children: [
+        url: Constants.PAGES.DATA_LIFECYCLE_MANAGEMENT, title: 'Data Lifecycle Management', children: [
           { url: Constants.PAGES.MANAGED_SERVICES, title: 'Managed Services', soon: true }
         ]
       },
       {
-        url: '', title: 'Cloud Native', children: [
+        url: Constants.PAGES.CLOUD_NATIVE_SD, title: 'Cloud Native', children: [
           { url: Constants.PAGES.CLOUD_NATIVE_SD, title: 'Software Development', soon: true },
         ]
       },
       {
-        url: '', title: 'CSP Services', children: [
+        url: Constants.PAGES.CSP_ENTERPRISE, title: 'CSP Services', children: [
           { url: Constants.PAGES.CSP_ENTERPRISE, title: 'CSP Enterprise', soon: true },
         ]
       }
@@ -136,11 +136,12 @@ function Navbar() {
                           onMouseEnter={() => item.url === Constants.PAGES.SOLUTIONS ? setSlideMenu(true) : {}}>
                           {item.title}
                           {
-                            item.children &&
-                            <CaretDownIcon
-                              className="relative top-[1px] transition-transform duration-[250] ease-in group-data-[state=open]:-rotate-180"
-                              aria-hidden
-                            />
+                            item.children && (
+                              <CaretDownIcon
+                                className="relative top-[1px] transition-transform duration-[250] ease-in group-data-[state=open]:-rotate-180"
+                                aria-hidden
+                              />
+                            )
                           }
                         </Link>
                       </li>
@@ -198,7 +199,7 @@ function Navbar() {
 
         <hr className="nav my-6 opacity-10 border-native" />
 
-        <ul className="flex flex-col px-4 gap-4">
+        <ul className="flex flex-col pt-4 px-4 gap-4">
           <Each
             of={pages}
             render={(item: Pages) => (
@@ -206,7 +207,7 @@ function Navbar() {
                 {
                   item.soon ? (
                     <CoomingSoon>
-                      <li className="text-black font-light flex items-center">
+                      <li className="text-black font-light flex items-center text-lg">
                         <Link href={item.url} onClick={() => setOpenSide(false)}>{item.title}</Link>
                         {item.children && (
                           <button
@@ -222,15 +223,24 @@ function Navbar() {
                   ) : (
                     <li className={`relative flex items-center text-black font-light transition-all ${pathname === item.url ? 'text-native' : ''}`}>
                       <>
-                        <Link className="flex items-center gap-1" href={item.url}>
+                        <Link className="flex items-center gap-1 text-lg" href={item.url} onClick={() => setOpenSide(false)}>
                           {item.title}
                         </Link>
-                        {item.children &&
-                          <CaretDownIcon
+                        {item.children && (
+                          <span
                             onClick={() => setExpanded(isExpanded === item.url ? null : item.url)}
-                            className={`ml-2 relative top-[1px] transition-transform duration-[250] ease-in ${!!isExpanded ? '-rotate-180' : ''} cursor-pointer`}
-                            aria-hidden
-                          />}
+                          >
+                            {
+                              !isExpanded ? <PlusIcon
+                                className={`ml-3 size-5 relative top-[1px] cursor-pointer`}
+                                aria-hidden
+                              /> : <MinusIcon
+                                className={`ml-3 size-5 relative top-[1px] cursor-pointer`}
+                                aria-hidden
+                              />
+                            }
+                          </span>
+                        )}
                       </>
                     </li>
                   )
@@ -255,12 +265,12 @@ function Navbar() {
                             {
                               item.soon ? (
                                 <CoomingSoon>
-                                  <li className="text-black font-light">
+                                  <li className="text-black font-light text-lg">
                                     <Link href={item.url}>{item.title}</Link>
                                   </li>
                                 </CoomingSoon>
                               ) : (
-                                <li className="text-black font-light">
+                                <li className="text-black font-light text-lg">
                                   <Link href={item.url} onClick={() => setOpenSide(false)}>
                                     {item.title}
                                   </Link>
@@ -344,7 +354,9 @@ function Navbar() {
                 render={(item: Pages) => (
                   <motion.div className="relative"
                     variants={motionItem}>
-                    <h2 className="mb-2 cursor-default">{item.title}</h2>
+                    <h2 className="mb-2 cursor-default">
+                      <Link href={item.url}>{item.title}</Link>
+                    </h2>
                     <ul className="flex flex-col gap-2">
                       <Each
                         of={item.children}

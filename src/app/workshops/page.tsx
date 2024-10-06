@@ -18,7 +18,7 @@ const WorkshopPage = () => {
   return (
     <div className={`relative min-h-full`}>
       <div className="absolute w-full h-full z-[-1] top-16 inset-x-0">
-        <Image src={BG3Img} alt="Background" className="!h-auto !-top-36" layout="fill" objectFit="cover" objectPosition='top' quality={100} />
+        <Image src={BG3Img} alt="Background" className="!h-auto md:!-top-36" layout="fill" objectFit="cover" objectPosition='top' quality={100} />
         <Image src="/img/Group 31.png" alt="Design Element" layout="fill" objectFit="contain" objectPosition='top right' quality={100} />
       </div>
       <div className={'relative mx-auto max-w-9xl px-2 sm:px-4 md:px-6 2xl:px-0'}>
