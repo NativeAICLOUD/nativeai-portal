@@ -1,5 +1,5 @@
 import { Constants } from '@/Constants';
-import { BG3Img, Location, Phone, PinMarker, Telephone } from '@/ImagePath';
+import { BG3Img, BGNativeWhite, Location, Phone, PinMarker, Telephone } from '@/ImagePath';
 import Image from 'next/image';
 import ContactUsForm from '../components/partials/ContactForm';
 
@@ -66,6 +66,11 @@ const GetInTouchPage = () => {
           </div>
         </div>
         <div className="relative bg-gtouch-bg-linear 2xl:bg-none lg:-mb-20 px-2">
+          <Image
+            src={BGNativeWhite}
+            alt="Native logo"
+            className={'absolute top-[-244px] right-0'}
+          />
           <ContactUsForm className='-translate-y-20 lg:-translate-y-48 border-2 border-footer' />
         </div>
       </div>

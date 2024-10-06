@@ -2,7 +2,7 @@ import MyAccordion from '@/app/components/controls/Accordion';
 import { Each } from '@/app/components/helpers/Each';
 import CoomingSoon from '@/app/components/ui/CoomingSoon';
 import { button } from '@/app/components/utils/tw-variants';
-import { BG3Img, BGNativeWhite } from '@/ImagePath';
+import { BG3Img, BG_INVERSE, BGNativeWhite } from '@/ImagePath';
 import Image from 'next/image';
 import { Link } from 'react-transition-progress/next';
 import { twMerge } from 'tailwind-merge';
@@ -87,7 +87,7 @@ const WorkshopDetailPage = () => {
                 </div>
             </div>
 
-            <div className={'relative home-partner mt-16 xl:pb-20 xl:mt-32'}>
+            <div className={'relative home-partner mt-16 xl:pb-16 xl:mt-32'}>
                 <Image
                     src="/img/arrow-down-1.png"
                     alt="Arrow Down"
@@ -146,6 +146,7 @@ const WorkshopDetailPage = () => {
                     </div>
                 </div>
             </div>
+            <Image src={BG3Img} alt="Background" className="!h-40 absolute w-full z-[-1] bottom-0 inset-x-0" objectFit="cover" objectPosition='top' quality={100} />
         </div>
     )
 }
