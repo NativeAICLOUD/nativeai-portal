@@ -6,7 +6,7 @@ import BG3Img from '../public/img/BG3.png';
 import BGNativeWhite from '../public/img/Native-white.png';
 import SolutionHeader from '../public/img/Solutions.png';
 import Telephone from '../public/img/Telephone.png';
-import Location from '../public/img/Location.png';
+import Location from '../public/img/Esg.jpg';
 import PinMarker from '../public/img/Pin.svg';
 import Phone from '../public/img/Phone.svg';
 

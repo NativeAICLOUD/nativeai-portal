@@ -35,7 +35,7 @@ export const Constants = {
     LINKEDIN: 'https://linkedin.com',
   },
   MAIL: 'artan@nativeai.cloud',
-  ADDRESS: 'EGL Building A1',
+  ADDRESS: 'Eeast Gate Skopje Building A1',
   MAPS: 'https://maps.app.goo.gl/b3gSTdeJ5eszoAyg6',
   PHONE: '+389 70 226 432',
 };

@@ -24,7 +24,7 @@ const HomeLowerSection = () => {
               <Image src="/img/icon-tasks.png" alt="Automate Release Pipeline" width={80} height={67} />
             </div>
             <h3 className="text-xl">Automate Release Pipeline</h3>
-            <p className="text-sm sm:text-base">Deliver innovative products and services to market quickly by automatically managing, monitoring, and provisioning AWS resources using IaC.</p>
+            <p className="text-sm sm:text-base">Deliver innovative products and services to market quickly by automatically managing, monitoring, and provisioning Azure and AWS resources using IaC.</p>
           </div>
           <div className={'flex flex-col gap-4 md:gap-10 items-center text-center max-w-sm mx-auto md:max-w-full md:mx-0'}>
             <div className="box-img md:h-20">
@@ -38,7 +38,7 @@ const HomeLowerSection = () => {
           <h3 className="text-center text-lg mb-3">Increase Enterprise Agility</h3>
           <p className="text-center text-base max-w-5xl mx-auto">
             DevOps tools and principles are essential for organizations that want to streamline the development and deployment
-            process to accelerate innovation. ClearScale will help you implement DevOps best practices and leverage powerful AWS solutions
+            process to accelerate innovation. NativeCloud will help you implement DevOps best practices and leverage powerful Azure solutions
             to automate your cloud infrastructure.
           </p>
         </div>

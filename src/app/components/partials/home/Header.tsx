@@ -18,7 +18,8 @@ function HomeHeader() {
       <div className="relative max-w-9xl mx-auto w-full flex justify-center lg:justify-between text-left text-[#2A3A4A] mt-0 lg:mt-36">
         <div className="group relative z-1">
           <h1 className="text-xl sm:text-2xl ml-1.5 mb-[0.5em] sm:mb-5 bg-clip h1-linear font-semibold text-center lg:text-left">Azure & AWS Consulting Company</h1>
-          <h2 className="text-3.5xl sm:text-4xl lg:text-6xl mb-[1.5em] sm:mb-8 font-black bg-clip h2-linear !leading-tight text-center lg:text-left max-w-lg lg:max-w-full mx-auto">Beyond Limits, <br /> Empowering Azure Clouds Solutions</h2>
+          <h2 className="text-3.5xl sm:text-4xl lg:text-6xl mb-[1.5em] sm:mb-8 font-black bg-clip h2-linear !leading-tight text-center lg:text-left max-w-lg lg:max-w-full mx-auto">Beyond Cloud Empowering Azure<br /> </h2>
+          <h1 className="text-xl sm:text-2xl ml-1.5 mb-[0.5em] sm:mb-5 bg-clip h1-linear font-semibold text-center lg:text-left">We transform your vision into reality by harnessing the power of Azure</h1>
           <div className="flex justify-start gap-5 flex-col lg:flex-row items-center">
             <CoomingSoon>
               <span>
