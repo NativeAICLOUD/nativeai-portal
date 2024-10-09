@@ -44,7 +44,7 @@ function ContactUsForm({
   }
 
   return (
-    <form className={twMerge("contact-us max-w-3xl mx-auto bg-white p-10 rounded-28", className || '')}
+    <form className={twMerge("contact-us max-w-3xl mx-auto bg-white p-8 sm:p-10 rounded-28", className || '')}
       onSubmit={handleSubmit(onSubmitForm)}>
       <h2 className="mb-12 mt-2 text-center text-lg sm:text-2.5xl font-bold uppercase outline-0">
         Contact Us
@@ -91,7 +91,7 @@ function ContactUsForm({
           rows={3} placeholder="Message here..." {...register('message')} />
       </div>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center pt-4 pb-3">
         <button type="submit" className={twMerge(`${button({ size: 'md', color: 'primary', icon: 'md' })}`, 'min-w-0 px-6 md:px-10')}>
           Submit
         </button>

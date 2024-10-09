@@ -14,7 +14,7 @@ const HomeLowerSection = () => {
         <div className={'grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 max-w-6xl mx-auto'}>
           <div className={'flex flex-col gap-4 md:gap-10 items-center text-center max-w-sm mx-auto md:max-w-full md:mx-0'}>
             <div className="box-img md:h-20">
-              <Image src="/img/icon-innovate.png" alt="Innovate Faster" width={89} height={67} />
+              <Image src="/img/icon-innovation.png" alt="Innovate Faster" width={89} height={67} />
             </div>
             <h3 className="text-xl">Innovate Faster</h3>
             <p className="text-sm sm:text-base">Decrease time to market and enable continuous delivery for mission-critical apps, products, and services.</p>

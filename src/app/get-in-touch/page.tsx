@@ -38,7 +38,7 @@ const GetInTouchPage = () => {
             className={'relative w-full h-full 2xl:rounded-20 object-cover'}
           />
           <div className="info absolute inset-0 top-[4.5rem] left-[34%] sm:top-[27.5%] sm:left-[34%] md:top-[29.5%] md:left-[36%] lg:top-[30%] lg:left-[36.4%] xl:top-[31%]">
-            <div className="content absolute text-black px-3 py-2 bg-white/80 rounded-14 -translate-x-16 -translate-y-[4.5rem] before:absolute before:bottom-[-6px] before:left-2/4 before:-translate-x-2.5 before:z-[-1] before:border-x-8 before:rotate-180 before:border-x-transparent before:border-b-8 before:border-b-white/7 before:size-0">
+            <div className="content absolute text-black px-3 py-2 bg-white/80 rounded-14 -translate-x-[7rem] -translate-y-[4.5rem] before:absolute before:bottom-[-6px] before:left-2/4 before:-translate-x-2.5 before:z-[-1] before:border-x-8 before:rotate-180 before:border-x-transparent before:border-b-8 before:border-b-white/7 before:size-0">
               <div className="list text-sm">
                 <a href={Constants.MAPS} target='_blank' className='flex mb-1 gap-2 items-center hover:text-primary'>
                   <Image
