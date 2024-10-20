@@ -29,7 +29,7 @@ function Checkbox({
           defaultChecked={defaultChecked}
           checked={isChecked}
           onChange={onCheckboxChange}
-          className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-slate-800 checked:border-slate-800"
+          className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-500 checked:bg-slate-800 checked:border-slate-800"
           id={checkboxId} />
         <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"
@@ -41,7 +41,7 @@ function Checkbox({
         </span>
       </label>
       {label &&
-        <label className="cursor-pointer ml-2 text-slate-600 text-sm" htmlFor={checkboxId}>
+        <label className="cursor-pointer ml-2 text-slate-800 text-sm" htmlFor={checkboxId}>
           {label}
         </label>
       }

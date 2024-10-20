@@ -24,7 +24,7 @@ const GetInTouchPage = () => {
             src={Telephone}
             alt="About Image"
             priority
-            className={'opacity-80 md:opacity-100 absolute md:relative object-contain w-full max-w-sm md:max-w-md xl:-translate-x-28'}
+            className={'opacity-80 md:opacity-100 absolute md:relative object-contain w-full max-w-sm xl:-translate-x-28'}
           />
         </div>
 

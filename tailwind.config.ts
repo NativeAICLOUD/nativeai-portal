@@ -100,6 +100,8 @@ const config: Config = {
       },
       aspectRatio: {
         box: '4 / 3',
+        thumbnail: '16 / 6',
+        postimg: '4 / 2'
       },
       keyframes: {
         slideDownAndFade: {

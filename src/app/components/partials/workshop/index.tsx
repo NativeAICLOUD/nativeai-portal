@@ -21,6 +21,10 @@ const workshopList = [
 ];
 type IWorkshopList = typeof workshopList[0];
 
+const Categories = [
+  'Basic', 'Special', 'Deep Dive', 'Workshops'
+];
+
 function WorkshopCards({ data }: { data: TCard[] }) {
 
   const [onOpenFilter, setOpenFilter] = useState(false);
@@ -37,10 +41,12 @@ function WorkshopCards({ data }: { data: TCard[] }) {
           </svg>
         </button>
         <div className="overflow-x-auto flex items-center flex-nowrap gap-4 whitespace-nowrap">
-          <Checkbox label="Basic" onChange={(checked) => console.log(checked)} />
-          <Checkbox label="Special" onChange={(checked) => console.log(checked)} />
-          <Checkbox label="Deep Dive" onChange={(checked) => console.log(checked)} />
-          <Checkbox label="Workshops" onChange={(checked) => console.log(checked)} />
+          <Each
+            of={Categories}
+            render={(category: string) => (
+              <Checkbox label={category} onChange={(checked) => console.log(category, checked)} />
+            )}
+          />
         </div>
       </div>
       <div className={'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'}>
