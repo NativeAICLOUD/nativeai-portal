@@ -1,11 +1,10 @@
 import Image from 'next/image';
 
-import { AzureHero, BG3Img, BGGroupLogo, BGNativeWhite, FrameMail, SolutionHeader } from '@/ImagePath';
+import { Constants } from '@/Constants';
+import { AzureHero, BGGroupLogo, BGNativeWhite, FrameMail } from '@/ImagePath';
 import { Link } from 'react-transition-progress/next';
-import { twMerge } from 'tailwind-merge';
 import { Each } from '../../components/helpers/Each';
 import { button } from '../../components/utils/tw-variants';
-import { Constants } from '@/Constants';
 
 const cards = [
   { img: '/img/Isolation_1.png', link: '', title: 'Cloud Design', desc: 'The cloud design ticket is the first step in the process. This is where you hop on. You receive a scalable, robust, and compliant Azure design for your application, monthly Azure costs, migration path, task list, and the hours required for your migration to Azure. After the cloud design, you decide if the proposed design fits your organization`s needs and if Intercept is the right partner to collaborate with. No strings attached, this is where you can hop off but you might want to see more.' },
@@ -55,30 +54,32 @@ const AzurePage = () => {
         </div>
       </div>
 
-      <p className={'pt-24 pb-10 text-base lg:text-lg font-normal px-2 xl:px-0 text-center sm:text-left'}>
-        <b>The transition to Azure</b><br />
-        Depending on your current situation and wishes, we will work with you to see if we can optimize your infrastructure with, for example, containers, Kubernetes, PaaS, and other cloud-native resources in Azure. The latter usually involves modifying part of your code, but it will undoubtedly result in lower costs and increase your efficiency and flexibility.
-        Once you`ve decided to start working with Azure, the cloud migration process begins. Several complex decisions play a role in this, so it makes sense to work according to a carefully designed migration strategy. These steps depend on your current IT environment, application architecture, and organizational goals.
-      </p>
+      <div className={'mx-auto max-w-9xl px-2 sm:px-4 md:px-6'}>
 
-      <div className={'flex text-center sm:text-left flex-col sm:flex-row flex-wrap justify-around px-6 xl:px-0 gap-16 sm:gap-6 mt-16 mb-24'}>
-        <Each
-          of={cards}
-          render={(item: TCard) => (
-            <Card
-              img={item.img}
-              title={item.title}
-              desc={item.desc}
-              link={item.link} />
-          )}
-        />
+        <p className={'pt-24 pb-10 text-base lg:text-lg font-normal px-2 xl:px-0 text-center sm:text-left'}>
+          <b>The transition to Azure</b><br />
+          Depending on your current situation and wishes, we will work with you to see if we can optimize your infrastructure with, for example, containers, Kubernetes, PaaS, and other cloud-native resources in Azure. The latter usually involves modifying part of your code, but it will undoubtedly result in lower costs and increase your efficiency and flexibility.
+          Once you`ve decided to start working with Azure, the cloud migration process begins. Several complex decisions play a role in this, so it makes sense to work according to a carefully designed migration strategy. These steps depend on your current IT environment, application architecture, and organizational goals.
+        </p>
+
+        <div className={'flex text-center sm:text-left flex-col sm:flex-row flex-wrap justify-around px-6 xl:px-0 gap-16 sm:gap-6 mt-16 mb-24'}>
+          <Each
+            of={cards}
+            render={(item: TCard) => (
+              <Card
+                img={item.img}
+                title={item.title}
+                desc={item.desc}
+                link={item.link} />
+            )}
+          />
+        </div>
+
+        <p className={'pb-20 text-base lg:text-lg font-normal px-2 xl:px-0 text-center sm:text-left'}>
+          <b>Migration</b><br />
+          After the cloud design has been approved we will create a project plan that will accommodate the migration process. The phasing and prioritization are set up in careful collaboration with all the stakeholders. Our project managers will have a feedback cycle in rhythm with the duration of the project. They are measured on time, material, and customer satisfaction. To ensure a good handover is necessary to the internal business of our customers, knowledge transfer is always part of the project cycle.1
+        </p>
       </div>
-
-      <p className={'pb-20 text-base lg:text-lg font-normal px-2 xl:px-0 text-center sm:text-left'}>
-        <b>Migration</b><br />
-        After the cloud design has been approved we will create a project plan that will accommodate the migration process. The phasing and prioritization are set up in careful collaboration with all the stakeholders. Our project managers will have a feedback cycle in rhythm with the duration of the project. They are measured on time, material, and customer satisfaction. To ensure a good handover is necessary to the internal business of our customers, knowledge transfer is always part of the project cycle.1
-      </p>
-
 
       <div className="why-to-azure relative max-w-9xl px-6 sm:px-16 py-8 sm:py-[70px] mx-auto bg-[#232F3E] text-white xl:rounded-xl mb-8 sm:mb-16">
         <Image

@@ -14,6 +14,7 @@ import LogoBlue from '../public/img/logo-blue.png';
 import AzureHero from '../public/img/AzureHero.png';
 import FrameMail from '../public/img/Frame.png';
 import BGGroupLogo from '../public/img/Group 31.png';
+import LaptopImg from '../public/img/laptop.png';
 
 import MSP from '../public/img/msp.png';
 import KCSP from '../public/img/kcsp.png';
@@ -37,5 +38,6 @@ export {
   LogoBlue,
   FrameMail,
   AzureHero,
-  BGGroupLogo
+  BGGroupLogo,
+  LaptopImg
 };
