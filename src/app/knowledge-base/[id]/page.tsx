@@ -1,5 +1,5 @@
 import RelatedArticles from '@/app/components/partials/RelatedArticles';
-import { BG5Img, LogoBlue } from '@/ImagePath';
+import { BG5Img, BGGroupLogo, LogoBlue } from '@/ImagePath';
 import { formatDistanceToNow } from 'date-fns';
 import Image from 'next/image';
 
@@ -22,7 +22,7 @@ const KnowledgeBaseDetailPage = () => {
             </div>
             <div className="absolute w-full h-full z-[-1] top-16 inset-x-0">
                 <Image src={BG5Img} alt="Background" className="!h-auto md:!-top-36" layout="fill" objectFit="cover" objectPosition='top' quality={100} />
-                <Image src="/img/Group 31.png" alt="Design Element" layout="fill" objectFit="contain" objectPosition='center right' quality={100} />
+                <Image src={BGGroupLogo} alt="Design Element" layout="fill" objectFit="contain" objectPosition='center right' quality={100} />
             </div>
             <div className={'relative mx-auto max-w-[954px] px-2 sm:px-4 md:px-6 2xl:px-0 [&>p]:py-2'}>
 

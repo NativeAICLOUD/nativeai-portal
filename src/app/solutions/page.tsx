@@ -75,10 +75,10 @@ const Card = ({ img, title, desc, link }: TCard) => {
 const CardGroup = ({ className }: { className: string }) => {
   return (
     <div className={twMerge('relative z-1 flex items-center flex-col sm:flex-row gap-6', className || '')}>
-        <Image src={MSP} alt="Microsoft Solutions Partner" className={'max-w-56 shadow-partner rounded-md'} />
-        <Image src={KCSP} alt="Kubernetes Certified Service Provider" className={'max-w-56 shadow-partner rounded-md'} />
-        <Image src={KTP} alt="Kubernetes Training Partner" className={'max-w-56 shadow-partner rounded-md'} />
-      </div>
+      <Image src={MSP} alt="Microsoft Solutions Partner" className={'max-w-56 shadow-partner rounded-md'} />
+      <Image src={KCSP} alt="Kubernetes Certified Service Provider" className={'max-w-56 shadow-partner rounded-md'} />
+      <Image src={KTP} alt="Kubernetes Training Partner" className={'max-w-56 shadow-partner rounded-md'} />
+    </div>
   )
 }
 

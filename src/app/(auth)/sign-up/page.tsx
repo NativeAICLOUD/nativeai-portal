@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { signIn } from 'next-auth/react'
-import { showToast } from '../components/controls/Toast'
+import { showToast } from '../../components/controls/Toast'
 
 const SignUpPage = () => {
     const [username, setUsername] = useState("")

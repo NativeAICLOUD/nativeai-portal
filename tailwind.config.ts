@@ -38,10 +38,12 @@ const config: Config = {
         'solution-text-linear': 'linear-gradient(90deg, #1E1E1E 0%, #2573BA 100%)',
         'workshop-text-linear': 'linear-gradient(90deg, #3A506B 0%, #131C28 100%)',
         'gtouch-bg-linear': 'linear-gradient(to bottom, #142335 0%, #2b384b 80%)',
+        'service-text-linear': 'linear-gradient(89.99deg, #E5A003 3.46%, #FBC980 22.53%, #F89201 45.05%)',
         'main-gradient': 'linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%)',
         'main-card': 'linear-gradient(to right, #003140, #203d5d), url(/img/noise-background.jpg)',
         'main-light-card': 'linear-gradient(to right, #37424f, #35404e), url(/img/noise-background.jpg)',
-        'two-color': 'linear-gradient(to bottom, #232F3E 50%, #283647 50%)'
+        'two-color': 'linear-gradient(to bottom, #232F3E 50%, #283647 50%)',
+        'azure-bg-opacity': 'linear-gradient(to left, #ffffff00 0%, rgb(255 255 255 / 90%) 60%), linear-gradient(to top, rgb(255 255 255) 65%,  #ffffff00 72%, #ffffff00 100%)'
       },
       fontSize: {
         'xxxs': ['8px', '1'],
