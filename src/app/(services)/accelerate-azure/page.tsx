@@ -1,19 +1,6 @@
 import Image from 'next/image';
 
-import { AzureHero, BG3Img, BGGroupLogo, BGNativeWhite, FrameMail, LaptopImg, SolutionHeader } from '@/ImagePath';
-import { Link } from 'react-transition-progress/next';
-import { twMerge } from 'tailwind-merge';
-import { Each } from '../../components/helpers/Each';
-import { button } from '../../components/utils/tw-variants';
-import { Constants } from '@/Constants';
-
-const cards = [
-  { img: '/img/Isolation_1.png', link: '', title: 'Cloud Design', desc: 'The cloud design ticket is the first step in the process. This is where you hop on. You receive a scalable, robust, and compliant Azure design for your application, monthly Azure costs, migration path, task list, and the hours required for your migration to Azure. After the cloud design, you decide if the proposed design fits your organization`s needs and if Intercept is the right partner to collaborate with. No strings attached, this is where you can hop off but you might want to see more.' },
-  { img: '/img/Isolation_2.png', link: '', title: 'CSP Onboarding', desc: 'Together with your team, we will ensure a flawless migration of your current application and workloads to your own CSP tenant. If you already have a Microsoft tenant we can move your existing Azure environment through an automated process. If you have an Enterprise Agreement we can import your EA as a benefit from the Azure Expert MSP partner status.' },
-  { img: '/img/Isolation_3.png', link: '', title: 'Governance and security', desc: 'Your customers demand a secure, compliant, and efficient environment for their applications. When hosting your application on a cloud platform, governance becomes even more critical and you want to manage this from the start of your journey. We call this shift left in the process. Good cloud governance results in guardrails that keep the company on a safe path throughout that journey. One of the reasons why we make this a mandatory part of our onboard practices and have fully automated the management of it.' },
-]
-
-type TCard = typeof cards[0];
+import { AzureHero, BGGroupLogo, BGNativeWhite, FrameMail, LaptopImg } from '@/ImagePath';
 
 const AzurePage = () => {
   return (
@@ -23,9 +10,9 @@ const AzurePage = () => {
         <Image src={BGGroupLogo} alt="Design Element" layout="fill" objectFit="contain" objectPosition='center right' quality={100} />
       </div>
       <div className={'relative mx-auto max-w-9xl px-2 sm:px-4 md:px-6 2xl:px-0'}>
-        <div className="top flex items-start pt-36 gap-10">
+        <div className="top flex items-start pt-28 sm:pt-36 gap-10">
           <div className="relative side pt-28 z-1 px-4 sm:px-10 md:px-0 text-center md:text-left">
-            <h1 className={'text-4xl md:text-5xl xl:text-6xl pb-6 leading-none font-bold bg-service-text-linear bg-clip-text text-transparent md:max-w-[600px] xl:max-w-[800px]'}>
+            <h1 className={'text-4xl md:text-5xl xl:text-6xl pb-6 leading-none font-bold bg-workshop-text-linear bg-clip-text text-transparent md:max-w-[600px] xl:max-w-[800px]'}>
               Accelerate with Azure
             </h1>
             <p className={'md:max-w-[580px] pt-3 pb-16 text-base lg:text-lg font-normal'}>
@@ -87,7 +74,7 @@ const AzurePage = () => {
         />
       </div>
 
-      <div className="why-to-azure relative max-w-9xl px-6 sm:px-16 py-8 sm:py-[70px] mx-auto bg-[#162A43] text-white xl:rounded-xl mb-8 sm:mb-16">
+      <div className="why-to-azure overflow-clip relative max-w-9xl px-6 sm:px-16 py-8 sm:py-[70px] mx-auto bg-[#162A43] text-white xl:rounded-xl mb-8 sm:mb-16">
         <Image
           src={BGNativeWhite}
           alt="Native logo"
@@ -107,19 +94,5 @@ const AzurePage = () => {
     </div>
   );
 };
-
-const Card = ({ img, title, desc, link }: TCard) => {
-  return (
-    <div className={'flex flex-col'}>
-      <Image src={img} alt={title} className='h-full max-h-[110px] mx-auto sm:mx-0 object-contain' width={160} height={110} />
-      <div className={'serviceText w-full max-w-[467px]'}>
-        <h3 className="text-2xl mt-4 mb-5 ">{title}</h3>
-        <p className='text-sm sm:text-base'>
-          {desc}
-        </p>
-      </div>
-    </div>
-  )
-}
 
 export default AzurePage;

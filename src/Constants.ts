@@ -7,7 +7,7 @@ export const Constants = {
     AZURE_CLOUDIFY: '/azure-cloudify',
     MANAGED_SERVICES: '/managed-services',
     CLOUD_NATIVE_SD: '/cloud-native-sd',
-    DATA_LIFECYCLE_MANAGEMENT: '/azure-cloudify',
+    DATA_LIFECYCLE_MANAGEMENT: '/data-lifecycle-management',
     CSP_ENTERPRISE: '/csp-enterprise',
 
     WORKSHOPS: '/workshops',

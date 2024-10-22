@@ -6,6 +6,7 @@ export const button = tv({
     color: {
       primary: "bg-btn-color text-white hover:bg-btn-color-hover",
       blue: "bg-native-btn-blue text-white hover:bg-native-btn-blue-hover",
+      native: "bg-native text-white hover:bg-native-hover border-2 border-solid border-white",
       secondary: "bg-white text-secondary border-2 border-solid border-border-color",
       outline: "bg-white/20 hover:bg-white/30 hover:shadow-md border border-black/30 text-black rounded-40",
       social: "bg-white rounded-28 shadow-social hover:shadow-md border border-social-border",

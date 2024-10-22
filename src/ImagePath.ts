@@ -10,11 +10,18 @@ import Telephone from '../public/img/Telephone.png';
 import Location from '../public/img/Esg.jpg';
 import PinMarker from '../public/img/Pin.svg';
 import Phone from '../public/img/Phone.svg';
+import PhoneWhite from '../public/img/PhoneWhite.svg';
 import LogoBlue from '../public/img/logo-blue.png';
 import AzureHero from '../public/img/AzureHero.png';
 import FrameMail from '../public/img/Frame.png';
 import BGGroupLogo from '../public/img/Group 31.png';
 import LaptopImg from '../public/img/laptop.png';
+import AzureMockup from '../public/img/azure-devops.png';
+import Team from '../public/img/team.png';
+import Microservices from '../public/img/microservices.png';
+import Stack from '../public/img/stack.png';
+
+
 
 import MSP from '../public/img/msp.png';
 import KCSP from '../public/img/kcsp.png';
@@ -35,9 +42,14 @@ export {
   Location,
   PinMarker,
   Phone,
+  PhoneWhite,
   LogoBlue,
   FrameMail,
   AzureHero,
   BGGroupLogo,
-  LaptopImg
+  LaptopImg,
+  AzureMockup,
+  Team,
+  Microservices,
+  Stack
 };

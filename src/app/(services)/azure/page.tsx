@@ -22,7 +22,7 @@ const AzurePage = () => {
         <Image src={BGGroupLogo} alt="Design Element" layout="fill" objectFit="contain" objectPosition='center right' quality={100} />
       </div>
       <div className={'relative mx-auto max-w-9xl px-2 sm:px-4 md:px-6 2xl:px-0'}>
-        <div className="top flex items-start pt-36 gap-10">
+        <div className="top flex items-start pt-28 sm:pt-36 gap-10">
           <div className="relative side pt-28 z-1 px-4 sm:px-10 md:px-0 text-center md:text-left">
             <h1 className={'text-4xl md:text-5xl xl:text-6xl pb-6 leading-none font-bold bg-service-text-linear bg-clip-text text-transparent md:max-w-[600px] xl:max-w-[800px]'}>
               Going to Azure

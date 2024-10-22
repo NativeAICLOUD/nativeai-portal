@@ -66,7 +66,7 @@ const AccordionItem = ({ idx, isLast, header, children, title, spanCls, desc, sh
     <Accordion.Header className="relative AccordionHeader rounded-none border-b border-b-gray-300">
       <Accordion.Trigger className={`AccordionTrigger text-white px-0 h-0 ${header ? '' : 'py-6'}`}>
         <span
-          className={twMerge('text-white flex items-center gap-4 pr-3 font-boston text-base sm:text-lg text-left', spanCls || '')}
+          className={twMerge('text-white flex items-center gap-4 pr-3 font-boston text-sm sm:text-base xl:text-lg text-left', spanCls || '')}
         >
           {title ? title : header}
         </span>
@@ -88,7 +88,7 @@ const AccordionItem = ({ idx, isLast, header, children, title, spanCls, desc, sh
       <div
         className={`flex items-start px-0 ${
           header ? '' : 'py-2 pb-4 md:pb-6'
-        } gap-4 rounded-b-20 dark:text-white text-left text-sm leading-normal sm:text-base`}
+        } gap-4 rounded-b-20 dark:text-white text-left text-xs sm:text-sm xl:text-base leading-normal`}
       >
         {desc ? <RenderHTML text={desc as string} cls="opacity-80 pt-1.5 [&>a]:text-white/70" /> : children}
       </div>

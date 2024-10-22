@@ -18,7 +18,7 @@ const services = [
 const CloudServicesSection = () => {
   return (
     <section className={'-mt-38 bg-white'}>
-      <div className={'relative max-w-9xl mx-auto bg-main-card text-white pt-14 sm:pt-24 px-8 sm:px-16 pb-10 sm:pb-16 xl:rounded-2xl'}>
+      <div className={'relative max-w-9xl mx-auto bg-main-card text-white pt-14 sm:pt-24 px-8 sm:px-16 pb-10 sm:pb-14 xl:rounded-2xl'}>
         <h2 className='relative flex text-lg sm:text-2xl md:text-3xl xl:text-3.5xl !leading-snug text-left before:bg-white before:w-3 before:h-auto before:my-1 sm:before:my-2 before:mr-5'>
           NativeCloud specializes in delivering smart, innovative, <br className='hidden xl:block' /> and highly resilient cloud solutions to support our customers to achieve their business transformation initiatives.
         </h2>
