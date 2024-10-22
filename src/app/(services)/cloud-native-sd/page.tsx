@@ -66,8 +66,8 @@ const CloudNativeSD = () => {
         </p>
 
         <p className={'pb-16 text-base lg:text-lg font-normal px-2 xl:px-0 text-center sm:text-left'}>
-          <b>Why Intercept?</b><br />
-          Intercept helps customers with the modernization and improvement of applications. Step by step we support you in becoming more cloud native. We help you to implement the best practices with the use of agile and continuous delivery. All this, working alongside the customer’s architects and development teams.
+          <b>Why NativeCloud?</b><br />
+          NativeCloud helps customers with the modernization and improvement of applications. Step by step we support you in becoming more cloud native. We help you to implement the best practices with the use of agile and continuous delivery. All this, working alongside the customer’s architects and development teams.
         </p>
 
         <h1 className={'text-2xl sm:text-3.5xl pb-6 leading-none font-bold bg-h2-native-linear bg-clip-text text-transparent text-center'}>

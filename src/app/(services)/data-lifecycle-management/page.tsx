@@ -104,9 +104,9 @@ const DataLifeCycleManagement = () => {
       <div className={'mx-auto max-w-9xl px-2 sm:px-4 md:px-6 sm:pt-28'}>
         <div className="azure sm:mb-20 gap-6 sm:gap-16 xl:gap-32 md:ml-auto flex flex-wrap-reverse md:flex-nowrap items-center relative max-w-7xl p-6 xl:pl-8 xl:py-0 lg:pr-8 text-black xl:rounded-xl">
           <div className="relative gap-6 flex flex-col lg:max-w-lg">
-            <h2 className="text-2xl font-bold bg-workshop-text-linear bg-clip-text text-transparent">Intercepts DLM / products</h2>
-            <p className="max-w-3xl">Intercept is engaged in the transformation, modernization, and acceleration of organizations through the Microsoft Azure platform. With our unique focus and expertise, we fully understand the current and future challenges that software companies are faced with.
-              <br /> Intercept has assisted more than two hundred organizations in their transformation to and within the cloud. We are your guide in the world of data!</p>
+            <h2 className="text-2xl font-bold bg-workshop-text-linear bg-clip-text text-transparent">NativeCloud DLM / products</h2>
+            <p className="max-w-3xl">NativeCloud is engaged in the transformation, modernization, and acceleration of organizations through the Microsoft Azure platform. With our unique focus and expertise, we fully understand the current and future challenges that software companies are faced with.
+              <br /> NativeCloud has assisted more than two hundred organizations in their transformation to and within the cloud. We are your guide in the world of data!</p>
           </div>
           <Image
             src={Team}

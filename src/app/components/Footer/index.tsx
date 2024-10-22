@@ -19,8 +19,7 @@ const pages = {
     { url: Constants.PAGES.AZURE_CLOUDIFY, title: 'Azure Cloudify', soon: true },
     { url: Constants.PAGES.MANAGED_SERVICES, title: 'Managed Services', soon: true },
     { url: Constants.PAGES.CLOUD_NATIVE_SD, title: 'Cloud Native Software Development', soon: true },
-    { url: Constants.PAGES.DATA_LIFECYCLE_MANAGEMENT, title: 'Data Lifecycle Management', soon: true },
-    { url: Constants.PAGES.CSP_ENTERPRISE, title: 'CSP Enterprise', soon: true },
+    { url: Constants.PAGES.DATA_LIFECYCLE_MANAGEMENT, title: 'Data Lifecycle Management', soon: true }
   ],
   workshops: [
     { url: Constants.PAGES.AZURE_FUNDAMENTALS_FOR_ISVS, title: 'Azure Fundamentals for ISVs', soon: true },

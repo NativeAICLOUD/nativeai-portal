@@ -19,7 +19,7 @@ const ManagedServices = () => {
               Managed Services
             </h1>
             <p className={'md:max-w-xl xl:max-w-2xl pb-16 text-base lg:text-lg font-normal'}>
-              You want to focus on what`s most important to you and your customers: your software. We can help. How? By managing, monitoring, and maintaining your Azure environment. By responding to incidents and advising you on improvements and ways to save on Azure costs. This way we ensure that your customers have fast and secure access to their business-critical systems. And that your Azure environment is always up-and-running, secure, and cost-efficient. That`s Managed Services by Intercept.
+              You want to focus on what`s most important to you and your customers: your software. We can help. How? By managing, monitoring, and maintaining your Azure environment. By responding to incidents and advising you on improvements and ways to save on Azure costs. This way we ensure that your customers have fast and secure access to their business-critical systems. And that your Azure environment is always up-and-running, secure, and cost-efficient. That`s Managed Services by NativeCloud.
             </p>
 
             <p className={'md:max-w-[640px] xl:max-w-[832px] pb-16 text-base lg:text-lg font-normal'}>

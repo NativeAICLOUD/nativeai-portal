@@ -49,7 +49,7 @@ const AzurePage = () => {
           <b>Refactoring your application and using AKS</b><br />
           A container is a reliable way to package and run applications in multiple environments, whether this is your own laptop, Microsoft Azure, private data center, Amazon Web Services, or a combination. A container isn’t dependent on the platform where it is deployed. So it isn’t that difficult to imagine that a lot of ISVs and software-driven companies want to leverage the power of containers and, with that, AKS.
           <br /><br />
-          Intercept helps you to set up a scalable AKS environment through our managed AKS landing zone, incorporating all our best practices that include governance, security, and availability. By using this, you can also start using microservices and become more cloud-native. We’ve simplified our best practices on AKS deployment into 12 steps so that you just need to think of the basic implementation, and we will take care of everything else, including full-stack monitoring.
+          NativeCloud helps you to set up a scalable AKS environment through our managed AKS landing zone, incorporating all our best practices that include governance, security, and availability. By using this, you can also start using microservices and become more cloud-native. We’ve simplified our best practices on AKS deployment into 12 steps so that you just need to think of the basic implementation, and we will take care of everything else, including full-stack monitoring.
         </p>
 
         <p className={'pb-16 text-base lg:text-lg font-normal px-2 xl:px-0 text-center sm:text-left'}>

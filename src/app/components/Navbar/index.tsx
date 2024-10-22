@@ -56,11 +56,6 @@ const pages: Pages[] = [
           { url: Constants.PAGES.CLOUD_NATIVE_SD, title: 'Software Development', soon: true },
         ]
       },
-      {
-        url: Constants.PAGES.CSP_ENTERPRISE, title: 'CSP Services', children: [
-          { url: Constants.PAGES.CSP_ENTERPRISE, title: 'CSP Enterprise', soon: true },
-        ]
-      }
     ]
   },
   { url: Constants.PAGES.WORKSHOPS, title: 'Workshops' },
