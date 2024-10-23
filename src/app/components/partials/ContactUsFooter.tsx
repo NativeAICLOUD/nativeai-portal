@@ -7,7 +7,7 @@ import { button } from '@/app/components/utils/tw-variants';
 
 function ContactUsFooter() {
   return (
-    <div className="contact-us max-w-9xl mx-auto gap-16 flex flex-wrap md:flex-nowrap items-center md:justify-between p-8 md:py-0 md:px-20 relative bg-[#283D3B] text-white 2xl:rounded-xl mb-8 sm:mb-16">
+    <div className="contact-us max-w-9xl mx-auto lg:gap-16 flex flex-col lg:flex-row items-center lg:justify-between p-8 md:py-0 md:px-20 relative bg-[#283D3B] text-white 2xl:rounded-xl mb-8 sm:mb-16">
       <Image
         src={BGNativeWhite}
         alt="Native logo"
@@ -16,9 +16,9 @@ function ContactUsFooter() {
       <Image
         src={Telephone}
         alt="Telephone"
-        className={'relative object-contain w-full mx-auto sm:mx-0 max-w-xs sm:max-w-sm -mt-12 sm:-mt-8'}
+        className={'relative object-contain w-full mx-auto lg:mx-0 max-w-xs sm:max-w-sm -mt-12 sm:-mt-8'}
       />
-      <div className="relative gap-6 flex flex-col flex-1 items-center sm:items-end lg:pr-20">
+      <div className="relative gap-6 flex flex-col flex-1 items-center lg:items-end lg:pr-20 md:py-10 ">
         <h2 className="text-2xl sm:text-4xl bg-h2-native-linear bg-clip-text font-bold">Get in touch!</h2>
         <p className="max-w-3xl">Have a question or can we help you with something?</p>
         <div className="contact inline-flex gap-6 items-center flex-wrap">

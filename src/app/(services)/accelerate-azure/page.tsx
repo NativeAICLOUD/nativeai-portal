@@ -5,8 +5,10 @@ import { AzureHero, BGGroupLogo, BGNativeWhite, FrameMail, LaptopImg } from '@/I
 const AzurePage = () => {
   return (
     <div className={`relative min-h-full overflow-x-clip`}>
-      <div className="absolute w-full h-full z-[-1] top-24 inset-x-0 before:absolute before:bg-azure-bg-opacity before:size-full before:top-0 before:z-1">
-        <Image src={AzureHero} alt="Background" className="opacity-60 sm:opacity-100 object-cover object-top h-[400px] sm:h-[500px] md:h-[600px]" quality={100} />
+      <div className="absolute w-full h-full z-[-1] top-24 inset-x-0">
+        <div className="overlay relative w-full h-[calc(100vh-10rem)] before:absolute before:bg-azure-bg-opacity before:size-full before:top-0 before:z-1">
+          <Image src={AzureHero} alt="Background" className="opacity-60 sm:opacity-100 object-cover object-[85%] sm:object-top" fill={true} quality={100} />
+        </div>
         <Image src={BGGroupLogo} alt="Design Element" layout="fill" objectFit="contain" objectPosition='center right' quality={100} />
       </div>
       <div className={'relative mx-auto max-w-9xl px-2 sm:px-4 md:px-6 2xl:px-0'}>
@@ -29,7 +31,7 @@ const AzurePage = () => {
         </div>
       </div>
 
-      <div className="migrate-to-azure gap-16 flex flex-wrap md:flex-nowrap items-center relative max-w-9xl py-6 pr-6 xl:py-0 xl:pr-12 mx-auto bg-main-card text-white xl:rounded-xl">
+      <div className="migrate-to-azure gap-8 md:gap-16 flex flex-wrap md:flex-nowrap items-center relative max-w-9xl p-6 xl:pl-8 xl:py-0 xl:pr-12 mx-auto bg-main-card text-white xl:rounded-xl">
         <Image
           src={LaptopImg}
           alt="Mail"
@@ -60,7 +62,7 @@ const AzurePage = () => {
 
       </div>
 
-      <div className="migrate-to-azure mb-10 gap-16 flex flex-wrap md:flex-nowrap items-center relative max-w-9xl p-6 xl:pl-8 xl:py-0 lg:pr-36 mx-auto bg-main-card text-white xl:rounded-xl">
+      <div className="migrate-to-azure mb-10 gap-8 md:gap-16 flex flex-wrap-reverse md:flex-nowrap items-center relative max-w-9xl p-6 xl:pl-8 xl:py-0 lg:pr-36 mx-auto bg-main-card text-white xl:rounded-xl">
         <div className="content relative py-4 lg:pl-8 inline-flex flex-col">
           <h2 className="text-2xl mb-8">Kickstart your Azure DevOps</h2>
           <p className="max-w-xl">Azure DevOps brings together your organization`s people, processes, and technology, and it automates your software development process. By effectively applying the DevOps principles, you can reliably deliver new software versions faster, more often, and you can respond faster to the needs of your customers and the continuously changing marketplace. Read the story about how Protomation delivers software faster and more often with Azure DevOps. Read more about the benefits of Azure DevOps here.</p>
@@ -70,7 +72,7 @@ const AzurePage = () => {
           alt="Mail"
           width={344}
           height={374}
-          className='-my-12 sm:-mt-6 pb-10 max-w-64 sm:max-w-sm ml-auto'
+          className='-my-12 sm:-mt-6 pb-10 max-w-64 sm:max-w-sm mx-auto md:ml-auto'
         />
       </div>
 

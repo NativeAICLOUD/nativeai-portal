@@ -45,7 +45,7 @@ const config: Config = {
         'main-card': 'linear-gradient(to right, #003140, #203d5d), url(/img/noise-background.jpg)',
         'main-light-card': 'linear-gradient(to right, #37424f, #35404e), url(/img/noise-background.jpg)',
         'two-color': 'linear-gradient(to bottom, #232F3E 50%, #283647 50%)',
-        'azure-bg-opacity': 'linear-gradient(to left, #ffffff00 0%, rgb(255 255 255 / 90%) 60%), linear-gradient(to top, rgb(255 255 255) 65%,  #ffffff00 72%, #ffffff00 100%)'
+        'azure-bg-opacity': 'linear-gradient(to left, #ffffff00 0%, rgb(255 255 255 / 90%) 60%), linear-gradient(to top, rgb(255 255 255) 5%, #ffffff00 45%, #ffffff00 100%)'
       },
       fontSize: {
         'xxxs': ['8px', '1'],

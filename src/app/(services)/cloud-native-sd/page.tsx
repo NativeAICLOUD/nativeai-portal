@@ -18,8 +18,10 @@ type TCard = typeof cards[0];
 const CloudNativeSD = () => {
   return (
     <div className={`relative min-h-full overflow-x-clip`}>
-      <div className="absolute w-full h-full z-[-1] top-24 inset-x-0 before:absolute before:bg-azure-bg-opacity before:size-full before:xl:h-[1800px] before:top-0 before:z-1">
-        <Image src={AzureHero} alt="Background" className="opacity-60 sm:opacity-100 object-cover object-top h-[400px] sm:h-[500px] md:h-[600px] xl:h-[800px]" quality={100} />
+      <div className="absolute w-full h-full z-[-1] top-24 inset-x-0">
+        <div className="overlay relative w-full h-[calc(100vh-10rem)] before:absolute before:bg-azure-bg-opacity before:size-full before:top-0 before:z-1">
+          <Image src={AzureHero} alt="Background" className="opacity-60 sm:opacity-100 object-cover object-[85%] sm:object-top" fill={true} quality={100} />
+        </div>
       </div>
       <div className={'relative mx-auto max-w-9xl px-2 sm:px-4 md:px-6 2xl:px-0'}>
         <div className="top flex items-start pt-28 sm:pt-36 gap-10">
@@ -34,9 +36,9 @@ const CloudNativeSD = () => {
         </div>
       </div>
 
-      <div className={'mx-auto max-w-9xl px-2 sm:px-4 md:px-6 sm:pt-28'}>
+      <div className={'mx-auto max-w-9xl sm:px-2 md:px-4 lg:px-6 sm:pt-28'}>
 
-        <div className="azure mb-10 gap-6 sm:gap-16 xl:gap-32 flex flex-wrap md:flex-nowrap items-center relative max-w-7xl p-6 xl:pl-8 xl:py-0 lg:pr-8 mx-auto text-black xl:rounded-xl">
+        <div className="azure mb-10 gap-8 xl:gap-32 flex flex-wrap lg:flex-nowrap items-center relative max-w-7xl p-6 xl:pl-8 xl:py-0 lg:pr-8 mx-auto text-black xl:rounded-xl">
           <Image
             src={Team}
             alt="Team"
@@ -74,7 +76,7 @@ const CloudNativeSD = () => {
           Why should you consider Cloud-Native Software Development?
         </h1>
 
-        <div className={'text-center sm:text-left grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-6 xl:px-0 gap-16 sm:gap-6 mt-16 mb-24'}>
+        <div className={'text-center sm:text-left grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-6 xl:px-0 gap-8 md:gap-16 mt-16 mb-14 sm:mb-24'}>
           <Each
             of={cards}
             render={({ title, desc }: TCard) => (
@@ -88,7 +90,7 @@ const CloudNativeSD = () => {
           />
         </div>
 
-        <div className="azure sm:mb-20 gap-6 sm:gap-16 xl:gap-32 md:ml-auto flex flex-wrap-reverse md:flex-nowrap items-center relative max-w-7xl p-6 xl:pl-8 xl:py-0 lg:pr-8 text-black xl:rounded-xl">
+        <div className="azure mb-8 sm:mb-20 gap-8 xl:gap-32 md:ml-auto flex flex-wrap-reverse lg:flex-nowrap items-center relative max-w-7xl p-6 xl:pl-8 xl:py-0 lg:pr-8 text-black xl:rounded-xl">
           <div className="relative gap-6 flex flex-col lg:max-w-lg">
             <h2 className="text-2xl  bg-h2-native-linear bg-clip-text text-transparent">Is cloud-native software development something for me?</h2>
             <p className="max-w-3xl">It is especially interesting for software organizations that face challenges in getting their application to become cloud-native. For those organizations that are eager to stay relevant in the future. Regardless of the current use of a private or public cloud, we can help you to migrate to Azure. In addition, for those organizations that are currently already working with Azure, we provide support to optimize the performance of your application development.</p>

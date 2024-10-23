@@ -8,8 +8,10 @@ import ContactUsFooter from '@/app/components/partials/ContactUsFooter';
 const ManagedServices = () => {
   return (
     <div className={`relative min-h-full overflow-x-clip`}>
-      <div className="absolute w-full h-full z-[-1] top-24 inset-x-0 before:absolute before:bg-azure-bg-opacity before:size-full before:top-0 before:z-1">
-        <Image src={AzureHero} alt="Background" className="opacity-60 sm:opacity-100 object-cover object-top h-[400px] sm:h-[500px] md:h-[600px] xl:h-[800px]" quality={100} />
+      <div className="absolute w-full h-full z-[-1] top-24 inset-x-0">
+        <div className="overlay relative w-full h-[calc(100vh-10rem)] before:absolute before:bg-azure-bg-opacity before:size-full before:top-0 before:z-1">
+          <Image src={AzureHero} alt="Background" className="opacity-60 sm:opacity-100 object-cover object-[85%] sm:object-top" fill={true} quality={100} />
+        </div>
         <Image src={BGGroupLogo} alt="Design Element" layout="fill" objectFit="contain" objectPosition='center right' quality={100} />
       </div>
       <div className={'relative mx-auto max-w-9xl px-2 sm:px-4 md:px-6 2xl:px-0'}>
@@ -32,7 +34,7 @@ const ManagedServices = () => {
 
       <div className={'mx-auto max-w-9xl px-2 sm:px-4 md:px-6 sm:pt-12'}>
 
-        <div className="azure mb-10 gap-6 sm:gap-16 xl:gap-32 flex flex-wrap md:flex-nowrap items-center relative max-w-7xl p-6 xl:pl-8 xl:py-0 lg:pr-8 mx-auto text-black xl:rounded-xl">
+        <div className="azure mb-10 gap-8 xl:gap-32 flex flex-wrap lg:flex-nowrap items-center relative max-w-7xl p-6 xl:pl-8 xl:py-0 lg:pr-8 mx-auto text-black xl:rounded-xl">
           <Image
             src={Microservices}
             alt="Microservices"
@@ -49,7 +51,7 @@ const ManagedServices = () => {
           </div>
         </div>
 
-        <div className="azure sm:mb-20 gap-6 sm:gap-16 xl:gap-32 flex flex-wrap-reverse md:flex-nowrap items-center relative max-w-7xl p-6 xl:pl-8 xl:py-0 lg:pr-8 text-black xl:rounded-xl">
+        <div className="azure lg:mb-16 gap-8 xl:gap-32 md:ml-auto flex flex-wrap-reverse lg:flex-nowrap items-center relative max-w-7xl p-6 xl:pl-8 xl:py-0 lg:pr-8 text-black xl:rounded-xl">
           <div className="relative gap-6 flex flex-col lg:max-w-lg">
             <h2 className="text-2xl">NET side-by-side with other stacks</h2>
             <p className="max-w-3xl">The microservices architecture allows a mix of technologies between each service. You can use .NET for parts of your application without adopting it everywhere. .NET microservices can be mixed with those written in Node.js, Java, Go, or any other language.</p>

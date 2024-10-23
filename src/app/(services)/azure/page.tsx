@@ -17,8 +17,10 @@ type TCard = typeof cards[0];
 const AzurePage = () => {
   return (
     <div className={`relative min-h-full overflow-x-clip`}>
-      <div className="absolute w-full h-full z-[-1] top-24 inset-x-0 before:absolute before:bg-azure-bg-opacity before:size-full before:top-0 before:z-1">
-        <Image src={AzureHero} alt="Background" className="opacity-60 sm:opacity-100 object-cover object-top h-[400px] sm:h-[500px] md:h-[600px]" quality={100} />
+      <div className="absolute w-full h-full z-[-1] top-24 inset-x-0">
+        <div className="overlay relative w-full h-[calc(100vh-10rem)] before:absolute before:bg-azure-bg-opacity before:size-full before:top-0 before:z-1">
+          <Image src={AzureHero} alt="Background" className="opacity-60 sm:opacity-100 object-cover object-[85%] sm:object-top" fill={true} quality={100} />
+        </div>
         <Image src={BGGroupLogo} alt="Design Element" layout="fill" objectFit="contain" objectPosition='center right' quality={100} />
       </div>
       <div className={'relative mx-auto max-w-9xl px-2 sm:px-4 md:px-6 2xl:px-0'}>
@@ -40,7 +42,7 @@ const AzurePage = () => {
         </div>
       </div>
 
-      <div className="migrate-to-azure gap-16 flex flex-wrap items-center relative max-w-9xl p-6 xl:pl-8 xl:py-0 xl:pr-12 mx-auto bg-main-card text-white xl:rounded-xl">
+      <div className="migrate-to-azure gap-16 flex flex-wrap md:flex-nowrap items-center relative max-w-9xl p-6 xl:pl-8 xl:py-0 xl:pr-12 mx-auto bg-main-card text-white xl:rounded-xl">
         <Image
           src={FrameMail}
           alt="Mail"

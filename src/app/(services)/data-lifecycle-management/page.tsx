@@ -34,8 +34,10 @@ type TCard = typeof cards[0];
 const DataLifeCycleManagement = () => {
   return (
     <div className={`relative min-h-full overflow-x-clip`}>
-      <div className="absolute w-full h-full z-[-1] top-24 inset-x-0 before:absolute before:bg-azure-bg-opacity before:size-full before:xl:h-[1800px] before:top-0 before:z-1">
-        <Image src={AzureHero} alt="Background" className="opacity-60 sm:opacity-100 object-cover object-top h-[400px] sm:h-[500px] md:h-[600px] xl:h-[800px]" quality={100} />
+      <div className="absolute w-full h-full z-[-1] top-24 inset-x-0">
+        <div className="overlay relative w-full h-[calc(100vh-10rem)] before:absolute before:bg-azure-bg-opacity before:size-full before:top-0 before:z-1">
+          <Image src={AzureHero} alt="Background" className="opacity-60 sm:opacity-100 object-cover object-[85%] sm:object-top" fill={true} quality={100} />
+        </div>
       </div>
       <div className={'relative mx-auto max-w-9xl px-2 sm:px-4 md:px-6 2xl:px-0'}>
         <div className="top flex items-start pt-28 sm:pt-36 gap-10">
@@ -50,9 +52,9 @@ const DataLifeCycleManagement = () => {
         </div>
       </div>
 
-      <div className={'mx-auto max-w-9xl px-2 sm:px-4 md:px-6 sm:pt-28'}>
+      <div className={'mx-auto max-w-9xl px-4 md:px-6 sm:pt-28'}>
 
-        <div className="azure mb-10 gap-6 sm:gap-16 xl:gap-32 flex flex-wrap md:flex-nowrap items-center relative max-w-7xl p-6 xl:pl-8 xl:py-0 lg:pr-8 mx-auto text-black xl:rounded-xl">
+        <div className="azure mb-6 sm:mb-10 gap-8 xl:gap-32 flex flex-wrap lg:flex-nowrap items-center relative max-w-7xl p-6 xl:pl-8 xl:py-0 lg:pr-8 mx-auto text-black xl:rounded-xl">
           <Image
             src={Team}
             alt="Team"
@@ -68,8 +70,8 @@ const DataLifeCycleManagement = () => {
           </div>
         </div>
 
-        <p className={'pb-16 text-base lg:text-lg font-normal px-2 xl:px-0 text-center sm:text-left'}>
-          <b>Benefits of cloud application development</b><br />
+        <p className={'pb-8 sm:pb-16 text-base lg:text-lg font-normal px-2 xl:px-0 text-center sm:text-left'}>
+          <b className="block pb-1 sm:pb-0">Benefits of cloud application development</b><br className="hidden sm:block" />
           Not every software company is the same. Some prefer to focus solely on software development, without having to think about things such as infrastructure and hosting. While others prefer to do as much as possible themselves and only spar with our Azure experts when complex challenges arise. That is why we have developed three service plans. Based on the wishes, needs, and experiences of our customers. From minimal to full support. With each plan, you get free access to our customer portal. This offers management information and ensures that developers and administrators have all the insights and tools they need to continuously improve the Azure environment.
         </p>
 
@@ -83,15 +85,15 @@ const DataLifeCycleManagement = () => {
         </ul>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-6 mb-10 sm:mb-20">
-        <div className={'flex-1 relative max-w-9xl mx-auto bg-[#131C28] text-white px-8 py-10 xl:rounded-lg'}>
+      <div className="flex flex-col lg:flex-row gap-2 xl:gap-6 mb-10 max-w-9xl mx-auto lg:px-2">
+        <div className={'flex-1 relative max-w-9xl mx-auto bg-[#131C28] text-white px-8 py-10 lg:rounded-lg'}>
           <h2 className='text-lg mb-4'>Why DLM?</h2>
           <p className='opacity-80'>
             Data is one of the most valuable elements of your organization. Data can show you what your situation was, what your situation is, and what it could be. The possibilities are endless. You could use DLM to make your data more accessible and insightful for your customers to serve them better. Maybe you want to utilize data to create business opportunities for your customers. Or maybe use data to improve your own business. For example, data can help you explore your customer journey (Data Science). Data can also be fundamental in predicting scenarios and outcomes (Machine Learning), even enabling your company to respond in real-time when events occur (Artificial Intelligence).
           </p>
         </div>
 
-        <div className={'flex-1 relative max-w-9xl mx-auto bg-[#131C28] text-white px-8 py-10 xl:rounded-lg'}>
+        <div className={'flex-1 relative max-w-9xl mx-auto bg-[#131C28] text-white px-8 py-10 lg:rounded-lg'}>
           <h2 className='text-lg mb-4'>For whom is DLM?</h2>
           <p className='opacity-80'>
             Data solutions can be for every organization in every branch. Your company can have hundreds of records or even billions. There is no maximum because our data solutions are scalable.
@@ -101,8 +103,8 @@ const DataLifeCycleManagement = () => {
         </div>
       </div>
 
-      <div className={'mx-auto max-w-9xl px-2 sm:px-4 md:px-6 sm:pt-28'}>
-        <div className="azure sm:mb-20 gap-6 sm:gap-16 xl:gap-32 md:ml-auto flex flex-wrap-reverse md:flex-nowrap items-center relative max-w-7xl p-6 xl:pl-8 xl:py-0 lg:pr-8 text-black xl:rounded-xl">
+      <div className={'mx-auto max-w-9xl px-2 sm:px-4 md:px-6 sm:pt-16'}>
+        <div className="azure mb-8 sm:mb-20 gap-8 xl:gap-32 md:ml-auto flex flex-wrap-reverse lg:flex-nowrap items-center relative max-w-7xl p-6 xl:pl-8 xl:py-0 lg:pr-8 text-black xl:rounded-xl">
           <div className="relative gap-6 flex flex-col lg:max-w-lg">
             <h2 className="text-2xl font-bold bg-workshop-text-linear bg-clip-text text-transparent">NativeCloud DLM / products</h2>
             <p className="max-w-3xl">NativeCloud is engaged in the transformation, modernization, and acceleration of organizations through the Microsoft Azure platform. With our unique focus and expertise, we fully understand the current and future challenges that software companies are faced with.

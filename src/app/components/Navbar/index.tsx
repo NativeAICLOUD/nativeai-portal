@@ -43,7 +43,7 @@ const pages: Pages[] = [
       {
         url: Constants.PAGES.SOLUTIONS, title: 'Solutions', children: [
           { url: Constants.PAGES.AZURE_CLOUDIFY, title: 'Azure Cloudify', soon: true },
-          { url: Constants.PAGES.MANAGED_SERVICES, title: 'Managed Services', soon: true }
+          { url: Constants.PAGES.MANAGED_SERVICES, title: 'Managed Services' }
         ]
       },
       {
@@ -53,7 +53,7 @@ const pages: Pages[] = [
       },
       {
         url: Constants.PAGES.CLOUD_NATIVE_SD, title: 'Cloud Native', children: [
-          { url: Constants.PAGES.CLOUD_NATIVE_SD, title: 'Software Development', soon: true },
+          { url: Constants.PAGES.CLOUD_NATIVE_SD, title: 'Software Development' },
         ]
       },
     ]
@@ -74,8 +74,8 @@ function Navbar() {
   const lastScrollY = useRef(0);
 
   useEffect(() => {
-    const onScroll = (e: any) => {
-      const scrollTop = e.target.documentElement.scrollTop;
+    const onScroll = (e: any, intial?: boolean) => {
+      const scrollTop = intial ? window.scrollY : e.target.documentElement.scrollTop;
 
       // remember current page location to use in the next move
       lastScrollY.current = scrollTop;
@@ -89,6 +89,8 @@ function Navbar() {
       }
     };
     window.addEventListener('scroll', onScroll);
+
+    onScroll(0, true);
 
     return () => window.removeEventListener('scroll', onScroll);
   }, [lastScrollY.current]);
