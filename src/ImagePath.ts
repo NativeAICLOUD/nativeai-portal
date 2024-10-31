@@ -12,7 +12,7 @@ import PinMarker from '../public/img/Pin.svg';
 import Phone from '../public/img/Phone.svg';
 import PhoneWhite from '../public/img/PhoneWhite.svg';
 import LogoBlue from '../public/img/logo-blue.png';
-import AzureHero from '../public/img/AzureHero.png';
+import AzureHero from '../public/img/HeroLarge.png';
 import FrameMail from '../public/img/Frame.png';
 import BGGroupLogo from '../public/img/Group 31.png';
 import LaptopImg from '../public/img/laptop.png';
