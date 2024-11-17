@@ -1,20 +1,20 @@
 import RelatedArticles from '@/app/components/partials/RelatedArticles';
-import { BG5Img, BGGroupLogo, LogoBlue } from '@/ImagePath';
+import { BG5Img, BGGroupLogo } from '@/ImagePath';
+import { getBlogPosts, getSinglePost } from '@/lib/blogsPosts';
 import { formatDistanceToNow } from 'date-fns';
+import { shuffle, take } from 'lodash';
 import Image from 'next/image';
+import { redirect } from 'next/navigation';
 
-const Post: IPost = {
-    id: 1,
-    image: '/img/nature1.jpg',
-    title: 'AWS',
-    date: new Date().toISOString(),
-    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-};
+const KnowledgeBaseDetailPage = async ({ params }: any) => {
+    const post = await getSinglePost(+params?.id);
 
-const KnowledgeBaseDetailPage = () => {
+    if (!post.id) {
+        redirect('/not-found')
+    }
 
-    const post = Post;
-
+      const posts = await getBlogPosts();
+    
     return (
         <div className={`relative min-h-full pt-28`}>
             <div className="feature-image relative w-full h-60 sm:aspect-thumbnail">
@@ -26,7 +26,7 @@ const KnowledgeBaseDetailPage = () => {
             </div>
             <div className={'relative mx-auto max-w-[954px] px-2 sm:px-4 md:px-6 2xl:px-0 [&>p]:py-2'}>
 
-                <h6 className="opacity-60 text-xs mb-1 pt-6 pb-2">{formatDistanceToNow(new Date(post.date || ''), { addSuffix: true })}</h6>
+                <h6 className="opacity-60 text-xs mb-1 pt-6 pb-2">{post.date ? formatDistanceToNow(new Date(post.date || ''), { addSuffix: true }) : ''}</h6>
 
                 <h2 className="text-gray-800 font-black text-4xl leading-tight mb-4">{post.title || ''}</h2>
 
@@ -43,7 +43,7 @@ const KnowledgeBaseDetailPage = () => {
             </div>
 
             <div className="related-articles pb-32 pt-16 px-2 max-w-8xl mx-auto">
-                <RelatedArticles />
+                <RelatedArticles posts={take(shuffle(posts), 3)} />
             </div>
         </div>
     );

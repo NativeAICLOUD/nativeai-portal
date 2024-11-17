@@ -1,23 +1,15 @@
 'use client';
 
-import { useState } from 'react';
 import Checkbox from '../../controls/Checkbox';
 import { Each } from '../../helpers/Each';
 import KBCard from './KBCard';
 
-const Posts: IPost[] = [
-  { id: 1, image: '/img/nature1.jpg', title: 'AWS', date: new Date().toISOString(), desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ' },
-  { id: 2, image: '/img/nature2.jpg', title: 'Azure', date: new Date().toISOString(), desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ' },
-  { id: 3, image: '/img/nature2.jpg', title: 'Google Cloud', date: new Date().toISOString(), desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ' },
-];
 
 const Categories = [
   'Migration', 'Native', 'Azure', 'AWS', 'Cloud Native', 'Insfrastructure', 'AI', 'Cloud Costs'
 ]
 
-function KnowledgeBasePosts() {
-
-  const [posts, setPosts] = useState(Posts);
+function KnowledgeBasePosts({ posts }: { posts: IPost[] }) {
 
   return (
     <div className="workshops pb-32">

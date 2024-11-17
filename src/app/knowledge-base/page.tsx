@@ -1,8 +1,12 @@
 import { BG5Img, LogoBlue } from '@/ImagePath';
 import Image from 'next/image';
 import KnowledgeBasePosts from '../components/partials/knowledge-base';
+import { getBlogPosts } from '@/lib/blogsPosts';
 
-const KnowledgeBasePage = () => {
+const KnowledgeBasePage = async () => {
+
+  const posts = await getBlogPosts();
+
   return (
     <div className={`relative min-h-full`}>
       <div className="absolute w-full h-full z-[-1] top-16 inset-x-0">
@@ -26,7 +30,7 @@ const KnowledgeBasePage = () => {
           />
         </div>
 
-        <KnowledgeBasePosts />
+        <KnowledgeBasePosts posts={posts} />
       </div>
     </div>
   );
