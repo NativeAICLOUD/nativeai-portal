@@ -4,6 +4,24 @@ import { Link } from 'react-transition-progress/next';
 
 import { Constants } from '@/Constants';
 import { AWSPartnerImg, MicrosotPartnerImg } from '@/ImagePath';
+import { Each } from '../../helpers/Each';
+
+const partnersData = [
+  { name: 'Azure AI Services', img: 'azure.svg', className: 'w-[160px] sm:w-[180px]' },
+  { name: 'Kubernetes', img: 'kubernetes.svg', className: 'w-[200px] sm:w-[240px]' },
+  { name: 'Semantic Kernel', img: 'skernel.svg', className: 'w-[150px] sm:w-[170px]' },
+  { name: 'React', img: 'react.svg', className: 'w-[60px] sm:w-[80px]' },
+  { name: 'Blazor', img: 'blazor.svg', className: 'w-[130px] sm:w-[150px]' },
+  { name: 'C#', img: 'csharp.svg', className: 'w-[80px] sm:w-[80px]' },
+  { name: '.Net', img: 'dotnet.svg', className: 'w-[80px] sm:w-[100px]' },
+  { name: 'ChatGpt', img: 'chatgpt.svg', className: 'w-[80px] sm:w-[140px]' },
+  { name: 'Amazon Web Services', img: 'aws.svg', className: 'w-[160px] sm:w-[180px]' },
+  { name: 'ASP.NET Core', img: 'aspnet.svg', className: 'w-[120px] sm:w-[140px]' },
+  { name: 'Docker', img: 'docker.svg', className: 'w-[80px] sm:w-[100px]' },
+];
+type IPartnerType = typeof partnersData[0];
+
+const marqueCls = 'marquee-item relative flex items-center justify-center py-18 gap-16';
 
 const HomePartner = () => {
   return (
@@ -61,8 +79,35 @@ const HomePartner = () => {
           />
         </div>
       </div>
-    </div >
+
+      <div className="relative slider-partners overflow-x-clip mb-16">
+        <div className="marquee-partner">
+          <div className={`marquee-group items-center gap-20`}>
+            <ImageGroup marqueCls={marqueCls} />
+          </div>
+          <div className={`marquee-group items-center gap-20`}>
+            <ImageGroup marqueCls={marqueCls} />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
+
+const ImageGroup = ({ marqueCls }: { marqueCls: string }) => (
+  <Each of={partnersData} render={({ name, img, className }: IPartnerType) =>
+    <>
+      <div className={marqueCls}>
+        <Image
+          src={`/img/partners/${img}`}
+          className={`object-contain ${className}`}
+          width={200}
+          height={60}
+          alt={name} />
+      </div>
+      <div className={`divider bg-black/10 min-w-[1px] h-7.5`}></div>
+    </>
+  } />
+)
 
 export default HomePartner;
