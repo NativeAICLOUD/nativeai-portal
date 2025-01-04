@@ -24,7 +24,7 @@ const services = [
   },
   {
     title: 'Azure & AWS',
-    desc: 'Native Cloud will help you implement DevOps best practices and leverage powerful Azure anmd AWS solutions to automate your cloud infrastructure.',
+    desc: 'Native Cloud will help you implement DevOps best practices and leverage powerful Azure and AWS solutions to automate your cloud infrastructure.',
     icon: '/img/icon-azure-aws.svg',
   },
 ];

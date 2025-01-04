@@ -1,10 +1,10 @@
 [
   {
     "id": 1,
-    "image": "/img/nature1.jpg",
-    "title": "AWS",
+    "image": "/img/ai.png",
+    "title": "Microsoft released this week is Microsoft Extension AI",
     "date": "2024-11-17T22:57:13.605Z",
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    "desc": "Microsoft.Extensions.AI Library  simple way they are reducing the amount of hard coding that you need to do to build AI solutions and language model Solutions this really is born from Semantic Kernel if you are using semantic kernel on the past and it looks pretty interesting for integrating AI services into the .NET applications and libraries along with middleware for adding key capabilities.AI capabilities are rapidly evolving with common patterns emerging for functionality like chat, embeddings and tool calling. Unified abstractions are crucial for developers to work across different sources. Middleware can add valuable functionality without burdening producers, benefiting consumers immediately. One of the core benefits of Microsoft Extension AI is its ability to provide reference implementations for various platforms, including OpenAI, Azure AI and Notably, Ollama stands out as an impressive tool that allows developers to run AI models easy on Mac, Windows, and Linux systems."
   },
   {
     "id": 2,
