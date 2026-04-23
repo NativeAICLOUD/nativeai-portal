@@ -283,45 +283,6 @@ function Navbar() {
                   )
                 }
               </>
-              // <>
-              //   <li className="text-black font-light flex items-center">
-              //     <Link href={item.url}>{item.title}</Link>
-              //     {item.children && (
-              //       <button
-              //         className="expanded w-[40px] h-[40px] grid place-items-center m-2"
-              //         onClick={() => setExpanded(!isExpanded)}
-              //       >
-              //         <svg className={`icon-caret text-black} ${isExpanded ? 'rotate-90' : ''}`} width={24} height={24}>
-              //           <use href={`/icons/all-icons.svg#icon-caret`}></use>
-              //         </svg>
-              //       </button>
-              //     )}
-              //   </li>
-              //   {
-              //     item.children && (
-              //       <Transition
-              //         className={"-mt-6 flex flex-col gap-2"}
-              //         appear={true}
-              //         show={isExpanded}
-              //         enter="transition-opacity duration-75"
-              //         enterFrom="opacity-0"
-              //         enterTo="opacity-100"
-              //         leave="transition-opacity duration-150"
-              //         leaveFrom="opacity-100"
-              //         leaveTo="opacity-0"
-              //       >
-              //         <Each
-              //           of={item.children}
-              //           render={(item: Pages) => (
-              //             <li className="text-black font-light">
-              //               <Link href={item.url}>{item.title}</Link>
-              //             </li>
-              //           )}
-              //         />
-              //       </Transition>
-              //     )
-              //   }
-              // </>
             )}
           />
         </ul>

@@ -1,79 +1,179 @@
-import Image from 'next/image';
+import { Link } from "react-transition-progress/next";
+import ProcessTimeline from "@/app/components/partials/services/ProcessTimeline";
+import ServiceFooter from "@/app/components/partials/services/ServiceFooter";
 
-import { Constants } from '@/Constants';
-import { AzureHero, BGGroupLogo, BGNativeWhite, Microservices, PhoneWhite, Stack, Telephone } from '@/ImagePath';
-import { button } from '@/app/components/utils/tw-variants';
-import ContactUsFooter from '@/app/components/partials/ContactUsFooter';
+const features = [
+  {
+    title: "24/7 Monitoring & Alerting",
+    body: "Round-the-clock visibility across your entire Azure environment — infrastructure, applications, and costs — with intelligent alerting that catches problems before your users do.",
+    decoration: "top-left" as const,
+  },
+  {
+    title: "Incident Response",
+    body: "When something breaks, we're already on it. Defined SLAs, escalation paths, and runbooks mean incidents are contained and resolved fast — with a full post-mortem every time.",
+  },
+  {
+    title: "Azure Cost Management",
+    body: "We actively manage your Azure spend — right-sizing resources, eliminating waste, and providing monthly FinOps reports so you always know what you're paying for and why.",
+  },
+  {
+    title: "Security & Compliance",
+    body: "Continuous security posture management, patch management, and compliance audits aligned to your industry standards — so your environment stays hardened without slowing down your team.",
+  },
+  {
+    title: "Performance Optimisation",
+    body: "Ongoing tuning of your applications and infrastructure — database query optimisation, caching strategies, autoscaling policies, and CDN configuration that keeps response times fast.",
+  },
+  {
+    title: "Customer Portal Access",
+    body: "Every managed services client gets access to our portal — real-time dashboards, incident history, cost breakdowns, and direct access to your dedicated Azure engineers.",
+    decoration: "bottom-right" as const,
+  },
+];
 
-const ManagedServices = () => {
+const processSteps = [
+  {
+    step: "01",
+    heading: "Onboarding & Discovery",
+    body: "We audit your existing Azure environment, document the architecture, and identify risks, optimisation opportunities, and monitoring gaps before we take over management.",
+  },
+  {
+    step: "02",
+    heading: "SLA & Service Plan",
+    body: "We agree on the right service tier for your needs — from advisory-level support to fully managed operations — with clear SLAs, escalation paths, and communication cadences.",
+  },
+  {
+    step: "03",
+    heading: "Monitoring Setup",
+    body: "We instrument your environment with Azure Monitor, Application Insights, and custom dashboards. Alerting thresholds are tuned to your workloads so you only hear from us when it matters.",
+  },
+  {
+    step: "04",
+    heading: "Active Management",
+    body: "From this point we own the environment — patching, scaling, incident response, and cost control. You get a monthly report covering health, spend, incidents, and recommendations.",
+  },
+  {
+    step: "05",
+    heading: "Continuous Improvement",
+    body: "Every quarter we review the environment against your evolving business goals — proposing architectural improvements, Azure service upgrades, and cost reduction opportunities.",
+  },
+  {
+    step: "06",
+    heading: "Knowledge Transfer",
+    body: "Everything we do is documented and shared. Your team always has full visibility and can take over any part of the operation at any time — we work transparently, not as a black box.",
+  },
+];
+
+export default function ManagedServicesPage() {
   return (
-    <div className={`relative min-h-full overflow-x-clip`}>
-      <div className="absolute w-full h-full z-[-1] top-24 inset-x-0">
-        <div className="overlay relative w-full h-[calc(100vh-10rem)] before:absolute before:bg-azure-bg-opacity before:size-full before:top-0 before:z-1">
-          <Image src={AzureHero} alt="Background" className="opacity-60 sm:opacity-100 object-cover object-[85%] sm:object-top" fill={true} quality={100} />
-        </div>
-        <Image src={BGGroupLogo} alt="Design Element" layout="fill" objectFit="contain" objectPosition='center right' quality={100} />
-      </div>
-      <div className={'relative mx-auto max-w-9xl px-2 sm:px-4 md:px-6 2xl:px-0'}>
-        <div className="top flex items-start pt-28 sm:pt-36 gap-10">
-          <div className="relative side pt-28 z-1 px-4 sm:px-10 md:px-0 text-center md:text-left">
-            <h1 className={'text-4xl md:text-5xl xl:text-6xl pb-6 xl:pb-16 leading-none font-bold bg-workshop-text-linear bg-clip-text text-transparent md:max-w-[600px] xl:max-w-[900px]'}>
+    <>
+      <div
+        className="bg-[#f4ebe8] min-h-screen"
+        style={{
+          backgroundImage: "url('/img/noise-background.jpg')",
+          backgroundBlendMode: "multiply",
+          backgroundSize: "300px 300px",
+        }}
+      >
+        {/* ── Hero ── */}
+        <section className="relative min-h-[85vh] overflow-hidden">
+          <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-20 min-h-[85vh] flex flex-col">
+            <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold text-[#0a0e1a] leading-[1.05] max-w-2xl">
               Managed Services
             </h1>
-            <p className={'md:max-w-xl xl:max-w-2xl pb-16 text-base lg:text-lg font-normal'}>
-              You want to focus on what`s most important to you and your customers: your software. We can help. How? By managing, monitoring, and maintaining your Azure environment. By responding to incidents and advising you on improvements and ways to save on Azure costs. This way we ensure that your customers have fast and secure access to their business-critical systems. And that your Azure environment is always up-and-running, secure, and cost-efficient. That`s Managed Services by NativeCloud.
+            <p className="mt-8 text-lg text-[#0a0e1a] max-w-[560px] font-normal">
+              You focus on building product. We keep your Azure environment running — monitored, secured, optimised, and ready to scale — 24 hours a day, every day of the year.
             </p>
-
-            <p className={'md:max-w-[640px] xl:max-w-[832px] pb-16 text-base lg:text-lg font-normal'}>
-              <b>Two customer-driven service plans</b><br />
-              Not every software company is the same. Some prefer to focus solely on software development, without having to think about things such as infrastructure and hosting. While others prefer to do as much as possible themselves and only spar with our Azure experts when complex challenges arise. That is why we have developed three service plans. Based on the wishes, needs, and experiences of our customers. From minimal to full support. With each plan, you get free access to our customer portal. This offers management information and ensures that developers and administrators have all the insights and tools they need to continuously improve the Azure environment.
+            <div className="mt-10 flex flex-wrap items-center gap-3">
+              <Link
+                href="/get-in-touch"
+                className="bg-[#0a0e1a] text-white px-7 py-3.5 rounded-full text-base font-medium whitespace-nowrap hover:opacity-90 transition-opacity"
+              >
+                Talk to an Azure engineer
+              </Link>
+              <Link
+                href="/get-in-touch"
+                aria-label="Get started"
+                className="w-12 h-12 rounded-full bg-[#0a0e1a] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <path d="M7 17L17 7" />
+                  <path d="M7 7h10v10" />
+                </svg>
+              </Link>
+            </div>
+            <p className="mt-auto pt-20 text-base text-[#0a0e1a] font-normal">
+              Your Azure environment — always up, always secure, always optimised.
             </p>
           </div>
-        </div>
+        </section>
+
+        {/* ── Section A — What's included ── */}
+        <section className="max-w-7xl mx-auto px-6 md:px-12 pt-24 pb-16">
+          <div className="flex items-center gap-2 mb-8">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
+            <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">
+              HERE&apos;S WHAT&apos;S INCLUDED
+            </p>
+          </div>
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
+            <p className="text-[#1a1d2e] text-base leading-relaxed max-w-[650px]">
+              We take full ownership of your Azure operations — so your engineering team can stop context-switching between firefighting and feature work. Three service tiers, one dedicated team, full transparency.
+            </p>
+            <Link
+              href="/get-in-touch"
+              className="shrink-0 self-start inline-flex items-center bg-[#0a0a0a] hover:bg-[#1a1d2e] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors whitespace-nowrap"
+            >
+              View service plans
+            </Link>
+          </div>
+        </section>
+
+        {/* ── Section B — Feature cards ── */}
+        <section className="max-w-7xl mx-auto px-6 md:px-12 pb-20 md:pb-32">
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {features.map((feature, i) => (
+              <div
+                key={i}
+                className="relative rounded-xl overflow-hidden bg-[#ece8e0] p-8 min-h-[280px] flex flex-col gap-4"
+              >
+                {feature.decoration === "top-left" && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src="/decorations/blob-orange-corner.svg" width={220} height={220} alt="" aria-hidden="true" className="absolute top-0 left-0 pointer-events-none select-none" />
+                )}
+                {feature.decoration === "bottom-right" && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src="/decorations/blob-sage-corner.svg" width={220} height={220} alt="" aria-hidden="true" className="absolute bottom-0 right-0 pointer-events-none select-none" />
+                )}
+                <h3 className="relative text-xl font-semibold text-[#1a1d2e] leading-snug z-10">{feature.title}</h3>
+                <p className="relative text-[#6b6b6b] text-sm leading-relaxed z-10">{feature.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── Section C — How we work ── */}
+        <section className="max-w-7xl mx-auto px-6 md:px-12 mt-40 py-20 md:py-32">
+          <div className="flex items-center gap-2 mb-10">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
+            <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">HOW WE WORK</p>
+          </div>
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
+            <h2 className="text-4xl md:text-5xl font-normal text-[#1a1d2e] max-w-[900px] leading-tight">
+              We take over cleanly — full visibility, defined SLAs, and no black-box operations
+            </h2>
+            <Link
+              href="/get-in-touch"
+              className="shrink-0 self-start lg:self-end inline-flex items-center bg-[#0a0a0a] hover:bg-[#1a1d2e] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors whitespace-nowrap"
+            >
+              Grow with us
+            </Link>
+          </div>
+          <ProcessTimeline steps={processSteps} />
+        </section>
       </div>
 
-      <div className={'mx-auto max-w-9xl px-2 sm:px-4 md:px-6 sm:pt-12'}>
-
-        <div className="azure mb-10 gap-8 xl:gap-32 flex flex-wrap lg:flex-nowrap items-center relative max-w-7xl p-6 xl:pl-8 xl:py-0 lg:pr-8 mx-auto text-black xl:rounded-xl">
-          <Image
-            src={Microservices}
-            alt="Microservices"
-            className={'relative object-contain w-full mx-auto sm:mx-0 max-w-sm sm:max-w-md'}
-          />
-          <div className="relative gap-6 flex flex-col lg:max-w-lg">
-            <h2 className="text-2xl">Build microservices with .NET</h2>
-            <p className="max-w-3xl">
-              You want to fully focus on development and innovation. That`s why we gladly take over both the management and the maintenance of your Azure environment.
-              <br /><br />
-              ASP.NET, the web framework for .NET, makes it easy to create the APIs that become your microservices. ASP.NET comes with built-in support for developing and deploying your microservices using Docker containers.
-              .NET includes APIs to easily consume microservices from any application you build, including mobile, desktop, games, web, and more.
-            </p>
-          </div>
-        </div>
-
-        <div className="azure lg:mb-16 gap-8 xl:gap-32 md:ml-auto flex flex-wrap-reverse lg:flex-nowrap items-center relative max-w-7xl p-6 xl:pl-8 xl:py-0 lg:pr-8 text-black xl:rounded-xl">
-          <div className="relative gap-6 flex flex-col lg:max-w-lg">
-            <h2 className="text-2xl">NET side-by-side with other stacks</h2>
-            <p className="max-w-3xl">The microservices architecture allows a mix of technologies between each service. You can use .NET for parts of your application without adopting it everywhere. .NET microservices can be mixed with those written in Node.js, Java, Go, or any other language.</p>
-          </div>
-          <Image
-            src={Stack}
-            alt="Stack"
-          />
-        </div>
-
-        <p className={'py-12 text-base lg:text-lg font-normal px-2 xl:px-0 text-center sm:text-left'}>
-          <b className="block pb-1 sm:pb-0">Free customer portal with managed services</b><br className="hidden sm:block" />
-          As a specialist for ISVs, we know the challenges of software companies inside out. We transform this knowledge into new products and services, such as our customer portal that offers targeted management information for your Azure environment. When purchasing one of the service plans mentioned above, you get immediate access to the portal. You only pay the monthly rate. Adding an additional employee to the portal is free of charge. With the insights from the customer portal, we help you to maximize the possibilities of Azure.
-          <br /><br />
-          We are happy to show you the customer portal. Request a free demo.
-        </p>
-      </div>
-
-      <ContactUsFooter />
-  
-    </div>
+      <ServiceFooter />
+    </>
   );
-};
-
-export default ManagedServices;
+}

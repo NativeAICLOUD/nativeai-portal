@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" width="220" height="220">
+  <defs>
+    <filter id="grain" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch" result="noise"/>
+      <feColorMatrix in="noise" type="matrix"
+        values="0 0 0 0 0
+                0 0 0 0 0
+                0 0 0 0 0
+                0 0 0 0.28 0" result="alpha"/>
+      <feComposite in="alpha" in2="SourceGraphic" operator="in" result="grainMask"/>
+      <feMerge>
+        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="grainMask"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <path
+    d="M220 220 C160 220, 42 202, 22 126 C2 52, 80 8, 162 28 C242 48, 232 140, 220 220 Z"
+    fill="#8fad9a"
+    opacity="0.88"
+    filter="url(#grain)"
+  />
+</svg>

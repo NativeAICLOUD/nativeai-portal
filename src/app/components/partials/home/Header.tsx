@@ -4,7 +4,7 @@ import { Constants } from "@/Constants";
 import { Link } from 'react-transition-progress/next'
 import Image from "next/image";
 
-import AzureHeroIMG from "../../../../../public/img/azure-hero.png";
+import AIHeroIMG from "../../../../../public/img/icon-genai.svg";
 import { button } from "../../utils/tw-variants";
 import CoomingSoon from "../../ui/CoomingSoon";
 
@@ -17,20 +17,21 @@ function HomeHeader() {
       </div>
       <div className="relative max-w-9xl mx-auto w-full flex justify-center lg:justify-between text-left text-[#2A3A4A] mt-0 lg:mt-36">
         <div className="group relative z-1">
-          <h1 className="text-xl sm:text-2xl ml-1.5 mb-[0.5em] sm:mb-5 bg-clip h1-linear font-semibold text-center lg:text-left">AI-Powered Azure & AWS Cloud Solutions</h1>
-          <h2 className="text-3.5xl sm:text-4xl lg:text-6xl mb-[1.5em] sm:mb-8 font-black bg-clip h2-linear !leading-tight text-center lg:text-left max-w-lg lg:max-w-full mx-auto">Beyond AI Empowering Azure<br /> </h2>
-          <h1 className="text-xl sm:text-2xl ml-1.5 mb-[0.5em] sm:mb-5 bg-clip h1-linear font-semibold text-center lg:text-left">We transform your vision into reality by harnessing the power of Azure</h1>
-          <div className="flex justify-start gap-5 flex-col lg:flex-row items-center">
-            <Link href={Constants.PAGES.AZURE} className={`${button({ size: 'lg', color: 'primary' })}`}>Going to Azure</Link>
+          <p className="text-xl sm:text-2xl ml-1.5 mb-[0.5em] sm:mb-5 bg-clip h1-linear font-semibold text-center lg:text-left">AI Agents · LLMs · Azure & AWS</p>
+          <h1 className="text-3.5xl sm:text-4xl lg:text-6xl mb-[1.5em] sm:mb-8 font-black bg-clip h2-linear !leading-tight text-center lg:text-left max-w-lg lg:max-w-full mx-auto">We make AI work inside your business</h1>
+          <div className="flex justify-start gap-5 flex-col lg:flex-row items-center mt-6">
+            <Link href={Constants.PAGES.AZURE} className={`${button({ size: 'lg', color: 'primary' })}`}>Book a consultation</Link>
             <Link href={Constants.PAGES.ACCELERATE_AZURE} className={`${button({ size: 'lg', color: 'secondary', icon: 'md' })} whitespace-nowrap w-full max-w-sm lg:w-auto lg:max-w-fit`}>
               <svg className={`icon-arrow-right text-secondary`} width={30} height={20}>
                 <use href={`/icons/all-icons.svg#icon-arrow-right`}></use>
               </svg>
-              Accelerate with Azure
+              Explore our solutions
             </Link>
           </div>
         </div>
-        <Image src={AzureHeroIMG} alt="Azure Hero" className="absolute opacity-70 top-0 z-0 inset-x-0 mx-auto lg:relative lg:-translate-y-16 lg:opacity-100 max-h-2xl lg:max-h-max" />
+        <div className="absolute opacity-70 top-0 z-0 inset-x-0 mx-auto lg:relative lg:-translate-y-16 lg:opacity-100 max-h-2xl lg:max-h-max animate-float">
+          <Image src={AIHeroIMG} alt="AI" className="animate-azure-glow w-[320px] lg:w-[480px] xl:w-[560px]" />
+        </div>
       </div>
     </main>
   );

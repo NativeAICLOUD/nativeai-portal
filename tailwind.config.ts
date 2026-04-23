@@ -128,12 +128,22 @@ const config: Config = {
           from: { opacity: '0', transform: 'translateX(-2px)' },
           to: { opacity: '1', transform: 'translateX(0)' },
         },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-20px)' },
+        },
+        'azure-glow': {
+          '0%, 100%': { filter: 'drop-shadow(0 0 20px rgba(139, 92, 246, 0.2))' },
+          '50%': { filter: 'drop-shadow(0 0 55px rgba(139, 92, 246, 0.6))' },
+        },
       },
       animation: {
         slideDownAndFade: 'slideDownAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
         slideLeftAndFade: 'slideLeftAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
         slideUpAndFade: 'slideUpAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
         slideRightAndFade: 'slideRightAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
+        float: 'float 4s ease-in-out infinite',
+        'azure-glow': 'azure-glow 4s ease-in-out infinite',
       },
     },
   },

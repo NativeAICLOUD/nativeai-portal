@@ -1,62 +1,90 @@
 "use client";
 
 import Image from 'next/image';
-import { twMerge } from 'tailwind-merge';
-import CoomingSoon from '../../ui/CoomingSoon';
-import { button } from '../../utils/tw-variants';
 import { Each } from '../../helpers/Each';
 
 const services = [
   {
     title: 'Generative AI',
-    desc: 'We create and fine-tune Language Models (LLMs) for companies. We specialize in crafting AI assistants and custom seamlessly integrate into your real-world operations, unlocking new possibilities for your business',
+    desc: 'We build and fine-tune LLMs, AI Agents, and RAG systems that plug into your real-world operations — automating decisions, answering from your own data, and unlocking capabilities your competitors don\'t have yet.',
     icon: '/img/icon-genai.svg',
+    tag: 'AI & LLMs',
   },
   {
     title: 'DevOps',
-    desc: 'Accelerate application development and deployment by implementing DevOps practices on the cloud.',
+    desc: 'Ship faster, break less. We implement CI/CD pipelines, infrastructure as code, and automated testing on Azure and AWS — so your teams release with confidence, not fear.',
     icon: '/img/icon-devops.svg',
+    tag: 'Automation',
   },
   {
     title: '.NET',
-    desc: 'We solve problems and create unique value through custom development. We work closely with you to deliver solutions that exceed your expectations and help your business achieve its goals. ',
+    desc: 'We build robust, scalable .NET solutions tailored to your business — from APIs and microservices to full enterprise platforms — delivered on time and built to last.',
     icon: '/img/icon-net.svg',
+    tag: 'Custom Dev',
   },
   {
     title: 'Azure & AWS',
-    desc: 'Native Cloud will help you implement DevOps best practices and leverage powerful Azure and AWS solutions to automate your cloud infrastructure.',
+    desc: 'Architecture, migration, and managed operations on Azure and AWS. We design cloud environments that are secure by default, cost-optimised from day one, and ready to scale with your ambitions.',
     icon: '/img/icon-azure-aws.svg',
+    tag: 'Cloud',
   },
 ];
+
 type IServices = typeof services[0];
 
 const HomeLowerSection = () => {
   return (
-    <section className={'relative pt-10 px-2 sm:px-4 2xl:px-0'}>
-      <div className={'relative max-w-9xl mx-auto'}>
-        <h2 className={'text-2.5xl sm:text-3.5xl lg:text-4.5xl mb-15 text-center font-semibold leading-snug px-2 lg:px-0'}>Services we provide</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10 xl:gap-x-20 xl:gap-y-12">
+    <section className="relative px-6 sm:px-12 xl:px-16 py-16 sm:py-24 bg-white">
+      <div className="max-w-9xl mx-auto">
+
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+          <div>
+            <div className="flex items-center gap-2 mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
+              <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">What we specialise in</p>
+            </div>
+            <h2 className="text-2xl sm:text-3.5xl lg:text-4xl font-bold text-[#0a0e1a] leading-tight">
+              Four areas. One team. Full delivery.
+            </h2>
+          </div>
+          <p className="text-[#6b6b6b] text-sm max-w-xs text-left sm:text-right">
+            From AI to cloud to code — we cover the full stack so you don't have to manage multiple vendors.
+          </p>
+        </div>
+
+        {/* Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Each
             of={services}
             render={(item: IServices, index: number) => (
-              <div className="card rounded-xl shadow-xl">
-                <div className={`card-header rounded-t-xl h-6  ${index === 1 ? 'bg-service-header-linear' : 'bg-[#352F5D]'}`}></div>
-                <div className="card-content relative flex flex-col-reverse lg:flex-row items-start md:gap-6 p-4 lg:py-5 sm:px-6 lg:px-10">
-                  <div className="group pb-16 lg:pb-20 after:bg-black after:absolute after:w-[calc(100%-48px)] lg:after:w-[calc(100%-80px)] after:h-[1px] after:mt-4">
-                    <h3 className={`text-4xl lg:text-5xl xl:text-6xl font-bold mt-4 mb-6 bg-clip-text ${
-                      index === 0 || index === 2
-                        ? 'bg-service-header-title-linear'
-                        : index === 1
-                          ? 'bg-service-header-title1-linear'
-                          : 'bg-service-header-title2-linear' }`}>{item.title}</h3>
-                    <p className="font-medium opacity-80 text-sm sm:text-base">{item.desc}</p>
-                  </div>
+              <div className="group relative flex flex-col sm:flex-row gap-6 items-start p-8 rounded-2xl border border-gray-100 hover:border-sky-200 hover:shadow-lg bg-white hover:bg-sky-50/30 transition-all duration-300 overflow-hidden">
+
+                {/* Subtle number watermark */}
+                <span className="absolute bottom-4 right-6 text-7xl font-black text-gray-100 group-hover:text-sky-100 transition-colors select-none leading-none">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+
+                {/* Icon */}
+                <div className="shrink-0 w-16 h-16 rounded-xl bg-slate-100 group-hover:bg-sky-100 flex items-center justify-center transition-colors duration-300">
                   <Image
                     src={item.icon}
                     alt={item.title}
-                    className='object-contain max-w-[120px] sm:max-w-[140px] xl:max-w-[160px] ml-auto lg:ml-0'
-                    width={170}
-                    height={150} />
+                    width={40}
+                    height={40}
+                    className="object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+                  />
+                </div>
+
+                {/* Content */}
+                <div className="flex flex-col gap-3 relative z-10">
+                  <div className="flex items-center gap-3">
+                    <h3 className="text-xl font-bold text-[#162435]">{item.title}</h3>
+                    <span className="text-xs font-semibold text-sky-600 bg-sky-50 border border-sky-100 px-2.5 py-0.5 rounded-full">
+                      {item.tag}
+                    </span>
+                  </div>
+                  <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             )}
