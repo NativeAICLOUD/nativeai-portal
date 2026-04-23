@@ -50,7 +50,7 @@ const socials = [
   { name: 'Facebook', icon: 'icon-facebook', url: Constants.SOCIALS.FACEBOOK },
 ];
 
-type NavLink = { url: string; title: string; soon?: true };
+type NavLink = { url: string; title: string; soon?: boolean };
 
 function Footer() {
   const pathname = usePathname();
