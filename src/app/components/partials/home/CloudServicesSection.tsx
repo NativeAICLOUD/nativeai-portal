@@ -114,7 +114,13 @@ const CloudServicesSection = () => {
               <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">What we deliver</p>
             </div>
             <h2 className="text-2xl sm:text-3.5xl lg:text-4xl font-bold text-[#0a0e1a] leading-tight max-w-lg">
-              Every cloud service your business needs — under one roof
+              Every cloud service your business needs —{' '}
+              <span className="relative inline-block">
+                <span className="bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] bg-clip-text text-transparent">
+                  under one roof
+                </span>
+                <span className="absolute -bottom-1 left-0 w-full h-[2px] rounded-full bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] opacity-50" />
+              </span>
             </h2>
           </div>
           <p className="text-[#6b6b6b] text-sm max-w-xs text-left sm:text-right">

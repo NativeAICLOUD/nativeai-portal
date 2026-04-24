@@ -15,11 +15,22 @@ function HomeHeader() {
         <Image src="/img/BG.png" alt="Background" layout="fill" objectFit="cover" quality={100} />
         <Image src="/img/Group 32.png" alt="Design Element" className="!top-36" layout="fill" objectFit="cover" quality={100} />
       </div>
-      <div className="relative max-w-9xl mx-auto w-full flex justify-center lg:justify-between text-left text-[#2A3A4A] mt-0 lg:mt-36">
+      <div className="relative max-w-9xl mx-auto w-full flex justify-center lg:justify-between text-left text-[#2A3A4A] mt-0 lg:mt-36 px-5 sm:px-10 lg:px-0">
         <div className="group relative z-1">
-          <p className="text-xl sm:text-2xl ml-1.5 mb-[0.5em] sm:mb-5 bg-clip h1-linear font-semibold text-center lg:text-left">AI Agents · LLMs · Azure & AWS</p>
-          <h1 className="text-3.5xl sm:text-4xl lg:text-6xl mb-[1.5em] sm:mb-8 font-black bg-clip h2-linear !leading-tight text-center lg:text-left max-w-lg lg:max-w-full mx-auto">We make AI work inside your business</h1>
-          <div className="flex justify-start gap-5 flex-col lg:flex-row items-center mt-6">
+          <p className="text-lg sm:text-2xl ml-1.5 mb-3 sm:mb-5 font-semibold text-center lg:text-left bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] bg-clip-text text-transparent">
+            AI Agents <span className="opacity-40 font-light">/</span> LLMs
+          </p>
+          <h1 className="text-[1.85rem] sm:text-4xl lg:text-6xl mb-6 sm:mb-8 font-black !leading-tight text-center lg:text-left max-w-lg lg:max-w-full mx-auto text-[#0a0e1a]">
+            We make{' '}
+            <span className="relative inline-block">
+              <span className="bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] bg-clip-text text-transparent">
+                AI work
+              </span>
+              <span className="absolute -bottom-1 left-0 w-full h-[3px] rounded-full bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] opacity-60" />
+            </span>
+            {' '}inside your business
+          </h1>
+          <div className="flex justify-start gap-5 flex-col lg:flex-row items-center mt-8 lg:mt-6">
             <Link href={Constants.PAGES.AZURE} className={`${button({ size: 'lg', color: 'primary' })}`}>Book a consultation</Link>
             <Link href={Constants.PAGES.ACCELERATE_AZURE} className={`${button({ size: 'lg', color: 'secondary', icon: 'md' })} whitespace-nowrap w-full max-w-sm lg:w-auto lg:max-w-fit`}>
               <svg className={`icon-arrow-right text-secondary`} width={30} height={20}>
@@ -29,8 +40,16 @@ function HomeHeader() {
             </Link>
           </div>
         </div>
-        <div className="absolute opacity-70 top-0 z-0 inset-x-0 mx-auto lg:relative lg:-translate-y-16 lg:opacity-100 max-h-2xl lg:max-h-max animate-float">
-          <Image src={AIHeroIMG} alt="AI" className="animate-azure-glow w-[320px] lg:w-[480px] xl:w-[560px]" />
+        <div className="hidden lg:block lg:relative lg:-translate-y-16 lg:max-h-max animate-float shrink-0">
+          {/* Warm radial glow backdrop */}
+          <div
+            className="absolute inset-0 -m-20 rounded-full pointer-events-none"
+            style={{
+              background: 'radial-gradient(ellipse at 50% 55%, rgba(240,160,80,0.20) 0%, rgba(232,154,120,0.12) 50%, transparent 72%)',
+              filter: 'blur(28px)',
+            }}
+          />
+          <Image src={AIHeroIMG} alt="AI" className="animate-azure-glow w-[320px] lg:w-[480px] xl:w-[560px] relative" />
         </div>
       </div>
     </main>

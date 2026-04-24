@@ -9,6 +9,7 @@ const NOISE_URI = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/sv
 const cards = [
   {
     title: "Custom Development",
+    subtitle: "Tailored software built precisely for your business workflows and goals.",
     href: "/services/custom-development",
     bg: [
       "radial-gradient(circle at 20% 30%, #c9a0c9 0%, transparent 55%)",
@@ -20,6 +21,7 @@ const cards = [
   },
   {
     title: "Design",
+    subtitle: "Beautiful, intuitive interfaces that users actually love to use.",
     href: "/services/design",
     bg: [
       "radial-gradient(circle at 50% 50%, #f4b97a 0%, transparent 55%)",
@@ -31,6 +33,7 @@ const cards = [
   },
   {
     title: "AI Agents & RAG",
+    subtitle: "Intelligent automation and retrieval-augmented generation for your data.",
     href: "/services/ai-agents-rag",
     bg: [
       "radial-gradient(circle at 20% 70%, #d4845c 0%, transparent 55%)",
@@ -53,7 +56,7 @@ const NoiseOverlay = () => (
 /* ── Mobile ── */
 function MobileCards() {
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-4">
       {cards.map((card, i) => (
         <Link key={i} href={card.href} className="block">
           <motion.div
@@ -62,11 +65,12 @@ function MobileCards() {
             whileHover={{ scale: 1.02 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.55, delay: i * 0.1 }}
-            className="relative rounded-2xl overflow-hidden flex flex-col justify-end p-7 min-h-[280px] cursor-pointer"
+            className="relative rounded-2xl overflow-hidden flex flex-col justify-between p-6 min-h-[200px] cursor-pointer"
             style={{ background: card.bg }}
           >
             <NoiseOverlay />
-            <h3 className="relative text-2xl font-black leading-tight text-white">{card.title}</h3>
+            <p className="relative text-sm font-medium text-white/80 leading-relaxed max-w-[85%]">{card.subtitle}</p>
+            <h3 className="relative text-2xl font-black leading-tight text-white mt-4">{card.title}</h3>
           </motion.div>
         </Link>
       ))}

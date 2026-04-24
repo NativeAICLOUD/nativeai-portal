@@ -24,13 +24,12 @@ const partnersData = [
 ];
 
 const navLinks = [
-  { label: 'Azure AI Foundry', href: '/azure' },
+  { label: 'Going to Azure', href: '/azure' },
   { label: 'Accelerate with Azure', href: '/accelerate-azure' },
   { label: 'Managed Services', href: '/managed-services' },
   { label: 'Cloud Native Dev', href: '/cloud-native-sd' },
-  { label: 'AI-Powered DevOps', href: '/devops-on-azure' },
-  { label: 'Cloud Migrations', href: '/cloud-migrations' },
-  { label: 'Solutions', href: '/solutions' },
+  { label: 'DevOps on Azure', href: '/devops-on-azure' },
+  { label: 'Data Lifecycle Management', href: '/data-lifecycle-management' },
 ];
 
 type IPartnerType = typeof partnersData[0];

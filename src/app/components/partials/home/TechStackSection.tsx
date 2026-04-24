@@ -84,7 +84,17 @@ export default function TechStackSection() {
                   transition={{ duration: 0.3, delay: i * 0.05, ease: "easeOut" }}
                   className="group bg-[#ece2dc] hover:bg-[#e4d5cc] rounded-2xl aspect-square flex flex-col items-center justify-center p-8 gap-3 transition-colors duration-200"
                 >
-                  <LogoOrFallback src={item.logo} name={item.name} />
+                  {item.logo ? (
+                    <img
+                      src={item.logo}
+                      alt={item.name}
+                      className="max-w-[65%] max-h-[55%] object-contain"
+                    />
+                  ) : (
+                    <span className="text-sm font-medium text-[#1a1d2e] text-center leading-snug px-2">
+                      {item.name}
+                    </span>
+                  )}
                 </motion.div>
               ))}
             </motion.div>
@@ -93,27 +103,5 @@ export default function TechStackSection() {
 
       </div>
     </section>
-  );
-}
-
-function LogoOrFallback({ src, name }: { src: string; name: string }) {
-  return (
-    <img
-      src={src}
-      alt={name}
-      className="max-w-[65%] max-h-[55%] object-contain"
-      onError={(e) => {
-        const target = e.currentTarget as HTMLImageElement;
-        const parent = target.parentElement;
-        if (parent && !parent.querySelector("span[data-fallback]")) {
-          target.style.display = "none";
-          const span = document.createElement("span");
-          span.textContent = name;
-          span.setAttribute("data-fallback", "true");
-          span.className = "text-sm font-medium text-[#1a1d2e] text-center leading-snug px-2";
-          parent.appendChild(span);
-        }
-      }}
-    />
   );
 }

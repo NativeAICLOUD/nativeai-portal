@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Mistral AI logo — geometric block grid -->
+  <rect x="20"  y="20"  width="48" height="48" fill="#000000"/>
+  <rect x="76"  y="20"  width="48" height="48" fill="#FF7000"/>
+  <rect x="132" y="20"  width="48" height="48" fill="#000000"/>
+  <rect x="20"  y="76"  width="48" height="48" fill="#FF7000"/>
+  <rect x="76"  y="76"  width="48" height="48" fill="#000000"/>
+  <rect x="132" y="76"  width="48" height="48" fill="#FF7000"/>
+  <rect x="76"  y="132" width="48" height="48" fill="#FF7000"/>
+  <rect x="132" y="132" width="48" height="48" fill="#000000"/>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Microsoft Copilot logo — colorful swirling loop -->
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#884EFF"/>
+      <stop offset="100%" stop-color="#4E8EFF"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#4E8EFF"/>
+      <stop offset="100%" stop-color="#00C8FF"/>
+    </linearGradient>
+    <linearGradient id="g3" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#00C8A0"/>
+      <stop offset="100%" stop-color="#00C8FF"/>
+    </linearGradient>
+    <linearGradient id="g4" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#FF8C00"/>
+      <stop offset="100%" stop-color="#FF4FD8"/>
+    </linearGradient>
+  </defs>
+  <!-- Top-left arc -->
+  <path d="M100 30 C60 30, 30 60, 30 100 C30 75, 55 55, 80 58 L100 60 Z" fill="url(#g1)"/>
+  <!-- Top-right arc -->
+  <path d="M100 30 C140 30, 170 60, 170 100 C170 75, 145 55, 120 58 L100 60 Z" fill="url(#g2)"/>
+  <!-- Bottom-right arc -->
+  <path d="M170 100 C170 140, 140 170, 100 170 C125 170, 145 145, 142 120 L140 100 Z" fill="url(#g3)"/>
+  <!-- Bottom-left arc -->
+  <path d="M30 100 C30 140, 60 170, 100 170 C75 170, 55 145, 58 120 L60 100 Z" fill="url(#g4)"/>
+  <!-- Center white circle -->
+  <circle cx="100" cy="100" r="24" fill="white"/>
+</svg>

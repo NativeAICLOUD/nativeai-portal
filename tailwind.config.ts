@@ -133,8 +133,8 @@ const config: Config = {
           '50%': { transform: 'translateY(-20px)' },
         },
         'azure-glow': {
-          '0%, 100%': { filter: 'drop-shadow(0 0 20px rgba(139, 92, 246, 0.2))' },
-          '50%': { filter: 'drop-shadow(0 0 55px rgba(139, 92, 246, 0.6))' },
+          '0%, 100%': { filter: 'drop-shadow(0 0 18px rgba(232, 154, 120, 0.45)) drop-shadow(0 0 40px rgba(240, 160, 80, 0.20))' },
+          '50%': { filter: 'drop-shadow(0 0 38px rgba(232, 154, 120, 0.82)) drop-shadow(0 0 72px rgba(240, 160, 80, 0.42))' },
         },
       },
       animation: {
