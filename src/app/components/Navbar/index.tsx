@@ -27,6 +27,7 @@ const pages: Pages[] = [
           { url: Constants.PAGES.MANAGED_SERVICES, title: 'Managed Services' },
           { url: Constants.PAGES.CLOUD_SOFTWARE_ARCHITECTURE, title: 'Cloud Software Architecture' },
           { url: Constants.PAGES.MIGRATE_TO_AZURE, title: 'Migrate to Azure' },
+          { url: Constants.PAGES.CASE_STUDIES, title: 'Case Studies' },
         ],
       },
       {

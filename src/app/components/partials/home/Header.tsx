@@ -9,12 +9,12 @@ import CoomingSoon from "../../ui/CoomingSoon";
 
 function HomeHeader() {
   return (
-    <main className="relative lg:h-screen overflow-hidden flex items-center lg:pl-[50px] pt-40 lg:pt-0 pb-16 sm:pb-40 lg:pb-0">
+    <main className="relative overflow-hidden lg:pl-[50px] pt-40 lg:pt-36 pb-16 sm:pb-40 lg:pb-16">
       <div className="absolute w-full h-full z-[-1] left-0 top-0 after:absolute after:bottom-0 after:bg-main-gradient after:w-full after:h-1/5">
         <Image src="/img/BG.png" alt="Background" layout="fill" objectFit="cover" quality={100} />
         <Image src="/img/Group 32.png" alt="Design Element" className="!top-36" layout="fill" objectFit="cover" quality={100} />
       </div>
-      <div className="relative max-w-9xl mx-auto w-full flex justify-center text-left text-[#2A3A4A] mt-0 lg:mt-36 px-5 sm:px-10 lg:px-0">
+      <div className="relative max-w-9xl mx-auto w-full flex justify-center text-left text-[#2A3A4A] px-5 sm:px-10 lg:px-0">
         <div className="group relative z-1 w-full max-w-3xl">
           <p className="text-lg sm:text-2xl ml-1.5 mb-3 sm:mb-5 font-semibold text-center lg:text-left bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] bg-clip-text text-transparent">
             AI Agents <span className="opacity-40 font-light">/</span> LLMs
