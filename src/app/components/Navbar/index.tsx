@@ -1,7 +1,6 @@
 'use client';
 
 import { Link } from 'react-transition-progress/next';
-
 import { Constants } from '@/Constants';
 import { Transition } from '@headlessui/react';
 import { PlusIcon, MinusIcon, CaretDownIcon } from '@radix-ui/react-icons';
@@ -18,45 +17,29 @@ type Pages = {
   title: string;
   soon?: true;
   children?: Pages[];
-}
-
-const motionContainer = {
-  hidden: { opacity: 0, },
-  show: {
-    opacity: 1,
-    duration: .5,
-    transition: {
-      delay: .3,
-      staggerChildren: .5
-    }
-  }
 };
-
-const motionItem = {
-  hidden: { opacity: 0, y: -20 },
-  show: { opacity: 1, y: 0 }
-}
 
 const pages: Pages[] = [
   {
     url: Constants.PAGES.SOLUTIONS, title: 'Solutions', children: [
       {
         url: Constants.PAGES.SOLUTIONS, title: 'Solutions', children: [
-          { url: Constants.PAGES.AZURE_CLOUDIFY, title: 'Azure Cloudify', soon: true },
-          { url: Constants.PAGES.MANAGED_SERVICES, title: 'Managed Services' }
-        ]
+          { url: Constants.PAGES.MANAGED_SERVICES, title: 'Managed Services' },
+          { url: Constants.PAGES.CLOUD_SOFTWARE_ARCHITECTURE, title: 'Cloud Software Architecture' },
+          { url: Constants.PAGES.MIGRATE_TO_AZURE, title: 'Migrate to Azure' },
+        ],
       },
       {
         url: Constants.PAGES.DATA_LIFECYCLE_MANAGEMENT, title: 'Data Lifecycle Management', children: [
-          { url: Constants.PAGES.MANAGED_SERVICES, title: 'Managed Services', soon: true }
-        ]
+          { url: Constants.PAGES.MANAGED_SERVICES, title: 'Managed Services', soon: true },
+        ],
       },
       {
         url: Constants.PAGES.CLOUD_NATIVE_SD, title: 'Cloud Native', children: [
           { url: Constants.PAGES.CLOUD_NATIVE_SD, title: 'Software Development' },
-        ]
+        ],
       },
-    ]
+    ],
   },
   { url: Constants.PAGES.WORKSHOPS, title: 'Workshops' },
   { url: Constants.PAGES.KNOWLEDGE_BASE, title: 'Knowledge base' },
@@ -66,317 +49,382 @@ const pages: Pages[] = [
 
 function Navbar() {
   const pathname = usePathname();
-
   const [openSide, setOpenSide] = useState(false);
   const [slideMenu, setSlideMenu] = useState(false);
   const [show, setShow] = useState(false);
   const [isExpanded, setExpanded] = useState<string | null>(null);
-  const lastScrollY = useRef(0);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const onScroll = (e: any, intial?: boolean) => {
-      const scrollTop = intial ? window.scrollY : e.target.documentElement.scrollTop;
-
-      // remember current page location to use in the next move
-      lastScrollY.current = scrollTop;
-
-      if (scrollTop <= 0) {
-        setShow(false);
-      }
-
-      if (!show && scrollTop > 0) {
-        return setShow(true);
-      }
-    };
+    const onScroll = () => setShow(window.scrollY > 0);
     window.addEventListener('scroll', onScroll);
-
-    onScroll(0, true);
-
+    onScroll();
     return () => window.removeEventListener('scroll', onScroll);
-  }, [lastScrollY.current]);
+  }, []);
+
+  const openMenu = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setSlideMenu(true);
+  };
+
+  const closeMenu = () => {
+    closeTimer.current = setTimeout(() => setSlideMenu(false), 120);
+  };
+
+  const navH = show ? 88 : 112;
 
   return (
     <header
-      className={`navbar overflow-x-clip w-full fixed transition-all ${show
-        ? 'h-[88px] z-999 before:bg-white before:absolute before:-left-4 sm:before:-left-6 inset-y-0 before:w-[calc(100%+2rem)] sm:before:w-[calc(100%+3rem)] before:h-[88px]'
-        : 'z-999'
-        } ${slideMenu ? 'h-full' : ''}`}
+      className={`navbar overflow-x-clip w-full fixed z-999 transition-all ${
+        show
+          ? 'h-[88px] before:bg-white before:absolute before:-left-4 sm:before:-left-6 inset-y-0 before:w-[calc(100%+2rem)] sm:before:w-[calc(100%+3rem)] before:h-[88px] before:shadow-[0_1px_0_0_rgba(0,0,0,0.06)]'
+          : ''
+      }`}
     >
+      {/* ── Main nav bar ── */}
       <nav
-        className={`relative nav-items flex justify-between gap-6 items-center px-4 sm:px-6 max-w-9xl mx-auto z-1 ${show
-          ? 'min-h-20'
-          : 'min-h-28'
-          } ${slideMenu ? 'z-1 border-b border-b-black' : ''} transition-all`}
+        className={`relative flex justify-between gap-6 items-center px-4 sm:px-6 max-w-9xl mx-auto z-1 transition-all ${
+          show ? 'h-[88px]' : 'min-h-28'
+        }`}
       >
-        <div className="relative left flex items-center gap-16 xl:gap-20">
-          <div className="main-logo py-2 flex items-center flex-col sm:flex-row gap-1.5"
-            onClick={() => setSlideMenu(false)}>
-            <Logo />
-          </div>
-
-          <ul className="hidden lg:flex items-center justify-center gap-6 xl:gap-10">
-            <Each
-              of={pages}
-              render={(item: Pages) => (
-                <>
-                  {
-                    item.soon ? (
-                      <CoomingSoon>
-                        <li className={`relative flex items-center text-black font-light transition-all ${show ? 'h-20 before:-bottom-1' : 'h-28 before:-bottom-0'} ${pathname === item.url ? 'before:absolute before:w-full before:h-0.5 before:bg-native' : ''}`}>
-                          <Link className="flex items-center gap-1" href={''}>
-                            {item.title}
-                          </Link>
-                        </li>
-                      </CoomingSoon>
-                    ) : (
-                      <li className={`relative flex items-center text-black font-light transition-all ${show ? 'h-20 before:-bottom-1' : 'h-28 before:-bottom-0'} ${pathname === item.url ? 'before:absolute before:w-full before:h-0.5 before:bg-native' : ''}`}>
-                        <Link className="flex items-center gap-1" href={item.url}
-                          onClick={() => setSlideMenu(false)}
-                          onMouseEnter={() => item.url === Constants.PAGES.SOLUTIONS ? setSlideMenu(true) : {}}>
-                          {item.title}
-                          {
-                            item.children && (
-                              <CaretDownIcon
-                                className="relative top-[1px] transition-transform duration-[250] ease-in group-data-[state=open]:-rotate-180"
-                                aria-hidden
-                              />
-                            )
-                          }
-                        </Link>
-                      </li>
-                    )
-                  }
-                </>
-              )}
-            />
-          </ul>
+        {/* Logo */}
+        <div
+          className="main-logo py-2 flex items-center flex-col sm:flex-row gap-1.5 shrink-0"
+          onClick={() => setSlideMenu(false)}
+        >
+          <Logo />
         </div>
 
-        <div className="relative actions flex items-center gap-4 sm:gap-8">
-
-          <NavSettigns slideMenu={slideMenu} />
-
-          <button
-            className="btn-action svg-hover w-[40px] h-[40px] md:w-[48px] md:h-[48px] hover:bg-black/5 hover:shadow-inner rounded-full grid lg:hidden place-items-center"
-            onClick={() => setOpenSide(!openSide)}
-          >
-            <svg className="icon-nav transition-colors text-black hover:text-native" width={24} height={18}>
-              <use
-                href={`/icons/all-icons.svg#${openSide ? 'icon-nav-close' : 'icon-nav-menu'
+        {/* Desktop nav links */}
+        <ul className="hidden lg:flex items-center justify-center gap-1 xl:gap-2">
+          {pages.map((item) => (
+            <li
+              key={item.url}
+              className="relative flex items-center"
+              onMouseEnter={() => (item.children ? openMenu() : closeMenu())}
+              onMouseLeave={closeMenu}
+            >
+              {item.soon ? (
+                <CoomingSoon>
+                  <span className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium text-[#0a0e1a]/40 cursor-default select-none">
+                    {item.title}
+                  </span>
+                </CoomingSoon>
+              ) : item.title === 'Get in touch' ? (
+                <Link
+                  href={item.url}
+                  onClick={() => setSlideMenu(false)}
+                  className="group relative flex items-center gap-2 px-4 py-2 rounded-full bg-[#0a0e1a] hover:bg-[#e89a78] text-white text-sm font-semibold transition-all duration-200 overflow-hidden shadow-sm hover:shadow-md hover:shadow-[#e89a78]/25"
+                >
+                  <span className="relative z-10">Get in touch</span>
+                  <svg
+                    className="relative z-10 w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}
+                    strokeLinecap="round" strokeLinejoin="round"
+                  >
+                    <path d="M7 17L17 7" /><path d="M7 7h10v10" />
+                  </svg>
+                </Link>
+              ) : (
+                <Link
+                  href={item.url}
+                  onClick={() => setSlideMenu(false)}
+                  className={`relative flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-150 ${
+                    pathname === item.url
+                      ? 'text-[#e89a78]'
+                      : 'text-[#0a0e1a] hover:text-[#e89a78] hover:bg-[#f4ebe8]/60'
                   }`}
-              ></use>
+                >
+                  {item.title}
+                  {item.children && (
+                    <motion.span
+                      animate={{ rotate: slideMenu ? 180 : 0 }}
+                      transition={{ duration: 0.2, ease: 'easeInOut' }}
+                      className="flex items-center"
+                    >
+                      <CaretDownIcon className="relative top-px opacity-60" aria-hidden />
+                    </motion.span>
+                  )}
+                  {pathname === item.url && (
+                    <span className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full bg-[#e89a78]" />
+                  )}
+                </Link>
+              )}
+            </li>
+          ))}
+        </ul>
+
+        {/* Right actions */}
+        <div className="relative flex items-center gap-3 sm:gap-6 shrink-0">
+          <NavSettings slideMenu={slideMenu} />
+
+          {/* Hamburger */}
+          <button
+            className="w-[40px] h-[40px] hover:bg-black/5 rounded-full grid lg:hidden place-items-center transition-colors"
+            onClick={() => setOpenSide(!openSide)}
+            aria-label="Toggle menu"
+          >
+            <svg className="text-black" width={24} height={18}>
+              <use href={`/icons/all-icons.svg#${openSide ? 'icon-nav-close' : 'icon-nav-menu'}`} />
             </svg>
           </button>
         </div>
       </nav>
 
-      {/* Sidebar */}
+      {/* ── Mega menu dropdown ── */}
+      <AnimatePresence>
+        {slideMenu && (
+          <>
+            <motion.div
+              key="megamenu"
+              className="fixed left-0 right-0 bg-white z-[998]"
+              style={{
+                top: navH,
+                boxShadow: '0 8px 32px rgba(0,0,0,0.08), 0 1px 0 rgba(0,0,0,0.06) inset',
+              }}
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.18, ease: 'easeOut' }}
+              onMouseEnter={openMenu}
+              onMouseLeave={closeMenu}
+            >
+              <div className="max-w-9xl mx-auto px-6 sm:px-10 py-8 pb-10">
+                <div className="grid grid-cols-3 gap-x-10 max-w-2xl">
+                  {pages[0].children?.map((col, i) => (
+                    <div key={i}>
+                      {/* Column header */}
+                      <div className="flex items-center gap-2.5 mb-5 pb-3 border-b border-[#f0ece8]">
+                        <span className="w-[3px] h-[14px] rounded-full bg-[#e89a78] shrink-0" />
+                        <Link
+                          href={col.url}
+                          onClick={() => setSlideMenu(false)}
+                          className="text-[11px] font-bold uppercase tracking-widest text-[#0a0e1a] hover:text-[#e89a78] transition-colors"
+                        >
+                          {col.title}
+                        </Link>
+                      </div>
+
+                      {/* Column links */}
+                      <ul className="flex flex-col gap-0.5">
+                        {col.children?.map((item, j) => (
+                          <li key={j}>
+                            {item.soon ? (
+                              <CoomingSoon>
+                                <span className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm text-[#c0b8b0] cursor-default select-none">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-[#e8e0d8] shrink-0" />
+                                  {item.title}
+                                </span>
+                              </CoomingSoon>
+                            ) : (
+                              <Link
+                                href={item.url}
+                                onClick={() => setSlideMenu(false)}
+                                className="group flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm text-[#444] hover:bg-[#f4ebe8] hover:text-[#0a0e1a] transition-all duration-150"
+                              >
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78]/25 group-hover:bg-[#e89a78] transition-colors shrink-0" />
+                                {item.title}
+                              </Link>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Backdrop */}
+            <motion.div
+              key="megamenu-backdrop"
+              className="fixed left-0 right-0 bottom-0 bg-black/20 backdrop-blur-[2px] z-[997]"
+              style={{ top: navH }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setSlideMenu(false)}
+            />
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* ── Mobile sidebar backdrop ── */}
       <div
-        className={`${openSide ? 'w-full' : 'w-0'
-          } aside-backdrop z-[99] h-full fixed inset-0 transition backdrop-blur-sm bg-black-opacity-2`}
+        className={`${openSide ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} fixed inset-0 z-[99] transition-opacity duration-300 backdrop-blur-sm bg-black/25`}
         onClick={() => setOpenSide(false)}
-      ></div>
+      />
 
+      {/* ── Mobile sidebar ── */}
       <aside
-        className={`${openSide ? 'translate-x-[0]' : 'translate-x-[100%]'
-          } sidebar  z-[100] bg-white/90 backdrop:blur-2xl text-black w-full min-h-screen md:w-[350px] p-2.5 fixed inset-y-0 right-0 transform transition duration-500 ease-in-out overflow-y-auto`}
+        className={`${
+          openSide ? 'translate-x-0' : 'translate-x-full'
+        } fixed inset-y-0 right-0 z-[100] w-full md:w-[360px] bg-white/98 backdrop-blur-xl text-black transform transition-transform duration-300 ease-in-out overflow-y-auto flex flex-col`}
       >
-        <div className="header flex items-center justify-between px-4">
-          <div className="main-logo py-2 flex items-center flex-col sm:flex-row gap-1.5" onClick={() => setSlideMenu(false)}>
-            <Logo />
-          </div>
-
+        {/* Sidebar header */}
+        <div className="flex items-center justify-between px-5 py-4 border-b border-black/[0.06]">
+          <Logo />
           <button
-            className="svg-hover w-[40px] h-[40px] hover:bg-black/5 shadow-inner rounded-full grid place-items-center m-2"
+            className="w-9 h-9 rounded-full hover:bg-black/5 flex items-center justify-center transition-colors"
             onClick={() => setOpenSide(false)}
+            aria-label="Close menu"
           >
-            <svg className="icon-nav-close" width={24} height={24}>
-              <use href={`/icons/all-icons.svg#icon-nav-close`}></use>
+            <svg width={20} height={20}>
+              <use href="/icons/all-icons.svg#icon-nav-close" />
             </svg>
           </button>
         </div>
 
-        <hr className="nav my-6 opacity-10 border-native" />
+        {/* Actions row */}
+        <div className="flex items-center gap-5 px-5 py-3 border-b border-black/[0.06]">
+          <NavSettings slideMenu={false} isMobile />
+        </div>
 
-        <ul className="flex flex-col pt-4 px-4 gap-4">
-          <Each
-            of={pages}
-            render={(item: Pages) => (
-              <>
-                {
-                  item.soon ? (
-                    <CoomingSoon>
-                      <li className="text-black font-light flex items-center text-lg">
-                        <Link href={item.url} onClick={() => setOpenSide(false)}>{item.title}</Link>
-                        {item.children && (
-                          <button
-                            className="expanded w-[40px] h-[40px] grid place-items-center m-2"
-                          >
-                            <svg className={`icon-caret text-black} ${item.url ? 'rotate-90' : ''}`} width={24} height={24}>
-                              <use href={`/icons/all-icons.svg#icon-caret`}></use>
-                            </svg>
-                          </button>
-                        )}
-                      </li>
-                    </CoomingSoon>
-                  ) : (
-                    <li className={`relative flex items-center text-black font-light transition-all ${pathname === item.url ? 'text-native' : ''}`}>
-                      <>
-                        <Link className="flex items-center gap-1 text-lg" href={item.url} onClick={() => setOpenSide(false)}>
-                          {item.title}
-                        </Link>
-                        {item.children && (
-                          <span
-                            onClick={() => setExpanded(isExpanded === item.url ? null : item.url)}
-                          >
-                            {
-                              !isExpanded ? <PlusIcon
-                                className={`ml-3 size-5 relative top-[1px] cursor-pointer`}
-                                aria-hidden
-                              /> : <MinusIcon
-                                className={`ml-3 size-5 relative top-[1px] cursor-pointer`}
-                                aria-hidden
-                              />
-                            }
-                          </span>
-                        )}
-                      </>
-                    </li>
-                  )
-                }
-                {
-                  item.children && (
-                    <Transition
-                      className={"ml-4 flex flex-col gap-2"}
-                      appear={true}
-                      show={!!isExpanded}
-                      enter="transition-opacity duration-75"
-                      enterFrom="opacity-0"
-                      enterTo="opacity-100"
-                      leave="transition-opacity duration-150"
-                      leaveFrom="opacity-100"
-                      leaveTo="opacity-0"
+        {/* Nav links */}
+        <ul className="flex flex-col gap-1 px-3 pt-4 flex-1">
+          {pages.map((item) => (
+            <li key={item.url} className="flex flex-col">
+              <div
+                className={`flex items-center justify-between rounded-xl px-3 py-3 transition-colors ${
+                  pathname === item.url ? 'bg-[#f4ebe8]' : 'hover:bg-[#faf7f4]'
+                }`}
+              >
+                {item.soon ? (
+                  <CoomingSoon>
+                    <span className="text-base font-medium text-[#b8b2aa]">{item.title}</span>
+                  </CoomingSoon>
+                ) : item.title === 'Get in touch' ? (
+                  <Link
+                    href={item.url}
+                    onClick={() => setOpenSide(false)}
+                    className="group flex items-center gap-2 px-4 py-2 rounded-full bg-[#0a0e1a] hover:bg-[#e89a78] text-white text-sm font-semibold transition-all duration-200"
+                  >
+                    Get in touch
+                    <svg
+                      className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}
+                      strokeLinecap="round" strokeLinejoin="round"
                     >
-                      <Each
-                        of={item.children}
-                        render={(item: Pages) => (
-                          <>
-                            {
-                              item.soon ? (
-                                <CoomingSoon>
-                                  <li className="text-black font-light text-lg">
-                                    <Link href={item.url}>{item.title}</Link>
-                                  </li>
-                                </CoomingSoon>
-                              ) : (
-                                <li className="text-black font-light text-lg">
-                                  <Link href={item.url} onClick={() => setOpenSide(false)}>
-                                    {item.title}
-                                  </Link>
-                                </li>
-                              )
-                            }
-                          </>
-                        )}
-                      />
-                    </Transition>
-                  )
-                }
-              </>
-            )}
-          />
-        </ul>
-      </aside>
-
-      {/* Slide menu */}
-      <div
-        className={`${slideMenu ? 'h-full' : 'h-0'
-          } aside-backdrop w-full fixed inset-0 transition bg-black/20`}
-        onClick={() => setSlideMenu(false)}
-      ></div>
-
-      <aside
-        className={`${slideMenu ? `translate-y-[0] ${show ? 'pt-20 h-[250px]' : 'pt-28 h-[300px]'}` : 'h-[300px] -translate-y-[100%]'
-          } sidebar bg-white backdrop:blur-2xl text-black w-full p-2.5 fixed inset-y-0 right-0 transform transition-all duration-500 ease-in-out overflow-y-auto`}
-      >
-
-        <AnimatePresence>
-          {slideMenu && (
-            <motion.div
-              className="relative grid grid-cols-4 gap-4 max-w-[55rem] ml-56 xl:ml-64 2xl:ml-[18.6rem] mt-10"
-              initial="hidden"
-              animate="show"
-              transition={{ delay: 1 }}
-              variants={motionContainer}
-            >
-              <Each
-                of={pages[0].children}
-                render={(item: Pages) => (
-                  <motion.div className="relative"
-                    variants={motionItem}>
-                    <h2 className="mb-2 cursor-default">
-                      <Link href={item.url} onClick={() => setSlideMenu(false)}>{item.title}</Link>
-                    </h2>
-                    <ul className="flex flex-col gap-2">
-                      <Each
-                        of={item.children}
-                        render={(item: Pages) => (
-                          <>
-                            {
-                              item.soon ? (
-                                <CoomingSoon>
-                                  <li className="text-black font-light opacity-70">
-                                    <Link href={item.url}>{item.title}</Link>
-                                  </li>
-                                </CoomingSoon>
-                              ) : (
-                                <li className="text-black font-light opacity-70">
-                                  <Link href={item.url} onClick={() => setSlideMenu(false)}>{item.title}</Link>
-                                </li>
-                              )
-                            }
-                          </>
-                        )}
-                      />
-                    </ul>
-                  </motion.div>
+                      <path d="M7 17L17 7" /><path d="M7 7h10v10" />
+                    </svg>
+                  </Link>
+                ) : (
+                  <Link
+                    href={item.url}
+                    onClick={() => { if (!item.children) setOpenSide(false); }}
+                    className={`text-base font-medium flex-1 ${
+                      pathname === item.url ? 'text-[#e89a78]' : 'text-[#0a0e1a]'
+                    }`}
+                  >
+                    {item.title}
+                  </Link>
                 )}
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
+                {item.children && (
+                  <button
+                    onClick={() => setExpanded(isExpanded === item.url ? null : item.url)}
+                    className="w-7 h-7 rounded-lg bg-black/[0.05] hover:bg-[#f4ebe8] flex items-center justify-center transition-colors shrink-0"
+                    aria-label={isExpanded === item.url ? 'Collapse' : 'Expand'}
+                  >
+                    {isExpanded === item.url
+                      ? <MinusIcon className="size-3.5 text-[#e89a78]" />
+                      : <PlusIcon className="size-3.5 text-[#0a0e1a]/60" />}
+                  </button>
+                )}
+              </div>
 
+              {/* Mobile accordion */}
+              {item.children && (
+                <Transition
+                  show={isExpanded === item.url}
+                  appear
+                  enter="transition-opacity duration-200"
+                  enterFrom="opacity-0"
+                  enterTo="opacity-100"
+                  leave="transition-opacity duration-150"
+                  leaveFrom="opacity-100"
+                  leaveTo="opacity-0"
+                >
+                  <div className="pl-4 pr-2 py-2 flex flex-col gap-3">
+                    {item.children.map((col) => (
+                      <div key={col.url}>
+                        <p className="text-[10px] font-bold uppercase tracking-widest text-[#e89a78] px-2 mb-1.5 flex items-center gap-1.5">
+                          <span className="w-[3px] h-3 rounded-full bg-[#e89a78]" />
+                          {col.title}
+                        </p>
+                        <ul className="flex flex-col gap-0.5">
+                          {col.children?.map((child) => (
+                            <li key={child.url}>
+                              {child.soon ? (
+                                <CoomingSoon>
+                                  <span className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-[#c0b8b0]">
+                                    {child.title}
+                                  </span>
+                                </CoomingSoon>
+                              ) : (
+                                <Link
+                                  href={child.url}
+                                  onClick={() => setOpenSide(false)}
+                                  className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-[#4a4a4a] hover:bg-[#f4ebe8] hover:text-[#0a0e1a] transition-colors"
+                                >
+                                  <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78]/30 shrink-0" />
+                                  {child.title}
+                                </Link>
+                              )}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </Transition>
+              )}
+            </li>
+          ))}
+        </ul>
+
+        {/* Sidebar footer */}
+        <div className="px-5 py-6 border-t border-black/[0.06] mt-auto">
+          <p className="text-xs text-[#b8b2aa] text-center">
+            © {new Date().getFullYear()} NativeCloud
+          </p>
+        </div>
       </aside>
     </header>
   );
 }
 
-const NavSettigns = ({
+const NavSettings = ({
   slideMenu,
-  isMobile = false
+  isMobile = false,
 }: {
   slideMenu: boolean;
-  isMobile?: boolean
-}) => {
+  isMobile?: boolean;
+}) => (
+  <>
+    <div className={`search cursor-pointer ${isMobile ? '' : 'hidden sm:block'}`}>
+      <svg
+        className={`icon-search transition-colors ${slideMenu ? 'text-[#e89a78]' : 'text-[#0a0e1a] hover:text-[#e89a78]'}`}
+        width={22}
+        height={22}
+      >
+        <use href="/icons/all-icons.svg#icon-search" />
+      </svg>
+    </div>
 
-  return (
-    <>
-      <div className={`search cursor-pointer ${isMobile ? '' : 'hidden sm:block'}`}>
-        <svg className={`icon-search ${slideMenu ? 'text-native' : 'text-black'}`} width={24} height={24}>
-          <use href={`/icons/all-icons.svg#icon-search`}></use>
-        </svg>
-      </div>
+    <LanguageSwitch className={`${isMobile ? '' : 'hidden sm:flex'}`} />
 
-      <LanguageSwitch className={`${isMobile ? '' : 'hidden sm:flex'}`} />
-
-      <div className={`login ${isMobile ? 'flex' : 'hidden sm:flex'} items-center cursor-pointer gap-1 ${slideMenu ? 'text-native' : 'text-black'}`}>
-        <svg className="icon-login" width={18} height={18}>
-          <use href={`/icons/all-icons.svg#icon-login`} />
-        </svg>
-        Login
-      </div>
-    </>
-  )
-}
+    <div
+      className={`login ${isMobile ? 'flex' : 'hidden sm:flex'} items-center cursor-pointer gap-1.5 text-sm font-medium transition-colors ${
+        slideMenu ? 'text-[#e89a78]' : 'text-[#0a0e1a] hover:text-[#e89a78]'
+      }`}
+    >
+      <svg className="icon-login" width={17} height={17}>
+        <use href="/icons/all-icons.svg#icon-login" />
+      </svg>
+      Login
+    </div>
+  </>
+);
 
 export default Navbar;

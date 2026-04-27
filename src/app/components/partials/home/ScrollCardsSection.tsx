@@ -3,55 +3,46 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-transition-progress/next";
-
-const NOISE_URI = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.4 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>";
+import BracketFrame from "../../ui/BracketFrame";
 
 const cards = [
   {
+    number: "01",
     title: "Custom Development",
     subtitle: "Tailored software built precisely for your business workflows and goals.",
     href: "/services/custom-development",
-    bg: [
-      "radial-gradient(circle at 20% 30%, #c9a0c9 0%, transparent 55%)",
-      "radial-gradient(circle at 75% 20%, #e8b8a8 0%, transparent 50%)",
-      "radial-gradient(circle at 60% 80%, #a89bc4 0%, transparent 60%)",
-      "radial-gradient(circle at 30% 70%, #d4a89c 0%, transparent 55%)",
-      "linear-gradient(135deg, #d9b8b0 0%, #c9a0b8 100%)",
-    ].join(", "),
+    background: "linear-gradient(135deg, #F0A062 0%, #E85D2F 100%)",
+    border: undefined,
+    textColor: "#F5F2EA",
+    numColor: "rgba(245,242,234,0.7)",
+    bracketColor: "rgba(245,242,234,0.5)",
+    hatch: false,
   },
   {
+    number: "02",
     title: "Design",
     subtitle: "Beautiful, intuitive interfaces that users actually love to use.",
     href: "/services/design",
-    bg: [
-      "radial-gradient(circle at 50% 50%, #f4b97a 0%, transparent 55%)",
-      "radial-gradient(circle at 15% 15%, #c99bc4 0%, transparent 45%)",
-      "radial-gradient(circle at 80% 75%, #f4a07c 0%, transparent 50%)",
-      "radial-gradient(circle at 62% 18%, #f9d4a0 0%, transparent 55%)",
-      "linear-gradient(135deg, #e8a87c 0%, #f4c99c 100%)",
-    ].join(", "),
+    background: "#F5F2EA",
+    border: "1.5px solid #1A1A1A",
+    textColor: "#1A1A1A",
+    numColor: "#888888",
+    bracketColor: "#1A1A1A",
+    hatch: true,
   },
   {
+    number: "03",
     title: "AI Agents & RAG",
     subtitle: "Intelligent automation and retrieval-augmented generation for your data.",
     href: "/services/ai-agents-rag",
-    bg: [
-      "radial-gradient(circle at 20% 70%, #d4845c 0%, transparent 55%)",
-      "radial-gradient(circle at 70% 28%, #9a96c4 0%, transparent 55%)",
-      "radial-gradient(circle at 42% 42%, #c4a870 0%, transparent 50%)",
-      "radial-gradient(circle at 82% 80%, #b88c6c 0%, transparent 50%)",
-      "linear-gradient(135deg, #c88968 0%, #9a96c4 100%)",
-    ].join(", "),
+    background: "linear-gradient(135deg, #1A1A1A 0%, #E85D2F 140%)",
+    border: undefined,
+    textColor: "#F5F2EA",
+    numColor: "#F0A062",
+    bracketColor: "rgba(245,242,234,0.5)",
+    hatch: false,
   },
 ];
-
-const NoiseOverlay = () => (
-  <div
-    aria-hidden
-    className="pointer-events-none absolute inset-0 rounded-2xl"
-    style={{ backgroundImage: `url("${NOISE_URI}")`, mixBlendMode: "overlay", opacity: 0.5 }}
-  />
-);
 
 /* ── Mobile ── */
 function MobileCards() {
@@ -62,15 +53,44 @@ function MobileCards() {
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ scale: 1.02 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.55, delay: i * 0.1 }}
-            className="relative rounded-2xl overflow-hidden flex flex-col justify-between p-6 min-h-[200px] cursor-pointer"
-            style={{ background: card.bg }}
+            whileHover={{ y: -2, boxShadow: "0 8px 24px rgba(0,0,0,0.08)", transition: { duration: 0.2 } }}
+            className="relative overflow-hidden flex flex-col justify-between p-6 min-h-[200px] cursor-pointer"
+            style={{
+              background: card.background,
+              border: card.border,
+              borderRadius: 18,
+            }}
           >
-            <NoiseOverlay />
-            <p className="relative text-sm font-medium text-white/80 leading-relaxed max-w-[85%]">{card.subtitle}</p>
-            <h3 className="relative text-2xl font-black leading-tight text-white mt-4">{card.title}</h3>
+            {card.hatch && (
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  borderRadius: 18,
+                  background:
+                    "repeating-linear-gradient(135deg, transparent 0px 8px, rgba(232,93,47,0.08) 8px 9px)",
+                }}
+              />
+            )}
+            <BracketFrame color={card.bracketColor} />
+            <p
+              className="relative text-sm font-medium leading-relaxed max-w-[85%]"
+              style={{ color: card.textColor, opacity: 0.7 }}
+            >
+              {card.subtitle}
+            </p>
+            <h3
+              className="relative font-semibold leading-[1.05] mt-4"
+              style={{
+                color: card.textColor,
+                fontSize: 22,
+                letterSpacing: "-0.01em",
+              }}
+            >
+              {card.title}
+            </h3>
           </motion.div>
         </Link>
       ))}
@@ -87,10 +107,10 @@ function DesktopCards() {
     offset: ["start end", "center 38%"],
   });
 
-  const leftX    = useTransform(scrollYProgress, [0, 1], [290, 0]);
-  const leftRot  = useTransform(scrollYProgress, [0, 1], [-8, 0]);
-  const rightX   = useTransform(scrollYProgress, [0, 1], [-290, 0]);
-  const rightRot = useTransform(scrollYProgress, [0, 1], [6, 0]);
+  const leftX   = useTransform(scrollYProgress, [0, 1], [290, 0]);
+  const leftRot = useTransform(scrollYProgress, [0, 1], [-8, 0]);
+  const rightX  = useTransform(scrollYProgress, [0, 1], [-290, 0]);
+  const rightRot= useTransform(scrollYProgress, [0, 1], [6, 0]);
 
   const titleOpacity = useTransform(scrollYProgress, [0, 0.75], [0.3, 1]);
   const titleBlur    = useTransform(scrollYProgress, [0, 0.75], ["blur(5px)", "blur(0px)"]);
@@ -106,19 +126,63 @@ function DesktopCards() {
       {cards.map((card, i) => (
         <Link key={i} href={card.href} className="block">
           <motion.div
-            className="relative rounded-2xl overflow-hidden flex flex-col justify-end p-8 xl:p-10 min-h-[440px] cursor-pointer"
+            className="relative overflow-hidden flex flex-col justify-end cursor-pointer"
             style={{
               x: transforms[i].x as any,
               rotate: transforms[i].rotate as any,
               zIndex: transforms[i].z,
-              background: card.bg,
+              background: card.background,
+              border: card.border,
+              borderRadius: 18,
+              padding: 24,
+              aspectRatio: "1 / 1.05",
             }}
-            whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+            whileHover={{
+              y: -2,
+              boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
+              transition: { duration: 0.2 },
+            }}
           >
-            <NoiseOverlay />
+            {/* Number badge */}
+            <span
+              aria-hidden
+              className="absolute"
+              style={{
+                top: 16,
+                left: 18,
+                fontFamily: "monospace",
+                fontSize: 10,
+                letterSpacing: "0.12em",
+                color: card.numColor,
+              }}
+            >
+              {card.number}
+            </span>
+
+            {/* Diagonal hatch overlay (card 2 only) */}
+            {card.hatch && (
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  borderRadius: 18,
+                  background:
+                    "repeating-linear-gradient(135deg, transparent 0px 8px, rgba(232,93,47,0.08) 8px 9px)",
+                }}
+              />
+            )}
+
+            <BracketFrame color={card.bracketColor} />
+
             <motion.h3
-              className="relative text-3xl xl:text-4xl font-black leading-tight text-white"
-              style={{ opacity: titleOpacity, filter: titleBlur }}
+              className="relative font-semibold leading-[1.05]"
+              style={{
+                color: card.textColor,
+                fontSize: 24,
+                letterSpacing: "-0.01em",
+                opacity: titleOpacity,
+                filter: titleBlur,
+              }}
             >
               {card.title}
             </motion.h3>

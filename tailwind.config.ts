@@ -13,6 +13,10 @@ const config: Config = {
         primary: ['var(--font-montserrat)', fontFamily.sans],
       },
       colors: {
+        'native-orange': '#E85D2F',
+        'native-peach': '#F0A062',
+        'native-ink': '#1A1A1A',
+        'native-cream': '#F5F2EA',
         primary: '#283D3B',
         secondary: '#031526',
         native: '#F89201',

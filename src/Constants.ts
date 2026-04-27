@@ -7,6 +7,8 @@ export const Constants = {
     AZURE_CLOUDIFY: '/azure-cloudify',
     MANAGED_SERVICES: '/managed-services',
     CLOUD_NATIVE_SD: '/cloud-native-sd',
+    CLOUD_SOFTWARE_ARCHITECTURE: '/cloud-software-architecture',
+    MIGRATE_TO_AZURE: '/migrate-to-azure',
     DATA_LIFECYCLE_MANAGEMENT: '/data-lifecycle-management',
     CSP_ENTERPRISE: '/csp-enterprise',
 
@@ -21,6 +23,8 @@ export const Constants = {
     KNOWLEDGE_BASE: '/knowledge-base',
     ABOUT_US: '/about-us',
     GET_IN_TOUCH: '/get-in-touch',
+    SCHEDULE_CALL: '/schedule-call',
+    CASE_STUDIES: '/case-studies',
     CERTIFICATIONS: '/certifications',
     
     LOGIN: '/login',
