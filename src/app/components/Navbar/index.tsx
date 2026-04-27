@@ -251,144 +251,151 @@ function Navbar() {
         )}
       </AnimatePresence>
 
-      {/* ── Mobile sidebar backdrop ── */}
-      <div
-        className={`${openSide ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} fixed inset-0 z-[99] transition-opacity duration-300 backdrop-blur-sm bg-black/25`}
-        onClick={() => setOpenSide(false)}
-      />
-
-      {/* ── Mobile sidebar ── */}
+      {/* ── Mobile full-screen overlay ── */}
       <aside
         className={`${
           openSide ? 'translate-x-0' : 'translate-x-full'
-        } fixed inset-y-0 right-0 z-[100] w-full md:w-[360px] bg-white/98 backdrop-blur-xl text-black transform transition-transform duration-300 ease-in-out overflow-y-auto flex flex-col`}
+        } fixed inset-0 z-[100] bg-[#0a0e1a] transform transition-transform duration-300 ease-in-out flex flex-col p-4 overflow-y-auto`}
       >
-        {/* Sidebar header */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-black/[0.06]">
-          <Logo />
-          <button
-            className="w-9 h-9 rounded-full hover:bg-black/5 flex items-center justify-center transition-colors"
-            onClick={() => setOpenSide(false)}
-            aria-label="Close menu"
-          >
-            <svg width={20} height={20}>
-              <use href="/icons/all-icons.svg#icon-nav-close" />
-            </svg>
-          </button>
+        {/* ── Top bar ── */}
+        <div className="flex items-center justify-between shrink-0">
+          {/* Brand logo */}
+          <div className="flex items-center cursor-pointer" onClick={() => setOpenSide(false)}>
+            <Logo isInvert />
+          </div>
+
+          <div className="flex items-center gap-2">
+            {/* Moon icon */}
+            <button
+              className="w-10 h-10 rounded-xl bg-white/[0.08] flex items-center justify-center text-white/50 hover:bg-white/[0.13] hover:text-white transition-all"
+              aria-label="Toggle theme"
+            >
+              <svg viewBox="0 0 24 24" fill="none" className="w-[18px] h-[18px]" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+            </button>
+
+            {/* Close X */}
+            <button
+              className="w-10 h-10 rounded-xl bg-[#e89a78]/15 border border-[#e89a78]/30 flex items-center justify-center text-[#e89a78] hover:bg-[#e89a78]/25 hover:border-[#e89a78]/50 transition-all"
+              onClick={() => { setOpenSide(false); setExpanded(null); }}
+              aria-label="Close menu"
+            >
+              <svg viewBox="0 0 24 24" fill="none" className="w-[18px] h-[18px]" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 6 6 18M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
         </div>
 
-        {/* Actions row */}
-        <div className="flex items-center gap-5 px-5 py-3 border-b border-black/[0.06]">
-          <NavSettings slideMenu={false} isMobile />
-        </div>
-
-        {/* Nav links */}
-        <ul className="flex flex-col gap-1 px-3 pt-4 flex-1">
-          {pages.map((item) => (
-            <li key={item.url} className="flex flex-col">
-              <div
-                className={`flex items-center justify-between rounded-xl px-3 py-3 transition-colors ${
-                  pathname === item.url ? 'bg-[#f4ebe8]' : 'hover:bg-[#faf7f4]'
-                }`}
-              >
-                {item.soon ? (
-                  <CoomingSoon>
-                    <span className="text-base font-medium text-[#b8b2aa]">{item.title}</span>
-                  </CoomingSoon>
-                ) : item.title === 'Get in touch' ? (
-                  <Link
-                    href={item.url}
-                    onClick={() => setOpenSide(false)}
-                    className="group flex items-center gap-2 px-4 py-2 rounded-full bg-[#0a0e1a] hover:bg-[#e89a78] text-white text-sm font-semibold transition-all duration-200"
-                  >
-                    Get in touch
-                    <svg
-                      className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}
-                      strokeLinecap="round" strokeLinejoin="round"
-                    >
-                      <path d="M7 17L17 7" /><path d="M7 7h10v10" />
-                    </svg>
-                  </Link>
-                ) : (
-                  <Link
-                    href={item.url}
-                    onClick={() => { if (!item.children) setOpenSide(false); }}
-                    className={`text-base font-medium flex-1 ${
-                      pathname === item.url ? 'text-[#e89a78]' : 'text-[#0a0e1a]'
-                    }`}
-                  >
-                    {item.title}
-                  </Link>
-                )}
-                {item.children && (
-                  <button
-                    onClick={() => setExpanded(isExpanded === item.url ? null : item.url)}
-                    className="w-7 h-7 rounded-lg bg-black/[0.05] hover:bg-[#f4ebe8] flex items-center justify-center transition-colors shrink-0"
-                    aria-label={isExpanded === item.url ? 'Collapse' : 'Expand'}
-                  >
-                    {isExpanded === item.url
-                      ? <MinusIcon className="size-3.5 text-[#e89a78]" />
-                      : <PlusIcon className="size-3.5 text-[#0a0e1a]/60" />}
-                  </button>
-                )}
-              </div>
-
-              {/* Mobile accordion */}
-              {item.children && (
-                <Transition
-                  show={isExpanded === item.url}
-                  appear
-                  enter="transition-opacity duration-200"
-                  enterFrom="opacity-0"
-                  enterTo="opacity-100"
-                  leave="transition-opacity duration-150"
-                  leaveFrom="opacity-100"
-                  leaveTo="opacity-0"
-                >
-                  <div className="pl-4 pr-2 py-2 flex flex-col gap-3">
-                    {item.children.map((col) => (
-                      <div key={col.url}>
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-[#e89a78] px-2 mb-1.5 flex items-center gap-1.5">
-                          <span className="w-[3px] h-3 rounded-full bg-[#e89a78]" />
-                          {col.title}
-                        </p>
-                        <ul className="flex flex-col gap-0.5">
-                          {col.children?.map((child) => (
-                            <li key={child.url}>
-                              {child.soon ? (
-                                <CoomingSoon>
-                                  <span className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-[#c0b8b0]">
-                                    {child.title}
-                                  </span>
-                                </CoomingSoon>
-                              ) : (
-                                <Link
-                                  href={child.url}
-                                  onClick={() => setOpenSide(false)}
-                                  className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-[#4a4a4a] hover:bg-[#f4ebe8] hover:text-[#0a0e1a] transition-colors"
-                                >
-                                  <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78]/30 shrink-0" />
-                                  {child.title}
-                                </Link>
-                              )}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
+        {/* ── Nav items — vertically centered ── */}
+        <nav className="flex-1 flex flex-col justify-center py-8">
+          <ul className="flex flex-col" style={{ gap: 36 }}>
+            {pages
+              .filter((item) => item.title !== 'Get in touch')
+              .map((item) => (
+                <li key={item.url}>
+                  <div className="flex items-center gap-3">
+                    {item.soon ? (
+                      <CoomingSoon>
+                        <span
+                          className="text-[32px] leading-none text-white/60 select-none"
+                          style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                        >
+                          {item.title}
+                        </span>
+                      </CoomingSoon>
+                    ) : (
+                      <Link
+                        href={item.url}
+                        onClick={() => { if (!item.children) setOpenSide(false); }}
+                        className="text-[32px] leading-none text-white/60 hover:text-[#e89a78] hover:translate-x-1.5 transition-all duration-200 inline-block"
+                        style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                      >
+                        {item.title}
+                      </Link>
+                    )}
+                    {item.children && (
+                      <button
+                        onClick={() => setExpanded(isExpanded === item.url ? null : item.url)}
+                        className="w-7 h-7 rounded-lg bg-white/[0.07] hover:bg-white/[0.13] flex items-center justify-center transition-colors shrink-0"
+                        aria-label={isExpanded === item.url ? 'Collapse' : 'Expand'}
+                      >
+                        {isExpanded === item.url
+                          ? <MinusIcon className="size-3.5 text-[#e89a78]" />
+                          : <PlusIcon className="size-3.5 text-white/40" />}
+                      </button>
+                    )}
                   </div>
-                </Transition>
-              )}
-            </li>
-          ))}
-        </ul>
 
-        {/* Sidebar footer */}
-        <div className="px-5 py-6 border-t border-black/[0.06] mt-auto">
-          <p className="text-xs text-[#b8b2aa] text-center">
-            © {new Date().getFullYear()} NativeCloud
-          </p>
+                  {/* Sub-items accordion */}
+                  {item.children && (
+                    <Transition
+                      show={isExpanded === item.url}
+                      appear
+                      enter="transition-opacity duration-200"
+                      enterFrom="opacity-0"
+                      enterTo="opacity-100"
+                      leave="transition-opacity duration-150"
+                      leaveFrom="opacity-100"
+                      leaveTo="opacity-0"
+                    >
+                      <div className="mt-5 pl-1 flex flex-col gap-4">
+                        {item.children.map((col) => (
+                          <div key={col.url}>
+                            <p className="text-[10px] font-bold uppercase tracking-widest text-[#e89a78] mb-2 flex items-center gap-1.5">
+                              <span className="w-[3px] h-3 rounded-full bg-[#e89a78]" />
+                              {col.title}
+                            </p>
+                            <ul className="flex flex-col gap-0.5">
+                              {col.children?.map((child) => (
+                                <li key={child.url}>
+                                  {child.soon ? (
+                                    <CoomingSoon>
+                                      <span className="flex items-center gap-2 px-2 py-1.5 text-sm text-[#444]">
+                                        {child.title}
+                                      </span>
+                                    </CoomingSoon>
+                                  ) : (
+                                    <Link
+                                      href={child.url}
+                                      onClick={() => setOpenSide(false)}
+                                      className="flex items-center gap-2 px-2 py-1.5 text-sm text-white/35 hover:text-[#e89a78] transition-colors"
+                                    >
+                                      <span className="w-1 h-1 rounded-full bg-[#e89a78]/50 shrink-0" />
+                                      {child.title}
+                                    </Link>
+                                  )}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    </Transition>
+                  )}
+                </li>
+              ))}
+          </ul>
+        </nav>
+
+        {/* ── Bottom: sign in + CTA ── */}
+        <div className="shrink-0 flex flex-col gap-3 pt-4">
+          <div className="flex justify-center">
+            <button className="text-sm text-white/30 hover:text-white/55 transition-colors">
+              Sign in
+            </button>
+          </div>
+          <Link
+            href={Constants.PAGES.SCHEDULE_CALL}
+            onClick={() => setOpenSide(false)}
+            className="w-full bg-[#e89a78] hover:bg-[#d4836a] text-white font-semibold text-base flex items-center justify-center gap-3 py-4 rounded-2xl shadow-lg shadow-[#e89a78]/20 hover:shadow-[#e89a78]/35 transition-all duration-200"
+          >
+            Get Started
+            <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </Link>
         </div>
       </aside>
     </header>

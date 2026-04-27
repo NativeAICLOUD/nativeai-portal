@@ -86,19 +86,27 @@ export default function ScheduleCallPage() {
     'w-full bg-white border border-[#e8e0d8] focus:border-[#e89a78] focus:ring-2 focus:ring-[#e89a78]/15 outline-none rounded-xl px-4 py-3.5 text-sm text-[#0a0e1a] placeholder:text-[#b8b2aa] transition-all duration-150';
 
   return (
-    <div
-      className="min-h-screen bg-[#f4ebe8]"
-      style={{
-        backgroundImage: "url('/img/noise-background.jpg')",
-        backgroundBlendMode: 'multiply',
-        backgroundSize: '300px 300px',
-      }}
-    >
+    <div className="min-h-screen bg-[#0a0e1a] relative overflow-hidden">
+      {/* Decorative background glows */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-[#e89a78]/[0.07] blur-[120px]" />
+        <div className="absolute top-1/2 -right-60 w-[500px] h-[500px] rounded-full bg-[#e89a78]/[0.05] blur-[100px]" />
+        {/* Subtle grid */}
+        <div
+          className="absolute inset-0 opacity-[0.035]"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(255,255,255,0.7) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.7) 1px,transparent 1px)',
+            backgroundSize: '48px 48px',
+          }}
+        />
+      </div>
+
       {/* ── Hero ── */}
-      <div className="max-w-9xl mx-auto px-6 sm:px-12 pt-40 pb-12">
+      <div className="relative max-w-9xl mx-auto px-6 sm:px-12 pt-40 pb-12">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-sm text-[#6b6b6b] hover:text-[#0a0e1a] transition-colors mb-8 group"
+          className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-white/80 transition-colors mb-8 group"
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 transition-transform group-hover:-translate-x-0.5">
             <path d="M19 12H5M12 5l-7 7 7 7" />
@@ -106,39 +114,39 @@ export default function ScheduleCallPage() {
           Back to home
         </Link>
 
-        <div className="inline-flex items-center gap-2 bg-[#e89a78]/10 border border-[#e89a78]/25 rounded-full px-4 py-1.5 mb-6">
+        <div className="inline-flex items-center gap-2 bg-[#e89a78]/15 border border-[#e89a78]/30 rounded-full px-4 py-1.5 mb-6">
           <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78]" />
           <p className="text-xs uppercase tracking-widest text-[#e89a78] font-semibold">Free consultation</p>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0a0e1a] leading-tight mb-4 max-w-2xl">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight mb-4 max-w-2xl">
           Schedule a{' '}
           <span className="bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] bg-clip-text text-transparent">
             free call
           </span>{' '}
           with our team
         </h1>
-        <p className="text-[#6b6b6b] text-base sm:text-lg max-w-xl leading-relaxed">
+        <p className="text-white/50 text-base sm:text-lg max-w-xl leading-relaxed">
           Tell us where you are and where you want to go. We&apos;ll map out the best path forward — together.
         </p>
       </div>
 
       {/* ── Main content ── */}
-      <div className="max-w-9xl mx-auto px-6 sm:px-12 pb-28 grid lg:grid-cols-[1fr_1.6fr] gap-12 lg:gap-20 items-start">
+      <div className="relative max-w-9xl mx-auto px-6 sm:px-12 pb-28 grid lg:grid-cols-[1fr_1.6fr] gap-12 lg:gap-20 items-start">
 
         {/* Left — What to expect */}
         <div className="flex flex-col gap-8">
           <div>
-            <h2 className="text-lg font-bold text-[#0a0e1a] mb-6">What to expect</h2>
+            <h2 className="text-lg font-bold text-white mb-6">What to expect</h2>
             <div className="flex flex-col gap-5">
               {expectations.map((item, i) => (
                 <div key={i} className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-white border border-[#e8e0d8] flex items-center justify-center text-[#e89a78] shrink-0 shadow-sm">
+                  <div className="w-10 h-10 rounded-xl bg-white/[0.07] border border-white/10 flex items-center justify-center text-[#e89a78] shrink-0">
                     {item.icon}
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-[#0a0e1a] mb-0.5">{item.title}</p>
-                    <p className="text-sm text-[#6b6b6b] leading-relaxed">{item.desc}</p>
+                    <p className="text-sm font-semibold text-white mb-0.5">{item.title}</p>
+                    <p className="text-sm text-white/45 leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -146,16 +154,16 @@ export default function ScheduleCallPage() {
           </div>
 
           {/* Divider */}
-          <div className="border-t border-[#e8e0d8]" />
+          <div className="border-t border-white/[0.08]" />
 
           {/* Contact info */}
           <div className="flex flex-col gap-3">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#b8b2aa]">Prefer email or phone?</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-white/25">Prefer email or phone?</p>
             <a
               href={`mailto:${Constants.MAIL}`}
-              className="inline-flex items-center gap-2.5 text-sm text-[#0a0e1a] hover:text-[#e89a78] transition-colors font-medium group"
+              className="inline-flex items-center gap-2.5 text-sm text-white/60 hover:text-[#e89a78] transition-colors font-medium group"
             >
-              <span className="w-8 h-8 rounded-lg bg-white border border-[#e8e0d8] flex items-center justify-center shrink-0">
+              <span className="w-8 h-8 rounded-lg bg-white/[0.07] border border-white/10 flex items-center justify-center shrink-0">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-[#e89a78]">
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
                 </svg>
@@ -164,9 +172,9 @@ export default function ScheduleCallPage() {
             </a>
             <a
               href={`tel:${Constants.PHONE}`}
-              className="inline-flex items-center gap-2.5 text-sm text-[#0a0e1a] hover:text-[#e89a78] transition-colors font-medium"
+              className="inline-flex items-center gap-2.5 text-sm text-white/60 hover:text-[#e89a78] transition-colors font-medium"
             >
-              <span className="w-8 h-8 rounded-lg bg-white border border-[#e8e0d8] flex items-center justify-center shrink-0">
+              <span className="w-8 h-8 rounded-lg bg-white/[0.07] border border-white/10 flex items-center justify-center shrink-0">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-[#e89a78]">
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
                 </svg>

@@ -98,62 +98,6 @@ const CloudServicesSection = () => {
         </div>
       </div>
 
-      {/* Cloud services grid */}
-      <div className="max-w-9xl mx-auto px-6 sm:px-12 xl:px-16 py-16 sm:py-24">
-
-        <motion.div
-          className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12"
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          viewport={{ once: true, margin: '-80px' }}
-        >
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
-              <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">What we deliver</p>
-            </div>
-            <h2 className="text-2xl sm:text-3.5xl lg:text-4xl font-bold text-[#0a0e1a] leading-tight max-w-lg">
-              Every cloud service your business needs —{' '}
-              <span className="relative inline-block">
-                <span className="bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] bg-clip-text text-transparent">
-                  under one roof
-                </span>
-                <span className="absolute -bottom-1 left-0 w-full h-[2px] rounded-full bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] opacity-50" />
-              </span>
-            </h2>
-          </div>
-          <p className="text-[#6b6b6b] text-sm max-w-xs text-left sm:text-right">
-            From first migration to full AI automation — we cover the entire cloud journey on Azure and AWS.
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 36, scale: 0.96 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.45, ease: 'easeOut', delay: index * 0.06 }}
-              viewport={{ once: true, margin: '-50px' }}
-              whileHover={{ y: -4, transition: { duration: 0.18 } }}
-              className="group flex flex-col items-center gap-4 p-6 rounded-2xl border border-[#e8e0d8] hover:border-[#e89a78] hover:shadow-md bg-[#faf7f4] hover:bg-[#f4ebe8] transition-colors duration-300 text-center"
-            >
-              <div className="relative w-[72px] h-[72px] flex items-center justify-center">
-                <div className="absolute inset-0 bg-[#ece8e0] group-hover:bg-[#e8d8cc] rounded-xl transition-colors duration-300" />
-                <Image
-                  src={service.src}
-                  alt={service.title}
-                  width={service.w}
-                  height={service.h}
-                  className="relative z-10 opacity-80 group-hover:opacity-100 transition-opacity max-w-[48px] max-h-[48px] object-contain"
-                />
-              </div>
-              <p className="text-sm font-medium text-[#0a0e1a] leading-snug">{service.title}</p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
     </section>
   );
 };
