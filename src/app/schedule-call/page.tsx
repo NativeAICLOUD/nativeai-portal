@@ -69,6 +69,7 @@ export default function ScheduleCallPage() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const update = (field: keyof FormState) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -77,9 +78,20 @@ export default function ScheduleCallPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1000));
-    setLoading(false);
-    setSubmitted(true);
+    setError(null);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error('server');
+      setSubmitted(true);
+    } catch {
+      setError('Something went wrong. Please email us directly at artan@nativeai.cloud');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const inputCls =
@@ -271,6 +283,13 @@ export default function ScheduleCallPage() {
                     className={`${inputCls} resize-none`}
                   />
                 </div>
+
+                {/* Error */}
+                {error && (
+                  <p className="text-sm text-red-500 bg-red-50 border border-red-100 rounded-xl px-4 py-3">
+                    {error}
+                  </p>
+                )}
 
                 {/* Submit */}
                 <button

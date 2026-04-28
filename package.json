@@ -37,6 +37,7 @@
     "react-hook-form": "^7.53.0",
     "react-toastify": "^10.0.5",
     "react-transition-progress": "^0.0.4",
+    "resend": "^6.12.2",
     "sharp": "^0.33.5",
     "tailwind-merge": "^2.5.2",
     "tailwind-variants": "^0.2.1",
