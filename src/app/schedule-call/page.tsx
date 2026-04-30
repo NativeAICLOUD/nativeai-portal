@@ -1,8 +1,254 @@
 'use client';
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import { Link } from 'react-transition-progress/next';
 import { Constants } from '@/Constants';
+
+/* ── Country codes ── */
+type Country = { code: string; dial: string; name: string; flag: string };
+const COUNTRIES: Country[] = [
+  { code: 'CH', dial: '+41',  name: 'Switzerland',      flag: '🇨🇭' },
+  { code: 'DE', dial: '+49',  name: 'Germany',           flag: '🇩🇪' },
+  { code: 'AT', dial: '+43',  name: 'Austria',           flag: '🇦🇹' },
+  { code: 'FR', dial: '+33',  name: 'France',            flag: '🇫🇷' },
+  { code: 'IT', dial: '+39',  name: 'Italy',             flag: '🇮🇹' },
+  { code: 'GB', dial: '+44',  name: 'United Kingdom',    flag: '🇬🇧' },
+  { code: 'US', dial: '+1',   name: 'United States',     flag: '🇺🇸' },
+  { code: 'CA', dial: '+1',   name: 'Canada',            flag: '🇨🇦' },
+  { code: 'NL', dial: '+31',  name: 'Netherlands',       flag: '🇳🇱' },
+  { code: 'BE', dial: '+32',  name: 'Belgium',           flag: '🇧🇪' },
+  { code: 'SE', dial: '+46',  name: 'Sweden',            flag: '🇸🇪' },
+  { code: 'NO', dial: '+47',  name: 'Norway',            flag: '🇳🇴' },
+  { code: 'DK', dial: '+45',  name: 'Denmark',           flag: '🇩🇰' },
+  { code: 'FI', dial: '+358', name: 'Finland',           flag: '🇫🇮' },
+  { code: 'ES', dial: '+34',  name: 'Spain',             flag: '🇪🇸' },
+  { code: 'PT', dial: '+351', name: 'Portugal',          flag: '🇵🇹' },
+  { code: 'PL', dial: '+48',  name: 'Poland',            flag: '🇵🇱' },
+  { code: 'CZ', dial: '+420', name: 'Czech Republic',    flag: '🇨🇿' },
+  { code: 'SK', dial: '+421', name: 'Slovakia',          flag: '🇸🇰' },
+  { code: 'HU', dial: '+36',  name: 'Hungary',           flag: '🇭🇺' },
+  { code: 'RO', dial: '+40',  name: 'Romania',           flag: '🇷🇴' },
+  { code: 'AL', dial: '+355', name: 'Albania',           flag: '🇦🇱' },
+  { code: 'XK', dial: '+383', name: 'Kosovo',            flag: '🇽🇰' },
+  { code: 'RS', dial: '+381', name: 'Serbia',            flag: '🇷🇸' },
+  { code: 'HR', dial: '+385', name: 'Croatia',           flag: '🇭🇷' },
+  { code: 'SI', dial: '+386', name: 'Slovenia',          flag: '🇸🇮' },
+  { code: 'BA', dial: '+387', name: 'Bosnia',            flag: '🇧🇦' },
+  { code: 'GR', dial: '+30',  name: 'Greece',            flag: '🇬🇷' },
+  { code: 'TR', dial: '+90',  name: 'Turkey',            flag: '🇹🇷' },
+  { code: 'IL', dial: '+972', name: 'Israel',            flag: '🇮🇱' },
+  { code: 'AE', dial: '+971', name: 'UAE',               flag: '🇦🇪' },
+  { code: 'SA', dial: '+966', name: 'Saudi Arabia',      flag: '🇸🇦' },
+  { code: 'AU', dial: '+61',  name: 'Australia',         flag: '🇦🇺' },
+  { code: 'NZ', dial: '+64',  name: 'New Zealand',       flag: '🇳🇿' },
+  { code: 'IN', dial: '+91',  name: 'India',             flag: '🇮🇳' },
+  { code: 'SG', dial: '+65',  name: 'Singapore',         flag: '🇸🇬' },
+  { code: 'JP', dial: '+81',  name: 'Japan',             flag: '🇯🇵' },
+  { code: 'KR', dial: '+82',  name: 'South Korea',       flag: '🇰🇷' },
+  { code: 'CN', dial: '+86',  name: 'China',             flag: '🇨🇳' },
+  { code: 'BR', dial: '+55',  name: 'Brazil',            flag: '🇧🇷' },
+  { code: 'MX', dial: '+52',  name: 'Mexico',            flag: '🇲🇽' },
+  { code: 'ZA', dial: '+27',  name: 'South Africa',      flag: '🇿🇦' },
+];
+
+function detectCountry(): Country {
+  try {
+    const lang = navigator.language || '';
+    const regionCode = lang.split('-')[1]?.toUpperCase();
+    if (regionCode) {
+      const match = COUNTRIES.find(c => c.code === regionCode);
+      if (match) return match;
+    }
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (tz.includes('Zurich') || tz.includes('Geneva')) return COUNTRIES[0];
+    if (tz.includes('Berlin') || tz.includes('Vienna')) return COUNTRIES.find(c => c.code === 'DE')!;
+    if (tz.includes('London')) return COUNTRIES.find(c => c.code === 'GB')!;
+    if (tz.includes('New_York') || tz.includes('Chicago') || tz.includes('Los_Angeles'))
+      return COUNTRIES.find(c => c.code === 'US')!;
+  } catch { /* ignore */ }
+  return COUNTRIES[0];
+}
+
+function PhoneInputField({
+  value, onChange, onBlur, className,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  onBlur: () => void;
+  className?: string;
+}) {
+  const [country, setCountry] = useState<Country>(COUNTRIES[0]);
+  const [number, setNumber] = useState('');
+  const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState('');
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const searchRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => { setCountry(detectCountry()); }, []);
+
+  useEffect(() => {
+    onChange(number ? `${country.dial} ${number}` : '');
+  }, [country, number]);
+
+  useEffect(() => {
+    if (open) setTimeout(() => searchRef.current?.focus(), 50);
+  }, [open]);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setOpen(false); setSearch('');
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  const filtered = useMemo(() =>
+    search.trim()
+      ? COUNTRIES.filter(c =>
+          c.name.toLowerCase().includes(search.toLowerCase()) ||
+          c.dial.includes(search) ||
+          c.code.toLowerCase().includes(search.toLowerCase()))
+      : COUNTRIES,
+    [search]
+  );
+
+  return (
+    <div className="relative flex" ref={dropdownRef}>
+
+      {/* ── Country selector button — liquid glass ── */}
+      <button
+        type="button"
+        onClick={() => setOpen(o => !o)}
+        className="flex items-center gap-1.5 shrink-0 px-3 py-4 sm:py-3.5 rounded-l-2xl transition-all duration-150 focus:outline-none"
+        style={{
+          minWidth: 84,
+          background: open ? '#ece9e5' : '#f5f3f0',
+          border: '1px solid #f5f3f0',
+          borderRight: '1px solid #e8e4df',
+          borderRadius: '16px 0 0 16px',
+          transition: 'background 0.15s',
+        }}
+      >
+        <span className="text-[17px] leading-none">{country.flag}</span>
+        <span className="text-[12px] font-semibold text-[#0a0e1a]/55 tabular-nums">{country.dial}</span>
+        <svg
+          width="9" height="9" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+          className={`shrink-0 text-[#0a0e1a]/25 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+
+      {/* ── Number input ── */}
+      <input
+        type="tel"
+        value={number}
+        onChange={e => setNumber(e.target.value)}
+        onBlur={onBlur}
+        placeholder="79 123 45 67"
+        className={className}
+        style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0, borderLeft: 'none' }}
+      />
+
+      {/* ── Dropdown — Apple liquid glass ── */}
+      {open && (
+        <div
+          className="absolute top-full left-0 z-50 mt-2 w-72 overflow-hidden"
+          style={{
+            background: 'rgba(255,255,255,0.72)',
+            backdropFilter: 'blur(64px) saturate(200%) brightness(110%)',
+            WebkitBackdropFilter: 'blur(64px) saturate(200%) brightness(110%)',
+            border: '1px solid rgba(255,255,255,0.65)',
+            borderRadius: 20,
+            boxShadow:
+              '0 0 0 0.5px rgba(255,255,255,0.20), ' +
+              '0 24px 60px rgba(0,0,0,0.13), ' +
+              '0 4px 12px rgba(0,0,0,0.07), ' +
+              'inset 0 1.5px 0 rgba(255,255,255,0.90)',
+          }}
+        >
+          {/* Search field */}
+          <div className="p-2.5">
+            <div
+              className="flex items-center gap-2 px-3 py-2 rounded-xl"
+              style={{
+                background: 'rgba(255,255,255,0.55)',
+                backdropFilter: 'blur(24px)',
+                WebkitBackdropFilter: 'blur(24px)',
+                border: '1px solid rgba(255,255,255,0.60)',
+                boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.80)',
+              }}
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="text-[#c0bab3] shrink-0">
+                <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
+              </svg>
+              <input
+                ref={searchRef}
+                type="text"
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                placeholder="Country or code…"
+                className="flex-1 bg-transparent text-[13px] text-[#0a0e1a] placeholder:text-[#c0bab3] outline-none"
+              />
+              {search && (
+                <button type="button" onClick={() => setSearch('')} className="text-[#c0bab3] hover:text-[#0a0e1a] transition-colors">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6L6 18M6 6l12 12" /></svg>
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div style={{ height: 1, background: 'rgba(0,0,0,0.05)', margin: '0 12px' }} />
+
+          {/* Country list */}
+          <div className="max-h-52 overflow-y-auto py-1.5">
+            {filtered.length === 0 ? (
+              <p className="text-[12px] text-[#b8b2aa] text-center py-4">No results</p>
+            ) : filtered.map(c => (
+              <button
+                key={`${c.code}-${c.dial}`}
+                type="button"
+                onClick={() => { setCountry(c); setOpen(false); setSearch(''); }}
+                className="w-full flex items-center gap-3 px-3.5 py-2 text-left transition-all duration-100"
+                style={{
+                  background: c.code === country.code
+                    ? 'rgba(240,160,96,0.12)'
+                    : 'transparent',
+                }}
+                onMouseEnter={e => {
+                  if (c.code !== country.code)
+                    (e.currentTarget as HTMLElement).style.background = 'rgba(0,0,0,0.04)';
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLElement).style.background =
+                    c.code === country.code ? 'rgba(240,160,96,0.12)' : 'transparent';
+                }}
+              >
+                <span className="text-[17px] leading-none">{c.flag}</span>
+                <span className="flex-1 text-[13px] text-[#0a0e1a] font-medium">{c.name}</span>
+                <span
+                  className="text-[11px] tabular-nums px-1.5 py-0.5 rounded-md"
+                  style={{
+                    color: c.code === country.code ? '#c4743c' : '#b8b2aa',
+                    background: c.code === country.code ? 'rgba(240,160,96,0.15)' : 'transparent',
+                  }}
+                >
+                  {c.dial}
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+const MONO = "'JetBrains Mono', monospace";
 
 const topics = [
   'AI Agents & LLMs',
@@ -203,14 +449,15 @@ export default function ScheduleCallPage() {
 
   const inputCls = (field: FieldKey, extra = '') => {
     const { err, valid } = fieldState(field);
-    const base = `w-full bg-white border outline-none rounded-xl px-4 py-3.5 text-sm text-[#0a0e1a] placeholder:text-[#c0bab3] transition-all duration-150 focus:ring-2 ${extra}`;
-    if (err) return `${base} border-red-400 focus:border-red-400 focus:ring-red-100`;
-    if (valid) return `${base} border-emerald-400 focus:border-emerald-400 focus:ring-emerald-50`;
-    return `${base} border-[#e8e0d8] focus:border-[#e89a78] focus:ring-[#e89a78]/15`;
+    /* text-base on mobile (≥16px) prevents iOS Safari from zooming on focus */
+    const base = `w-full outline-none rounded-2xl px-4 py-4 sm:py-3.5 text-base sm:text-sm text-[#0a0e1a] placeholder:text-[#0a0e1a]/30 transition-all duration-200 ${extra}`;
+    if (err) return `${base} bg-red-50 border border-red-200 focus:border-red-400 focus:shadow-[0_0_0_3px_rgba(248,113,113,0.12)]`;
+    if (valid) return `${base} bg-emerald-50/50 border border-emerald-200 focus:border-emerald-400 focus:shadow-[0_0_0_3px_rgba(52,211,153,0.10)]`;
+    return `${base} bg-[#f5f3f0] border border-[#f5f3f0] focus:bg-white focus:border-[#e89a78] focus:shadow-[0_0_0_3px_rgba(232,154,120,0.13)]`;
   };
 
   return (
-    <div className="min-h-screen bg-[#06080f] relative overflow-hidden">
+    <div className="min-h-screen bg-[#06080f] relative overflow-hidden" style={{ fontFamily: MONO }}>
       {/* Background — mesh gradient design */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
 
@@ -256,7 +503,7 @@ export default function ScheduleCallPage() {
       </div>
 
       {/* Hero */}
-      <div className="relative max-w-9xl mx-auto px-6 sm:px-12 pt-40 pb-12">
+      <div className="relative max-w-9xl mx-auto px-5 sm:px-12 pt-28 sm:pt-40 pb-8 sm:pb-12">
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-white/80 transition-colors mb-8 group"
@@ -280,10 +527,10 @@ export default function ScheduleCallPage() {
       </div>
 
       {/* Main content */}
-      <div className="relative max-w-9xl mx-auto px-6 sm:px-12 pb-28 grid lg:grid-cols-[1fr_1.6fr] gap-12 lg:gap-20 items-start">
+      <div className="relative max-w-9xl mx-auto px-5 sm:px-12 pb-20 grid lg:grid-cols-[1fr_1.6fr] gap-8 lg:gap-20 items-start">
 
-        {/* Left — What to expect */}
-        <div className="flex flex-col gap-8">
+        {/* Left — What to expect — shows BELOW form on mobile */}
+        <div className="flex flex-col gap-8 order-2 lg:order-1">
           <div>
             <h2 className="text-lg font-bold text-white mb-6">What to expect</h2>
             <div className="flex flex-col gap-5">
@@ -330,33 +577,47 @@ export default function ScheduleCallPage() {
           </div>
         </div>
 
-        {/* Right — Form or success */}
-        <div className="bg-white rounded-3xl border border-[#e8e0d8] shadow-sm p-8 sm:p-10">
+        {/* Right — Form or success — shows FIRST on mobile */}
+        <div
+          className="overflow-hidden order-1 lg:order-2"
+          style={{
+            background: '#ffffff',
+            borderRadius: 28,
+            boxShadow:
+              '0 0 0 1px rgba(0,0,0,0.06), ' +
+              '0 4px 16px rgba(0,0,0,0.06), ' +
+              '0 20px 60px rgba(0,0,0,0.12)',
+          }}
+        >
           {!submitted ? (
             <>
-              {/* Header + progress */}
-              <div className="flex items-center justify-between mb-1">
-                <h2 className="text-xl font-bold text-[#0a0e1a]">Book your session</h2>
-                <span className={`text-xs font-semibold tabular-nums transition-colors duration-300 ${completionScore === 100 ? 'text-emerald-500' : 'text-[#e89a78]'}`}>
-                  {completionScore}% complete
-                </span>
+              {/* Sticky progress header */}
+              <div className="sticky top-0 z-10 bg-white/95 backdrop-blur-sm border-b border-black/[0.06] px-5 sm:px-8 pt-5 sm:pt-7 pb-4">
+                <div className="flex items-center justify-between mb-2">
+                  <h2 className="text-lg sm:text-xl font-bold text-[#0a0e1a]">Book your session</h2>
+                  <span className={`text-xs font-semibold tabular-nums transition-colors duration-300 ${completionScore === 100 ? 'text-emerald-500' : 'text-[#e89a78]'}`}>
+                    {completionScore}% complete
+                  </span>
+                </div>
+                <div className="h-1.5 bg-[#f0ece8] rounded-full overflow-hidden">
+                  <div
+                    className={`h-full rounded-full transition-all duration-500 ease-out ${completionScore === 100 ? 'bg-emerald-400' : 'bg-gradient-to-r from-[#f0a060] to-[#d4845c]'}`}
+                    style={{ width: `${completionScore}%` }}
+                  />
+                </div>
               </div>
-              <p className="text-sm text-[#6b6b6b] mb-4">We reply within one business day to confirm your slot.</p>
 
-              <div className="h-1 bg-[#f0ece8] rounded-full mb-8 overflow-hidden">
-                <div
-                  className={`h-full rounded-full transition-all duration-500 ease-out ${completionScore === 100 ? 'bg-emerald-400' : 'bg-gradient-to-r from-[#e89a78] to-[#d4845c]'}`}
-                  style={{ width: `${completionScore}%` }}
-                />
-              </div>
+              {/* Form body */}
+              <div className="px-5 sm:px-8 pt-5 pb-7 sm:pb-10">
+                <p className="text-sm text-[#0a0e1a]/45 mb-6">We reply within one business day to confirm your slot.</p>
 
               <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
 
                 {/* Row 1: Name + Company */}
-                <div className="grid sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* Full name */}
                   <div className="flex flex-col gap-1.5">
-                    <label className="flex items-center gap-1 text-xs font-semibold text-[#0a0e1a] uppercase tracking-wide">
+                    <label className="flex items-center gap-1 text-xs font-semibold text-[#0a0e1a]/50 uppercase tracking-wide">
                       Full name <span className="text-[#e89a78] not-uppercase">*</span>
                     </label>
                     <div className="relative">
@@ -389,9 +650,9 @@ export default function ScheduleCallPage() {
 
                   {/* Company */}
                   <div className="flex flex-col gap-1.5">
-                    <label className="flex items-center gap-1.5 text-xs font-semibold text-[#0a0e1a] uppercase tracking-wide">
+                    <label className="flex items-center gap-1.5 text-xs font-semibold text-[#0a0e1a]/50 uppercase tracking-wide">
                       Company
-                      <span className="text-[#b8b2aa] normal-case font-normal tracking-normal text-[11px]">optional</span>
+                      <span className="text-[#0a0e1a]/35 normal-case font-normal tracking-normal text-[11px]">optional</span>
                     </label>
                     <div className="relative">
                       <input
@@ -413,10 +674,10 @@ export default function ScheduleCallPage() {
                 </div>
 
                 {/* Row 2: Email + Phone */}
-                <div className="grid sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* Work email */}
                   <div className="flex flex-col gap-1.5">
-                    <label className="flex items-center gap-1 text-xs font-semibold text-[#0a0e1a] uppercase tracking-wide">
+                    <label className="flex items-center gap-1 text-xs font-semibold text-[#0a0e1a]/50 uppercase tracking-wide">
                       Work email <span className="text-[#e89a78] not-uppercase">*</span>
                     </label>
                     <div className="relative">
@@ -447,31 +708,16 @@ export default function ScheduleCallPage() {
 
                   {/* Phone */}
                   <div className="flex flex-col gap-1.5">
-                    <label className="flex items-center gap-1.5 text-xs font-semibold text-[#0a0e1a] uppercase tracking-wide">
+                    <label className="flex items-center gap-1.5 text-xs font-semibold text-[#0a0e1a]/50 uppercase tracking-wide">
                       Phone
-                      <span className="text-[#b8b2aa] normal-case font-normal tracking-normal text-[11px]">optional</span>
+                      <span className="text-[#0a0e1a]/35 normal-case font-normal tracking-normal text-[11px]">optional</span>
                     </label>
-                    <div className="relative">
-                      <input
-                        type="tel"
-                        autoComplete="tel"
-                        placeholder="+1 (234) 567-8901"
-                        value={form.phone}
-                        onChange={update('phone')}
-                        onBlur={handleBlur('phone')}
-                        className={inputCls('phone', 'pr-10')}
-                      />
-                      {fieldState('phone').valid && (
-                        <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                          <CheckIcon />
-                        </span>
-                      )}
-                      {fieldState('phone').err && (
-                        <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                          <ErrorIcon />
-                        </span>
-                      )}
-                    </div>
+                    <PhoneInputField
+                      value={form.phone}
+                      onChange={(v) => setForm(f => ({ ...f, phone: v }))}
+                      onBlur={handleBlur('phone')}
+                      className={inputCls('phone')}
+                    />
                     {fieldState('phone').err && (
                       <p className="text-xs text-red-500">{fieldState('phone').err}</p>
                     )}
@@ -480,7 +726,7 @@ export default function ScheduleCallPage() {
 
                 {/* Topic */}
                 <div className="flex flex-col gap-1.5">
-                  <label className="flex items-center gap-1 text-xs font-semibold text-[#0a0e1a] uppercase tracking-wide">
+                  <label className="flex items-center gap-1 text-xs font-semibold text-[#0a0e1a]/50 uppercase tracking-wide">
                     What would you like to discuss? <span className="text-[#e89a78] not-uppercase">*</span>
                   </label>
                   <div className="relative">
@@ -497,7 +743,7 @@ export default function ScheduleCallPage() {
                     </select>
                     {/* Show chevron when no validation icon is present */}
                     {!fieldState('topic').valid && !fieldState('topic').err && (
-                      <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[#b8b2aa]">
+                      <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[#0a0e1a]/30">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
                           <polyline points="6 9 12 15 18 9" />
                         </svg>
@@ -522,9 +768,9 @@ export default function ScheduleCallPage() {
                 {/* Message */}
                 <div className="flex flex-col gap-1.5">
                   <div className="flex items-center justify-between">
-                    <label className="flex items-center gap-1.5 text-xs font-semibold text-[#0a0e1a] uppercase tracking-wide">
+                    <label className="flex items-center gap-1.5 text-xs font-semibold text-[#0a0e1a]/50 uppercase tracking-wide">
                       Tell us more
-                      <span className="text-[#b8b2aa] normal-case font-normal tracking-normal text-[11px]">optional</span>
+                      <span className="text-[#0a0e1a]/35 normal-case font-normal tracking-normal text-[11px]">optional</span>
                     </label>
                     <span
                       className={`text-xs tabular-nums transition-colors ${
@@ -532,7 +778,7 @@ export default function ScheduleCallPage() {
                           ? 'text-red-500 font-semibold'
                           : form.message.length > MSG_MAX * 0.8
                           ? 'text-amber-500'
-                          : 'text-[#c0bab3]'
+                          : 'text-[#0a0e1a]/28'
                       }`}
                     >
                       {form.message.length}/{MSG_MAX}
@@ -567,7 +813,7 @@ export default function ScheduleCallPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="group w-full inline-flex items-center justify-center gap-3 px-7 py-4 rounded-full bg-[#0a0e1a] hover:bg-[#e89a78] text-white font-semibold text-base transition-all duration-200 shadow-md hover:shadow-[#e89a78]/30 hover:shadow-lg disabled:opacity-60 disabled:pointer-events-none mt-1"
+                  className="group w-full inline-flex items-center justify-center gap-3 px-7 py-4 sm:py-4 rounded-full bg-gradient-to-r from-[#f0a060] to-[#d4845c] hover:from-[#f5aa6c] hover:to-[#dc8e6a] text-white font-semibold text-base transition-all duration-200 shadow-lg shadow-[#e89a78]/20 hover:shadow-[#e89a78]/35 disabled:opacity-60 disabled:pointer-events-none mt-2 min-h-[56px]"
                 >
                   {loading ? (
                     <>
@@ -589,7 +835,7 @@ export default function ScheduleCallPage() {
                   )}
                 </button>
 
-                <p className="text-xs text-center text-[#b8b2aa]">
+                <p className="text-xs text-center text-[#0a0e1a]/35">
                   By submitting you agree to our{' '}
                   <Link href={Constants.PAGES.PRIVACY} className="underline hover:text-[#0a0e1a] transition-colors">
                     Privacy Policy
@@ -597,10 +843,11 @@ export default function ScheduleCallPage() {
                   . No spam, ever.
                 </p>
               </form>
+              </div>{/* end form body */}
             </>
           ) : (
             /* Success state */
-            <div className="flex flex-col items-center text-center py-8 gap-6">
+            <div className="flex flex-col items-center text-center px-5 sm:px-8 py-10 gap-6">
               <div className="w-16 h-16 rounded-full bg-[#e89a78]/15 border border-[#e89a78]/30 flex items-center justify-center">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#e89a78" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8">
                   <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />
@@ -612,10 +859,10 @@ export default function ScheduleCallPage() {
                   Thanks {form.name.split(' ')[0]}! We&apos;ve received your request and will be in touch within one business day to confirm your call.
                 </p>
               </div>
-              <div className="bg-[#faf7f4] rounded-2xl border border-[#e8e0d8] p-5 w-full text-left flex flex-col gap-2">
-                <p className="text-xs font-bold uppercase tracking-widest text-[#b8b2aa] mb-1">Confirmation sent to</p>
+              <div className="bg-[#f5f3f0] rounded-2xl p-5 w-full text-left flex flex-col gap-2">
+                <p className="text-xs font-bold uppercase tracking-widest text-[#0a0e1a]/30 mb-1">Confirmation sent to</p>
                 <p className="text-sm font-semibold text-[#0a0e1a]">{form.email}</p>
-                <p className="text-sm text-[#6b6b6b]">Topic: <span className="font-medium text-[#0a0e1a]">{form.topic}</span></p>
+                <p className="text-sm text-[#0a0e1a]/50">Topic: <span className="font-medium text-[#0a0e1a]">{form.topic}</span></p>
               </div>
               <Link
                 href="/"

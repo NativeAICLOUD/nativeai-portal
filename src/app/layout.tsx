@@ -1,4 +1,5 @@
 import { Montserrat } from "next/font/google";
+import type { Viewport } from "next";
 import seoConfig from "../../seo.config";
 import "./globals.css";
 
@@ -22,6 +23,12 @@ const montserrat = Montserrat({
 
 export const metadata = seoConfig;
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -34,9 +41,11 @@ export default function RootLayout({
           <ProgressBarProvider>
             <ProgressBar className="fixed z-[100] h-1 shadow-lg shadow-native/20 bg-native top-0" />
             <AppProviders>
-              <Navbar />
-              {children}
-              <Footer />
+              <div style={{ width: '100%', maxWidth: '100vw', overflowX: 'clip', overflowY: 'visible', position: 'relative' }}>
+                <Navbar />
+                {children}
+                <Footer />
+              </div>
             </AppProviders>
           </ProgressBarProvider>
           <ToastContainer

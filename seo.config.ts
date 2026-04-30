@@ -4,11 +4,11 @@ const defineMetadata = <T extends Metadata>(metadata: T) => metadata;
 
 const { url, title, description, keywords } = {
   url: 'https://native.cloud',
-  title: 'Native.Cloud | Azure Clouds Solutions',
+  title: 'NativeCloud | AI Agents & Cloud Solutions',
   description:
-    'Native.Cloud | Azure Clouds Solutions',
+    'We build AI Agents, RAG pipelines and LLM-powered solutions that work inside your business. Specialising in Azure OpenAI, GPT-4o and cloud-native architecture.',
   keywords:
-    'azure, cloud, solutions, resolve',
+    'AI agents, LLMs, RAG pipeline, Azure OpenAI, GPT-4o, cloud solutions, AI consulting, Azure, AWS, NativeCloud',
 };
 const seoConfig = defineMetadata({
   title,

@@ -12,7 +12,7 @@ import Logo from '../ui/Logo';
 import {
   Code2, Palette, CloudCog, CloudUpload,
   Bot, Database, Boxes, Workflow,
-  Plane, Scale, CreditCard,
+  Plane, Scale, Landmark, HeartPulse, ShoppingBag, Factory,
   BookOpen, GraduationCap, Library, Building2,
   LucideIcon,
 } from 'lucide-react';
@@ -46,10 +46,13 @@ const pages: Pages[] = [
         ],
       },
       {
-        url: Constants.PAGES.SOLUTIONS, title: 'Products', children: [
-          { url: Constants.PAGES.AIRLINE_BOOKING,           title: 'Airline & Travel Booking',desc: 'GDS-connected booking SaaS',             icon: Plane        },
-          { url: Constants.PAGES.AI_LEGAL_WORKSPACE,        title: 'AI Legal Workspace',      desc: 'AI for law firms & legal teams',         icon: Scale        },
-          { url: Constants.PAGES.PAYMENT_AUTOMATION,        title: 'Payment Automation',      desc: 'Recurring billing & reconciliation',     icon: CreditCard   },
+        url: Constants.PAGES.SOLUTIONS, title: 'Industries', children: [
+          { url: Constants.PAGES.AIRLINE_BOOKING,           title: 'Travel & Aviation',       desc: 'GDS booking & airline platforms',        icon: Plane        },
+          { url: Constants.PAGES.AI_LEGAL_WORKSPACE,        title: 'Legal & Compliance',      desc: 'AI for law firms & legal teams',         icon: Scale        },
+          { url: Constants.PAGES.PAYMENT_AUTOMATION,        title: 'Finance & Banking',       desc: 'Payments, billing & reconciliation',     icon: Landmark     },
+          { url: Constants.PAGES.SOLUTIONS,                 title: 'Healthcare',              desc: 'Secure data & clinical workflows',       icon: HeartPulse   },
+          { url: Constants.PAGES.SOLUTIONS,                 title: 'Retail & E-commerce',     desc: 'Scalable storefronts & logistics',       icon: ShoppingBag  },
+          { url: Constants.PAGES.SOLUTIONS,                 title: 'Manufacturing',           desc: 'IoT, automation & supply chain',         icon: Factory      },
         ],
       },
       {
@@ -106,10 +109,13 @@ function Navbar() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[999] p-3">
+    <header
+      className="fixed top-0 left-0 right-0 z-[999] pb-2 sm:px-3 sm:pb-3"
+      style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
+    >
 
       {/* ── Floating nav pill ── */}
-      <nav className="max-w-7xl mx-auto bg-[#0a0e1a] border border-white/[0.08] rounded-2xl flex items-center justify-between px-6 h-[72px] shadow-[0_4px_32px_rgba(0,0,0,0.35)] overflow-hidden">
+      <nav className="max-w-7xl mx-auto bg-[#0a0e1a] border border-white/[0.08] rounded-none sm:rounded-2xl flex items-center justify-between px-5 sm:px-6 h-[48px] sm:h-[72px] shadow-[0_4px_32px_rgba(0,0,0,0.35)] overflow-hidden">
 
         {/* Logo */}
         <div className="shrink-0 cursor-pointer" onClick={() => setSlideMenu(false)}>
@@ -184,13 +190,20 @@ function Navbar() {
 
           {/* Hamburger */}
           <button
-            className="w-11 h-11 rounded-xl bg-white/[0.07] hover:bg-white/[0.12] grid lg:hidden place-items-center transition-colors"
+            className="w-9 h-9 rounded-lg bg-white/[0.07] hover:bg-white/[0.12] lg:hidden flex flex-col items-center justify-center gap-[5px] transition-colors px-2"
             onClick={() => setOpenSide(!openSide)}
             aria-label="Toggle menu"
           >
-            <svg className="text-white" width={20} height={16}>
-              <use href={`/icons/all-icons.svg#${openSide ? 'icon-nav-close' : 'icon-nav-menu'}`} />
-            </svg>
+            {openSide ? (
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-white">
+                <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/>
+              </svg>
+            ) : (
+              <>
+                <span className="block h-[1.5px] w-full rounded-full bg-white transition-all" />
+                <span className="block h-[1.5px] w-[65%] rounded-full bg-white/60 transition-all self-start" />
+              </>
+            )}
           </button>
         </div>
       </nav>
@@ -316,11 +329,12 @@ function Navbar() {
       {/* ── Mobile full-screen overlay ── */}
       <aside
         className={`${
-          openSide ? 'translate-x-0' : 'translate-x-full'
-        } fixed inset-0 z-[100] bg-[#0a0e1a] transform transition-transform duration-300 ease-in-out flex flex-col p-4 overflow-y-auto`}
+          openSide ? 'translate-x-0 visible pointer-events-auto' : 'translate-x-full invisible pointer-events-none'
+        } fixed inset-0 z-[100] bg-[#0a0e1a] transform transition-all duration-300 ease-in-out flex flex-col overflow-y-auto`}
+        style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 12px)' }}
       >
         {/* Top bar */}
-        <div className="flex items-center justify-between shrink-0">
+        <div className="flex items-center justify-between shrink-0 px-4 pb-2">
           <div className="flex items-center cursor-pointer" onClick={() => setOpenSide(false)}>
             <Logo isInvert />
           </div>
@@ -336,7 +350,7 @@ function Navbar() {
         </div>
 
         {/* Nav items */}
-        <nav className="flex-1 flex flex-col justify-center py-8">
+        <nav className="flex-1 flex flex-col justify-center pt-4 pb-4 px-4">
           <ul className="flex flex-col" style={{ gap: 36 }}>
             {pages
               .filter((item) => item.title !== 'Schedule a call')
@@ -433,7 +447,7 @@ function Navbar() {
         </nav>
 
         {/* Bottom CTA */}
-        <div className="shrink-0 pt-4">
+        <div className="shrink-0 px-4 pt-4 pb-6" style={{ paddingBottom: 'max(24px, env(safe-area-inset-bottom, 24px))' }}>
           <Link
             href={Constants.PAGES.SCHEDULE_CALL}
             onClick={() => setOpenSide(false)}

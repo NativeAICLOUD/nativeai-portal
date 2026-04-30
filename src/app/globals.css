@@ -12,10 +12,15 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 body {
   background: #fff;
+  overflow-x: clip;
+  width: 100%;
+  max-width: 100%;
 }
 
 ::selection {
