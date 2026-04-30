@@ -15,7 +15,17 @@ html {
 }
 
 body {
-  background: #fff
+  background: #fff;
+}
+
+::selection {
+  background: #fcd34d;
+  color: #0a0e1a;
+}
+
+/* Ensure all interactive elements have pointer cursor */
+button, a, [role="button"] {
+  cursor: pointer;
 }
 
 div[data-radix-popper-content-wrapper] {

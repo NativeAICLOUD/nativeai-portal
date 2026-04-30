@@ -80,7 +80,7 @@ function Navbar() {
   const scrollTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isScrolling = useRef(false);
 
-  const navH = 80; // 12px outer padding + 60px nav height + 8px gap
+  const navH = 92; // 12px outer padding + 72px nav height + 8px gap
 
   useEffect(() => {
     const onScroll = () => {
@@ -109,7 +109,7 @@ function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-[999] p-3">
 
       {/* ── Floating nav pill ── */}
-      <nav className="max-w-7xl mx-auto bg-[#0a0e1a] border border-white/[0.08] rounded-2xl flex items-center justify-between px-5 h-[60px] shadow-[0_4px_32px_rgba(0,0,0,0.35)] overflow-hidden">
+      <nav className="max-w-7xl mx-auto bg-[#0a0e1a] border border-white/[0.08] rounded-2xl flex items-center justify-between px-6 h-[72px] shadow-[0_4px_32px_rgba(0,0,0,0.35)] overflow-hidden">
 
         {/* Logo */}
         <div className="shrink-0 cursor-pointer" onClick={() => setSlideMenu(false)}>
@@ -184,7 +184,7 @@ function Navbar() {
 
           {/* Hamburger */}
           <button
-            className="w-9 h-9 rounded-xl bg-white/[0.07] hover:bg-white/[0.12] grid lg:hidden place-items-center transition-colors"
+            className="w-11 h-11 rounded-xl bg-white/[0.07] hover:bg-white/[0.12] grid lg:hidden place-items-center transition-colors"
             onClick={() => setOpenSide(!openSide)}
             aria-label="Toggle menu"
           >
