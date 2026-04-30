@@ -13,8 +13,8 @@ steps:
 
 # Install dependencies and build the app
 - script: |
-    npm install
-    npm run build
+    npm ci
+    NODE_OPTIONS="--max-old-space-size=4096" npm run build
   displayName: 'Install npm dependencies and build'
 
 # Copy necessary files to staging directory
