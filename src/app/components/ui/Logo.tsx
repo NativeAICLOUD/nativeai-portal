@@ -6,19 +6,17 @@ import LogoInvert from '../../../../public/img/Native-Cloud-Logo_Invert.png';
 
 type Props = {
   isInvert?: boolean;
+  className?: string;
 }
 
-function Logo({
-  isInvert
-}: Props) {
+function Logo({ isInvert, className }: Props) {
   return (
-    <Link href={'/'}>
+    <Link href={'/'} className="flex items-center">
       <Image
         src={isInvert ? LogoInvert : LogoSvg}
-        alt="Logo"
-        className="logo min-w-[145px]"
+        alt="NativeCloud"
+        className={`h-9 w-auto ${className ?? ''}`}
         priority
-        sizes="(max-width: 768px) 100vw, 100vw"
         quality={100}
       />
     </Link>

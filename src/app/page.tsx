@@ -16,7 +16,7 @@ export default function Home() {
       {/* Scroll-animated 3-card services */}
       <ScrollCardsSection />
 
-      {/* Cloud Services Section — dark AI pillars block */}
+      {/* AI Agents · LLMs · Azure & AWS */}
       <CloudServicesSection />
 
       {/* What We Deliver — pinned scroll card experience */}

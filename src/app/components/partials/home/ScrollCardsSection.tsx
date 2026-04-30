@@ -205,8 +205,10 @@ export default function ScrollCardsSection() {
   }, []);
 
   return (
-    <section className="max-w-9xl mx-auto px-6 sm:px-12 xl:px-16 py-20 sm:py-28 lg:pt-10 lg:pb-20">
-      {isMobile ? <MobileCards /> : <DesktopCards />}
+    <section className="min-h-screen flex items-center py-16 sm:py-20">
+      <div className="w-full max-w-9xl mx-auto px-6 sm:px-12 xl:px-16">
+        {isMobile ? <MobileCards /> : <DesktopCards />}
+      </div>
     </section>
   );
 }

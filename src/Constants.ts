@@ -12,6 +12,10 @@ export const Constants = {
     DATA_LIFECYCLE_MANAGEMENT: '/data-lifecycle-management',
     CSP_ENTERPRISE: '/csp-enterprise',
 
+    AIRLINE_BOOKING: '/airline-booking',
+    AI_LEGAL_WORKSPACE: '/ai-legal-workspace',
+    PAYMENT_AUTOMATION: '/payment-automation',
+
     WORKSHOPS: '/workshops',
     AZURE_FUNDAMENTALS_FOR_ISVS: '/af-isv',
     AZURE_COST_MANAGEMENT: '/acm',

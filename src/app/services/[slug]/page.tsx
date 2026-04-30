@@ -18,15 +18,22 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
   }
 
   return (
-    <>
-    <div
-      className="bg-[#f4ebe8] min-h-screen"
-      style={{
-        backgroundImage: "url('/img/noise-background.jpg')",
-        backgroundBlendMode: "multiply",
-        backgroundSize: "300px 300px",
-      }}
-    >
+    <div className="bg-[#f4ebe8] relative">
+
+      {/* Seamless noise overlay — fixed to viewport, no tiling/squares */}
+      <div
+        aria-hidden
+        className="fixed inset-0 pointer-events-none select-none"
+        style={{
+          zIndex: 0,
+          backgroundImage: "url('/img/noisy-background.png'), url('/img/noise-background.jpg')",
+          backgroundSize: "cover, cover",
+          mixBlendMode: "multiply",
+        }}
+      />
+
+      {/* Page content — sits above the overlay */}
+      <div className="relative" style={{ zIndex: 1 }}>
 
       {/* ── Hero ── */}
       {service.heroHeadline ? (
@@ -79,7 +86,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-[#1a1d2e] leading-none tracking-tight max-w-xl">
               {service.heroTitle}
             </h1>
-            <p className="text-[#6b6b6b] text-lg mt-5 max-w-md leading-relaxed">
+            <p className="text-[#1a1a1a] text-lg mt-5 max-w-md leading-relaxed">
               {service.heroSubtitle}
             </p>
           </div>
@@ -91,7 +98,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         {/* Label */}
         <div className="flex items-center gap-2 mb-8">
           <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
-          <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">
+          <p className="text-xs uppercase tracking-wider text-[#1a1a1a] font-medium">
             {service.includedLabel}
           </p>
         </div>
@@ -144,7 +151,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               <h3 className="relative text-xl font-semibold text-[#1a1d2e] leading-snug z-10">
                 {feature.title}
               </h3>
-              <p className="relative text-[#6b6b6b] text-sm leading-relaxed z-10">
+              <p className="relative text-[#1a1a1a] text-sm leading-relaxed z-10">
                 {feature.body}
               </p>
             </div>
@@ -157,7 +164,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         {/* Label */}
         <div className="flex items-center gap-2 mb-10">
           <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
-          <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">
+          <p className="text-xs uppercase tracking-wider text-[#1a1a1a] font-medium">
             {service.howWeWorkLabel}
           </p>
         </div>
@@ -181,9 +188,8 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         )}
       </section>
 
+      <ServiceFooter />
+      </div> {/* end content wrapper */}
     </div>
-
-    <ServiceFooter />
-    </>
   );
 }

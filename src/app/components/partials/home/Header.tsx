@@ -9,7 +9,7 @@ import CoomingSoon from "../../ui/CoomingSoon";
 
 function HomeHeader() {
   return (
-    <main className="relative overflow-hidden lg:pl-[50px] pt-40 lg:pt-36 pb-16 sm:pb-40 lg:pb-16">
+    <main className="relative overflow-hidden lg:pl-[50px] min-h-screen flex flex-col justify-center pt-28 pb-16">
       <div className="absolute w-full h-full z-[-1] left-0 top-0 after:absolute after:bottom-0 after:bg-main-gradient after:w-full after:h-1/5">
         <Image src="/img/BG.png" alt="Background" layout="fill" objectFit="cover" quality={100} />
         <Image src="/img/Group 32.png" alt="Design Element" className="!top-36" layout="fill" objectFit="cover" quality={100} />

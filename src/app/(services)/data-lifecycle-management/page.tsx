@@ -1,154 +1,243 @@
-import Image from 'next/image';
+import Image from "next/image";
+import { Link } from "react-transition-progress/next";
+import { AzureHero } from "@/ImagePath";
+import ProcessTimeline from "@/app/components/partials/services/ProcessTimeline";
+import ServiceFooter from "@/app/components/partials/services/ServiceFooter";
 
-import { AzureHero, Team } from '@/ImagePath';
-import { Each } from '@/app/components/helpers/Each';
-import ContactUsFooter from '@/app/components/partials/ContactUsFooter';
-import MyAccordion from '@/app/components/controls/Accordion';
-
-const ListData = [
+const features = [
   {
-    title: "Can I enjoy DLM services if I am not on the (Azure) Cloud yet?",
-    desc: "That doesn’t matter. Whether you have hundreds of data records or even billions. If there are actionable insights to be found within your data, we are ready to help!"
+    title: "Azure Landing Zone",
+    body: "Enterprise-grade cloud foundation in Azure — networking, security, RBAC, Key Vault, and storage tiers — provisioned and compliant before your first byte of data arrives.",
+    decoration: "top-left" as const,
   },
   {
-    title: "How much data do I need to have?",
-    desc: "That doesn’t matter. Whether you have hundreds of data records or even billions. If there are actionable insights to be found within your data, we are ready to help!"
+    title: "Data Extraction & Ingestion",
+    body: "Connect and offload data from any source — databases, APIs, flat files, or event streams — into your Azure Data Lake with automated, monitored pipelines.",
   },
   {
-    title: "Is a Data solution expensive?",
-    desc: "That doesn’t matter. Whether you have hundreds of data records or even billions. If there are actionable insights to be found within your data, we are ready to help!"
+    title: "Data Transformation & Cleaning",
+    body: "Bronze → Silver → Gold layer pipelines that normalize, deduplicate, validate, and enrich your raw data before it reaches any analytics or ML workload.",
   },
   {
-    title: "Before starting with DLM, do I need to have knowledge or experience with data?",
-    desc: "That doesn’t matter. Whether you have hundreds of data records or even billions. If there are actionable insights to be found within your data, we are ready to help!"
+    title: "Data Science & Analysis",
+    body: "Surface patterns, trends, and predictions from your cleaned data using Azure Synapse Analytics and Databricks — turning historical records into forward-looking insight.",
+  },
+  {
+    title: "Data Visualisation",
+    body: "Power BI reports and dashboards that translate complex datasets into clear, actionable views — built with your business users, not just your data team.",
+  },
+  {
+    title: "AI & Machine Learning",
+    body: "Embed predictive models and real-time intelligence into your data workflows — automate decisions, detect anomalies, and respond to events as they happen.",
+    decoration: "bottom-right" as const,
   },
 ];
 
-const cards = [
-  { img: '/img/directory.png', title: 'Data Deep-dive', desc: 'Are you finding yourself willing to start your data journey, but having no clue where to start? We’ve got you covered! After this Deep-dive session, you will have an idea of what a data journey could mean for your organization and what it will look like. ' },
-  { img: '/img/monitor.png', title: 'Data Design or Second Opinion', desc: 'Need advice on how to get through the steps to make your data insightful? Let us help by designing your data infrastructure. Together we will inform you about all the possibilities, including which tools and costs come into play. In this way, you can make the best-informed decision for your data journey.' },
-]
+const processSteps = [
+  {
+    step: "01",
+    heading: "Discovery & Data Audit",
+    body: "We map your data sources, understand volumes, formats, and access patterns — then design the target architecture before a single resource is provisioned.",
+  },
+  {
+    step: "02",
+    heading: "Azure Landing Zone Setup",
+    body: "We provision the full foundation: networking, IAM, Key Vault, storage tiers, and compliance controls — your data platform starts secure from day one.",
+  },
+  {
+    step: "03",
+    heading: "Extraction & Pipeline Build",
+    body: "We connect your sources, build ingestion pipelines, and land raw data in the bronze layer of your Data Lake — with alerting and monitoring in place.",
+  },
+  {
+    step: "04",
+    heading: "Transformation & Enrichment",
+    body: "We build the silver and gold layer pipelines that clean, join, and enrich your data — making it ready for reporting, analytics, and machine learning.",
+  },
+  {
+    step: "05",
+    heading: "Visualisation & Validation",
+    body: "We build Power BI reports and dashboards, then validate every metric with your business stakeholders before the platform is handed over.",
+  },
+  {
+    step: "06",
+    heading: "Handover, Training & Support",
+    body: "Your team gets full ownership, thorough documentation, and access to our support desk — so you can scale the platform confidently without depending on us.",
+  },
+];
 
-type TCard = typeof cards[0];
-
-const DataLifeCycleManagement = () => {
+export default function DataLifecycleManagementPage() {
   return (
-    <div className={`relative min-h-full overflow-x-clip`}>
-      <div className="absolute w-full h-full z-[-1] top-24 inset-x-0">
-        <div className="overlay relative w-full h-[calc(100vh-10rem)] before:absolute before:bg-azure-bg-opacity before:size-full before:top-0 before:z-1">
-          <Image src={AzureHero} alt="Background" className="opacity-60 sm:opacity-100 object-cover object-[85%] sm:object-top" fill={true} quality={100} />
-        </div>
-      </div>
-      <div className={'relative mx-auto max-w-9xl px-2 sm:px-4 md:px-6 2xl:px-0'}>
-        <div className="top flex items-start pt-28 sm:pt-36 gap-10">
-          <div className="relative side pt-28 z-1 px-4 sm:px-10 md:px-0 text-center md:text-left">
-            <h1 className={'text-4xl md:text-5xl xl:text-6xl pb-6 xl:pb-16 leading-none font-bold bg-workshop-text-linear bg-clip-text text-transparent md:max-w-[600px] xl:max-w-[900px]'}>
-              Build and modernize intelligent apps
+    <>
+      <div className="bg-white">
+
+        {/* ── Hero — keeps the AzureHero background image ── */}
+        <section className="relative min-h-[85vh] overflow-hidden bg-white">
+          {/* Background image with gradient fade */}
+          <div className="absolute inset-0 z-0">
+            <div
+              className="absolute inset-0 z-10"
+              style={{
+                background:
+                  "linear-gradient(to right, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.75) 50%, rgba(255,255,255,0.1) 100%), linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 25%)",
+              }}
+            />
+            <Image
+              src={AzureHero}
+              alt=""
+              fill
+              className="object-cover object-[85%] sm:object-top opacity-60 sm:opacity-100"
+              priority
+              quality={100}
+            />
+          </div>
+
+          {/* Hero content */}
+          <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pt-36 pb-20 min-h-[85vh] flex flex-col">
+            <p className="text-sm font-semibold uppercase tracking-widest text-[#e89a78] mb-4">
+              Data Lifecycle Management
+            </p>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-[#0a0e1a] leading-[1.05] max-w-2xl">
+              Turn your data into a business asset
             </h1>
-            <p className={'md:max-w-xl xl:max-w-2xl pb-16 text-base lg:text-lg font-normal'}>
-              Build AI-powered, intelligent apps and enhance your critical solutions with generative AI.
+            <p className="mt-8 text-lg text-[#0a0e1a] max-w-[540px] font-normal leading-relaxed">
+              We design and build end-to-end data platforms on Azure — from raw ingestion to clean analytics layers — so your organisation can act on data instead of just storing it.
+            </p>
+            <div className="mt-10 flex flex-wrap items-center gap-3">
+              <Link
+                href="/schedule-call"
+                className="bg-[#0a0e1a] text-white px-7 py-3.5 rounded-full text-base font-medium whitespace-nowrap hover:opacity-90 transition-opacity"
+              >
+                Schedule a free call
+              </Link>
+              <Link
+                href="/schedule-call"
+                aria-label="Schedule a free call"
+                className="w-12 h-12 rounded-full bg-[#0a0e1a] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <path d="M7 17L17 7" />
+                  <path d="M7 7h10v10" />
+                </svg>
+              </Link>
+            </div>
+            <p className="mt-auto pt-20 text-sm text-[#0a0e1a]/60 font-normal">
+              Trusted by data-driven organisations across Europe — built on Microsoft Azure.
             </p>
           </div>
-        </div>
-      </div>
+        </section>
 
-      <div className={'mx-auto max-w-9xl px-4 md:px-6 sm:pt-28'}>
-
-        <div className="azure mb-6 sm:mb-10 gap-8 xl:gap-32 flex flex-wrap lg:flex-nowrap items-center relative max-w-7xl p-6 xl:pl-8 xl:py-0 lg:pr-8 mx-auto text-black xl:rounded-xl">
-          <Image
-            src={Team}
-            alt="Team"
-            className={'relative object-cover w-full mx-auto sm:mx-0 aspect-box max-w-[480px] max-h-[280px] max-h-sm'}
-          />
-          <div className="relative gap-6 flex flex-col lg:max-w-lg">
-            <h2 className="text-2xl">Azure OpenAI Service</h2>
-            <p className="max-w-3xl">
-              Build resilient apps with increased scalability and availability.
-              <br /><br />
-              Quickly develop generative AI experiences with a diverse set of prebuilt and curated models from OpenAI, Meta and beyond.
+        {/* ── Section A — What's included ── */}
+        <section className="max-w-7xl mx-auto px-6 md:px-12 pt-24 pb-16">
+          <div className="flex items-center gap-2 mb-8">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
+            <p className="text-xs uppercase tracking-wider text-[#1a1a1a] font-medium">
+              What&apos;s included
             </p>
           </div>
-        </div>
-
-        <p className={'pb-8 sm:pb-16 text-base lg:text-lg font-normal px-2 xl:px-0 text-center sm:text-left'}>
-          <b className="block pb-1 sm:pb-0">Benefits of cloud application development</b><br className="hidden sm:block" />
-          Not every software company is the same. Some prefer to focus solely on software development, without having to think about things such as infrastructure and hosting. While others prefer to do as much as possible themselves and only spar with our Azure experts when complex challenges arise. That is why we have developed three service plans. Based on the wishes, needs, and experiences of our customers. From minimal to full support. With each plan, you get free access to our customer portal. This offers management information and ensures that developers and administrators have all the insights and tools they need to continuously improve the Azure environment.
-        </p>
-
-        <p className="font-bold mb-3">Let us explain our way to your data journey:</p>
-        <ul className="list-decimal ml-5 mb-10 [&>li]:mb-3">
-          <li><b>Azure Landingzone</b>: We start with a Data Landingzone where we create all platform resources required to support your intended data design.</li>
-          <li><b>Data Extraction</b>: When phase 1 is in place, we can start offloading your data sources and storing them properly.</li>
-          <li><b>Data transformation and Cleaning</b>: Most of the time, your data will contain errors. We transform and clean your data and make it ready for usage.</li>
-          <li><b>Data Science and Analysis</b>: After cleaning, we can start gaining useful insights.</li>
-          <li><b>Data Visualisation</b>: To share these insights effectively, it needs to be visualized.</li>
-        </ul>
-      </div>
-
-      <div className="flex flex-col lg:flex-row gap-2 xl:gap-6 mb-10 max-w-9xl mx-auto lg:px-2">
-        <div className={'flex-1 relative max-w-9xl mx-auto bg-[#131C28] text-white px-8 py-10 lg:rounded-lg'}>
-          <h2 className='text-lg mb-4'>Why DLM?</h2>
-          <p className='opacity-80'>
-            Data is one of the most valuable elements of your organization. Data can show you what your situation was, what your situation is, and what it could be. The possibilities are endless. You could use DLM to make your data more accessible and insightful for your customers to serve them better. Maybe you want to utilize data to create business opportunities for your customers. Or maybe use data to improve your own business. For example, data can help you explore your customer journey (Data Science). Data can also be fundamental in predicting scenarios and outcomes (Machine Learning), even enabling your company to respond in real-time when events occur (Artificial Intelligence).
-          </p>
-        </div>
-
-        <div className={'flex-1 relative max-w-9xl mx-auto bg-[#131C28] text-white px-8 py-10 lg:rounded-lg'}>
-          <h2 className='text-lg mb-4'>For whom is DLM?</h2>
-          <p className='opacity-80'>
-            Data solutions can be for every organization in every branch. Your company can have hundreds of records or even billions. There is no maximum because our data solutions are scalable.
-            <br /><br />
-            Whether you are already on the (Azure) Cloud or (partly) on-premises, we can customize your data journey to suit your needs. You don’t need to have anything running in production before you make use of DLM.
-          </p>
-        </div>
-      </div>
-
-      <div className={'mx-auto max-w-9xl px-2 sm:px-4 md:px-6 sm:pt-16'}>
-        <div className="azure mb-8 sm:mb-20 gap-8 xl:gap-32 md:ml-auto flex flex-wrap-reverse lg:flex-nowrap items-center relative max-w-7xl p-6 xl:pl-8 xl:py-0 lg:pr-8 text-black xl:rounded-xl">
-          <div className="relative gap-6 flex flex-col lg:max-w-lg">
-            <h2 className="text-2xl font-bold bg-workshop-text-linear bg-clip-text text-transparent">NativeCloud DLM / products</h2>
-            <p className="max-w-3xl">NativeCloud is engaged in the transformation, modernization, and acceleration of organizations through the Microsoft Azure platform. With our unique focus and expertise, we fully understand the current and future challenges that software companies are faced with.
-              <br /> NativeCloud has assisted more than two hundred organizations in their transformation to and within the cloud. We are your guide in the world of data!</p>
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
+            <p className="text-[#1a1d2e] text-base leading-relaxed max-w-[650px]">
+              A complete data journey — from landing zone to live dashboard. We handle every layer of the stack so your team gets clean data, reliable pipelines, and insights they can act on from day one.
+            </p>
+            <Link
+              href="/schedule-call"
+              className="shrink-0 self-start inline-flex items-center bg-[#0a0a0a] hover:bg-[#1a1d2e] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors whitespace-nowrap"
+            >
+              Start your data journey
+            </Link>
           </div>
-          <Image
-            src={Team}
-            alt="Team"
-            className={'relative object-cover w-full mx-auto sm:mx-0 aspect-box max-w-[480px] max-h-[280px] max-h-sm'}
-          />
-        </div>
+        </section>
 
-        <div className={'flex text-center sm:text-left flex-col sm:flex-row flex-wrap justify-around px-6 gap-16 sm:gap-6 mt-16 mb-16 sm:mb-24 max-w-6xl mx-auto'}>
-          <Each
-            of={cards}
-            render={(item: TCard) => (
-              <Card {...item} />
-            )}
-          />
-        </div>
+        {/* ── Section B — Feature cards ── */}
+        <section className="max-w-7xl mx-auto px-6 md:px-12 pb-20 md:pb-32">
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {features.map((feature, i) => (
+              <div
+                key={i}
+                className="relative rounded-xl overflow-hidden bg-[#f0ece4] p-8 min-h-[280px] flex flex-col gap-4"
+              >
+                {feature.decoration === "top-left" && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src="/decorations/blob-orange-corner.svg"
+                    width={220}
+                    height={220}
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute top-0 left-0 pointer-events-none select-none"
+                  />
+                )}
+                {feature.decoration === "bottom-right" && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src="/decorations/blob-sage-corner.svg"
+                    width={220}
+                    height={220}
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute bottom-0 right-0 pointer-events-none select-none"
+                  />
+                )}
+                <h3 className="relative text-xl font-semibold text-[#1a1d2e] leading-snug z-10">
+                  {feature.title}
+                </h3>
+                <p className="relative text-[#1a1a1a] text-sm leading-relaxed z-10">
+                  {feature.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── Why DLM — two-column callout ── */}
+        <section className="max-w-7xl mx-auto px-6 md:px-12 pb-20 md:pb-32">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="bg-[#0a0e1a] text-white rounded-xl px-10 py-12 flex flex-col gap-5">
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
+                <p className="text-xs uppercase tracking-wider text-white/50 font-medium">Why DLM?</p>
+              </div>
+              <p className="text-white/80 text-base leading-relaxed">
+                Data is one of the most valuable elements of your organisation. It shows you what your situation was, what it is, and what it could be. DLM lets you make that data more accessible — to serve customers better, create business opportunities, and power decisions with real intelligence: from Data Science and Machine Learning through to real-time AI.
+              </p>
+            </div>
+            <div className="bg-[#0a0e1a] text-white rounded-xl px-10 py-12 flex flex-col gap-5">
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
+                <p className="text-xs uppercase tracking-wider text-white/50 font-medium">For whom?</p>
+              </div>
+              <p className="text-white/80 text-base leading-relaxed">
+                Data solutions work for any organisation in any sector — whether you have hundreds of records or billions. There is no minimum or maximum. Whether you are already on Azure, partly on-premises, or not yet in the cloud at all, we tailor the journey to where you are today and where you need to go.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Section C — How we work ── */}
+        <section className="max-w-7xl mx-auto px-6 md:px-12 mt-20 py-20 md:py-32">
+          <div className="flex items-center gap-2 mb-10">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
+            <p className="text-xs uppercase tracking-wider text-[#1a1a1a] font-medium">
+              How we work
+            </p>
+          </div>
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
+            <h2 className="text-4xl md:text-5xl font-normal text-[#1a1d2e] max-w-[900px] leading-tight">
+              A structured journey from raw data to reliable insight — without disrupting your operations
+            </h2>
+            <Link
+              href="/schedule-call"
+              className="shrink-0 self-start lg:self-end inline-flex items-center bg-[#0a0a0a] hover:bg-[#1a1d2e] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors whitespace-nowrap"
+            >
+              Schedule a free call
+            </Link>
+          </div>
+          <ProcessTimeline steps={processSteps} />
+        </section>
+
       </div>
 
-      <div className={'flex-1 relative max-w-9xl mx-auto bg-[#131C28] text-white px-6 md:px-20 py-10 md:py-14 xl:rounded-lg mb-16 sm:mb-20'}>
-        <h2 className='text-xl sm:text-2xl font-bold mb-6'>How may we help?</h2>
-        <MyAccordion data={ListData} />
-      </div>
-
-      <ContactUsFooter />
-    </div >
-  )
-};
-
-const Card = ({ img, title, desc }: TCard) => {
-  return (
-    <div className={'flex flex-col'}>
-      <Image src={img} alt={title} className='h-full max-h-[110px] mx-auto sm:mx-0 object-contain' width={160} height={110} />
-      <div className={'serviceText w-full max-w-[467px]'}>
-        <h3 className="text-2xl mt-4">{title}</h3>
-        <p className='my-5 text-sm sm:text-base md:min-h-[140px]'>
-          {desc}
-        </p>
-      </div>
-    </div>
-  )
+      <ServiceFooter />
+    </>
+  );
 }
-
-export default DataLifeCycleManagement;
