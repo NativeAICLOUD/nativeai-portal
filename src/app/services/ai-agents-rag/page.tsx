@@ -1,6 +1,50 @@
 import { Link } from "react-transition-progress/next";
 import ServiceFooter from "@/app/components/partials/services/ServiceFooter";
 import ProcessTimeline from "@/app/components/partials/services/ProcessTimeline";
+import {
+  Code2, Palette, CloudCog, CloudUpload,
+  Bot, Database, Boxes, Workflow,
+  Plane, Scale, CreditCard,
+  BookOpen, GraduationCap, Library, Building2,
+} from "lucide-react";
+
+const solutions = [
+  {
+    label: "Services",
+    items: [
+      { href: "/services/custom-development",      icon: Code2,          title: "Custom Development",       desc: "Tailored software for your workflows"  },
+      { href: "/services/design",                  icon: Palette,        title: "Design",                   desc: "Interfaces your users will love"        },
+      { href: "/services/cloud-architecture",      icon: CloudCog,       title: "Cloud Architecture",        desc: "Scalable infrastructure design"         },
+      { href: "/services/migrate-to-azure",        icon: CloudUpload,    title: "Migrate to Azure",          desc: "Low-risk migration to the cloud"        },
+    ],
+  },
+  {
+    label: "AI & Data",
+    items: [
+      { href: "/services/ai-agents-rag",           icon: Bot,            title: "AI Agents & RAG",           desc: "Intelligent automation & LLMs"          },
+      { href: "/services/data-lifecycle",          icon: Database,       title: "Data Lifecycle",            desc: "Raw data to live dashboards"            },
+      { href: "/services/cloud-native-sd",         icon: Boxes,          title: "Cloud Native Dev",          desc: "Kubernetes & microservices"             },
+      { href: "/services/devops-on-azure",         icon: Workflow,       title: "DevOps on Azure",           desc: "CI/CD & infrastructure-as-code"         },
+    ],
+  },
+  {
+    label: "Products",
+    items: [
+      { href: "/products/airline-booking",         icon: Plane,          title: "Airline & Travel Booking",  desc: "GDS-connected booking SaaS"             },
+      { href: "/products/ai-legal-workspace",      icon: Scale,          title: "AI Legal Workspace",        desc: "AI for law firms & legal teams"         },
+      { href: "/products/payment-automation",      icon: CreditCard,     title: "Payment Automation",        desc: "Recurring billing & reconciliation"     },
+    ],
+  },
+  {
+    label: "Company",
+    items: [
+      { href: "/case-studies",                     icon: BookOpen,       title: "Case Studies",              desc: "How we deliver for clients"             },
+      { href: "/workshops",                        icon: GraduationCap,  title: "Workshops",                 desc: "Azure & Kubernetes training"            },
+      { href: "/knowledge-base",                   icon: Library,        title: "Knowledge Base",            desc: "Guides and articles"                    },
+      { href: "/about",                            icon: Building2,      title: "About Us",                  desc: "Our team and mission"                   },
+    ],
+  },
+];
 
 const processSteps = [
   {
@@ -193,6 +237,74 @@ export default function AIAgentsRAGPage() {
                     <p className="text-[#9ca3af] text-[11px] leading-snug">{s.label}</p>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Glass solutions panel */}
+          <div className="mt-14">
+            <div
+              className="overflow-hidden"
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                background: "rgba(255,255,255,0.72)",
+                backdropFilter: "blur(48px) saturate(200%)",
+                WebkitBackdropFilter: "blur(48px) saturate(200%)",
+                border: "1px solid rgba(255,255,255,0.90)",
+                borderRadius: 20,
+                boxShadow: "0 24px 64px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.98)",
+              }}
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 p-10 pb-8">
+                {solutions.map((col) => (
+                  <div key={col.label} className="flex flex-col">
+                    <p className="text-[11px] font-medium uppercase tracking-[0.1em] text-[#9A9A9A] mb-5">
+                      {col.label}
+                    </p>
+                    <ul className="flex flex-col gap-5">
+                      {col.items.map((item) => {
+                        const Icon = item.icon;
+                        return (
+                          <li key={item.href}>
+                            <Link
+                              href={item.href}
+                              className="group flex items-start gap-3 px-2.5 py-2 -mx-2.5 rounded-[10px] hover:bg-black/[0.05] transition-colors duration-150"
+                            >
+                              <Icon
+                                size={20}
+                                strokeWidth={1.5}
+                                className="shrink-0 mt-[2px] text-[#0E0E12] group-hover:text-[#e89a78] transition-colors duration-150"
+                              />
+                              <div className="flex flex-col gap-[4px] min-w-0">
+                                <span className="text-[14px] font-semibold leading-snug text-[#0E0E12] group-hover:text-[#e89a78] transition-colors duration-150">
+                                  {item.title}
+                                </span>
+                                <span className="text-[12.5px] leading-snug text-[#6B6B6B] line-clamp-2">
+                                  {item.desc}
+                                </span>
+                              </div>
+                            </Link>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+              <div
+                className="px-10 py-5 border-t border-black/[0.07] flex items-center justify-between"
+                style={{ background: "rgba(255,255,255,0.40)" }}
+              >
+                <p className="text-[13px] text-[#9A9A9A]">Not sure where to start?</p>
+                <Link
+                  href="/schedule-call"
+                  className="inline-flex items-center gap-2 text-[13px] font-medium text-[#e89a78] hover:text-[#d4836a] transition-colors"
+                >
+                  Schedule a free call
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </Link>
               </div>
             </div>
           </div>

@@ -5,7 +5,6 @@ import { Link } from 'react-transition-progress/next';
 import { Constants } from "@/Constants";
 import { BGNativeWhite } from "@/ImagePath";
 import Logo from "../ui/Logo";
-import CoomingSoon from "../ui/CoomingSoon";
 import { usePathname } from "next/navigation";
 
 import MicrosoftPartner from "../../../../public/img/microsoft.png";
@@ -13,33 +12,39 @@ import AWSPartner from "../../../../public/img/aws.png";
 
 const navColumns = [
   {
-    title: 'Solutions',
+    title: 'Services',
     links: [
-      { url: Constants.PAGES.AZURE_CLOUDIFY, title: 'Azure Cloudify', soon: true },
-      { url: Constants.PAGES.MANAGED_SERVICES, title: 'Managed Services' },
-      { url: Constants.PAGES.CLOUD_NATIVE_SD, title: 'Cloud Native Dev', soon: true },
-      { url: Constants.PAGES.DATA_LIFECYCLE_MANAGEMENT, title: 'Data Lifecycle Management', soon: true },
+      { url: '/services/custom-development',             title: 'Custom Development'       },
+      { url: '/services/design',                         title: 'Design'                   },
+      { url: Constants.PAGES.CLOUD_SOFTWARE_ARCHITECTURE, title: 'Cloud Architecture'      },
+      { url: Constants.PAGES.MIGRATE_TO_AZURE,           title: 'Migrate to Azure'         },
     ],
   },
   {
-    title: 'Workshops',
+    title: 'AI & Data',
     links: [
-      { url: Constants.PAGES.AZURE_FUNDAMENTALS_FOR_ISVS, title: 'Azure Fundamentals', soon: true },
-      { url: Constants.PAGES.AZURE_COST_MANAGEMENT, title: 'Cost Management', soon: true },
-      { url: Constants.PAGES.DEVOPS_ON_AZURE, title: 'DevOps on Azure', soon: true },
-      { url: Constants.PAGES.AZURE_KUBERNETES_SERVICES, title: 'AKS Workshop', soon: true },
-      { url: Constants.PAGES.APPLICATION_INSIGHTS, title: 'Application Insights', soon: true },
-      { url: Constants.PAGES.WORKSHOP_DATA_AI_SECURITY, title: 'Data & AI Security', soon: true },
+      { url: '/services/ai-agents-rag',                  title: 'AI Agents & RAG'          },
+      { url: Constants.PAGES.DATA_LIFECYCLE_MANAGEMENT,  title: 'Data Lifecycle'           },
+      { url: Constants.PAGES.CLOUD_NATIVE_SD,            title: 'Cloud Native Dev'         },
+      { url: Constants.PAGES.DEVOPS_ON_AZURE,            title: 'DevOps on Azure'          },
+    ],
+  },
+  {
+    title: 'Products',
+    links: [
+      { url: Constants.PAGES.AIRLINE_BOOKING,            title: 'Airline & Travel Booking' },
+      { url: Constants.PAGES.AI_LEGAL_WORKSPACE,         title: 'AI Legal Workspace'       },
+      { url: Constants.PAGES.PAYMENT_AUTOMATION,         title: 'Payment Automation'       },
     ],
   },
   {
     title: 'Company',
     links: [
-      { url: Constants.PAGES.KNOWLEDGE_BASE, title: 'Knowledge Base', soon: true },
-      { url: Constants.PAGES.CERTIFICATIONS, title: 'Certifications', soon: true },
-      { url: Constants.PAGES.ABOUT_US, title: 'About Us' },
-      { url: '/terms-and-conditions', title: 'Terms & Conditions' },
-      { url: '/privacy-policy', title: 'Privacy Policy' },
+      { url: Constants.PAGES.CASE_STUDIES,               title: 'Case Studies'             },
+      { url: Constants.PAGES.WORKSHOPS,                  title: 'Workshops'                },
+      { url: Constants.PAGES.KNOWLEDGE_BASE,             title: 'Knowledge Base'           },
+      { url: Constants.PAGES.ABOUT_US,                   title: 'About Us'                 },
+      { url: Constants.PAGES.PRIVACY,                    title: 'Privacy Policy'           },
     ],
   },
 ];
@@ -50,20 +55,26 @@ const socials = [
   { name: 'Facebook', icon: 'icon-facebook', url: Constants.SOCIALS.FACEBOOK },
 ];
 
-type NavLink = { url: string; title: string; soon?: boolean };
+type NavLink = { url: string; title: string };
 
 function Footer() {
   const pathname = usePathname();
   if (
     pathname.startsWith('/services/') ||
     pathname.startsWith('/accelerate-azure') ||
-    pathname.startsWith('/managed-services')
+    pathname.startsWith('/managed-services') ||
+    pathname.startsWith('/cloud-native-sd') ||
+    pathname.startsWith('/ai-legal-workspace') ||
+    pathname.startsWith('/airline-booking') ||
+    pathname.startsWith('/data-lifecycle-management') ||
+    pathname.startsWith('/payment-automation')
   ) return null;
 
   return (
     <footer
       className="bg-[#f4ebe8]"
       style={{
+        fontFamily: "'JetBrains Mono', monospace",
         backgroundImage: "url('/img/noise-background.jpg')",
         backgroundBlendMode: "multiply",
         backgroundSize: "300px 300px",
@@ -110,10 +121,10 @@ function Footer() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pt-14 pb-10">
 
           {/* Top row: logo + nav columns */}
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10 pb-12 border-b border-white/8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10 pb-12 border-b border-white/8">
 
             {/* Brand column */}
-            <div className="col-span-2 md:col-span-1 lg:col-span-2 flex flex-col gap-5">
+            <div className="col-span-2 md:col-span-3 lg:col-span-2 flex flex-col gap-5">
               <Logo isInvert={true} />
               <p className="text-white/50 text-xs leading-relaxed max-w-[200px]">
                 AI Agents · LLMs · Azure &amp; AWS — we build what your business actually needs.
@@ -135,15 +146,9 @@ function Footer() {
                 <ul className="flex flex-col gap-2.5">
                   {col.links.map((link: NavLink) => (
                     <li key={link.title}>
-                      {link.soon ? (
-                        <CoomingSoon>
-                          <span className="text-white/35 text-sm cursor-default">{link.title}</span>
-                        </CoomingSoon>
-                      ) : (
-                        <Link href={link.url} className="text-white/50 hover:text-white text-sm transition-colors duration-200">
-                          {link.title}
-                        </Link>
-                      )}
+                      <Link href={link.url} className="text-white/50 hover:text-white text-sm transition-colors duration-200">
+                        {link.title}
+                      </Link>
                     </li>
                   ))}
                 </ul>

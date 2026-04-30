@@ -21,42 +21,39 @@ const socials = [
 export default function ServiceFooter() {
   return (
     <footer
-      className="bg-[#f4ebe8]"
-      style={{
-        backgroundImage: "url('/img/noise-background.jpg')",
-        backgroundBlendMode: "multiply",
-        backgroundSize: "300px 300px",
-      }}
+      style={{ fontFamily: "'JetBrains Mono', monospace" }}
     >
       {/* ── CTA band ── */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 py-24 border-t border-black/8">
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-10">
-          <div>
-            <div className="flex items-center gap-2 mb-5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
-              <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">
-                Ready to ship?
+      <div className="bg-[#0a0e1a]">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-24 border-t border-white/[0.06]">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-10">
+            <div>
+              <div className="flex items-center gap-2 mb-5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
+                <p className="text-xs uppercase tracking-wider text-[#e89a78]/80 font-medium">
+                  Ready to ship?
+                </p>
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-[1.1] max-w-lg">
+                Let&apos;s build something that actually lasts.
+              </h2>
+            </div>
+
+            <div className="flex flex-col gap-3 shrink-0">
+              <a
+                href={`mailto:${Constants.MAIL}`}
+                className="inline-flex items-center gap-2 bg-[#e89a78] hover:bg-[#d4836a] text-white font-medium px-7 py-3.5 rounded-full transition-colors text-sm whitespace-nowrap"
+              >
+                {Constants.MAIL}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <path d="M7 17L17 7" />
+                  <path d="M7 7h10v10" />
+                </svg>
+              </a>
+              <p className="text-white/30 text-xs text-center">
+                We reply within one business day.
               </p>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0a0e1a] leading-[1.1] max-w-lg">
-              Let&apos;s build something that actually lasts.
-            </h2>
-          </div>
-
-          <div className="flex flex-col gap-3 shrink-0">
-            <a
-              href={`mailto:${Constants.MAIL}`}
-              className="inline-flex items-center gap-2 bg-[#0a0e1a] hover:bg-[#e89a78] text-white font-medium px-7 py-3.5 rounded-full transition-colors text-sm whitespace-nowrap"
-            >
-              {Constants.MAIL}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                <path d="M7 17L17 7" />
-                <path d="M7 7h10v10" />
-              </svg>
-            </a>
-            <p className="text-[#6b6b6b] text-xs text-center">
-              We reply within one business day.
-            </p>
           </div>
         </div>
       </div>
