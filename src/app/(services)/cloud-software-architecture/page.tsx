@@ -1,9 +1,15 @@
 'use client';
 
+import { Plus_Jakarta_Sans } from "next/font/google";
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import ContactUsFooter from '@/app/components/partials/ContactUsFooter';
 import { Constants } from '@/Constants';
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
+});
 
 const pillars = [
   {
@@ -31,257 +37,328 @@ const pillars = [
       </svg>
     ),
     title: 'Infrastructure as Code',
-    desc: 'We provision, configure, and manage all infrastructure through code — Terraform, Bicep, or Pulumi — so every environment is reproducible, auditable, and version-controlled.',
+    desc: 'We provision and manage all infrastructure through code — Terraform, Bicep, or Pulumi — so every environment is reproducible, auditable, and version-controlled.',
   },
 ];
 
 const services = [
-  { title: 'Well-Architected Reviews', desc: 'Audit your existing cloud setup against the five pillars of the Azure or AWS Well-Architected Framework and get a prioritised improvement roadmap.' },
+  { title: 'Well-Architected Reviews',       desc: 'Audit your existing cloud setup against the five pillars of the Azure or AWS Well-Architected Framework and get a prioritised improvement roadmap.' },
   { title: 'Reference Architecture Blueprints', desc: 'Proven, battle-tested architecture patterns — multi-region HA, event-driven systems, CQRS/ES — adapted to your domain and delivered as living documentation.' },
-  { title: 'Cloud Migration Architecture', desc: 'Lift-and-shift, re-platform, or full re-architect — we plan the migration path that minimises risk and maximises the value of the cloud.' },
+  { title: 'Cloud Migration Architecture',   desc: 'Lift-and-shift, re-platform, or full re-architect — we plan the migration path that minimises risk and maximises the value of the cloud.' },
   { title: 'Serverless & Container Architecture', desc: 'Design containerised workloads on AKS or EKS, or go fully serverless with Azure Functions and Azure Container Apps — right-sized for cost and performance.' },
-  { title: 'Event-Driven Architecture', desc: 'Decouple services with reliable messaging and event streaming using Azure Service Bus, Event Grid, or Kafka — built for resilience at any scale.' },
-  { title: 'Security & Compliance Design', desc: 'Zero-trust network design, identity architecture, encryption at rest and in transit, and compliance mapping for ISO 27001, SOC 2, GDPR, and more.' },
+  { title: 'Event-Driven Architecture',      desc: 'Decouple services with reliable messaging and event streaming using Azure Service Bus, Event Grid, or Kafka — built for resilience at any scale.' },
+  { title: 'Security & Compliance Design',   desc: 'Zero-trust network design, identity architecture, encryption at rest and in transit, and compliance mapping for ISO 27001, SOC 2, GDPR, and more.' },
 ];
 
 const reasons = [
-  { stat: '3×', label: 'Faster time-to-scale', desc: 'Well-designed systems scale horizontally without rewrites.' },
-  { stat: '60%', label: 'Lower incident rate', desc: 'Architecture reviews catch failure modes before they hit production.' },
-  { stat: '40%', label: 'Reduced cloud spend', desc: 'Right-sized resources and optimised data flows cut waste at the source.' },
+  { stat: '3×',  label: 'Faster time-to-scale',  desc: 'Well-designed systems scale horizontally without rewrites.' },
+  { stat: '60%', label: 'Lower incident rate',    desc: 'Architecture reviews catch failure modes before they hit production.' },
+  { stat: '40%', label: 'Reduced cloud spend',    desc: 'Right-sized resources and optimised data flows cut waste at the source.' },
 ];
+
+/* ── Authentic Apple liquid-glass ── */
+const lg: React.CSSProperties = {
+  background: "rgba(255,255,255,0.60)",
+  backdropFilter: "blur(40px) saturate(160%)",
+  WebkitBackdropFilter: "blur(40px) saturate(160%)",
+  border: "1px solid rgba(255,255,255,0.82)",
+  boxShadow: "0 2px 24px rgba(14,116,144,0.08), 0 1px 2px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.95)",
+};
+const lgCard: React.CSSProperties = {
+  background: "rgba(255,255,255,0.52)",
+  backdropFilter: "blur(32px) saturate(150%)",
+  WebkitBackdropFilter: "blur(32px) saturate(150%)",
+  border: "1px solid rgba(255,255,255,0.78)",
+  boxShadow: "0 4px 32px rgba(14,116,144,0.07), 0 1px 3px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.90)",
+};
+
+function Blobs({ items }: { items: { w: number; h: number; top?: string; left?: string; right?: string; bottom?: string; color: string; blur?: number; delay?: string }[] }) {
+  return (
+    <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
+      {items.map((b, i) => (
+        <div key={i} className="absolute rounded-full" style={{ width: b.w, height: b.h, top: b.top, left: b.left, right: b.right, bottom: b.bottom, background: `radial-gradient(circle, ${b.color} 0%, transparent 65%)`, filter: `blur(${b.blur ?? 60}px)` }} />
+      ))}
+    </div>
+  );
+}
 
 export default function CloudSoftwareArchitecturePage() {
   return (
-    <div className="relative min-h-full overflow-x-clip bg-white">
+    <div className={`relative min-h-full overflow-x-clip ${jakarta.className}`}>
 
-      {/* ── Hero ── */}
-      <section className="relative overflow-hidden bg-[#0a0e1a] pt-36 pb-20 sm:pt-44 sm:pb-28 px-5 sm:px-10">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_60%,_rgba(232,154,120,0.12)_0%,_transparent_60%)] pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_20%,_rgba(240,160,80,0.07)_0%,_transparent_55%)] pointer-events-none" />
+      {/* ── Hero ──────────────────────────────────────── */}
+      <section className="relative overflow-hidden min-h-[100svh] flex items-center" style={{ background: "linear-gradient(145deg, #0b1437 0%, #0f2d6b 28%, #0c4a8c 55%, #0369a1 80%, #0891b2 100%)" }}>
+        <Blobs items={[
+          { w: 700, h: 700, top: "-20%", left: "-15%",  color: "rgba(147,197,253,0.35)", delay: "0s" },
+          { w: 600, h: 600, top: "15%",  right: "-12%", color: "rgba(34,211,238,0.25)",  delay: "0.8s" },
+          { w: 500, h: 500, bottom: "-15%", left: "30%",color: "rgba(96,165,250,0.30)",  delay: "1.4s" },
+          { w: 300, h: 300, top: "60%",  left: "10%",   color: "rgba(165,243,252,0.20)", delay: "0.4s" },
+        ]} />
 
-        <div className="relative max-w-9xl mx-auto">
-          <motion.div
-            className="inline-flex items-center gap-2 bg-[#e89a78]/10 border border-[#e89a78]/25 rounded-full px-4 py-1.5 mb-8"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78]" />
-            <p className="text-xs uppercase tracking-widest text-[#e89a78] font-semibold">Solutions · Architecture</p>
-          </motion.div>
+        <div className="relative w-full max-w-7xl mx-auto px-6 md:px-12 pt-36 pb-24">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-14 xl:gap-20">
 
-          <motion.h1
-            className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black !leading-[1.05] text-white max-w-4xl mb-6"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            Design systems that{' '}
-            <span className="relative inline-block">
-              <span className="bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] bg-clip-text text-transparent">
-                scale from day one
-              </span>
-              <span className="absolute -bottom-1 left-0 w-full h-[3px] rounded-full bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] opacity-60" />
-            </span>
-          </motion.h1>
-
-          <motion.p
-            className="text-white/55 text-lg sm:text-xl max-w-2xl leading-relaxed mb-10"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            We architect cloud-native solutions built for performance, resilience, and growth. Whether you&apos;re building from scratch or rethinking an existing stack, we make the right design decisions before a single line of code is written.
-          </motion.p>
-
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <Link
-              href={Constants.PAGES.SCHEDULE_CALL}
-              className="inline-flex items-center justify-center gap-3 px-7 min-h-[52px] rounded-full bg-[#e89a78] hover:bg-[#f0a060] text-white font-semibold text-sm transition-all duration-200 shadow-lg shadow-[#e89a78]/25 w-full sm:w-auto"
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0">
-                <rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" />
-              </svg>
-              Schedule a free call
-            </Link>
-            <Link
-              href={Constants.PAGES.SOLUTIONS}
-              className="inline-flex items-center justify-center gap-2 px-7 min-h-[52px] rounded-full border border-white/20 hover:border-[#e89a78]/50 text-white/70 hover:text-white font-semibold text-sm transition-all duration-200 w-full sm:w-auto"
-            >
-              View all solutions
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── Three pillars ── */}
-      <section className="max-w-9xl mx-auto px-5 sm:px-10 py-20 sm:py-28">
-        <motion.div
-          className="flex items-center gap-2 mb-4"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true, margin: '-60px' }}
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78]" />
-          <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">What we do</p>
-        </motion.div>
-
-        <motion.h2
-          className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0a0e1a] max-w-xl mb-14 leading-tight"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          viewport={{ once: true, margin: '-60px' }}
-        >
-          Three disciplines that make architecture{' '}
-          <span className="bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] bg-clip-text text-transparent">
-            future-proof
-          </span>
-        </motion.h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {pillars.map((pillar, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: 'easeOut', delay: i * 0.1 }}
-              viewport={{ once: true, margin: '-40px' }}
-              className="group flex flex-col gap-4 p-7 rounded-2xl border border-[#e8e0d8] hover:border-[#e89a78]/40 bg-[#faf7f4] hover:bg-[#f4ebe8] transition-all duration-200"
-            >
-              <div className="w-11 h-11 rounded-xl bg-[#e89a78]/10 border border-[#e89a78]/20 flex items-center justify-center text-[#e89a78] group-hover:bg-[#e89a78]/15 transition-colors">
-                {pillar.icon}
+            {/* Left */}
+            <motion.div className="flex-1 min-w-0" initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, ease: [0.25,0.46,0.45,0.94] }}>
+              <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-10" style={lg}>
+                <span className="w-1.5 h-1.5 rounded-full bg-sky-500 shrink-0" />
+                <span className="text-[11px] font-semibold text-sky-700 tracking-widest uppercase">Cloud Architecture</span>
               </div>
-              <h3 className="text-base font-semibold text-[#0a0e1a]">{pillar.title}</h3>
-              <p className="text-[#6b6b6b] text-sm leading-relaxed">{pillar.desc}</p>
+
+              <h1 className="text-6xl md:text-7xl lg:text-[96px] font-extrabold text-white leading-[0.97] tracking-[-0.045em] mb-8">
+                Systems that<br />
+                scale from<br />
+                <span style={{ background: "linear-gradient(120deg, #7dd3fc 0%, #38bdf8 40%, #22d3ee 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                  day one.
+                </span>
+              </h1>
+
+              <motion.p className="text-white/55 text-[18px] font-normal leading-[1.75] max-w-[460px] mb-10" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }}>
+                We architect cloud-native solutions built for performance, resilience, and growth — making the right design decisions before a single line of code is written.
+              </motion.p>
+
+              <motion.div className="flex flex-wrap gap-3" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25 }}>
+                <Link href={Constants.PAGES.SCHEDULE_CALL} className="bg-white hover:bg-white/90 text-[#0c4a8c] font-bold px-8 py-4 rounded-full text-base transition-colors whitespace-nowrap shadow-lg shadow-black/10">
+                  Schedule a free call
+                </Link>
+                <Link href={Constants.PAGES.SOLUTIONS} className="font-medium px-8 py-4 rounded-full text-base text-white/80 hover:text-white transition-colors whitespace-nowrap" style={lg}>
+                  View all solutions
+                </Link>
+              </motion.div>
             </motion.div>
-          ))}
+
+            {/* Right — floating architecture diagram */}
+            <motion.div className="lg:flex-1 lg:max-w-[500px] w-full" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.95, delay: 0.08, ease: [0.25,0.46,0.45,0.94] }}>
+              <motion.div animate={{ y: [0, -12, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}>
+                <div className="rounded-[28px] p-7 flex flex-col gap-5" style={lgCard}>
+                  {/* Header */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-bold text-sky-700 uppercase tracking-widest">Cloud Architecture</span>
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400" style={{ boxShadow: "0 0 6px #34d399" }} />
+                      <span className="text-[10px] text-sky-600 font-medium">Live</span>
+                    </div>
+                  </div>
+
+                  {/* Architecture diagram */}
+                  <div className="flex flex-col gap-3">
+                    {/* Top row — CDN + Gateway */}
+                    <div className="grid grid-cols-2 gap-2.5">
+                      {[
+                        { label: "CDN / WAF", color: "from-sky-200/60 to-blue-100/40" },
+                        { label: "API Gateway", color: "from-blue-200/60 to-indigo-100/40" },
+                      ].map((n) => (
+                        <div key={n.label} className={`h-12 rounded-2xl bg-gradient-to-br ${n.color} flex items-center justify-center`} style={{ border: "1px solid rgba(255,255,255,0.80)" }}>
+                          <span className="text-[11px] font-semibold text-sky-800">{n.label}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Arrow */}
+                    <div className="flex justify-center">
+                      <svg width="24" height="16" viewBox="0 0 24 16" fill="none">
+                        <path d="M12 0v12M6 8l6 6 6-6" stroke="rgba(14,116,144,0.4)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+
+                    {/* Middle row — microservices */}
+                    <div className="grid grid-cols-3 gap-2">
+                      {[
+                        { label: "Auth",    color: "from-violet-200/50 to-purple-100/30" },
+                        { label: "Orders",  color: "from-sky-200/50 to-cyan-100/30" },
+                        { label: "Events",  color: "from-teal-200/50 to-emerald-100/30" },
+                      ].map((n) => (
+                        <div key={n.label} className={`h-16 rounded-2xl bg-gradient-to-br ${n.color} flex items-center justify-center`} style={{ border: "1px solid rgba(255,255,255,0.75)" }}>
+                          <span className="text-[11px] font-semibold text-slate-700">{n.label}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Arrow */}
+                    <div className="flex justify-center">
+                      <svg width="24" height="16" viewBox="0 0 24 16" fill="none">
+                        <path d="M12 0v12M6 8l6 6 6-6" stroke="rgba(14,116,144,0.4)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+
+                    {/* Bottom row — storage */}
+                    <div className="grid grid-cols-2 gap-2.5">
+                      {[
+                        { label: "Azure SQL / Cosmos", color: "from-blue-200/60 to-sky-100/40" },
+                        { label: "Blob / Redis",       color: "from-cyan-200/60 to-teal-100/40" },
+                      ].map((n) => (
+                        <div key={n.label} className={`h-12 rounded-2xl bg-gradient-to-br ${n.color} flex items-center justify-center px-2`} style={{ border: "1px solid rgba(255,255,255,0.80)" }}>
+                          <span className="text-[10px] font-semibold text-sky-800 text-center leading-tight">{n.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2 pt-1">
+                    {["Azure", "Kubernetes", "Terraform", "IaC"].map((t) => (
+                      <span key={t} className="text-[10px] font-semibold text-sky-700 bg-sky-100/70 border border-sky-200/60 px-2.5 py-1 rounded-full">{t}</span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* ── Services grid ── */}
-      <section className="bg-[#faf7f4] py-20 sm:py-28 px-5 sm:px-10">
-        <div className="max-w-9xl mx-auto">
-          <motion.div
-            className="flex items-center gap-2 mb-4"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true, margin: '-60px' }}
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78]" />
-            <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">Architecture services</p>
-          </motion.div>
+      {/* ── Three pillars ─────────────────────────────── */}
+      <section className="relative overflow-hidden" style={{ background: "linear-gradient(160deg, #f0f9ff 0%, #e0f2fe 40%, #ecfeff 100%)" }}>
+        <Blobs items={[
+          { w: 700, h: 700, top: "-20%", right: "-15%", color: "rgba(147,197,253,0.35)", blur: 70 },
+          { w: 500, h: 500, bottom: "-15%", left: "-10%", color: "rgba(165,243,252,0.30)", blur: 60 },
+        ]} />
+        <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-28">
+          <div className="flex items-center gap-2 mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-sky-500 shrink-0" />
+            <p className="text-xs uppercase tracking-wider text-sky-600 font-semibold">What we do</p>
+          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#0c1445] leading-[1.05] tracking-[-0.035em] mb-14 max-w-2xl">
+            Three disciplines that make<br />architecture{" "}
+            <span style={{ background: "linear-gradient(120deg, #0369a1 0%, #0891b2 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>future-proof.</span>
+          </h2>
 
-          <motion.h2
-            className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0a0e1a] max-w-2xl mb-12 leading-tight"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true, margin: '-60px' }}
-          >
-            Everything your architecture needs —{' '}
-            <span className="relative inline-block">
-              <span className="bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] bg-clip-text text-transparent">
-                under one roof
-              </span>
-              <span className="absolute -bottom-1 left-0 w-full h-[2px] rounded-full bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] opacity-50" />
-            </span>
-          </motion.h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {services.map((service, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {pillars.map((p, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 28 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, ease: 'easeOut', delay: i * 0.07 }}
-                viewport={{ once: true, margin: '-40px' }}
-                className="group flex flex-col gap-3 p-6 rounded-2xl border border-[#e8e0d8] hover:border-[#e89a78]/40 bg-white hover:shadow-md transition-all duration-200"
+                viewport={{ once: true, margin: "-8%" }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="rounded-[22px] p-8 flex flex-col gap-5 hover:shadow-lg transition-shadow duration-300"
+                style={lgCard}
               >
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78]/30 group-hover:bg-[#e89a78] transition-colors shrink-0" />
-                  <h3 className="text-sm font-semibold text-[#0a0e1a]">{service.title}</h3>
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center text-sky-600" style={{ background: "rgba(14,165,233,0.12)", border: "1px solid rgba(14,165,233,0.20)" }}>
+                  {p.icon}
                 </div>
-                <p className="text-[#6b6b6b] text-sm leading-relaxed pl-4">{service.desc}</p>
+                <h3 className="text-base font-bold text-[#0c1445] leading-snug">{p.title}</h3>
+                <p className="text-[#334155] text-sm font-light leading-relaxed">{p.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Why it matters ── */}
-      <section className="max-w-9xl mx-auto px-5 sm:px-10 py-20 sm:py-28">
-        <motion.div
-          className="flex items-center gap-2 mb-4"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true, margin: '-60px' }}
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78]" />
-          <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">Why architecture matters</p>
-        </motion.div>
-
-        <motion.h2
-          className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0a0e1a] max-w-xl mb-14 leading-tight"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          viewport={{ once: true, margin: '-60px' }}
-        >
-          Good architecture pays for itself
-        </motion.h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
-          {reasons.map((r, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              viewport={{ once: true, margin: '-40px' }}
-              className="flex flex-col gap-2 p-7 rounded-2xl bg-[#0a0e1a] text-white"
-            >
-              <span className="text-4xl font-black bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] bg-clip-text text-transparent">
-                {r.stat}
-              </span>
-              <h3 className="text-base font-semibold">{r.label}</h3>
-              <p className="text-white/50 text-sm leading-relaxed">{r.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-
-        <motion.div
-          className="flex flex-col sm:flex-row gap-5 items-start sm:items-center justify-between p-8 rounded-2xl bg-[#faf7f4] border border-[#e8e0d8]"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true, margin: '-40px' }}
-        >
-          <div className="max-w-lg">
-            <h3 className="text-lg font-bold text-[#0a0e1a] mb-1">Ready to design your architecture?</h3>
-            <p className="text-[#6b6b6b] text-sm">Book a free 30-minute call. We&apos;ll review your current setup and outline a path forward — no obligation.</p>
+      {/* ── Services grid ─────────────────────────────── */}
+      <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 50%, #ecfeff 100%)" }}>
+        <Blobs items={[
+          { w: 600, h: 600, top: "0%", left: "20%", color: "rgba(34,211,238,0.20)", blur: 70 },
+        ]} />
+        <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-24">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
+            <div>
+              <div className="flex items-center gap-2 mb-5">
+                <span className="w-1.5 h-1.5 rounded-full bg-sky-500 shrink-0" />
+                <p className="text-xs uppercase tracking-wider text-sky-600 font-semibold">Architecture services</p>
+              </div>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#0c1445] leading-[1.05] tracking-[-0.035em] max-w-xl">
+                Everything your architecture<br />needs, under one roof.
+              </h2>
+            </div>
+            <Link href={Constants.PAGES.SCHEDULE_CALL} className="shrink-0 self-start md:self-end font-semibold px-6 py-3 rounded-full text-sm text-sky-700 whitespace-nowrap hover:shadow-md transition-all" style={lg}>
+              Schedule a call →
+            </Link>
           </div>
-          <Link
-            href={Constants.PAGES.SCHEDULE_CALL}
-            className="shrink-0 inline-flex items-center justify-center gap-2 px-6 min-h-[48px] rounded-full bg-[#0a0e1a] hover:bg-[#e89a78] text-white font-semibold text-sm transition-all duration-200 shadow-sm w-full sm:w-auto"
-          >
-            Schedule a free call
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </Link>
-        </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {services.map((s, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-8%" }}
+                transition={{ duration: 0.5, delay: i * 0.07 }}
+                className="rounded-[22px] p-8 flex flex-col gap-3 hover:shadow-lg transition-shadow duration-300"
+                style={lgCard}
+              >
+                <span className="text-[11px] font-bold text-sky-500 uppercase tracking-widest">0{i + 1}</span>
+                <h3 className="text-base font-bold text-[#0c1445] leading-snug">{s.title}</h3>
+                <p className="text-[#334155] text-sm font-light leading-relaxed">{s.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </section>
 
-      <ContactUsFooter />
+      {/* ── Why it matters — stats ─────────────────────── */}
+      <section className="relative overflow-hidden" style={{ background: "linear-gradient(145deg, #0b1437 0%, #0f2d6b 40%, #0c4a8c 100%)" }}>
+        <Blobs items={[
+          { w: 600, h: 600, top: "-20%", right: "-10%", color: "rgba(147,197,253,0.20)", blur: 70 },
+          { w: 400, h: 400, bottom: "-10%", left: "10%", color: "rgba(34,211,238,0.15)", blur: 60 },
+        ]} />
+        <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-28">
+          <div className="flex items-center gap-2 mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0" />
+            <p className="text-xs uppercase tracking-wider text-sky-400 font-semibold">Why architecture matters</p>
+          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.05] tracking-[-0.035em] mb-14">
+            Good architecture<br />pays for itself.
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-12">
+            {reasons.map((r, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-8%" }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="rounded-[22px] p-8 flex flex-col gap-3"
+                style={{
+                  background: "rgba(255,255,255,0.09)",
+                  backdropFilter: "blur(32px) saturate(150%)",
+                  WebkitBackdropFilter: "blur(32px) saturate(150%)",
+                  border: "1px solid rgba(255,255,255,0.18)",
+                  boxShadow: "inset 0 1px 0 rgba(255,255,255,0.25)",
+                }}
+              >
+                <span className="text-5xl font-black" style={{ background: "linear-gradient(120deg, #7dd3fc 0%, #22d3ee 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                  {r.stat}
+                </span>
+                <h3 className="text-base font-bold text-white">{r.label}</h3>
+                <p className="text-white/50 text-sm font-light leading-relaxed">{r.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* CTA banner */}
+          <motion.div
+            className="rounded-[24px] px-10 py-10 flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between"
+            style={{
+              background: "rgba(255,255,255,0.10)",
+              backdropFilter: "blur(40px) saturate(160%)",
+              WebkitBackdropFilter: "blur(40px) saturate(160%)",
+              border: "1px solid rgba(255,255,255,0.22)",
+              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.30)",
+            }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-8%" }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="max-w-lg">
+              <h3 className="text-2xl font-extrabold text-white tracking-[-0.025em] mb-2">Ready to design your architecture?</h3>
+              <p className="text-white/55 text-[15px] font-normal leading-relaxed">Book a free 30-minute call. We&apos;ll review your current setup and outline a path forward — no obligation.</p>
+            </div>
+            <Link
+              href={Constants.PAGES.SCHEDULE_CALL}
+              className="shrink-0 inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-white hover:bg-white/90 text-[#0c4a8c] font-bold text-sm transition-all whitespace-nowrap shadow-lg shadow-black/10"
+            >
+              Schedule a free call
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
     </div>
   );
 }

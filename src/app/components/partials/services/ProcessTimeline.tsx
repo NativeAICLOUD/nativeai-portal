@@ -55,7 +55,7 @@ function TimelineStep({ step, index }: { step: ProcessStep; index: number }) {
           viewport={{ once: true, margin: "-30%" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           style={{ transformOrigin: "top" }}
-          className="w-px h-[260px] bg-[#ff6b4a]"
+          className="w-0.5 h-[260px] bg-[#ff6b4a]"
         />
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
@@ -84,7 +84,16 @@ function TimelineStep({ step, index }: { step: ProcessStep; index: number }) {
 
 export default function ProcessTimeline({ steps }: { steps: ProcessStep[] }) {
   return (
-    <div className="mt-32 pb-20 md:pb-32">
+    <div className="mt-32 pb-20 md:pb-32 relative">
+      {/* Continuous vertical guide on mobile — fills the gaps between steps */}
+      <motion.div
+        className="absolute md:hidden w-0.5 rounded-full bg-[#ff6b4a]"
+        style={{ left: "calc(1rem + 7px)", top: 0, bottom: 0, transformOrigin: "top" }}
+        initial={{ scaleY: 0 }}
+        whileInView={{ scaleY: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.4, ease: "easeOut" }}
+      />
       {steps.map((step, i) => (
         <TimelineStep key={step.step} step={step} index={i} />
       ))}

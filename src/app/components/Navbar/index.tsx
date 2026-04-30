@@ -214,10 +214,12 @@ function Navbar() {
               <div
                 className="max-w-[1200px] mx-auto overflow-hidden"
                 style={{
-                  background: '#F8F4EE',
-                  border: '1px solid rgba(0,0,0,0.06)',
+                  background: "rgba(255,255,255,0.72)",
+                  backdropFilter: "blur(48px) saturate(200%)",
+                  WebkitBackdropFilter: "blur(48px) saturate(200%)",
+                  border: "1px solid rgba(255,255,255,0.90)",
                   borderRadius: 20,
-                  boxShadow: '0 20px 60px -20px rgba(0,0,0,0.18)',
+                  boxShadow: "0 24px 64px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.98)",
                 }}
               >
                 {/* Grid — 4 equal cols */}
@@ -250,7 +252,7 @@ function Navbar() {
                                 <Link
                                   href={item.url}
                                   onClick={() => setSlideMenu(false)}
-                                  className="group flex items-start gap-3 px-2.5 py-2 -mx-2.5 rounded-[10px] hover:bg-black/[0.04] transition-colors duration-150"
+                                  className="group flex items-start gap-3 px-2.5 py-2 -mx-2.5 rounded-[10px] hover:bg-black/[0.05] transition-colors duration-150"
                                 >
                                   {Icon && (
                                     <Icon
@@ -280,7 +282,7 @@ function Navbar() {
                 </div>
 
                 {/* Bottom CTA row */}
-                <div className="px-10 py-5 border-t border-black/[0.06] flex items-center justify-between">
+                <div className="px-10 py-5 border-t border-black/[0.07] flex items-center justify-between" style={{ background: "rgba(255,255,255,0.40)" }}>
                   <p className="text-[13px] text-[#9A9A9A]">Not sure where to start?</p>
                   <Link
                     href={Constants.PAGES.SCHEDULE_CALL}
@@ -299,7 +301,7 @@ function Navbar() {
             {/* Backdrop */}
             <motion.div
               key="megamenu-backdrop"
-              className="fixed left-0 right-0 bottom-0 bg-black/15 backdrop-blur-[1px] z-[997]"
+              className="fixed left-0 right-0 bottom-0 bg-black/10 backdrop-blur-[2px] z-[997]"
               style={{ top: navH }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
