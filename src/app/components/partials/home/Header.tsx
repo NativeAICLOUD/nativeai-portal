@@ -8,14 +8,6 @@ const MONO: React.CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
 
 const tags = ['AI Agents', 'LLMs', 'Azure & AWS'];
 
-const metrics = [
-  { label: 'Documents processed', value: '1,240+',   dot: '#28c840' },
-  { label: 'Avg review time',     value: '< 8s',     dot: '#28c840' },
-  { label: 'Accuracy score',      value: '97.8%',    dot: '#28c840' },
-  { label: 'Last query',          value: '1 min ago', dot: '#febc2e' },
-];
-
-const techStack = ['Azure OpenAI', 'GPT-4o', 'RAG', 'Azure AI Search', 'Next.js', 'Azure'];
 
 function HomeHeader() {
   return (
@@ -211,90 +203,6 @@ function HomeHeader() {
               </svg>
             </div>
 
-            {/* ── Metrics glass card ── */}
-            <div
-              className="overflow-hidden"
-              style={{
-                ...MONO,
-                background: 'rgba(255,255,255,0.72)',
-                backdropFilter: 'blur(48px) saturate(200%)',
-                WebkitBackdropFilter: 'blur(48px) saturate(200%)',
-                border: '1px solid rgba(255,255,255,0.90)',
-                borderRadius: 20,
-                boxShadow: '0 24px 64px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.98)',
-              }}
-            >
-              {/* Header */}
-              <div className="px-5 pt-5 pb-4 border-b border-black/[0.06]">
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <p className="text-[13px] font-semibold text-[#0a0e1a]">Legal Document Agent</p>
-                    <p className="text-[11px] text-[#0a0e1a]/40 mt-0.5">RAG pipeline · contract review</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Metrics */}
-              <div className="px-5 py-4 border-b border-black/[0.06]">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-[#0a0e1a]/30 mb-3">Live Metrics</p>
-                <div className="flex flex-col gap-2.5">
-                  {metrics.map((m) => (
-                    <div key={m.label} className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: m.dot }} />
-                        <span className="text-[12px] text-[#0a0e1a]/50">{m.label}</span>
-                      </div>
-                      <span className="text-[12px] font-semibold text-[#0a0e1a]">{m.value}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Progress */}
-                <div className="mt-4">
-                  <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-[12px] text-[#0a0e1a]/50">Documents reviewed this month</span>
-                    <span className="text-[12px] font-semibold text-[#0a0e1a]">1,240 / 1,300</span>
-                  </div>
-                  <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(0,0,0,0.07)' }}>
-                    <div
-                      className="h-full rounded-full"
-                      style={{
-                        width: '95%',
-                        backgroundImage: 'linear-gradient(90deg, #f0a060, #e89a78, #f5b87a, #e89a78, #f0a060)',
-                        backgroundSize: '200% 100%',
-                        animation: 'progressGrow 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.6s both, shimmer 2.4s linear 1.8s infinite',
-                      }}
-                    />
-                  </div>
-                  <style>{`
-                    @keyframes progressGrow {
-                      from { width: 0%; opacity: 0.4; }
-                      to   { width: 95%; opacity: 1; }
-                    }
-                    @keyframes shimmer {
-                      from { background-position: 200% 0; }
-                      to   { background-position: -200% 0; }
-                    }
-                  `}</style>
-                </div>
-              </div>
-
-              {/* Tech stack */}
-              <div className="px-5 py-4">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-[#0a0e1a]/30 mb-3">Tech Stack</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {techStack.map((t) => (
-                    <span
-                      key={t}
-                      className="text-[11px] font-medium px-2.5 py-1 rounded-full"
-                      style={{ background: 'rgba(0,0,0,0.05)', color: 'rgba(10,14,26,0.65)', border: '1px solid rgba(0,0,0,0.08)' }}
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
           </div>
 
         </div>

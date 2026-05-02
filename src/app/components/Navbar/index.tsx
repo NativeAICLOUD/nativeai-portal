@@ -120,11 +120,11 @@ function Navbar() {
     <>
     <header
       className={`fixed top-0 left-0 right-0 z-[999] px-5 pb-3 sm:px-3 sm:pb-3 transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${navHidden && !openSide ? '-translate-y-full' : 'translate-y-0'}`}
-      style={{ paddingTop: 'max(6px, env(safe-area-inset-top, 6px))' }}
+      style={{ paddingTop: 'max(8px, env(safe-area-inset-top, 8px))' }}
     >
 
       {/* ── Floating nav pill ── */}
-      <nav className="max-w-7xl mx-auto bg-[#0a0e1a] border border-white/[0.08] rounded-2xl flex items-center justify-between px-5 sm:px-6 h-[58px] sm:h-[72px] shadow-[0_4px_32px_rgba(0,0,0,0.35)] overflow-hidden">
+      <nav className="max-w-7xl mx-auto bg-[#0a0e1a] border border-white/[0.08] rounded-2xl flex items-center justify-between px-5 sm:px-6 h-[76px] sm:h-[72px] shadow-[0_4px_32px_rgba(0,0,0,0.35)] overflow-hidden">
 
         {/* Logo */}
         <div
