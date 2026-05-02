@@ -24,12 +24,74 @@ const partnersData = [
 ];
 
 const navLinks = [
-  { label: 'Going to Azure', href: '/azure' },
-  { label: 'Accelerate with Azure', href: '/accelerate-azure' },
-  { label: 'Managed Services', href: '/managed-services' },
-  { label: 'Cloud Native Dev', href: '/cloud-native-sd' },
-  { label: 'DevOps on Azure', href: '/devops-on-azure' },
-  { label: 'Data Lifecycle Management', href: '/data-lifecycle-management' },
+  {
+    label:    'Going to Azure',
+    sub:      'Migrate with confidence',
+    href:     '/azure',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+        <path d="M3 15a4 4 0 0 0 4 4h9a5 5 0 0 0 1.8-9.7A7 7 0 1 0 3 15Z"/>
+        <path d="M12 12v6M9 15l3-3 3 3"/>
+      </svg>
+    ),
+  },
+  {
+    label:    'Accelerate with Azure',
+    sub:      'Ship faster on the cloud',
+    href:     '/accelerate-azure',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+        <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>
+      </svg>
+    ),
+  },
+  {
+    label:    'Managed Services',
+    sub:      'We run it, you focus',
+    href:     '/managed-services',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+        <path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/>
+        <path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+      </svg>
+    ),
+  },
+  {
+    label:    'Cloud Native Dev',
+    sub:      'Build cloud-first apps',
+    href:     '/cloud-native-sd',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+        <polyline points="16 18 22 12 16 6"/>
+        <polyline points="8 6 2 12 8 18"/>
+      </svg>
+    ),
+  },
+  {
+    label:    'DevOps on Azure',
+    sub:      'CI/CD that never sleeps',
+    href:     '/devops-on-azure',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+        <path d="M8 12h8M12 8l4 4-4 4"/>
+      </svg>
+    ),
+  },
+  {
+    label:    'Data Lifecycle Mgmt',
+    sub:      'Data at every stage',
+    href:     '/data-lifecycle-management',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+        <ellipse cx="12" cy="5" rx="9" ry="3"/>
+        <path d="M3 5v5c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/>
+        <path d="M3 10v5c0 1.66 4.03 3 9 3s9-1.34 9-3v-5"/>
+        <path d="M3 15v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
+      </svg>
+    ),
+  },
 ];
 
 type IPartnerType = typeof partnersData[0];
@@ -61,17 +123,44 @@ const HomePartner = () => {
           </p>
         </div>
 
-        {/* Service pills */}
-        <div className="flex flex-wrap justify-center gap-2.5 mb-10 sm:mb-16 max-w-4xl mx-auto px-4">
-          {navLinks.map((link) => (
-            <Link
+        {/* Service cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-4xl mx-auto px-4 mb-10 sm:mb-16">
+          {navLinks.map((link, i) => (
+            <motion.div
               key={link.href}
-              href={link.href}
-              className="inline-flex items-center gap-2 min-h-[42px] md:min-h-[48px] px-5 bg-white/[0.04] hover:bg-[#e89a78]/15 border border-white/10 hover:border-[#e89a78]/40 text-white/70 hover:text-white text-sm font-medium rounded-full no-underline transition-all duration-200"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, ease: 'easeOut', delay: i * 0.07 }}
+              viewport={{ once: true, margin: '-40px' }}
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
-              {link.label}
-            </Link>
+              <Link
+                href={link.href}
+                className="group flex items-start gap-3.5 p-4 rounded-xl border border-white/[0.08] bg-white/[0.03] hover:bg-[#e89a78]/[0.08] hover:border-[#e89a78]/35 transition-all duration-200 no-underline"
+              >
+                {/* icon */}
+                <div className="shrink-0 w-9 h-9 rounded-lg bg-white/[0.06] border border-white/[0.08] group-hover:bg-[#e89a78]/15 group-hover:border-[#e89a78]/30 flex items-center justify-center text-white/45 group-hover:text-[#e89a78] transition-all duration-200">
+                  {link.icon}
+                </div>
+
+                {/* text */}
+                <div className="flex-1 min-w-0">
+                  <p className="text-[13px] font-semibold text-white/80 group-hover:text-white leading-tight transition-colors">
+                    {link.label}
+                  </p>
+                  <p className="text-[11px] text-white/35 group-hover:text-white/55 mt-0.5 transition-colors">
+                    {link.sub}
+                  </p>
+                </div>
+
+                {/* arrow */}
+                <svg
+                  className="shrink-0 w-3.5 h-3.5 text-white/20 group-hover:text-[#e89a78] mt-0.5 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round"
+                >
+                  <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                </svg>
+              </Link>
+            </motion.div>
           ))}
         </div>
 

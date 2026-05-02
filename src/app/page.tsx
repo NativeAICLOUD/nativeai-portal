@@ -19,6 +19,9 @@ export default function Home() {
       {/* AI Agents · LLMs · Azure & AWS */}
       <CloudServicesSection />
 
+      {/* Industries Section */}
+      <IndustriesBusinessDomain />
+
       {/* What We Deliver — pinned scroll card experience */}
       <ServicesScrollSection />
 
@@ -33,9 +36,6 @@ export default function Home() {
 
       {/* Home Partner Section */}
       <HomePartner />
-
-      {/* Industries Section */}
-      <IndustriesBusinessDomain />
     </main>
   );
 }

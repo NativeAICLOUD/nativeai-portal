@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import BracketFrame from '../../ui/BracketFrame';
 
@@ -199,57 +199,159 @@ export default function ServicesScrollSection() {
     </div>
   );
 
+  /* ── mobile carousel ── */
+  const mobileTrackRef = useRef<HTMLDivElement>(null);
+  const mobileCardRefs = useRef<(HTMLDivElement | null)[]>(Array(CARD_COUNT).fill(null));
+  const [activeCard, setActiveCard] = useState(0);
+
+  useEffect(() => {
+    const track = mobileTrackRef.current;
+    if (!track) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = mobileCardRefs.current.indexOf(entry.target as HTMLDivElement);
+            if (idx >= 0) setActiveCard(idx);
+          }
+        });
+      },
+      { threshold: 0.6, root: track },
+    );
+
+    mobileCardRefs.current.forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       {/* ══ MOBILE  ≤ 768 px ══════════════════════════════════════ */}
-      <section className="md:hidden bg-[#faf7f4] px-6 sm:px-10 py-16">
-        <div className="max-w-9xl mx-auto">
-          {headingBlock}
+      <section className="md:hidden bg-[#faf7f4] py-14">
 
-          <div className="grid grid-cols-2 gap-4 mt-10">
-            {services.map((svc, i) => {
-              const v = variants[i % 3];
-              return (
-                <div
-                  key={i}
-                  className="relative overflow-hidden flex flex-col justify-between p-5 min-h-[170px]"
-                  style={{ background: v.background, border: v.border, borderRadius: 18 }}
-                >
-                  {v.hatch && (
-                    <div
-                      aria-hidden
-                      className="pointer-events-none absolute inset-0"
-                      style={{
-                        borderRadius: 18,
-                        background: 'repeating-linear-gradient(135deg,transparent 0px 8px,rgba(232,93,47,0.08) 8px 9px)',
-                      }}
-                    />
-                  )}
-                  <span
-                    className="font-mono"
-                    style={{ fontSize: 10, letterSpacing: '0.14em', color: v.numColor }}
-                  >
-                    {String(i + 1).padStart(2, '0')}
+        {/* heading */}
+        <div className="px-6 mb-8">{headingBlock}</div>
+
+        {/* counter + dots */}
+        <div className="flex items-center justify-between px-6 mb-5">
+          <span className="font-mono text-sm font-semibold tabular-nums text-[#0a0e1a]">
+            {String(activeCard + 1).padStart(2, '0')} / {String(CARD_COUNT).padStart(2, '0')}
+          </span>
+          <div className="flex items-center gap-1.5">
+            {Array.from({ length: CARD_COUNT }).map((_, i) => (
+              <span
+                key={i}
+                className="rounded-full transition-all duration-200"
+                style={{
+                  width:      i === activeCard ? 18 : 5,
+                  height:     5,
+                  background: i < activeCard ? '#e89a78' : i === activeCard ? '#0a0e1a' : 'rgba(10,14,26,0.2)',
+                }}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* progress rail */}
+        <div className="px-6 mb-6">
+          <div className="h-[1.5px] bg-[#e8e0d8] rounded-full overflow-hidden">
+            <div
+              className="h-full bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] rounded-full transition-all duration-300"
+              style={{ width: `${((activeCard + 1) / CARD_COUNT) * 100}%` }}
+            />
+          </div>
+        </div>
+
+        {/* horizontal snap track */}
+        <div
+          ref={mobileTrackRef}
+          className="flex gap-4 overflow-x-auto"
+          style={{
+            scrollSnapType:          'x mandatory',
+            WebkitOverflowScrolling: 'touch',
+            scrollbarWidth:          'none',
+            paddingLeft:             24,
+            paddingRight:            24,
+          }}
+        >
+          {services.map((svc, i) => {
+            const v   = variants[i % 3];
+            const idx = String(i + 1).padStart(2, '0');
+            return (
+              <div
+                key={i}
+                ref={(el) => { mobileCardRefs.current[i] = el; }}
+                className="relative overflow-hidden shrink-0 flex flex-col justify-between"
+                style={{
+                  scrollSnapAlign: 'start',
+                  width:           'min(72vw, 280px)',
+                  aspectRatio:     '4 / 5',
+                  borderRadius:    22,
+                  background:      v.background,
+                  border:          v.border,
+                  boxShadow:       '0 20px 56px rgba(0,0,0,0.15), 0 4px 14px rgba(0,0,0,0.08)',
+                  padding:         22,
+                }}
+              >
+                {/* diagonal hatch (cream variant) */}
+                {v.hatch && (
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0"
+                    style={{
+                      borderRadius: 22,
+                      background:   'repeating-linear-gradient(135deg,transparent 0px 8px,rgba(232,93,47,0.08) 8px 9px)',
+                    }}
+                  />
+                )}
+
+                <BracketFrame color={v.bracketColor} />
+
+                {/* top: number + meta */}
+                <div className="relative flex items-start justify-between">
+                  <span className="font-mono" style={{ fontSize: 10, letterSpacing: '0.14em', color: v.numColor }}>
+                    {idx}
                   </span>
-                  <div>
-                    <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center mb-3"
-                      style={{ background: v.iconBg }}
-                    >
-                      <Image
-                        src={svc.src} alt={svc.title}
-                        width={svc.w} height={svc.h}
-                        className="max-w-[26px] max-h-[26px] object-contain"
-                      />
-                    </div>
-                    <h3 className="font-semibold text-sm leading-snug" style={{ color: v.textColor }}>
-                      {svc.title}
-                    </h3>
+                  <span className="font-mono" style={{ fontSize: 9, letterSpacing: '0.10em', color: v.metaColor }}>
+                    {svc.meta}
+                  </span>
+                </div>
+
+                {/* centre: icon */}
+                <div className="relative flex items-center justify-center">
+                  <div
+                    className="flex items-center justify-center"
+                    style={{ width: 76, height: 76, borderRadius: 16, background: v.iconBg }}
+                  >
+                    <Image
+                      src={svc.src} alt={svc.title}
+                      width={svc.w} height={svc.h}
+                      className="max-w-[44px] max-h-[44px] object-contain"
+                    />
                   </div>
                 </div>
-              );
-            })}
-          </div>
+
+                {/* bottom: title + url */}
+                <div className="relative">
+                  <h3
+                    className="font-bold leading-tight"
+                    style={{ color: v.textColor, fontSize: 16, letterSpacing: '-0.01em' }}
+                  >
+                    {svc.title}
+                  </h3>
+                  <span
+                    className="font-mono mt-1.5 block"
+                    style={{ fontSize: 9, letterSpacing: '0.10em', color: v.metaColor }}
+                  >
+                    ↗ nativecloud.service
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+
+          {/* trailing spacer so last card snaps cleanly */}
+          <div className="shrink-0 w-6" aria-hidden />
         </div>
       </section>
 

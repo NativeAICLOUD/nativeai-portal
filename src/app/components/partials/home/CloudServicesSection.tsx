@@ -1,7 +1,61 @@
 "use client";
 
 import Image from 'next/image';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+
+const MONO: React.CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
+
+function RAGChatDemo() {
+  const ANSWER = "Customers have 30 days for full refunds. After day 14, partial refunds apply — per §4.2.";
+  const [phase, setPhase] = useState<0 | 1 | 2 | 3>(0);
+  const [chars, setChars] = useState(0);
+
+  useEffect(() => {
+    let t: ReturnType<typeof setTimeout>;
+    if (phase === 0)      t = setTimeout(() => setPhase(1), 1000);
+    else if (phase === 1) t = setTimeout(() => setPhase(2), 1300);
+    else if (phase === 2) {
+      if (chars < ANSWER.length) t = setTimeout(() => setChars(c => c + 1), 22);
+      else                       t = setTimeout(() => setPhase(3), 2400);
+    } else t = setTimeout(() => { setPhase(0); setChars(0); }, 600);
+    return () => clearTimeout(t);
+  }, [phase, chars]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  return (
+    <div style={{ ...MONO, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }} className="rounded-xl p-4 mb-4">
+      <div className="flex items-center gap-2 mb-3 pb-2 border-b border-white/[0.07]">
+        <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] animate-pulse" />
+        <span className="text-[10px] text-white/30 uppercase tracking-widest">RAG · policy_2024.pdf</span>
+      </div>
+      <div className="flex justify-end mb-2">
+        <span className="bg-[#e89a78]/15 border border-[#e89a78]/20 text-white/75 px-2.5 py-1 rounded-lg rounded-tr-none text-[11px]">
+          What&apos;s our refund policy?
+        </span>
+      </div>
+      <div className="flex gap-2">
+        <span className="w-4 h-4 rounded-full bg-[#e89a78]/20 border border-[#e89a78]/30 flex items-center justify-center shrink-0 mt-0.5 font-bold" style={{ fontSize: 7, color: '#e89a78' }}>AI</span>
+        <div className="text-white/60 text-[11px] leading-relaxed flex-1 min-h-[36px]">
+          {phase === 0 && <span className="text-white/20">…</span>}
+          {phase === 1 && (
+            <span className="flex gap-1 items-center h-4">
+              {[0, 150, 300].map(d => (
+                <span key={d} className="w-1.5 h-1.5 rounded-full bg-white/30 animate-bounce" style={{ animationDelay: `${d}ms` }} />
+              ))}
+            </span>
+          )}
+          {(phase === 2 || phase === 3) && (
+            <>
+              {ANSWER.slice(0, chars)}
+              {chars < ANSWER.length && <span className="opacity-60 animate-pulse">▌</span>}
+              {chars >= ANSWER.length && <span className="block mt-1 text-[9px] text-[#e89a78]/55">↳ policy_2024.pdf §4.2</span>}
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const services = [
   { w: 93, h: 68, src: '/img/Cloud.png', title: 'Cloud Solutions & Services' },
@@ -53,17 +107,6 @@ const CloudServicesSection = () => {
       <div className="relative max-w-9xl mx-auto bg-[#0a0e1a] text-white pt-14 sm:pt-24 px-8 sm:px-16 pb-10 sm:pb-14 xl:rounded-2xl overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_15%_70%,_rgba(232,154,120,0.10)_0%,_transparent_55%)]" />
 
-        {/* Label pill */}
-        <motion.div
-          className="relative inline-flex items-center gap-2 bg-[#e89a78]/10 border border-[#e89a78]/25 rounded-full px-4 py-1.5 mb-7"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
-          viewport={{ once: true, margin: '-60px' }}
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78]" />
-          <p className="text-xs uppercase tracking-widest text-[#e89a78] font-semibold">AI Agents · LLMs · Azure &amp; AWS</p>
-        </motion.div>
 
         <motion.h2
           className="relative text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-bold !leading-[1.1] max-w-4xl mb-2"
@@ -74,8 +117,7 @@ const CloudServicesSection = () => {
         >
           We implement{' '}
           <span className="text-[#e89a78]">AI Agents &amp; LLMs</span>{' '}
-          inside your business —{' '}
-          <span className="text-white/50 font-normal">automating decisions, workflows, and operations.</span>
+          inside your business.
         </motion.h2>
 
         <div className="relative text-sm sm:text-base grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 mt-12 sm:mt-16">
@@ -88,9 +130,13 @@ const CloudServicesSection = () => {
               viewport={{ once: true, margin: '-40px' }}
               className="flex flex-col gap-4 border border-white/10 hover:border-[#e89a78]/35 rounded-2xl p-7 bg-white/[0.03] hover:bg-white/[0.06] transition-all duration-200 group"
             >
-              <div className="w-11 h-11 rounded-xl bg-[#e89a78]/10 border border-[#e89a78]/20 flex items-center justify-center text-[#e89a78] group-hover:bg-[#e89a78]/15 transition-colors">
-                {pillar.icon}
-              </div>
+              {i === 1 ? (
+                <RAGChatDemo />
+              ) : (
+                <div className="w-11 h-11 rounded-xl bg-[#e89a78]/10 border border-[#e89a78]/20 flex items-center justify-center text-[#e89a78] group-hover:bg-[#e89a78]/15 transition-colors">
+                  {pillar.icon}
+                </div>
+              )}
               <h3 className="text-base sm:text-lg font-semibold">{pillar.title}</h3>
               <p className="text-white/55 text-sm leading-relaxed">{pillar.desc}</p>
             </motion.div>
