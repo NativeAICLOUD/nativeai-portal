@@ -124,19 +124,19 @@ function PhoneInputField({
         className="flex items-center gap-1.5 shrink-0 px-3 py-4 sm:py-3.5 rounded-l-2xl transition-all duration-150 focus:outline-none"
         style={{
           minWidth: 84,
-          background: open ? '#ece9e5' : '#f5f3f0',
-          border: '1px solid #f5f3f0',
-          borderRight: '1px solid #e8e4df',
+          background: open ? 'rgba(255,255,255,0.09)' : 'rgba(255,255,255,0.04)',
+          border: '1px solid rgba(255,255,255,0.09)',
+          borderRight: '1px solid rgba(255,255,255,0.07)',
           borderRadius: '16px 0 0 16px',
           transition: 'background 0.15s',
         }}
       >
         <span className="text-[17px] leading-none">{country.flag}</span>
-        <span className="text-[12px] font-semibold text-[#0a0e1a]/55 tabular-nums">{country.dial}</span>
+        <span className="text-[12px] font-semibold text-white/55 tabular-nums">{country.dial}</span>
         <svg
           width="9" height="9" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-          className={`shrink-0 text-[#0a0e1a]/25 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+          className={`shrink-0 text-white/25 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
         >
           <polyline points="6 9 12 15 18 9" />
         </svg>
@@ -150,7 +150,7 @@ function PhoneInputField({
         onBlur={onBlur}
         placeholder="79 123 45 67"
         className={className}
-        style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0, borderLeft: 'none' }}
+        style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0, borderLeft: 'none', borderTopRightRadius: 16, borderBottomRightRadius: 16 }}
       />
 
       {/* ── Dropdown — Apple liquid glass ── */}
@@ -247,8 +247,6 @@ function PhoneInputField({
     </div>
   );
 }
-
-const MONO = "'JetBrains Mono', monospace";
 
 const topics = [
   'AI Agents & LLMs',
@@ -449,57 +447,20 @@ export default function ScheduleCallPage() {
 
   const inputCls = (field: FieldKey, extra = '') => {
     const { err, valid } = fieldState(field);
-    /* text-base on mobile (≥16px) prevents iOS Safari from zooming on focus */
-    const base = `w-full outline-none rounded-2xl px-4 py-4 sm:py-3.5 text-base sm:text-sm text-[#0a0e1a] placeholder:text-[#0a0e1a]/30 transition-all duration-200 ${extra}`;
-    if (err) return `${base} bg-red-50 border border-red-200 focus:border-red-400 focus:shadow-[0_0_0_3px_rgba(248,113,113,0.12)]`;
-    if (valid) return `${base} bg-emerald-50/50 border border-emerald-200 focus:border-emerald-400 focus:shadow-[0_0_0_3px_rgba(52,211,153,0.10)]`;
-    return `${base} bg-[#f5f3f0] border border-[#f5f3f0] focus:bg-white focus:border-[#e89a78] focus:shadow-[0_0_0_3px_rgba(232,154,120,0.13)]`;
+    const base = `w-full outline-none rounded-2xl px-4 py-3.5 text-[15px] text-white placeholder:text-white/20 transition-all duration-200 ${extra}`;
+    if (err) return `${base} bg-red-950/40 border border-red-500/30 focus:border-red-500/60`;
+    if (valid) return `${base} bg-emerald-950/30 border border-emerald-500/25 focus:border-emerald-500/50`;
+    return `${base} bg-white/[0.04] border border-white/[0.09] focus:bg-white/[0.07] focus:border-white/[0.22]`;
   };
 
   return (
-    <div className="min-h-screen bg-[#06080f] relative overflow-hidden" style={{ fontFamily: MONO }}>
-      {/* Background — mesh gradient design */}
+    <div className="min-h-screen bg-[#000000] relative overflow-hidden">
+      {/* Background — Apple-style pure black with atmospheric glows */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-
-        {/* Base diagonal gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0d1630] via-[#06080f] to-[#0f0c18]" />
-
-        {/* Warm focal glow — center-top, behind the hero */}
-        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[600px] rounded-full bg-[#e89a78]/[0.11] blur-[160px]" />
-
-        {/* Cool accent — bottom-left */}
-        <div className="absolute bottom-0 -left-40 w-[700px] h-[500px] rounded-full bg-[#3b6fd4]/[0.09] blur-[140px]" />
-
-        {/* Secondary warm — right edge */}
-        <div className="absolute top-1/3 -right-32 w-[500px] h-[500px] rounded-full bg-[#e89a78]/[0.07] blur-[120px]" />
-
-        {/* Tight hot-spot glow behind form area */}
-        <div className="absolute top-1/2 right-1/4 w-[280px] h-[280px] rounded-full bg-[#f0a060]/[0.08] blur-[80px]" />
-
-        {/* Dot-matrix pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.18]"
-          style={{
-            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.45) 1px, transparent 1px)',
-            backgroundSize: '28px 28px',
-          }}
-        />
-
-        {/* Edge vignette — darkens corners for depth */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: 'radial-gradient(ellipse 90% 80% at 50% 40%, transparent 40%, rgba(6,8,15,0.7) 100%)',
-          }}
-        />
-
-        {/* Infinity mark — large, centered, faint */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[920px] opacity-[0.055] select-none">
-          <svg viewBox="21 1 97 45" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
-            <path d="M109.088 8.57212C106.515 5.58012 102.965 3.33773 99.0229 2.31032C97.0446 1.79468 94.9567 1.45887 92.8976 1.60776C91.3139 1.72185 89.7534 2.11502 88.2375 2.54107C84.3481 3.63487 80.6244 5.26107 76.9974 6.95624C73.1175 8.76935 69.3226 10.741 65.5777 12.7881C63.955 13.675 62.3425 14.5787 60.7389 15.4952C58.7805 16.64 56.8227 17.784 54.865 18.9287C54.6951 18.8295 54.5253 18.7302 54.3561 18.6303C52.3682 17.4643 50.3954 16.2809 48.3575 15.1923C44.5284 13.1478 40.4793 10.9898 36.146 10.072C32.1148 9.21861 27.7589 11.2908 25.471 14.3995C22.3083 18.6961 21.9199 24.9211 24.5736 29.5348C26.5827 33.0283 30.6496 35.7534 35.0267 35.3886C37.0194 35.2223 39.0086 34.454 40.8266 33.7121C42.9885 32.8298 45.0839 31.8036 47.1458 30.7317C49.7768 29.3634 52.3422 27.8822 54.8924 26.3785C59.5312 29.0972 64.1796 31.794 68.9493 34.3096C72.6038 36.2368 76.311 38.0848 80.1148 39.738C83.4967 41.2083 86.9881 42.5773 90.6357 43.343C98.5714 45.0098 106.624 40.7139 110.762 34.4585C115.896 26.6994 115.192 15.6751 109.088 8.57212ZM39.569 26.9695C37.8421 27.6624 36.3508 28.2908 34.5287 28.3127C32.5463 28.336 30.7092 27.7036 29.1255 26.5776C28.7069 26.2805 27.9856 25.5586 27.4945 24.916C27.4945 24.9018 27.2616 24.5512 27.241 24.5157C27.1218 24.3088 27.0225 24.0942 26.9108 23.8847C26.9054 23.8744 26.8999 23.8615 26.8944 23.8492C26.9047 23.8802 26.9136 23.906 26.9259 23.9459C26.8485 23.7074 26.5978 23.2833 26.6362 23.0332C26.6636 23.1589 26.691 23.2853 26.719 23.4109C26.6875 23.2517 26.6601 23.0925 26.6375 22.932C26.6307 22.9005 26.6259 22.8792 26.6197 22.8547C26.6149 22.6813 26.5766 22.4177 26.6129 22.2359C26.617 22.2288 26.6225 22.2211 26.6286 22.2069C26.6211 22.3384 26.6136 22.4699 26.6067 22.6014C26.6252 22.4396 26.6478 22.2785 26.6752 22.118C26.6773 22.1032 26.6779 22.0948 26.6793 22.0819C26.6862 22.0632 26.6923 22.0484 26.6999 22.0258C26.7458 21.8937 26.7889 21.7609 26.8321 21.6281C26.8595 21.5695 26.978 21.2672 27.015 21.1931C27.1321 20.9617 27.267 20.738 27.404 20.5163C27.4643 20.437 27.6397 20.1843 27.663 20.1553C27.7623 20.0322 27.8651 19.9104 27.9705 19.7918C28.2671 19.4592 28.5905 19.1395 28.9391 18.8527C28.9823 18.8288 29.3481 18.5588 29.3248 18.5749C29.5262 18.4389 29.7324 18.3106 29.944 18.1894C30.4407 17.9046 30.9647 17.6622 31.5079 17.465C33.095 16.8894 34.8884 16.8443 36.5536 17.269C37.0899 17.4057 38.2818 17.8201 39.0408 18.1127C40.1786 18.551 41.2945 19.0396 42.3966 19.552C44.4647 20.5131 46.4861 21.5624 48.4808 22.6517C45.6244 24.2688 42.6268 25.7429 39.569 26.9695ZM110.23 24.3978C110.199 24.5866 110.182 24.8122 110.128 25.0069C110.1 25.0823 110.074 25.1557 110.062 25.2009C109.936 25.6617 109.791 26.1181 109.626 26.568C109.584 26.6853 109.261 27.4117 109.568 26.7336C109.502 26.878 109.44 27.0236 109.373 27.1674C109.139 27.6682 108.88 28.1581 108.598 28.6363C108.477 28.8406 108.348 29.0392 108.223 29.2409C108.192 29.2899 108.17 29.3273 108.151 29.3589C108.129 29.3879 108.102 29.422 108.067 29.4678C107.779 29.8461 107.493 30.2232 107.182 30.5854C106.526 31.3492 105.801 32.066 105.015 32.7124C104.955 32.7595 104.786 32.8936 104.753 32.9187C104.592 33.0386 104.43 33.1578 104.264 33.2732C103.868 33.551 103.46 33.8146 103.041 34.0621C102.128 34.6023 101.165 35.067 100.166 35.4492C96.9692 36.6738 93.4668 36.9098 90.0946 36.1241C89.6473 36.0196 89.0438 35.852 88.2992 35.6226C87.3875 35.3416 86.4867 35.0309 85.5934 34.7015C83.7631 34.0273 81.9657 33.2758 80.1895 32.4849C76.3247 30.7646 72.5538 28.858 68.8363 26.8728C66.2737 25.5044 63.7454 24.0832 61.2328 22.6388C61.402 22.5402 61.5705 22.4415 61.7397 22.3423C68.9788 18.2062 76.4014 14.1726 84.2323 11.1046C87.3148 9.89667 90.1048 8.78482 93.3579 8.68427C97.3727 8.55988 101.281 9.86251 104.462 12.1552C104.935 12.4961 104.962 12.5219 105.331 12.8429C105.693 13.1574 106.042 13.4855 106.376 13.8265C107.002 14.464 107.576 15.1465 108.095 15.8639C108.135 15.9271 108.332 16.2178 108.351 16.2481C108.477 16.4492 108.599 16.6522 108.717 16.8578C108.953 17.2703 109.172 17.6925 109.372 18.1211C109.402 18.1849 109.516 18.4576 109.555 18.5427C109.606 18.6767 109.658 18.8102 109.705 18.9455C109.858 19.3819 110.103 19.9188 110.165 20.3964C110.17 20.4911 110.177 20.5917 110.188 20.6516C110.217 20.8108 110.243 20.9713 110.267 21.1312C110.303 21.3729 110.326 21.6159 110.359 21.8582C110.361 21.8737 110.363 21.8834 110.364 21.8969C110.364 21.8969 110.364 21.8969 110.364 21.8975C110.374 22.3964 110.374 22.8921 110.364 23.391C110.364 23.391 110.364 23.391 110.364 23.3916C110.362 23.4058 110.361 23.4148 110.359 23.4303C110.316 23.7532 110.283 24.0761 110.23 24.3978Z" fill="#e89a78"/>
-            <path d="M48.4809 22.6504L54.8918 26.3804L51.686 28.2451L44.9319 24.5454L48.4809 22.6504Z" fill="#e89a78"/>
-          </svg>
-        </div>
+        {/* Soft warm glow top-center */}
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full opacity-30" style={{ background: 'radial-gradient(ellipse, rgba(232,154,120,0.18) 0%, transparent 70%)' }} />
+        {/* Subtle cool glow bottom */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1000px] h-[400px] rounded-full opacity-20" style={{ background: 'radial-gradient(ellipse, rgba(100,120,200,0.15) 0%, transparent 70%)' }} />
       </div>
 
       {/* Hero */}
@@ -581,44 +542,39 @@ export default function ScheduleCallPage() {
         <div
           className="overflow-hidden order-1 lg:order-2"
           style={{
-            background: '#ffffff',
+            background: '#111111',
+            border: '1px solid rgba(255,255,255,0.09)',
             borderRadius: 28,
-            boxShadow:
-              '0 0 0 1px rgba(0,0,0,0.06), ' +
-              '0 4px 16px rgba(0,0,0,0.06), ' +
-              '0 20px 60px rgba(0,0,0,0.12)',
+            boxShadow: '0 0 0 0.5px rgba(255,255,255,0.03), 0 32px 80px rgba(0,0,0,0.8)',
           }}
         >
           {!submitted ? (
             <>
-              {/* Sticky progress header */}
-              <div className="sticky top-0 z-10 bg-white/95 backdrop-blur-sm border-b border-black/[0.06] px-5 sm:px-8 pt-5 sm:pt-7 pb-4">
-                <div className="flex items-center justify-between mb-2">
-                  <h2 className="text-lg sm:text-xl font-bold text-[#0a0e1a]">Book your session</h2>
-                  <span className={`text-xs font-semibold tabular-nums transition-colors duration-300 ${completionScore === 100 ? 'text-emerald-500' : 'text-[#e89a78]'}`}>
-                    {completionScore}% complete
+              {/* Progress header */}
+              <div className="border-b border-white/[0.07] px-6 sm:px-8 pt-7 pb-5" style={{ background: '#111111' }}>
+                <div className="flex items-center justify-between mb-3">
+                  <h2 className="text-base font-semibold text-white tracking-tight">Book your session</h2>
+                  <span className={`text-[11px] font-medium tabular-nums transition-colors duration-300 ${completionScore === 100 ? 'text-emerald-400' : 'text-white/30'}`}>
+                    {completionScore}%
                   </span>
                 </div>
-                <div className="h-1.5 bg-[#f0ece8] rounded-full overflow-hidden">
+                <div className="h-[2px] bg-white/[0.07] rounded-full overflow-hidden">
                   <div
-                    className={`h-full rounded-full transition-all duration-500 ease-out ${completionScore === 100 ? 'bg-emerald-400' : 'bg-gradient-to-r from-[#f0a060] to-[#d4845c]'}`}
+                    className={`h-full rounded-full transition-all duration-500 ease-out ${completionScore === 100 ? 'bg-emerald-400' : 'bg-white/50'}`}
                     style={{ width: `${completionScore}%` }}
                   />
                 </div>
               </div>
 
               {/* Form body */}
-              <div className="px-5 sm:px-8 pt-5 pb-7 sm:pb-10">
-                <p className="text-sm text-[#0a0e1a]/45 mb-6">We reply within one business day to confirm your slot.</p>
-
-              <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
+              <div className="px-6 sm:px-8 pt-7 pb-8 sm:pb-10">
+              <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-6">
 
                 {/* Row 1: Name + Company */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {/* Full name */}
-                  <div className="flex flex-col gap-1.5">
-                    <label className="flex items-center gap-1 text-xs font-semibold text-[#0a0e1a]/50 uppercase tracking-wide">
-                      Full name <span className="text-[#e89a78] not-uppercase">*</span>
+                  <div className="flex flex-col gap-2">
+                    <label className="text-[12px] text-white/40 font-medium">
+                      Full name <span className="text-white/20">*</span>
                     </label>
                     <div className="relative">
                       <input
@@ -630,29 +586,15 @@ export default function ScheduleCallPage() {
                         onBlur={handleBlur('name')}
                         className={inputCls('name', 'pr-10')}
                       />
-                      {fieldState('name').valid && (
-                        <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                          <CheckIcon />
-                        </span>
-                      )}
-                      {fieldState('name').err && (
-                        <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                          <ErrorIcon />
-                        </span>
-                      )}
+                      {fieldState('name').valid && <span className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none"><CheckIcon /></span>}
+                      {fieldState('name').err   && <span className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none"><ErrorIcon /></span>}
                     </div>
-                    {fieldState('name').err && (
-                      <p className="text-xs text-red-500 flex items-center gap-1">
-                        {fieldState('name').err}
-                      </p>
-                    )}
+                    {fieldState('name').err && <p className="text-[11px] text-red-400">{fieldState('name').err}</p>}
                   </div>
 
-                  {/* Company */}
-                  <div className="flex flex-col gap-1.5">
-                    <label className="flex items-center gap-1.5 text-xs font-semibold text-[#0a0e1a]/50 uppercase tracking-wide">
-                      Company
-                      <span className="text-[#0a0e1a]/35 normal-case font-normal tracking-normal text-[11px]">optional</span>
+                  <div className="flex flex-col gap-2">
+                    <label className="text-[12px] text-white/40 font-medium">
+                      Company <span className="text-white/20 font-normal">optional</span>
                     </label>
                     <div className="relative">
                       <input
@@ -664,21 +606,16 @@ export default function ScheduleCallPage() {
                         onBlur={handleBlur('company')}
                         className={inputCls('company', 'pr-10')}
                       />
-                      {fieldState('company').valid && (
-                        <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                          <CheckIcon />
-                        </span>
-                      )}
+                      {fieldState('company').valid && <span className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none"><CheckIcon /></span>}
                     </div>
                   </div>
                 </div>
 
                 {/* Row 2: Email + Phone */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {/* Work email */}
-                  <div className="flex flex-col gap-1.5">
-                    <label className="flex items-center gap-1 text-xs font-semibold text-[#0a0e1a]/50 uppercase tracking-wide">
-                      Work email <span className="text-[#e89a78] not-uppercase">*</span>
+                  <div className="flex flex-col gap-2">
+                    <label className="text-[12px] text-white/40 font-medium">
+                      Work email <span className="text-white/20">*</span>
                     </label>
                     <div className="relative">
                       <input
@@ -690,27 +627,15 @@ export default function ScheduleCallPage() {
                         onBlur={handleBlur('email')}
                         className={inputCls('email', 'pr-10')}
                       />
-                      {fieldState('email').valid && (
-                        <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                          <CheckIcon />
-                        </span>
-                      )}
-                      {fieldState('email').err && (
-                        <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                          <ErrorIcon />
-                        </span>
-                      )}
+                      {fieldState('email').valid && <span className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none"><CheckIcon /></span>}
+                      {fieldState('email').err   && <span className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none"><ErrorIcon /></span>}
                     </div>
-                    {fieldState('email').err && (
-                      <p className="text-xs text-red-500">{fieldState('email').err}</p>
-                    )}
+                    {fieldState('email').err && <p className="text-[11px] text-red-400">{fieldState('email').err}</p>}
                   </div>
 
-                  {/* Phone */}
-                  <div className="flex flex-col gap-1.5">
-                    <label className="flex items-center gap-1.5 text-xs font-semibold text-[#0a0e1a]/50 uppercase tracking-wide">
-                      Phone
-                      <span className="text-[#0a0e1a]/35 normal-case font-normal tracking-normal text-[11px]">optional</span>
+                  <div className="flex flex-col gap-2">
+                    <label className="text-[12px] text-white/40 font-medium">
+                      Phone <span className="text-white/20 font-normal">optional</span>
                     </label>
                     <PhoneInputField
                       value={form.phone}
@@ -718,102 +643,68 @@ export default function ScheduleCallPage() {
                       onBlur={handleBlur('phone')}
                       className={inputCls('phone')}
                     />
-                    {fieldState('phone').err && (
-                      <p className="text-xs text-red-500">{fieldState('phone').err}</p>
-                    )}
+                    {fieldState('phone').err && <p className="text-[11px] text-red-400">{fieldState('phone').err}</p>}
                   </div>
                 </div>
 
-                {/* Topic */}
-                <div className="flex flex-col gap-1.5">
-                  <label className="flex items-center gap-1 text-xs font-semibold text-[#0a0e1a]/50 uppercase tracking-wide">
-                    What would you like to discuss? <span className="text-[#e89a78] not-uppercase">*</span>
+                {/* Topic — pill grid */}
+                <div className="flex flex-col gap-2">
+                  <label className="text-[12px] text-white/40 font-medium">
+                    What would you like to discuss? <span className="text-white/20">*</span>
                   </label>
-                  <div className="relative">
-                    <select
-                      value={form.topic}
-                      onChange={update('topic')}
-                      onBlur={handleBlur('topic')}
-                      className={`${inputCls('topic', 'pr-10')} appearance-none cursor-pointer`}
-                    >
-                      <option value="" disabled>Select a topic…</option>
-                      {topics.map((t) => (
-                        <option key={t} value={t}>{t}</option>
-                      ))}
-                    </select>
-                    {/* Show chevron when no validation icon is present */}
-                    {!fieldState('topic').valid && !fieldState('topic').err && (
-                      <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[#0a0e1a]/30">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
-                          <polyline points="6 9 12 15 18 9" />
-                        </svg>
-                      </span>
-                    )}
-                    {fieldState('topic').valid && (
-                      <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                        <CheckIcon />
-                      </span>
-                    )}
-                    {fieldState('topic').err && (
-                      <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                        <ErrorIcon />
-                      </span>
-                    )}
+                  <div className="grid grid-cols-2 gap-2">
+                    {topics.map((t) => (
+                      <button
+                        key={t}
+                        type="button"
+                        onClick={() => { setForm(f => ({ ...f, topic: t })); setTouched(tt => ({ ...tt, topic: true })); }}
+                        className={`px-4 py-3 rounded-2xl text-[13px] text-left transition-all duration-150 ${
+                          form.topic === t
+                            ? 'bg-white text-[#0a0a0a] font-semibold'
+                            : 'bg-white/[0.04] border border-white/[0.09] text-white/50 hover:bg-white/[0.08] hover:text-white/80 hover:border-white/[0.16]'
+                        }`}
+                      >
+                        {t}
+                      </button>
+                    ))}
                   </div>
-                  {fieldState('topic').err && (
-                    <p className="text-xs text-red-500">{fieldState('topic').err}</p>
-                  )}
+                  {fieldState('topic').err && <p className="text-[11px] text-red-400">{fieldState('topic').err}</p>}
                 </div>
 
                 {/* Message */}
-                <div className="flex flex-col gap-1.5">
+                <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between">
-                    <label className="flex items-center gap-1.5 text-xs font-semibold text-[#0a0e1a]/50 uppercase tracking-wide">
-                      Tell us more
-                      <span className="text-[#0a0e1a]/35 normal-case font-normal tracking-normal text-[11px]">optional</span>
+                    <label className="text-[12px] text-white/40 font-medium">
+                      Tell us more <span className="text-white/20 font-normal">optional</span>
                     </label>
-                    <span
-                      className={`text-xs tabular-nums transition-colors ${
-                        form.message.length > MSG_MAX
-                          ? 'text-red-500 font-semibold'
-                          : form.message.length > MSG_MAX * 0.8
-                          ? 'text-amber-500'
-                          : 'text-[#0a0e1a]/28'
-                      }`}
-                    >
+                    <span className={`text-[11px] tabular-nums transition-colors ${form.message.length > MSG_MAX ? 'text-red-400 font-semibold' : form.message.length > MSG_MAX * 0.8 ? 'text-amber-400' : 'text-white/20'}`}>
                       {form.message.length}/{MSG_MAX}
                     </span>
                   </div>
                   <textarea
                     rows={4}
-                    placeholder="Brief context about your project, current setup, or key challenges you're facing…"
+                    placeholder="Brief context about your project or challenges…"
                     value={form.message}
                     onChange={update('message')}
                     onBlur={handleBlur('message')}
                     className={`${inputCls('message')} resize-none`}
                   />
-                  {fieldState('message').err && (
-                    <p className="text-xs text-red-500">{fieldState('message').err}</p>
-                  )}
+                  {fieldState('message').err && <p className="text-[11px] text-red-400">{fieldState('message').err}</p>}
                 </div>
 
-                {/* Server error */}
                 {error && (
-                  <div className="flex items-start gap-3 text-sm text-red-600 bg-red-50 border border-red-100 rounded-xl px-4 py-3">
+                  <div className="flex items-start gap-3 text-[13px] text-red-400 bg-red-950/40 border border-red-500/25 rounded-2xl px-4 py-3">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0 mt-0.5">
-                      <circle cx="12" cy="12" r="10" />
-                      <line x1="12" y1="8" x2="12" y2="12" />
-                      <line x1="12" y1="16" x2="12.01" y2="16" />
+                      <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
                     </svg>
                     {error}
                   </div>
                 )}
 
-                {/* Submit */}
                 <button
                   type="submit"
                   disabled={loading}
-                  className="group w-full inline-flex items-center justify-center gap-3 px-7 py-4 sm:py-4 rounded-full bg-gradient-to-r from-[#f0a060] to-[#d4845c] hover:from-[#f5aa6c] hover:to-[#dc8e6a] text-white font-semibold text-base transition-all duration-200 shadow-lg shadow-[#e89a78]/20 hover:shadow-[#e89a78]/35 disabled:opacity-60 disabled:pointer-events-none mt-2 min-h-[56px]"
+                  className="group w-full inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl bg-white hover:bg-[#f0f0f0] text-[#0a0a0a] font-semibold text-[15px] transition-all duration-150 disabled:opacity-40 disabled:pointer-events-none mt-1"
                 >
                   {loading ? (
                     <>
@@ -826,24 +717,19 @@ export default function ScheduleCallPage() {
                   ) : (
                     <>
                       Schedule my free call
-                      <span className="w-7 h-7 rounded-full bg-white/15 group-hover:bg-white/20 flex items-center justify-center transition-all shrink-0">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5">
-                          <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                      </span>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
                     </>
                   )}
                 </button>
 
-                <p className="text-xs text-center text-[#0a0e1a]/35">
+                <p className="text-[11px] text-center text-white/25">
                   By submitting you agree to our{' '}
-                  <Link href={Constants.PAGES.PRIVACY} className="underline hover:text-[#0a0e1a] transition-colors">
-                    Privacy Policy
-                  </Link>
-                  . No spam, ever.
+                  <Link href={Constants.PAGES.PRIVACY} className="underline hover:text-white/60 transition-colors">Privacy Policy</Link>.
                 </p>
               </form>
-              </div>{/* end form body */}
+              </div>
             </>
           ) : (
             /* Success state */
@@ -854,19 +740,19 @@ export default function ScheduleCallPage() {
                 </svg>
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-[#0a0e1a] mb-2">You&apos;re all set!</h2>
-                <p className="text-[#6b6b6b] text-sm leading-relaxed max-w-xs mx-auto">
+                <h2 className="text-2xl font-bold text-white mb-2">You&apos;re all set!</h2>
+                <p className="text-white/55 text-sm leading-relaxed max-w-xs mx-auto">
                   Thanks {form.name.split(' ')[0]}! We&apos;ve received your request and will be in touch within one business day to confirm your call.
                 </p>
               </div>
-              <div className="bg-[#f5f3f0] rounded-2xl p-5 w-full text-left flex flex-col gap-2">
-                <p className="text-xs font-bold uppercase tracking-widest text-[#0a0e1a]/30 mb-1">Confirmation sent to</p>
-                <p className="text-sm font-semibold text-[#0a0e1a]">{form.email}</p>
-                <p className="text-sm text-[#0a0e1a]/50">Topic: <span className="font-medium text-[#0a0e1a]">{form.topic}</span></p>
+              <div className="rounded-xl p-5 w-full text-left flex flex-col gap-2" style={{ background: '#1a1a1a', border: '1px solid #2a2a2a' }}>
+                <p className="text-xs font-bold uppercase tracking-widest text-white/30 mb-1">Confirmation sent to</p>
+                <p className="text-sm font-semibold text-white">{form.email}</p>
+                <p className="text-sm text-white/50">Topic: <span className="font-medium text-white">{form.topic}</span></p>
               </div>
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 text-sm text-[#6b6b6b] hover:text-[#0a0e1a] transition-colors"
+                className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
                   <path d="M19 12H5M12 5l-7 7 7 7" />

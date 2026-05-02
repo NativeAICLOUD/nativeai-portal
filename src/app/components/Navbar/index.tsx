@@ -79,20 +79,28 @@ function Navbar() {
   const [openSide, setOpenSide] = useState(false);
   const [slideMenu, setSlideMenu] = useState(false);
   const [isExpanded, setExpanded] = useState<string | null>(null);
+  const [navHidden, setNavHidden] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const scrollTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastScrollY = useRef(0);
   const isScrolling = useRef(false);
 
-  const navH = 92; // 12px outer padding + 72px nav height + 8px gap
+  const navH = 92;
 
   useEffect(() => {
     const onScroll = () => {
-      setSlideMenu(false);
+      const currentY = window.scrollY;
+      const diff = currentY - lastScrollY.current;
+      if (diff > 4 && currentY > 60) {
+        setNavHidden(true);
+        setSlideMenu(false);
+      } else if (diff < -4 || currentY < 60) {
+        setNavHidden(false);
+      }
+      lastScrollY.current = currentY;
       isScrolling.current = true;
       if (scrollTimer.current) clearTimeout(scrollTimer.current);
-      scrollTimer.current = setTimeout(() => {
-        isScrolling.current = false;
-      }, 400);
+      scrollTimer.current = setTimeout(() => { isScrolling.current = false; }, 400);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -109,16 +117,21 @@ function Navbar() {
   };
 
   return (
+    <>
     <header
-      className="fixed top-0 left-0 right-0 z-[999] pb-2 sm:px-3 sm:pb-3"
+      className={`fixed top-0 left-0 right-0 z-[999] pb-2 sm:px-3 sm:pb-3 transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${navHidden && !openSide ? '-translate-y-full' : 'translate-y-0'}`}
       style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
     >
 
       {/* ── Floating nav pill ── */}
-      <nav className="max-w-7xl mx-auto bg-[#0a0e1a] border border-white/[0.08] rounded-none sm:rounded-2xl flex items-center justify-between px-5 sm:px-6 h-[48px] sm:h-[72px] shadow-[0_4px_32px_rgba(0,0,0,0.35)] overflow-hidden">
+      <nav className="max-w-7xl mx-auto bg-[#0a0e1a] border border-white/[0.08] rounded-none sm:rounded-2xl flex items-center justify-between px-5 sm:px-6 h-[58px] sm:h-[72px] shadow-[0_4px_32px_rgba(0,0,0,0.35)] overflow-hidden">
 
         {/* Logo */}
-        <div className="shrink-0 cursor-pointer" onClick={() => setSlideMenu(false)}>
+        <div
+          className="shrink-0 cursor-pointer px-3 py-1.5 rounded-xl"
+          style={{ background: 'linear-gradient(135deg, rgba(232,154,120,0.18) 0%, rgba(232,154,120,0.06) 60%, transparent 100%)' }}
+          onClick={() => setSlideMenu(false)}
+        >
           <Logo isInvert />
         </div>
 
@@ -326,142 +339,148 @@ function Navbar() {
         )}
       </AnimatePresence>
 
-      {/* ── Mobile full-screen overlay ── */}
-      <aside
-        className={`${
-          openSide ? 'translate-x-0 visible pointer-events-auto' : 'translate-x-full invisible pointer-events-none'
-        } fixed inset-0 z-[100] bg-[#0a0e1a] transform transition-all duration-300 ease-in-out flex flex-col overflow-y-auto`}
-        style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 12px)' }}
-      >
-        {/* Top bar */}
-        <div className="flex items-center justify-between shrink-0 px-4 pb-2">
-          <div className="flex items-center cursor-pointer" onClick={() => setOpenSide(false)}>
-            <Logo isInvert />
-          </div>
-          <button
-            className="w-10 h-10 rounded-xl bg-[#e89a78]/15 border border-[#e89a78]/30 flex items-center justify-center text-[#e89a78] hover:bg-[#e89a78]/25 hover:border-[#e89a78]/50 transition-all"
-            onClick={() => { setOpenSide(false); setExpanded(null); }}
-            aria-label="Close menu"
-          >
-            <svg viewBox="0 0 24 24" fill="none" className="w-[18px] h-[18px]" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-              <path d="M18 6 6 18M6 6l12 12" />
-            </svg>
-          </button>
+    </header>
+
+    {/* ── Mobile full-screen overlay ── */}
+    <aside
+      className={`${
+        openSide ? 'translate-x-0 visible pointer-events-auto' : 'translate-x-full invisible pointer-events-none'
+      } fixed inset-0 z-[100] bg-[#0a0e1a] transform transition-all duration-300 ease-in-out flex flex-col overflow-y-auto`}
+      style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 12px)' }}
+    >
+      {/* Top bar */}
+      <div className="flex items-center justify-between shrink-0 px-4 pb-2">
+        <div
+          className="flex items-center cursor-pointer px-3 py-1.5 rounded-xl"
+          style={{ background: 'linear-gradient(135deg, rgba(232,154,120,0.18) 0%, rgba(232,154,120,0.06) 60%, transparent 100%)' }}
+          onClick={() => setOpenSide(false)}
+        >
+          <Logo isInvert />
         </div>
+        <button
+          className="w-10 h-10 rounded-xl bg-[#e89a78]/15 border border-[#e89a78]/30 flex items-center justify-center text-[#e89a78] hover:bg-[#e89a78]/25 hover:border-[#e89a78]/50 transition-all"
+          onClick={() => { setOpenSide(false); setExpanded(null); }}
+          aria-label="Close menu"
+        >
+          <svg viewBox="0 0 24 24" fill="none" className="w-[18px] h-[18px]" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
 
-        {/* Nav items */}
-        <nav className="flex-1 flex flex-col justify-center pt-4 pb-4 px-4">
-          <ul className="flex flex-col" style={{ gap: 36 }}>
-            {pages
-              .filter((item) => item.title !== 'Schedule a call')
-              .map((item) => (
-                <li key={item.url + item.title}>
-                  <div className="flex items-center gap-3">
-                    {item.soon ? (
-                      <CoomingSoon>
-                        <span style={MONO} className="text-[32px] leading-none text-white/60 select-none">
-                          {item.title}
-                        </span>
-                      </CoomingSoon>
-                    ) : (
-                      <Link
-                        href={item.url}
-                        onClick={() => { if (!item.children) setOpenSide(false); }}
-                        style={MONO}
-                        className="text-[32px] leading-none text-white/60 hover:text-[#e89a78] hover:translate-x-1.5 transition-all duration-200 inline-block"
-                      >
+      {/* Nav items */}
+      <nav className="flex-1 flex flex-col justify-center pt-4 pb-4 px-4">
+        <ul className="flex flex-col" style={{ gap: 36 }}>
+          {pages
+            .filter((item) => item.title !== 'Schedule a call')
+            .map((item) => (
+              <li key={item.url + item.title}>
+                <div className="flex items-center gap-3">
+                  {item.soon ? (
+                    <CoomingSoon>
+                      <span style={MONO} className="text-[32px] leading-none text-white/60 select-none">
                         {item.title}
-                      </Link>
-                    )}
-                    {item.children && (
-                      <button
-                        onClick={() => setExpanded(isExpanded === item.url ? null : item.url)}
-                        className="w-7 h-7 rounded-lg bg-white/[0.07] hover:bg-white/[0.13] flex items-center justify-center transition-colors shrink-0"
-                        aria-label={isExpanded === item.url ? 'Collapse' : 'Expand'}
-                      >
-                        {isExpanded === item.url
-                          ? <MinusIcon className="size-3.5 text-[#e89a78]" />
-                          : <PlusIcon className="size-3.5 text-white/40" />}
-                      </button>
-                    )}
-                  </div>
-
-                  {/* Sub-items accordion */}
-                  {item.children && (
-                    <Transition
-                      show={isExpanded === item.url}
-                      appear
-                      enter="transition-opacity duration-200"
-                      enterFrom="opacity-0"
-                      enterTo="opacity-100"
-                      leave="transition-opacity duration-150"
-                      leaveFrom="opacity-100"
-                      leaveTo="opacity-0"
+                      </span>
+                    </CoomingSoon>
+                  ) : (
+                    <Link
+                      href={item.url}
+                      onClick={() => { if (!item.children) setOpenSide(false); }}
+                      style={MONO}
+                      className="text-[32px] leading-none text-white/60 hover:text-[#e89a78] hover:translate-x-1.5 transition-all duration-200 inline-block"
                     >
-                      <div className="mt-5 pl-1 flex flex-col gap-5">
-                        {item.children.map((col) => (
-                          <div key={col.url + col.title}>
-                            <p className="text-[10px] font-bold uppercase tracking-widest text-[#e89a78] mb-2 flex items-center gap-1.5">
-                              <span className="w-[3px] h-3 rounded-full bg-[#e89a78]" />
-                              {col.title}
-                            </p>
-                            <ul className="flex flex-col gap-0.5">
-                              {col.children?.map((child) => (
-                                <li key={child.url + child.title}>
-                                  {child.soon ? (
-                                    <CoomingSoon>
-                                      <span className="flex items-center gap-2 px-2 py-1.5 text-sm text-[#555]">
+                      {item.title}
+                    </Link>
+                  )}
+                  {item.children && (
+                    <button
+                      onClick={() => setExpanded(isExpanded === item.url ? null : item.url)}
+                      className="w-7 h-7 rounded-lg bg-white/[0.07] hover:bg-white/[0.13] flex items-center justify-center transition-colors shrink-0"
+                      aria-label={isExpanded === item.url ? 'Collapse' : 'Expand'}
+                    >
+                      {isExpanded === item.url
+                        ? <MinusIcon className="size-3.5 text-[#e89a78]" />
+                        : <PlusIcon className="size-3.5 text-white/40" />}
+                    </button>
+                  )}
+                </div>
+
+                {/* Sub-items accordion */}
+                {item.children && (
+                  <Transition
+                    show={isExpanded === item.url}
+                    appear
+                    enter="transition-opacity duration-200"
+                    enterFrom="opacity-0"
+                    enterTo="opacity-100"
+                    leave="transition-opacity duration-150"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                  >
+                    <div className="mt-5 pl-1 flex flex-col gap-5">
+                      {item.children.map((col) => (
+                        <div key={col.url + col.title}>
+                          <p className="text-[10px] font-bold uppercase tracking-widest text-[#e89a78] mb-2 flex items-center gap-1.5">
+                            <span className="w-[3px] h-3 rounded-full bg-[#e89a78]" />
+                            {col.title}
+                          </p>
+                          <ul className="flex flex-col gap-0.5">
+                            {col.children?.map((child) => (
+                              <li key={child.url + child.title}>
+                                {child.soon ? (
+                                  <CoomingSoon>
+                                    <span className="flex items-center gap-2 px-2 py-1.5 text-sm text-[#555]">
+                                      {child.title}
+                                    </span>
+                                  </CoomingSoon>
+                                ) : (
+                                  <Link
+                                    href={child.url}
+                                    onClick={() => setOpenSide(false)}
+                                    className="flex items-start gap-2 px-2 py-1.5 group"
+                                  >
+                                    <span className="w-1 h-1 rounded-full bg-[#e89a78]/50 shrink-0 mt-[6px]" />
+                                    <div className="flex flex-col">
+                                      <span className="text-sm text-white/40 group-hover:text-[#e89a78] transition-colors leading-snug">
                                         {child.title}
                                       </span>
-                                    </CoomingSoon>
-                                  ) : (
-                                    <Link
-                                      href={child.url}
-                                      onClick={() => setOpenSide(false)}
-                                      className="flex items-start gap-2 px-2 py-1.5 group"
-                                    >
-                                      <span className="w-1 h-1 rounded-full bg-[#e89a78]/50 shrink-0 mt-[6px]" />
-                                      <div className="flex flex-col">
-                                        <span className="text-sm text-white/40 group-hover:text-[#e89a78] transition-colors leading-snug">
-                                          {child.title}
+                                      {child.desc && (
+                                        <span className="text-[11px] text-white/20 leading-snug mt-0.5">
+                                          {child.desc}
                                         </span>
-                                        {child.desc && (
-                                          <span className="text-[11px] text-white/20 leading-snug mt-0.5">
-                                            {child.desc}
-                                          </span>
-                                        )}
-                                      </div>
-                                    </Link>
-                                  )}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </div>
-                    </Transition>
-                  )}
-                </li>
-              ))}
-          </ul>
-        </nav>
+                                      )}
+                                    </div>
+                                  </Link>
+                                )}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  </Transition>
+                )}
+              </li>
+            ))}
+        </ul>
+      </nav>
 
-        {/* Bottom CTA */}
-        <div className="shrink-0 px-4 pt-4 pb-6" style={{ paddingBottom: 'max(24px, env(safe-area-inset-bottom, 24px))' }}>
-          <Link
-            href={Constants.PAGES.SCHEDULE_CALL}
-            onClick={() => setOpenSide(false)}
-            className="w-full bg-[#e89a78] hover:bg-[#d4836a] text-white font-semibold text-base flex items-center justify-center gap-3 py-4 rounded-2xl shadow-lg shadow-[#e89a78]/20 hover:shadow-[#e89a78]/35 transition-all duration-200"
-            style={MONO}
-          >
-            Schedule a free call
-            <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </Link>
-        </div>
-      </aside>
-    </header>
+      {/* Bottom CTA */}
+      <div className="shrink-0 px-4 pt-4 pb-6" style={{ paddingBottom: 'max(24px, env(safe-area-inset-bottom, 24px))' }}>
+        <Link
+          href={Constants.PAGES.SCHEDULE_CALL}
+          onClick={() => setOpenSide(false)}
+          className="w-full bg-[#e89a78] hover:bg-[#d4836a] text-white font-semibold text-base flex items-center justify-center gap-3 py-4 rounded-2xl shadow-lg shadow-[#e89a78]/20 hover:shadow-[#e89a78]/35 transition-all duration-200"
+          style={MONO}
+        >
+          Schedule a free call
+          <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </Link>
+      </div>
+    </aside>
+    </>
   );
 }
 
