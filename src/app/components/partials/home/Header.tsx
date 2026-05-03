@@ -11,7 +11,7 @@ const tags = ['AI Agents', 'LLMs', 'Azure & AWS'];
 
 function HomeHeader() {
   return (
-    <main className="relative overflow-hidden lg:pl-[50px] min-h-[90vh] lg:min-h-screen flex flex-col justify-center pt-24 pb-16 lg:pt-28 lg:pb-16">
+    <main className="relative overflow-hidden lg:pl-[50px] min-h-screen flex flex-col justify-center pt-28 pb-20 lg:pt-28 lg:pb-16">
 
       {/* ── Backgrounds ── */}
       <div className="absolute w-full h-full z-[-1] left-0 top-0 after:absolute after:bottom-0 after:bg-main-gradient after:w-full after:h-1/5">
@@ -43,7 +43,7 @@ function HomeHeader() {
           <div className="relative z-[1] flex-1 min-w-0 lg:max-w-[520px]">
 
             {/* Tags */}
-            <div className="flex flex-wrap justify-center lg:justify-start items-center gap-2 mb-6 sm:mb-7">
+            <div className="flex flex-wrap justify-center lg:justify-start items-center gap-2 mb-8 sm:mb-7">
               {tags.map((tag) => (
                 <span
                   key={tag}
@@ -63,7 +63,7 @@ function HomeHeader() {
             </div>
 
             {/* Headline */}
-            <h1 className="text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl mb-8 font-extrabold leading-[1.1] tracking-tight text-center lg:text-left max-w-lg lg:max-w-full mx-auto text-[#0a0e1a]">
+            <h1 className="text-[2.6rem] sm:text-4xl md:text-5xl lg:text-6xl mb-10 sm:mb-8 font-extrabold leading-[1.1] tracking-tight text-center lg:text-left max-w-lg lg:max-w-full mx-auto text-[#0a0e1a]">
               We make{' '}
               <span className="relative inline-block">
                 <span className="bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] bg-clip-text text-transparent">
@@ -75,10 +75,10 @@ function HomeHeader() {
             </h1>
 
             {/* Buttons */}
-            <div className="flex justify-center lg:justify-start gap-2.5 flex-col sm:flex-row items-stretch sm:items-center">
+            <div className="flex justify-center lg:justify-start gap-3 flex-col sm:flex-row items-stretch sm:items-center">
               <Link
                 href={Constants.PAGES.SCHEDULE_CALL}
-                className="inline-flex items-center justify-center gap-2.5 whitespace-nowrap w-full sm:w-auto px-6 py-3 rounded-full text-sm font-semibold text-white bg-[#0a0e1a] hover:bg-[#1a2235] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e89a78] focus-visible:ring-offset-2"
+                className="inline-flex items-center justify-center gap-2.5 whitespace-nowrap w-full sm:w-auto px-7 py-4 sm:py-3 rounded-full text-base sm:text-sm font-semibold text-white bg-[#0a0e1a] hover:bg-[#1a2235] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e89a78] focus-visible:ring-offset-2"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0">
                   <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
@@ -87,7 +87,7 @@ function HomeHeader() {
               </Link>
               <Link
                 href={Constants.PAGES.SOLUTIONS}
-                className="group/sol inline-flex items-center justify-center gap-2.5 whitespace-nowrap w-full sm:w-auto px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e89a78] focus-visible:ring-offset-2"
+                className="group/sol inline-flex items-center justify-center gap-2.5 whitespace-nowrap w-full sm:w-auto px-7 py-4 sm:py-3 rounded-full text-base sm:text-sm font-semibold transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e89a78] focus-visible:ring-offset-2"
                 style={{
                   background: 'rgba(255,255,255,0.65)',
                   backdropFilter: 'blur(20px) saturate(180%)',

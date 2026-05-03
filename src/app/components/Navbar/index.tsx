@@ -119,12 +119,13 @@ function Navbar() {
   return (
     <>
     <header
-      className={`fixed top-0 left-0 right-0 z-[999] px-5 pb-3 sm:px-3 sm:pb-3 transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${navHidden && !openSide ? '-translate-y-full' : 'translate-y-0'}`}
-      style={{ paddingTop: 'max(8px, env(safe-area-inset-top, 8px))' }}
+      className={`fixed top-0 left-0 right-0 z-[999] transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${navHidden || openSide ? '-translate-y-full' : 'translate-y-0'}`}
+      style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
     >
 
-      {/* ── Floating nav pill ── */}
-      <nav className="max-w-7xl mx-auto bg-[#0a0e1a] border border-white/[0.08] rounded-2xl flex items-center justify-between px-5 sm:px-6 h-[76px] sm:h-[72px] shadow-[0_4px_32px_rgba(0,0,0,0.35)] overflow-hidden">
+      {/* ── Full-width nav bar ── */}
+      <nav className="w-full bg-[#0a0e1a] border-b border-white/[0.08] flex items-center justify-between px-5 sm:px-8 h-[76px] sm:h-[72px] shadow-[0_4px_32px_rgba(0,0,0,0.35)]">
+        <div className="max-w-7xl mx-auto w-full flex items-center justify-between">
 
         {/* Logo */}
         <div
@@ -132,7 +133,7 @@ function Navbar() {
           style={{ background: 'linear-gradient(135deg, rgba(232,154,120,0.18) 0%, rgba(232,154,120,0.06) 60%, transparent 100%)' }}
           onClick={() => setSlideMenu(false)}
         >
-          <Logo isInvert />
+          <Logo isInvert className="!h-13" />
         </div>
 
         {/* Desktop nav links */}
@@ -203,7 +204,7 @@ function Navbar() {
 
           {/* Hamburger */}
           <button
-            className="w-9 h-9 rounded-lg bg-white/[0.07] hover:bg-white/[0.12] lg:hidden flex flex-col items-center justify-center gap-[5px] transition-colors px-2"
+            className="w-12 h-12 rounded-full bg-white/[0.07] hover:bg-white/[0.12] lg:hidden flex flex-col items-center justify-center gap-[6px] transition-colors px-3"
             onClick={() => setOpenSide(!openSide)}
             aria-label="Toggle menu"
           >
@@ -218,6 +219,7 @@ function Navbar() {
               </>
             )}
           </button>
+        </div>
         </div>
       </nav>
 
@@ -358,7 +360,7 @@ function Navbar() {
           <Logo isInvert />
         </div>
         <button
-          className="w-10 h-10 rounded-xl bg-[#e89a78]/15 border border-[#e89a78]/30 flex items-center justify-center text-[#e89a78] hover:bg-[#e89a78]/25 hover:border-[#e89a78]/50 transition-all"
+          className="w-12 h-12 rounded-full bg-[#e89a78]/15 border border-[#e89a78]/30 flex items-center justify-center text-[#e89a78] transition-all"
           onClick={() => { setOpenSide(false); setExpanded(null); }}
           aria-label="Close menu"
         >

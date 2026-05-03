@@ -6,39 +6,45 @@ import { Link } from 'react-transition-progress/next';
 
 const KBCard = ({ id, image, title, desc, date }: IPost) => {
   return (
-    <div className="card relative bg-white rounded-lg shadow-lg">
-      <div className="card-img relative aspect-video">
+    <Link
+      href={`/knowledge-base/${id}`}
+      className="group flex flex-col h-full bg-white rounded-2xl border border-black/[0.07] shadow-[0_2px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.10)] hover:-translate-y-1 transition-all duration-200 overflow-hidden"
+    >
+      {/* Image */}
+      <div className="relative aspect-video overflow-hidden">
         <Image
           src={image}
-          alt={`Post ${title}`}
+          alt={title}
           priority
-          fill={true}
-          className={'object-cover rounded-t-lg'}
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
       </div>
-      <div className="card-body px-4 py-4">
-        <h6 className="opacity-60 text-xs mb-1">{formatDistanceToNow(new Date(date), { addSuffix: true })}</h6>
 
-        <h2 className="text-gray-800 font-black text-xl leading-tight mb-4">
+      {/* Body */}
+      <div className="flex flex-col flex-1 px-5 py-5">
+        <span className="text-[11px] font-medium text-[#0a0e1a]/35 mb-2">
+          {formatDistanceToNow(new Date(date), { addSuffix: true })}
+        </span>
+
+        <h2 className="text-[#0a0e1a] font-bold text-lg leading-snug mb-3 group-hover:text-[#e89a78] transition-colors duration-200 line-clamp-2">
           {title}
         </h2>
 
-        <p className="text-black text-sm mt-2 mb-3">
+        <p className="text-[#0a0e1a]/50 text-sm leading-relaxed flex-1 line-clamp-3 mb-5">
           {desc}
         </p>
 
-        <div className="footer flex justify-between">
-          <Link href={`/knowledge-base/${id}`}
-            className="text-orange-500 inline-flex items-center gap-1.5 font-bold group">
-            Read More
-            <svg className={`icon-arrow-right transition-transform group-hover:translate-x-1`} width={28} height={28}>
-              <use href={`/icons/all-icons.svg#icon-arrow-right`}></use>
-            </svg>
-          </Link>
-        </div>
+        <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#e89a78]">
+          Read article
+          <svg className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </span>
       </div>
-    </div>
-  )
-}
+    </Link>
+  );
+};
 
 export default KBCard;

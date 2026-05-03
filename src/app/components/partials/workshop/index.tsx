@@ -1,125 +1,143 @@
 'use client';
 
 import { useState } from 'react';
-import Checkbox from '../../controls/Checkbox';
-import { Each } from '../../helpers/Each';
 import { Link } from 'react-transition-progress/next';
+import { motion } from 'framer-motion';
 
 type TCard = {
   id: number;
   color: string;
+  level: string;
   link: string;
   title: string;
   desc: string;
-}
+  date: string;
+  duration: string;
+  language: string;
+  format: string;
+  tags: string[];
+};
 
-const workshopList = [
-  { icon: 'icon-calendar', title: '24 May 2024' },
-  { icon: 'icon-time', title: '2 hours' },
-  { icon: 'icon-world', title: 'English' },
-  { icon: 'icon-camera', title: 'Online' },
-];
-type IWorkshopList = typeof workshopList[0];
+const LEVELS = ['All', 'Basic', 'Deep Dive', 'Special'];
 
-const Categories = [
-  'Basic', 'Special', 'Deep Dive', 'Workshops'
-];
+const levelStyle: Record<string, { bg: string; text: string; dot: string }> = {
+  Basic:      { bg: 'rgba(248,146,1,0.10)',  text: '#c4743c', dot: '#F89201' },
+  'Deep Dive': { bg: 'rgba(239,96,25,0.10)',  text: '#b84a10', dot: '#EF6019' },
+  Special:    { bg: 'rgba(19,28,40,0.08)',   text: '#1e3a5f', dot: '#131C28' },
+};
 
 function WorkshopCards({ data }: { data: TCard[] }) {
+  const [active, setActive] = useState('All');
 
-  const [onOpenFilter, setOpenFilter] = useState(false);
+  const filtered = active === 'All' ? data : data.filter((d) => d.level === active);
 
   return (
-    <div className="workshops pb-32">
-      <div className="options flex items-center gap-4 mb-4">
-        <button
-          className="btn-action mr-2 svg-hover min-w-[40px] h-[40px] md:w-[48px] md:h-[48px] hover:bg-black/5 hover:shadow-inner rounded-full grid place-items-center"
-          onClick={() => setOpenFilter(true)}
-        >
-          <svg className="icon fill-primary size-6 sm:size-8">
-            <use href={`/icons/all-icons.svg#icon-filter`}></use>
-          </svg>
-        </button>
-        <div className="overflow-x-auto flex items-center flex-nowrap gap-4 whitespace-nowrap">
-          <Each
-            of={Categories}
-            render={(category: string) => (
-              <Checkbox label={category} onChange={(checked) => console.log(category, checked)} />
-            )}
-          />
-        </div>
+    <div className="pb-32">
+
+      {/* Filter tabs */}
+      <div className="flex items-center gap-2 mb-8 overflow-x-auto pb-1">
+        {LEVELS.map((lvl) => (
+          <button
+            key={lvl}
+            onClick={() => setActive(lvl)}
+            className="whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium transition-all duration-200"
+            style={
+              active === lvl
+                ? { background: '#0a0e1a', color: '#fff' }
+                : { background: 'rgba(10,14,26,0.06)', color: 'rgba(10,14,26,0.55)' }
+            }
+          >
+            {lvl}
+          </button>
+        ))}
+        <span className="ml-auto text-xs text-[#0a0e1a]/35 whitespace-nowrap shrink-0">
+          {filtered.length} session{filtered.length !== 1 ? 's' : ''}
+        </span>
       </div>
-      <div className={'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'}>
-        <Each
-          of={data || []}
-          render={(item: TCard) => (
+
+      {/* Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {filtered.map((item, i) => (
+          <motion.div
+            key={item.id}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, ease: 'easeOut', delay: i * 0.06 }}
+          >
             <Card {...item} />
-          )}
-        />
+          </motion.div>
+        ))}
       </div>
     </div>
   );
 }
 
-const Card = ({ id, color, title, desc, link }: TCard) => {
+const Card = ({ id, level, title, desc, date, duration, language, format, tags }: TCard) => {
+  const style = levelStyle[level] ?? levelStyle['Basic'];
+
   return (
-    <div className="card bg-white rounded-lg shadow-lg">
-      <div className={`text-white text-sm uppercase tracking-wide font-normal py-1 px-4 rounded-t-lg ${
-        color === 'orange' ? 'bg-[#F89201]' :
-        color === 'red' ? 'bg-[#EF6019]' :
-        color === 'blue' ? 'bg-[#131C28]' :
-        color === 'orange-80' ? 'bg-[#F89201]' :
-        color === 'red-80' ? 'bg-[#EF6019]' :
-        color === 'blue-80' ? 'bg-[#143258]' :
-        color === 'orange-50' ? 'bg-[#F89201]' :
-        color === 'red-50' ? 'bg-[#EF6019]' :
-        color === 'blue-50' ? 'bg-[#3A506B]' : 'bg-native'}`}>
-        {title}
-      </div>
-      <div className="card-body px-4 py-6">
+    <div className="group flex flex-col h-full bg-white rounded-2xl border border-black/[0.07] shadow-[0_2px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.10)] hover:-translate-y-1 transition-all duration-200 overflow-hidden">
 
-        <h2 className="text-gray-800 font-bold text-xl leading-tight mb-4">
-          Some long title goes here <br /> but in two rows
-        </h2>
-
-        <p className="text-gray-600 text-sm mt-2 mb-12">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua tempor incididunt ut labore et dolore magna  et aliqua.
-        </p>
-
-        <div className="border-t border-native/50 mt-4"></div>
-
-        <div className="footer flex justify-between">
-          {/* Information Section */}
-          <div className="mt-2 flex-1">
-            <p className="text-gray-700 font-semibold text-sm mb-6">First upcoming date:</p>
-            <ul className="mt-2 space-y-1 text-gray-600 text-sm">
-              <Each
-                of={workshopList}
-                render={(item: IWorkshopList) => (
-                  <li className="flex items-center gap-1 text-sm">
-                    <svg className={item.icon} width={20} height={20}>
-                      <use href={`/icons/all-icons.svg#${item.icon}`}></use>
-                    </svg>
-                    {item.title}
-                  </li>
-                )}
-              />
-            </ul>
-          </div>
-
-          {/* Arrow Button */}
-          <div className="flex justify-end mt-auto">
-            <Link href={`/workshops/${id}`} className="bg-orange-500 text-white rounded-full size-12 shadow-md hover:bg-orange-600 hover:scale-[1.05] transition-all grid place-content-center">
-              <svg className={`icon-arrow-right`} width={40} height={30}>
-                <use href={`/icons/all-icons.svg#icon-caret`}></use>
-              </svg>
-            </Link>
+      {/* Card header */}
+      <div className="px-5 pt-5 pb-4 border-b border-black/[0.06]">
+        <div className="flex items-center justify-between mb-3">
+          <span
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider"
+            style={{ background: style.bg, color: style.text }}
+          >
+            <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: style.dot }} />
+            {level}
+          </span>
+          <div className="flex flex-wrap gap-1 justify-end">
+            {tags.map((t) => (
+              <span key={t} className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-black/[0.05] text-[#0a0e1a]/50">
+                {t}
+              </span>
+            ))}
           </div>
         </div>
+        <h2 className="text-[#0a0e1a] font-bold text-lg leading-snug group-hover:text-[#e89a78] transition-colors duration-200">
+          {title}
+        </h2>
+      </div>
+
+      {/* Body */}
+      <div className="flex flex-col flex-1 px-5 py-4">
+        <p className="text-[#0a0e1a]/50 text-sm leading-relaxed flex-1 mb-5">
+          {desc}
+        </p>
+
+        {/* Meta */}
+        <div className="grid grid-cols-2 gap-y-2 gap-x-3 mb-5">
+          {[
+            { icon: 'icon-calendar', label: date },
+            { icon: 'icon-time',     label: duration },
+            { icon: 'icon-world',    label: language },
+            { icon: 'icon-camera',   label: format },
+          ].map((m) => (
+            <div key={m.icon} className="flex items-center gap-1.5 text-[12px] text-[#0a0e1a]/45">
+              <svg width={14} height={14} className="shrink-0 opacity-60">
+                <use href={`/icons/all-icons.svg#${m.icon}`} />
+              </svg>
+              {m.label}
+            </div>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <Link
+          href={`/workshops/${id}`}
+          className="flex items-center justify-between w-full px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200 group/btn"
+          style={{ background: '#0a0e1a', color: '#fff' }}
+        >
+          View workshop
+          <svg className="w-4 h-4 transition-transform duration-200 group-hover/btn:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default WorkshopCards;

@@ -3,40 +3,142 @@ import WorkshopCards from '../components/partials/workshop';
 import Image from 'next/image';
 
 const cards = [
-  { id: 1, color: 'orange', link: '', title: 'Basic', desc: 'Once you`ve decided to start working with Azure, the cloud migration process begins. Several complex decisions play a role in this, so it makes sense to work according to a carefully designed migration strategy.' },
-  { id: 2, color: 'red', link: '', title: 'Deep dive', desc: 'Improving your application and infrastructure environment is a continuous process. The first step to achieving this is already done when you have chosen the public cloud. The next step is moving to a cloud-native application.' },
-  { id: 3, color: 'blue', link: '', title: 'Special', desc: 'Besides renewing or recoding the application, making your application more cloud-native, or helping you kickstart your application on the public cloud, we have extensive support packages available if you would like us to manage the application as well.' },
-  { id: 4, color: 'orange-80', link: '', title: 'Basic', desc: 'Once you`ve decided to start working with Azure, the cloud migration process begins. Several complex decisions play a role in this, so it makes sense to work according to a carefully designed migration strategy.' },
-  { id: 5, color: 'red-80', link: '', title: 'Deep dive', desc: 'Improving your application and infrastructure environment is a continuous process. The first step to achieving this is already done when you have chosen the public cloud. The next step is moving to a cloud-native application.' },
-  { id: 6, color: 'blue-80', link: '', title: 'Special', desc: 'Besides renewing or recoding the application, making your application more cloud-native, or helping you kickstart your application on the public cloud, we have extensive support packages available if you would like us to manage the application as well.' },
-  { id: 7, color: 'orange-50', link: '', title: 'Basic', desc: 'Once you`ve decided to start working with Azure, the cloud migration process begins. Several complex decisions play a role in this, so it makes sense to work according to a carefully designed migration strategy.' },
-  { id: 8, color: 'red-50', link: '', title: 'Deep dive', desc: 'Improving your application and infrastructure environment is a continuous process. The first step to achieving this is already done when you have chosen the public cloud. The next step is moving to a cloud-native application.' },
-  { id: 9, color: 'blue-50', link: '', title: 'Special', desc: 'Besides renewing or recoding the application, making your application more cloud-native, or helping you kickstart your application on the public cloud, we have extensive support packages available if you would like us to manage the application as well.' },
-]
+  {
+    id: 1,
+    level: 'Basic',
+    color: 'orange',
+    link: '',
+    title: 'Azure Cloud Fundamentals',
+    desc: 'Get up to speed with Microsoft Azure. Learn core services, resource management, and how to architect your first cloud workload — no prior cloud experience required.',
+    date: '24 May 2025',
+    duration: '2 hours',
+    language: 'English',
+    format: 'Online',
+    tags: ['Azure', 'Beginner'],
+  },
+  {
+    id: 2,
+    level: 'Deep Dive',
+    color: 'red',
+    link: '',
+    title: 'Kubernetes on AKS',
+    desc: 'Go deep on Azure Kubernetes Service. Cover cluster design, workload scheduling, autoscaling, and production-grade observability for containerised applications.',
+    date: '31 May 2025',
+    duration: '4 hours',
+    language: 'English',
+    format: 'Online',
+    tags: ['Kubernetes', 'AKS'],
+  },
+  {
+    id: 3,
+    level: 'Special',
+    color: 'blue',
+    link: '',
+    title: 'AI Agents & RAG on Azure',
+    desc: 'Build production-ready AI Agents powered by GPT-4o and Azure AI Search. Implement Retrieval-Augmented Generation pipelines connected to your own data.',
+    date: '7 Jun 2025',
+    duration: '3 hours',
+    language: 'English',
+    format: 'Online',
+    tags: ['AI', 'RAG', 'GPT-4o'],
+  },
+  {
+    id: 4,
+    level: 'Basic',
+    color: 'orange',
+    link: '',
+    title: 'DevOps on Azure Bootcamp',
+    desc: 'Set up CI/CD pipelines with Azure DevOps and GitHub Actions. Automate builds, tests, and deployments to Azure with infrastructure-as-code using Bicep and Terraform.',
+    date: '14 Jun 2025',
+    duration: '3 hours',
+    language: 'English',
+    format: 'Online',
+    tags: ['DevOps', 'CI/CD'],
+  },
+  {
+    id: 5,
+    level: 'Deep Dive',
+    color: 'red',
+    link: '',
+    title: 'Cloud-Native Architecture',
+    desc: 'Design scalable, resilient microservices on Azure. Cover event-driven patterns, service mesh, distributed tracing, and zero-downtime deployment strategies.',
+    date: '21 Jun 2025',
+    duration: '4 hours',
+    language: 'English',
+    format: 'Online',
+    tags: ['Architecture', 'Microservices'],
+  },
+  {
+    id: 6,
+    level: 'Special',
+    color: 'blue',
+    link: '',
+    title: 'Azure Security & Compliance',
+    desc: 'Harden your Azure environment. Implement Zero Trust, manage identities with Entra ID, configure Defender for Cloud, and meet compliance requirements in regulated industries.',
+    date: '28 Jun 2025',
+    duration: '3 hours',
+    language: 'English',
+    format: 'Online',
+    tags: ['Security', 'Compliance'],
+  },
+];
+
+const stats = [
+  { value: '6', label: 'Workshops' },
+  { value: '19h', label: 'Total content' },
+  { value: '100%', label: 'Hands-on' },
+  { value: 'Live', label: 'Online sessions' },
+];
 
 const WorkshopPage = () => {
   return (
-    <div className={`relative min-h-full`}>
+    <div className="relative min-h-full">
+      {/* Background */}
       <div className="absolute w-full h-full z-[-1] top-16 inset-x-0">
-        <Image src={BG3Img} alt="Background" className="!h-auto md:!-top-36" layout="fill" objectFit="cover" objectPosition='top' quality={100} />
-        <Image src={BGGroupLogo} alt="Design Element" layout="fill" objectFit="contain" objectPosition='top right' quality={100} />
+        <Image src={BG3Img} alt="Background" className="!h-auto md:!-top-36" layout="fill" objectFit="cover" objectPosition="top" quality={100} />
+        <Image src={BGGroupLogo} alt="Design Element" layout="fill" objectFit="contain" objectPosition="top right" quality={100} />
       </div>
-      <div className={'relative mx-auto max-w-9xl px-2 sm:px-4 md:px-6 2xl:px-0'}>
-        <div className="relative side pt-60 z-1 px-10 md:px-0 text-center md:text-left mb-6">
-          <h1 className={'text-4xl md:text-5xl xl:text-6xl pb-6 leading-none font-bold bg-workshop-text-linear bg-clip-text text-transparent md:max-w-[600px] xl:max-w-[800px]'}>
-            Dive into our workshops
+
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-10 2xl:px-0">
+
+        {/* Hero */}
+        <div className="pt-40 pb-12 lg:pt-48 lg:pb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest mb-5"
+            style={{ background: 'rgba(248,146,1,0.10)', color: '#c4743c', border: '1px solid rgba(248,146,1,0.25)' }}>
+            Azure & AI Training
+          </div>
+          <h1 className="text-4xl sm:text-5xl xl:text-6xl font-extrabold leading-[1.1] tracking-tight text-[#0a0e1a] max-w-3xl mb-5">
+            Hands-on{' '}
+            <span className="bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] bg-clip-text text-transparent">
+              workshops
+            </span>{' '}
+            for your team
           </h1>
-          <p className={'md:max-w-[600px] xl:max-w-[800px] sm:ml-1.5 pt-2 pb-16 text-base lg:text-lg font-normal'}>
-            Master Microsoft Azure in hands-on sessions. Accelerate your cloud proficiency!
+          <p className="text-[#0a0e1a]/55 text-base lg:text-lg max-w-xl leading-relaxed mb-10">
+            Master Microsoft Azure, Kubernetes, and AI in live online sessions — designed for developers and architects who learn by doing.
           </p>
+
+          {/* Stats strip */}
+          <div className="flex flex-wrap gap-6 sm:gap-10">
+            {stats.map((s) => (
+              <div key={s.label} className="flex flex-col">
+                <span className="text-2xl font-extrabold text-[#0a0e1a]">{s.value}</span>
+                <span className="text-xs text-[#0a0e1a]/40 font-medium uppercase tracking-wider mt-0.5">{s.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
+
+        {/* Cards */}
         <WorkshopCards data={cards} />
       </div>
+
       <Image
         src={BG_INVERSE}
-        alt="Design Element" 
+        alt="Design Element"
         className="absolute bottom-0 left-0 w-full h-full max-w-[800px] z-[-1] object-contain object-left-bottom"
-        quality={100} />
+        quality={100}
+      />
     </div>
   );
 };
