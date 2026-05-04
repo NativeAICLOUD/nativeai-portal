@@ -3,9 +3,34 @@ import { BG5Img } from '@/ImagePath';
 import { getBlogPosts, getSinglePost } from '@/lib/blogsPosts';
 import { formatDistanceToNow } from 'date-fns';
 import { shuffle, take } from 'lodash';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 import { Link } from 'react-transition-progress/next';
+
+export async function generateMetadata({ params }: any): Promise<Metadata> {
+  const post = await getSinglePost(+params?.id);
+  if (!post?.id) return {};
+  const desc = post.desc.slice(0, 160);
+  const imageUrl = post.image.startsWith('http') ? post.image : `https://native.cloud${post.image}`;
+  return {
+    title: `${post.title} | NativeCloud`,
+    description: desc,
+    openGraph: {
+      title: post.title,
+      description: desc,
+      type: 'article',
+      url: `https://native.cloud/knowledge-base/${post.id}`,
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: post.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: desc,
+      images: [imageUrl],
+    },
+  };
+}
 
 const KnowledgeBaseDetailPage = async ({ params }: any) => {
   const post = await getSinglePost(+params?.id);

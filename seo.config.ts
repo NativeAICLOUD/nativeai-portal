@@ -50,13 +50,10 @@ const seoConfig = defineMetadata({
     ],
   },
   twitter: {
-    site: 'Native.Cloud',
-    creator: 'Native.Cloud',
     card: 'summary_large_image',
-    images: ['/native.cloud-og.png'],
-    url,
     title,
     description,
+    images: ['/native.cloud-og.png'],
   },
 });
 

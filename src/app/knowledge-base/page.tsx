@@ -1,7 +1,25 @@
 import { BG5Img } from '@/ImagePath';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import KnowledgeBasePosts from '../components/partials/knowledge-base';
 import { getBlogPosts } from '@/lib/blogsPosts';
+
+export const metadata: Metadata = {
+  title: 'Knowledge Base | NativeCloud',
+  description: 'Guides, articles and news on Azure, AI, Kubernetes, cloud-native architecture and modern software engineering.',
+  openGraph: {
+    title: 'Knowledge Base | NativeCloud',
+    description: 'Guides, articles and news on Azure, AI, Kubernetes, cloud-native architecture and modern software engineering.',
+    url: 'https://native.cloud/knowledge-base',
+    images: [{ url: 'https://native.cloud/native.cloud-og.png', width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Knowledge Base | NativeCloud',
+    description: 'Guides, articles and news on Azure, AI, Kubernetes and cloud-native architecture.',
+    images: ['https://native.cloud/native.cloud-og.png'],
+  },
+};
 
 const KnowledgeBasePage = async () => {
   const posts = await getBlogPosts();
