@@ -5,6 +5,7 @@ import HomeHeader from "./components/partials/home/Header";
 import HomeLowerSection from "./components/partials/home/HomeLowerSection";
 import HomePartner from "./components/partials/home/homepartner";
 import IndustriesBusinessDomain from "./components/partials/home/IndustriesBusinessDomain";
+import MissionSection from "./components/partials/home/MissionSection";
 import ScrollCardsSection from "./components/partials/home/ScrollCardsSection";
 import TechStackSection from "./components/partials/home/TechStackSection";
 
@@ -27,6 +28,9 @@ export default function Home() {
 
       {/* AI Services — Custom Dev, Cloud, AI Agents & RAG */}
       <AIServicesSection />
+
+      {/* Mission statement */}
+      <MissionSection />
 
       {/* Existing Blog Section */}
       <HomeLowerSection />
