@@ -455,12 +455,30 @@ export default function ScheduleCallPage() {
 
   return (
     <div className="min-h-screen bg-[#000000] relative overflow-hidden">
-      {/* Background — Apple-style pure black with atmospheric glows */}
+      {/* Background layers */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        {/* Soft warm glow top-center */}
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full opacity-30" style={{ background: 'radial-gradient(ellipse, rgba(232,154,120,0.18) 0%, transparent 70%)' }} />
-        {/* Subtle cool glow bottom */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1000px] h-[400px] rounded-full opacity-20" style={{ background: 'radial-gradient(ellipse, rgba(100,120,200,0.15) 0%, transparent 70%)' }} />
+        {/* Vercel-style subtle top radial */}
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[400px] rounded-full" style={{ background: 'radial-gradient(ellipse, rgba(255,255,255,0.04) 0%, transparent 70%)' }} />
+
+        {/* NativeCloud infinity mark — white ghost watermark */}
+        <svg
+          viewBox="24 1 88 44"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="absolute -right-16 top-1/2 -translate-y-1/2 w-[520px] sm:w-[720px] lg:w-[860px] opacity-[0.028]"
+          aria-hidden="true"
+        >
+          <path d="M109.088 8.57212C106.515 5.58012 102.965 3.33773 99.0229 2.31032C97.0446 1.79468 94.9567 1.45887 92.8976 1.60776C91.3139 1.72185 89.7534 2.11502 88.2375 2.54107C84.3481 3.63487 80.6244 5.26107 76.9974 6.95624C73.1175 8.76935 69.3226 10.741 65.5777 12.7881C63.955 13.675 62.3425 14.5787 60.7389 15.4952C58.7805 16.64 56.8227 17.784 54.865 18.9287C54.6951 18.8295 54.5253 18.7302 54.3561 18.6303C52.3682 17.4643 50.3954 16.2809 48.3575 15.1923C44.5284 13.1478 40.4793 10.9898 36.146 10.072C32.1148 9.21861 27.7589 11.2908 25.471 14.3995C22.3083 18.6961 21.9199 24.9211 24.5736 29.5348C26.5827 33.0283 30.6496 35.7534 35.0267 35.3886C37.0194 35.2223 39.0086 34.454 40.8266 33.7121C42.9885 32.8298 45.0839 31.8036 47.1458 30.7317C49.7768 29.3634 52.3422 27.8822 54.8924 26.3785C59.5312 29.0972 64.1796 31.794 68.9493 34.3096C72.6038 36.2368 76.311 38.0848 80.1148 39.738C83.4967 41.2083 86.9881 42.5773 90.6357 43.343C98.5714 45.0098 106.624 40.7139 110.762 34.4585C115.896 26.6994 115.192 15.6751 109.088 8.57212Z" fill="white"/>
+        </svg>
+
+        {/* Subtle grid pattern — Vercel style */}
+        <div
+          className="absolute inset-0 opacity-[0.025]"
+          style={{
+            backgroundImage: 'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)',
+            backgroundSize: '72px 72px',
+          }}
+        />
       </div>
 
       {/* Hero */}
@@ -542,16 +560,16 @@ export default function ScheduleCallPage() {
         <div
           className="overflow-hidden order-1 lg:order-2"
           style={{
-            background: '#111111',
-            border: '1px solid rgba(255,255,255,0.09)',
+            background: '#0a0a0a',
+            border: '1px solid rgba(255,255,255,0.08)',
             borderRadius: 28,
-            boxShadow: '0 0 0 0.5px rgba(255,255,255,0.03), 0 32px 80px rgba(0,0,0,0.8)',
+            boxShadow: '0 0 0 0.5px rgba(255,255,255,0.03), 0 32px 80px rgba(0,0,0,0.9)',
           }}
         >
           {!submitted ? (
             <>
               {/* Progress header */}
-              <div className="border-b border-white/[0.07] px-6 sm:px-8 pt-7 pb-5" style={{ background: '#111111' }}>
+              <div className="border-b border-white/[0.07] px-6 sm:px-8 pt-7 pb-5" style={{ background: '#0a0a0a' }}>
                 <div className="flex items-center justify-between mb-3">
                   <h2 className="text-base font-semibold text-white tracking-tight">Book your session</h2>
                   <span className={`text-[11px] font-medium tabular-nums transition-colors duration-300 ${completionScore === 100 ? 'text-emerald-400' : 'text-white/30'}`}>
@@ -745,7 +763,7 @@ export default function ScheduleCallPage() {
                   Thanks {form.name.split(' ')[0]}! We&apos;ve received your request and will be in touch within one business day to confirm your call.
                 </p>
               </div>
-              <div className="rounded-xl p-5 w-full text-left flex flex-col gap-2" style={{ background: '#1a1a1a', border: '1px solid #2a2a2a' }}>
+              <div className="rounded-xl p-5 w-full text-left flex flex-col gap-2" style={{ background: '#111', border: '1px solid rgba(255,255,255,0.08)' }}>
                 <p className="text-xs font-bold uppercase tracking-widest text-white/30 mb-1">Confirmation sent to</p>
                 <p className="text-sm font-semibold text-white">{form.email}</p>
                 <p className="text-sm text-white/50">Topic: <span className="font-medium text-white">{form.topic}</span></p>

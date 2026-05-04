@@ -84,6 +84,7 @@ function Navbar() {
   const [activeNav, setActiveNav] = useState<string>('');
   const [isExpanded, setExpanded] = useState<string | null>(null);
   const [navHidden, setNavHidden] = useState(false);
+  const [hamburgerRipple, setHamburgerRipple] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const scrollTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastScrollY = useRef(0);
@@ -129,7 +130,7 @@ function Navbar() {
     >
 
       {/* ── Full-width nav bar ── */}
-      <nav className="w-full bg-[#0a0e1a] border-b border-white/[0.08] flex items-center justify-between px-5 sm:px-8 h-[76px] sm:h-[72px] shadow-[0_4px_32px_rgba(0,0,0,0.35)]">
+      <nav className={`w-full border-b border-white/[0.08] flex items-center justify-between px-5 sm:px-8 h-[76px] sm:h-[72px] shadow-[0_4px_32px_rgba(0,0,0,0.35)] transition-colors duration-300 ${pathname === '/schedule-call' ? 'bg-[#000000]' : 'bg-[#0a0e1a]'}`}>
         <div className="max-w-7xl mx-auto w-full flex items-center justify-between">
 
         {/* Logo */}
@@ -209,20 +210,37 @@ function Navbar() {
 
           {/* Hamburger */}
           <motion.button
-            className="w-9 h-9 rounded-full bg-white/[0.07] hover:bg-white/[0.12] lg:hidden flex flex-col items-center justify-center gap-[5px] transition-colors px-2.5"
-            whileTap={{ scale: 0.82, backgroundColor: 'rgba(255,255,255,0.22)' }}
+            className="w-11 h-11 rounded-full bg-white/[0.07] hover:bg-white/[0.12] lg:hidden flex flex-col items-center justify-center gap-[6px] transition-colors px-3 relative overflow-hidden"
+            whileTap={{ scale: 0.82 }}
             transition={{ type: 'spring', stiffness: 520, damping: 22 }}
-            onClick={() => setOpenSide(!openSide)}
+            onClick={() => {
+              setOpenSide(!openSide);
+              setHamburgerRipple(true);
+              setTimeout(() => setHamburgerRipple(false), 380);
+            }}
             aria-label="Toggle menu"
           >
+            <AnimatePresence>
+              {hamburgerRipple && (
+                <motion.span
+                  key="ripple"
+                  className="absolute inset-0 rounded-full pointer-events-none"
+                  initial={{ scale: 0, opacity: 0.55 }}
+                  animate={{ scale: 2.8, opacity: 0 }}
+                  exit={{}}
+                  transition={{ duration: 0.38, ease: 'easeOut' }}
+                  style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.55) 0%, transparent 65%)' }}
+                />
+              )}
+            </AnimatePresence>
             {openSide ? (
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="text-white">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="text-white relative z-[1]">
                 <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/>
               </svg>
             ) : (
               <>
-                <span className="block h-[1.5px] w-full rounded-full bg-white transition-all" />
-                <span className="block h-[1.5px] w-[65%] rounded-full bg-white/60 transition-all self-start" />
+                <span className="block h-[1.5px] w-full rounded-full bg-white transition-all relative z-[1]" />
+                <span className="block h-[1.5px] w-[65%] rounded-full bg-white/60 transition-all self-start relative z-[1]" />
               </>
             )}
           </motion.button>
