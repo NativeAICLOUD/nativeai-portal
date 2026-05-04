@@ -25,13 +25,14 @@ const edges = [
   { d: 'M83,64 L78,84',  dur: 1.8, fd: 0.42 },
 ];
 
-const P: Record<string, { bg: string; bd: string; tx: string; sh: string }> = {
-  orange:  { bg: 'rgba(232,154,120,0.15)', bd: 'rgba(232,154,120,0.55)', tx: '#e89a78', sh: '0 0 32px rgba(232,154,120,0.35)' },
-  blue:    { bg: 'rgba(96,165,250,0.11)',  bd: 'rgba(96,165,250,0.44)',  tx: '#60a5fa', sh: '0 0 20px rgba(96,165,250,0.25)'  },
-  purple:  { bg: 'rgba(167,139,250,0.11)', bd: 'rgba(167,139,250,0.44)', tx: '#a78bfa', sh: '0 0 20px rgba(167,139,250,0.22)' },
-  azure:   { bg: 'rgba(56,189,248,0.11)',  bd: 'rgba(56,189,248,0.44)',  tx: '#38bdf8', sh: '0 0 16px rgba(56,189,248,0.22)'  },
-  teal:    { bg: 'rgba(45,212,191,0.11)',  bd: 'rgba(45,212,191,0.44)',  tx: '#2dd4bf', sh: '0 0 16px rgba(45,212,191,0.22)'  },
-  neutral: { bg: 'rgba(255,255,255,0.05)', bd: 'rgba(255,255,255,0.18)', tx: 'rgba(255,255,255,0.88)', sh: 'none' },
+
+const P: Record<string, { bd: string; tx: string; sh: string }> = {
+  orange:  { bd: 'rgba(232,154,120,0.55)', tx: '#e89a78', sh: '0 0 22px rgba(232,154,120,0.28)' },
+  blue:    { bd: 'rgba(96,165,250,0.45)',  tx: '#60a5fa', sh: '0 0 16px rgba(96,165,250,0.18)'  },
+  purple:  { bd: 'rgba(167,139,250,0.45)', tx: '#a78bfa', sh: '0 0 16px rgba(167,139,250,0.18)' },
+  azure:   { bd: 'rgba(56,189,248,0.45)',  tx: '#38bdf8', sh: '0 0 14px rgba(56,189,248,0.18)'  },
+  teal:    { bd: 'rgba(45,212,191,0.45)',  tx: '#2dd4bf', sh: '0 0 14px rgba(45,212,191,0.18)'  },
+  neutral: { bd: 'rgba(255,255,255,0.18)', tx: 'rgba(255,255,255,0.88)', sh: 'none' },
 };
 
 /* ─── icons (24×24 SVG paths) ─── */
@@ -136,11 +137,6 @@ export default function AgentFlowDiagram() {
               viewport={{ once: true }}
               style={{ animation: 'flowDash 1.4s linear infinite' }}
             />
-            {/* moving dot */}
-            <circle r="0.9" fill="#e89a78" opacity="0.95">
-              {/* @ts-ignore – animateMotion path attr */}
-              <animateMotion dur={`${e.dur}s`} repeatCount="indefinite" path={e.d}/>
-            </circle>
           </g>
         ))}
       </svg>
@@ -160,11 +156,9 @@ export default function AgentFlowDiagram() {
               left: `${n.x}%`,
               top: `${n.y}%`,
               transform: 'translate(-50%, -50%)',
-              background: p.bg,
+              background: 'linear-gradient(135deg, #0e1d42 0%, #0a0e2c 100%)',
               border: `1px solid ${p.bd}`,
               boxShadow: p.sh,
-              backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)',
               borderRadius: n.hero ? 16 : 12,
               padding: n.hero ? '11px 20px' : '7px 11px',
               minWidth: n.hero ? 128 : 78,
@@ -173,8 +167,21 @@ export default function AgentFlowDiagram() {
               alignItems: 'center',
               gap: 4,
               zIndex: n.hero ? 2 : 1,
+              overflow: 'hidden',
             }}
           >
+            {/* grid overlay */}
+            <div style={{
+              position: 'absolute', inset: 0, pointerEvents: 'none',
+              backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
+              backgroundSize: '14px 14px',
+            }}/>
+            {/* top highlight */}
+            <div style={{
+              position: 'absolute', top: 0, left: 0, right: 0, height: 1,
+              background: 'rgba(255,255,255,0.12)', pointerEvents: 'none',
+            }}/>
+
             {/* double pulse rings on AI AGENT */}
             {n.hero && (
               <>
@@ -196,13 +203,14 @@ export default function AgentFlowDiagram() {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              style={{ width: n.hero ? 18 : 14, height: n.hero ? 18 : 14, color: p.tx, flexShrink: 0 }}
+              style={{ position: 'relative', width: n.hero ? 18 : 14, height: n.hero ? 18 : 14, color: p.tx, flexShrink: 0 }}
             >
               {icons[n.id]}
             </svg>
 
             {/* label */}
             <p style={{
+              position: 'relative',
               color: p.tx,
               fontWeight: 700,
               fontSize: n.hero ? 12 : 9.5,
@@ -217,7 +225,8 @@ export default function AgentFlowDiagram() {
 
             {/* sublabel */}
             <p style={{
-              color: 'rgba(255,255,255,0.3)',
+              position: 'relative',
+              color: 'rgba(255,255,255,0.35)',
               fontSize: 8,
               letterSpacing: '0.04em',
               margin: 0,
