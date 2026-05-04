@@ -2,7 +2,6 @@
 
 import { Link } from 'react-transition-progress/next';
 import { Constants } from '@/Constants';
-import { Transition } from '@headlessui/react';
 import { PlusIcon, MinusIcon, CaretDownIcon } from '@radix-ui/react-icons';
 import { AnimatePresence, motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
@@ -46,21 +45,25 @@ const pages: Pages[] = [
         ],
       },
       {
-        url: Constants.PAGES.SOLUTIONS, title: 'Industries', children: [
-          { url: Constants.PAGES.AIRLINE_BOOKING,           title: 'Travel & Aviation',       desc: 'GDS booking & airline platforms',        icon: Plane        },
-          { url: Constants.PAGES.AI_LEGAL_WORKSPACE,        title: 'Legal & Compliance',      desc: 'AI for law firms & legal teams',         icon: Scale        },
-          { url: Constants.PAGES.PAYMENT_AUTOMATION,        title: 'Finance & Banking',       desc: 'Payments, billing & reconciliation',     icon: Landmark     },
-          { url: Constants.PAGES.SOLUTIONS,                 title: 'Healthcare',              desc: 'Secure data & clinical workflows',       icon: HeartPulse   },
-          { url: Constants.PAGES.SOLUTIONS,                 title: 'Retail & E-commerce',     desc: 'Scalable storefronts & logistics',       icon: ShoppingBag  },
-          { url: Constants.PAGES.SOLUTIONS,                 title: 'Manufacturing',           desc: 'IoT, automation & supply chain',         icon: Factory      },
-        ],
-      },
-      {
         url: Constants.PAGES.ABOUT_US, title: 'Company', children: [
           { url: Constants.PAGES.CASE_STUDIES,              title: 'Case Studies',            desc: 'How we deliver for clients',             icon: BookOpen     },
           { url: Constants.PAGES.WORKSHOPS,                 title: 'Workshops',               desc: 'Azure & Kubernetes training',            icon: GraduationCap},
           { url: Constants.PAGES.KNOWLEDGE_BASE,            title: 'Knowledge Base',          desc: 'Guides and articles',                   icon: Library      },
           { url: Constants.PAGES.ABOUT_US,                  title: 'About Us',                desc: 'Our team and mission',                  icon: Building2    },
+        ],
+      },
+    ],
+  },
+  {
+    url: Constants.PAGES.SOLUTIONS, title: 'Industries', children: [
+      {
+        url: Constants.PAGES.SOLUTIONS, title: 'Industries', children: [
+          { url: Constants.PAGES.AIRLINE_BOOKING,        title: 'Travel & Aviation',   desc: 'GDS booking & airline platforms',     icon: Plane        },
+          { url: Constants.PAGES.AI_LEGAL_WORKSPACE,     title: 'Legal & Compliance',  desc: 'AI for law firms & legal teams',      icon: Scale        },
+          { url: Constants.PAGES.PAYMENT_AUTOMATION,     title: 'Finance & Banking',   desc: 'Payments, billing & reconciliation',  icon: Landmark     },
+          { url: Constants.PAGES.SOLUTIONS,              title: 'Healthcare',          desc: 'Secure data & clinical workflows',    icon: HeartPulse   },
+          { url: Constants.PAGES.SOLUTIONS,              title: 'Retail & E-commerce', desc: 'Scalable storefronts & logistics',    icon: ShoppingBag  },
+          { url: Constants.PAGES.SOLUTIONS,              title: 'Manufacturing',       desc: 'IoT, automation & supply chain',      icon: Factory      },
         ],
       },
     ],
@@ -78,6 +81,7 @@ function Navbar() {
   const pathname = usePathname();
   const [openSide, setOpenSide] = useState(false);
   const [slideMenu, setSlideMenu] = useState(false);
+  const [activeNav, setActiveNav] = useState<string>('');
   const [isExpanded, setExpanded] = useState<string | null>(null);
   const [navHidden, setNavHidden] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -106,9 +110,10 @@ function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const openMenu = () => {
+  const openMenu = (title = '') => {
     if (isScrolling.current) return;
     if (closeTimer.current) clearTimeout(closeTimer.current);
+    if (title) setActiveNav(title);
     setSlideMenu(true);
   };
 
@@ -142,7 +147,7 @@ function Navbar() {
             <li
               key={item.url + item.title}
               className="relative flex items-center"
-              onMouseEnter={() => (item.children ? openMenu() : closeMenu())}
+              onMouseEnter={() => (item.children ? openMenu(item.title) : closeMenu())}
               onMouseLeave={closeMenu}
             >
               {item.soon ? (
@@ -203,13 +208,15 @@ function Navbar() {
           </button>
 
           {/* Hamburger */}
-          <button
-            className="w-12 h-12 rounded-full bg-white/[0.07] hover:bg-white/[0.12] lg:hidden flex flex-col items-center justify-center gap-[6px] transition-colors px-3"
+          <motion.button
+            className="w-9 h-9 rounded-full bg-white/[0.07] hover:bg-white/[0.12] lg:hidden flex flex-col items-center justify-center gap-[5px] transition-colors px-2.5"
+            whileTap={{ scale: 0.82, backgroundColor: 'rgba(255,255,255,0.22)' }}
+            transition={{ type: 'spring', stiffness: 520, damping: 22 }}
             onClick={() => setOpenSide(!openSide)}
             aria-label="Toggle menu"
           >
             {openSide ? (
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-white">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="text-white">
                 <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/>
               </svg>
             ) : (
@@ -218,7 +225,7 @@ function Navbar() {
                 <span className="block h-[1.5px] w-[65%] rounded-full bg-white/60 transition-all self-start" />
               </>
             )}
-          </button>
+          </motion.button>
         </div>
         </div>
       </nav>
@@ -250,79 +257,87 @@ function Navbar() {
                   boxShadow: "0 24px 64px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.98)",
                 }}
               >
-                {/* Grid — 4 equal cols */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 p-10 pb-8">
-                  {pages[0].children?.map((col, i) => (
-                    <div key={i} className="flex flex-col">
-
-                      {/* Column header — all identical */}
-                      <p className="text-[11px] font-medium uppercase tracking-[0.1em] text-[#9A9A9A] mb-5">
-                        {col.title}
-                      </p>
-
-                      {/* Items — 20px gap between rows */}
-                      <ul className="flex flex-col gap-5">
-                        {col.children?.map((item, j) => {
-                          const Icon = item.icon;
-                          return (
-                            <li key={j}>
-                              {item.soon ? (
-                                <CoomingSoon>
-                                  <span className="flex items-start gap-3 opacity-35 cursor-default select-none">
-                                    {Icon && <Icon size={20} strokeWidth={1.5} className="shrink-0 mt-[2px] text-[#0E0E12]" />}
-                                    <div className="flex flex-col gap-[4px]">
-                                      <span className="text-[14px] font-semibold leading-snug text-[#0E0E12]">{item.title}</span>
-                                      {item.desc && <span className="text-[12.5px] leading-snug text-[#6B6B6B] line-clamp-2">{item.desc}</span>}
-                                    </div>
-                                  </span>
-                                </CoomingSoon>
-                              ) : (
-                                <Link
-                                  href={item.url}
-                                  onClick={() => setSlideMenu(false)}
-                                  className="group flex items-start gap-3 px-2.5 py-2 -mx-2.5 rounded-[10px] hover:bg-black/[0.05] transition-colors duration-150"
-                                >
-                                  {Icon && (
-                                    <Icon
-                                      size={20}
-                                      strokeWidth={1.5}
-                                      className="shrink-0 mt-[2px] text-[#0E0E12] group-hover:text-[#e89a78] transition-colors duration-150"
-                                    />
-                                  )}
-                                  <div className="flex flex-col gap-[4px] min-w-0">
-                                    <span className="text-[14px] font-semibold leading-snug text-[#0E0E12] group-hover:text-[#e89a78] transition-colors duration-150">
-                                      {item.title}
-                                    </span>
-                                    {item.desc && (
-                                      <span className="text-[12.5px] leading-snug text-[#6B6B6B] line-clamp-2">
-                                        {item.desc}
-                                      </span>
-                                    )}
-                                  </div>
-                                </Link>
-                              )}
-                            </li>
-                          );
-                        })}
-                      </ul>
+                {activeNav === 'Industries' ? (
+                  <>
+                    {/* Industries grid — 2 cols */}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-8">
+                      {pages.find(p => p.title === 'Industries')?.children?.[0]?.children?.map((item, j) => {
+                        const Icon = item.icon;
+                        return (
+                          <Link
+                            key={j}
+                            href={item.url}
+                            onClick={() => setSlideMenu(false)}
+                            className="group flex items-center gap-3 px-4 py-3 rounded-[12px] hover:bg-black/[0.05] transition-colors duration-150"
+                          >
+                            {Icon && (
+                              <span className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style={{ background: 'rgba(232,154,120,0.10)', border: '1px solid rgba(232,154,120,0.15)' }}>
+                                <Icon size={18} strokeWidth={1.5} className="text-[#e89a78]" />
+                              </span>
+                            )}
+                            <div className="flex flex-col min-w-0">
+                              <span className="text-[14px] font-semibold leading-snug text-[#0E0E12] group-hover:text-[#e89a78] transition-colors duration-150">{item.title}</span>
+                              {item.desc && <span className="text-[12px] leading-snug text-[#9A9A9A] truncate">{item.desc}</span>}
+                            </div>
+                          </Link>
+                        );
+                      })}
                     </div>
-                  ))}
-                </div>
-
-                {/* Bottom CTA row */}
-                <div className="px-10 py-5 border-t border-black/[0.07] flex items-center justify-between" style={{ background: "rgba(255,255,255,0.40)" }}>
-                  <p className="text-[13px] text-[#9A9A9A]">Not sure where to start?</p>
-                  <Link
-                    href={Constants.PAGES.SCHEDULE_CALL}
-                    onClick={() => setSlideMenu(false)}
-                    className="inline-flex items-center gap-2 text-[13px] font-medium text-[#e89a78] hover:text-[#d4836a] transition-colors"
-                  >
-                    Schedule a free call
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                  </Link>
-                </div>
+                    <div className="px-8 py-4 border-t border-black/[0.07] flex items-center justify-between" style={{ background: "rgba(255,255,255,0.40)" }}>
+                      <p className="text-[13px] text-[#9A9A9A]">Need a tailored solution?</p>
+                      <Link href={Constants.PAGES.SCHEDULE_CALL} onClick={() => setSlideMenu(false)} className="inline-flex items-center gap-2 text-[13px] font-medium text-[#e89a78] hover:text-[#d4836a] transition-colors">
+                        Talk to us
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                      </Link>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {/* Solutions grid — 3 cols */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-10 pb-8">
+                      {pages[0].children?.map((col, i) => (
+                        <div key={i} className="flex flex-col">
+                          <p className="text-[11px] font-medium uppercase tracking-[0.1em] text-[#9A9A9A] mb-5">{col.title}</p>
+                          <ul className="flex flex-col gap-5">
+                            {col.children?.map((item, j) => {
+                              const Icon = item.icon;
+                              return (
+                                <li key={j}>
+                                  {item.soon ? (
+                                    <CoomingSoon>
+                                      <span className="flex items-start gap-3 opacity-35 cursor-default select-none">
+                                        {Icon && <Icon size={20} strokeWidth={1.5} className="shrink-0 mt-[2px] text-[#0E0E12]" />}
+                                        <div className="flex flex-col gap-[4px]">
+                                          <span className="text-[14px] font-semibold leading-snug text-[#0E0E12]">{item.title}</span>
+                                          {item.desc && <span className="text-[12.5px] leading-snug text-[#6B6B6B] line-clamp-2">{item.desc}</span>}
+                                        </div>
+                                      </span>
+                                    </CoomingSoon>
+                                  ) : (
+                                    <Link href={item.url} onClick={() => setSlideMenu(false)} className="group flex items-start gap-3 px-2.5 py-2 -mx-2.5 rounded-[10px] hover:bg-black/[0.05] transition-colors duration-150">
+                                      {Icon && <Icon size={20} strokeWidth={1.5} className="shrink-0 mt-[2px] text-[#0E0E12] group-hover:text-[#e89a78] transition-colors duration-150" />}
+                                      <div className="flex flex-col gap-[4px] min-w-0">
+                                        <span className="text-[14px] font-semibold leading-snug text-[#0E0E12] group-hover:text-[#e89a78] transition-colors duration-150">{item.title}</span>
+                                        {item.desc && <span className="text-[12.5px] leading-snug text-[#6B6B6B] line-clamp-2">{item.desc}</span>}
+                                      </div>
+                                    </Link>
+                                  )}
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="px-10 py-5 border-t border-black/[0.07] flex items-center justify-between" style={{ background: "rgba(255,255,255,0.40)" }}>
+                      <p className="text-[13px] text-[#9A9A9A]">Not sure where to start?</p>
+                      <Link href={Constants.PAGES.SCHEDULE_CALL} onClick={() => setSlideMenu(false)} className="inline-flex items-center gap-2 text-[13px] font-medium text-[#e89a78] hover:text-[#d4836a] transition-colors">
+                        Schedule a free call
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                      </Link>
+                    </div>
+                  </>
+                )}
               </div>
             </motion.div>
 
@@ -359,15 +374,17 @@ function Navbar() {
         >
           <Logo isInvert />
         </div>
-        <button
+        <motion.button
           className="w-12 h-12 rounded-full bg-[#e89a78]/15 border border-[#e89a78]/30 flex items-center justify-center text-[#e89a78] transition-all"
+          whileTap={{ scale: 0.82, backgroundColor: 'rgba(232,154,120,0.30)' }}
+          transition={{ type: 'spring', stiffness: 520, damping: 22 }}
           onClick={() => { setOpenSide(false); setExpanded(null); }}
           aria-label="Close menu"
         >
           <svg viewBox="0 0 24 24" fill="none" className="w-[18px] h-[18px]" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
             <path d="M18 6 6 18M6 6l12 12" />
           </svg>
-        </button>
+        </motion.button>
       </div>
 
       {/* Nav items */}
@@ -395,73 +412,92 @@ function Navbar() {
                     </Link>
                   )}
                   {item.children && (
-                    <button
-                      onClick={() => setExpanded(isExpanded === item.url ? null : item.url)}
-                      className="w-7 h-7 rounded-lg bg-white/[0.07] hover:bg-white/[0.13] flex items-center justify-center transition-colors shrink-0"
-                      aria-label={isExpanded === item.url ? 'Collapse' : 'Expand'}
+                    <motion.button
+                      onClick={() => setExpanded(isExpanded === item.title ? null : item.title)}
+                      className="w-8 h-8 rounded-xl bg-white/[0.07] hover:bg-white/[0.13] flex items-center justify-center shrink-0 transition-colors"
+                      whileTap={{ scale: 0.82, backgroundColor: 'rgba(255,255,255,0.22)' }}
+                      transition={{ type: 'spring', stiffness: 520, damping: 22 }}
+                      aria-label={isExpanded === item.title ? 'Collapse' : 'Expand'}
                     >
-                      {isExpanded === item.url
-                        ? <MinusIcon className="size-3.5 text-[#e89a78]" />
-                        : <PlusIcon className="size-3.5 text-white/40" />}
-                    </button>
+                      {isExpanded === item.title
+                        ? <MinusIcon className="size-3.5 text-[#e89a78] relative z-[1]" />
+                        : <PlusIcon className="size-3.5 text-white/60 relative z-[1]" />}
+                    </motion.button>
                   )}
                 </div>
 
                 {/* Sub-items accordion */}
-                {item.children && (
-                  <Transition
-                    show={isExpanded === item.url}
-                    appear
-                    enter="transition-opacity duration-200"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="transition-opacity duration-150"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                  >
-                    <div className="mt-5 pl-1 flex flex-col gap-5">
-                      {item.children.map((col) => (
-                        <div key={col.url + col.title}>
-                          <p className="text-[10px] font-bold uppercase tracking-widest text-[#e89a78] mb-2 flex items-center gap-1.5">
-                            <span className="w-[3px] h-3 rounded-full bg-[#e89a78]" />
-                            {col.title}
-                          </p>
-                          <ul className="flex flex-col gap-0.5">
-                            {col.children?.map((child) => (
-                              <li key={child.url + child.title}>
-                                {child.soon ? (
-                                  <CoomingSoon>
-                                    <span className="flex items-center gap-2 px-2 py-1.5 text-sm text-[#555]">
-                                      {child.title}
-                                    </span>
-                                  </CoomingSoon>
-                                ) : (
-                                  <Link
-                                    href={child.url}
-                                    onClick={() => setOpenSide(false)}
-                                    className="flex items-start gap-2 px-2 py-1.5 group"
-                                  >
-                                    <span className="w-1 h-1 rounded-full bg-[#e89a78]/50 shrink-0 mt-[6px]" />
-                                    <div className="flex flex-col">
-                                      <span className="text-sm text-white/40 group-hover:text-[#e89a78] transition-colors leading-snug">
-                                        {child.title}
-                                      </span>
-                                      {child.desc && (
-                                        <span className="text-[11px] text-white/20 leading-snug mt-0.5">
-                                          {child.desc}
+                <AnimatePresence initial={false}>
+                  {item.children && isExpanded === item.title && (
+                    <motion.div
+                      key={item.url + '-accordion'}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="mt-3 flex flex-col gap-2.5">
+                        {item.children.map((col) => (
+                          <div
+                            key={col.url + col.title}
+                            className="rounded-2xl overflow-hidden"
+                            style={{
+                              background: 'rgba(255,255,255,0.05)',
+                              border: '1px solid rgba(255,255,255,0.08)',
+                              boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06)',
+                            }}
+                          >
+                            <p className="px-4 pt-3 pb-1.5 text-[10px] font-bold uppercase tracking-[0.12em] text-[#e89a78]/60">
+                              {col.title}
+                            </p>
+                            <ul className="flex flex-col pb-1.5">
+                              {col.children?.map((child) => {
+                                const Icon = child.icon;
+                                return (
+                                  <li key={child.url + child.title}>
+                                    {child.soon ? (
+                                      <CoomingSoon>
+                                        <span className="flex items-center gap-3 px-4 py-2.5 opacity-30">
+                                          {Icon && <Icon size={15} strokeWidth={1.5} className="shrink-0 text-white" />}
+                                          <span className="text-sm text-white">{child.title}</span>
                                         </span>
-                                      )}
-                                    </div>
-                                  </Link>
-                                )}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
-                  </Transition>
-                )}
+                                      </CoomingSoon>
+                                    ) : (
+                                      <Link
+                                        href={child.url}
+                                        onClick={() => setOpenSide(false)}
+                                        className="flex items-center gap-3 px-4 py-2.5 active:bg-white/[0.07] transition-colors"
+                                      >
+                                        {Icon && (
+                                          <span
+                                            className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+                                            style={{ background: 'rgba(232,154,120,0.12)', border: '1px solid rgba(232,154,120,0.15)' }}
+                                          >
+                                            <Icon size={14} strokeWidth={1.5} className="text-[#e89a78]" />
+                                          </span>
+                                        )}
+                                        <div className="flex flex-col min-w-0 flex-1">
+                                          <span className="text-sm font-medium text-white/80 leading-snug">{child.title}</span>
+                                          {child.desc && (
+                                            <span className="text-[11px] text-white/30 leading-snug mt-0.5 truncate">{child.desc}</span>
+                                          )}
+                                        </div>
+                                        <svg className="shrink-0 w-3 h-3 text-white/20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                                          <path d="M9 18l6-6-6-6" />
+                                        </svg>
+                                      </Link>
+                                    )}
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </li>
             ))}
         </ul>

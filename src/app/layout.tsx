@@ -39,7 +39,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={montserrat.className}>
           <ProgressBarProvider>
-            <ProgressBar className="fixed z-[100] h-1 shadow-lg shadow-native/20 bg-native top-0" />
+            <ProgressBar className="fixed z-[9999] top-0 left-0 h-[3px] bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#f5b87a] shadow-[0_0_12px_rgba(232,154,120,0.7),0_0_4px_rgba(232,154,120,0.5)] rounded-full" />
             <AppProviders>
               <div style={{ width: '100%', maxWidth: '100vw', overflowX: 'clip', overflowY: 'visible', position: 'relative' }}>
                 <Navbar />
