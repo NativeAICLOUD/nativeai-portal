@@ -25,7 +25,7 @@ function HomeHeader() {
       </div>
 
       {/* ── Desktop hero card ── */}
-      <div className="hidden lg:block relative z-[1] max-w-7xl mx-auto w-full px-6 xl:px-8">
+      <div className="hidden lg:block relative z-[1] w-full px-4 xl:px-6">
         <div
           style={{
             borderRadius: 32,
@@ -33,23 +33,15 @@ function HomeHeader() {
             overflow: 'hidden',
             position: 'relative',
             border: '1px solid rgba(255,255,255,0.65)',
+            minHeight: 'calc(100vh - 120px)',
           }}
         >
-          {/* card background — mirrors page bg */}
-          <div className="absolute inset-0 z-0">
-            <Image src="/img/BG.png" alt="" layout="fill" objectFit="cover" quality={100} />
-          </div>
-          <div className="absolute inset-0 z-0">
-            <Image src="/img/Group 32.png" alt="" layout="fill" objectFit="cover" quality={100} />
-          </div>
-          <div className="absolute inset-0 z-0 pointer-events-none" style={{ backgroundImage: "url('/img/noise-background.jpg')", backgroundSize: '300px 300px', opacity: 0.04 }} />
-          <div className="absolute pointer-events-none z-0" style={{ top: '55%', left: '65%', transform: 'translate(-50%,-50%)', width: 700, height: 600, background: 'radial-gradient(ellipse, rgba(232,154,120,0.2) 0%, transparent 68%)' }} />
 
           {/* card inner layout */}
-          <div className="relative z-[2] flex items-center gap-0">
+          <div className="relative z-[2] flex items-center gap-0 h-full" style={{ minHeight: 'calc(100vh - 120px)' }}>
 
             {/* Left — text content */}
-            <div className="flex-1 py-16 px-14 xl:py-20 xl:px-16 flex flex-col justify-center min-w-0">
+            <div className="flex-1 py-20 px-16 xl:py-24 xl:px-20 flex flex-col justify-center min-w-0">
 
               {/* tags */}
               <div className="flex flex-wrap items-center gap-2 mb-8">
@@ -72,7 +64,7 @@ function HomeHeader() {
               {/* headline */}
               <h1
                 style={{
-                  fontSize: 'clamp(2.6rem, 4.5vw, 4rem)',
+                  fontSize: 'clamp(2.8rem, 5vw, 5rem)',
                   fontWeight: 900,
                   lineHeight: 1.06,
                   letterSpacing: '-0.03em',
@@ -82,13 +74,16 @@ function HomeHeader() {
                 }}
               >
                 We make{' '}
-                <span style={{
-                  background: 'linear-gradient(90deg, #f0a060, #e89a78, #d4845c)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}>
-                  AI work
+                <span className="relative inline-block">
+                  <span style={{
+                    background: 'linear-gradient(90deg, #f0a060, #e89a78, #d4845c)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}>
+                    AI work
+                  </span>
+                  <span className="absolute bottom-1 left-0 w-full h-[3px] rounded-full bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] opacity-70" />
                 </span>
                 {' '}inside your business
               </h1>
@@ -126,12 +121,12 @@ function HomeHeader() {
             </div>
 
             {/* Right — illustration */}
-            <div className="shrink-0 w-[42%] xl:w-[44%] self-center py-4 pr-6">
+            <div className="shrink-0 w-[52%] xl:w-[54%] self-end">
               <Image
                 src="/img/github.png"
                 alt="AI Agent Architecture"
-                width={520}
-                height={520}
+                width={800}
+                height={800}
                 style={{
                   width: '100%',
                   height: 'auto',

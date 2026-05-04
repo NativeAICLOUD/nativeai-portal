@@ -18,15 +18,6 @@ export default function MobileAgentFlow() {
         border: '1px solid rgba(255,255,255,0.65)',
       }}
     >
-      {/* card background */}
-      <div className="absolute inset-0 z-0">
-        <Image src="/img/BG.png" alt="" layout="fill" objectFit="cover" quality={100} />
-      </div>
-      <div className="absolute inset-0 z-0">
-        <Image src="/img/Group 32.png" alt="" layout="fill" objectFit="cover" quality={100} />
-      </div>
-      <div className="absolute inset-0 z-0 pointer-events-none" style={{ backgroundImage: "url('/img/noise-background.jpg')", backgroundSize: '300px 300px', opacity: 0.04 }} />
-      <div className="absolute pointer-events-none z-0" style={{ top: '60%', left: '50%', transform: 'translate(-50%,-50%)', width: 340, height: 300, background: 'radial-gradient(ellipse, rgba(232,154,120,0.2) 0%, transparent 68%)' }} />
 
       {/* content */}
       <div className="relative z-[2] px-7 pt-10 pb-0">
@@ -62,13 +53,16 @@ export default function MobileAgentFlow() {
           }}
         >
           We make{' '}
-          <span style={{
-            background: 'linear-gradient(90deg, #f0a060, #e89a78, #d4845c)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-          }}>
-            AI work
+          <span className="relative inline-block">
+            <span style={{
+              background: 'linear-gradient(90deg, #f0a060, #e89a78, #d4845c)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}>
+              AI work
+            </span>
+            <span className="absolute bottom-1 left-0 w-full h-[3px] rounded-full bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] opacity-70" />
           </span>
           {' '}inside your business
         </h1>
@@ -105,22 +99,20 @@ export default function MobileAgentFlow() {
         </div>
 
         {/* illustration */}
-        <div style={{ width: '70%', margin: '0 auto' }}>
-          <Image
-            src="/img/github.png"
-            alt="AI Agent Architecture"
-            width={400}
-            height={400}
-            style={{
-              width: '100%',
-              height: 'auto',
-              display: 'block',
-              WebkitMaskImage: 'radial-gradient(ellipse 78% 78% at 50% 50%, black 50%, transparent 88%)',
-              maskImage: 'radial-gradient(ellipse 78% 78% at 50% 50%, black 50%, transparent 88%)',
-            }}
-            quality={95}
-          />
-        </div>
+        <Image
+          src="/img/github.png"
+          alt="AI Agent Architecture"
+          width={600}
+          height={600}
+          style={{
+            width: '100%',
+            height: 'auto',
+            display: 'block',
+            WebkitMaskImage: 'radial-gradient(ellipse 78% 78% at 50% 50%, black 50%, transparent 88%)',
+            maskImage: 'radial-gradient(ellipse 78% 78% at 50% 50%, black 50%, transparent 88%)',
+          }}
+          quality={95}
+        />
 
       </div>
     </div>
