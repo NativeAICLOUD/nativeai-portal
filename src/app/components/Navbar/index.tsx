@@ -243,7 +243,7 @@ function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -4 }}
               transition={{ duration: 0.18, ease: 'easeOut' }}
-              onMouseEnter={openMenu}
+              onMouseEnter={() => openMenu()}
               onMouseLeave={closeMenu}
             >
               <div
