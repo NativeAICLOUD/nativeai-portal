@@ -3,6 +3,7 @@
 import { Constants } from "@/Constants";
 import { Link } from 'react-transition-progress/next';
 import Image from "next/image";
+import AgentFlowDiagram from './AgentFlowDiagram';
 
 const MONO: React.CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
 
@@ -105,104 +106,21 @@ function HomeHeader() {
             </div>
           </div>
 
-          {/* Right — MCP diagram + glass card */}
-          <div className="relative z-[1] w-full lg:w-[340px] xl:w-[380px] shrink-0 flex flex-col gap-3">
-
-            {/* ── Animated MCP architecture diagram ── */}
+          {/* Right — AgentFlow diagram */}
+          <div className="relative z-[1] w-full lg:w-[380px] xl:w-[420px] shrink-0 hidden lg:block">
             <div
-              className="hidden lg:block overflow-hidden"
               style={{
-                ...MONO,
-                background: 'rgba(10,14,26,0.82)',
-                backdropFilter: 'blur(24px) saturate(180%)',
-                WebkitBackdropFilter: 'blur(24px) saturate(180%)',
-                border: '1px solid rgba(255,255,255,0.09)',
-                borderRadius: 16,
-                boxShadow: '0 8px 32px rgba(0,0,0,0.25)',
+                background: 'rgba(10,14,26,0.78)',
+                backdropFilter: 'blur(28px) saturate(180%)',
+                WebkitBackdropFilter: 'blur(28px) saturate(180%)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                borderRadius: 24,
+                boxShadow: '0 12px 48px rgba(0,0,0,0.32)',
+                padding: '28px 24px',
               }}
             >
-              <svg width="100%" height="96" viewBox="0 0 360 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-                {/* ── INPUT node ── */}
-                <g opacity="0">
-                  <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="0.15s" fill="freeze" />
-                  <animateTransform attributeName="transform" type="translate" from="-8 0" to="0 0" dur="0.5s" begin="0.15s" fill="freeze" />
-                  <circle cx="34" cy="48" r="16" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.14)" strokeWidth="1.2" />
-                  <circle cx="34" cy="48" r="16" fill="none" stroke="rgba(240,160,96,0.22)" strokeWidth="1">
-                    <animate attributeName="r" values="16;26;16" dur="2.4s" begin="1.5s" repeatCount="indefinite" />
-                    <animate attributeName="opacity" values="0.5;0;0.5" dur="2.4s" begin="1.5s" repeatCount="indefinite" />
-                  </circle>
-                  <rect x="27" y="40" width="14" height="16" rx="2" fill="none" stroke="rgba(255,255,255,0.45)" strokeWidth="1.2" />
-                  <path d="M30 44h8M30 47.5h8M30 51h5" stroke="rgba(255,255,255,0.25)" strokeWidth="0.9" strokeLinecap="round" />
-                  <text x="34" y="76" textAnchor="middle" fill="rgba(255,255,255,0.28)" fontSize="6.5" fontFamily="JetBrains Mono, monospace" letterSpacing="0.3">INPUT</text>
-                </g>
-
-                {/* ── Flow line: Input → Agent ── */}
-                <g opacity="0">
-                  <animate attributeName="opacity" from="0" to="1" dur="0.35s" begin="0.55s" fill="freeze" />
-                  <line x1="52" y1="48" x2="83" y2="48" stroke="rgba(240,160,96,0.50)" strokeWidth="1.2" strokeDasharray="5 4">
-                    <animate attributeName="strokeDashoffset" from="9" to="0" dur="0.7s" begin="0.55s" repeatCount="indefinite" />
-                  </line>
-                </g>
-
-                {/* ── AI Agent box ── */}
-                <g opacity="0">
-                  <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="0.7s" fill="freeze" />
-                  <animateTransform attributeName="transform" type="translate" from="0 6" to="0 0" dur="0.5s" begin="0.7s" fill="freeze" />
-                  <rect x="85" y="28" width="76" height="40" rx="9" fill="rgba(240,160,96,0.18)" stroke="rgba(240,160,96,0.60)" strokeWidth="1.4" />
-                  <text x="123" y="44" textAnchor="middle" fill="rgba(255,255,255,0.92)" fontSize="9" fontWeight="700" fontFamily="JetBrains Mono, monospace">AI Agent</text>
-                  <text x="123" y="57" textAnchor="middle" fill="rgba(240,160,96,0.65)" fontSize="7" fontFamily="JetBrains Mono, monospace">GPT-4o</text>
-                  <text x="123" y="80" textAnchor="middle" fill="rgba(255,255,255,0.22)" fontSize="6" fontFamily="JetBrains Mono, monospace" letterSpacing="0.3">AGENT</text>
-                </g>
-
-                {/* ── Bidirectional MCP lines + label ── */}
-                <g opacity="0">
-                  <animate attributeName="opacity" from="0" to="1" dur="0.35s" begin="1.1s" fill="freeze" />
-                  <line x1="163" y1="43" x2="192" y2="43" stroke="rgba(240,160,96,0.55)" strokeWidth="1.2" strokeDasharray="5 4">
-                    <animate attributeName="strokeDashoffset" from="9" to="0" dur="0.7s" begin="1.1s" repeatCount="indefinite" />
-                  </line>
-                  <line x1="192" y1="53" x2="163" y2="53" stroke="rgba(240,160,96,0.30)" strokeWidth="1" strokeDasharray="5 4">
-                    <animate attributeName="strokeDashoffset" from="0" to="9" dur="0.7s" begin="1.1s" repeatCount="indefinite" />
-                  </line>
-                  <text x="177" y="36" textAnchor="middle" fill="rgba(240,160,96,0.55)" fontSize="6.5" fontFamily="JetBrains Mono, monospace" letterSpacing="0.5">MCP</text>
-                </g>
-
-                {/* ── MCP Server box ── */}
-                <g opacity="0">
-                  <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="1.25s" fill="freeze" />
-                  <animateTransform attributeName="transform" type="translate" from="0 6" to="0 0" dur="0.5s" begin="1.25s" fill="freeze" />
-                  <rect x="194" y="28" width="76" height="40" rx="9" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.16)" strokeWidth="1.2" />
-                  <text x="232" y="44" textAnchor="middle" fill="rgba(255,255,255,0.80)" fontSize="9" fontWeight="600" fontFamily="JetBrains Mono, monospace">MCP</text>
-                  <text x="232" y="57" textAnchor="middle" fill="rgba(255,255,255,0.35)" fontSize="7" fontFamily="JetBrains Mono, monospace">Server</text>
-                  <text x="232" y="80" textAnchor="middle" fill="rgba(255,255,255,0.22)" fontSize="6" fontFamily="JetBrains Mono, monospace" letterSpacing="0.3">SERVER</text>
-                </g>
-
-                {/* ── Flow line: Server → Tools ── */}
-                <g opacity="0">
-                  <animate attributeName="opacity" from="0" to="1" dur="0.35s" begin="1.65s" fill="freeze" />
-                  <line x1="272" y1="48" x2="302" y2="48" stroke="rgba(240,160,96,0.40)" strokeWidth="1.2" strokeDasharray="5 4">
-                    <animate attributeName="strokeDashoffset" from="9" to="0" dur="0.7s" begin="1.65s" repeatCount="indefinite" />
-                  </line>
-                  <path d="M272 43 Q287 43 305 33" stroke="rgba(255,255,255,0.10)" strokeWidth="0.9" fill="none" />
-                  <path d="M272 53 Q287 53 305 63" stroke="rgba(255,255,255,0.10)" strokeWidth="0.9" fill="none" />
-                </g>
-
-                {/* ── Tool nodes ── */}
-                <g opacity="0">
-                  <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="1.8s" fill="freeze" />
-                  <animateTransform attributeName="transform" type="translate" from="8 0" to="0 0" dur="0.5s" begin="1.8s" fill="freeze" />
-                  <circle cx="320" cy="33" r="13" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.14)" strokeWidth="1" />
-                  <text x="320" y="30" textAnchor="middle" fill="rgba(255,255,255,0.45)" fontSize="5.5" fontFamily="JetBrains Mono, monospace">Azure</text>
-                  <text x="320" y="39" textAnchor="middle" fill="rgba(255,255,255,0.45)" fontSize="5.5" fontFamily="JetBrains Mono, monospace">AI</text>
-                  <circle cx="320" cy="63" r="13" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.14)" strokeWidth="1" />
-                  <text x="320" y="60" textAnchor="middle" fill="rgba(255,255,255,0.45)" fontSize="5.5" fontFamily="JetBrains Mono, monospace">RAG</text>
-                  <text x="320" y="69" textAnchor="middle" fill="rgba(255,255,255,0.45)" fontSize="5.5" fontFamily="JetBrains Mono, monospace">Store</text>
-                  <text x="320" y="88" textAnchor="middle" fill="rgba(255,255,255,0.20)" fontSize="6" fontFamily="JetBrains Mono, monospace" letterSpacing="0.3">TOOLS</text>
-                </g>
-
-              </svg>
+              <AgentFlowDiagram />
             </div>
-
           </div>
 
         </div>

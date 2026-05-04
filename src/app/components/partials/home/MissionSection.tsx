@@ -6,6 +6,28 @@ export default function MissionSection() {
   return (
     <section className="relative bg-[#0a0e1a] border-y border-white/[0.07] overflow-hidden py-24 sm:py-32 lg:py-40">
 
+      {/* Large decorative ring — intercept.cloud style */}
+      <div
+        className="pointer-events-none absolute right-[-18%] top-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full"
+        style={{
+          border: '1px solid rgba(255,255,255,0.055)',
+          boxShadow: 'inset 0 0 80px rgba(232,154,120,0.04)',
+        }}
+      />
+      <div
+        className="pointer-events-none absolute right-[-10%] top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full"
+        style={{
+          border: '1px solid rgba(255,255,255,0.04)',
+        }}
+      />
+      <div
+        className="pointer-events-none absolute right-[-4%] top-1/2 -translate-y-1/2 w-[340px] h-[340px] rounded-full"
+        style={{
+          border: '1px solid rgba(232,154,120,0.1)',
+          boxShadow: '0 0 60px rgba(232,154,120,0.05)',
+        }}
+      />
+
       {/* Faint warm glow left */}
       <div
         className="pointer-events-none absolute -left-40 top-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full"
