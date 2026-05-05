@@ -13,6 +13,7 @@ import {
   Bot, Database, Boxes, Workflow,
   Plane, Scale, Landmark, HeartPulse, ShoppingBag, Factory,
   BookOpen, GraduationCap, Library, Building2,
+  GitBranch, Sparkles,
   LucideIcon,
 } from 'lucide-react';
 
@@ -45,11 +46,10 @@ const pages: Pages[] = [
         ],
       },
       {
-        url: Constants.PAGES.ABOUT_US, title: 'Company', children: [
+        url: Constants.PAGES.ABOUT_US, title: 'Innovate', children: [
           { url: Constants.PAGES.CASE_STUDIES,              title: 'Case Studies',            desc: 'How we deliver for clients',             icon: BookOpen     },
-          { url: Constants.PAGES.WORKSHOPS,                 title: 'Workshops',               desc: 'Azure & Kubernetes training',            icon: GraduationCap},
-          { url: Constants.PAGES.KNOWLEDGE_BASE,            title: 'Knowledge Base',          desc: 'Guides and articles',                   icon: Library      },
-          { url: Constants.PAGES.ABOUT_US,                  title: 'About Us',                desc: 'Our team and mission',                  icon: Building2    },
+          { url: Constants.PAGES.GITHUB_ACCELERATOR,        title: 'GitHub Accelerator',      desc: 'Copilot, migration & DevSecOps',         icon: GitBranch    },
+          { url: Constants.PAGES.AI_ACCELERATOR,            title: 'AI Accelerator',          desc: 'Azure AI from use case to production',   icon: Sparkles     },
         ],
       },
     ],

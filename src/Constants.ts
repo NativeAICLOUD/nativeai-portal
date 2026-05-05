@@ -4,6 +4,8 @@ export const Constants = {
     ACCELERATE_AZURE: '/accelerate-azure',
     
     SOLUTIONS: '/solutions',
+    GITHUB_ACCELERATOR: '/solutions/github-accelerator',
+    AI_ACCELERATOR: '/solutions/ai-accelerator',
     AZURE_CLOUDIFY: '/azure-cloudify',
     MANAGED_SERVICES: '/managed-services',
     CLOUD_NATIVE_SD: '/cloud-native-sd',

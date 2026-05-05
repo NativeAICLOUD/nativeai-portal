@@ -98,7 +98,7 @@ function HomeHeader() {
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0">
                     <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2Z"/>
                   </svg>
-                  Schedule a free call
+                  Talk to our Experts
                 </Link>
                 <Link
                   href={Constants.PAGES.SOLUTIONS}
@@ -121,18 +121,29 @@ function HomeHeader() {
             </div>
 
             {/* Right — illustration */}
-            <div className="shrink-0 w-[52%] xl:w-[54%] self-end">
+            <div className="shrink-0 w-[52%] xl:w-[54%] self-end relative">
+              {/* Warm glow anchoring image to background palette */}
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background: 'radial-gradient(ellipse 80% 55% at 48% 92%, rgba(240,160,96,0.13) 0%, rgba(212,132,92,0.04) 48%, transparent 68%)',
+                }}
+              />
               <Image
                 src="/img/github.png"
                 alt="AI Agent Architecture"
-                width={800}
-                height={800}
+                width={900}
+                height={900}
                 style={{
-                  width: '100%',
+                  position: 'relative',
+                  width: '106%',
+                  marginLeft: '-3%',
                   height: 'auto',
                   display: 'block',
-                  WebkitMaskImage: 'radial-gradient(ellipse 78% 78% at 50% 50%, black 50%, transparent 88%)',
-                  maskImage: 'radial-gradient(ellipse 78% 78% at 50% 50%, black 50%, transparent 88%)',
+                  WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 16%), linear-gradient(to bottom, transparent 0%, black 14%)',
+                  WebkitMaskComposite: 'source-in',
+                  maskImage: 'linear-gradient(to right, transparent 0%, black 16%), linear-gradient(to bottom, transparent 0%, black 14%)',
+                  maskComposite: 'intersect',
                 }}
                 quality={95}
               />
