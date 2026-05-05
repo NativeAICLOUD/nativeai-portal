@@ -1,4 +1,4 @@
-import { Link } from "react-transition-progress/next";
+﻿import { Link } from "react-transition-progress/next";
 import ProcessTimeline from "@/app/components/partials/services/ProcessTimeline";
 import ServiceFooter from "@/app/components/partials/services/ServiceFooter";
 
@@ -117,7 +117,6 @@ export default function AirlineBookingPage() {
         {/* What's included */}
         <section className="max-w-7xl mx-auto px-6 md:px-12 pt-24 pb-16">
           <div className="flex items-center gap-2 mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
             <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">
               WHAT&apos;S INCLUDED
             </p>
@@ -161,7 +160,6 @@ export default function AirlineBookingPage() {
         {/* How we work */}
         <section className="max-w-7xl mx-auto px-6 md:px-12 mt-40 py-20 md:py-32">
           <div className="flex items-center gap-2 mb-10">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
             <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">HOW WE DELIVER</p>
           </div>
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Image from "next/image";
 import Link from "next/link";
@@ -115,7 +115,6 @@ export default function SolutionsPage() {
                 className="inline-flex items-center gap-2.5 rounded-full px-4 py-1.5 mb-10"
                 style={{ background: "rgba(232,154,120,0.10)", border: "1px solid rgba(232,154,120,0.28)", backdropFilter: "blur(12px)" }}
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
                 <span className="text-[11px] font-bold text-[#b8714e] tracking-widest uppercase" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
                   What we build
                 </span>
@@ -247,7 +246,6 @@ export default function SolutionsPage() {
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
               <div>
                 <div className="flex items-center gap-2 mb-5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
                   <p className="text-xs uppercase tracking-wider text-[#9ca3af] font-medium">Services</p>
                 </div>
                 <h2
@@ -281,7 +279,6 @@ export default function SolutionsPage() {
                       style={lgCard}
                     >
                       <div className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
                         <span
                           className="text-[10px] font-bold uppercase tracking-widest text-[#e89a78]"
                           style={{ fontFamily: "'JetBrains Mono', monospace" }}
@@ -313,7 +310,6 @@ export default function SolutionsPage() {
 
           <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-28">
             <div className="flex items-center gap-2 mb-5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
               <p className="text-xs uppercase tracking-wider text-[#e89a78]/60 font-medium">Products</p>
             </div>
             <h2
@@ -338,7 +334,6 @@ export default function SolutionsPage() {
                       style={lgDark}
                     >
                       <div className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
                         <span className="text-[10px] font-bold uppercase tracking-widest text-[#e89a78]/75" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
                           NativeCloud Product
                         </span>
@@ -370,7 +365,6 @@ export default function SolutionsPage() {
 
           <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-28">
             <div className="flex items-center gap-2 mb-5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
               <p className="text-xs uppercase tracking-wider text-[#9ca3af] font-medium">Certifications</p>
             </div>
             <h2

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -80,7 +80,6 @@ export default function CloudNativeSD() {
             className="inline-flex items-center gap-2.5 bg-[#e8f4fb] border border-[#bde0f5] rounded-full px-4 py-1.5 mb-10"
             initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#0284c7] shrink-0" />
             <span className="text-[11px] font-semibold text-[#0284c7] tracking-widest uppercase">
               Cloud Native · Kubernetes · Azure
             </span>
@@ -198,7 +197,6 @@ export default function CloudNativeSD() {
       <section className="bg-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-24">
           <div className="flex items-center gap-2 mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
             <p className="text-xs uppercase tracking-wider text-[#6b7280] font-medium">How we build</p>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-[#0a0e1a] leading-tight mb-12 max-w-2xl">
@@ -263,7 +261,6 @@ export default function CloudNativeSD() {
           style={{ background: 'linear-gradient(160deg, #f0f9ff 0%, #faf5ff 50%, #f0fdf4 100%)' }} />
         <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-24">
           <div className="flex items-center gap-2 mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
             <p className="text-xs uppercase tracking-wider text-[#6b7280] font-medium">Why go cloud-native</p>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-[#0a0e1a] leading-tight mb-14 max-w-2xl">
@@ -282,7 +279,6 @@ export default function CloudNativeSD() {
                 viewport={{ once: true, margin: '-40px' }}
               >
                 <div className="flex items-center gap-2.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
                   <h3 className="text-sm font-semibold text-[#0a0e1a]">{b.title}</h3>
                 </div>
                 <p className="text-[#6b7280] text-sm leading-relaxed">{b.desc}</p>
@@ -296,7 +292,6 @@ export default function CloudNativeSD() {
       <section className="bg-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-24">
           <div className="flex items-center gap-2 mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
             <p className="text-xs uppercase tracking-wider text-[#6b7280] font-medium">How we work</p>
           </div>
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-14">
@@ -354,7 +349,6 @@ export default function CloudNativeSD() {
           style={{ background: 'linear-gradient(160deg, #faf5ff 0%, #f0f9ff 100%)' }} />
         <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-24">
           <div className="flex items-center gap-2 mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
             <p className="text-xs uppercase tracking-wider text-[#6b7280] font-medium">Who is it for</p>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-[#0a0e1a] leading-tight mb-14 max-w-2xl">
@@ -365,7 +359,6 @@ export default function CloudNativeSD() {
             {/* Left — why panel */}
             <div style={glass} className="p-10 flex flex-col gap-5">
               <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#0284c7] shrink-0" />
                 <p className="text-xs uppercase tracking-wider text-[#0284c7] font-semibold">Why cloud-native?</p>
               </div>
               <p className="text-[#0a0e1a] text-lg leading-relaxed">
@@ -381,7 +374,6 @@ export default function CloudNativeSD() {
               <div className="divide-y divide-black/[0.06]">
                 {useCases.map((item, i) => (
                   <div key={i} className="flex items-start gap-4 px-8 py-5 hover:bg-black/[0.02] transition-colors">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0 mt-1.5" />
                     <div>
                       <p className="text-[14px] font-semibold text-[#0E0E12] mb-0.5">{item.label}</p>
                       <p className="text-[12.5px] text-[#6B6B6B] leading-relaxed">{item.value}</p>

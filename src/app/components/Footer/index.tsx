@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Image from "next/image";
 import { Link } from 'react-transition-progress/next';
@@ -85,7 +85,6 @@ function Footer() {
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-10">
           <div>
             <div className="flex items-center gap-2 mb-5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
               <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">
                 Ready to ship?
               </p>
@@ -186,7 +185,7 @@ function Footer() {
             <div className="flex items-center gap-6">
               <Image
                 src={MicrosoftPartner}
-                alt="Microsoft Partner"
+                alt="Microsoft"
                 className="h-7 w-auto opacity-30 hover:opacity-50 transition-opacity"
               />
               <Image

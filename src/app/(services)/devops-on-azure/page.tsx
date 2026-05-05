@@ -1,8 +1,9 @@
-'use client';
+﻿'use client';
 
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import ProcessTimeline from '@/app/components/partials/services/ProcessTimeline';
 
 const jakarta = Plus_Jakarta_Sans({
@@ -81,19 +82,6 @@ function Blobs({ items }: { items: { w: number; h: number; top?: string; left?: 
   );
 }
 
-function PipelineStage({ label, status }: { label: string; status: 'done' | 'running' | 'pending' }) {
-  const cfg = {
-    done:    { bg: 'rgba(5,150,105,0.18)',   border: 'rgba(5,150,105,0.45)',   text: '#059669', icon: '✓' },
-    running: { bg: 'rgba(0,188,242,0.18)',   border: 'rgba(0,188,242,0.50)',   text: '#0078d4', icon: '▶' },
-    pending: { bg: 'rgba(255,255,255,0.08)', border: 'rgba(255,255,255,0.20)', text: 'rgba(255,255,255,0.40)', icon: '○' },
-  }[status];
-  return (
-    <div className="flex items-center gap-2 px-3 py-2 rounded-xl" style={{ background: cfg.bg, border: `1px solid ${cfg.border}` }}>
-      <span className="text-xs font-bold" style={{ color: cfg.text }}>{cfg.icon}</span>
-      <span className="text-xs font-semibold" style={{ color: cfg.text, fontFamily: "'JetBrains Mono', monospace" }}>{label}</span>
-    </div>
-  );
-}
 
 export default function DevOpsOnAzurePage() {
   return (
@@ -103,10 +91,6 @@ export default function DevOpsOnAzurePage() {
           0%, 100% { opacity: 0.75; transform: scale(1); }
           50%       { opacity: 1;   transform: scale(1.07); }
         }
-        @keyframes pipeline-pulse {
-          0%, 100% { opacity: 0.4; }
-          50%       { opacity: 1; }
-        }
       `}</style>
 
       <div className={jakarta.className}>
@@ -114,15 +98,15 @@ export default function DevOpsOnAzurePage() {
         {/* ── Hero ── */}
         <section
           className="relative overflow-hidden min-h-[100svh] flex items-center"
-          style={{ background: "linear-gradient(145deg, #05102b 0%, #0c2461 28%, #0078d4 65%, #00bcf2 100%)" }}
+          style={{ background: "linear-gradient(145deg, #0d0a2e 0%, #1a1260 32%, #2e2ab8 65%, #4a46d0 100%)" }}
         >
           <Blobs items={[
-            { w: 900, h: 900, top: "-25%",    left: "-20%",  color: "rgba(0,120,212,0.50)",  delay: "0s" },
-            { w: 750, h: 750, top: "20%",     right: "-15%", color: "rgba(0,188,242,0.40)",  delay: "1.2s" },
-            { w: 600, h: 600, bottom: "-20%", left: "30%",   color: "rgba(124,58,237,0.25)", delay: "2.4s" },
+            { w: 900, h: 900, top: "-25%",    left: "-20%",  color: "rgba(46,42,184,0.55)",  delay: "0s" },
+            { w: 700, h: 700, top: "15%",     right: "-12%", color: "rgba(74,70,208,0.38)",  delay: "1.2s" },
+            { w: 550, h: 550, bottom: "-18%", left: "32%",   color: "rgba(240,112,96,0.22)", delay: "2.4s" },
           ]} />
 
-          <div className="relative w-full max-w-7xl mx-auto px-6 md:px-12 pt-36 pb-28">
+<div className="relative w-full max-w-7xl mx-auto px-6 md:px-12 pt-36 pb-28">
             <div className="flex flex-col lg:flex-row lg:items-center gap-14 xl:gap-20">
 
               {/* Left */}
@@ -134,9 +118,8 @@ export default function DevOpsOnAzurePage() {
               >
                 <div
                   className="inline-flex items-center gap-2.5 rounded-full px-4 py-1.5 mb-8"
-                  style={{ background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.30)", backdropFilter: "blur(20px) saturate(160%)", WebkitBackdropFilter: "blur(20px) saturate(160%)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.40)" }}
+                  style={{ background: "rgba(74,70,208,0.20)", border: "1px solid rgba(140,136,240,0.40)", backdropFilter: "blur(20px) saturate(160%)", WebkitBackdropFilter: "blur(20px) saturate(160%)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.25)" }}
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00bcf2] shrink-0" style={{ boxShadow: "0 0 8px #00bcf2" }} />
                   <span className="text-[11px] font-bold text-white/80 tracking-widest uppercase" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
                     DevOps on Azure
                   </span>
@@ -146,15 +129,15 @@ export default function DevOpsOnAzurePage() {
                   className="font-extrabold text-white mb-8 leading-[0.95]"
                   style={{ fontSize: "clamp(52px, 7vw, 96px)", letterSpacing: "-0.045em" }}
                 >
-                  Ship faster.<br />
-                  Break less.<br />
+                  Automate delivery.<br />
+                  Eliminate risk.<br />
                   <span style={{
-                    background: "linear-gradient(90deg, #00bcf2 0%, #7dd3fc 60%, #bae6fd 100%)",
+                    background: "linear-gradient(90deg, #a5a0f8 0%, #c4c0ff 60%, #e0deff 100%)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",
                   }}>
-                    Sleep better.
+                    Scale with confidence.
                   </span>
                 </h1>
 
@@ -176,7 +159,7 @@ export default function DevOpsOnAzurePage() {
                   <Link
                     href="/schedule-call"
                     className="inline-flex items-center px-8 py-4 rounded-full text-base font-bold transition-all"
-                    style={{ background: "#ffffff", color: "#0078d4" }}
+                    style={{ background: "#ffffff", color: "#2e2ab8" }}
                   >
                     Book a 15-min call
                   </Link>
@@ -207,86 +190,35 @@ export default function DevOpsOnAzurePage() {
                 </motion.div>
               </motion.div>
 
-              {/* Right — floating glass CI/CD pipeline card */}
+              {/* Right — devops image */}
               <motion.div
-                className="lg:flex-1 lg:max-w-[480px] w-full"
-                initial={{ opacity: 0, x: 60 }}
+                className="lg:flex-1 lg:max-w-[500px] w-full"
+                initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.9, delay: 0.12, ease: "easeOut" }}
+                transition={{ duration: 0.9, delay: 0.18, ease: "easeOut" }}
               >
-                <motion.div
-                  animate={{ y: [0, -12, 0] }}
-                  transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  {/* Ambient glow behind the card */}
-                  <div className="relative">
-                    <div
-                      className="absolute inset-0 rounded-[32px] -z-10"
-                      style={{ background: "radial-gradient(ellipse at 50% 40%, rgba(0,188,242,0.35) 0%, transparent 70%)", filter: "blur(32px)", transform: "scale(1.1)" }}
-                    />
-                    <div className="rounded-[28px] p-6 flex flex-col gap-5" style={lg}>
-                      {/* Header */}
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: "linear-gradient(135deg, #0078d4, #00bcf2)", boxShadow: "0 2px 12px rgba(0,120,212,0.40)" }}>
-                            <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="white" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" /></svg>
-                          </div>
-                          <div>
-                            <p className="text-[13px] font-bold text-[#0a0e1a]">Pipeline #247</p>
-                            <p className="text-[11px] text-[#6b7280]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>main · feat/auth-refresh</p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-1.5 px-3 py-1 rounded-full" style={{ background: "rgba(0,120,212,0.10)", border: "1px solid rgba(0,188,242,0.35)", backdropFilter: "blur(8px)" }}>
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#00bcf2]" style={{ animation: "pipeline-pulse 1.4s ease-in-out infinite", boxShadow: "0 0 6px #00bcf2" }} />
-                          <span className="text-[11px] font-bold text-[#0078d4]">Running</span>
-                        </div>
-                      </div>
+                <div className="relative rounded-3xl overflow-hidden" style={{ boxShadow: "0 24px 80px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.08)" }}>
+                  {/* ambient glow */}
+                  <div className="absolute -inset-4 -z-10 rounded-[40px]" style={{ background: "radial-gradient(ellipse at 60% 40%, rgba(0,188,242,0.30) 0%, transparent 65%)", filter: "blur(28px)" }} />
 
-                      {/* Pipeline stages */}
-                      <div>
-                        <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-wider mb-2.5" style={{ fontFamily: "'JetBrains Mono', monospace" }}>Pipeline Stages</p>
-                        <div className="grid grid-cols-2 gap-2">
-                          <PipelineStage label="Build"       status="done" />
-                          <PipelineStage label="Unit Tests"  status="done" />
-                          <PipelineStage label="Deploy Dev"  status="done" />
-                          <PipelineStage label="Integration" status="running" />
-                          <PipelineStage label="Deploy Stg"  status="pending" />
-                          <PipelineStage label="Deploy Prod" status="pending" />
-                        </div>
-                      </div>
+                  <Image
+                    src="/img/devops1.jpeg"
+                    alt="DevOps engineering"
+                    width={600}
+                    height={520}
+                    style={{ width: '100%', height: 'auto', display: 'block' }}
+                    quality={92}
+                  />
 
-                      {/* Progress */}
-                      <div>
-                        <div className="flex justify-between items-center mb-2">
-                          <span className="text-[11px] font-semibold text-[#6b7280]">Overall progress</span>
-                          <span className="text-[11px] font-bold text-[#0078d4]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>66%</span>
-                        </div>
-                        <div className="h-2 rounded-full overflow-hidden" style={{ background: "rgba(0,120,212,0.10)" }}>
-                          <motion.div
-                            className="h-full rounded-full"
-                            style={{ background: "linear-gradient(90deg, #0078d4, #00bcf2)" }}
-                            initial={{ width: 0 }}
-                            animate={{ width: "66%" }}
-                            transition={{ duration: 1.4, delay: 0.6, ease: "easeOut" }}
-                          />
-                        </div>
-                      </div>
+                  {/* gradient overlay */}
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(5,16,43,0.75) 0%, rgba(5,16,43,0.10) 50%, transparent 75%)" }} />
 
-                      <div className="border-t" style={{ borderColor: "rgba(0,0,0,0.06)" }} />
-
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="text-[10px] text-[#9ca3af] mb-0.5">Last commit</p>
-                          <p className="text-[13px] font-semibold text-[#0a0e1a]">feat: refresh token rotation</p>
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          <div className="w-6 h-6 rounded-full text-white flex items-center justify-center text-[9px] font-bold shrink-0" style={{ background: "linear-gradient(135deg, #0078d4, #7c3aed)" }}>AJ</div>
-                          <span className="text-[11px] text-[#9ca3af]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>a3f9b2c</span>
-                        </div>
-                      </div>
-                    </div>
+                  {/* bottom caption */}
+                  <div className="absolute bottom-6 left-6">
+                    <p className="text-white font-bold text-sm leading-tight">DevOps on Azure</p>
+                    <p className="text-white/50 text-xs mt-0.5">From commit to production — automated.</p>
                   </div>
-                </motion.div>
+                </div>
               </motion.div>
 
             </div>
@@ -309,7 +241,6 @@ export default function DevOpsOnAzurePage() {
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
               <div>
                 <div className="flex items-center gap-2 mb-5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#0078d4] shrink-0" />
                   <p className="text-xs uppercase tracking-wider text-[#6b7280] font-medium">What we deliver</p>
                 </div>
                 <h2
@@ -389,18 +320,20 @@ export default function DevOpsOnAzurePage() {
                 </p>
               </div>
 
-              {/* Light glass panel */}
-              <div
-                className="rounded-3xl px-10 py-12 flex flex-col gap-5"
-                style={lg}
-              >
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#0078d4] shrink-0" style={{ boxShadow: "0 0 6px rgba(0,120,212,0.6)" }} />
-                  <p className="text-xs uppercase tracking-wider text-[#0078d4]/70 font-medium">Who we work with</p>
+              {/* Image panel */}
+              <div className="rounded-3xl overflow-hidden relative min-h-[320px]" style={{ boxShadow: "0 4px 32px rgba(0,80,180,0.12)" }}>
+                <Image
+                  src="/img/devops1.jpeg"
+                  alt="DevOps engineering team"
+                  fill
+                  style={{ objectFit: 'cover', objectPosition: 'center' }}
+                  quality={90}
+                />
+                <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(5,16,43,0.55) 0%, transparent 60%)' }} />
+                <div className="absolute bottom-6 left-8">
+                  <p className="text-white font-semibold text-sm">DevOps engineering, done right.</p>
+                  <p className="text-white/55 text-xs mt-1">Faster delivery. Less friction. Every time.</p>
                 </div>
-                <p className="text-[#0c1a2e] text-lg leading-[1.75]">
-                  Engineering teams frustrated with slow, flaky deployments. CTOs who need compliance without slowing delivery. Startups scaling from one environment to many. If you ship software, we can make the process faster and safer.
-                </p>
               </div>
             </div>
           </div>
@@ -418,7 +351,6 @@ export default function DevOpsOnAzurePage() {
           ]} />
           <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-24">
             <div className="flex items-center gap-2 mb-10">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#0078d4] shrink-0" />
               <p className="text-xs uppercase tracking-wider text-[#6b7280] font-medium">How it works</p>
             </div>
             <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
@@ -452,7 +384,6 @@ export default function DevOpsOnAzurePage() {
 
           <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-28">
             <div className="flex items-center gap-2 mb-5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#0078d4] shrink-0" />
               <p className="text-xs uppercase tracking-wider text-[#6b7280] font-medium">Common questions</p>
             </div>
             <h2
@@ -484,11 +415,11 @@ export default function DevOpsOnAzurePage() {
         {/* ── CTA Banner ── */}
         <section
           className="relative overflow-hidden"
-          style={{ background: "linear-gradient(135deg, #0078d4 0%, #0c2461 100%)" }}
+          style={{ background: "linear-gradient(135deg, #1a1260 0%, #2e2ab8 55%, #4a46d0 100%)" }}
         >
           <Blobs items={[
-            { w: 700, h: 700, top: "-30%",   right: "-10%", color: "rgba(0,188,242,0.40)",  delay: "0s" },
-            { w: 500, h: 500, bottom: "-20%", left: "20%",  color: "rgba(124,58,237,0.25)", delay: "1.5s" },
+            { w: 700, h: 700, top: "-30%",    right: "-10%", color: "rgba(74,70,208,0.40)",  delay: "0s" },
+            { w: 500, h: 500, bottom: "-20%", left: "20%",   color: "rgba(240,112,96,0.22)", delay: "1.5s" },
           ]} />
           <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-20 flex flex-col md:flex-row md:items-center md:justify-between gap-10">
             <div className="flex flex-col gap-4 max-w-xl">

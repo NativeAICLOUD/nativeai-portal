@@ -1,6 +1,7 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import { useState } from 'react';
@@ -65,7 +66,6 @@ function Pill({ label, dark = false }: { label: string; dark?: boolean }) {
         border: '1px solid rgba(232,154,120,0.28)',
       }}
     >
-      <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
       <span
         className="text-[11px] font-bold tracking-widest uppercase"
         style={{ ...MONO, color: dark ? 'rgba(232,154,120,0.85)' : '#b8714e' }}
@@ -312,7 +312,24 @@ export default function GitHubAcceleratorPage() {
             { w: 500, h: 500, bottom: '-15%', left: '28%',   color: 'rgba(110,207,176,0.26)', delay: '3s' },
           ]} />
 
-          <div className="relative w-full max-w-7xl mx-auto px-6 md:px-12 pt-44 pb-28">
+          {/* background devops image */}
+          <div className="absolute inset-0 z-[1] pointer-events-none select-none overflow-hidden" aria-hidden>
+            <Image
+              src="/img/devops.jpeg"
+              alt=""
+              fill
+              style={{
+                objectFit: 'cover',
+                objectPosition: 'center right',
+                opacity: 0.28,
+                WebkitMaskImage: 'linear-gradient(to left, black 0%, black 35%, transparent 70%)',
+                maskImage: 'linear-gradient(to left, black 0%, black 35%, transparent 70%)',
+              }}
+              quality={90}
+            />
+          </div>
+
+          <div className="relative z-[2] w-full max-w-7xl mx-auto px-6 md:px-12 pt-44 pb-28">
             <motion.div initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, ease: 'easeOut' }}>
 
               {/* GitHub logo badge */}

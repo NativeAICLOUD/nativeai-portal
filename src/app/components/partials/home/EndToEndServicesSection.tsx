@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { motion } from 'framer-motion';
 import { Link } from 'react-transition-progress/next';
@@ -78,7 +78,6 @@ export default function EndToEndServicesSection() {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-20">
           <div>
             <div className="flex items-center gap-2 mb-5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78]" />
               <p className="text-xs uppercase tracking-[0.18em] text-[#9a9a9a] font-medium">What we deliver</p>
             </div>
             <h2 className="text-4xl sm:text-5xl font-extrabold leading-[1.08] tracking-tight text-[#0a0e1a] max-w-lg">

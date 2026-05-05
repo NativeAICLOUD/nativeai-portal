@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import { Link } from "react-transition-progress/next";
 import { Constants } from "@/Constants";
 import Logo from "@/app/components/ui/Logo";
@@ -29,7 +29,6 @@ export default function ServiceFooter() {
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-10">
             <div>
               <div className="flex items-center gap-2 mb-5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
                 <p className="text-xs uppercase tracking-wider text-[#e89a78]/80 font-medium">
                   Ready to ship?
                 </p>

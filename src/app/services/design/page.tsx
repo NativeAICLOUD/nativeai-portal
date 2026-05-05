@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { Inter } from "next/font/google";
 import { Link } from "react-transition-progress/next";
@@ -98,7 +98,6 @@ export default function DesignPage() {
             >
               {/* Pill */}
               <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-10" style={lg}>
-                <span className="w-1.5 h-1.5 rounded-full bg-violet-500 shrink-0" />
                 <span className="text-[11px] font-semibold text-violet-600 tracking-widest uppercase">Design</span>
               </div>
 
@@ -224,7 +223,6 @@ export default function DesignPage() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
             <div>
               <div className="flex items-center gap-2 mb-5">
-                <span className="w-1.5 h-1.5 rounded-full bg-violet-500 shrink-0" />
                 <p className="text-xs uppercase tracking-wider text-violet-500 font-semibold">What&apos;s included</p>
               </div>
               <h2 className="text-4xl md:text-5xl font-black text-[#0f0c1e] leading-tight tracking-tight">
@@ -269,7 +267,6 @@ export default function DesignPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
             <div className="rounded-[28px] px-10 py-12 flex flex-col gap-5" style={lgCard}>
               <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-violet-500 shrink-0" />
                 <p className="text-xs uppercase tracking-wider text-violet-500 font-semibold">Why design first?</p>
               </div>
               <p className="text-[#0f0c1e] text-lg font-light leading-relaxed">
@@ -278,7 +275,6 @@ export default function DesignPage() {
             </div>
             <div className="rounded-[28px] px-10 py-12 flex flex-col gap-5" style={lgCard}>
               <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-pink-500 shrink-0" />
                 <p className="text-xs uppercase tracking-wider text-pink-500 font-semibold">Who we design for</p>
               </div>
               <p className="text-[#0f0c1e] text-lg font-light leading-relaxed">
@@ -293,7 +289,6 @@ export default function DesignPage() {
       <section className="bg-white border-t border-[#f0eeff]">
         <div className={`max-w-7xl mx-auto px-6 md:px-12 py-24 ${inter.className}`}>
           <div className="flex items-center gap-2 mb-10">
-            <span className="w-1.5 h-1.5 rounded-full bg-violet-500 shrink-0" />
             <p className="text-xs uppercase tracking-wider text-violet-500 font-semibold">How we work</p>
           </div>
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">

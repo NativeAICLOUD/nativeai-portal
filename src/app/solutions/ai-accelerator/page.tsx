@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -62,7 +62,6 @@ function Pill({ label, dark = false }: { label: string; dark?: boolean }) {
       className="inline-flex items-center gap-2.5 rounded-full px-4 py-1.5 mb-6"
       style={{ background: 'rgba(232,154,120,0.10)', border: '1px solid rgba(232,154,120,0.28)' }}
     >
-      <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
       <span
         className="text-[11px] font-bold tracking-widest uppercase"
         style={{ ...MONO, color: dark ? 'rgba(232,154,120,0.85)' : '#b8714e' }}

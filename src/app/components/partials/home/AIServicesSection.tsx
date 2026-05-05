@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from 'framer-motion';
 import { Link } from 'react-transition-progress/next';
@@ -48,7 +48,6 @@ const AIServicesSection = () => (
     <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
       <div>
         <div className="flex items-center gap-2 mb-4">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
           <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">What we build</p>
         </div>
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0a0e1a] max-w-md leading-tight">

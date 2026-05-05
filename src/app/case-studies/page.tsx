@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
 import Image from 'next/image';
@@ -204,7 +204,6 @@ export default function CaseStudiesPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78]" />
             <p className="text-xs uppercase tracking-widest text-[#e89a78] font-semibold">
               Solutions · Case Studies
             </p>

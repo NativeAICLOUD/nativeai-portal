@@ -1,4 +1,4 @@
-import { Link } from "react-transition-progress/next";
+﻿import { Link } from "react-transition-progress/next";
 import ServiceFooter from "@/app/components/partials/services/ServiceFooter";
 import ProcessTimeline from "@/app/components/partials/services/ProcessTimeline";
 import {
@@ -139,7 +139,6 @@ export default function AIAgentsRAGPage() {
 
           {/* Pill tag */}
           <div className="inline-flex items-center gap-2.5 bg-[#f4f0ff] border border-[#e2d9ff] rounded-full px-4 py-1.5 mb-10">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#7c3aed] shrink-0" />
             <span className="text-[11px] font-semibold text-[#7c3aed] tracking-widest uppercase" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
               AI Agents · LLMs · Azure &amp; AWS
             </span>
@@ -329,7 +328,6 @@ export default function AIAgentsRAGPage() {
       <section className="bg-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-24">
           <div className="flex items-center gap-2 mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
             <p className="text-xs uppercase tracking-wider text-[#6b7280] font-medium">What we build</p>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-[#0a0e1a] leading-tight mb-12 max-w-2xl">
@@ -404,7 +402,6 @@ export default function AIAgentsRAGPage() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
             <div>
               <div className="flex items-center gap-2 mb-5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
                 <p className="text-xs uppercase tracking-wider text-[#6b7280] font-medium">What&apos;s included</p>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold text-[#0a0e1a] leading-tight max-w-xl">
@@ -440,7 +437,6 @@ export default function AIAgentsRAGPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
             <div className="rounded-3xl bg-[#0a0e1a] px-10 py-12 flex flex-col gap-5">
               <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
                 <p className="text-xs uppercase tracking-wider text-white/50 font-medium">Why AI Agents?</p>
               </div>
               <p className="text-white text-lg leading-relaxed">
@@ -449,7 +445,6 @@ export default function AIAgentsRAGPage() {
             </div>
             <div className="rounded-3xl bg-[#f4f0ff] border border-[#e2d9ff] px-10 py-12 flex flex-col gap-5">
               <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#7c3aed] shrink-0" />
                 <p className="text-xs uppercase tracking-wider text-[#7c3aed]/70 font-medium">For whom?</p>
               </div>
               <p className="text-[#1f1035] text-lg leading-relaxed">
@@ -464,7 +459,6 @@ export default function AIAgentsRAGPage() {
       <section className="bg-[#f9fafb] border-t border-[#e5e7eb]">
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-24">
           <div className="flex items-center gap-2 mb-10">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
             <p className="text-xs uppercase tracking-wider text-[#6b7280] font-medium">How we work</p>
           </div>
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">

@@ -1,5 +1,5 @@
 import { Constants } from '@/Constants';
-import { BG3Img, BGGroupLogo, BGNativeWhite, Location, Phone, PinMarker, Telephone } from '@/ImagePath';
+import { BG3Img, BGGroupLogo, BGNativeWhite, Location, Phone, PinMarker } from '@/ImagePath';
 import Image from 'next/image';
 import ContactUsForm from '../components/partials/ContactForm';
 
@@ -20,12 +20,12 @@ const GetInTouchPage = () => {
               We`re always happy to help! Please choose a way to contact us below.
             </p>
           </div>
-          <Image
-            src={Telephone}
-            alt="About Image"
-            priority
-            className={'opacity-80 md:opacity-100 absolute md:relative object-contain w-full max-w-sm xl:-translate-x-28'}
-          />
+          <div className="opacity-80 md:opacity-100 absolute md:relative w-full max-w-sm xl:-translate-x-28 flex items-center justify-center">
+            <svg width="220" height="220" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+              <circle cx="32" cy="32" r="32" fill="rgba(100,130,200,0.12)" />
+              <path d="M20 20c-.6 0-1.1.5-1.1 1.1v1.8c0 12.1 9.8 21.9 21.9 21.9h1.8c.6 0 1.1-.5 1.1-1.1v-4.2c0-.6-.5-1.1-1.1-1.1h-4.2c-.6 0-1.1.5-1.1 1.1v.7c-5.4-1.3-9.6-5.5-10.9-10.9h.7c.6 0 1.1-.5 1.1-1.1v-4.2c0-.6-.5-1.1-1.1-1.1H20z" fill="currentColor" opacity="0.5"/>
+            </svg>
+          </div>
         </div>
 
       </div>

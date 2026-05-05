@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
@@ -15,11 +15,11 @@ const services = [
   { src: '/img/Cloud.png',    w: 93,  h: 68,  title: 'Cloud Solutions & Services',     meta: 'cloud.solutions'   },
   { src: '/img/Layer_1.png',  w: 95,  h: 90,  title: 'Platform Development',           meta: 'platform.dev'      },
   { src: '/img/Layer_2.png',  w: 89,  h: 81,  title: 'SaaS App Development',          meta: 'saas.build'        },
-  { src: '/img/Layer_3.png',  w: 89,  h: 67,  title: 'End-to-end Business Solutions', meta: 'biz.solutions'     },
+  { src: '/img/DevOps.png',   w: 77,  h: 74,  title: 'Cloud & DevOps',                meta: 'cloud.devops'      },
   { src: '/img/Layer_4.png',  w: 77,  h: 77,  title: 'App Modernization',              meta: 'app.modern'        },
   { src: '/img/Layer_5.png',  w: 88,  h: 89,  title: 'Enterprise App Development',    meta: 'enterprise.dev'    },
   { src: '/img/Layer_6.png',  w: 101, h: 79,  title: 'Digital Transformation',        meta: 'digital.transform' },
-  { src: '/img/DevOps.png',   w: 77,  h: 74,  title: 'Cloud & DevOps',                meta: 'cloud.devops'      },
+  { src: '/img/Layer_3.png',  w: 89,  h: 67,  title: 'End-to-end Business Solutions', meta: 'biz.solutions'     },
   { src: '/img/Layer_8.png',  w: 90,  h: 90,  title: 'UI / UX Design',               meta: 'ui.ux.design'      },
   { src: '/img/Layer_9.png',  w: 140, h: 112, title: 'Cloud Migrations',              meta: 'cloud.migrate'     },
 ];
@@ -184,7 +184,6 @@ export default function ServicesScrollSection() {
   const headingBlock = (
     <div>
       <div className="flex items-center gap-2 mb-3">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
         <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">What we deliver</p>
       </div>
       <h2 className="text-2xl lg:text-4xl font-bold text-[#0a0e1a] leading-tight">

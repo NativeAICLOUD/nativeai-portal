@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { Link } from 'react-transition-progress/next';
 import { Constants } from '@/Constants';
@@ -175,7 +175,6 @@ export default function AboutUsPage() {
         <div className="mb-14">
           <div style={lg1} className="px-6 sm:px-8 py-6">
             <div className="flex items-center gap-2 mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78]" />
               <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#0a0e1a]/35">Partners & credentials</p>
             </div>
             <div className="flex flex-wrap gap-3">
@@ -211,7 +210,6 @@ export default function AboutUsPage() {
         <div className="mb-14">
           <div style={{ ...lg1, padding: '44px 48px' }}>
             <div className="flex items-center gap-2 mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78]" />
               <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#e89a78]">Our mission</p>
             </div>
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
@@ -228,7 +226,6 @@ export default function AboutUsPage() {
         {/* ── What we do ── */}
         <div className="mb-14">
           <div className="flex items-center gap-2.5 mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78]" />
             <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#0a0e1a]/35">What we do</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -259,7 +256,6 @@ export default function AboutUsPage() {
         {/* ── How we work ── */}
         <div className="mb-14">
           <div className="flex items-center gap-2.5 mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78]" />
             <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#0a0e1a]/35">How we work</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -278,7 +274,6 @@ export default function AboutUsPage() {
           <div style={lgDark} className="px-8 py-12 sm:px-12 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78]" />
                 <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#e89a78]/80">Ready to start?</p>
               </div>
               <h2 className="text-2xl sm:text-3xl font-bold text-white leading-snug max-w-sm">

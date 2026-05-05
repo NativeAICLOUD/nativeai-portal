@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { motion } from 'framer-motion';
 import { Link } from 'react-transition-progress/next';
@@ -24,7 +24,6 @@ export default function HowItWorksSection() {
             viewport={{ once: true, margin: '-60px' }}
           >
             <div className="flex items-center gap-2 mb-5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78]" />
               <p className="text-xs uppercase tracking-[0.18em] text-white/35 font-medium">How it works</p>
             </div>
 

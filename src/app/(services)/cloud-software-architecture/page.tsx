@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { motion } from 'framer-motion';
@@ -101,7 +101,6 @@ export default function CloudSoftwareArchitecturePage() {
             {/* Left */}
             <motion.div className="flex-1 min-w-0" initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, ease: [0.25,0.46,0.45,0.94] }}>
               <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-10" style={lg}>
-                <span className="w-1.5 h-1.5 rounded-full bg-sky-500 shrink-0" />
                 <span className="text-[11px] font-semibold text-sky-700 tracking-widest uppercase">Cloud Architecture</span>
               </div>
 
@@ -215,7 +214,6 @@ export default function CloudSoftwareArchitecturePage() {
         ]} />
         <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-28">
           <div className="flex items-center gap-2 mb-5">
-            <span className="w-1.5 h-1.5 rounded-full bg-sky-500 shrink-0" />
             <p className="text-xs uppercase tracking-wider text-sky-600 font-semibold">What we do</p>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#0c1445] leading-[1.05] tracking-[-0.035em] mb-14 max-w-2xl">
@@ -254,7 +252,6 @@ export default function CloudSoftwareArchitecturePage() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
             <div>
               <div className="flex items-center gap-2 mb-5">
-                <span className="w-1.5 h-1.5 rounded-full bg-sky-500 shrink-0" />
                 <p className="text-xs uppercase tracking-wider text-sky-600 font-semibold">Architecture services</p>
               </div>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#0c1445] leading-[1.05] tracking-[-0.035em] max-w-xl">
@@ -294,7 +291,6 @@ export default function CloudSoftwareArchitecturePage() {
         ]} />
         <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-28">
           <div className="flex items-center gap-2 mb-5">
-            <span className="w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0" />
             <p className="text-xs uppercase tracking-wider text-sky-400 font-semibold">Why architecture matters</p>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.05] tracking-[-0.035em] mb-14">

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React from 'react';
 import Image from 'next/image';
@@ -109,7 +109,6 @@ const HomePartner = () => {
         {/* Headline */}
         <div className="relative pt-16 pb-8 text-center px-4">
           <div className="inline-flex items-center gap-2 bg-[#e89a78]/10 border border-[#e89a78]/25 rounded-full px-4 py-1.5 mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
             <p className="text-xs uppercase tracking-widest text-[#e89a78] font-semibold">
               Start your AI &amp; cloud journey
             </p>
@@ -203,7 +202,6 @@ const HomePartner = () => {
         >
           <div>
             <div className="inline-flex items-center gap-2 mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
               <p className="text-xs uppercase tracking-widest text-[#6b6b6b] font-semibold">Certifications</p>
             </div>
             <h2 className="text-2xl sm:text-3.5xl lg:text-4xl font-bold text-[#0a0e1a] leading-tight">
@@ -226,7 +224,6 @@ const HomePartner = () => {
           >
             <div className="absolute top-0 right-0 w-48 h-48 bg-[radial-gradient(circle,_rgba(232,154,120,0.08)_0%,_transparent_70%)] pointer-events-none" />
             <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78]" />
               <span className="text-xs uppercase tracking-widest text-[#e89a78] font-semibold">Microsoft Azure</span>
             </div>
             <Image
@@ -256,7 +253,6 @@ const HomePartner = () => {
           >
             <div className="absolute top-0 right-0 w-48 h-48 bg-[radial-gradient(circle,_rgba(232,154,120,0.08)_0%,_transparent_70%)] pointer-events-none" />
             <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78]" />
               <span className="text-xs uppercase tracking-widest text-[#e89a78] font-semibold">Amazon Web Services</span>
             </div>
             <Image

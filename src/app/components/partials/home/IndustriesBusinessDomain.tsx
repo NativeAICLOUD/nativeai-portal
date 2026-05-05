@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
@@ -127,7 +127,6 @@ export default function IndustriesBusinessDomain() {
           viewport={{ once: true, margin: '-80px' }}
         >
           <div className="flex items-center gap-2 mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
             <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">Industries we serve</p>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-[#0a0e1a] leading-tight max-w-2xl">

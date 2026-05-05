@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { motion } from "framer-motion";
@@ -148,7 +148,6 @@ export default function CustomDevelopmentPage() {
                   className="inline-flex items-center gap-2.5 rounded-full px-4 py-1.5 mb-8"
                   style={{ background: "rgba(232,154,120,0.12)", border: "1px solid rgba(232,154,120,0.30)", backdropFilter: "blur(20px) saturate(160%)", WebkitBackdropFilter: "blur(20px) saturate(160%)" }}
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
                   <span className="text-[11px] font-bold text-[#c2410c] tracking-widest uppercase" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
                     Custom Development
                   </span>
@@ -319,7 +318,6 @@ export default function CustomDevelopmentPage() {
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
               <div>
                 <div className="flex items-center gap-2 mb-5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
                   <p className="text-xs uppercase tracking-wider text-[#6b7280] font-medium">What we deliver</p>
                 </div>
                 <h2
@@ -427,7 +425,6 @@ export default function CustomDevelopmentPage() {
           ]} />
           <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-24">
             <div className="flex items-center gap-2 mb-10">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
               <p className="text-xs uppercase tracking-wider text-[#6b7280] font-medium">How we work</p>
             </div>
             <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
@@ -462,7 +459,6 @@ export default function CustomDevelopmentPage() {
 
           <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-28">
             <div className="flex items-center gap-2 mb-5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
               <p className="text-xs uppercase tracking-wider text-[#6b7280] font-medium">Common questions</p>
             </div>
             <h2
