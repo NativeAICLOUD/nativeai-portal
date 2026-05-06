@@ -23,6 +23,7 @@ body {
   max-width: 100%;
 }
 
+
 ::selection {
   background: #fcd34d;
   color: #0a0e1a;

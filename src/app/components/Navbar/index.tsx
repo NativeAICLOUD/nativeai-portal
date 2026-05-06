@@ -130,7 +130,13 @@ function Navbar() {
     >
 
       {/* ── Full-width nav bar ── */}
-      <nav className={`w-full border-b border-white/[0.08] flex items-center justify-between px-5 sm:px-8 h-[76px] sm:h-[72px] shadow-[0_4px_32px_rgba(0,0,0,0.35)] transition-colors duration-300 ${pathname === '/schedule-call' ? 'bg-[#000000]' : 'bg-[#0a0e1a]'}`}>
+      <nav className={`w-full flex items-center justify-between px-5 sm:px-8 h-[76px] sm:h-[72px] transition-colors duration-300 ${
+        pathname === '/'
+          ? 'bg-transparent shadow-none'
+          : pathname === '/schedule-call'
+          ? 'bg-[#000000] border-b border-white/[0.08] shadow-[0_4px_32px_rgba(0,0,0,0.35)]'
+          : 'bg-[#0a0e1a] border-b border-white/[0.08] shadow-[0_4px_32px_rgba(0,0,0,0.35)]'
+      }`}>
         <div className="max-w-7xl mx-auto w-full flex items-center justify-between">
 
         {/* Logo */}
@@ -139,7 +145,7 @@ function Navbar() {
           style={{ background: 'linear-gradient(135deg, rgba(232,154,120,0.18) 0%, rgba(232,154,120,0.06) 60%, transparent 100%)' }}
           onClick={() => setSlideMenu(false)}
         >
-          <Logo isInvert className="!h-13" />
+          <Logo isInvert={pathname !== '/'} className="!h-13" />
         </div>
 
         {/* Desktop nav links */}
@@ -172,7 +178,11 @@ function Navbar() {
                   onClick={() => setSlideMenu(false)}
                   style={MONO}
                   className={`relative flex items-center gap-1 px-3 py-1.5 rounded-lg text-base font-medium transition-colors duration-150 ${
-                    pathname === item.url
+                    pathname === '/'
+                      ? pathname === item.url
+                        ? 'text-[#0a0e1a]'
+                        : 'text-[#0a0e1a]/55 hover:text-[#0a0e1a] hover:bg-black/[0.05]'
+                      : pathname === item.url
                       ? 'text-white'
                       : 'text-white/55 hover:text-white hover:bg-white/[0.06]'
                   }`}
@@ -200,7 +210,7 @@ function Navbar() {
         <div className="flex items-center gap-3 shrink-0">
           <button
             style={MONO}
-            className="hidden lg:flex items-center gap-1.5 text-white/40 hover:text-white/80 text-sm transition-colors"
+            className={`hidden lg:flex items-center gap-1.5 text-sm transition-colors ${pathname === '/' ? 'text-[#0a0e1a]/40 hover:text-[#0a0e1a]/80' : 'text-white/40 hover:text-white/80'}`}
           >
             <svg width={15} height={15}>
               <use href="/icons/all-icons.svg#icon-login" />
@@ -210,7 +220,7 @@ function Navbar() {
 
           {/* Hamburger */}
           <motion.button
-            className="w-11 h-11 rounded-full bg-white/[0.07] hover:bg-white/[0.12] lg:hidden flex flex-col items-center justify-center gap-[6px] transition-colors px-3 relative overflow-hidden"
+            className={`w-11 h-11 rounded-full lg:hidden flex flex-col items-center justify-center gap-[6px] transition-colors px-3 relative overflow-hidden ${pathname === '/' ? 'bg-black/[0.07] hover:bg-black/[0.12]' : 'bg-white/[0.07] hover:bg-white/[0.12]'}`}
             whileTap={{ scale: 0.82 }}
             transition={{ type: 'spring', stiffness: 520, damping: 22 }}
             onClick={() => {
@@ -234,13 +244,13 @@ function Navbar() {
               )}
             </AnimatePresence>
             {openSide ? (
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="text-white relative z-[1]">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className={`relative z-[1] ${pathname === '/' ? 'text-[#0a0e1a]' : 'text-white'}`}>
                 <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/>
               </svg>
             ) : (
               <>
-                <span className="block h-[1.5px] w-full rounded-full bg-white transition-all relative z-[1]" />
-                <span className="block h-[1.5px] w-[65%] rounded-full bg-white/60 transition-all self-start relative z-[1]" />
+                <span className={`block h-[1.5px] w-full rounded-full transition-all relative z-[1] ${pathname === '/' ? 'bg-[#0a0e1a]' : 'bg-white'}`} />
+                <span className={`block h-[1.5px] w-[65%] rounded-full transition-all self-start relative z-[1] ${pathname === '/' ? 'bg-[#0a0e1a]/60' : 'bg-white/60'}`} />
               </>
             )}
           </motion.button>
