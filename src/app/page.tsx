@@ -6,6 +6,7 @@ import HomeLowerSection from "./components/partials/home/HomeLowerSection";
 import HomePartner from "./components/partials/home/homepartner";
 import IndustriesBusinessDomain from "./components/partials/home/IndustriesBusinessDomain";
 import MissionSection from "./components/partials/home/MissionSection";
+import PracticalSolutionsSection from "./components/partials/home/PracticalSolutionsSection";
 import ScrollCardsSection from "./components/partials/home/ScrollCardsSection";
 import TechStackSection from "./components/partials/home/TechStackSection";
 
@@ -26,8 +27,11 @@ export default function Home() {
       {/* What We Deliver — pinned scroll card experience */}
       <ServicesScrollSection />
 
-      {/* AI Services — Custom Dev, Cloud, AI Agents & RAG */}
+      {/* AI Services — 3 core services */}
       <AIServicesSection />
+
+      {/* Practical AI & Cloud solutions */}
+      <PracticalSolutionsSection />
 
       {/* Mission statement */}
       <MissionSection />

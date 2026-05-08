@@ -10,7 +10,7 @@ const tags = ['AI Agents', 'LLMs', 'Azure & AWS'];
 
 function HomeHeader() {
   return (
-    <main className="relative overflow-hidden min-h-screen flex flex-col justify-center pt-24 pb-16">
+    <main className="relative overflow-hidden min-h-screen flex flex-col justify-center pt-[80px] pb-6">
 
       {/* ── Page backgrounds ── */}
       <div className="absolute w-full h-full z-[-1] left-0 top-0 after:absolute after:bottom-0 after:bg-main-gradient after:w-full after:h-1/5">
@@ -33,12 +33,12 @@ function HomeHeader() {
             overflow: 'hidden',
             position: 'relative',
             border: '1px solid rgba(255,255,255,0.65)',
-            minHeight: 'calc(100vh - 120px)',
+            minHeight: 'calc(100vh - 100px)',
           }}
         >
 
           {/* card inner layout */}
-          <div className="relative z-[2] flex items-center gap-0 h-full" style={{ minHeight: 'calc(100vh - 120px)' }}>
+          <div className="relative z-[2] flex items-center gap-0 h-full" style={{ minHeight: 'calc(100vh - 100px)' }}>
 
             {/* Left — text content */}
             <div className="flex-1 py-20 px-16 xl:py-24 xl:px-20 flex flex-col justify-center min-w-0">

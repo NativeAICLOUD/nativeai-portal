@@ -21,6 +21,7 @@ const montserrat = Montserrat({
   variable: '--font-montserrat'
 })
 
+
 export const metadata = seoConfig;
 
 export const viewport: Viewport = {

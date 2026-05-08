@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import CoomingSoon from '../ui/CoomingSoon';
 import Logo from '../ui/Logo';
+import { NavMenuItemCard, NavMenuItemDisabled } from './NavMenuItem';
 import {
   Code2, Palette, CloudCog, CloudUpload,
   Bot, Database, Boxes, Workflow,
@@ -23,33 +24,42 @@ type Pages = {
   desc?: string;
   soon?: true;
   icon?: LucideIcon;
+  color?: string;
   children?: Pages[];
 };
+
+const PALETTE = {
+  blue:   '#5B7CFA',
+  green:  '#59C28A',
+  purple: '#9B6BFF',
+  orange: '#E59B47',
+  teal:   '#46B5B0',
+} as const;
 
 const pages: Pages[] = [
   {
     url: Constants.PAGES.SOLUTIONS, title: 'Solutions', children: [
       {
         url: Constants.PAGES.SOLUTIONS, title: 'Services', children: [
-          { url: '/services/custom-development',            title: 'Custom Development',      desc: 'Tailored software for your workflows',  icon: Code2        },
-          { url: '/services/design',                        title: 'Design',                  desc: 'Interfaces your users will love',        icon: Palette      },
-          { url: Constants.PAGES.CLOUD_SOFTWARE_ARCHITECTURE, title: 'Cloud Architecture',   desc: 'Scalable infrastructure design',         icon: CloudCog     },
-          { url: Constants.PAGES.MIGRATE_TO_AZURE,          title: 'Migrate to Azure',        desc: 'Low-risk migration to the cloud',        icon: CloudUpload  },
+          { url: '/services/custom-development',               title: 'Custom Development', desc: 'Tailored software for your workflows',  icon: Code2,       color: PALETTE.blue   },
+          { url: '/services/design',                           title: 'Design',             desc: 'Interfaces your users will love',        icon: Palette,     color: PALETTE.purple },
+          { url: Constants.PAGES.CLOUD_SOFTWARE_ARCHITECTURE,  title: 'Cloud Architecture', desc: 'Scalable infrastructure design',         icon: CloudCog,    color: PALETTE.teal   },
+          { url: Constants.PAGES.MIGRATE_TO_AZURE,             title: 'Migrate to Azure',   desc: 'Low-risk migration to the cloud',        icon: CloudUpload, color: PALETTE.green  },
         ],
       },
       {
         url: '/services/ai-agents-rag', title: 'AI & Data', children: [
-          { url: '/services/ai-agents-rag',                 title: 'AI Agents & RAG',         desc: 'Intelligent automation & LLMs',          icon: Bot          },
-          { url: Constants.PAGES.DATA_LIFECYCLE_MANAGEMENT, title: 'Data Lifecycle',          desc: 'Raw data to live dashboards',            icon: Database     },
-          { url: Constants.PAGES.CLOUD_NATIVE_SD,           title: 'Cloud Native Dev',        desc: 'Kubernetes & microservices',             icon: Boxes        },
-          { url: Constants.PAGES.DEVOPS_ON_AZURE,           title: 'DevOps on Azure',         desc: 'CI/CD & infrastructure-as-code',         icon: Workflow     },
+          { url: '/services/ai-agents-rag',                    title: 'AI Agents & RAG',   desc: 'Intelligent automation & LLMs',          icon: Bot,         color: PALETTE.teal   },
+          { url: Constants.PAGES.DATA_LIFECYCLE_MANAGEMENT,    title: 'Data Lifecycle',    desc: 'Raw data to live dashboards',            icon: Database,    color: PALETTE.orange },
+          { url: Constants.PAGES.CLOUD_NATIVE_SD,              title: 'Cloud Native Dev',  desc: 'Kubernetes & microservices',             icon: Boxes,       color: PALETTE.blue   },
+          { url: Constants.PAGES.DEVOPS_ON_AZURE,              title: 'DevOps on Azure',   desc: 'CI/CD & infrastructure-as-code',         icon: Workflow,    color: PALETTE.green  },
         ],
       },
       {
         url: Constants.PAGES.ABOUT_US, title: 'Innovate', children: [
-          { url: Constants.PAGES.CASE_STUDIES,              title: 'Case Studies',            desc: 'How we deliver for clients',             icon: BookOpen     },
-          { url: Constants.PAGES.GITHUB_ACCELERATOR,        title: 'GitHub Accelerator',      desc: 'Copilot, migration & DevSecOps',         icon: GitBranch    },
-          { url: Constants.PAGES.AI_ACCELERATOR,            title: 'AI Accelerator',          desc: 'Azure AI from use case to production',   icon: Sparkles     },
+          { url: Constants.PAGES.CASE_STUDIES,                 title: 'Case Studies',      desc: 'How we deliver for clients',             icon: BookOpen,    color: PALETTE.orange },
+          { url: Constants.PAGES.GITHUB_ACCELERATOR,           title: 'GitHub Accelerator', desc: 'Copilot, migration & DevSecOps',        icon: GitBranch,   color: PALETTE.purple },
+          { url: Constants.PAGES.AI_ACCELERATOR,               title: 'AI Accelerator',    desc: 'Azure AI from use case to production',   icon: Sparkles,    color: PALETTE.blue   },
         ],
       },
     ],
@@ -58,12 +68,12 @@ const pages: Pages[] = [
     url: Constants.PAGES.SOLUTIONS, title: 'Industries', children: [
       {
         url: Constants.PAGES.SOLUTIONS, title: 'Industries', children: [
-          { url: Constants.PAGES.AIRLINE_BOOKING,        title: 'Travel & Aviation',   desc: 'GDS booking & airline platforms',     icon: Plane        },
-          { url: Constants.PAGES.AI_LEGAL_WORKSPACE,     title: 'Legal & Compliance',  desc: 'AI for law firms & legal teams',      icon: Scale        },
-          { url: Constants.PAGES.PAYMENT_AUTOMATION,     title: 'Finance & Banking',   desc: 'Payments, billing & reconciliation',  icon: Landmark     },
-          { url: Constants.PAGES.SOLUTIONS,              title: 'Healthcare',          desc: 'Secure data & clinical workflows',    icon: HeartPulse   },
-          { url: Constants.PAGES.SOLUTIONS,              title: 'Retail & E-commerce', desc: 'Scalable storefronts & logistics',    icon: ShoppingBag  },
-          { url: Constants.PAGES.SOLUTIONS,              title: 'Manufacturing',       desc: 'IoT, automation & supply chain',      icon: Factory      },
+          { url: Constants.PAGES.AIRLINE_BOOKING,    title: 'Travel & Aviation',   desc: 'GDS booking & airline platforms',     icon: Plane,       color: PALETTE.blue   },
+          { url: Constants.PAGES.AI_LEGAL_WORKSPACE, title: 'Legal & Compliance',  desc: 'AI for law firms & legal teams',      icon: Scale,       color: PALETTE.purple },
+          { url: Constants.PAGES.PAYMENT_AUTOMATION, title: 'Finance & Banking',   desc: 'Payments, billing & reconciliation',  icon: Landmark,    color: PALETTE.green  },
+          { url: Constants.PAGES.SOLUTIONS,          title: 'Healthcare',          desc: 'Secure data & clinical workflows',    icon: HeartPulse,  color: PALETTE.orange },
+          { url: Constants.PAGES.SOLUTIONS,          title: 'Retail & E-commerce', desc: 'Scalable storefronts & logistics',    icon: ShoppingBag, color: PALETTE.teal   },
+          { url: Constants.PAGES.SOLUTIONS,          title: 'Manufacturing',       desc: 'IoT, automation & supply chain',      icon: Factory,     color: PALETTE.blue   },
         ],
       },
     ],
@@ -90,15 +100,15 @@ function Navbar() {
   const lastScrollY = useRef(0);
   const isScrolling = useRef(false);
 
-  const navH = 92;
+  const navH = 72;
 
   useEffect(() => {
     const onScroll = () => {
       const currentY = window.scrollY;
       const diff = currentY - lastScrollY.current;
+      if (Math.abs(diff) > 2) setSlideMenu(false);
       if (diff > 4 && currentY > 60) {
         setNavHidden(true);
-        setSlideMenu(false);
       } else if (diff < -4 || currentY < 60) {
         setNavHidden(false);
       }
@@ -111,6 +121,12 @@ function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    setSlideMenu(false);
+    setOpenSide(false);
+    setExpanded(null);
+  }, [pathname]);
+
   const openMenu = (title = '') => {
     if (isScrolling.current) return;
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -119,7 +135,7 @@ function Navbar() {
   };
 
   const closeMenu = () => {
-    closeTimer.current = setTimeout(() => setSlideMenu(false), 120);
+    closeTimer.current = setTimeout(() => setSlideMenu(false), 150);
   };
 
   return (
@@ -181,10 +197,10 @@ function Navbar() {
                     pathname === '/'
                       ? pathname === item.url
                         ? 'text-[#0a0e1a]'
-                        : 'text-[#0a0e1a]/55 hover:text-[#0a0e1a] hover:bg-black/[0.05]'
+                        : 'text-[#0a0e1a]/70 hover:text-[#0a0e1a] hover:bg-black/[0.05]'
                       : pathname === item.url
                       ? 'text-white'
-                      : 'text-white/55 hover:text-white hover:bg-white/[0.06]'
+                      : 'text-white/70 hover:text-white hover:bg-white/[0.06]'
                   }`}
                 >
                   {item.title}
@@ -210,7 +226,7 @@ function Navbar() {
         <div className="flex items-center gap-3 shrink-0">
           <button
             style={MONO}
-            className={`hidden lg:flex items-center gap-1.5 text-sm transition-colors ${pathname === '/' ? 'text-[#0a0e1a]/40 hover:text-[#0a0e1a]/80' : 'text-white/40 hover:text-white/80'}`}
+            className={`hidden lg:flex items-center gap-1.5 text-sm transition-colors ${pathname === '/' ? 'text-[#0a0e1a]/60 hover:text-[#0a0e1a]/90' : 'text-white/60 hover:text-white/90'}`}
           >
             <svg width={15} height={15}>
               <use href="/icons/all-icons.svg#icon-login" />
@@ -258,8 +274,10 @@ function Navbar() {
         </div>
       </nav>
 
-      {/* ── Mega menu dropdown ── */}
-      <AnimatePresence>
+    </header>
+
+    {/* ── Mega menu dropdown ── */}
+    <AnimatePresence>
         {slideMenu && (
           <>
             {/* Floating centered card */}
@@ -287,29 +305,20 @@ function Navbar() {
               >
                 {activeNav === 'Industries' ? (
                   <>
-                    {/* Industries grid — 2 cols */}
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-8">
-                      {pages.find(p => p.title === 'Industries')?.children?.[0]?.children?.map((item, j) => {
-                        const Icon = item.icon;
-                        return (
-                          <Link
-                            key={j}
-                            href={item.url}
-                            onClick={() => setSlideMenu(false)}
-                            className="group flex items-center gap-3 px-4 py-3 rounded-[12px] hover:bg-black/[0.05] transition-colors duration-150"
-                          >
-                            {Icon && (
-                              <span className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style={{ background: 'rgba(232,154,120,0.10)', border: '1px solid rgba(232,154,120,0.15)' }}>
-                                <Icon size={18} strokeWidth={1.5} className="text-[#e89a78]" />
-                              </span>
-                            )}
-                            <div className="flex flex-col min-w-0">
-                              <span className="text-[14px] font-semibold leading-snug text-[#0E0E12] group-hover:text-[#e89a78] transition-colors duration-150">{item.title}</span>
-                              {item.desc && <span className="text-[12px] leading-snug text-[#9A9A9A] truncate">{item.desc}</span>}
-                            </div>
-                          </Link>
-                        );
-                      })}
+                    {/* Industries grid — 3 cols */}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-1 p-6">
+                      {pages.find(p => p.title === 'Industries')?.children?.[0]?.children?.map((item, j) => (
+                        <NavMenuItemCard
+                          key={j}
+                          href={item.url}
+                          title={item.title}
+                          desc={item.desc}
+                          icon={item.icon!}
+                          color={item.color ?? PALETTE.blue}
+                          onClick={() => setSlideMenu(false)}
+                          compact
+                        />
+                      ))}
                     </div>
                     <div className="px-8 py-4 border-t border-black/[0.07] flex items-center justify-between" style={{ background: "rgba(255,255,255,0.40)" }}>
                       <p className="text-[13px] text-[#9A9A9A]">Need a tailored solution?</p>
@@ -325,34 +334,31 @@ function Navbar() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-10 pb-8">
                       {pages[0].children?.map((col, i) => (
                         <div key={i} className="flex flex-col">
-                          <p className="text-[11px] font-medium uppercase tracking-[0.1em] text-[#9A9A9A] mb-5">{col.title}</p>
-                          <ul className="flex flex-col gap-5">
-                            {col.children?.map((item, j) => {
-                              const Icon = item.icon;
-                              return (
-                                <li key={j}>
-                                  {item.soon ? (
-                                    <CoomingSoon>
-                                      <span className="flex items-start gap-3 opacity-35 cursor-default select-none">
-                                        {Icon && <Icon size={20} strokeWidth={1.5} className="shrink-0 mt-[2px] text-[#0E0E12]" />}
-                                        <div className="flex flex-col gap-[4px]">
-                                          <span className="text-[14px] font-semibold leading-snug text-[#0E0E12]">{item.title}</span>
-                                          {item.desc && <span className="text-[12.5px] leading-snug text-[#6B6B6B] line-clamp-2">{item.desc}</span>}
-                                        </div>
-                                      </span>
-                                    </CoomingSoon>
-                                  ) : (
-                                    <Link href={item.url} onClick={() => setSlideMenu(false)} className="group flex items-start gap-3 px-2.5 py-2 -mx-2.5 rounded-[10px] hover:bg-black/[0.05] transition-colors duration-150">
-                                      {Icon && <Icon size={20} strokeWidth={1.5} className="shrink-0 mt-[2px] text-[#0E0E12] group-hover:text-[#e89a78] transition-colors duration-150" />}
-                                      <div className="flex flex-col gap-[4px] min-w-0">
-                                        <span className="text-[14px] font-semibold leading-snug text-[#0E0E12] group-hover:text-[#e89a78] transition-colors duration-150">{item.title}</span>
-                                        {item.desc && <span className="text-[12.5px] leading-snug text-[#6B6B6B] line-clamp-2">{item.desc}</span>}
-                                      </div>
-                                    </Link>
-                                  )}
-                                </li>
-                              );
-                            })}
+                          <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#9A9A9A] mb-4">{col.title}</p>
+                          <ul className="flex flex-col gap-1">
+                            {col.children?.map((item, j) => (
+                              <li key={j}>
+                                {item.soon ? (
+                                  <CoomingSoon>
+                                    <NavMenuItemDisabled
+                                      title={item.title}
+                                      desc={item.desc}
+                                      icon={item.icon!}
+                                      color={item.color ?? PALETTE.blue}
+                                    />
+                                  </CoomingSoon>
+                                ) : (
+                                  <NavMenuItemCard
+                                    href={item.url}
+                                    title={item.title}
+                                    desc={item.desc}
+                                    icon={item.icon!}
+                                    color={item.color ?? PALETTE.blue}
+                                    onClick={() => setSlideMenu(false)}
+                                  />
+                                )}
+                              </li>
+                            ))}
                           </ul>
                         </div>
                       ))}
@@ -382,9 +388,7 @@ function Navbar() {
             />
           </>
         )}
-      </AnimatePresence>
-
-    </header>
+    </AnimatePresence>
 
     {/* ── Mobile full-screen overlay ── */}
     <aside
@@ -498,12 +502,7 @@ function Navbar() {
                                         className="flex items-center gap-3 px-4 py-2.5 active:bg-white/[0.07] transition-colors"
                                       >
                                         {Icon && (
-                                          <span
-                                            className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-                                            style={{ background: 'rgba(232,154,120,0.12)', border: '1px solid rgba(232,154,120,0.15)' }}
-                                          >
-                                            <Icon size={14} strokeWidth={1.5} className="text-[#e89a78]" />
-                                          </span>
+                                          <Icon size={15} strokeWidth={1.5} className="shrink-0 text-white/40" />
                                         )}
                                         <div className="flex flex-col min-w-0 flex-1">
                                           <span className="text-sm font-medium text-white/80 leading-snug">{child.title}</span>
