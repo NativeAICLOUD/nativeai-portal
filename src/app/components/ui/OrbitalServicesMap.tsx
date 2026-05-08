@@ -64,9 +64,7 @@ export function OrbitalServicesMap() {
 
         {/* ── Blue dot — outer ring, 34 s ── */}
         <g>
-          {/* @ts-expect-error – animateMotion is valid SVG */}
           <animateMotion dur="34s" repeatCount="indefinite" begin="0s" rotate="0" calcMode="linear">
-            {/* @ts-expect-error – mpath is valid SVG */}
             <mpath href="#nc-mp-o" />
           </animateMotion>
           <circle r="18" fill="url(#nc-glow-blue)" />
@@ -75,9 +73,7 @@ export function OrbitalServicesMap() {
 
         {/* ── White dot — middle ring, 22 s ── */}
         <g>
-          {/* @ts-expect-error – animateMotion is valid SVG */}
           <animateMotion dur="22s" repeatCount="indefinite" begin="-7s" rotate="0" calcMode="linear">
-            {/* @ts-expect-error – mpath is valid SVG */}
             <mpath href="#nc-mp-m" />
           </animateMotion>
           <circle r="14" fill="url(#nc-glow-white)" />
@@ -86,9 +82,7 @@ export function OrbitalServicesMap() {
 
         {/* ── Coral dot — inner ring, 14 s ── */}
         <g>
-          {/* @ts-expect-error – animateMotion is valid SVG */}
           <animateMotion dur="14s" repeatCount="indefinite" begin="-4s" rotate="0" calcMode="linear">
-            {/* @ts-expect-error – mpath is valid SVG */}
             <mpath href="#nc-mp-i" />
           </animateMotion>
           <circle r="16" fill="url(#nc-glow-coral)" />
