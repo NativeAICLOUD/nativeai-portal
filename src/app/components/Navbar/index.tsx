@@ -15,6 +15,7 @@ import {
   Plane, Scale, Landmark, HeartPulse, ShoppingBag, Factory,
   BookOpen, GraduationCap, Library, Building2,
   GitBranch, Sparkles,
+  Users,
   LucideIcon,
 } from 'lucide-react';
 
@@ -60,6 +61,11 @@ const pages: Pages[] = [
           { url: Constants.PAGES.CASE_STUDIES,                 title: 'Case Studies',      desc: 'How we deliver for clients',             icon: BookOpen,    color: PALETTE.orange },
           { url: Constants.PAGES.GITHUB_ACCELERATOR,           title: 'GitHub Accelerator', desc: 'Copilot, migration & DevSecOps',        icon: GitBranch,   color: PALETTE.purple },
           { url: Constants.PAGES.AI_ACCELERATOR,               title: 'AI Accelerator',    desc: 'Azure AI from use case to production',   icon: Sparkles,    color: PALETTE.blue   },
+        ],
+      },
+      {
+        url: Constants.PAGES.NEARSHORE_TEAMS, title: 'Nearshore', children: [
+          { url: Constants.PAGES.NEARSHORE_TEAMS,              title: 'Dedicated Dev Teams',    desc: 'Senior engineers in your workflow',       icon: Users,       color: PALETTE.blue   },
         ],
       },
     ],
@@ -331,7 +337,7 @@ function Navbar() {
                 ) : (
                   <>
                     {/* Solutions grid — 3 cols */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-10 pb-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-8 pb-6">
                       {pages[0].children?.map((col, i) => (
                         <div key={i} className="flex flex-col">
                           <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#9A9A9A] mb-4">{col.title}</p>
@@ -363,7 +369,7 @@ function Navbar() {
                         </div>
                       ))}
                     </div>
-                    <div className="px-10 py-5 border-t border-black/[0.07] flex items-center justify-between" style={{ background: "rgba(255,255,255,0.40)" }}>
+                    <div className="px-8 py-4 border-t border-black/[0.07] flex items-center justify-between" style={{ background: "rgba(255,255,255,0.40)" }}>
                       <p className="text-[13px] text-[#9A9A9A]">Not sure where to start?</p>
                       <Link href={Constants.PAGES.SCHEDULE_CALL} onClick={() => setSlideMenu(false)} className="inline-flex items-center gap-2 text-[13px] font-medium text-[#e89a78] hover:text-[#d4836a] transition-colors">
                         Schedule a free call

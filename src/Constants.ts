@@ -32,6 +32,7 @@ export const Constants = {
     SCHEDULE_CALL: '/schedule-call',
     CASE_STUDIES: '/case-studies',
     CERTIFICATIONS: '/certifications',
+    NEARSHORE_TEAMS: '/nearshore-teams',
     
     LOGIN: '/login',
     SIGN_UP: '/sign-up',

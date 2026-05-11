@@ -67,7 +67,8 @@ function Footer() {
     pathname.startsWith('/ai-legal-workspace') ||
     pathname.startsWith('/airline-booking') ||
     pathname.startsWith('/data-lifecycle-management') ||
-    pathname.startsWith('/payment-automation')
+    pathname.startsWith('/payment-automation') ||
+    pathname.startsWith('/nearshore-teams')
   ) return null;
 
   return (
