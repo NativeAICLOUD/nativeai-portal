@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import { useState } from 'react';
 import { Constants } from '@/Constants';
-import ServiceFooter from '@/app/components/partials/services/ServiceFooter';
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -691,8 +690,6 @@ export default function GitHubAcceleratorPage() {
           </div>
         </section>
 
-        {/* ── FOOTER CTA ── */}
-        <ServiceFooter />
 
       </div>
     </>

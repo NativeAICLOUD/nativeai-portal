@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-transition-progress/next';
 import { Constants } from '@/Constants';
-import ServiceFooter from '@/app/components/partials/services/ServiceFooter';
 
 const MONO: React.CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
 
@@ -340,7 +339,6 @@ export default function NearshoreTeamsPage() {
         </div>
       </main>
 
-      <ServiceFooter />
     </>
   );
 }

@@ -3,7 +3,6 @@
 import { Inter } from "next/font/google";
 import { Link } from "react-transition-progress/next";
 import { motion } from "framer-motion";
-import ServiceFooter from "@/app/components/partials/services/ServiceFooter";
 import ProcessTimeline from "@/app/components/partials/services/ProcessTimeline";
 
 const inter = Inter({
@@ -306,7 +305,6 @@ export default function DesignPage() {
         </div>
       </section>
 
-      <ServiceFooter />
     </div>
   );
 }

@@ -5,8 +5,6 @@ import { Link } from 'react-transition-progress/next';
 import { Constants } from "@/Constants";
 import { BGNativeWhite } from "@/ImagePath";
 import Logo from "../ui/Logo";
-import { usePathname } from "next/navigation";
-
 import MicrosoftPartner from "../../../../public/img/microsoft.png";
 import AWSPartner from "../../../../public/img/aws.png";
 
@@ -58,53 +56,42 @@ const socials = [
 type NavLink = { url: string; title: string };
 
 function Footer() {
-  const pathname = usePathname();
-  if (
-    pathname.startsWith('/services/') ||
-    pathname.startsWith('/accelerate-azure') ||
-    pathname.startsWith('/managed-services') ||
-    pathname.startsWith('/cloud-native-sd') ||
-    pathname.startsWith('/ai-legal-workspace') ||
-    pathname.startsWith('/airline-booking') ||
-    pathname.startsWith('/data-lifecycle-management') ||
-    pathname.startsWith('/payment-automation') ||
-    pathname.startsWith('/nearshore-teams')
-  ) return null;
-
   return (
     <footer
-      className="bg-[#f4ebe8]"
-      style={{
-        fontFamily: "'JetBrains Mono', monospace",
-        backgroundImage: "url('/img/noise-background.jpg')",
-        backgroundBlendMode: "multiply",
-        backgroundSize: "300px 300px",
-      }}
+      style={{ fontFamily: "'JetBrains Mono', monospace" }}
     >
       {/* ── CTA band ── */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 py-24 border-t border-black/8">
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-10">
-          <div>
-            <div className="flex items-center gap-2 mb-5">
-              <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">
-                Ready to ship?
-              </p>
+      <div
+        className="relative overflow-hidden"
+        style={{ background: 'linear-gradient(135deg, #080c1a 0%, #0d1225 40%, #111828 70%, #0a0e1a 100%)' }}
+      >
+        {/* Ambient glows */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div style={{ position: 'absolute', top: '-20%', left: '-5%',  width: 600, height: 600, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(232,154,120,0.13) 0%, transparent 65%)', filter: 'blur(1px)' }} />
+          <div style={{ position: 'absolute', bottom: '-30%', right: '5%', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(91,124,250,0.10) 0%, transparent 65%)' }} />
+          <div style={{ position: 'absolute', top: '10%', right: '20%', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(155,107,255,0.07) 0%, transparent 65%)' }} />
+          <div className="absolute inset-0" style={{ backgroundImage: "url('/img/noise-background.jpg')", backgroundSize: '280px 280px', opacity: 0.03 }} />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-24">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-10">
+            <div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-[1.1] max-w-lg">
+                Let&apos;s build something<br className="hidden sm:block" /> that actually lasts.
+              </h2>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0a0e1a] leading-[1.1] max-w-lg">
-              Let&apos;s build something that actually lasts.
-            </h2>
-          </div>
-          <div className="flex flex-col gap-3 shrink-0">
-            <a
-              href={`mailto:${Constants.MAIL}`}
-              className="inline-flex items-center gap-2 bg-[#0a0e1a] hover:bg-[#e89a78] text-white font-medium px-7 py-3.5 rounded-full transition-colors text-sm whitespace-nowrap"
-            >
-              {Constants.MAIL}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                <path d="M7 17L17 7" /><path d="M7 7h10v10" />
-              </svg>
-            </a>
-            <p className="text-[#6b6b6b] text-xs text-center">We reply within one business day.</p>
+            <div className="flex flex-col gap-3 shrink-0">
+              <a
+                href={`mailto:${Constants.MAIL}`}
+                className="inline-flex items-center gap-2 bg-[#e89a78] hover:bg-[#d4836a] active:scale-[0.98] text-white font-semibold px-7 py-3.5 rounded-full transition-all duration-200 text-sm whitespace-nowrap"
+              >
+                {Constants.MAIL}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <path d="M7 17L17 7" /><path d="M7 7h10v10" />
+                </svg>
+              </a>
+              <p className="text-white/30 text-xs text-center">We reply within one business day.</p>
+            </div>
           </div>
         </div>
       </div>

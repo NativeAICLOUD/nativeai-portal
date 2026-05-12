@@ -1,7 +1,5 @@
 ﻿'use client';
 
-import { Link } from 'react-transition-progress/next';
-import { Constants } from '@/Constants';
 
 const MONO: React.CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
 
@@ -115,12 +113,12 @@ export default function AboutUsPage() {
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {/* main warm glow — top right */}
         <div style={{ position: 'absolute', top: '-15%', right: '-10%', width: 820, height: 820, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(240,140,60,0.38) 0%, rgba(232,154,120,0.18) 45%, transparent 70%)', filter: 'blur(2px)' }} />
-        {/* secondary amber — mid left */}
-        <div style={{ position: 'absolute', top: '28%', left: '-18%', width: 680, height: 680, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(250,180,80,0.28) 0%, rgba(240,160,96,0.12) 50%, transparent 70%)' }} />
+        {/* secondary coral — mid left */}
+        <div style={{ position: 'absolute', top: '28%', left: '-18%', width: 680, height: 680, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(232,154,120,0.18) 0%, rgba(232,154,120,0.08) 50%, transparent 70%)' }} />
         {/* soft rose — bottom center */}
-        <div style={{ position: 'absolute', bottom: '-8%', left: '20%', width: 700, height: 700, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(255,160,100,0.22) 0%, rgba(240,120,80,0.10) 50%, transparent 70%)' }} />
+        <div style={{ position: 'absolute', bottom: '-8%', left: '20%', width: 700, height: 700, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(232,154,120,0.16) 0%, rgba(212,132,92,0.08) 50%, transparent 70%)' }} />
         {/* cool accent — far bottom right */}
-        <div style={{ position: 'absolute', bottom: '5%', right: '-5%', width: 460, height: 460, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(255,200,120,0.18) 0%, transparent 65%)' }} />
+        <div style={{ position: 'absolute', bottom: '5%', right: '-5%', width: 460, height: 460, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(232,154,120,0.12) 0%, transparent 65%)' }} />
         {/* noise texture */}
         <div className="absolute inset-0" style={{ backgroundImage: "url('/img/noise-background.jpg')", backgroundSize: '280px 280px', opacity: 0.04 }} />
       </div>
@@ -156,7 +154,7 @@ export default function AboutUsPage() {
               </span>
             </h1>
             <p className="lg:max-w-[360px] text-[14px] text-[#0a0e1a]/52 leading-relaxed lg:pb-2">
-              NativeCloud is an AI and cloud engineering studio. We help businesses move from "AI could be useful" to production systems that create real, measurable impact.
+              NativeCloud is an AI and cloud engineering company. We help businesses move from "AI could be useful" to production systems that create real, measurable impact.
             </p>
           </div>
         </div>
@@ -199,6 +197,63 @@ export default function AboutUsPage() {
                   <div>
                     <p className="text-[12.5px] font-semibold text-[#0a0e1a]">{p.label}</p>
                     <p className="text-[10.5px] text-[#0a0e1a]/40 mt-0.5">{p.sub}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── Achievements ── */}
+        <div className="mb-14">
+          <div style={lg1} className="px-6 sm:px-8 py-6">
+            <div className="flex items-center gap-2 mb-6">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#0a0e1a]/35">Achievements we&apos;re proud of</p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              {([
+                { label: 'Azure Expert MSP',                  sub: 'Microsoft designation',                logo: null,                           msLogo: true  },
+                { label: 'Cloud Native Computing Foundation', sub: 'CNCF member',                         logo: null,                           msLogo: false },
+                { label: 'Kubernetes KCSP',                   sub: 'Kubernetes Certified Service Provider', logo: '/img/partners/kubernetes.svg', msLogo: false },
+                { label: '5× Microsoft Solutions Partner',    sub: 'Multi-area certification',             logo: '/img/microsoft-partner.png',   msLogo: false },
+                { label: 'AWS Partner',                       sub: 'Amazon Web Services network',          logo: '/img/aws-partner.png',         msLogo: false },
+                { label: 'Microsoft Certified Developers AI', sub: 'AI-ready engineering team',            logo: '/img/microsoft.png',           msLogo: true  },
+              ] as { label: string; sub: string; logo: string | null; msLogo: boolean }[]).map((a) => (
+                <div
+                  key={a.label}
+                  className="flex items-center gap-3 px-4 py-3.5 rounded-2xl"
+                  style={lg2}
+                >
+                  <span className="flex items-center gap-1 shrink-0">
+                    {a.logo ? (
+                      <span className="w-14 h-14 rounded-2xl flex items-center justify-center overflow-hidden" style={{ background: 'rgba(255,255,255,0.70)', boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.90)' }}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={a.logo} alt={a.label} className="w-9 h-9 object-contain" />
+                      </span>
+                    ) : !a.msLogo ? (
+                      <span className="w-14 h-14 rounded-2xl flex items-center justify-center overflow-hidden" style={{ background: 'rgba(255,255,255,0.70)', boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.90)' }}>
+                        {/* CNCF official icon mark — source: cncf.io */}
+                        <svg width="34" height="34" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg">
+                          <path fill="#0086FF" d="M6.263 29.706H0v14.776h14.66v-6.354H6.263v-8.422zm31.524.069v8.353H29.39v6.354h14.66V29.706h-6.332l.069.069zM0 15.005h6.332l-.069-.069V6.584H14.66V.229H0v14.776zM29.39.229v6.355h8.397v8.421h6.263V.229H29.39z"/>
+                          <path fill="#93EAFF" d="M28.563 15.005l-8.397-8.421h9.223V.229H14.66v6.355l8.397 8.421h5.506zm-7.571 14.7h-5.506l6.951 6.977 1.377 1.445H14.66v6.354h14.73v-6.423l-4.198-4.149-4.2-4.204zm16.794-14.7v9.182l-1.445-1.452-6.952-6.977v5.594l4.13 4.149 4.198 4.211h6.332V15.006h-6.263zM14.66 23.358l-8.328-8.353H0v14.7h6.263v-9.182l8.397 8.429v-5.594z"/>
+                        </svg>
+                      </span>
+                    ) : null}
+                    {a.msLogo && (
+                      <span className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0" style={{ background: 'rgba(255,255,255,0.70)', boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.90)' }}>
+                        {/* Microsoft four-square logo */}
+                        <svg width="28" height="28" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="0"  y="0"  width="10" height="10" fill="#F25022"/>
+                          <rect x="11" y="0"  width="10" height="10" fill="#7FBA00"/>
+                          <rect x="0"  y="11" width="10" height="10" fill="#00A4EF"/>
+                          <rect x="11" y="11" width="10" height="10" fill="#FFB900"/>
+                        </svg>
+                      </span>
+                    )}
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-[12px] font-semibold text-[#0a0e1a] leading-snug">{a.label}</p>
+                    <p className="text-[10.5px] text-[#0a0e1a]/40 mt-0.5 leading-snug">{a.sub}</p>
                   </div>
                 </div>
               ))}
@@ -261,7 +316,7 @@ export default function AboutUsPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {values.map(v => (
               <div key={v.num} style={lg3} className="flex flex-col gap-4 px-6 py-6">
-                <span className="text-[32px] font-extrabold leading-none" style={{ color: 'rgba(240,140,60,0.28)' }}>{v.num}</span>
+                <span className="text-[32px] font-extrabold leading-none" style={{ color: 'rgba(232,154,120,0.35)' }}>{v.num}</span>
                 <h3 className="text-[14.5px] font-bold text-[#0a0e1a]">{v.title}</h3>
                 <p className="text-[12.5px] text-[#0a0e1a]/48 leading-relaxed">{v.body}</p>
               </div>
@@ -269,31 +324,77 @@ export default function AboutUsPage() {
           </div>
         </div>
 
-        {/* ── CTA ── */}
-        <div className="mb-24">
-          <div style={lgDark} className="px-8 py-12 sm:px-12 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-8">
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#e89a78]/80">Ready to start?</p>
+        {/* ── Get in touch ── */}
+        <div className="mb-14">
+          <div style={lgDark} className="px-8 py-12 sm:px-12">
+            <div className="flex items-center gap-2 mb-2">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#e89a78]/80">Get in touch</p>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white leading-snug mb-8">
+              Let's build something that actually works.
+            </h2>
+
+            <form
+              onSubmit={(e) => e.preventDefault()}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+            >
+              {/* Name */}
+              <div className="flex flex-col gap-1.5">
+                <label className="text-[10.5px] font-semibold uppercase tracking-[0.10em] text-white/40">Name</label>
+                <input
+                  type="text"
+                  placeholder="Your full name"
+                  className="w-full bg-white/5 border border-white/10 focus:border-[#e89a78]/50 outline-none rounded-2xl px-4 py-3 text-white text-sm placeholder:text-white/25 transition-colors"
+                />
               </div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-white leading-snug max-w-sm">
-                Let's build something that actually works.
-              </h2>
-            </div>
-            <div className="flex flex-col gap-3 shrink-0">
-              <Link
-                href={Constants.PAGES.SCHEDULE_CALL}
-                className="inline-flex items-center justify-center gap-2 bg-[#e89a78] hover:bg-[#d4836a] text-white font-semibold px-7 py-3.5 rounded-full transition-colors duration-200 text-sm whitespace-nowrap"
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0">
-                  <rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" />
-                </svg>
-                Schedule a free call
-              </Link>
-              <p className="text-white/28 text-xs text-center">We reply within one business day.</p>
-            </div>
+
+              {/* Email */}
+              <div className="flex flex-col gap-1.5">
+                <label className="text-[10.5px] font-semibold uppercase tracking-[0.10em] text-white/40">Email</label>
+                <input
+                  type="email"
+                  placeholder="your@email.com"
+                  className="w-full bg-white/5 border border-white/10 focus:border-[#e89a78]/50 outline-none rounded-2xl px-4 py-3 text-white text-sm placeholder:text-white/25 transition-colors"
+                />
+              </div>
+
+              {/* Subject */}
+              <div className="flex flex-col gap-1.5 sm:col-span-2">
+                <label className="text-[10.5px] font-semibold uppercase tracking-[0.10em] text-white/40">Subject</label>
+                <input
+                  type="text"
+                  placeholder="What are you working on?"
+                  className="w-full bg-white/5 border border-white/10 focus:border-[#e89a78]/50 outline-none rounded-2xl px-4 py-3 text-white text-sm placeholder:text-white/25 transition-colors"
+                />
+              </div>
+
+              {/* Message */}
+              <div className="flex flex-col gap-1.5 sm:col-span-2">
+                <label className="text-[10.5px] font-semibold uppercase tracking-[0.10em] text-white/40">Message</label>
+                <textarea
+                  rows={5}
+                  placeholder="Tell us about your project, timeline, or any questions…"
+                  className="w-full bg-white/5 border border-white/10 focus:border-[#e89a78]/50 outline-none rounded-2xl px-4 py-3 text-white text-sm placeholder:text-white/25 transition-colors resize-none"
+                />
+              </div>
+
+              {/* Submit row */}
+              <div className="sm:col-span-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-2">
+                <p className="text-white/28 text-xs">We reply within one business day.</p>
+                <button
+                  type="submit"
+                  className="inline-flex items-center justify-center gap-2 bg-[#e89a78] hover:bg-[#d4836a] active:scale-[0.97] text-white font-semibold px-8 py-3.5 rounded-full transition-all duration-200 text-sm whitespace-nowrap"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0">
+                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                  </svg>
+                  Send message
+                </button>
+              </div>
+            </form>
           </div>
         </div>
+
 
       </div>
     </main>

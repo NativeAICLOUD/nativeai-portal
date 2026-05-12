@@ -3,7 +3,6 @@
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { motion } from "framer-motion";
 import { Link } from "react-transition-progress/next";
-import ServiceFooter from "@/app/components/partials/services/ServiceFooter";
 import ProcessTimeline from "@/app/components/partials/services/ProcessTimeline";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -528,7 +527,6 @@ export default function CustomDevelopmentPage() {
           </div>
         </section>
 
-        <ServiceFooter />
       </div>
     </>
   );

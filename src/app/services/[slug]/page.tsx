@@ -3,7 +3,6 @@ import Image from "next/image";
 import { Link } from "react-transition-progress/next";
 import { services } from "@/lib/services-data";
 import ProcessTimeline from "@/app/components/partials/services/ProcessTimeline";
-import ServiceFooter from "@/app/components/partials/services/ServiceFooter";
 
 
 export function generateStaticParams() {
@@ -18,19 +17,13 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
   }
 
   return (
-    <div className="bg-[#f4ebe8] relative">
-
-      {/* Seamless noise overlay — fixed to viewport, no tiling/squares */}
-      <div
-        aria-hidden
-        className="fixed inset-0 pointer-events-none select-none"
-        style={{
-          zIndex: 0,
-          backgroundImage: "url('/img/noisy-background.png'), url('/img/noise-background.jpg')",
-          backgroundSize: "cover, cover",
-          mixBlendMode: "multiply",
-        }}
-      />
+    <div className="relative min-h-screen overflow-x-hidden" style={{ background: '#ffffff' }}>
+      {/* ambient glows */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div style={{ position: 'absolute', top: '-10%', right: '-5%', width: 700, height: 700, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(232,154,120,0.10) 0%, transparent 65%)' }} />
+        <div style={{ position: 'absolute', top: '40%', left: '-8%', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(91,124,250,0.06) 0%, transparent 65%)' }} />
+        <div className="absolute inset-0" style={{ backgroundImage: "url('/img/noise-background.jpg')", backgroundSize: '280px 280px', opacity: 0.03 }} />
+      </div>
 
       {/* Page content — sits above the overlay */}
       <div className="relative" style={{ zIndex: 1 }}>
@@ -42,20 +35,20 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold text-[#0a0e1a] leading-[1.05] max-w-2xl">
               {service.heroHeadline}
             </h1>
-            <p className="mt-8 text-lg text-[#0a0e1a] max-w-[560px] font-normal">
+            <p className="mt-8 text-lg text-[#0a0e1a]/70 max-w-[560px] font-normal">
               {service.heroBody}
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-3">
               <Link
                 href={service.ctaPrimary.href}
-                className="bg-[#0a0e1a] text-white px-7 py-3.5 rounded-full text-base font-medium whitespace-nowrap hover:opacity-90 transition-opacity"
+                className="bg-[#e89a78] hover:bg-[#d4836a] text-white px-7 py-3.5 rounded-full text-base font-medium whitespace-nowrap hover:opacity-90 transition-opacity"
               >
                 {service.heroCTALabel ?? service.ctaPrimary.label}
               </Link>
               <Link
                 href={service.ctaPrimary.href}
                 aria-label="Learn more"
-                className="w-12 h-12 rounded-full bg-[#0a0e1a] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity"
+                className="w-12 h-12 rounded-full bg-[#e89a78] hover:bg-[#d4836a] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <path d="M7 17L17 7" />
@@ -64,7 +57,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               </Link>
             </div>
             {service.heroTagline && (
-              <p className="mt-auto pt-20 text-base text-[#0a0e1a] font-normal">
+              <p className="mt-auto pt-20 text-base text-[#6b6b6b] font-normal">
                 {service.heroTagline}
               </p>
             )}
@@ -72,7 +65,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         </section>
       ) : (
         /* Image-based hero fallback (design, ai-agents-rag) */
-        <section className="relative overflow-hidden min-h-[70vh] flex items-center bg-[#f4ebe8]">
+        <section className="relative overflow-hidden min-h-[70vh] flex items-center">
           {service.heroImage && (
             <Image
               src={service.heroImage}
@@ -83,10 +76,10 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             />
           )}
           <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full pt-40 pb-16">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-[#1a1d2e] leading-none tracking-tight max-w-xl">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-[#0a0e1a] leading-none tracking-tight max-w-xl">
               {service.heroTitle}
             </h1>
-            <p className="text-[#1a1a1a] text-lg mt-5 max-w-md leading-relaxed">
+            <p className="text-[#0a0e1a]/70 text-lg mt-5 max-w-md leading-relaxed">
               {service.heroSubtitle}
             </p>
           </div>
@@ -98,7 +91,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         {/* Label */}
         <div className="flex items-center gap-2 mb-8">
           <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
-          <p className="text-xs uppercase tracking-wider text-[#1a1a1a] font-medium">
+          <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">
             {service.includedLabel}
           </p>
         </div>
@@ -110,7 +103,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           </p>
           <Link
             href={service.ctaPrimary.href}
-            className="shrink-0 self-start inline-flex items-center bg-[#0a0a0a] hover:bg-[#1a1d2e] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors whitespace-nowrap"
+            className="shrink-0 self-start inline-flex items-center bg-[#e89a78] hover:bg-[#d4836a] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors whitespace-nowrap"
           >
             {service.ctaPrimary.label}
           </Link>
@@ -123,7 +116,8 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           {service.features.map((feature, i) => (
             <div
               key={i}
-              className="relative rounded-xl overflow-hidden bg-[#ece8e0] p-8 min-h-[280px] flex flex-col gap-4"
+              className="relative rounded-xl overflow-hidden p-8 min-h-[280px] flex flex-col gap-4"
+              style={{ background: '#f0ede8', border: 'none' }}
             >
               {feature.decoration === "top-left" && (
                 // eslint-disable-next-line @next/next/no-img-element
@@ -151,7 +145,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               <h3 className="relative text-xl font-semibold text-[#1a1d2e] leading-snug z-10">
                 {feature.title}
               </h3>
-              <p className="relative text-[#1a1a1a] text-sm leading-relaxed z-10">
+              <p className="relative text-[#6b6b6b] text-sm leading-relaxed z-10">
                 {feature.body}
               </p>
             </div>
@@ -164,7 +158,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         {/* Label */}
         <div className="flex items-center gap-2 mb-10">
           <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
-          <p className="text-xs uppercase tracking-wider text-[#1a1a1a] font-medium">
+          <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">
             {service.howWeWorkLabel}
           </p>
         </div>
@@ -176,7 +170,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           </h2>
           <Link
             href={service.ctaSecondary.href}
-            className="shrink-0 self-start lg:self-end inline-flex items-center bg-[#0a0a0a] hover:bg-[#1a1d2e] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors whitespace-nowrap"
+            className="shrink-0 self-start lg:self-end inline-flex items-center bg-[#e89a78] hover:bg-[#d4836a] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors whitespace-nowrap"
           >
             {service.ctaSecondary.label}
           </Link>
@@ -188,7 +182,6 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         )}
       </section>
 
-      <ServiceFooter />
       </div> {/* end content wrapper */}
     </div>
   );

@@ -1,6 +1,5 @@
 ﻿import { Link } from "react-transition-progress/next";
 import ProcessTimeline from "@/app/components/partials/services/ProcessTimeline";
-import ServiceFooter from "@/app/components/partials/services/ServiceFooter";
 
 const features = [
   {
@@ -67,14 +66,14 @@ const processSteps = [
 export default function PaymentAutomationPage() {
   return (
     <>
-      <div
-        className="bg-[#f4ebe8] min-h-screen"
-        style={{
-          backgroundImage: "url('/img/noise-background.jpg')",
-          backgroundBlendMode: "multiply",
-          backgroundSize: "300px 300px",
-        }}
-      >
+      <div className="relative min-h-screen overflow-x-hidden" style={{ background: '#ffffff' }}>
+        {/* ambient glows */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div style={{ position: 'absolute', top: '-10%', right: '-5%', width: 700, height: 700, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(232,154,120,0.10) 0%, transparent 65%)' }} />
+          <div style={{ position: 'absolute', top: '40%', left: '-8%', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(91,124,250,0.06) 0%, transparent 65%)' }} />
+          <div className="absolute inset-0" style={{ backgroundImage: "url('/img/noise-background.jpg')", backgroundSize: '280px 280px', opacity: 0.03 }} />
+        </div>
+
         {/* Hero */}
         <section className="relative min-h-[85vh] overflow-hidden">
           <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-20 min-h-[85vh] flex flex-col">
@@ -84,7 +83,7 @@ export default function PaymentAutomationPage() {
             <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold text-[#0a0e1a] leading-[1.05] max-w-3xl">
               Payment Automation Platform
             </h1>
-            <p className="mt-8 text-lg text-[#0a0e1a] max-w-[560px] font-normal">
+            <p className="mt-8 text-lg text-[#0a0e1a]/70 max-w-[560px] font-normal">
               A SaaS platform that automates invoices, recurring payments, rent collection, payment reminders, overdue tracking, client balances, and monthly financial reporting — so your team stops chasing and starts growing.
             </p>
             <p className="mt-4 text-sm text-[#6b6b6b] max-w-[500px]">
@@ -93,14 +92,14 @@ export default function PaymentAutomationPage() {
             <div className="mt-10 flex flex-wrap items-center gap-3">
               <Link
                 href="/schedule-call"
-                className="bg-[#0a0e1a] text-white px-7 py-3.5 rounded-full text-base font-medium whitespace-nowrap hover:opacity-90 transition-opacity"
+                className="bg-[#e89a78] hover:bg-[#d4836a] text-white px-7 py-3.5 rounded-full text-base font-medium whitespace-nowrap hover:opacity-90 transition-opacity"
               >
                 Book a demo
               </Link>
               <Link
                 href="/schedule-call"
                 aria-label="Book a demo"
-                className="w-12 h-12 rounded-full bg-[#0a0e1a] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity"
+                className="w-12 h-12 rounded-full bg-[#e89a78] hover:bg-[#d4836a] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <path d="M7 17L17 7" />
@@ -108,7 +107,7 @@ export default function PaymentAutomationPage() {
                 </svg>
               </Link>
             </div>
-            <p className="mt-auto pt-20 text-base text-[#0a0e1a] font-normal">
+            <p className="mt-auto pt-20 text-base text-[#6b6b6b] font-normal">
               Recurring Billing, Rent Collection & Invoice Tracking — fully automated.
             </p>
           </div>
@@ -127,7 +126,7 @@ export default function PaymentAutomationPage() {
             </p>
             <Link
               href="/schedule-call"
-              className="shrink-0 self-start inline-flex items-center bg-[#0a0a0a] hover:bg-[#1a1d2e] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors whitespace-nowrap"
+              className="shrink-0 self-start inline-flex items-center bg-[#e89a78] hover:bg-[#d4836a] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors whitespace-nowrap"
             >
               See the platform
             </Link>
@@ -140,7 +139,8 @@ export default function PaymentAutomationPage() {
             {features.map((feature, i) => (
               <div
                 key={i}
-                className="relative rounded-xl overflow-hidden bg-[#ece8e0] p-8 min-h-[280px] flex flex-col gap-4"
+                className="relative rounded-xl overflow-hidden p-8 min-h-[280px] flex flex-col gap-4"
+                style={{ background: '#f0ede8', border: 'none' }}
               >
                 {feature.decoration === "top-left" && (
                   // eslint-disable-next-line @next/next/no-img-element
@@ -168,7 +168,7 @@ export default function PaymentAutomationPage() {
             </h2>
             <Link
               href="/schedule-call"
-              className="shrink-0 self-start lg:self-end inline-flex items-center bg-[#0a0a0a] hover:bg-[#1a1d2e] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors whitespace-nowrap"
+              className="shrink-0 self-start lg:self-end inline-flex items-center bg-[#e89a78] hover:bg-[#d4836a] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors whitespace-nowrap"
             >
               Book a demo
             </Link>
@@ -177,7 +177,6 @@ export default function PaymentAutomationPage() {
         </section>
       </div>
 
-      <ServiceFooter />
     </>
   );
 }

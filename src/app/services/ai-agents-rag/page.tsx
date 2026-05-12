@@ -1,5 +1,4 @@
 ﻿import { Link } from "react-transition-progress/next";
-import ServiceFooter from "@/app/components/partials/services/ServiceFooter";
 import ProcessTimeline from "@/app/components/partials/services/ProcessTimeline";
 import {
   Code2, Palette, CloudCog, CloudUpload,
@@ -476,7 +475,6 @@ export default function AIAgentsRAGPage() {
         </div>
       </section>
 
-      <ServiceFooter />
     </>
   );
 }
