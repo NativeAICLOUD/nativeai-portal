@@ -43,7 +43,7 @@ const lg: React.CSSProperties = {
   backdropFilter: "blur(40px) saturate(180%)",
   WebkitBackdropFilter: "blur(40px) saturate(180%)",
   border: "1px solid rgba(255,255,255,0.85)",
-  boxShadow: "0 4px 32px rgba(0,80,180,0.10), 0 1px 2px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.95)",
+  boxShadow: "0 4px 32px rgba(232,154,120,0.10), 0 1px 2px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.95)",
 };
 
 const lgCard: React.CSSProperties = {
@@ -51,15 +51,7 @@ const lgCard: React.CSSProperties = {
   backdropFilter: "blur(32px) saturate(160%)",
   WebkitBackdropFilter: "blur(32px) saturate(160%)",
   border: "1px solid rgba(255,255,255,0.80)",
-  boxShadow: "0 2px 20px rgba(0,80,180,0.07), inset 0 1px 0 rgba(255,255,255,0.92)",
-};
-
-const lgDark: React.CSSProperties = {
-  background: "rgba(255,255,255,0.07)",
-  backdropFilter: "blur(40px) saturate(160%)",
-  WebkitBackdropFilter: "blur(40px) saturate(160%)",
-  border: "1px solid rgba(255,255,255,0.18)",
-  boxShadow: "inset 0 1px 0 rgba(255,255,255,0.28)",
+  boxShadow: "0 2px 20px rgba(232,154,120,0.08), inset 0 1px 0 rgba(255,255,255,0.92)",
 };
 
 function Blobs({ items }: { items: { w: number; h: number; top?: string; left?: string; right?: string; bottom?: string; color: string; delay: string }[] }) {
@@ -98,12 +90,12 @@ export default function DevOpsOnAzurePage() {
         {/* ── Hero ── */}
         <section
           className="relative overflow-hidden min-h-[100svh] flex items-center"
-          style={{ background: "linear-gradient(145deg, #0d0a2e 0%, #1a1260 32%, #2e2ab8 65%, #4a46d0 100%)" }}
+          style={{ background: "linear-gradient(145deg, #fff5ee 0%, #fdf0e8 30%, #fef6f0 60%, #fff8f2 100%)" }}
         >
           <Blobs items={[
-            { w: 900, h: 900, top: "-25%",    left: "-20%",  color: "rgba(46,42,184,0.55)",  delay: "0s" },
-            { w: 700, h: 700, top: "15%",     right: "-12%", color: "rgba(74,70,208,0.38)",  delay: "1.2s" },
-            { w: 550, h: 550, bottom: "-18%", left: "32%",   color: "rgba(240,112,96,0.22)", delay: "2.4s" },
+            { w: 820, h: 820, top: "-15%",    right: "-10%", color: "rgba(240,140,60,0.30)",  delay: "0s" },
+            { w: 680, h: 680, top: "28%",     left: "-18%",  color: "rgba(232,154,120,0.18)", delay: "1.2s" },
+            { w: 500, h: 500, bottom: "-10%", left: "25%",   color: "rgba(212,132,92,0.16)",  delay: "2.4s" },
           ]} />
 
 <div className="relative w-full max-w-7xl mx-auto px-6 md:px-12 pt-36 pb-28">
@@ -118,21 +110,21 @@ export default function DevOpsOnAzurePage() {
               >
                 <div
                   className="inline-flex items-center gap-2.5 rounded-full px-4 py-1.5 mb-8"
-                  style={{ background: "rgba(74,70,208,0.20)", border: "1px solid rgba(140,136,240,0.40)", backdropFilter: "blur(20px) saturate(160%)", WebkitBackdropFilter: "blur(20px) saturate(160%)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.25)" }}
+                  style={{ ...lg, borderRadius: 999 }}
                 >
-                  <span className="text-[11px] font-bold text-white/80 tracking-widest uppercase" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                  <span className="text-[11px] font-bold tracking-widest uppercase" style={{ color: '#b86a30', fontFamily: "'JetBrains Mono', monospace" }}>
                     DevOps on Azure
                   </span>
                 </div>
 
                 <h1
-                  className="font-extrabold text-white mb-8 leading-[0.95]"
+                  className="font-extrabold text-[#0a0e1a] mb-8 leading-[0.95]"
                   style={{ fontSize: "clamp(52px, 7vw, 96px)", letterSpacing: "-0.045em" }}
                 >
                   Automate delivery.<br />
                   Eliminate risk.<br />
                   <span style={{
-                    background: "linear-gradient(90deg, #a5a0f8 0%, #c4c0ff 60%, #e0deff 100%)",
+                    background: "linear-gradient(90deg, #f0a060 0%, #e89a78 60%, #d4845c 100%)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",
@@ -142,7 +134,7 @@ export default function DevOpsOnAzurePage() {
                 </h1>
 
                 <motion.p
-                  className="text-white/70 text-lg leading-[1.75] max-w-[480px] mb-10"
+                  className="text-[#0a0e1a]/52 text-lg leading-[1.75] max-w-[480px] mb-10"
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
@@ -159,14 +151,14 @@ export default function DevOpsOnAzurePage() {
                   <Link
                     href="/schedule-call"
                     className="inline-flex items-center px-8 py-4 rounded-full text-base font-bold transition-all"
-                    style={{ background: "#ffffff", color: "#2e2ab8" }}
+                    style={{ background: "#e89a78", color: "#ffffff", boxShadow: "0 4px 16px rgba(232,154,120,0.35)" }}
                   >
                     Book a 15-min call
                   </Link>
                   <Link
                     href="/solutions"
                     className="inline-flex items-center px-8 py-4 rounded-full text-base font-semibold transition-all"
-                    style={{ background: "rgba(255,255,255,0.10)", border: "1px solid rgba(255,255,255,0.28)", backdropFilter: "blur(16px)", color: "rgba(255,255,255,0.85)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.30)" }}
+                    style={{ ...lg, color: '#b86a30', borderRadius: 999 }}
                   >
                     All solutions
                   </Link>
@@ -182,7 +174,7 @@ export default function DevOpsOnAzurePage() {
                     <span
                       key={tag}
                       className="text-[11px] font-bold px-3 py-1 rounded-full"
-                      style={{ background: "rgba(255,255,255,0.10)", border: "1px solid rgba(255,255,255,0.22)", color: "rgba(255,255,255,0.65)", fontFamily: "'JetBrains Mono', monospace", backdropFilter: "blur(8px)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.25)" }}
+                      style={{ color: '#b86a30', background: 'rgba(240,160,96,0.12)', border: '1px solid rgba(240,160,96,0.25)', fontFamily: "'JetBrains Mono', monospace" }}
                     >
                       {tag}
                     </span>
@@ -229,19 +221,19 @@ export default function DevOpsOnAzurePage() {
         {/* ── Capabilities — glass on pastel blobs ── */}
         <section
           className="relative overflow-hidden"
-          style={{ background: "linear-gradient(160deg, #f0f8ff 0%, #e8f4ff 40%, #f0fdf8 100%)" }}
+          style={{ background: "linear-gradient(160deg, #fdf0e8 0%, #fff5ee 40%, #fef6f0 100%)" }}
         >
           <Blobs items={[
-            { w: 900, h: 900, top: "-20%",    right: "-18%", color: "rgba(0,120,212,0.28)",  delay: "0s" },
-            { w: 700, h: 700, bottom: "-15%", left: "-12%",  color: "rgba(0,188,242,0.22)",  delay: "1.5s" },
-            { w: 500, h: 500, top: "35%",     left: "40%",   color: "rgba(124,58,237,0.14)", delay: "3s" },
+            { w: 900, h: 900, top: "-20%",    right: "-18%", color: "rgba(240,140,60,0.22)",  delay: "0s" },
+            { w: 700, h: 700, bottom: "-15%", left: "-12%",  color: "rgba(232,154,120,0.18)", delay: "1.5s" },
+            { w: 500, h: 500, top: "35%",     left: "40%",   color: "rgba(212,132,92,0.14)",  delay: "3s" },
           ]} />
 
           <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-28">
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
               <div>
                 <div className="flex items-center gap-2 mb-5">
-                  <p className="text-xs uppercase tracking-wider text-[#6b7280] font-medium">What we deliver</p>
+                  <p className="text-xs uppercase tracking-wider font-medium" style={{ color: '#b86a30' }}>What we deliver</p>
                 </div>
                 <h2
                   className="font-extrabold text-[#0a0e1a] leading-[1.05] max-w-xl"
@@ -253,7 +245,7 @@ export default function DevOpsOnAzurePage() {
               <Link
                 href="/schedule-call"
                 className="shrink-0 self-start md:self-end inline-flex items-center px-6 py-3 rounded-full text-sm font-bold whitespace-nowrap"
-                style={{ background: "#0078d4", color: "#fff", boxShadow: "0 4px 16px rgba(0,120,212,0.35)" }}
+                style={{ background: "#e89a78", color: "#fff", boxShadow: "0 4px 16px rgba(232,154,120,0.35)" }}
               >
                 Schedule a quick intro
               </Link>
@@ -281,7 +273,7 @@ export default function DevOpsOnAzurePage() {
                     >{c.num}</span>
                   </div>
                   <h3 className="text-[17px] font-bold text-[#0a0e1a] leading-snug">{c.title}</h3>
-                  <p className="text-[#5a6476] text-sm leading-relaxed">{c.body}</p>
+                  <p className="text-[#0a0e1a]/52 text-sm leading-relaxed">{c.body}</p>
                 </motion.div>
               ))}
             </div>
@@ -291,11 +283,11 @@ export default function DevOpsOnAzurePage() {
         {/* ── Two-column callout — glass panels on blob bg ── */}
         <section
           className="relative overflow-hidden"
-          style={{ background: "linear-gradient(160deg, #f5f8ff 0%, #eaf3ff 50%, #f5f8ff 100%)" }}
+          style={{ background: "linear-gradient(160deg, #fff5ee 0%, #fef6f0 50%, #fff8f2 100%)" }}
         >
           <Blobs items={[
-            { w: 800, h: 800, top: "-25%",    left: "-15%",  color: "rgba(0,120,212,0.20)",  delay: "0.5s" },
-            { w: 600, h: 600, bottom: "-20%", right: "-10%", color: "rgba(0,188,242,0.18)",  delay: "2s" },
+            { w: 800, h: 800, top: "-25%",    left: "-15%",  color: "rgba(240,140,60,0.20)",  delay: "0.5s" },
+            { w: 600, h: 600, bottom: "-20%", right: "-10%", color: "rgba(232,154,120,0.18)", delay: "2s" },
           ]} />
 
           <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-24">
@@ -304,15 +296,15 @@ export default function DevOpsOnAzurePage() {
               <div
                 className="rounded-3xl px-10 py-12 flex flex-col gap-5"
                 style={{
-                  background: "rgba(5,16,43,0.88)",
-                  backdropFilter: "blur(40px) saturate(160%)",
-                  WebkitBackdropFilter: "blur(40px) saturate(160%)",
-                  border: "1px solid rgba(255,255,255,0.14)",
-                  boxShadow: "inset 0 1px 0 rgba(255,255,255,0.22), 0 8px 40px rgba(0,20,80,0.25)",
+                  background: "rgba(8,11,20,0.72)",
+                  backdropFilter: "blur(80px) saturate(200%) brightness(90%)",
+                  WebkitBackdropFilter: "blur(80px) saturate(200%) brightness(90%)",
+                  border: "1px solid rgba(255,255,255,0.10)",
+                  boxShadow: "0 0 0 0.5px rgba(0,0,0,0.25), 0 40px 100px rgba(0,0,0,0.28), inset 0 1.5px 0 rgba(255,255,255,0.08)",
                 }}
               >
                 <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00bcf2] shrink-0" style={{ boxShadow: "0 0 6px #00bcf2" }} />
+                  <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: '#e89a78', boxShadow: "0 0 6px #e89a78" }} />
                   <p className="text-xs uppercase tracking-wider text-white/50 font-medium">Our philosophy</p>
                 </div>
                 <p className="text-white/85 text-lg leading-[1.75]">
@@ -342,16 +334,16 @@ export default function DevOpsOnAzurePage() {
         {/* ── How it works — ProcessTimeline ── */}
         <section
           className="relative overflow-hidden"
-          style={{ background: "linear-gradient(160deg, #f0f8ff 0%, #e8f4ff 45%, #f5f0ff 100%)" }}
+          style={{ background: "linear-gradient(160deg, #fdf0e8 0%, #fff5ee 45%, #fef6f0 100%)" }}
         >
           <Blobs items={[
-            { w: 900, h: 900, top: "-20%",    right: "-15%", color: "rgba(0,120,212,0.22)",  delay: "0s" },
-            { w: 700, h: 700, bottom: "-20%", left: "-12%",  color: "rgba(0,188,242,0.18)",  delay: "1.8s" },
-            { w: 500, h: 500, top: "35%",     left: "40%",   color: "rgba(124,58,237,0.14)", delay: "3.2s" },
+            { w: 900, h: 900, top: "-20%",    right: "-15%", color: "rgba(240,140,60,0.22)",  delay: "0s" },
+            { w: 700, h: 700, bottom: "-20%", left: "-12%",  color: "rgba(232,154,120,0.18)", delay: "1.8s" },
+            { w: 500, h: 500, top: "35%",     left: "40%",   color: "rgba(212,132,92,0.14)",  delay: "3.2s" },
           ]} />
           <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-24">
             <div className="flex items-center gap-2 mb-10">
-              <p className="text-xs uppercase tracking-wider text-[#6b7280] font-medium">How it works</p>
+              <p className="text-xs uppercase tracking-wider font-medium" style={{ color: '#b86a30' }}>How it works</p>
             </div>
             <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
               <h2
@@ -363,7 +355,7 @@ export default function DevOpsOnAzurePage() {
               <Link
                 href="/schedule-call"
                 className="shrink-0 self-start lg:self-end inline-flex items-center px-6 py-3 rounded-full text-sm font-bold whitespace-nowrap"
-                style={{ background: "#0078d4", color: "#fff", boxShadow: "0 4px 16px rgba(0,120,212,0.30)" }}
+                style={{ background: "#e89a78", color: "#fff", boxShadow: "0 4px 16px rgba(232,154,120,0.35)" }}
               >
                 Start the journey
               </Link>
@@ -375,16 +367,16 @@ export default function DevOpsOnAzurePage() {
         {/* ── FAQ — glass on Azure pastel blobs ── */}
         <section
           className="relative overflow-hidden"
-          style={{ background: "linear-gradient(160deg, #f0f8ff 0%, #e8f4ff 50%, #f5f8ff 100%)" }}
+          style={{ background: "linear-gradient(160deg, #fff5ee 0%, #fef6f0 50%, #fff8f2 100%)" }}
         >
           <Blobs items={[
-            { w: 800, h: 800, top: "-15%",    right: "-15%", color: "rgba(0,120,212,0.20)",  delay: "0s" },
-            { w: 600, h: 600, bottom: "-10%", left: "-8%",   color: "rgba(0,188,242,0.16)",  delay: "1.8s" },
+            { w: 800, h: 800, top: "-15%",    right: "-15%", color: "rgba(240,140,60,0.20)",  delay: "0s" },
+            { w: 600, h: 600, bottom: "-10%", left: "-8%",   color: "rgba(232,154,120,0.16)", delay: "1.8s" },
           ]} />
 
           <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-28">
             <div className="flex items-center gap-2 mb-5">
-              <p className="text-xs uppercase tracking-wider text-[#6b7280] font-medium">Common questions</p>
+              <p className="text-xs uppercase tracking-wider font-medium" style={{ color: '#b86a30' }}>Common questions</p>
             </div>
             <h2
               className="font-extrabold text-[#0a0e1a] mb-14 leading-[1.05]"
@@ -405,7 +397,7 @@ export default function DevOpsOnAzurePage() {
                   transition={{ duration: 0.5, delay: i * 0.08, ease: "easeOut" }}
                 >
                   <h3 className="text-[15px] font-bold text-[#0a0e1a] leading-snug">{f.q}</h3>
-                  <p className="text-[#5a6476] text-sm leading-relaxed">{f.a}</p>
+                  <p className="text-[#0a0e1a]/52 text-sm leading-relaxed">{f.a}</p>
                 </motion.div>
               ))}
             </div>
@@ -415,21 +407,21 @@ export default function DevOpsOnAzurePage() {
         {/* ── CTA Banner ── */}
         <section
           className="relative overflow-hidden"
-          style={{ background: "linear-gradient(135deg, #1a1260 0%, #2e2ab8 55%, #4a46d0 100%)" }}
+          style={{ background: "linear-gradient(145deg, #fdf0e8 0%, #fff5ee 40%, #fff8f2 100%)" }}
         >
           <Blobs items={[
-            { w: 700, h: 700, top: "-30%",    right: "-10%", color: "rgba(74,70,208,0.40)",  delay: "0s" },
-            { w: 500, h: 500, bottom: "-20%", left: "20%",   color: "rgba(240,112,96,0.22)", delay: "1.5s" },
+            { w: 700, h: 700, top: "-30%",    right: "-10%", color: "rgba(240,140,60,0.28)",  delay: "0s" },
+            { w: 500, h: 500, bottom: "-20%", left: "20%",   color: "rgba(232,154,120,0.20)", delay: "1.5s" },
           ]} />
           <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-20 flex flex-col md:flex-row md:items-center md:justify-between gap-10">
             <div className="flex flex-col gap-4 max-w-xl">
               <h2
-                className="font-extrabold text-white leading-[1.05]"
+                className="font-extrabold text-[#0a0e1a] leading-[1.05]"
                 style={{ fontSize: "clamp(28px, 4vw, 48px)", letterSpacing: "-0.035em" }}
               >
                 Ready to transform<br />your delivery pipeline?
               </h2>
-              <p className="text-white/65 text-lg leading-[1.75]">
+              <p className="text-[#0a0e1a]/52 text-lg leading-[1.75]">
                 Let&apos;s talk about your current setup and map out what modern DevOps looks like for your team.
               </p>
             </div>
@@ -437,14 +429,14 @@ export default function DevOpsOnAzurePage() {
               <Link
                 href="/schedule-call"
                 className="inline-flex items-center px-8 py-4 rounded-full text-base font-bold"
-                style={{ background: "#ffffff", color: "#0078d4" }}
+                style={{ background: "#e89a78", color: "#ffffff", boxShadow: "0 4px 16px rgba(232,154,120,0.35)" }}
               >
                 Book a discovery call
               </Link>
               <Link
                 href="/solutions"
                 className="inline-flex items-center px-8 py-4 rounded-full text-base font-semibold"
-                style={{ background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.30)", color: "rgba(255,255,255,0.85)", backdropFilter: "blur(16px)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.35)" }}
+                style={{ ...lg, color: '#b86a30', borderRadius: 999 }}
               >
                 All solutions
               </Link>

@@ -56,21 +56,14 @@ const lg: React.CSSProperties = {
   backdropFilter: "blur(40px) saturate(160%)",
   WebkitBackdropFilter: "blur(40px) saturate(160%)",
   border: "1px solid rgba(255,255,255,0.82)",
-  boxShadow: "0 2px 24px rgba(0,120,212,0.08), 0 1px 2px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.95)",
+  boxShadow: "0 2px 24px rgba(232,154,120,0.10), 0 1px 2px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.95)",
 };
 const lgCard: React.CSSProperties = {
   background: "rgba(255,255,255,0.52)",
   backdropFilter: "blur(32px) saturate(150%)",
   WebkitBackdropFilter: "blur(32px) saturate(150%)",
   border: "1px solid rgba(255,255,255,0.78)",
-  boxShadow: "0 4px 32px rgba(0,120,212,0.07), 0 1px 3px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.90)",
-};
-const lgDark: React.CSSProperties = {
-  background: "rgba(255,255,255,0.09)",
-  backdropFilter: "blur(32px) saturate(150%)",
-  WebkitBackdropFilter: "blur(32px) saturate(150%)",
-  border: "1px solid rgba(255,255,255,0.18)",
-  boxShadow: "inset 0 1px 0 rgba(255,255,255,0.25)",
+  boxShadow: "0 4px 32px rgba(232,154,120,0.08), 0 1px 3px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.90)",
 };
 
 export default function MigrateToAzurePage() {
@@ -78,13 +71,13 @@ export default function MigrateToAzurePage() {
     <div className={`relative min-h-full overflow-x-clip ${jakarta.className}`}>
 
       {/* ── Hero ──────────────────────────────────────── */}
-      <section className="relative overflow-hidden min-h-[100svh] flex items-center" style={{ background: "linear-gradient(145deg, #05102b 0%, #0c2461 28%, #0078d4 62%, #00bcf2 100%)" }}>
+      <section className="relative overflow-hidden min-h-[100svh] flex items-center" style={{ background: "linear-gradient(145deg, #fff5ee 0%, #fdf0e8 30%, #fef6f0 60%, #fff8f2 100%)" }}>
 
         {/* Blobs */}
         <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute rounded-full" style={{ width: 700, height: 700, top: "-20%", left: "-15%", background: "radial-gradient(circle, rgba(0,188,242,0.30) 0%, transparent 65%)", filter: "blur(70px)" }} />
-          <div className="absolute rounded-full" style={{ width: 600, height: 600, top: "10%",  right: "-10%", background: "radial-gradient(circle, rgba(0,120,212,0.35) 0%, transparent 65%)", filter: "blur(60px)" }} />
-          <div className="absolute rounded-full" style={{ width: 500, height: 500, bottom: "-15%", left: "30%", background: "radial-gradient(circle, rgba(100,210,255,0.25) 0%, transparent 65%)", filter: "blur(60px)" }} />
+          <div className="absolute rounded-full" style={{ width: 820, height: 820, top: "-15%", right: "-10%", background: "radial-gradient(circle, rgba(240,140,60,0.30) 0%, transparent 65%)", filter: "blur(70px)" }} />
+          <div className="absolute rounded-full" style={{ width: 680, height: 680, top: "28%",  left: "-18%", background: "radial-gradient(circle, rgba(232,154,120,0.18) 0%, transparent 65%)", filter: "blur(60px)" }} />
+          <div className="absolute rounded-full" style={{ width: 500, height: 500, bottom: "-10%", left: "25%", background: "radial-gradient(circle, rgba(232,154,120,0.16) 0%, transparent 65%)", filter: "blur(60px)" }} />
         </div>
 
         <div className="relative w-full max-w-7xl mx-auto px-6 md:px-12 pt-36 pb-24">
@@ -93,25 +86,25 @@ export default function MigrateToAzurePage() {
             {/* Left */}
             <motion.div className="flex-1 min-w-0" initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, ease: [0.25,0.46,0.45,0.94] }}>
               <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-10" style={lg}>
-                <span className="text-[11px] font-semibold text-[#0078d4] tracking-widest uppercase">Cloud Migration</span>
+                <span className="text-[11px] font-semibold tracking-widest uppercase" style={{ color: '#b86a30' }}>Cloud Migration</span>
               </div>
 
-              <h1 className="text-6xl md:text-7xl lg:text-[96px] font-extrabold text-white leading-[0.97] tracking-[-0.045em] mb-8">
+              <h1 className="text-6xl md:text-7xl lg:text-[96px] font-extrabold text-[#0a0e1a] leading-[0.97] tracking-[-0.045em] mb-8">
                 Move to Azure<br />without<br />
-                <span style={{ background: "linear-gradient(120deg, #64d2ff 0%, #00bcf2 50%, #38bdf8 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                <span style={{ background: "linear-gradient(120deg, #f0a060 0%, #e89a78 40%, #d4845c 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                   the risk.
                 </span>
               </h1>
 
-              <motion.p className="text-white/55 text-[18px] font-normal leading-[1.75] max-w-[460px] mb-10" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }}>
+              <motion.p className="text-[#0a0e1a]/52 text-[18px] font-normal leading-[1.75] max-w-[460px] mb-10" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }}>
                 We migrate your workloads, databases, and infrastructure to Azure — on time, on budget, and with zero unplanned downtime. Every stage handled end-to-end.
               </motion.p>
 
               <motion.div className="flex flex-wrap gap-3" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25 }}>
-                <Link href={Constants.PAGES.SCHEDULE_CALL} className="bg-white hover:bg-white/90 text-[#0c2461] font-bold px-8 py-4 rounded-full text-base transition-colors whitespace-nowrap shadow-lg shadow-black/10">
+                <Link href={Constants.PAGES.SCHEDULE_CALL} className="bg-[#e89a78] hover:bg-[#d4836a] text-white font-bold px-8 py-4 rounded-full text-base transition-colors whitespace-nowrap shadow-lg shadow-black/10">
                   Schedule a free assessment
                 </Link>
-                <Link href={Constants.PAGES.SOLUTIONS} className="font-medium px-8 py-4 rounded-full text-base text-white/80 hover:text-white transition-colors whitespace-nowrap" style={lg}>
+                <Link href={Constants.PAGES.SOLUTIONS} className="font-medium px-8 py-4 rounded-full text-base transition-colors whitespace-nowrap" style={{ ...lg, color: '#b86a30' }}>
                   View all solutions
                 </Link>
               </motion.div>
@@ -124,10 +117,10 @@ export default function MigrateToAzurePage() {
 
                   {/* Header */}
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-bold text-[#0078d4] uppercase tracking-widest">Migration Progress</span>
+                    <span className="text-[11px] font-bold uppercase tracking-widest" style={{ color: '#b86a30' }}>Migration Progress</span>
                     <div className="flex items-center gap-1.5">
                       <span className="w-2 h-2 rounded-full bg-emerald-400" style={{ boxShadow: "0 0 6px #34d399" }} />
-                      <span className="text-[10px] text-[#0078d4] font-semibold">Active</span>
+                      <span className="text-[10px] font-semibold" style={{ color: '#c4743c' }}>Active</span>
                     </div>
                   </div>
 
@@ -142,19 +135,19 @@ export default function MigrateToAzurePage() {
                     ].map((row, i) => (
                       <div key={i} className="flex flex-col gap-1.5">
                         <div className="flex items-center gap-3">
-                          <span className={`text-xs shrink-0 w-4 ${row.done ? "text-emerald-500" : row.pending ? "text-slate-400" : "text-[#0078d4]"}`}>
+                          <span className={`text-xs shrink-0 w-4 ${row.done ? "text-emerald-500" : row.pending ? "text-slate-400" : ""}`} style={!row.done && !row.pending ? { color: '#c4743c' } : {}}>
                             {row.done ? "✓" : row.pending ? "○" : "▸"}
                           </span>
-                          <span className={`text-sm ${row.done ? "text-[#0c2461] font-medium" : row.pending ? "text-slate-400" : "text-[#0c2461] font-semibold"}`} style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12 }}>
+                          <span className={`text-sm ${row.pending ? "text-slate-400" : ""}`} style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, ...(!row.pending ? { color: '#0a0e1a', fontWeight: row.done ? 500 : 600 } : {}) }}>
                             {row.label}
                           </span>
                         </div>
                         {row.progress !== undefined && (
                           <div className="ml-7 flex items-center gap-2">
-                            <div className="flex-1 h-1.5 rounded-full bg-blue-100 overflow-hidden">
-                              <div className="h-full rounded-full" style={{ width: `${row.progress}%`, background: "linear-gradient(90deg, #0078d4, #00bcf2)" }} />
+                            <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(240,160,96,0.15)' }}>
+                              <div className="h-full rounded-full" style={{ width: `${row.progress}%`, background: "linear-gradient(90deg, #e89a78, #f0a060)" }} />
                             </div>
-                            <span className="text-[10px] font-bold text-[#0078d4]">{row.progress}%</span>
+                            <span className="text-[10px] font-bold" style={{ color: '#c4743c' }}>{row.progress}%</span>
                           </div>
                         )}
                       </div>
@@ -164,7 +157,7 @@ export default function MigrateToAzurePage() {
                   {/* Tech tags */}
                   <div className="flex flex-wrap gap-2 pt-1 border-t border-black/[0.06]">
                     {["Azure Migrate", "CAF", "Terraform", "Azure Policy"].map((t) => (
-                      <span key={t} className="text-[10px] font-semibold text-[#0078d4] bg-blue-50 border border-blue-100 px-2.5 py-1 rounded-full">{t}</span>
+                      <span key={t} className="text-[10px] font-semibold px-2.5 py-1 rounded-full" style={{ color: '#b86a30', background: 'rgba(240,160,96,0.12)', border: '1px solid rgba(240,160,96,0.25)' }}>{t}</span>
                     ))}
                   </div>
                 </div>
@@ -176,18 +169,18 @@ export default function MigrateToAzurePage() {
       </section>
 
       {/* ── Migration types ───────────────────────────── */}
-      <section className="relative overflow-hidden" style={{ background: "linear-gradient(160deg, #f0f9ff 0%, #e0f2fe 45%, #ecfeff 100%)" }}>
+      <section className="relative overflow-hidden" style={{ background: "linear-gradient(160deg, #fdf0e8 0%, #fff5ee 40%, #fef6f0 100%)" }}>
         <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute rounded-full" style={{ width: 700, height: 700, top: "-25%", right: "-15%", background: "radial-gradient(circle, rgba(0,188,242,0.25) 0%, transparent 65%)", filter: "blur(70px)" }} />
-          <div className="absolute rounded-full" style={{ width: 500, height: 500, bottom: "-15%", left: "-5%",  background: "radial-gradient(circle, rgba(0,120,212,0.18) 0%, transparent 65%)", filter: "blur(60px)" }} />
+          <div className="absolute rounded-full" style={{ width: 700, height: 700, top: "-25%", right: "-15%", background: "radial-gradient(circle, rgba(240,140,60,0.22) 0%, transparent 65%)", filter: "blur(70px)" }} />
+          <div className="absolute rounded-full" style={{ width: 500, height: 500, bottom: "-15%", left: "-5%",  background: "radial-gradient(circle, rgba(232,154,120,0.18) 0%, transparent 65%)", filter: "blur(60px)" }} />
         </div>
         <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-28">
           <div className="flex items-center gap-2 mb-5">
-            <p className="text-xs uppercase tracking-wider text-[#0078d4] font-semibold">Migration types</p>
+            <p className="text-xs uppercase tracking-wider font-semibold" style={{ color: '#b86a30' }}>Migration types</p>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#05102b] leading-[1.05] tracking-[-0.035em] mb-14 max-w-2xl">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#0a0e1a] leading-[1.05] tracking-[-0.035em] mb-14 max-w-2xl">
             We migrate from<br />
-            <span style={{ background: "linear-gradient(120deg, #0078d4 0%, #00bcf2 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+            <span style={{ background: "linear-gradient(120deg, #f0a060 0%, #d4845c 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
               anywhere to Azure.
             </span>
           </h2>
@@ -196,11 +189,11 @@ export default function MigrateToAzurePage() {
             {pillars.map((p, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-8%" }} transition={{ duration: 0.5, delay: i * 0.08 }}
                 className="rounded-[22px] p-8 flex flex-col gap-5 hover:shadow-lg transition-shadow duration-300" style={lgCard}>
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center text-[#0078d4]" style={{ background: "rgba(0,120,212,0.10)", border: "1px solid rgba(0,120,212,0.18)" }}>
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center" style={{ color: '#c4743c', background: "rgba(240,160,96,0.14)", border: "1px solid rgba(240,160,96,0.22)" }}>
                   {p.icon}
                 </div>
-                <h3 className="text-base font-bold text-[#05102b] leading-snug">{p.title}</h3>
-                <p className="text-[#334155] text-sm font-normal leading-relaxed">{p.desc}</p>
+                <h3 className="text-base font-bold text-[#0a0e1a] leading-snug">{p.title}</h3>
+                <p className="text-[#0a0e1a]/52 text-sm font-normal leading-relaxed">{p.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -208,29 +201,29 @@ export default function MigrateToAzurePage() {
       </section>
 
       {/* ── How it works ──────────────────────────────── */}
-      <section className="relative overflow-hidden" style={{ background: "linear-gradient(145deg, #05102b 0%, #0c2461 40%, #0078d4 100%)" }}>
+      <section className="relative overflow-hidden" style={{ background: "linear-gradient(145deg, #fff5ee 0%, #fdf0e8 30%, #fef6f0 60%, #fff8f2 100%)" }}>
         <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute rounded-full" style={{ width: 600, height: 600, top: "-20%", right: "-10%", background: "radial-gradient(circle, rgba(0,188,242,0.20) 0%, transparent 65%)", filter: "blur(70px)" }} />
-          <div className="absolute rounded-full" style={{ width: 400, height: 400, bottom: "0%", left: "5%", background: "radial-gradient(circle, rgba(100,210,255,0.15) 0%, transparent 65%)", filter: "blur(60px)" }} />
+          <div className="absolute rounded-full" style={{ width: 600, height: 600, top: "-20%", right: "-10%", background: "radial-gradient(circle, rgba(240,140,60,0.22) 0%, transparent 65%)", filter: "blur(70px)" }} />
+          <div className="absolute rounded-full" style={{ width: 400, height: 400, bottom: "0%", left: "5%", background: "radial-gradient(circle, rgba(232,154,120,0.18) 0%, transparent 65%)", filter: "blur(60px)" }} />
         </div>
         <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-28">
           <div className="flex items-center gap-2 mb-5">
-            <p className="text-xs uppercase tracking-wider text-sky-400 font-semibold">How it works</p>
+            <p className="text-xs uppercase tracking-wider font-semibold" style={{ color: '#b86a30' }}>How it works</p>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.05] tracking-[-0.035em] mb-14">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#0a0e1a] leading-[1.05] tracking-[-0.035em] mb-14">
             A proven five-step<br />migration process.
           </h2>
 
           <div className="flex flex-col gap-3">
             {steps.map((step, i) => (
               <motion.div key={i} initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-8%" }} transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="rounded-[22px] p-8 flex gap-8 items-start hover:bg-white/[0.04] transition-colors duration-200" style={lgDark}>
-                <span className="text-4xl font-extrabold shrink-0 leading-none pt-1 tracking-[-0.04em]" style={{ background: "linear-gradient(135deg, #64d2ff 0%, #00bcf2 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                className="rounded-[22px] p-8 flex gap-8 items-start hover:shadow-md transition-shadow duration-200" style={lgCard}>
+                <span className="text-4xl font-extrabold shrink-0 leading-none pt-1 tracking-[-0.04em]" style={{ background: "linear-gradient(135deg, #f0a060 0%, #d4845c 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                   {step.number}
                 </span>
                 <div className="flex flex-col gap-2">
-                  <h3 className="text-lg font-bold text-white tracking-[-0.01em]">{step.title}</h3>
-                  <p className="text-white/50 text-[15px] font-normal leading-relaxed max-w-2xl">{step.desc}</p>
+                  <h3 className="text-lg font-bold text-[#0a0e1a] tracking-[-0.01em]">{step.title}</h3>
+                  <p className="text-[#0a0e1a]/48 text-[15px] font-normal leading-relaxed max-w-2xl">{step.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -239,15 +232,15 @@ export default function MigrateToAzurePage() {
       </section>
 
       {/* ── Stats ─────────────────────────────────────── */}
-      <section className="relative overflow-hidden" style={{ background: "linear-gradient(160deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%)" }}>
+      <section className="relative overflow-hidden" style={{ background: "linear-gradient(160deg, #fdf0e8 0%, #fff5ee 40%, #fff8f2 100%)" }}>
         <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute rounded-full" style={{ width: 600, height: 600, top: "0%", left: "20%", background: "radial-gradient(circle, rgba(0,188,242,0.20) 0%, transparent 65%)", filter: "blur(70px)" }} />
+          <div className="absolute rounded-full" style={{ width: 600, height: 600, top: "0%", left: "20%", background: "radial-gradient(circle, rgba(240,140,60,0.20) 0%, transparent 65%)", filter: "blur(70px)" }} />
         </div>
         <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-28">
           <div className="flex items-center gap-2 mb-5">
-            <p className="text-xs uppercase tracking-wider text-[#0078d4] font-semibold">Why Azure</p>
+            <p className="text-xs uppercase tracking-wider font-semibold" style={{ color: '#b86a30' }}>Why Azure</p>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#05102b] leading-[1.05] tracking-[-0.035em] mb-14">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#0a0e1a] leading-[1.05] tracking-[-0.035em] mb-14">
             The numbers speak<br />for themselves.
           </h2>
 
@@ -255,20 +248,20 @@ export default function MigrateToAzurePage() {
             {reasons.map((r, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-8%" }} transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="rounded-[22px] p-8 flex flex-col gap-3 hover:shadow-lg transition-shadow duration-300" style={lgCard}>
-                <span className="text-5xl font-extrabold tracking-[-0.04em]" style={{ background: "linear-gradient(120deg, #0078d4 0%, #00bcf2 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                <span className="text-5xl font-extrabold tracking-[-0.04em]" style={{ background: "linear-gradient(120deg, #f0a060 0%, #d4845c 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                   {r.stat}
                 </span>
-                <h3 className="text-base font-bold text-[#05102b]">{r.label}</h3>
-                <p className="text-[#334155] text-sm font-normal leading-relaxed">{r.desc}</p>
+                <h3 className="text-base font-bold text-[#0a0e1a]">{r.label}</h3>
+                <p className="text-[#0a0e1a]/52 text-sm font-normal leading-relaxed">{r.desc}</p>
               </motion.div>
             ))}
           </div>
 
           {/* FAQ */}
           <div className="flex items-center gap-2 mb-5">
-            <p className="text-xs uppercase tracking-wider text-[#0078d4] font-semibold">Common questions</p>
+            <p className="text-xs uppercase tracking-wider font-semibold" style={{ color: '#b86a30' }}>Common questions</p>
           </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-[#05102b] leading-[1.05] tracking-[-0.035em] mb-12">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-[#0a0e1a] leading-[1.05] tracking-[-0.035em] mb-12">
             Frequently asked questions.
           </h2>
 
@@ -276,8 +269,8 @@ export default function MigrateToAzurePage() {
             {faqs.map((faq, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-8%" }} transition={{ duration: 0.45, delay: i * 0.07 }}
                 className="rounded-[22px] p-8 flex flex-col gap-3 hover:shadow-lg transition-shadow duration-300" style={lgCard}>
-                <h3 className="text-base font-bold text-[#05102b] leading-snug">{faq.q}</h3>
-                <p className="text-[#334155] text-sm font-normal leading-relaxed">{faq.a}</p>
+                <h3 className="text-base font-bold text-[#0a0e1a] leading-snug">{faq.q}</h3>
+                <p className="text-[#0a0e1a]/52 text-sm font-normal leading-relaxed">{faq.a}</p>
               </motion.div>
             ))}
           </div>
@@ -285,14 +278,14 @@ export default function MigrateToAzurePage() {
           {/* CTA banner */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-8%" }} transition={{ duration: 0.6 }}
             className="rounded-[24px] px-10 py-10 flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between"
-            style={{ background: "linear-gradient(135deg, #0078d4 0%, #0c2461 100%)", border: "1px solid rgba(255,255,255,0.15)", boxShadow: "0 20px 60px rgba(0,120,212,0.25), inset 0 1px 0 rgba(255,255,255,0.20)" }}
+            style={lg}
           >
             <div className="max-w-lg">
-              <h3 className="text-2xl font-extrabold text-white tracking-[-0.025em] mb-2">Ready to start your migration?</h3>
-              <p className="text-white/60 text-[15px] font-normal leading-relaxed">Book a free 30-minute assessment. We&apos;ll review your current estate and give you a clear migration roadmap — no obligation.</p>
+              <h3 className="text-2xl font-extrabold text-[#0a0e1a] tracking-[-0.025em] mb-2">Ready to start your migration?</h3>
+              <p className="text-[#0a0e1a]/52 text-[15px] font-normal leading-relaxed">Book a free 30-minute assessment. We&apos;ll review your current estate and give you a clear migration roadmap — no obligation.</p>
             </div>
             <Link href={Constants.PAGES.SCHEDULE_CALL}
-              className="shrink-0 inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-white hover:bg-white/90 text-[#0c2461] font-bold text-sm transition-all whitespace-nowrap shadow-lg shadow-black/10">
+              className="shrink-0 inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-[#e89a78] hover:bg-[#d4836a] text-white font-bold text-sm transition-all whitespace-nowrap shadow-lg shadow-black/10">
               Schedule a free assessment
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
                 <path d="M5 12h14M12 5l7 7-7 7" />

@@ -1,12 +1,10 @@
 ﻿'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import ContactUsFooter from '@/app/components/partials/ContactUsFooter';
 import { Constants } from '@/Constants';
-import { AzureHero } from '@/ImagePath';
 
 type Industry =
   | 'All'
@@ -153,370 +151,261 @@ const heroStats = [
 
 function ArrowIcon() {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2.5}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="w-3.5 h-3.5 shrink-0"
-    >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5 shrink-0">
       <path d="M5 12h14M12 5l7 7-7 7" />
     </svg>
   );
 }
 
+const lg: React.CSSProperties = {
+  background: "rgba(255,255,255,0.62)",
+  backdropFilter: "blur(40px) saturate(180%)",
+  WebkitBackdropFilter: "blur(40px) saturate(180%)",
+  border: "1px solid rgba(255,255,255,0.85)",
+  boxShadow: "0 4px 32px rgba(232,154,120,0.10), 0 1px 2px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.95)",
+};
+
+const lgCard: React.CSSProperties = {
+  background: "rgba(255,255,255,0.55)",
+  backdropFilter: "blur(32px) saturate(160%)",
+  WebkitBackdropFilter: "blur(32px) saturate(160%)",
+  border: "1px solid rgba(255,255,255,0.80)",
+  boxShadow: "0 2px 20px rgba(232,154,120,0.08), inset 0 1px 0 rgba(255,255,255,0.92)",
+};
+
 export default function CaseStudiesPage() {
   const [active, setActive] = useState<Industry>('All');
-
-  const filtered =
-    active === 'All'
-      ? caseStudies
-      : caseStudies.filter((c) => c.industry === active);
-
+  const filtered = active === 'All' ? caseStudies : caseStudies.filter((c) => c.industry === active);
   const [featured, ...rest] = filtered;
 
   return (
-    <div className="relative min-h-full overflow-x-clip bg-white">
+    <div className="relative min-h-full overflow-x-clip">
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden flex flex-col pt-36 sm:pt-44">
-        {/* Background image — same approach as other service pages */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src={AzureHero}
-            alt="Case Studies"
-            fill
-            className="object-cover object-[85%] sm:object-top"
-            quality={100}
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0e1a]/95 via-[#0a0e1a]/80 to-[#0a0e1a]/40" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e1a] via-transparent to-transparent" />
+      <section className="relative overflow-hidden min-h-[100svh] flex items-center" style={{ background: "linear-gradient(145deg, #fff5ee 0%, #fdf0e8 30%, #fef6f0 60%, #fff8f2 100%)" }}>
+        <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute rounded-full" style={{ width: 820, height: 820, top: "-15%", right: "-10%", background: "radial-gradient(circle, rgba(240,140,60,0.30) 0%, transparent 65%)", filter: "blur(70px)" }} />
+          <div className="absolute rounded-full" style={{ width: 680, height: 680, top: "28%", left: "-18%", background: "radial-gradient(circle, rgba(232,154,120,0.18) 0%, transparent 65%)", filter: "blur(60px)" }} />
+          <div className="absolute rounded-full" style={{ width: 500, height: 500, bottom: "-10%", left: "25%", background: "radial-gradient(circle, rgba(232,154,120,0.16) 0%, transparent 65%)", filter: "blur(60px)" }} />
         </div>
 
-        {/* Hero content */}
-        <div className="relative z-10 max-w-9xl mx-auto w-full px-5 sm:px-10 pb-16 sm:pb-20">
-          <motion.div
-            className="inline-flex items-center gap-2 bg-[#e89a78]/15 border border-[#e89a78]/30 rounded-full px-4 py-1.5 mb-8"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <p className="text-xs uppercase tracking-widest text-[#e89a78] font-semibold">
-              Solutions · Case Studies
-            </p>
-          </motion.div>
+        <div className="relative w-full max-w-7xl mx-auto px-6 md:px-12 pt-36 pb-24">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-14 xl:gap-20">
 
-          <motion.h1
-            className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black !leading-[1.05] text-white max-w-3xl mb-6"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            Proven results{' '}
-            <span className="relative inline-block">
-              <span className="bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] bg-clip-text text-transparent">
-                across every industry
-              </span>
-              <span className="absolute -bottom-1 left-0 w-full h-[3px] rounded-full bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] opacity-60" />
-            </span>
-          </motion.h1>
+            {/* Left */}
+            <motion.div className="flex-1 min-w-0" initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, ease: [0.25,0.46,0.45,0.94] }}>
+              <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-10" style={{ ...lg, borderRadius: 999 }}>
+                <span className="text-[11px] font-semibold tracking-widest uppercase" style={{ color: '#b86a30' }}>Solutions · Case Studies</span>
+              </div>
 
-          <motion.p
-            className="text-white/60 text-lg sm:text-xl max-w-xl leading-relaxed mb-10"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Real outcomes for real organisations — from financial services to
-            healthcare. See how we help businesses modernise, scale, and cut
-            costs on Azure.
-          </motion.p>
+              <h1 className="font-black text-[#0a0e1a] leading-[1.05] tracking-[-0.045em] mb-8" style={{ fontSize: "clamp(44px, 6vw, 80px)" }}>
+                Proven results{' '}
+                <span style={{ background: "linear-gradient(120deg, #f0a060 0%, #e89a78 50%, #d4845c 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                  across every industry
+                </span>
+              </h1>
 
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <Link
-              href={Constants.PAGES.SCHEDULE_CALL}
-              className="inline-flex items-center justify-center gap-3 px-7 min-h-[52px] rounded-full bg-[#e89a78] hover:bg-[#f0a060] text-white font-semibold text-sm transition-all duration-200 shadow-lg shadow-[#e89a78]/25 w-full sm:w-auto"
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
-                strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0">
-                <rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" />
-              </svg>
-              Schedule a free call
-            </Link>
-            <Link
-              href={Constants.PAGES.SOLUTIONS}
-              className="inline-flex items-center justify-center gap-2 px-7 min-h-[52px] rounded-full border border-white/25 hover:border-[#e89a78]/60 text-white/70 hover:text-white font-semibold text-sm transition-all duration-200 w-full sm:w-auto"
-            >
-              View all solutions
-            </Link>
-          </motion.div>
-        </div>
+              <motion.p className="text-[#0a0e1a]/52 text-lg leading-[1.75] max-w-[480px] mb-10" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }}>
+                Real outcomes for real organisations — from financial services to healthcare. See how we help businesses modernise, scale, and cut costs on Azure.
+              </motion.p>
 
-        {/* Stats strip — attached to bottom of hero */}
-        <div className="relative z-10 max-w-9xl mx-auto w-full px-5 sm:px-10 border-t border-white/[0.08]">
-          <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/[0.08]">
-            {heroStats.map((s, i) => (
-              <motion.div
-                key={i}
-                className="py-6 px-0 sm:px-6 first:pl-0"
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.4 + i * 0.07 }}
-              >
-                <p className="text-2xl sm:text-3xl font-black text-white mb-0.5">{s.value}</p>
-                <p className="text-xs text-white/40 font-medium">{s.label}</p>
+              <motion.div className="flex flex-wrap gap-3" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25 }}>
+                <Link href={Constants.PAGES.SCHEDULE_CALL} className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-base font-bold transition-all text-white whitespace-nowrap" style={{ background: "#e89a78", boxShadow: "0 4px 16px rgba(232,154,120,0.35)" }}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg>
+                  Schedule a free call
+                </Link>
+                <Link href={Constants.PAGES.SOLUTIONS} className="inline-flex items-center px-8 py-4 rounded-full text-base font-semibold transition-all whitespace-nowrap" style={{ ...lg, color: '#b86a30', borderRadius: 999 }}>
+                  View all solutions
+                </Link>
               </motion.div>
-            ))}
+            </motion.div>
+
+            {/* Right — stats glass card */}
+            <motion.div className="lg:flex-1 lg:max-w-[420px] w-full" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.95, delay: 0.08 }}>
+              <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}>
+                <div className="rounded-[28px] p-7 flex flex-col gap-5" style={lgCard}>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[11px] font-bold uppercase tracking-widest" style={{ color: '#b86a30' }}>Our Track Record</span>
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400" style={{ boxShadow: "0 0 6px #34d399" }} />
+                      <span className="text-[10px] font-medium" style={{ color: '#c4743c' }}>Verified</span>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    {heroStats.map((s, i) => (
+                      <div key={i} className="rounded-2xl p-4 flex flex-col gap-1" style={{ background: 'rgba(255,255,255,0.60)', border: '1px solid rgba(255,255,255,0.80)' }}>
+                        <p className="text-2xl font-black text-[#0a0e1a]" style={{ letterSpacing: '-0.03em' }}>{s.value}</p>
+                        <p className="text-[10px] text-[#0a0e1a]/40 font-medium leading-snug">{s.label}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex flex-wrap gap-2 pt-1">
+                    {['Financial Services', 'Healthcare', 'Retail', 'SaaS'].map(t => (
+                      <span key={t} className="text-[10px] font-semibold px-2.5 py-1 rounded-full" style={{ color: '#b86a30', background: 'rgba(240,160,96,0.12)', border: '1px solid rgba(240,160,96,0.25)' }}>{t}</span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+
           </div>
         </div>
       </section>
 
       {/* ── Filter + Cards ── */}
-      <section className="max-w-9xl mx-auto px-5 sm:px-10 py-16 sm:py-24">
+      <section className="relative overflow-hidden" style={{ background: "linear-gradient(160deg, #fdf0e8 0%, #fff5ee 40%, #fef6f0 100%)" }}>
+        <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute rounded-full" style={{ width: 700, height: 700, top: "-10%", right: "-10%", background: "radial-gradient(circle, rgba(240,140,60,0.18) 0%, transparent 65%)", filter: "blur(70px)" }} />
+          <div className="absolute rounded-full" style={{ width: 500, height: 500, bottom: "-10%", left: "10%", background: "radial-gradient(circle, rgba(232,154,120,0.15) 0%, transparent 65%)", filter: "blur(60px)" }} />
+        </div>
 
-        {/* Filter pills */}
-        <motion.div
-          className="flex flex-wrap gap-2 mb-12"
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true, margin: '-60px' }}
-        >
-          {filters.map((f) => (
-            <button
-              key={f}
-              onClick={() => setActive(f)}
-              className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide border transition-all duration-200 ${
-                active === f
-                  ? 'bg-[#0a0e1a] border-[#0a0e1a] text-white shadow-sm'
-                  : 'bg-white border-[#e8e0d8] text-[#6b6b6b] hover:border-[#0a0e1a]/30 hover:text-[#0a0e1a]'
-              }`}
-            >
-              {f}
-            </button>
-          ))}
-        </motion.div>
+        <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-16 sm:py-24">
 
-        {filtered.length === 0 ? (
-          <div className="flex items-center justify-center py-24">
-            <p className="text-sm text-[#9b9589]">No case studies in this category yet.</p>
-          </div>
-        ) : (
-          <div className="flex flex-col gap-6">
-
-            {/* ── Featured card (first result) ── */}
-            {featured && (
-              <motion.div
-                key={`${featured.id}-featured`}
-                className="group rounded-2xl bg-[#0a0e1a] overflow-hidden border border-white/[0.07] hover:border-white/[0.14] transition-all duration-300"
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+          {/* Filter pills */}
+          <motion.div className="flex flex-wrap gap-2 mb-12" initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true, margin: '-60px' }}>
+            {filters.map((f) => (
+              <button
+                key={f}
+                onClick={() => setActive(f)}
+                className="px-4 py-2 rounded-full text-xs font-semibold tracking-wide border transition-all duration-200"
+                style={active === f
+                  ? { background: '#e89a78', borderColor: '#e89a78', color: '#ffffff' }
+                  : { background: 'rgba(255,255,255,0.60)', borderColor: '#e8d0b8', color: '#6b6b6b' }
+                }
               >
-                {/* Industry-coloured top bar */}
-                <div className="h-[3px]" style={{ backgroundColor: industryStyle[featured.industry].bar }} />
+                {f}
+              </button>
+            ))}
+          </motion.div>
 
-                <div className="p-7 sm:p-10 lg:p-12">
-                  <div className="flex flex-col lg:flex-row lg:items-start gap-8 lg:gap-16">
+          {filtered.length === 0 ? (
+            <div className="flex items-center justify-center py-24">
+              <p className="text-sm text-[#9b9589]">No case studies in this category yet.</p>
+            </div>
+          ) : (
+            <div className="flex flex-col gap-6">
 
-                    {/* Left — content */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between mb-6">
-                        <span className={`inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold ${industryStyle[featured.industry].pill}`}>
-                          {featured.industry}
-                        </span>
-                        <span className="hidden sm:block text-[10px] uppercase tracking-[0.15em] text-white/25 font-semibold">
-                          Featured
-                        </span>
-                      </div>
-
-                      <p className="text-[10px] uppercase tracking-[0.15em] text-white/35 font-semibold mb-3">
-                        {featured.client}
-                      </p>
-
-                      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-5 max-w-2xl">
-                        {featured.title}
-                      </h2>
-
-                      <p className="text-white/50 text-base leading-relaxed mb-8 max-w-2xl">
-                        {featured.desc}
-                      </p>
-
-                      <div className="flex flex-wrap gap-2 mb-8">
-                        {featured.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-[11px] text-white/45 bg-white/[0.06] border border-white/[0.08] px-3 py-1 rounded-lg font-medium"
-                          >
-                            {tag}
+              {/* Featured card */}
+              {featured && (
+                <motion.div
+                  key={`${featured.id}-featured`}
+                  className="group rounded-2xl overflow-hidden"
+                  style={lgCard}
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <div className="h-[3px]" style={{ backgroundColor: industryStyle[featured.industry].bar }} />
+                  <div className="p-7 sm:p-10 lg:p-12">
+                    <div className="flex flex-col lg:flex-row lg:items-start gap-8 lg:gap-16">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between mb-6">
+                          <span className={`inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold ${industryStyle[featured.industry].pill}`}>
+                            {featured.industry}
                           </span>
-                        ))}
+                          <span className="hidden sm:block text-[10px] uppercase tracking-[0.15em] text-[#0a0e1a]/30 font-semibold">Featured</span>
+                        </div>
+                        <p className="text-[10px] uppercase tracking-[0.15em] text-[#0a0e1a]/35 font-semibold mb-3">{featured.client}</p>
+                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0a0e1a] leading-tight mb-5 max-w-2xl">{featured.title}</h2>
+                        <p className="text-[#0a0e1a]/52 text-base leading-relaxed mb-8 max-w-2xl">{featured.desc}</p>
+                        <div className="flex flex-wrap gap-2 mb-8">
+                          {featured.tags.map((tag) => (
+                            <span key={tag} className="text-[11px] px-3 py-1 rounded-lg font-medium" style={{ color: '#b86a30', background: 'rgba(240,160,96,0.12)', border: '1px solid rgba(240,160,96,0.20)' }}>{tag}</span>
+                          ))}
+                        </div>
+                        <div className="flex items-center gap-5">
+                          <Link href={featured.serviceUrl} className="inline-flex items-center gap-2 px-5 min-h-[44px] rounded-full font-semibold text-sm transition-all text-white hover:opacity-90" style={{ background: '#e89a78' }}>
+                            View {featured.service}
+                            <ArrowIcon />
+                          </Link>
+                          <span className="text-xs text-[#0a0e1a]/30 font-medium">NativeCloud · {featured.service}</span>
+                        </div>
                       </div>
-
-                      <div className="flex items-center gap-5">
-                        <Link
-                          href={featured.serviceUrl}
-                          className="inline-flex items-center gap-2 px-5 min-h-[44px] rounded-full bg-[#e89a78] hover:bg-[#f0a060] text-white font-semibold text-sm transition-all duration-200"
-                        >
-                          View {featured.service}
-                          <ArrowIcon />
-                        </Link>
-                        <span className="text-xs text-white/25 font-medium">
-                          NativeCloud · {featured.service}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Right — big metric */}
-                    <div className="lg:w-52 shrink-0">
-                      <div className="p-6 rounded-2xl bg-white/[0.04] border border-white/[0.08]">
-                        <p
-                          className="text-5xl sm:text-6xl font-black leading-none mb-2"
-                          style={{ color: industryStyle[featured.industry].bar }}
-                        >
-                          {featured.metric.value}
-                        </p>
-                        <p className="text-xs text-white/40 font-medium leading-snug">
-                          {featured.metric.label}
-                        </p>
+                      <div className="lg:w-52 shrink-0">
+                        <div className="p-6 rounded-2xl" style={{ background: 'rgba(255,255,255,0.70)', border: '1px solid rgba(255,255,255,0.90)', boxShadow: '0 2px 12px rgba(232,154,120,0.10)' }}>
+                          <p className="text-5xl sm:text-6xl font-black leading-none mb-2" style={{ color: industryStyle[featured.industry].bar }}>{featured.metric.value}</p>
+                          <p className="text-xs text-[#0a0e1a]/40 font-medium leading-snug">{featured.metric.label}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            )}
+                </motion.div>
+              )}
 
-            {/* ── Regular cards grid ── */}
-            {rest.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {rest.map((cs, i) => {
-                  const sty = industryStyle[cs.industry];
-                  return (
-                    <motion.div
-                      key={cs.id}
-                      className="group flex flex-col bg-white border border-[#e8e0d8] rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-black/[0.07] hover:-translate-y-1 transition-all duration-300"
-                      initial={{ opacity: 0, y: 24 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.45, ease: 'easeOut', delay: i * 0.07 }}
-                    >
-                      {/* Industry-coloured top bar */}
-                      <div className="h-[3px] shrink-0" style={{ backgroundColor: sty.bar }} />
-
-                      <div className="flex flex-col flex-1 p-6">
-                        {/* Industry badge */}
-                        <div className="mb-5">
-                          <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold ${sty.pill}`}>
-                            {cs.industry}
-                          </span>
-                        </div>
-
-                        {/* Big metric */}
-                        <div className="mb-5">
-                          <p
-                            className="text-4xl font-black leading-none mb-1"
-                            style={{ color: sty.metricColor }}
-                          >
-                            {cs.metric.value}
-                          </p>
-                          <p className="text-xs text-[#9b9589] font-medium">
-                            {cs.metric.label}
-                          </p>
-                        </div>
-
-                        {/* Divider */}
-                        <div className="border-t border-[#f0ece8] mb-5" />
-
-                        {/* Client */}
-                        <p className="text-[10px] uppercase tracking-[0.15em] text-[#9b9589] font-semibold mb-2">
-                          {cs.client}
-                        </p>
-
-                        {/* Title */}
-                        <h3 className="text-[15px] font-bold text-[#0a0e1a] leading-snug mb-3">
-                          {cs.title}
-                        </h3>
-
-                        {/* Description */}
-                        <p className="text-sm text-[#6b6b6b] leading-relaxed mb-5 flex-1">
-                          {cs.desc}
-                        </p>
-
-                        {/* Tags */}
-                        <div className="flex flex-wrap gap-1.5 mb-5">
-                          {cs.tags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="text-[11px] text-[#6b6b6b] bg-[#f4f1ee] px-2.5 py-1 rounded-lg font-medium"
-                            >
-                              {tag}
+              {/* Regular cards grid */}
+              {rest.length > 0 && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {rest.map((cs, i) => {
+                    const sty = industryStyle[cs.industry];
+                    return (
+                      <motion.div
+                        key={cs.id}
+                        className="group flex flex-col rounded-2xl overflow-hidden hover:-translate-y-1 transition-all duration-300"
+                        style={lgCard}
+                        initial={{ opacity: 0, y: 24 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.45, ease: 'easeOut', delay: i * 0.07 }}
+                      >
+                        <div className="h-[3px] shrink-0" style={{ backgroundColor: sty.bar }} />
+                        <div className="flex flex-col flex-1 p-6">
+                          <div className="mb-5">
+                            <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold ${sty.pill}`}>{cs.industry}</span>
+                          </div>
+                          <div className="mb-5">
+                            <p className="text-4xl font-black leading-none mb-1" style={{ color: sty.metricColor }}>{cs.metric.value}</p>
+                            <p className="text-xs text-[#0a0e1a]/40 font-medium">{cs.metric.label}</p>
+                          </div>
+                          <div className="border-t border-[#f0e0d0] mb-5" />
+                          <p className="text-[10px] uppercase tracking-[0.15em] text-[#0a0e1a]/40 font-semibold mb-2">{cs.client}</p>
+                          <h3 className="text-[15px] font-bold text-[#0a0e1a] leading-snug mb-3">{cs.title}</h3>
+                          <p className="text-sm text-[#0a0e1a]/52 leading-relaxed mb-5 flex-1">{cs.desc}</p>
+                          <div className="flex flex-wrap gap-1.5 mb-5">
+                            {cs.tags.map((tag) => (
+                              <span key={tag} className="text-[11px] px-2.5 py-1 rounded-lg font-medium" style={{ color: '#b86a30', background: 'rgba(240,160,96,0.10)', border: '1px solid rgba(240,160,96,0.18)' }}>{tag}</span>
+                            ))}
+                          </div>
+                          <div className="flex items-center justify-between pt-4 border-t border-[#f0e0d0]">
+                            <Link href={cs.serviceUrl} className="text-xs font-medium hover:text-[#e89a78] transition-colors" style={{ color: '#9b9589' }}>{cs.service}</Link>
+                            <span className="inline-flex items-center gap-1.5 text-xs font-semibold group-hover:gap-2.5 transition-all duration-200 cursor-pointer" style={{ color: '#e89a78' }}>
+                              Read more <ArrowIcon />
                             </span>
-                          ))}
+                          </div>
                         </div>
-
-                        {/* Footer */}
-                        <div className="flex items-center justify-between pt-4 border-t border-[#f0ece8]">
-                          <Link
-                            href={cs.serviceUrl}
-                            className="text-xs text-[#9b9589] hover:text-[#e89a78] transition-colors font-medium"
-                          >
-                            {cs.service}
-                          </Link>
-                          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#e89a78] group-hover:gap-2.5 transition-all duration-200 cursor-pointer">
-                            Read more
-                            <ArrowIcon />
-                          </span>
-                        </div>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-        )}
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
       </section>
 
       {/* ── CTA ── */}
-      <section className="max-w-9xl mx-auto px-5 sm:px-10 pb-20 sm:pb-28">
-        <motion.div
-          className="relative overflow-hidden flex flex-col sm:flex-row gap-8 items-start sm:items-center justify-between p-8 sm:p-12 rounded-2xl bg-[#0a0e1a]"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true, margin: '-40px' }}
-        >
-          {/* Decorative glow */}
-          <div className="absolute -top-12 -right-12 w-72 h-72 bg-[#e89a78]/10 rounded-full blur-3xl pointer-events-none" />
-
-          <div className="relative max-w-lg">
-            <p className="text-xs uppercase tracking-widest text-[#e89a78] font-semibold mb-3">
-              Ready to be next?
-            </p>
-            <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3 leading-tight">
-              Let&apos;s build your success story on Azure
-            </h3>
-            <p className="text-white/45 text-sm leading-relaxed">
-              Book a free 30-minute call. We&apos;ll assess where you are today and outline
-              a realistic path forward — no obligation, no pressure.
-            </p>
-          </div>
-
-          <Link
-            href={Constants.PAGES.SCHEDULE_CALL}
-            className="relative shrink-0 inline-flex items-center justify-center gap-2.5 px-7 min-h-[52px] rounded-full bg-[#e89a78] hover:bg-[#f0a060] text-white font-semibold text-sm transition-all duration-200 shadow-lg shadow-[#e89a78]/25 w-full sm:w-auto"
+      <section className="relative overflow-hidden" style={{ background: "linear-gradient(145deg, #fdf0e8 0%, #fff5ee 40%, #fff8f2 100%)" }}>
+        <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute rounded-full" style={{ width: 600, height: 600, top: "-20%", right: "-10%", background: "radial-gradient(circle, rgba(240,140,60,0.22) 0%, transparent 65%)", filter: "blur(70px)" }} />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-20">
+          <motion.div
+            className="rounded-[24px] px-10 py-10 flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between"
+            style={lg}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: '-40px' }}
           >
-            Schedule a free call
-            <ArrowIcon />
-          </Link>
-        </motion.div>
+            <div className="max-w-lg">
+              <p className="text-xs uppercase tracking-widest font-semibold mb-3" style={{ color: '#b86a30' }}>Ready to be next?</p>
+              <h3 className="text-2xl sm:text-3xl font-bold text-[#0a0e1a] mb-3 leading-tight">Let&apos;s build your success story on Azure</h3>
+              <p className="text-[#0a0e1a]/48 text-sm leading-relaxed">Book a free 30-minute call. We&apos;ll assess where you are today and outline a realistic path forward — no obligation, no pressure.</p>
+            </div>
+            <Link href={Constants.PAGES.SCHEDULE_CALL} className="shrink-0 inline-flex items-center justify-center gap-2.5 px-7 min-h-[52px] rounded-full font-semibold text-sm transition-all text-white w-full sm:w-auto hover:opacity-90" style={{ background: '#e89a78', boxShadow: '0 4px 16px rgba(232,154,120,0.35)' }}>
+              Schedule a free call
+              <ArrowIcon />
+            </Link>
+          </motion.div>
+        </div>
       </section>
 
       <ContactUsFooter />
