@@ -6,7 +6,7 @@ import Image from 'next/image';
 import RelatedArticles from '../RelatedArticles';
 import { AnimatePresence, motion } from 'framer-motion';
 
-type Section = { id: string; heading: string; content: string };
+type Section = { id: string; heading: string; content?: string; blocks?: ContentBlock[] };
 
 interface Props {
   post: IPost;
