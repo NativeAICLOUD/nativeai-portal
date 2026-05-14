@@ -1,5 +1,6 @@
 ﻿'use client';
 
+import { Constants } from "@/Constants";
 
 const MONO: React.CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
 
@@ -153,9 +154,37 @@ export default function AboutUsPage() {
                 work for you
               </span>
             </h1>
-            <p className="lg:max-w-[360px] text-[14px] text-[#0a0e1a]/52 leading-relaxed lg:pb-2">
-              NativeCloud is an AI and cloud engineering company. We help businesses move from "AI could be useful" to production systems that create real, measurable impact.
-            </p>
+            <div className="flex flex-col gap-4 lg:pb-2">
+              <p className="lg:max-w-[360px] text-[14px] text-[#0a0e1a]/52 leading-relaxed">
+                NativeCloud is an AI and cloud engineering company. We help businesses move from "AI could be useful" to production systems that create real, measurable impact.
+              </p>
+              <div className="flex items-center gap-2">
+                {[
+                  { name: 'LinkedIn', icon: 'icon-linkedin', url: Constants.SOCIALS.LINKEDIN },
+                  { name: 'Instagram', icon: 'icon-instagram', url: Constants.SOCIALS.INSTAGRAM },
+                ].map((s) => (
+                  <a
+                    key={s.name}
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={s.name}
+                    className="w-9 h-9 flex items-center justify-center transition-all duration-200 hover:scale-110"
+                    style={{
+                      ...lg3,
+                      borderRadius: '50%',
+                      width: 48,
+                      height: 48,
+                      color: '#b86a30',
+                    }}
+                  >
+                    <svg width="20" height="20">
+                      <use href={`/icons/all-icons.svg#${s.icon}`} />
+                    </svg>
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 

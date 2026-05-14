@@ -4,9 +4,9 @@ import { promises as fs } from 'fs';
 
 export const getBlogPosts = async (): Promise<IPost[]> => {
   const file = await fs.readFile(process.cwd() + '/public/blogs.json', 'utf8');
-  const posts = JSON.parse(file);
+  const posts: IPost[] = JSON.parse(file);
 
-  return posts;
+  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
 export const getSinglePost = async (id: number): Promise<IPost> => {

@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import AppProviders from "./components/AppProviders";
+import CookieBanner from "./components/ui/CookieBanner";
 
 const montserrat = Montserrat({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -38,6 +39,10 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html lang="en">
+        <head>
+          <link rel="preconnect" href="https://api.fontshare.com" />
+          <link href="https://api.fontshare.com/v2/css?f[]=fk-grotesk@400,500,600,700,800&display=swap" rel="stylesheet" />
+        </head>
         <body className={montserrat.className}>
           <ProgressBarProvider>
             <ProgressBar className="fixed z-[9999] top-0 left-0 h-[3px] bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#f5b87a] shadow-[0_0_12px_rgba(232,154,120,0.7),0_0_4px_rgba(232,154,120,0.5)] rounded-full" />
@@ -47,6 +52,7 @@ export default function RootLayout({
                 {children}
                 <Footer />
               </div>
+              <CookieBanner />
             </AppProviders>
           </ProgressBarProvider>
           <ToastContainer

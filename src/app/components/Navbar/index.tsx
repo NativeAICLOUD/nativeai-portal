@@ -4,7 +4,7 @@ import { Link } from 'react-transition-progress/next';
 import { Constants } from '@/Constants';
 import { PlusIcon, MinusIcon, CaretDownIcon } from '@radix-ui/react-icons';
 import { AnimatePresence, motion } from 'framer-motion';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import CoomingSoon from '../ui/CoomingSoon';
 import Logo from '../ui/Logo';
@@ -101,6 +101,12 @@ function Navbar() {
   const [isExpanded, setExpanded] = useState<string | null>(null);
   const [navHidden, setNavHidden] = useState(false);
   const [hamburgerRipple, setHamburgerRipple] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [allPosts, setAllPosts] = useState<IPost[]>([]);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const searchPanelRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const scrollTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastScrollY = useRef(0);
@@ -131,7 +137,41 @@ function Navbar() {
     setSlideMenu(false);
     setOpenSide(false);
     setExpanded(null);
+    setSearchOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    if (searchOpen) {
+      setTimeout(() => searchInputRef.current?.focus(), 50);
+      if (allPosts.length === 0) {
+        fetch('/blogs.json')
+          .then(r => r.json())
+          .then((data: IPost[]) =>
+            setAllPosts(data.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()))
+          )
+          .catch(() => {});
+      }
+    } else {
+      setSearchQuery('');
+    }
+  }, [searchOpen]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setSearchOpen(false); };
+    const onClickOutside = (e: MouseEvent) => {
+      if (searchPanelRef.current && !searchPanelRef.current.contains(e.target as Node)) {
+        setSearchOpen(false);
+      }
+    };
+    if (searchOpen) {
+      document.addEventListener('keydown', onKey);
+      document.addEventListener('mousedown', onClickOutside);
+    }
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('mousedown', onClickOutside);
+    };
+  }, [searchOpen]);
 
   const openMenu = (title = '') => {
     if (isScrolling.current) return;
@@ -201,10 +241,10 @@ function Navbar() {
                   style={MONO}
                   className={`relative flex items-center gap-1 px-3 py-1.5 rounded-lg text-base font-medium transition-colors duration-150 ${
                     pathname === '/'
-                      ? pathname === item.url
+                      ? (!item.children && pathname === item.url)
                         ? 'text-[#0a0e1a]'
                         : 'text-[#0a0e1a]/70 hover:text-[#0a0e1a] hover:bg-black/[0.05]'
-                      : pathname === item.url
+                      : (!item.children && pathname === item.url)
                       ? 'text-white'
                       : 'text-white/70 hover:text-white hover:bg-white/[0.06]'
                   }`}
@@ -219,7 +259,7 @@ function Navbar() {
                       <CaretDownIcon className="relative top-px opacity-50" aria-hidden />
                     </motion.span>
                   )}
-                  {pathname === item.url && (
+                  {!item.children && pathname === item.url && (
                     <span className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full bg-[#e89a78]" />
                   )}
                 </Link>
@@ -228,8 +268,23 @@ function Navbar() {
           ))}
         </ul>
 
-        {/* Right: Login + Hamburger */}
+        {/* Right: Search + Login + Hamburger */}
         <div className="flex items-center gap-3 shrink-0">
+          {/* Search icon */}
+          <button
+            onClick={() => { setSearchOpen(!searchOpen); setSlideMenu(false); }}
+            aria-label="Search"
+            className={`hidden lg:flex w-9 h-9 items-center justify-center rounded-full transition-all duration-200 ${
+              searchOpen
+                ? 'bg-[#e89a78]/20 text-[#e89a78]'
+                : pathname === '/' ? 'text-[#0a0e1a]/60 hover:text-[#0a0e1a] hover:bg-black/[0.06]' : 'text-white/60 hover:text-white hover:bg-white/[0.08]'
+            }`}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+            </svg>
+          </button>
+
           <button
             style={MONO}
             className={`hidden lg:flex items-center gap-1.5 text-sm transition-colors ${pathname === '/' ? 'text-[#0a0e1a]/60 hover:text-[#0a0e1a]/90' : 'text-white/60 hover:text-white/90'}`}
@@ -281,6 +336,118 @@ function Navbar() {
       </nav>
 
     </header>
+
+    {/* ── Search panel ── */}
+    <AnimatePresence>
+      {searchOpen && (
+        <motion.div
+          key="search-panel"
+          ref={searchPanelRef}
+          className="fixed left-0 right-0 z-[998]"
+          style={{ top: navH }}
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+        >
+          <div
+            className="w-full py-12 px-5 sm:px-8 relative overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 40%, #edfaf4 100%)',
+              borderBottom: '1px solid rgba(0,0,0,0.06)',
+              boxShadow: '0 8px 40px rgba(0,0,0,0.08)',
+            }}
+          >
+            {/* Right green glow */}
+            <div className="absolute top-0 right-0 w-[500px] h-full pointer-events-none" style={{ background: 'radial-gradient(ellipse at 80% 50%, rgba(52,211,153,0.18) 0%, transparent 65%)' }} />
+
+            <div className="relative max-w-[1200px] mx-auto flex flex-col gap-4">
+              {/* Input row */}
+              <div className="relative flex items-center">
+                <input
+                  ref={searchInputRef}
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && searchQuery.trim()) {
+                      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+                      setSearchOpen(false);
+                    }
+                  }}
+                  placeholder="Add your search term"
+                  className="w-full outline-none text-[16px] text-[#0a0e1a] placeholder:text-[#aaaaaa]"
+                  style={{
+                    background: '#F5F5F5',
+                    borderRadius: 50,
+                    border: 'none',
+                    padding: '20px 200px 20px 32px',
+                    boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.06)',
+                  }}
+                />
+                <button
+                  onClick={() => {
+                    if (searchQuery.trim()) {
+                      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+                      setSearchOpen(false);
+                    }
+                  }}
+                  className="absolute right-2 flex items-center gap-2 text-white text-sm font-semibold px-6 py-3.5 transition-all duration-200 hover:opacity-90 active:scale-[0.97]"
+                  style={{ background: '#0a0e1a', borderRadius: 50 }}
+                >
+                  <span className="hidden sm:inline">Find results</span>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+                  </svg>
+                </button>
+              </div>
+
+              {/* Live results */}
+              {searchQuery.trim().length > 0 && (() => {
+                const q = searchQuery.toLowerCase();
+                const hits = allPosts.filter(p =>
+                  p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)
+                ).slice(0, 5);
+                return hits.length > 0 ? (
+                  <div className="rounded-2xl overflow-hidden" style={{ background: 'rgba(255,255,255,0.90)', border: '1px solid rgba(0,0,0,0.07)', boxShadow: '0 4px 24px rgba(0,0,0,0.06)' }}>
+                    {hits.map((post, i) => (
+                      <button
+                        key={post.id}
+                        onClick={() => { router.push(`/knowledge-base/${post.id}`); setSearchOpen(false); }}
+                        className={`w-full flex items-start gap-4 px-5 py-3.5 text-left hover:bg-[#f5f5f5] transition-colors ${i > 0 ? 'border-t border-black/[0.05]' : ''}`}
+                      >
+                        <div className="w-5 h-5 mt-0.5 shrink-0 text-[#aaaaaa]">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+                          </svg>
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-[13.5px] font-semibold text-[#0a0e1a] leading-snug truncate">{post.title}</p>
+                          <p className="text-[11.5px] text-[#0a0e1a]/45 mt-0.5 leading-snug line-clamp-1">{post.desc}</p>
+                        </div>
+                        <svg className="shrink-0 mt-1 w-3.5 h-3.5 text-[#cccccc]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                      </button>
+                    ))}
+                    <div className="px-5 py-3 border-t border-black/[0.05]" style={{ background: 'rgba(248,249,255,0.80)' }}>
+                      <button
+                        onClick={() => { router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`); setSearchOpen(false); }}
+                        className="text-[12px] font-medium text-[#0a0e1a] hover:opacity-75 transition-opacity"
+                      >
+                        See all results for &ldquo;{searchQuery}&rdquo; →
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <p className="text-sm text-[#0a0e1a]/40 px-2">No articles found for &ldquo;{searchQuery}&rdquo;</p>
+                );
+              })()}
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
 
     {/* ── Mega menu dropdown ── */}
     <AnimatePresence>

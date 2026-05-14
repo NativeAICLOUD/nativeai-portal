@@ -16,7 +16,6 @@ import FrameMail from '../public/img/Frame.png';
 import BGGroupLogo from '../public/img/Group 31.png';
 import LaptopImg from '../public/img/laptop.png';
 import AzureMockup from '../public/img/azure-devops.png';
-import Team from '../public/img/team.png';
 import Microservices from '../public/img/microservices.png';
 import Stack from '../public/img/stack.png';
 
@@ -47,7 +46,6 @@ export {
   BGGroupLogo,
   LaptopImg,
   AzureMockup,
-  Team,
   Microservices,
   Stack
 };

@@ -41,9 +41,9 @@ export const Constants = {
     PRIVACY: '/privacy-policy',
   },
   SOCIALS: {
-    INSTAGRAM: 'https://instagram.com',
+    INSTAGRAM: 'https://www.instagram.com/nativecloud_/',
     FACEBOOK: 'https://facebook.com',
-    LINKEDIN: 'https://linkedin.com',
+    LINKEDIN: 'https://linkedin.com/company/103508499/',
   },
   MAIL: 'artan@nativeai.cloud',
   ADDRESS: 'Eeast Gate Skopje Building A1',

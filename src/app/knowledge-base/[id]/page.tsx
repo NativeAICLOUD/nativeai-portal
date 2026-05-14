@@ -1,18 +1,26 @@
-import RelatedArticles from '@/app/components/partials/RelatedArticles';
-import { BG5Img } from '@/ImagePath';
 import { getBlogPosts, getSinglePost } from '@/lib/blogsPosts';
-import { formatDistanceToNow } from 'date-fns';
 import { shuffle, take } from 'lodash';
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import { redirect } from 'next/navigation';
-import { Link } from 'react-transition-progress/next';
+import ArticleClient from '@/app/components/partials/knowledge-base/ArticleClient';
+import richArticles from '@/data/richArticles';
+
+function resolveOgImage(imagePath: string): string {
+  const base = 'https://native.cloud';
+  // Already absolute
+  if (imagePath.startsWith('http')) return imagePath;
+  // Encode spaces and special chars in the path, preserving slashes
+  const encoded = imagePath.split('/').map(encodeURIComponent).join('/');
+  return `${base}${encoded}`;
+}
 
 export async function generateMetadata({ params }: any): Promise<Metadata> {
   const post = await getSinglePost(+params?.id);
   if (!post?.id) return {};
   const desc = post.desc.slice(0, 160);
-  const imageUrl = post.image.startsWith('http') ? post.image : `https://native.cloud${post.image}`;
+  const imageUrl = resolveOgImage(post.image);
+  const articleUrl = `https://native.cloud/knowledge-base/${post.id}`;
+  const publishedTime = post.date ? new Date(post.date).toISOString() : undefined;
   return {
     title: `${post.title} | NativeCloud`,
     description: desc,
@@ -20,132 +28,89 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
       title: post.title,
       description: desc,
       type: 'article',
-      url: `https://native.cloud/knowledge-base/${post.id}`,
+      url: articleUrl,
+      siteName: 'NativeCloud',
+      locale: 'en_US',
       images: [{ url: imageUrl, width: 1200, height: 630, alt: post.title }],
+      ...(publishedTime && {
+        publishedTime,
+        authors: ['https://native.cloud/about-us'],
+      }),
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description: desc,
       images: [imageUrl],
+      creator: '@nativecloud_',
+      site: '@nativecloud_',
     },
   };
 }
 
+const SECTION_HEADINGS: Record<number, string[]> = {
+  1: ['Introduction', 'Setting Up Azure OpenAI', 'Making Your First API Call', 'Production Tips'],
+  2: ['Overview', 'Migration Strategies', 'Step-by-Step Walkthrough', 'Post-Migration Validation'],
+  3: ['Introduction', 'Azure DevOps vs GitHub Actions', 'Building the Pipeline', 'Secrets & Rollback Strategies'],
+  4: ['From Monolith to Microservices', 'Architecture Design', 'Distributed Tracing & Messaging', 'Avoiding Common Pitfalls'],
+  5: ['Introduction', 'Cluster Configuration', 'Workload Identity & Secrets', 'High Availability & Autoscaling'],
+  6: ['Why Cloud Costs Spiral', 'Right-Sizing & Reserved Instances', 'Auto-Shutdown & Serverless', 'Cost Alerts & Budgets'],
+  7: ['What is RAG?', 'Indexing Your Data', 'Retrieval & Prompt Assembly', 'Evaluation & Quality'],
+  8: ['The Zero Trust Mindset', 'Identity & Access Controls', 'Network Hardening', 'Security Monitoring'],
+};
+
+const CATEGORIES: Record<number, string> = {
+  1: 'Azure AI',
+  2: 'Migration',
+  3: 'DevOps',
+  4: 'Cloud Native',
+  5: 'Kubernetes',
+  6: 'Cloud Costs',
+  7: 'AI & RAG',
+  8: 'Security',
+  9: 'Infrastructure as Code',
+};
+
+function buildSections(desc: string, id: number) {
+  const sentences = desc.match(/[^.!?]+[.!?]+\s*/g) ?? [desc];
+  const headings = SECTION_HEADINGS[id] ?? ['Overview', 'Core Concepts', 'Implementation', 'Key Takeaways'];
+  const count = headings.length;
+  const chunkSize = Math.ceil(sentences.length / count);
+
+  return headings.map((heading, i) => ({
+    id: heading.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+    heading,
+    content: sentences.slice(i * chunkSize, (i + 1) * chunkSize).join('').trim(),
+  })).filter((s) => s.content.length > 0);
+}
+
 const KnowledgeBaseDetailPage = async ({ params }: any) => {
   const post = await getSinglePost(+params?.id);
-
   if (!post.id) redirect('/not-found');
 
   const posts = await getBlogPosts();
-  const related = take(shuffle(posts.filter(p => p.id !== post.id)), 3);
+  const related = take(shuffle(posts.filter((p) => p.id !== post.id)), 3);
 
-  // Split desc into paragraphs (split on double space or '. ' boundaries for readability)
-  const sentences = post.desc.split('. ');
-  const mid = Math.ceil(sentences.length / 2);
-  const para1 = sentences.slice(0, mid).join('. ') + '.';
-  const para2 = sentences.slice(mid).join('. ');
+  const richSections = richArticles[post.id];
+  const sections = richSections ?? buildSections(post.desc, post.id);
+  const wordCount = richSections
+    ? richSections.flatMap(s => s.blocks).filter(b => b.type === 'paragraph' || b.type === 'heading3').map(b => ('text' in b ? b.text : '')).join(' ').split(' ').length
+    : post.desc.split(' ').length;
+  const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+  const publishDate = post.date
+    ? new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+    : '';
+  const category = CATEGORIES[post.id] ?? 'Azure & Cloud';
 
   return (
-    <div className="relative min-h-full">
-
-      {/* Background */}
-      <div className="absolute w-full h-full z-[-1] top-16 inset-x-0">
-        <Image src={BG5Img} alt="Background" className="!h-auto md:!-top-36" layout="fill" objectFit="cover" objectPosition="top" quality={100} />
-      </div>
-
-      {/* Hero image */}
-      <div className="relative w-full h-[280px] sm:h-[380px] lg:h-[440px] overflow-hidden">
-        <Image src={post.image} alt={post.title} fill objectFit="cover" quality={100} className="object-center" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-
-        {/* Back link */}
-        <div className="absolute top-0 left-0 right-0 pt-28 px-5 sm:px-8">
-          <Link
-            href="/knowledge-base"
-            className="inline-flex items-center gap-1.5 text-white/70 hover:text-white text-sm font-medium transition-colors"
-          >
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-              <path d="M19 12H5M12 5l-7 7 7 7" />
-            </svg>
-            Knowledge base
-          </Link>
-        </div>
-
-        {/* Title overlay */}
-        <div className="absolute bottom-0 left-0 right-0 px-5 sm:px-8 pb-8 max-w-4xl mx-auto w-full" style={{ left: '50%', transform: 'translateX(-50%)' }}>
-          <p className="text-white/60 text-xs font-medium uppercase tracking-widest mb-2">
-            {post.date ? formatDistanceToNow(new Date(post.date), { addSuffix: true }) : ''}
-          </p>
-          <h1 className="text-white font-extrabold text-2xl sm:text-3xl lg:text-4xl leading-tight">
-            {post.title}
-          </h1>
-        </div>
-      </div>
-
-      {/* Article body */}
-      <div className="relative mx-auto max-w-3xl px-5 sm:px-8 py-12">
-
-        {/* Reading time + share row */}
-        <div className="flex items-center justify-between mb-8 pb-6 border-b border-black/[0.08]">
-          <div className="flex items-center gap-4 text-xs text-[#0a0e1a]/40 font-medium">
-            <span className="flex items-center gap-1.5">
-              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
-              </svg>
-              {Math.ceil(post.desc.split(' ').length / 200)} min read
-            </span>
-            <span className="flex items-center gap-1.5">
-              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
-              </svg>
-              {post.date ? new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : ''}
-            </span>
-          </div>
-          <div
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold"
-            style={{ background: 'rgba(248,146,1,0.10)', color: '#c4743c', border: '1px solid rgba(248,146,1,0.25)' }}
-          >
-            Azure &amp; Cloud
-          </div>
-        </div>
-
-        {/* Content */}
-        <div className="prose prose-lg max-w-none">
-          <p className="text-[#0a0e1a]/70 text-base sm:text-lg leading-relaxed mb-6">
-            {para1}
-          </p>
-          <p className="text-[#0a0e1a]/70 text-base sm:text-lg leading-relaxed mb-8">
-            {para2}
-          </p>
-        </div>
-
-        {/* CTA block */}
-        <div
-          className="rounded-2xl px-6 py-6 mt-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-          style={{ background: '#0a0e1a' }}
-        >
-          <div>
-            <p className="text-white font-semibold text-base mb-1">Want to implement this for your business?</p>
-            <p className="text-white/45 text-sm">Book a free call with our team and we will walk you through it.</p>
-          </div>
-          <Link
-            href="/schedule-call"
-            className="shrink-0 inline-flex items-center gap-2 px-5 py-3 rounded-full text-sm font-semibold text-[#0a0e1a] bg-[#e89a78] hover:bg-[#d4836a] transition-colors whitespace-nowrap"
-          >
-            Schedule a call
-            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </Link>
-        </div>
-      </div>
-
-      {/* Related articles */}
-      <div className="pb-24 px-5 sm:px-8 max-w-7xl mx-auto">
-        <RelatedArticles posts={related} />
-      </div>
-    </div>
+    <ArticleClient
+      post={post}
+      sections={sections}
+      related={related}
+      readingTime={readingTime}
+      publishDate={publishDate}
+      category={category}
+    />
   );
 };
 

@@ -50,7 +50,6 @@ const navColumns = [
 const socials = [
   { name: 'LinkedIn', icon: 'icon-linkedin', url: Constants.SOCIALS.LINKEDIN },
   { name: 'Instagram', icon: 'icon-instagram', url: Constants.SOCIALS.INSTAGRAM },
-  { name: 'Facebook', icon: 'icon-facebook', url: Constants.SOCIALS.FACEBOOK },
 ];
 
 type NavLink = { url: string; title: string };
@@ -124,6 +123,22 @@ function Footer() {
                   {Constants.MAIL}
                 </a>
               </div>
+              <div className="flex items-center gap-2">
+                {socials.map((s) => (
+                  <a
+                    key={s.name}
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={s.name}
+                    className="w-8 h-8 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#e89a78]/40 flex items-center justify-center transition-all duration-200"
+                  >
+                    <svg className="text-white/60" width={13} height={13}>
+                      <use href={`/icons/all-icons.svg#${s.icon}`} />
+                    </svg>
+                  </a>
+                ))}
+              </div>
             </div>
 
             {/* Nav columns */}
@@ -145,28 +160,75 @@ function Footer() {
 
           {/* Newsletter row */}
           <div className="py-10 border-b border-white/8">
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+            <div className="flex flex-col gap-5 w-full lg:max-w-md" style={{ fontFamily: "'FK Grotesk', sans-serif" }}>
               <div>
                 <p className="text-white text-base font-semibold mb-1">Stay up to date</p>
                 <p className="text-white/40 text-sm">Subscribe to our newsletter — no spam, just product updates and AI insights.</p>
               </div>
-              <form className="flex flex-col sm:flex-row gap-3 w-full lg:max-w-md" onSubmit={(e) => e.preventDefault()}>
-                <input
-                  type="email"
-                  placeholder="Your email address"
-                  className="flex-1 bg-white/5 border border-white/10 focus:border-[#e89a78]/50 outline-none rounded-full px-5 py-3 text-white text-sm placeholder:text-white/30 transition-colors"
-                />
-                <button
-                  type="submit"
-                  className="shrink-0 bg-[#e89a78] hover:bg-[#d4836a] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors whitespace-nowrap"
-                >
-                  Subscribe
-                </button>
-              </form>
+              <div className="flex flex-col gap-4 w-full">
+                <form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <input
+                      type="text"
+                      placeholder="First name"
+                      className="flex-1 bg-white/5 border border-white/10 focus:border-[#e89a78]/50 outline-none rounded-full px-5 py-3 text-white text-sm placeholder:text-white/30 transition-colors"
+                    />
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      className="flex-1 bg-white/5 border border-white/10 focus:border-[#e89a78]/50 outline-none rounded-full px-5 py-3 text-white text-sm placeholder:text-white/30 transition-colors"
+                    />
+                  </div>
+                  <label className="flex items-start gap-2.5 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      required
+                      className="mt-0.5 shrink-0 accent-[#e89a78] w-4 h-4 cursor-pointer"
+                    />
+                    <span className="text-white/40 text-xs leading-relaxed">
+                      I accept the{" "}
+                      <Link href={Constants.PAGES.PRIVACY} className="text-[#e89a78] hover:text-[#f0a060] underline transition-colors">
+                        NativeAI Privacy Policy
+                      </Link>
+                    </span>
+                  </label>
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                    <button
+                      type="submit"
+                      className="w-full sm:w-auto bg-[#e89a78] hover:bg-[#d4836a] text-white text-sm font-medium px-8 py-3 rounded-full transition-colors whitespace-nowrap"
+                    >
+                      Sign Up
+                    </button>
+                    <p className="text-white/25 text-[10px] leading-relaxed">
+                      Protected by reCAPTCHA —{" "}
+                      <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/40 transition-colors">Privacy</a>
+                      {" & "}
+                      <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/40 transition-colors">Terms</a>
+                    </p>
+                  </div>
+                </form>
+                {/* Socials below form */}
+                <div className="flex items-center gap-2">
+                  {socials.map((s) => (
+                    <a
+                      key={s.name}
+                      href={s.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={s.name}
+                      className="w-9 h-9 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#e89a78]/40 flex items-center justify-center transition-all duration-200"
+                    >
+                      <svg className="text-white/60" width={15} height={15}>
+                        <use href={`/icons/all-icons.svg#${s.icon}`} />
+                      </svg>
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Bottom row: partners + socials + copyright */}
+          {/* Bottom row: partners + copyright */}
           <div className="pt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
 
             {/* Partner logos */}
@@ -181,24 +243,6 @@ function Footer() {
                 alt="AWS Partner"
                 className="h-6 w-auto opacity-30 hover:opacity-50 transition-opacity"
               />
-            </div>
-
-            {/* Socials */}
-            <div className="flex items-center gap-2">
-              {socials.map((s) => (
-                <a
-                  key={s.name}
-                  href={s.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.name}
-                  className="w-9 h-9 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#e89a78]/40 flex items-center justify-center transition-all duration-200"
-                >
-                  <svg className="text-white/60" width={15} height={15}>
-                    <use href={`/icons/all-icons.svg#${s.icon}`} />
-                  </svg>
-                </a>
-              ))}
             </div>
 
             {/* Copyright */}

@@ -4,6 +4,17 @@ import Image from 'next/image';
 import KnowledgeBasePosts from '../components/partials/knowledge-base';
 import { getBlogPosts } from '@/lib/blogsPosts';
 
+const CATEGORIES: Record<number, string> = {
+  1: 'Azure AI',
+  3: 'DevOps',
+  4: 'Cloud Native',
+  5: 'Kubernetes',
+  6: 'Cloud Costs',
+  7: 'AI & RAG',
+  8: 'Security',
+  9: 'Infrastructure as Code',
+};
+
 export const metadata: Metadata = {
   title: 'Knowledge Base | NativeCloud',
   description: 'Guides, articles and news on Azure, AI, Kubernetes, cloud-native architecture and modern software engineering.',
@@ -65,7 +76,7 @@ const KnowledgeBasePage = async () => {
 
         </div>
 
-        <KnowledgeBasePosts posts={posts} />
+        <KnowledgeBasePosts posts={posts} categories={CATEGORIES} />
       </div>
     </div>
   );
