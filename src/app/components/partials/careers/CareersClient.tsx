@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 
 const LINKEDIN_COMPANY_URL = 'https://www.linkedin.com/company/nativecloud';
 
