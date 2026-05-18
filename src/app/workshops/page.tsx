@@ -1,4 +1,4 @@
-import { BG3Img, BG_INVERSE, BGGroupLogo } from '@/ImagePath';
+﻿import { BG3Img, BG_INVERSE, BGGroupLogo } from '@/ImagePath';
 import type { Metadata } from 'next';
 import WorkshopCards from '../components/partials/workshop';
 import Image from 'next/image';
@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Workshops | NativeCloud',
     description: 'Hands-on Azure, Kubernetes and AI workshops for engineering teams. Live sessions, real workloads, expert instructors.',
-    url: 'https://native.cloud/workshops',
-    images: [{ url: 'https://native.cloud/native.cloud-og.png', width: 1200, height: 630 }],
+    url: 'https://nativeai.cloud/workshops',
+    images: [{ url: 'https://nativeai.cloud/nativeai.cloud-og.png', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Workshops | NativeCloud',
     description: 'Hands-on Azure, Kubernetes and AI workshops for engineering teams.',
-    images: ['https://native.cloud/native.cloud-og.png'],
+    images: ['https://nativeai.cloud/nativeai.cloud-og.png'],
   },
 };
 

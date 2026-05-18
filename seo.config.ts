@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 const defineMetadata = <T extends Metadata>(metadata: T) => metadata;
 
 const { url, title, description, keywords } = {
-  url: 'https://native.cloud',
+  url: 'https://nativeai.cloud',
   title: 'NativeCloud | AI Agents & Cloud Solutions',
   description:
     'We build AI Agents, RAG pipelines and LLM-powered solutions that work inside your business. Specialising in Azure OpenAI, GPT-4o and cloud-native architecture.',
@@ -43,7 +43,7 @@ const seoConfig = defineMetadata({
     locale: 'en_US',
     images: [
       {
-        url: '/native.cloud-og.png',
+        url: '/nativeai.cloud-og.png',
         width: 1395,
         height: 697,
       },
@@ -53,7 +53,7 @@ const seoConfig = defineMetadata({
     card: 'summary_large_image',
     title,
     description,
-    images: ['/native.cloud-og.png'],
+    images: ['/nativeai.cloud-og.png'],
   },
 });
 

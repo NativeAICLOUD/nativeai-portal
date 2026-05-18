@@ -128,7 +128,7 @@ export default function SolutionsPage() {
                   >
                     Solutions<br />
                     <span style={{
-                      background: "linear-gradient(135deg, #e89a78 0%, #fb923c 60%, #fbbf24 100%)",
+                      background: "linear-gradient(135deg, #e89a78 0%, #f0a060 60%, #fbbf24 100%)",
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
                       backgroundClip: "text",
@@ -188,7 +188,7 @@ export default function SolutionsPage() {
                         <div className="flex items-center gap-2.5">
                           <div
                             className="w-9 h-9 rounded-xl flex items-center justify-center"
-                            style={{ background: "linear-gradient(135deg, #e89a78, #fb923c)", boxShadow: "0 2px 12px rgba(232,154,120,0.40)" }}
+                            style={{ background: "linear-gradient(135deg, #e89a78, #f0a060)", boxShadow: "0 2px 12px rgba(232,154,120,0.40)" }}
                           >
                             <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="white" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" /></svg>
                           </div>
@@ -216,7 +216,7 @@ export default function SolutionsPage() {
                         <Link
                           href="/schedule-call"
                           className="flex items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold text-white"
-                          style={{ background: "linear-gradient(135deg, #e89a78, #fb923c)", boxShadow: "0 4px 16px rgba(232,154,120,0.38)" }}
+                          style={{ background: "linear-gradient(135deg, #e89a78, #f0a060)", boxShadow: "0 4px 16px rgba(232,154,120,0.38)" }}
                         >
                           Schedule a free call
                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7" /><path d="M7 7h10v10" /></svg>

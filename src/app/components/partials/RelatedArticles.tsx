@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import KBCard from './knowledge-base/KBCard';
 

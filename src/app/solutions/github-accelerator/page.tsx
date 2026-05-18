@@ -356,7 +356,7 @@ export default function GitHubAcceleratorPage() {
                   >
                     Deliver software<br />
                     <span style={{
-                      background: 'linear-gradient(135deg, #e89a78 0%, #fb923c 55%, #4A90D9 100%)',
+                      background: 'linear-gradient(135deg, #e89a78 0%, #f0a060 55%, #4A90D9 100%)',
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',
                       backgroundClip: 'text',
@@ -496,7 +496,7 @@ export default function GitHubAcceleratorPage() {
               >
                 Three modules.<br />
                 <span style={{
-                  background: 'linear-gradient(135deg, #e89a78 0%, #fb923c 100%)',
+                  background: 'linear-gradient(135deg, #e89a78 0%, #f0a060 100%)',
                   WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
                 }}>
                   One program.
@@ -621,7 +621,7 @@ export default function GitHubAcceleratorPage() {
               >
                 Wherever you start,<br />
                 <span style={{
-                  background: 'linear-gradient(135deg, #e89a78 0%, #fb923c 100%)',
+                  background: 'linear-gradient(135deg, #e89a78 0%, #f0a060 100%)',
                   WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
                 }}>
                   we get you there.

@@ -159,7 +159,7 @@ export default function CustomDevelopmentPage() {
                   We build<br />
                   products that<br />
                   <span style={{
-                    background: "linear-gradient(90deg, #e89a78 0%, #fb923c 60%, #e89a78 100%)",
+                    background: "linear-gradient(90deg, #e89a78 0%, #f0a060 60%, #e89a78 100%)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",
@@ -238,7 +238,7 @@ export default function CustomDevelopmentPage() {
                       {/* Header */}
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2.5">
-                          <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: "linear-gradient(135deg, #e89a78, #fb923c)", boxShadow: "0 2px 12px rgba(232,154,120,0.40)" }}>
+                          <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: "linear-gradient(135deg, #e89a78, #f0a060)", boxShadow: "0 2px 12px rgba(232,154,120,0.40)" }}>
                             <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="white" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
                               <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
                             </svg>
@@ -272,7 +272,7 @@ export default function CustomDevelopmentPage() {
                         <div className="h-2 rounded-full overflow-hidden" style={{ background: "rgba(232,154,120,0.15)" }}>
                           <motion.div
                             className="h-full rounded-full"
-                            style={{ background: "linear-gradient(90deg, #e89a78, #fb923c)" }}
+                            style={{ background: "linear-gradient(90deg, #e89a78, #f0a060)" }}
                             initial={{ width: 0 }}
                             animate={{ width: "67%" }}
                             transition={{ duration: 1.4, delay: 0.6, ease: "easeOut" }}

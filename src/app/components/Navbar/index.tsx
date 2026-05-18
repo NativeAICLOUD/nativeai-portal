@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { Link } from 'react-transition-progress/next';
 import { Constants } from '@/Constants';
@@ -86,6 +86,7 @@ const pages: Pages[] = [
   },
   { url: Constants.PAGES.WORKSHOPS,    title: 'Workshops'     },
   { url: Constants.PAGES.KNOWLEDGE_BASE, title: 'Knowledge base' },
+  { url: Constants.PAGES.CAREERS,     title: 'Careers'       },
   { url: Constants.PAGES.ABOUT_US,     title: 'About'         },
   { url: Constants.PAGES.SCHEDULE_CALL, title: 'Schedule a call' },
 ];
@@ -272,9 +273,9 @@ function Navbar() {
         <div className="flex items-center gap-3 shrink-0">
           {/* Search icon */}
           <button
-            onClick={() => { setSearchOpen(!searchOpen); setSlideMenu(false); }}
+            onClick={() => { setSearchOpen(!searchOpen); setSlideMenu(false); setOpenSide(false); }}
             aria-label="Search"
-            className={`hidden lg:flex w-9 h-9 items-center justify-center rounded-full transition-all duration-200 ${
+            className={`flex w-9 h-9 items-center justify-center rounded-full transition-all duration-200 ${
               searchOpen
                 ? 'bg-[#e89a78]/20 text-[#e89a78]'
                 : pathname === '/' ? 'text-[#0a0e1a]/60 hover:text-[#0a0e1a] hover:bg-black/[0.06]' : 'text-white/60 hover:text-white hover:bg-white/[0.08]'
@@ -590,6 +591,45 @@ function Navbar() {
             <path d="M18 6 6 18M6 6l12 12" />
           </svg>
         </motion.button>
+      </div>
+
+      {/* Search bar */}
+      <div className="px-4 pt-2 pb-4 shrink-0">
+        <div className="relative flex items-center">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            onKeyDown={e => {
+              if (e.key === 'Enter' && searchQuery.trim()) {
+                router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+                setOpenSide(false);
+              }
+            }}
+            placeholder="Search…"
+            className="w-full outline-none text-[15px] text-white placeholder:text-white/30"
+            style={{
+              background: 'rgba(255,255,255,0.07)',
+              borderRadius: 50,
+              border: '1px solid rgba(255,255,255,0.10)',
+              padding: '14px 56px 14px 20px',
+            }}
+          />
+          <button
+            onClick={() => {
+              if (searchQuery.trim()) {
+                router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+                setOpenSide(false);
+              }
+            }}
+            className="absolute right-2 w-9 h-9 flex items-center justify-center rounded-full transition-all hover:bg-white/10"
+            style={{ color: 'rgba(255,255,255,0.50)' }}
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Nav items */}

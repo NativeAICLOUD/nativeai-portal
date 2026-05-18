@@ -1,4 +1,4 @@
-import { BG5Img } from '@/ImagePath';
+﻿import { BG5Img } from '@/ImagePath';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import KnowledgeBasePosts from '../components/partials/knowledge-base';
@@ -21,14 +21,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Knowledge Base | NativeCloud',
     description: 'Guides, articles and news on Azure, AI, Kubernetes, cloud-native architecture and modern software engineering.',
-    url: 'https://native.cloud/knowledge-base',
-    images: [{ url: 'https://native.cloud/native.cloud-og.png', width: 1200, height: 630 }],
+    url: 'https://nativeai.cloud/knowledge-base',
+    images: [{ url: 'https://nativeai.cloud/nativeai.cloud-og.png', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Knowledge Base | NativeCloud',
     description: 'Guides, articles and news on Azure, AI, Kubernetes and cloud-native architecture.',
-    images: ['https://native.cloud/native.cloud-og.png'],
+    images: ['https://nativeai.cloud/nativeai.cloud-og.png'],
   },
 };
 

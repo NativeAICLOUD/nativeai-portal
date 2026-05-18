@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:nativeai.cloud)"
+      "WebFetch(domain:nativeai.cloud)",
+      "Bash(curl -s \"https://careers.intercept.cloud/o/netc-developer\")",
+      "Bash(npx tsc *)",
+      "Bash(Get-ChildItem \"C:\\\\NativeCloud\\\\NativeCloud-Portal\\\\public\\\\img\")",
+      "Bash(Sort-Object LastWriteTime -Descending)",
+      "Bash(Select-Object -First 15)",
+      "Bash(Format-Table Name, LastWriteTime)"
     ]
   }
 }

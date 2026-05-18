@@ -1,4 +1,4 @@
-import { Montserrat } from "next/font/google";
+﻿import { Montserrat } from "next/font/google";
 import type { Viewport } from "next";
 import seoConfig from "../../seo.config";
 import "./globals.css";

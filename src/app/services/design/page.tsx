@@ -198,7 +198,7 @@ export default function DesignPage() {
 
                   {/* Design tokens */}
                   <div className="flex items-center gap-2.5 pt-1">
-                    {["#c084fc","#f472b6","#60a5fa","#34d399","#fb923c"].map((c) => (
+                    {["#c084fc","#f472b6","#60a5fa","#34d399","#f0a060"].map((c) => (
                       <div key={c} className="w-6 h-6 rounded-full ring-2 ring-white/80 shadow-sm shrink-0" style={{ background: c }} />
                     ))}
                     <div className="flex-1 h-px mx-1 bg-black/08" />

@@ -6,7 +6,7 @@ import ArticleClient from '@/app/components/partials/knowledge-base/ArticleClien
 import richArticles from '@/data/richArticles';
 
 function resolveOgImage(imagePath: string): string {
-  const base = 'https://native.cloud';
+  const base = 'https://nativeai.cloud';
   // Already absolute
   if (imagePath.startsWith('http')) return imagePath;
   // Encode spaces and special chars in the path, preserving slashes
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
   if (!post?.id) return {};
   const desc = post.desc.slice(0, 160);
   const imageUrl = resolveOgImage(post.image);
-  const articleUrl = `https://native.cloud/knowledge-base/${post.id}`;
+  const articleUrl = `https://nativeai.cloud/knowledge-base/${post.id}`;
   const publishedTime = post.date ? new Date(post.date).toISOString() : undefined;
   return {
     title: `${post.title} | NativeCloud`,
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
       images: [{ url: imageUrl, width: 1200, height: 630, alt: post.title }],
       ...(publishedTime && {
         publishedTime,
-        authors: ['https://native.cloud/about-us'],
+        authors: ['https://nativeai.cloud/about-us'],
       }),
     },
     twitter: {

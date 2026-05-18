@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 /**
  * Elliptical orbital rings — center at (100, 600), rotation -10°.

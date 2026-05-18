@@ -310,7 +310,7 @@ export default function AIAcceleratorPage() {
                   >
                     Build AI solutions<br />
                     <span style={{
-                      background: 'linear-gradient(135deg, #e89a78 0%, #fb923c 50%, #9b7fe8 100%)',
+                      background: 'linear-gradient(135deg, #e89a78 0%, #f0a060 50%, #9b7fe8 100%)',
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',
                       backgroundClip: 'text',
@@ -447,7 +447,7 @@ export default function AIAcceleratorPage() {
               <h2 className="text-4xl md:text-5xl font-extrabold text-white leading-[1.06]" style={{ letterSpacing: '-0.035em' }}>
                 Three modules.<br />
                 <span style={{
-                  background: 'linear-gradient(135deg, #e89a78 0%, #fb923c 100%)',
+                  background: 'linear-gradient(135deg, #e89a78 0%, #f0a060 100%)',
                   WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
                 }}>
                   One complete program.
@@ -566,7 +566,7 @@ export default function AIAcceleratorPage() {
               <h2 className="text-4xl md:text-5xl font-extrabold text-white leading-[1.06]" style={{ letterSpacing: '-0.035em' }}>
                 Innovate freely.<br />
                 <span style={{
-                  background: 'linear-gradient(135deg, #e89a78 0%, #fb923c 100%)',
+                  background: 'linear-gradient(135deg, #e89a78 0%, #f0a060 100%)',
                   WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
                 }}>
                   Stay in control.

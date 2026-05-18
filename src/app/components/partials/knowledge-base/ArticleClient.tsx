@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -91,7 +91,7 @@ export default function ArticleClient({ post, sections, related, readingTime, pu
               <div className="rounded-2xl p-5 flex flex-col gap-3" style={{ background: 'rgba(255,255,255,0.72)', border: '1px solid rgba(255,255,255,0.90)', backdropFilter: 'blur(20px)', boxShadow: '0 4px 24px rgba(232,154,120,0.12)' }}>
                 <p className="text-[10px] font-bold uppercase tracking-[0.12em]" style={{ color: '#e89a78' }}>Author</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-full flex items-center justify-center shrink-0 text-white font-bold text-sm" style={{ background: 'linear-gradient(135deg, #e89a78 0%, #d4836a 100%)' }}>AA</div>
+                  <Image src="/img/Artan.png" alt="Artan Ajredini" width={64} height={64} className="w-16 h-16 rounded-full object-cover shrink-0" style={{ border: '1.5px solid rgba(232,154,120,0.4)' }} />
                   <div>
                     <p className="text-[13px] font-bold text-[#0a0e1a]">Artan Ajredini</p>
                     <p className="text-[11px] text-[#0a0e1a]/45 mt-0.5">CEO & Cloud Architect</p>
@@ -213,7 +213,21 @@ export default function ArticleClient({ post, sections, related, readingTime, pu
                             /* Simple quote without illustration */
                             <blockquote className="pl-5 border-l-4 border-[#e89a78]">
                               <p className="text-[16px] italic leading-relaxed" style={{ color: '#666' }}>&ldquo;{block.text}&rdquo;</p>
-                              {block.author && <cite className="block mt-2 text-[12px] not-italic" style={{ color: '#aaa' }}>— {block.author}</cite>}
+                              {block.author && (
+                                <cite className="flex items-center gap-2.5 mt-3 not-italic">
+                                  {block.authorPhoto && (
+                                    <Image
+                                      src={block.authorPhoto}
+                                      alt={block.author}
+                                      width={32}
+                                      height={32}
+                                      className="rounded-full object-cover shrink-0"
+                                      style={{ border: '1.5px solid rgba(232,154,120,0.4)' }}
+                                    />
+                                  )}
+                                  <span className="text-[12px]" style={{ color: '#aaa' }}>— {block.author}</span>
+                                </cite>
+                              )}
                             </blockquote>
                           )}
                         </div>

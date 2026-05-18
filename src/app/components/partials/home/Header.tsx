@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { Constants } from "@/Constants";
 import { Link } from 'react-transition-progress/next';

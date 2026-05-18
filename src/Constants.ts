@@ -27,6 +27,7 @@ export const Constants = {
     WORKSHOP_DATA_AI_SECURITY: '/workshop-data-and-ai-security',
 
     KNOWLEDGE_BASE: '/knowledge-base',
+    CAREERS: '/careers',
     ABOUT_US: '/about-us',
     GET_IN_TOUCH: '/get-in-touch',
     SCHEDULE_CALL: '/schedule-call',

@@ -41,6 +41,7 @@ const navColumns = [
       { url: Constants.PAGES.CASE_STUDIES,               title: 'Case Studies'             },
       { url: Constants.PAGES.WORKSHOPS,                  title: 'Workshops'                },
       { url: Constants.PAGES.KNOWLEDGE_BASE,             title: 'Knowledge Base'           },
+      { url: Constants.PAGES.CAREERS,                    title: 'Careers'                  },
       { url: Constants.PAGES.ABOUT_US,                   title: 'About Us'                 },
       { url: Constants.PAGES.PRIVACY,                    title: 'Privacy Policy'           },
     ],

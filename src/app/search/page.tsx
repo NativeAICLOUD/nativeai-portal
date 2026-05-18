@@ -1,10 +1,10 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 
-const DOMAIN = 'native.cloud';
+const DOMAIN = 'nativeai.cloud';
 
 const CATEGORIES: Record<number, string> = {
   1: 'Azure AI',
