@@ -29,7 +29,7 @@ export async function POST(request: Request) {
 
     await resend.emails.send({
       from: 'NativeCloud Careers <noreply@nativeai.cloud>',
-      to: ['careers@nativeai.cloud'],
+      to: ['artan@nativeai.cloud'],
       replyTo: email,
       subject: `New application: ${jobTitle} — ${name}`,
       attachments,
