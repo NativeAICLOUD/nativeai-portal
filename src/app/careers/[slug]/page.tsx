@@ -19,6 +19,7 @@ type Job = {
   about: string;
   responsibilities: string[];
   requirements: string[];
+  preferredRequirements?: string[];
   benefits: string[];
 };
 

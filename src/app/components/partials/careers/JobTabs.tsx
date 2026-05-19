@@ -14,6 +14,7 @@ type Job = {
   about: string;
   responsibilities: string[];
   requirements: string[];
+  preferredRequirements?: string[];
   benefits: string[];
 };
 
@@ -97,6 +98,18 @@ export default function JobTabs({ job, modelStyle, typeStyle }: Props) {
                 </li>
               ))}
             </ul>
+            {job.preferredRequirements && job.preferredRequirements.length > 0 && (
+              <>
+                <p className="text-[11px] font-bold uppercase tracking-widest mt-7 mb-3" style={{ color: 'rgba(255,255,255,0.30)' }}>Nice to have</p>
+                <ul className="flex flex-col gap-3">
+                  {job.preferredRequirements.map((r, i) => (
+                    <li key={i} className="text-[16px] leading-relaxed" style={{ color: 'rgba(255,255,255,0.50)' }}>
+                      {r}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
           </Section>
 
           <Section title="What we offer">
