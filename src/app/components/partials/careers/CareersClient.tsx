@@ -376,7 +376,7 @@ export default function CareersClient({ jobs }: { jobs: Job[] }) {
                           <span
                             key={skill}
                             className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium"
-                            style={{ background: 'rgba(10,14,26,0.05)', color: 'rgba(10,14,26,0.55)', border: '1px solid rgba(10,14,26,0.07)' }}
+                            style={{ background: 'rgba(91,124,250,0.08)', color: '#4a5fd4', border: '1px solid rgba(91,124,250,0.18)' }}
                           >
                             {skill}
                           </span>
