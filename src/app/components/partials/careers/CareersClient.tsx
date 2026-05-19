@@ -22,6 +22,8 @@ type Job = {
   type: string;
   slug: string;
   description: string;
+  skills?: string[];
+  duration?: string;
 };
 
 const MODEL_COLORS: Record<string, { bg: string; color: string }> = {
@@ -323,25 +325,13 @@ export default function CareersClient({ jobs }: { jobs: Job[] }) {
         {activeDept !== 'All' && ` in ${activeDept}`}
       </p>
 
-      {/* ── Table header ── */}
-      <div
-        className="hidden md:grid grid-cols-[1fr_160px_160px_140px_120px] gap-4 px-6 py-3 rounded-xl mb-2 text-[12px] font-bold uppercase tracking-widest"
-        style={{ background: '#0a0e1a', color: 'rgba(255,255,255,0.75)' }}
-      >
-        <span>Position</span>
-        <span>Department</span>
-        <span>Location</span>
-        <span>Work model</span>
-        <span />
-      </div>
-
-      {/* ── Job rows ── */}
+      {/* ── Job cards ── */}
       {filtered.length === 0 ? (
         <div className="text-center py-20 text-[#0a0e1a]/35 text-sm">
           No open positions match your search.
         </div>
       ) : (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-3">
           <AnimatePresence mode="popLayout">
             {filtered.map((job, i) => {
               const modelStyle = MODEL_COLORS[job.workModel] ?? MODEL_COLORS['On-site'];
@@ -357,49 +347,73 @@ export default function CareersClient({ jobs }: { jobs: Job[] }) {
                 >
                   <div
                     onClick={() => router.push(`/careers/${job.slug}`)}
-                    className="group flex flex-col md:grid md:grid-cols-[1fr_160px_160px_140px_120px] gap-4 items-start md:items-center px-6 py-5 rounded-2xl border border-black/[0.07] bg-white hover:border-[#e89a78]/40 hover:shadow-[0_4px_24px_rgba(232,154,120,0.12)] transition-all duration-200 cursor-pointer"
+                    className="group flex flex-col gap-3.5 px-6 py-5 rounded-2xl border border-black/[0.07] bg-white hover:border-[#e89a78]/40 hover:shadow-[0_4px_24px_rgba(232,154,120,0.12)] transition-all duration-200 cursor-pointer"
                   >
-                    {/* Title + type */}
-                    <div>
+                    {/* Row 1: Title + Hiring Now */}
+                    <div className="flex items-start justify-between gap-3">
                       <p className="font-bold text-[#0a0e1a] text-[15px] leading-snug group-hover:text-[#e89a78] transition-colors">
                         {job.title}
                       </p>
                       <span
-                        className="inline-block mt-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide"
+                        className="shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide"
+                        style={{ background: 'rgba(52,211,153,0.10)', color: '#0d9f6e', border: '1px solid rgba(52,211,153,0.18)' }}
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#0d9f6e] animate-pulse" />
+                        Hiring Now
+                      </span>
+                    </div>
+
+                    {/* Row 2: Description */}
+                    <p className="text-sm text-[#0a0e1a]/50 leading-relaxed line-clamp-2">
+                      {job.description}
+                    </p>
+
+                    {/* Row 3: Skills */}
+                    {job.skills && job.skills.length > 0 && (
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-[#0a0e1a]/25 mr-0.5">Skills</span>
+                        {job.skills.map(skill => (
+                          <span
+                            key={skill}
+                            className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium"
+                            style={{ background: 'rgba(10,14,26,0.05)', color: 'rgba(10,14,26,0.55)', border: '1px solid rgba(10,14,26,0.07)' }}
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Row 4: Meta + CTA */}
+                    <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-black/[0.05]">
+                      <span
+                        className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide"
                         style={typeStyle}
                       >
                         {job.type}
                       </span>
-                    </div>
-
-                    {/* Department */}
-                    <p className="text-sm text-[#0a0e1a]/55">
-                      <span className="md:hidden text-[10px] font-bold uppercase tracking-widest text-[#0a0e1a]/30 mr-1">Dept </span>
-                      {job.department}
-                    </p>
-
-                    {/* Location */}
-                    <p className="text-sm text-[#0a0e1a]/55 flex items-center gap-1.5">
-                      <svg className="w-3.5 h-3.5 shrink-0 opacity-40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M20 10c0 6-8 13-8 13s-8-7-8-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
-                      </svg>
-                      {job.location}
-                    </p>
-
-                    {/* Work model badge */}
-                    <span
-                      className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-semibold"
-                      style={modelStyle}
-                    >
-                      {job.workModel}
-                    </span>
-
-                    {/* CTA */}
-                    <div className="flex items-center gap-2 text-base font-bold text-[#e89a78] group-hover:gap-3 transition-all">
-                      View job
-                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                      </svg>
+                      {job.duration && (
+                        <span className="text-[11px] text-[#0a0e1a]/35 font-medium">{job.duration}</span>
+                      )}
+                      <span
+                        className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold"
+                        style={modelStyle}
+                      >
+                        {job.workModel}
+                      </span>
+                      <span className="flex items-center gap-1 text-[11px] text-[#0a0e1a]/35">
+                        <svg className="w-3 h-3 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M20 10c0 6-8 13-8 13s-8-7-8-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        {job.location}
+                      </span>
+                      <span className="text-[11px] text-[#0a0e1a]/35">{job.department}</span>
+                      <div className="ml-auto flex items-center gap-1.5 text-sm font-bold text-[#e89a78] group-hover:gap-2.5 transition-all">
+                        View job
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                      </div>
                     </div>
                   </div>
                 </motion.div>

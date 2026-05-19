@@ -43,6 +43,12 @@
       "Hands-on experience with AI/LLM platforms and agentic workflows.",
       "Background in project management or business analysis alongside technical delivery.",
       "Experience working with globally distributed teams."
+    ],
+    "skills": [
+      "AI Strategy",
+      "LLM Platforms",
+      "Workflow Automation",
+      "Governance"
     ]
   },
   {
@@ -77,6 +83,12 @@
       "Hybrid working — Skopje office + remote flexibility",
       "Direct exposure to enterprise-scale Azure environments",
       "Small, senior team — no bureaucracy, real ownership"
+    ],
+    "skills": [
+      "Azure",
+      "Bicep",
+      "Terraform",
+      "IaC"
     ]
   },
   {
@@ -111,6 +123,12 @@
       "Hybrid working — Skopje office + remote flexibility",
       "Work across diverse client stacks — no two projects are the same",
       "Small, senior team — real ownership from day one"
+    ],
+    "skills": [
+      "Azure DevOps",
+      "GitHub Actions",
+      "Docker",
+      "Kubernetes"
     ]
   },
   {
@@ -145,6 +163,12 @@
       "Access to Azure OpenAI credits and sandbox environments",
       "Microsoft AI certification fees covered",
       "Small, senior team working on cutting-edge production AI"
+    ],
+    "skills": [
+      "Azure OpenAI",
+      "RAG Pipelines",
+      "Semantic Kernel",
+      "Python"
     ]
   },
   {
@@ -179,6 +203,12 @@
       "Hybrid working — Skopje office + remote flexibility",
       "Work on complex, greenfield cloud-native systems",
       "Direct collaboration with cloud architects and DevOps engineers"
+    ],
+    "skills": [
+      ".NET",
+      "C#",
+      "Azure",
+      "Microservices"
     ]
   },
   {
@@ -213,6 +243,12 @@
       "CNCF and Microsoft certification fees covered",
       "Work on complex, high-traffic AKS environments",
       "Small, senior team — real technical ownership"
+    ],
+    "skills": [
+      "Kubernetes",
+      "AKS",
+      "Helm",
+      "GitOps"
     ]
   },
   {
@@ -247,6 +283,12 @@
       "Hybrid working — Skopje office + travel to client sites",
       "High-impact role with direct client ownership",
       "Small, senior team — architecture decisions are yours to lead"
+    ],
+    "skills": [
+      "Azure Architecture",
+      "Landing Zones",
+      "Migration",
+      "WAF"
     ]
   },
   {
@@ -281,6 +323,12 @@
       "Work on polished products with real design quality",
       "Collaborate directly with cloud architects and backend engineers",
       "Small, senior team — your code ships to production fast"
+    ],
+    "skills": [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS"
     ]
   },
   {
@@ -315,6 +363,12 @@
       "Hybrid working — Skopje office + remote flexibility",
       "End-to-end ownership across the full stack",
       "Small, senior team — no bureaucracy, fast shipping"
+    ],
+    "skills": [
+      ".NET",
+      "React",
+      "AWS",
+      "TypeScript"
     ]
   },
   {
@@ -349,6 +403,12 @@
       "Hybrid working — Skopje office + remote flexibility",
       "Mentorship from senior engineers and cloud architects",
       "Real ownership — your code ships to enterprise production environments"
+    ],
+    "skills": [
+      ".NET",
+      "C#",
+      "Azure",
+      "REST APIs"
     ]
   },
   {
@@ -383,7 +443,14 @@
       "Microsoft security certification fees covered",
       "High-impact work securing enterprise Azure environments",
       "Flexible engagement — contract with potential to convert to permanent"
-    ]
+    ],
+    "skills": [
+      "Azure Security",
+      "Sentinel",
+      "Zero Trust",
+      "Entra ID"
+    ],
+    "duration": "Flexible engagement"
   },
   {
     "id": 12,
@@ -418,6 +485,13 @@
       "3–6 month engagement with potential to extend",
       "Direct access to AI tools and cloud sandbox environments",
       "Work alongside a senior engineering team on production AI systems"
-    ]
+    ],
+    "skills": [
+      "TypeScript",
+      "AI Workflows",
+      "Multi-agent Systems",
+      "Node.js"
+    ],
+    "duration": "3–6 months"
   }
 ]
