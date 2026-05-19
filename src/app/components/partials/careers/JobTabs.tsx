@@ -177,15 +177,13 @@ export default function JobTabs({ job, modelStyle, typeStyle }: Props) {
           style={{ scrollMarginTop: '120px' }}
         >
           <div className="h-px mb-8" style={{ background: 'rgba(255,255,255,0.08)' }} />
-          <div className="pt-14">
-            <ApplyForm
-              jobTitle={job.title}
-              jobSlug={job.slug}
-              department={job.department}
-              location={job.location}
-              workModel={job.workModel}
-            />
-          </div>
+          <ApplyForm
+            jobTitle={job.title}
+            jobSlug={job.slug}
+            department={job.department}
+            location={job.location}
+            workModel={job.workModel}
+          />
         </div>
       )}
 
