@@ -384,5 +384,40 @@
       "High-impact work securing enterprise Azure environments",
       "Flexible engagement — contract with potential to convert to permanent"
     ]
+  },
+  {
+    "id": 12,
+    "title": "Senior TypeScript Backend Developer",
+    "department": "AI Engineering",
+    "location": "Remote",
+    "workModel": "Remote",
+    "type": "Contract",
+    "slug": "senior-typescript-backend-developer",
+    "description": "Build backend TypeScript services powering AI workflows, multi-agent systems, and enterprise integrations. Strong hands-on engineering in a fast-moving AI environment.",
+    "about": "We are looking for a Senior TypeScript Backend Developer with experience in AI workflows and orchestration. The ideal candidate has strong hands-on backend development skills in TypeScript, along with experience building and managing AI-driven workflows, multi-agent systems, and enterprise integrations.",
+    "responsibilities": [
+      "Design and build backend TypeScript services and APIs that power AI-driven products",
+      "Build and manage AI workflow orchestration systems and multi-agent pipelines",
+      "Integrate with AI/LLM platforms such as OpenAI, Azure OpenAI, and Anthropic",
+      "Develop enterprise integrations with third-party platforms and internal services",
+      "Define reusable patterns and best practices for AI-assisted backend development",
+      "Write clean, well-tested TypeScript with high reliability standards",
+      "Collaborate with frontend and cloud engineering teams to deliver end-to-end features"
+    ],
+    "requirements": [
+      "4+ years of backend development experience with TypeScript and Node.js",
+      "Proven experience building AI workflows and orchestration systems",
+      "Hands-on experience with multi-agent frameworks such as LangChain, AutoGen, or similar",
+      "Strong understanding of REST APIs, message queues, and event-driven architecture",
+      "Experience integrating with AI/LLM platforms (OpenAI, Azure OpenAI, or Anthropic)",
+      "Good written and spoken English"
+    ],
+    "benefits": [
+      "Fully remote — work from anywhere in Europe",
+      "Competitive contract rate",
+      "3–6 month engagement with potential to extend",
+      "Direct access to AI tools and cloud sandbox environments",
+      "Work alongside a senior engineering team on production AI systems"
+    ]
   }
 ]
