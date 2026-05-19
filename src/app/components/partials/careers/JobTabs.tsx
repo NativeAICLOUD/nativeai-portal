@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import ApplyForm from './ApplyForm';
 
@@ -29,6 +29,16 @@ type Tab = typeof TABS[number];
 export default function JobTabs({ job, modelStyle, typeStyle }: Props) {
   const [active, setActive] = useState<Tab>('Job details');
   const [stuck, setStuck]   = useState(false);
+  const applyRef = useRef<HTMLDivElement>(null);
+
+  function switchTab(tab: Tab) {
+    setActive(tab);
+    if (tab === 'Apply') {
+      requestAnimationFrame(() => {
+        applyRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+  }
 
   useEffect(() => {
     const onScroll = () => setStuck(window.scrollY > 120);
@@ -44,7 +54,7 @@ export default function JobTabs({ job, modelStyle, typeStyle }: Props) {
           {TABS.map(tab => (
             <button
               key={tab}
-              onClick={() => setActive(tab)}
+              onClick={() => switchTab(tab)}
               className="relative px-6 py-4 text-base font-semibold transition-colors duration-150"
               style={{ color: active === tab ? (tab === 'Apply' ? '#e89a78' : '#fff') : 'rgba(255,255,255,0.35)' }}
             >
@@ -133,7 +143,7 @@ export default function JobTabs({ job, modelStyle, typeStyle }: Props) {
               <p className="text-sm" style={{ color: 'rgba(255,255,255,0.40)' }}>Send your CV and a short note about why this role is a fit.</p>
             </div>
             <button
-              onClick={() => setActive('Apply')}
+              onClick={() => switchTab('Apply')}
               className="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold transition-all hover:opacity-90"
               style={{ background: '#e89a78', color: '#fff' }}
             >
@@ -161,15 +171,21 @@ export default function JobTabs({ job, modelStyle, typeStyle }: Props) {
 
       {/* ── Apply tab ── */}
       {active === 'Apply' && (
-        <div>
+        <div
+          ref={applyRef}
+          id="apply"
+          style={{ scrollMarginTop: '120px' }}
+        >
           <div className="h-px mb-8" style={{ background: 'rgba(255,255,255,0.08)' }} />
-          <ApplyForm
-            jobTitle={job.title}
-            jobSlug={job.slug}
-            department={job.department}
-            location={job.location}
-            workModel={job.workModel}
-          />
+          <div className="pt-14">
+            <ApplyForm
+              jobTitle={job.title}
+              jobSlug={job.slug}
+              department={job.department}
+              location={job.location}
+              workModel={job.workModel}
+            />
+          </div>
         </div>
       )}
 
@@ -178,7 +194,7 @@ export default function JobTabs({ job, modelStyle, typeStyle }: Props) {
         className="fixed left-0 right-0 z-[200] transition-all duration-300"
         style={{
           top: stuck ? 64 : -80,
-          background: 'rgba(10,14,26,0.92)',
+          background: '#0a0e1a',
           backdropFilter: 'blur(16px)',
           WebkitBackdropFilter: 'blur(16px)',
           borderBottom: '1px solid rgba(255,255,255,0.08)',
@@ -200,7 +216,7 @@ export default function JobTabs({ job, modelStyle, typeStyle }: Props) {
             {TABS.map(tab => (
               <button
                 key={tab}
-                onClick={() => setActive(tab)}
+                onClick={() => switchTab(tab)}
                 className="relative px-4 py-[17px] text-xs font-semibold transition-colors duration-150"
                 style={{ color: active === tab ? (tab === 'Apply' ? '#e89a78' : '#fff') : 'rgba(255,255,255,0.35)' }}
               >
