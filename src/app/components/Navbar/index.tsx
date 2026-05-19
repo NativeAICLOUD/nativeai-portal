@@ -286,7 +286,8 @@ function Navbar() {
             </svg>
           </button>
 
-          <button
+          <Link
+            href="/login"
             style={MONO}
             className={`hidden lg:flex items-center gap-1.5 text-sm transition-colors ${pathname === '/' ? 'text-[#0a0e1a]/60 hover:text-[#0a0e1a]/90' : 'text-white/60 hover:text-white/90'}`}
           >
@@ -294,7 +295,7 @@ function Navbar() {
               <use href="/icons/all-icons.svg#icon-login" />
             </svg>
             Login
-          </button>
+          </Link>
 
           {/* Hamburger */}
           <motion.button
