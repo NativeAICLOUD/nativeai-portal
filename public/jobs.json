@@ -306,6 +306,44 @@
     ]
   },
   {
+    "id": 11,
+    "title": "AI Enablement Lead",
+    "department": "AI Enablement",
+    "location": "Remote",
+    "workModel": "Remote",
+    "type": "Full-time",
+    "slug": "ai-enablement-lead",
+    "description": "Lead AI adoption across NativeCloud — evaluating tools, governing use cases, training staff, and embedding alongside teams to make AI work in practice. The go-to AI resource for the whole company, reporting directly to the CTO.",
+    "about": "AI is reshaping how our teams and clients work, and we need someone who can lead that change from the inside. As our AI Enablement Lead, you will be the primary AI resource across the company — the person who helps engineers build faster, guides non-technical staff through new workflows, and ensures we adopt AI thoughtfully and securely. This is a high-trust, high-impact role reporting directly to the CTO. We are looking for a genuine AI enthusiast — someone who follows the space closely, experiments constantly, and brings real energy to helping others see what is possible.",
+    "responsibilities": [
+      "Serve as the primary AI resource across the company — the person teams turn to with questions, ideas, and problems",
+      "Work with teams to identify where AI can add value, scope practical solutions, and guide implementation",
+      "Help non-technical staff build their own AI workflows — the goal is capability-building, not creating a bottleneck",
+      "Research, evaluate, and manage the intake and review process for new AI tools and use cases",
+      "Prepare risk assessments and recommendations covering security and data protection considerations",
+      "Monitor the AI landscape and keep leadership informed of relevant developments",
+      "Embed alongside active projects to accelerate AI adoption within existing delivery workflows",
+      "Design and deliver AI training for technical and non-technical staff, and create practical documentation and reference guides"
+    ],
+    "requirements": [
+      "Proven leadership experience — you have run teams, managed stakeholders, and been accountable for outcomes",
+      "Comfortable with ambiguity — you can take a loosely defined mandate and turn it into a structured programme of work without waiting for a plan",
+      "Strong people skills — patience, a natural teaching instinct, and the ability to make non-technical people feel capable rather than overwhelmed",
+      "Strong software engineering foundation — you can read production code, understand cloud architectures, and work within modern development workflows",
+      "Ability to communicate across levels, from an engineering standup to an executive briefing",
+      "Sound judgment around data security and enterprise risk",
+      "Hands-on experience with AI/LLM platforms and agentic workflows (preferred)",
+      "Experience in financial services, regulated industries, or project management alongside technical delivery (preferred)"
+    ],
+    "benefits": [
+      "Fully remote — work from anywhere in Europe",
+      "Competitive salary based on experience",
+      "Direct access to AI tools, credits, and sandbox environments for experimentation",
+      "High-trust role reporting directly to the CTO with real company-wide impact",
+      "Small, senior team where your ideas shape how AI is adopted across the business"
+    ]
+  },
+  {
     "id": 8,
     "title": "Security Engineer (Azure)",
     "department": "Security",
