@@ -10,26 +10,26 @@
     "description": "Lead AI adoption across NativeCloud — evaluating tools, governing use cases, training staff, and embedding alongside teams to make AI work in practice. The go-to AI resource for the whole company, reporting directly to the CTO.",
     "about": "The AI Enablement Lead evaluates tools, builds and automates workflows, supports live projects, trains staff, and manages the intake and review of new AI use cases across the company. This person must be a genuine AI enthusiast — someone who follows the space closely, experiments constantly, and brings real energy to helping others see what's possible.",
     "responsibilities": [
-      "Serve as the primary AI resource across the company — the person teams turn to with questions, ideas, or problems",
-      "Work with teams to identify where AI can add value, scope practical solutions, and guide implementation",
-      "Help non-technical staff build their own AI workflows — the goal is capability-building, not creating a bottleneck",
-      "Translate between technical capability and business need",
-      "Research, evaluate, and document new AI tools and capabilities",
-      "Prepare risk assessments and recommendations, including security and data protection considerations",
-      "Manage the intake and review process for new AI tools and use cases",
-      "Monitor the AI landscape and keep leadership informed of relevant developments",
-      "Embed alongside active projects to accelerate AI adoption within existing workflows",
-      "Work with engineering teams to define reusable patterns and best practices for AI-assisted development",
-      "Design and deliver AI training for technical and non-technical staff",
-      "Create practical documentation, onboarding materials, and reference guides"
+      "Serve as the primary AI resource across the company — the person teams turn to with questions, ideas, or problems.",
+      "Work with teams to identify where AI can add value, scope practical solutions, and guide implementation.",
+      "Help non-technical staff build their own AI workflows. The goal is capability-building, not creating a bottleneck.",
+      "Translate between technical capability and business need.",
+      "Research, evaluate, and document new AI tools and capabilities.",
+      "Prepare risk assessments and recommendations, including security and data protection considerations.",
+      "Manage the intake and review process for new AI tools and use cases.",
+      "Monitor the AI landscape and keep leadership informed of relevant developments.",
+      "Embed alongside active projects to accelerate AI adoption within existing workflows.",
+      "Work with engineering teams to define reusable patterns and best practices for AI-assisted development.",
+      "Design and deliver AI training for technical and non-technical staff.",
+      "Create practical documentation, onboarding materials, and reference guides."
     ],
     "requirements": [
-      "Leadership experience — you have run teams, managed stakeholders, and been accountable for outcomes",
-      "Comfortable with ambiguity — you can take a loosely defined mandate and turn it into a structured programme of work without waiting for someone to hand you a plan",
-      "Strong people skills — patience, a natural teaching instinct, and the ability to make non-technical people feel capable rather than overwhelmed. Your success is measured by how independently others can work after you have helped them",
-      "Strong software engineering foundation — you can read production code, understand cloud architectures, and work within modern development workflows",
-      "Ability to communicate across levels — from an engineering standup to an executive briefing",
-      "Sound judgment around data security and enterprise risk"
+      "Leadership experience — you have run teams, managed stakeholders, and been accountable for outcomes.",
+      "Comfortable with ambiguity — you can take a loosely defined mandate and turn it into a structured programme of work without waiting for someone to hand you a plan.",
+      "Strong people skills — patience, a natural teaching instinct, and the ability to make non-technical people feel capable rather than overwhelmed. Your success is measured by how independently others can work after you've helped them.",
+      "Strong software engineering foundation. You can read production code, understand cloud architectures, and work within modern development workflows.",
+      "Ability to communicate across levels — from an engineering standup to an executive briefing.",
+      "Sound judgment around data security and enterprise risk."
     ],
     "benefits": [
       "Fully remote — work from anywhere in Europe",
@@ -39,10 +39,10 @@
       "Small, senior team where your ideas shape how AI is adopted across the business"
     ],
     "preferredRequirements": [
-      "Experience in financial services or regulated industries",
-      "Hands-on experience with AI/LLM platforms and agentic workflows",
-      "Background in project management or business analysis alongside technical delivery",
-      "Experience working with globally distributed teams"
+      "Experience in financial services or regulated industries.",
+      "Hands-on experience with AI/LLM platforms and agentic workflows.",
+      "Background in project management or business analysis alongside technical delivery.",
+      "Experience working with globally distributed teams."
     ]
   },
   {
