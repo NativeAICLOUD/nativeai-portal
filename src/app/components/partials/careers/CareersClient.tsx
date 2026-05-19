@@ -358,7 +358,6 @@ export default function CareersClient({ jobs }: { jobs: Job[] }) {
                         className="shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide"
                         style={{ background: 'rgba(52,211,153,0.10)', color: '#0d9f6e', border: '1px solid rgba(52,211,153,0.18)' }}
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#0d9f6e] animate-pulse" />
                         Hiring Now
                       </span>
                     </div>
