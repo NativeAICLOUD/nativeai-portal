@@ -15,7 +15,13 @@
       "Bash(type .env.local)",
       "Bash(type .env)",
       "Bash(dir /b .env*)",
-      "Bash(node -e \"const p = require\\('./package.json'\\); console.log\\(p.dependencies?.resend || p.devDependencies?.resend || 'NOT FOUND'\\)\")"
+      "Bash(node -e \"const p = require\\('./package.json'\\); console.log\\(p.dependencies?.resend || p.devDependencies?.resend || 'NOT FOUND'\\)\")",
+      "Bash(node -e \"const j = require\\('./public/jobs.json'\\); console.log\\(j.length + ' jobs, last added:', j.find\\(x=>x.id===11\\).title\\)\")",
+      "Bash(node -e ' *)",
+      "Bash(node -e \"const j = require\\('./public/jobs.json'\\); const job = j.find\\(x=>x.id===11\\); console.log\\('description:', job.description\\); console.log\\('\\\\nabout:', job.about\\);\")",
+      "Bash(xargs grep -l \"signIn\\\\|login\\\\|auth\")",
+      "Bash(New-Item -ItemType Directory -Force src/app/api/auth/otp/send)",
+      "Bash(Out-Null)"
     ]
   }
 }

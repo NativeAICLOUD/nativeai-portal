@@ -1,25 +1,34 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import Logo from '@/app/components/ui/Logo'
 
 type Step = 'email' | 'code'
 
 export default function LoginPage() {
-  const [step, setStep]         = useState<Step>('email')
-  const [email, setEmail]       = useState('')
-  const [code, setCode]         = useState('')
-  const [error, setError]       = useState('')
-  const [loading, setLoading]   = useState(false)
+  const [step, setStep]           = useState<Step>('email')
+  const [email, setEmail]         = useState('')
+  const [code, setCode]           = useState('')
+  const [error, setError]         = useState('')
+  const [loading, setLoading]     = useState(false)
+  const [lastUsed, setLastUsed]   = useState(false)
+  const [lastEmail, setLastEmail] = useState('')
   const router = useRouter()
+
+  useEffect(() => {
+    const method = localStorage.getItem('nc_last_method')
+    const saved  = localStorage.getItem('nc_last_email') || ''
+    setLastUsed(method === 'email' && !!saved)
+    setLastEmail(saved)
+  }, [])
 
   const sendCode = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
     if (!email) { setError('Please enter your email.'); return }
-
     setLoading(true)
     try {
       const res = await fetch('/api/auth/otp/send', {
@@ -41,11 +50,12 @@ export default function LoginPage() {
     e.preventDefault()
     setError('')
     if (code.length !== 6) { setError('Enter the 6-digit code from your email.'); return }
-
     setLoading(true)
     try {
       const res = await signIn('otp', { email, code, redirect: false })
       if (res?.error === null) {
+        localStorage.setItem('nc_last_method', 'email')
+        localStorage.setItem('nc_last_email', email)
         router.push('/')
       } else {
         setError('Invalid or expired code. Please try again.')
@@ -58,74 +68,143 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#fafafa] flex flex-col items-center justify-center px-4">
+    <div className="min-h-screen flex flex-col" style={{ background: '#000', fontFamily: "'Geist', 'Inter', -apple-system, sans-serif" }}>
 
-      {/* Logo */}
-      <div className="mb-8 flex flex-col items-center gap-3">
-        <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: '#0a0e1a' }}>
-          <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-          </svg>
-        </div>
-        <span className="text-[15px] font-bold text-[#0a0e1a] tracking-tight">NativeCloud</span>
-      </div>
-
-      {/* Card */}
-      <div
-        className="w-full max-w-[380px] rounded-2xl bg-white px-8 py-8"
-        style={{ border: '1px solid rgba(0,0,0,0.08)', boxShadow: '0 4px 24px rgba(0,0,0,0.06)' }}
+      {/* Auth header */}
+      <header
+        className="flex items-center justify-between px-5 sm:px-8 h-[72px] shrink-0"
+        style={{ borderBottom: '1px solid #1a1a1a' }}
       >
-        {step === 'email' ? (
-          <>
-            <h1 className="text-[22px] font-bold text-[#0a0e1a] mb-1 text-center">Log in</h1>
-            <p className="text-sm text-[#0a0e1a]/45 text-center mb-7">to continue to NativeCloud</p>
+        <div
+          className="shrink-0 px-3 py-1.5 rounded-xl"
+          style={{ background: 'linear-gradient(135deg, rgba(232,154,120,0.18) 0%, rgba(232,154,120,0.06) 60%, transparent 100%)' }}
+        >
+          <Logo isInvert />
+        </div>
+        <Link
+          href="/sign-up"
+          className="text-[13px] font-medium transition-colors px-3 py-1.5 rounded-lg"
+          style={{ color: '#666', letterSpacing: '-0.01em' }}
+          onMouseEnter={e => { e.currentTarget.style.color = '#fff'; }}
+          onMouseLeave={e => { e.currentTarget.style.color = '#666'; }}
+        >
+          Sign up
+        </Link>
+      </header>
 
-            <form onSubmit={sendCode} className="flex flex-col gap-3">
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-semibold text-[#0a0e1a]/60">Email address</label>
+      {/* Form area */}
+      <div className="flex-1 flex items-center justify-center px-4 py-16">
+        <div className="w-full" style={{ maxWidth: 320 }}>
+
+          {step === 'email' ? (
+            <>
+              <h1
+                className="mb-8 font-semibold text-white"
+                style={{ fontSize: 24, letterSpacing: '-0.03em' }}
+              >
+                Log in
+              </h1>
+
+              <form onSubmit={sendCode} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+
+                {lastUsed && lastEmail && (
+                  <button
+                    type="button"
+                    onClick={() => setEmail(lastEmail)}
+                    className="w-full flex items-center justify-between transition-colors"
+                    style={{
+                      background: '#0a0a0a',
+                      border: '1px solid #2a2a2a',
+                      borderRadius: 8,
+                      padding: '11px 14px',
+                    }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = '#444'; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = '#2a2a2a'; }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, minWidth: 0 }}>
+                      <div style={{ width: 22, height: 22, borderRadius: '50%', background: '#1a1a1a', border: '1px solid #333', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#888" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                        </svg>
+                      </div>
+                      <span style={{ fontSize: 13, color: '#888', letterSpacing: '-0.01em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{lastEmail}</span>
+                    </div>
+                    <span style={{ fontSize: 10, fontWeight: 600, background: '#0070f3', color: '#fff', borderRadius: 99, padding: '2px 7px', letterSpacing: '0.02em', flexShrink: 0, marginLeft: 8 }}>
+                      Last Used
+                    </span>
+                  </button>
+                )}
+
                 <input
                   type="email"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
-                  placeholder="you@example.com"
+                  placeholder="Email Address"
                   autoComplete="email"
                   autoFocus
                   required
-                  className="w-full px-4 py-2.5 rounded-xl border border-black/[0.09] bg-[#fafafa] text-[#0a0e1a] text-sm placeholder:text-[#0a0e1a]/25 focus:outline-none focus:border-[#0a0e1a]/40 focus:ring-2 focus:ring-[#0a0e1a]/[0.06] transition-all"
+                  style={{
+                    width: '100%',
+                    background: '#0a0a0a',
+                    border: '1px solid #2a2a2a',
+                    borderRadius: 8,
+                    padding: '12px 14px',
+                    fontSize: 14,
+                    color: '#fff',
+                    letterSpacing: '-0.01em',
+                    outline: 'none',
+                    transition: 'border-color 0.15s',
+                    boxSizing: 'border-box',
+                  }}
+                  onFocus={e => { e.currentTarget.style.borderColor = '#fff'; }}
+                  onBlur={e => { e.currentTarget.style.borderColor = '#2a2a2a'; }}
+                  className="placeholder-[#666]"
                 />
+
+                {error && (
+                  <p style={{ fontSize: 13, color: '#f87171', margin: 0, letterSpacing: '-0.01em' }}>{error}</p>
+                )}
+
+                <div className="relative">
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full rounded-lg font-semibold text-black disabled:cursor-not-allowed transition-colors"
+                    style={{
+                      background: loading ? '#e0e0e0' : '#fafafa',
+                      padding: '12px 14px',
+                      fontSize: 14,
+                      letterSpacing: '-0.01em',
+                    }}
+                    onMouseEnter={e => { if (!loading) (e.currentTarget as HTMLButtonElement).style.background = '#e6e6e6'; }}
+                    onMouseLeave={e => { if (!loading) (e.currentTarget as HTMLButtonElement).style.background = '#fafafa'; }}
+                  >
+                    {loading ? 'Sending…' : 'Continue with Email'}
+                  </button>
+                  {lastUsed && (
+                    <span className="absolute -top-2 right-2.5 pointer-events-none rounded-full bg-[#0070f3] px-2 py-0.5 text-[10px] font-semibold text-white" style={{ letterSpacing: '0.02em' }}>
+                      Last Used
+                    </span>
+                  )}
+                </div>
+              </form>
+            </>
+          ) : (
+            <>
+              <div style={{ marginBottom: 32 }}>
+                <h1
+                  className="font-semibold text-white"
+                  style={{ fontSize: 24, letterSpacing: '-0.03em', marginBottom: 8 }}
+                >
+                  Check your email
+                </h1>
+                <p style={{ fontSize: 14, color: '#666', letterSpacing: '-0.01em', lineHeight: 1.5, margin: 0 }}>
+                  We sent a code to{' '}
+                  <span style={{ color: '#999' }}>{email}</span>
+                </p>
               </div>
 
-              {error && <p className="text-xs text-red-500 px-1">{error}</p>}
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="mt-1 w-full py-2.5 rounded-xl text-sm font-bold text-white transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{ background: '#0a0e1a' }}
-              >
-                {loading ? 'Sending…' : 'Continue with Email'}
-              </button>
-            </form>
-          </>
-        ) : (
-          <>
-            {/* Check email header */}
-            <div className="flex flex-col items-center mb-6">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center mb-3" style={{ background: 'rgba(10,14,26,0.06)' }}>
-                <svg className="w-5 h-5 text-[#0a0e1a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
-                  <rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-                </svg>
-              </div>
-              <h1 className="text-[20px] font-bold text-[#0a0e1a] mb-1">Check your email</h1>
-              <p className="text-sm text-[#0a0e1a]/45 text-center">
-                We sent a 6-digit code to<br />
-                <span className="font-semibold text-[#0a0e1a]/70">{email}</span>
-              </p>
-            </div>
-
-            <form onSubmit={verifyCode} className="flex flex-col gap-3">
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-semibold text-[#0a0e1a]/60">Verification code</label>
+              <form onSubmit={verifyCode} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 <input
                   type="text"
                   inputMode="numeric"
@@ -134,41 +213,79 @@ export default function LoginPage() {
                   placeholder="000000"
                   autoFocus
                   autoComplete="one-time-code"
-                  className="w-full px-4 py-2.5 rounded-xl border border-black/[0.09] bg-[#fafafa] text-[#0a0e1a] text-sm text-center tracking-[0.3em] font-mono placeholder:tracking-normal placeholder:text-[#0a0e1a]/25 focus:outline-none focus:border-[#0a0e1a]/40 focus:ring-2 focus:ring-[#0a0e1a]/[0.06] transition-all"
+                  style={{
+                    width: '100%',
+                    background: '#0a0a0a',
+                    border: '1px solid #2a2a2a',
+                    borderRadius: 8,
+                    padding: '12px 14px',
+                    fontSize: 20,
+                    color: '#fff',
+                    letterSpacing: '0.35em',
+                    textAlign: 'center',
+                    fontFamily: 'monospace',
+                    outline: 'none',
+                    transition: 'border-color 0.15s',
+                    boxSizing: 'border-box',
+                  }}
+                  onFocus={e => { e.currentTarget.style.borderColor = '#fff'; }}
+                  onBlur={e => { e.currentTarget.style.borderColor = '#2a2a2a'; }}
+                  className="placeholder-[#333]"
                 />
-              </div>
 
-              {error && <p className="text-xs text-red-500 px-1">{error}</p>}
+                {error && (
+                  <p style={{ fontSize: 13, color: '#f87171', margin: 0, letterSpacing: '-0.01em' }}>{error}</p>
+                )}
 
-              <button
-                type="submit"
-                disabled={loading || code.length !== 6}
-                className="mt-1 w-full py-2.5 rounded-xl text-sm font-bold text-white transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{ background: '#0a0e1a' }}
-              >
-                {loading ? 'Verifying…' : 'Verify code'}
-              </button>
+                <button
+                  type="submit"
+                  disabled={loading || code.length !== 6}
+                  style={{
+                    width: '100%',
+                    background: loading || code.length !== 6 ? '#1a1a1a' : '#fafafa',
+                    color: loading || code.length !== 6 ? '#444' : '#000',
+                    border: '1px solid transparent',
+                    borderRadius: 8,
+                    padding: '12px 14px',
+                    fontSize: 14,
+                    fontWeight: 600,
+                    letterSpacing: '-0.01em',
+                    cursor: loading || code.length !== 6 ? 'not-allowed' : 'pointer',
+                    transition: 'background 0.15s, color 0.15s',
+                  }}
+                  onMouseEnter={e => { if (code.length === 6 && !loading) (e.currentTarget as HTMLButtonElement).style.background = '#e6e6e6'; }}
+                  onMouseLeave={e => { if (code.length === 6 && !loading) (e.currentTarget as HTMLButtonElement).style.background = '#fafafa'; }}
+                >
+                  {loading ? 'Verifying…' : 'Verify code'}
+                </button>
 
-              <button
-                type="button"
-                onClick={() => { setStep('email'); setCode(''); setError(''); }}
-                className="text-xs text-[#0a0e1a]/40 hover:text-[#0a0e1a]/70 transition-colors text-center"
-              >
-                Use a different email
-              </button>
-            </form>
-          </>
-        )}
+                <button
+                  type="button"
+                  onClick={() => { setStep('email'); setCode(''); setError(''); }}
+                  style={{ fontSize: 13, color: '#444', background: 'none', border: 'none', cursor: 'pointer', padding: '4px 0', letterSpacing: '-0.01em', transition: 'color 0.15s' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = '#fff'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = '#444'; }}
+                >
+                  Use a different email
+                </button>
+              </form>
+            </>
+          )}
+
+          <p style={{ marginTop: 28, fontSize: 13, color: '#444', letterSpacing: '-0.01em' }}>
+            Don&apos;t have an account?{' '}
+            <Link
+              href="/sign-up"
+              style={{ color: '#666', fontWeight: 500, textDecoration: 'none', transition: 'color 0.15s' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#fff'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#666'; }}
+            >
+              Sign up
+            </Link>
+          </p>
+
+        </div>
       </div>
-
-      {/* Footer */}
-      <p className="mt-5 text-sm text-[#0a0e1a]/40">
-        Don&apos;t have an account?{' '}
-        <Link href="/sign-up" className="font-semibold text-[#0a0e1a]/70 hover:text-[#0a0e1a] transition-colors">
-          Sign up
-        </Link>
-      </p>
-
     </div>
   )
 }

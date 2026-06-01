@@ -75,7 +75,14 @@ export default function ServiceFooter() {
                 AI Agents · LLMs · Azure &amp; AWS
               </p>
               <p className="text-white/35 text-xs max-w-[240px] leading-relaxed">
-                We make AI work inside your business.
+                <a
+                  href="https://refive.ch/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white/60 transition-colors"
+                >
+                  We make AI work inside your business.
+                </a>
               </p>
             </div>
 

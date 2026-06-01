@@ -108,8 +108,8 @@ const HomePartner = () => {
         {/* Animated orbital services map */}
         <OrbitalServicesMap />
 
-        {/* Headline + right visual */}
-        <div className="relative z-[1] grid grid-cols-1 lg:grid-cols-[1fr_auto] items-start gap-8 lg:gap-16 pt-12 px-6 sm:px-14 xl:px-16">
+        {/* Headline */}
+        <div className="relative z-[1] pt-12 px-6 sm:px-14 xl:px-16">
 
           {/* Left: badge + headline */}
           <div>
@@ -122,57 +122,6 @@ const HomePartner = () => {
               Everything your business needs —{' '}
               <span className="text-[#e89a78]">in one place</span>
             </h2>
-          </div>
-
-          {/* Right: service panel — desktop only */}
-          <div className="hidden lg:block relative w-[256px] xl:w-[272px] shrink-0">
-            <div
-              className="absolute -inset-16 pointer-events-none"
-              style={{ background: 'radial-gradient(ellipse 80% 80% at 50% 50%, rgba(91,139,245,0.06) 0%, transparent 70%)' }}
-            />
-            <div
-              className="relative rounded-2xl overflow-hidden"
-              style={{
-                background: 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(255,255,255,0.08)',
-                backdropFilter: 'blur(16px)',
-              }}
-            >
-              {([
-                {
-                  label: 'Services', color: '#e89a78',
-                  items: ['Custom Development', 'Cloud Architecture', 'Migrate to Azure'],
-                },
-                {
-                  label: 'AI & Data', color: '#5B8BF5',
-                  items: ['AI Agents & RAG', 'Data Lifecycle', 'DevOps on Azure'],
-                },
-              ] as const).map(({ label, color, items }, gi) => (
-                <div key={label}>
-                  {gi > 0 && (
-                    <div className="mx-4" style={{ height: 1, background: 'rgba(255,255,255,0.06)' }} />
-                  )}
-                  <div className="px-4 py-4">
-                    <span
-                      className="inline-flex items-center px-2.5 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-[0.13em] mb-3"
-                      style={{ background: `${color}18`, color }}
-                    >
-                      {label}
-                    </span>
-                    <ul className="flex flex-col gap-0.5">
-                      {items.map((item) => (
-                        <li key={item} className="flex items-center justify-between py-1.5">
-                          <span className="text-[12.5px] text-white/50 leading-snug">{item}</span>
-                          <svg className="w-3 h-3 shrink-0 text-white/15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M9 18l6-6-6-6" />
-                          </svg>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
 
         </div>

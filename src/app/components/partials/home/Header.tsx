@@ -75,18 +75,50 @@ function HomeHeader() {
               >
                 We make{' '}
                 <span className="relative inline-block">
-                  <span style={{
-                    background: 'linear-gradient(90deg, #f0a060, #e89a78, #d4845c)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                  }}>
+                  <span className="hdr-aiwork-refive">
                     AI work
                   </span>
                   <span className="absolute bottom-1 left-0 w-full h-[3px] rounded-full bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] opacity-70" />
                 </span>
                 {' '}inside your business
               </h1>
+
+              <style>{`
+                .hdr-aiwork-refive {
+                  display: inline-block;
+                  /* Warm orange metallic shimmer (refive-style, original palette) */
+                  background: linear-gradient(
+                    100deg,
+                    #d4845c 0%,
+                    #f0a060 28%,
+                    #ffe0c0 50%,
+                    #f0a060 72%,
+                    #d4845c 100%
+                  );
+                  background-size: 200% auto;
+                  -webkit-background-clip: text;
+                  background-clip: text;
+                  -webkit-text-fill-color: transparent;
+                  color: transparent;
+                  /* fade + un-blur in, then a continuous shimmer */
+                  animation:
+                    hdr-aiwork-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) both,
+                    hdr-aiwork-shimmer 3.2s linear infinite;
+                }
+                @keyframes hdr-aiwork-reveal {
+                  from { opacity: 0; filter: blur(16px); }
+                  to   { opacity: 1; filter: blur(0); }
+                }
+                @keyframes hdr-aiwork-shimmer {
+                  to { background-position: 200% center; }
+                }
+                @media (prefers-reduced-motion: reduce) {
+                  .hdr-aiwork-refive {
+                    animation: none;
+                    background-position: 50% center;
+                  }
+                }
+              `}</style>
 
               {/* buttons */}
               <div className="flex items-center gap-3 flex-wrap">

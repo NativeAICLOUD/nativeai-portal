@@ -115,6 +115,8 @@ function Navbar() {
 
   const navH = 72;
 
+  const isAuthPage = pathname === '/login' || pathname === '/sign-up';
+
   useEffect(() => {
     const onScroll = () => {
       const currentY = window.scrollY;
@@ -184,6 +186,8 @@ function Navbar() {
   const closeMenu = () => {
     closeTimer.current = setTimeout(() => setSlideMenu(false), 150);
   };
+
+  if (isAuthPage) return null;
 
   return (
     <>

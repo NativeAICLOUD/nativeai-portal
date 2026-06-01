@@ -25,16 +25,16 @@ function RAGChatDemo() {
   return (
     <div style={{ ...MONO, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }} className="rounded-xl p-4 mb-4">
       <div className="flex items-center gap-2 mb-3 pb-2 border-b border-white/[0.07]">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] animate-pulse" />
+        <span className="w-1.5 h-1.5 rounded-full bg-[#9aa3af] animate-pulse" />
         <span className="text-[10px] text-white/30 uppercase tracking-widest">RAG · policy_2024.pdf</span>
       </div>
       <div className="flex justify-end mb-2">
-        <span className="bg-[#e89a78]/15 border border-[#e89a78]/20 text-white/75 px-2.5 py-1 rounded-lg rounded-tr-none text-[11px]">
+        <span className="bg-[#9aa3af]/15 border border-[#9aa3af]/20 text-white/75 px-2.5 py-1 rounded-lg rounded-tr-none text-[11px]">
           What&apos;s our refund policy?
         </span>
       </div>
       <div className="flex gap-2">
-        <span className="w-4 h-4 rounded-full bg-[#e89a78]/20 border border-[#e89a78]/30 flex items-center justify-center shrink-0 mt-0.5 font-bold" style={{ fontSize: 7, color: '#e89a78' }}>AI</span>
+        <span className="w-4 h-4 rounded-full bg-[#9aa3af]/20 border border-[#9aa3af]/30 flex items-center justify-center shrink-0 mt-0.5 font-bold" style={{ fontSize: 7, color: '#cfd5dc' }}>AI</span>
         <div className="text-white/60 text-[11px] leading-relaxed flex-1 min-h-[36px]">
           {phase === 0 && <span className="text-white/20">…</span>}
           {phase === 1 && (
@@ -48,7 +48,7 @@ function RAGChatDemo() {
             <>
               {ANSWER.slice(0, chars)}
               {chars < ANSWER.length && <span className="opacity-60 animate-pulse">▌</span>}
-              {chars >= ANSWER.length && <span className="block mt-1 text-[9px] text-[#e89a78]/55">↳ policy_2024.pdf §4.2</span>}
+              {chars >= ANSWER.length && <span className="block mt-1 text-[9px] text-[#9aa3af]/55">↳ policy_2024.pdf §4.2</span>}
             </>
           )}
         </div>
@@ -72,40 +72,46 @@ const services = [
 
 const pillars = [
   {
+    // Bot / autonomous agent
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" stroke="currentColor" strokeWidth={1.6}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z" />
+      <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" stroke="url(#cslSilver)" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round">
+        <rect width="16" height="12" x="4" y="8" rx="2" />
+        <path d="M12 8V4H8" />
+        <path d="M2 14h2M20 14h2M15 13v2M9 13v2" />
       </svg>
     ),
     title: 'Custom AI Agents',
-    desc: 'We build autonomous AI agents tailored to your business — agents that research, decide, and act across your tools, APIs, and data without manual intervention.',
   },
   {
+    // Brain / LLM
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" stroke="currentColor" strokeWidth={1.6}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 2.625c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
+      <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" stroke="url(#cslSilver)" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 5a3 3 0 1 0-5.997.142 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z" />
+        <path d="M12 5a3 3 0 1 1 5.997.142 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z" />
+        <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4" />
       </svg>
     ),
     title: 'LLM Integration & RAG',
-    desc: 'We embed large language models into your products and internal tools — connected to your own data via RAG so every answer is accurate, private, and on-brand.',
   },
   {
+    // Workflow / automation pipeline
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" stroke="currentColor" strokeWidth={1.6}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+      <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" stroke="url(#cslSilver)" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round">
+        <rect width="8" height="8" x="3" y="3" rx="2" />
+        <path d="M7 11v4a2 2 0 0 0 2 2h4" />
+        <rect width="8" height="8" x="13" y="13" rx="2" />
       </svg>
     ),
     title: 'AI Workflow Automation',
-    desc: 'We replace manual processes with multi-agent pipelines — from document processing and approvals to reporting and customer interactions, fully automated end-to-end.',
   },
 ];
 
 const CloudServicesSection = () => {
   return (
     <section className="-mt-38 bg-white">
-      {/* Dark AI pillars block */}
-      <div className="relative max-w-9xl mx-auto bg-[#0a0e1a] text-white pt-14 sm:pt-24 px-8 sm:px-16 pb-10 sm:pb-14 xl:rounded-2xl overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_15%_70%,_rgba(232,154,120,0.10)_0%,_transparent_55%)]" />
+      {/* Dark AI pillars block — full-bleed */}
+      <div className="relative w-full bg-[#060606] text-white pt-14 sm:pt-24 px-8 sm:px-16 pb-10 sm:pb-14 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_15%_70%,_rgba(154,163,175,0.10)_0%,_transparent_55%)]" />
 
 
         <motion.h2
@@ -116,9 +122,31 @@ const CloudServicesSection = () => {
           viewport={{ once: true, margin: '-60px' }}
         >
           We implement{' '}
-          <span className="text-[#e89a78]">AI Agents &amp; LLMs</span>{' '}
+          <span className="csl-shimmer-text">AI Agents &amp; LLMs</span>{' '}
           inside your business.
         </motion.h2>
+
+        <style>{`
+          .csl-shimmer-text {
+            /* Static silver gradient (no animation) */
+            background: linear-gradient(100deg, #9a9a9a, #ffffff 45%, #8f9aa3 90%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+          }
+        `}</style>
+
+        {/* Shared silver metallic gradient for the pillar icons */}
+        <svg width="0" height="0" className="absolute" aria-hidden="true">
+          <defs>
+            <linearGradient id="cslSilver" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#eef2f7" />
+              <stop offset="50%" stopColor="#9aa3af" />
+              <stop offset="100%" stopColor="#646b76" />
+            </linearGradient>
+          </defs>
+        </svg>
 
         <div className="relative text-sm sm:text-base grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 mt-12 sm:mt-16">
           {pillars.map((pillar, i) => (
@@ -128,17 +156,16 @@ const CloudServicesSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 + i * 0.12 }}
               viewport={{ once: true, margin: '-40px' }}
-              className="flex flex-col gap-4 border border-white/10 hover:border-[#e89a78]/35 rounded-2xl p-7 bg-white/[0.03] hover:bg-white/[0.06] transition-all duration-200 group"
+              className="flex flex-col gap-4 border border-white/10 hover:border-white/25 rounded-2xl p-7 bg-white/[0.03] hover:bg-white/[0.06] transition-all duration-200 group"
             >
               {i === 1 ? (
                 <RAGChatDemo />
               ) : (
-                <div className="w-11 h-11 rounded-xl bg-[#e89a78]/10 border border-[#e89a78]/20 flex items-center justify-center text-[#e89a78] group-hover:bg-[#e89a78]/15 transition-colors">
+                <div className="w-11 h-11 rounded-xl bg-white/[0.05] border border-white/15 flex items-center justify-center group-hover:bg-white/[0.09] group-hover:border-white/25 transition-colors">
                   {pillar.icon}
                 </div>
               )}
               <h3 className="text-base sm:text-lg font-semibold">{pillar.title}</h3>
-              <p className="text-white/55 text-sm leading-relaxed">{pillar.desc}</p>
             </motion.div>
           ))}
         </div>

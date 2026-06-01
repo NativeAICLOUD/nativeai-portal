@@ -8,6 +8,7 @@ import IndustriesBusinessDomain from "./components/partials/home/IndustriesBusin
 import MissionSection from "./components/partials/home/MissionSection";
 import PracticalSolutionsSection from "./components/partials/home/PracticalSolutionsSection";
 import ScrollCardsSection from "./components/partials/home/ScrollCardsSection";
+import RotatingHeadlineHero from "./components/partials/home/RotatingHeadlineHero";
 import TechStackSection from "./components/partials/home/TechStackSection";
 
 export default function Home() {
@@ -17,6 +18,9 @@ export default function Home() {
 
       {/* Scroll-animated 3-card services */}
       <ScrollCardsSection />
+
+      {/* Metallic shimmer headline hero */}
+      <RotatingHeadlineHero />
 
       {/* AI Agents · LLMs · Azure & AWS */}
       <CloudServicesSection />

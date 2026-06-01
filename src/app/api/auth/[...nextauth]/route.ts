@@ -43,8 +43,7 @@ const handler = NextAuth({
                     }
                 }
             }
-        })
-    ],
+        }),
         CredentialsProvider({
             id: 'otp',
             name: 'OTP',

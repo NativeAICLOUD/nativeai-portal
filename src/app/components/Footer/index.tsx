@@ -7,6 +7,7 @@ import { BGNativeWhite } from "@/ImagePath";
 import Logo from "../ui/Logo";
 import MicrosoftPartner from "../../../../public/img/microsoft.png";
 import AWSPartner from "../../../../public/img/aws.png";
+import { usePathname } from 'next/navigation';
 
 const navColumns = [
   {
@@ -56,6 +57,9 @@ const socials = [
 type NavLink = { url: string; title: string };
 
 function Footer() {
+  const pathname = usePathname();
+  if (pathname === '/login' || pathname === '/sign-up') return null;
+
   return (
     <footer
       style={{ fontFamily: "'JetBrains Mono', monospace" }}
