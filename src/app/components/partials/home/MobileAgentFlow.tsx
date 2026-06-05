@@ -3,9 +3,10 @@
 import Image from 'next/image';
 import { Link } from 'react-transition-progress/next';
 import { Constants } from '@/Constants';
+import RotatingHeroHeadline from './RotatingHeroHeadline';
 
 const MONO: React.CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
-const tags = ['AI Agents', 'LLMs', 'Azure & AWS'];
+const tags = ['AI', 'DATA', 'CLOUD'];
 
 export default function MobileAgentFlow() {
   return (
@@ -20,50 +21,24 @@ export default function MobileAgentFlow() {
     >
       <div className="relative z-[2] px-6 pt-9 pb-0">
 
-        {/* badges */}
+        {/* eyebrow badge */}
         <div className="flex flex-wrap justify-center items-center gap-1.5 mb-5">
-          {tags.map((tag) => (
-            <span
-              key={tag}
-              style={{
-                ...MONO,
-                background: 'rgba(232,154,120,0.12)',
-                border: '1px solid rgba(240,160,96,0.38)',
-                color: '#c4743c',
-              }}
-              className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold tracking-wide select-none"
-            >
-              {tag}
-            </span>
-          ))}
+          <span
+            style={{
+              ...MONO,
+              background: 'rgba(37,99,235,0.10)',
+              border: '1px solid rgba(37,99,235,0.32)',
+              color: '#1d4ed8',
+              letterSpacing: '0.08em',
+            }}
+            className="inline-flex items-center px-3 py-0.5 rounded-full text-[11px] font-semibold select-none"
+          >
+            {tags.join(' ')}
+          </span>
         </div>
 
-        {/* headline */}
-        <h1
-          style={{
-            fontSize: 'clamp(1.75rem, 6.5vw, 2.4rem)',
-            fontWeight: 900,
-            lineHeight: 1.08,
-            letterSpacing: '-0.03em',
-            margin: '0 0 20px',
-            color: '#0a0e1a',
-            textAlign: 'center',
-          }}
-        >
-          We make{' '}
-          <span className="relative inline-block">
-            <span style={{
-              background: 'linear-gradient(90deg, #f0a060, #e89a78, #d4845c)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
-              AI work
-            </span>
-            <span className="absolute bottom-0.5 left-0 w-full h-[2.5px] rounded-full bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] opacity-60" />
-          </span>
-          {' '}inside your business
-        </h1>
+        {/* headline (rotates between slogans) */}
+        <RotatingHeroHeadline variant="mobile" />
 
         {/* buttons — stacked, full-width, equal height */}
         <div className="flex flex-col gap-2.5 mb-5">

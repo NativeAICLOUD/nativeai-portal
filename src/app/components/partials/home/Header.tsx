@@ -4,9 +4,10 @@ import { Constants } from "@/Constants";
 import { Link } from 'react-transition-progress/next';
 import Image from 'next/image';
 import MobileAgentFlow from './MobileAgentFlow';
+import RotatingHeroHeadline from './RotatingHeroHeadline';
 
 const MONO: React.CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
-const tags = ['AI Agents', 'LLMs', 'Azure & AWS'];
+const tags = ['AI', 'DATA', 'CLOUD'];
 
 function HomeHeader() {
   return (
@@ -43,82 +44,24 @@ function HomeHeader() {
             {/* Left — text content */}
             <div className="flex-1 py-20 px-16 xl:py-24 xl:px-20 flex flex-col justify-center min-w-0">
 
-              {/* tags */}
+              {/* eyebrow badge */}
               <div className="flex flex-wrap items-center gap-2 mb-8">
-                {tags.map((tag) => (
-                  <span
-                    key={tag}
-                    style={{
-                      ...MONO,
-                      background: 'rgba(232,154,120,0.12)',
-                      border: '1px solid rgba(240,160,96,0.38)',
-                      color: '#c4743c',
-                    }}
-                    className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium select-none"
-                  >
-                    {tag}
-                  </span>
-                ))}
+                <span
+                  style={{
+                    ...MONO,
+                    background: 'rgba(37,99,235,0.10)',
+                    border: '1px solid rgba(37,99,235,0.32)',
+                    color: '#1d4ed8',
+                    letterSpacing: '0.08em',
+                  }}
+                  className="inline-flex items-center px-3.5 py-1 rounded-full text-sm font-semibold select-none"
+                >
+                  {tags.join(' ')}
+                </span>
               </div>
 
-              {/* headline */}
-              <h1
-                style={{
-                  fontSize: 'clamp(2.8rem, 5vw, 5rem)',
-                  fontWeight: 900,
-                  lineHeight: 1.06,
-                  letterSpacing: '-0.03em',
-                  color: '#0a0e1a',
-                  margin: '0 0 28px',
-                  maxWidth: 520,
-                }}
-              >
-                We make{' '}
-                <span className="relative inline-block">
-                  <span className="hdr-aiwork-refive">
-                    AI work
-                  </span>
-                  <span className="absolute bottom-1 left-0 w-full h-[3px] rounded-full bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] opacity-70" />
-                </span>
-                {' '}inside your business
-              </h1>
-
-              <style>{`
-                .hdr-aiwork-refive {
-                  display: inline-block;
-                  /* Warm orange metallic shimmer (refive-style, original palette) */
-                  background: linear-gradient(
-                    100deg,
-                    #d4845c 0%,
-                    #f0a060 28%,
-                    #ffe0c0 50%,
-                    #f0a060 72%,
-                    #d4845c 100%
-                  );
-                  background-size: 200% auto;
-                  -webkit-background-clip: text;
-                  background-clip: text;
-                  -webkit-text-fill-color: transparent;
-                  color: transparent;
-                  /* fade + un-blur in, then a continuous shimmer */
-                  animation:
-                    hdr-aiwork-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) both,
-                    hdr-aiwork-shimmer 3.2s linear infinite;
-                }
-                @keyframes hdr-aiwork-reveal {
-                  from { opacity: 0; filter: blur(16px); }
-                  to   { opacity: 1; filter: blur(0); }
-                }
-                @keyframes hdr-aiwork-shimmer {
-                  to { background-position: 200% center; }
-                }
-                @media (prefers-reduced-motion: reduce) {
-                  .hdr-aiwork-refive {
-                    animation: none;
-                    background-position: 50% center;
-                  }
-                }
-              `}</style>
+              {/* headline (rotates between slogans) */}
+              <RotatingHeroHeadline variant="desktop" />
 
               {/* buttons */}
               <div className="flex items-center gap-3 flex-wrap">
@@ -154,11 +97,11 @@ function HomeHeader() {
 
             {/* Right — illustration */}
             <div className="shrink-0 w-[52%] xl:w-[54%] self-end relative">
-              {/* Warm glow anchoring image to background palette */}
+              {/* Cool blue glow anchoring image to background palette */}
               <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
-                  background: 'radial-gradient(ellipse 80% 55% at 48% 92%, rgba(240,160,96,0.13) 0%, rgba(212,132,92,0.04) 48%, transparent 68%)',
+                  background: 'radial-gradient(ellipse 80% 55% at 48% 92%, rgba(37,99,235,0.13) 0%, rgba(59,130,246,0.04) 48%, transparent 68%)',
                 }}
               />
               <Image

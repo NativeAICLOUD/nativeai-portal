@@ -40,7 +40,7 @@ export default function RotatingHeadlineHero() {
         </h1>
 
         <p className="rhh-tagline">
-          Inspire. Create. Succeed. <span className="rhh-accent">We for You.</span>
+          Innovate Anywhere with <span className="rhh-accent">AI</span>
         </p>
       </div>
 
