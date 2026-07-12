@@ -163,7 +163,7 @@ function KnowledgeBasePosts({
                     {categories[post.id] && (
                       <span
                         className="shrink-0 self-center px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide"
-                        style={{ background: 'rgba(232,154,120,0.12)', color: '#c4743c', border: '1px solid rgba(232,154,120,0.25)' }}
+                        style={{ background: '#f3f4f6', color: '#6b7280', border: '1px solid #e6e6e6' }}
                       >
                         {categories[post.id]}
                       </span>
@@ -204,7 +204,7 @@ function KnowledgeBasePosts({
                 <span
                   key={cat}
                   className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium shrink-0"
-                  style={{ background: 'rgba(248,146,1,0.10)', color: '#c4743c', border: '1px solid rgba(248,146,1,0.25)' }}
+                  style={{ background: '#f3f4f6', color: '#6b7280', border: '1px solid #e6e6e6' }}
                 >
                   {cat}
                   <button onClick={() => toggleCategory(cat)} className="hover:opacity-70">
@@ -248,7 +248,7 @@ function KnowledgeBasePosts({
           <div className="flex items-center justify-between mb-4">
             <p className="text-sm font-semibold text-[#0a0e1a]">Filter by category</p>
             {selected.length > 0 && (
-              <button onClick={() => setSelected([])} className="text-xs text-[#e89a78] hover:text-[#d4836a] font-medium transition-colors">
+              <button onClick={() => setSelected([])} className="text-xs text-[#111] hover:opacity-70 font-medium transition-colors">
                 Clear all
               </button>
             )}
@@ -303,7 +303,7 @@ function KnowledgeBasePosts({
               {isNewArticle(featured.date) && (
                 <span
                   className="absolute top-4 left-4 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wide"
-                  style={{ background: '#e89a78', color: '#fff' }}
+                  style={{ background: '#111', color: '#fff' }}
                 >
                   New
                 </span>
@@ -314,7 +314,7 @@ function KnowledgeBasePosts({
             <div className="flex flex-col justify-center px-7 py-8 sm:w-[45%]">
               <div
                 className="inline-flex self-start items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-widest mb-4"
-                style={{ background: 'rgba(248,146,1,0.10)', color: '#c4743c', border: '1px solid rgba(248,146,1,0.25)' }}
+                style={{ background: '#f3f4f6', color: '#6b7280', border: '1px solid #e6e6e6' }}
               >
                 ★ Featured
               </div>
@@ -323,7 +323,7 @@ function KnowledgeBasePosts({
                   {categories[featured.id]}
                 </span>
               )}
-              <h2 className="text-[#0a0e1a] font-extrabold text-xl sm:text-2xl leading-snug mb-3 group-hover:text-[#e89a78] transition-colors duration-200">
+              <h2 className="text-[#0a0e1a] font-extrabold text-xl sm:text-2xl leading-snug mb-3 group-hover:text-[#111] transition-colors duration-200">
                 {featured.title}
               </h2>
               <p className="text-[#0a0e1a]/50 text-sm leading-relaxed line-clamp-3 mb-5">
@@ -334,7 +334,7 @@ function KnowledgeBasePosts({
                 <span className="w-1 h-1 rounded-full bg-[#0a0e1a]/20" />
                 <span>{calcReadingTime(featured.desc)} min read</span>
               </div>
-              <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#e89a78] mt-5">
+              <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#111] mt-5">
                 Read article
                 <svg className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14M12 5l7 7-7 7" />

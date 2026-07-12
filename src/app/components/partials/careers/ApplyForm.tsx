@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 type Props = {
@@ -14,9 +15,9 @@ type Props = {
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
 const MODEL_COLORS: Record<string, { bg: string; color: string }> = {
-  Remote:    { bg: 'rgba(10,14,26,0.07)',    color: 'rgba(10,14,26,0.55)' },
-  Hybrid:    { bg: 'rgba(232,154,120,0.14)', color: '#c4743c' },
-  'On-site': { bg: 'rgba(91,124,250,0.12)',  color: '#4a5fd4' },
+  Remote:    { bg: '#f3f4f6', color: '#374151' },
+  Hybrid:    { bg: '#f3f4f6', color: '#374151' },
+  'On-site': { bg: '#f3f4f6', color: '#374151' },
 };
 
 export default function ApplyForm({ jobTitle, jobSlug, department, location, workModel }: Props) {
@@ -28,6 +29,7 @@ export default function ApplyForm({ jobTitle, jobSlug, department, location, wor
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [status, setStatus] = useState<Status>('idle');
   const [dragOver, setDragOver] = useState(false);
+  const [started, setStarted] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
   const modelStyle = MODEL_COLORS[workModel] ?? MODEL_COLORS['On-site'];
@@ -98,8 +100,51 @@ export default function ApplyForm({ jobTitle, jobSlug, department, location, wor
     );
   }
 
+  if (!started) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35 }}
+        className="flex flex-col items-center gap-6 rounded-2xl border border-black/[0.07] bg-white px-6 sm:px-8 py-14 text-center"
+      >
+        <div className="flex flex-col gap-2">
+          <h2 className="m-0 text-xl font-semibold text-[#111]">Apply for {jobTitle}</h2>
+          <p className="m-0 max-w-xs text-sm text-[#6b7280]">Share your CV and a short note — it takes about two minutes.</p>
+        </div>
+        <button
+          type="button"
+          onClick={() => setStarted(true)}
+          className="ai-search-wrap w-full max-w-sm transition-transform duration-200 hover:scale-[1.01] active:scale-[0.99] focus-visible:outline-none"
+        >
+          <span className="ai-search-inner flex items-center justify-center gap-2.5 px-6 py-4">
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" className="shrink-0">
+              <defs>
+                <linearGradient id="apply-grad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#60a5fa" />
+                  <stop offset="50%" stopColor="#3b82f6" />
+                  <stop offset="100%" stopColor="#1e4fd6" />
+                </linearGradient>
+              </defs>
+              <path fill="url(#apply-grad)" d="M12 0c0 6.627-5.373 12-12 12 6.627 0 12 5.373 12 12 0-6.627 5.373-12 12-12-6.627 0-12-5.373-12-12Z" />
+            </svg>
+            <span className="text-[15px] font-medium text-[#111]">Start your application</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-[#111]"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+          </span>
+        </button>
+        <p className="m-0 text-[11px] text-[#9ca3af]">Takes ~2 minutes · CV required</p>
+      </motion.div>
+    );
+  }
+
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+    <motion.form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-5"
+      initial={{ opacity: 0, y: 24, filter: 'blur(10px)' }}
+      animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+    >
 
       {/* Job summary card */}
       <div className="rounded-2xl border border-black/[0.07] bg-white px-6 py-5 flex items-center justify-between gap-4">
@@ -129,7 +174,7 @@ export default function ApplyForm({ jobTitle, jobSlug, department, location, wor
               onChange={e => setName(e.target.value)}
               required
               placeholder="Jane Smith"
-              className="w-full px-4 py-3 rounded-xl border border-black/[0.09] bg-[#fafafa] text-[#0a0e1a] text-sm placeholder:text-[#0a0e1a]/25 focus:outline-none focus:border-[#e89a78] focus:ring-2 focus:ring-[#e89a78]/15 transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-black/[0.09] bg-[#fafafa] text-[#0a0e1a] text-sm placeholder:text-[#0a0e1a]/25 focus:outline-none focus:border-[#3b82f6] focus:ring-2 focus:ring-[#3b82f6]/15 transition-all"
             />
           </Field>
 
@@ -142,7 +187,7 @@ export default function ApplyForm({ jobTitle, jobSlug, department, location, wor
                 onChange={e => setEmail(e.target.value)}
                 required
                 placeholder="jane@example.com"
-                className="w-full px-4 py-3 rounded-xl border border-black/[0.09] bg-[#fafafa] text-[#0a0e1a] text-sm placeholder:text-[#0a0e1a]/25 focus:outline-none focus:border-[#e89a78] focus:ring-2 focus:ring-[#e89a78]/15 transition-all"
+                className="w-full px-4 py-3 rounded-xl border border-black/[0.09] bg-[#fafafa] text-[#0a0e1a] text-sm placeholder:text-[#0a0e1a]/25 focus:outline-none focus:border-[#3b82f6] focus:ring-2 focus:ring-[#3b82f6]/15 transition-all"
               />
             </Field>
             <Field label="Phone number">
@@ -151,7 +196,7 @@ export default function ApplyForm({ jobTitle, jobSlug, department, location, wor
                 value={phone}
                 onChange={e => setPhone(e.target.value)}
                 placeholder="+389 70 000 000"
-                className="w-full px-4 py-3 rounded-xl border border-black/[0.09] bg-[#fafafa] text-[#0a0e1a] text-sm placeholder:text-[#0a0e1a]/25 focus:outline-none focus:border-[#e89a78] focus:ring-2 focus:ring-[#e89a78]/15 transition-all"
+                className="w-full px-4 py-3 rounded-xl border border-black/[0.09] bg-[#fafafa] text-[#0a0e1a] text-sm placeholder:text-[#0a0e1a]/25 focus:outline-none focus:border-[#3b82f6] focus:ring-2 focus:ring-[#3b82f6]/15 transition-all"
               />
             </Field>
           </div>
@@ -165,8 +210,8 @@ export default function ApplyForm({ jobTitle, jobSlug, department, location, wor
               onClick={() => fileRef.current?.click()}
               className="relative flex flex-col items-center justify-center gap-3 px-6 py-8 rounded-xl border-2 border-dashed cursor-pointer transition-all"
               style={{
-                borderColor: dragOver ? '#e89a78' : cvFile ? 'rgba(52,211,153,0.5)' : 'rgba(10,14,26,0.12)',
-                background: dragOver ? 'rgba(232,154,120,0.04)' : cvFile ? 'rgba(52,211,153,0.04)' : '#fafafa',
+                borderColor: dragOver ? '#3b82f6' : cvFile ? 'rgba(52,211,153,0.5)' : 'rgba(10,14,26,0.12)',
+                background: dragOver ? 'rgba(59,130,246,0.04)' : cvFile ? 'rgba(52,211,153,0.04)' : '#fafafa',
               }}
             >
               <input
@@ -196,7 +241,7 @@ export default function ApplyForm({ jobTitle, jobSlug, department, location, wor
                     </svg>
                   </div>
                   <div className="text-center">
-                    <p className="text-sm font-semibold text-[#0a0e1a]">Drop your CV here or <span style={{ color: '#e89a78' }}>browse</span></p>
+                    <p className="text-sm font-semibold text-[#0a0e1a]">Drop your CV here or <span style={{ color: '#2563eb' }}>browse</span></p>
                     <p className="text-xs text-[#0a0e1a]/35 mt-0.5">PDF, DOC, DOCX · max 10 MB</p>
                   </div>
                 </>
@@ -218,7 +263,7 @@ export default function ApplyForm({ jobTitle, jobSlug, department, location, wor
               required
               rows={4}
               placeholder="Tell us what draws you to this role and what you'd bring to the team…"
-              className="w-full px-4 py-3 rounded-xl border border-black/[0.09] bg-[#fafafa] text-[#0a0e1a] text-sm placeholder:text-[#0a0e1a]/25 focus:outline-none focus:border-[#e89a78] focus:ring-2 focus:ring-[#e89a78]/15 transition-all resize-none"
+              className="w-full px-4 py-3 rounded-xl border border-black/[0.09] bg-[#fafafa] text-[#0a0e1a] text-sm placeholder:text-[#0a0e1a]/25 focus:outline-none focus:border-[#3b82f6] focus:ring-2 focus:ring-[#3b82f6]/15 transition-all resize-none"
             />
           </Field>
 
@@ -228,7 +273,7 @@ export default function ApplyForm({ jobTitle, jobSlug, department, location, wor
               onChange={e => setCover(e.target.value)}
               rows={5}
               placeholder="Anything else you'd like us to know…"
-              className="w-full px-4 py-3 rounded-xl border border-black/[0.09] bg-[#fafafa] text-[#0a0e1a] text-sm placeholder:text-[#0a0e1a]/25 focus:outline-none focus:border-[#e89a78] focus:ring-2 focus:ring-[#e89a78]/15 transition-all resize-none"
+              className="w-full px-4 py-3 rounded-xl border border-black/[0.09] bg-[#fafafa] text-[#0a0e1a] text-sm placeholder:text-[#0a0e1a]/25 focus:outline-none focus:border-[#3b82f6] focus:ring-2 focus:ring-[#3b82f6]/15 transition-all resize-none"
             />
           </Field>
         </div>
@@ -236,7 +281,7 @@ export default function ApplyForm({ jobTitle, jobSlug, department, location, wor
 
       {/* Submit */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <p className="text-xs text-[#0a0e1a]/35">Fields marked <span className="text-[#e89a78]">*</span> are required.</p>
+        <p className="text-xs text-[#0a0e1a]/35">Fields marked <span className="text-[#2563eb]">*</span> are required.</p>
         <div className="flex items-center gap-3">
           <Link
             href={`/careers/${jobSlug}`}
@@ -273,7 +318,7 @@ export default function ApplyForm({ jobTitle, jobSlug, department, location, wor
         <p className="text-sm text-red-500 text-right">Something went wrong — please try again or email careers@nativeai.cloud.</p>
       )}
 
-    </form>
+    </motion.form>
   );
 }
 
@@ -287,7 +332,7 @@ function Field({ label, required, hint, children }: {
     <div className="flex flex-col gap-1.5">
       <label className="text-xs font-semibold text-[#0a0e1a]/60 flex items-center gap-1.5">
         {label}
-        {required && <span style={{ color: '#e89a78' }}>*</span>}
+        {required && <span style={{ color: '#2563eb' }}>*</span>}
         {hint && <span className="text-[#0a0e1a]/30 font-normal">· {hint}</span>}
       </label>
       {children}

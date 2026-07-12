@@ -16,6 +16,15 @@ const industries = [
   },
   {
     number: '02',
+    title:  'Legal & Compliance',
+    desc:   'Law firms & legal teams',
+    src:    '/img/industry-legal.svg',
+    w: 78, h: 80,
+    detail: 'We build AI workspaces for law firms and legal teams — document classification, deadline extraction, contract analysis, and case workflow automation that keeps every matter on track.',
+    tags:   ['Document AI', 'Deadline Extraction', 'Contract Analysis', 'Case Workflows'],
+  },
+  {
+    number: '03',
     title:  'Fintech',
     desc:   'Banking & payments',
     src:    '/img/industry2.png',
@@ -24,7 +33,7 @@ const industries = [
     tags:   ['AI Fraud Detection', 'Payment Automation', 'RegTech', 'Open Banking'],
   },
   {
-    number: '03',
+    number: '04',
     title:  'E-commerce & Retail',
     desc:   'Online & in-store',
     src:    '/img/industry3.png',
@@ -33,7 +42,7 @@ const industries = [
     tags:   ['AI Recommendations', 'Inventory Automation', 'Omnichannel', 'Analytics'],
   },
   {
-    number: '04',
+    number: '05',
     title:  'Insurance',
     desc:   'Claims & InsurTech',
     src:    '/img/industry4.png',
@@ -42,7 +51,7 @@ const industries = [
     tags:   ['Claims Automation', 'Underwriting AI', 'Risk Assessment', 'Customer Portal'],
   },
   {
-    number: '05',
+    number: '06',
     title:  'Manufacturing',
     desc:   'Industry 4.0',
     src:    '/img/industry5.png',
@@ -51,7 +60,7 @@ const industries = [
     tags:   ['Predictive Maintenance', 'Quality Control AI', 'Supply Chain', 'IoT Integration'],
   },
   {
-    number: '06',
+    number: '07',
     title:  'Chemical',
     desc:   'Process & compliance',
     src:    '/img/industry6.png',
@@ -60,7 +69,7 @@ const industries = [
     tags:   ['Process Optimisation', 'Safety Monitoring', 'Compliance Mgmt', 'ERP Integration'],
   },
   {
-    number: '07',
+    number: '08',
     title:  'Construction',
     desc:   'Build & project mgmt',
     src:    '/img/industry7.png',
@@ -69,7 +78,7 @@ const industries = [
     tags:   ['Project Management', 'BIM Integration', 'On-site IoT', 'Document Automation'],
   },
   {
-    number: '08',
+    number: '09',
     title:  'Renewable Energy',
     desc:   'Clean tech & grid',
     src:    '/img/industry8.png',
@@ -78,7 +87,7 @@ const industries = [
     tags:   ['Grid Optimisation', 'Asset Monitoring', 'Data Pipelines', 'Forecasting AI'],
   },
   {
-    number: '09',
+    number: '10',
     title:  'B2B Solutions',
     desc:   'Enterprise platforms',
     src:    '/img/industry9.png',
@@ -115,7 +124,7 @@ export default function IndustriesBusinessDomain() {
   const item = industries[active];
 
   return (
-    <section className="relative bg-white py-20 sm:py-28 overflow-hidden">
+    <section className="font-switzer relative bg-white py-20 sm:py-28 overflow-hidden">
       <div className="max-w-9xl mx-auto px-6 sm:px-12 xl:px-16">
 
         {/* ── Header ── */}
@@ -126,17 +135,9 @@ export default function IndustriesBusinessDomain() {
           transition={{ duration: 0.55, ease: 'easeOut' }}
           viewport={{ once: true, margin: '-80px' }}
         >
-          <div className="flex items-center gap-2 mb-4">
-            <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">Industries we serve</p>
-          </div>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-[#0a0e1a] leading-tight max-w-2xl">
-            Move your industry{' '}
-            <span className="relative inline-block">
-              <span className="bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] bg-clip-text text-transparent">
-                forward
-              </span>
-              <span className="absolute -bottom-1 left-0 w-full h-[3px] rounded-full bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] opacity-50" />
-            </span>
+          <p className="text-[12px] font-medium uppercase tracking-[0.14em] text-[#9ca3af] mb-4">Industries we serve</p>
+          <h2 className="text-[30px] md:text-[40px] font-medium text-[#111] leading-[1.1] max-w-2xl">
+            Move your industry forward
           </h2>
         </motion.div>
 
@@ -159,21 +160,21 @@ export default function IndustriesBusinessDomain() {
                 transition={{ duration: 0.4, ease: 'easeOut', delay: i * 0.05 }}
                 viewport={{ once: true, margin: '-40px' }}
                 className="group flex items-center justify-between py-5 border-b cursor-pointer select-none"
-                style={{ borderColor: '#f0ebe4' }}
+                style={{ borderColor: '#e6e6e6' }}
               >
                 {/* left: number + title */}
                 <div className="flex items-center gap-5">
                   <span
                     className="font-mono text-[11px] tracking-widest shrink-0 transition-colors duration-200"
-                    style={{ color: i === active ? '#e89a78' : '#c4bab2' }}
+                    style={{ color: i === active ? '#111' : '#c4c4c4' }}
                   >
                     {ind.number}
                   </span>
                   <span
-                    className="font-bold leading-tight transition-all duration-200"
+                    className="font-medium leading-tight transition-all duration-200"
                     style={{
                       fontSize:   'clamp(1.1rem, 2vw, 1.6rem)',
-                      color:      i === active ? '#0a0e1a' : '#9b9086',
+                      color:      i === active ? '#111' : '#9ca3af',
                     }}
                   >
                     {ind.title}
@@ -184,16 +185,16 @@ export default function IndustriesBusinessDomain() {
                 <div className="flex items-center gap-3 shrink-0">
                   <span
                     className="text-xs font-medium transition-all duration-200"
-                    style={{ color: i === active ? '#e89a78' : 'transparent' }}
+                    style={{ color: i === active ? '#6b7280' : 'transparent' }}
                   >
                     {ind.desc}
                   </span>
                   <div
                     className="w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-200"
                     style={{
-                      borderColor:     i === active ? '#0a0e1a'  : '#e8e0d8',
-                      backgroundColor: i === active ? '#0a0e1a'  : 'transparent',
-                      color:           i === active ? '#ffffff'  : '#c4bab2',
+                      borderColor:     i === active ? '#111'  : '#e6e6e6',
+                      backgroundColor: i === active ? '#111'  : 'transparent',
+                      color:           i === active ? '#ffffff'  : '#c4c4c4',
                     }}
                   >
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
@@ -206,7 +207,7 @@ export default function IndustriesBusinessDomain() {
                 {i === active && (
                   <motion.div
                     layoutId="activeLine"
-                    className="absolute left-0 w-[3px] rounded-full bg-[#e89a78]"
+                    className="absolute left-0 w-[3px] rounded-full bg-[#111]"
                     style={{ height: 40 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 35 }}
                   />
@@ -252,10 +253,10 @@ export default function IndustriesBusinessDomain() {
                 {/* content */}
                 <div className="p-7">
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="font-mono text-[11px] tracking-widest text-[#e89a78] font-semibold">{item.number}</span>
+                    <span className="font-mono text-[11px] tracking-widest text-white/60 font-semibold">{item.number}</span>
                     <span
                       className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full"
-                      style={{ background: 'rgba(232,154,120,0.12)', border: '1px solid rgba(232,154,120,0.28)', color: '#e89a78' }}
+                      style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.6)' }}
                     >
                       {item.desc}
                     </span>
@@ -285,7 +286,7 @@ export default function IndustriesBusinessDomain() {
                       initial={{ width: '0%' }}
                       animate={{ width: '100%' }}
                       transition={{ duration: INTERVAL / 1000, ease: 'linear' }}
-                      style={{ height: '100%', background: '#e89a78' }}
+                      style={{ height: '100%', background: '#ffffff' }}
                     />
                   )}
                 </div>
@@ -326,9 +327,9 @@ export default function IndustriesBusinessDomain() {
                 onClick={() => go(i)}
                 className="text-[12px] font-medium px-3.5 py-1.5 rounded-full border transition-all duration-200"
                 style={{
-                  background:  i === active ? '#0a0e1a' : 'transparent',
-                  borderColor: i === active ? '#0a0e1a' : '#e8e0d8',
-                  color:       i === active ? '#fff'    : '#6b6b6b',
+                  background:  i === active ? '#111' : 'transparent',
+                  borderColor: i === active ? '#111' : '#e6e6e6',
+                  color:       i === active ? '#fff' : '#6b7280',
                 }}
               >
                 {ind.title}
@@ -360,8 +361,8 @@ export default function IndustriesBusinessDomain() {
                 {/* content */}
                 <div className="p-6">
                   <div className="flex items-center gap-3 mb-3">
-                    <span className="font-mono text-[11px] tracking-widest text-[#e89a78] font-semibold">{item.number}</span>
-                    <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full" style={{ background: 'rgba(232,154,120,0.12)', border: '1px solid rgba(232,154,120,0.28)', color: '#e89a78' }}>
+                    <span className="font-mono text-[11px] tracking-widest text-white/60 font-semibold">{item.number}</span>
+                    <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.6)' }}>
                       {item.desc}
                     </span>
                   </div>
@@ -383,7 +384,7 @@ export default function IndustriesBusinessDomain() {
               <div className="flex gap-1.5">
                 {industries.map((_, i) => (
                   <button key={i} onClick={() => go(i)} className="rounded-full transition-all duration-200"
-                    style={{ width: i === active ? 18 : 5, height: 5, background: i < active ? '#e89a78' : i === active ? '#fff' : 'rgba(255,255,255,0.18)' }}
+                    style={{ width: i === active ? 18 : 5, height: 5, background: i < active ? 'rgba(255,255,255,0.5)' : i === active ? '#fff' : 'rgba(255,255,255,0.18)' }}
                   />
                 ))}
               </div>

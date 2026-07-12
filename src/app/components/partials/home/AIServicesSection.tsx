@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion } from 'framer-motion';
 import { Link } from 'react-transition-progress/next';
@@ -8,7 +8,7 @@ const services = [
   {
     tag:  'Automate first',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/>
         <path d="M2 14h2M20 14h2M15 13v2M9 13v2"/>
       </svg>
@@ -20,7 +20,7 @@ const services = [
   {
     tag:  'Scale & modernize',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
         <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/>
         <path d="M12 12v9M8 17l4-4 4 4"/>
       </svg>
@@ -32,7 +32,7 @@ const services = [
   {
     tag:  'Built to scale',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
         <rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M9 21V9"/>
       </svg>
     ),
@@ -43,24 +43,22 @@ const services = [
 ];
 
 const AIServicesSection = () => (
-  <section className="max-w-9xl mx-auto px-6 sm:px-12 xl:px-16 py-20 sm:py-28">
+  <section className="font-switzer max-w-9xl mx-auto px-6 sm:px-12 xl:px-16 py-20 sm:py-28">
 
     {/* Header */}
     <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
       <div>
-        <div className="flex items-center gap-2 mb-4">
-          <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">Core Services</p>
-        </div>
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0a0e1a] max-w-md leading-tight">
+        <p className="text-[12px] font-medium uppercase tracking-[0.14em] text-[#9ca3af] mb-4">Core Services</p>
+        <h2 className="text-[30px] md:text-[40px] font-medium text-[#111] leading-[1.1] max-w-md">
           Three ways we drive results
         </h2>
-        <p className="text-[#6b6b6b] text-sm mt-3 max-w-sm leading-relaxed">
+        <p className="text-[#6b7280] text-[15px] font-light mt-3 max-w-sm leading-relaxed">
           Every engagement maps to one of these pillars — often all three at once.
         </p>
       </div>
       <Link
         href="/services"
-        className="inline-flex items-center gap-2 text-sm font-semibold text-[#0a0e1a] hover:text-[#e89a78] transition-colors shrink-0"
+        className="inline-flex items-center gap-2 text-[14px] font-medium text-[#111] hover:opacity-70 transition-opacity shrink-0"
       >
         Explore all services
         <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
@@ -81,21 +79,17 @@ const AIServicesSection = () => (
         >
           <Link
             href={s.href}
-            className="group flex flex-col gap-5 border border-[#e8e0d8] rounded-2xl p-7 hover:border-[#e89a78] hover:shadow-lg transition-all duration-300 bg-[#faf7f4] h-full"
+            className="group flex h-full flex-col gap-5 rounded-lg border border-[#e6e6e6] bg-white p-7 transition-[filter,box-shadow] duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.2)] hover:[filter:invert(1)]"
           >
             <div className="flex items-center justify-between">
-              <div className="w-11 h-11 rounded-xl bg-[#e89a78]/10 border border-[#e89a78]/20 flex items-center justify-center text-[#e89a78]">
-                {s.icon}
-              </div>
-              <span className="text-xs font-semibold text-[#b8714e] bg-[#f4ebe8] px-3 py-1 rounded-full border border-[#e8d0c4]">
-                {s.tag}
-              </span>
+              <span className="text-[#111]">{s.icon}</span>
+              <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#9ca3af]">{s.tag}</span>
             </div>
             <div>
-              <h3 className="text-lg font-bold text-[#0a0e1a] mb-2">{s.title}</h3>
-              <p className="text-[#6b6b6b] text-sm leading-relaxed">{s.desc}</p>
+              <h3 className="text-[20px] font-medium text-[#111] mb-2 leading-[1.25]">{s.title}</h3>
+              <p className="text-[#111] text-[15px] font-normal leading-[1.5]">{s.desc}</p>
             </div>
-            <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-[#0a0e1a] group-hover:text-[#e89a78] group-hover:gap-2.5 transition-all">
+            <span className="mt-auto inline-flex items-center gap-1.5 text-[13px] font-medium text-[#111]">
               Learn more
               <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
                 <path d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />

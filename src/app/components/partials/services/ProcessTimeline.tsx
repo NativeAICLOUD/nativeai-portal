@@ -2,8 +2,22 @@
 
 import { motion } from "framer-motion";
 import type { ProcessStep } from "@/lib/services-data";
+import {
+  UserPlus, Plug, FileText, BellRing, ClipboardCheck, Rocket,
+  type LucideIcon,
+} from "lucide-react";
+
+const ICONS: Record<string, LucideIcon> = {
+  setup: UserPlus,
+  connect: Plug,
+  template: FileText,
+  reminder: BellRing,
+  validate: ClipboardCheck,
+  launch: Rocket,
+};
 
 function TextBlock({ step, index }: { step: ProcessStep; index: number }) {
+  const Icon = step.icon ? ICONS[step.icon] : undefined;
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -12,6 +26,11 @@ function TextBlock({ step, index }: { step: ProcessStep; index: number }) {
       transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
       className="max-w-[320px]"
     >
+      {Icon && (
+        <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-4" style={{ background: "rgba(255,107,74,0.12)", color: "#ff6b4a" }}>
+          <Icon size={22} strokeWidth={1.8} aria-hidden />
+        </span>
+      )}
       <p className="text-sm text-[#ff6b4a] uppercase tracking-wide font-medium mb-3">
         Step {step.step}
       </p>

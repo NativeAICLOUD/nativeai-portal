@@ -1,297 +1,238 @@
-﻿'use client';
+import type { Metadata } from "next";
+import { CloudUpload, Workflow, Database, type LucideIcon } from "lucide-react";
+import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from "@/app/components/partials/services/ServiceUI";
 
-import { Plus_Jakarta_Sans } from "next/font/google";
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { Constants } from '@/Constants';
+export const metadata: Metadata = {
+  title: "Migrate to Azure",
+  description:
+    "We migrate your workloads, databases, and infrastructure to Azure — on time, on budget, and with zero unplanned downtime. Every stage handled end-to-end.",
+};
 
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
-const steps = [
-  { number: '01', title: 'Discovery & Assessment',  desc: 'We map your entire estate — workloads, dependencies, data, and integrations — and produce a migration readiness report with a risk-scored inventory of every asset.' },
-  { number: '02', title: 'Migration Strategy',       desc: 'We select the right strategy for each workload: Rehost, Replatform, Refactor, Rearchitect, or Retire. No one-size-fits-all approach — every decision is justified.' },
-  { number: '03', title: 'Landing Zone Setup',       desc: 'We build a secure, governance-ready Azure Landing Zone following Microsoft CAF best practices — networking, identity, policies, and cost management configured from day one.' },
-  { number: '04', title: 'Migration & Cutover',      desc: 'We execute migrations in waves with parallel-run validation, automated rollback plans, and zero-downtime cutovers — keeping your business running throughout.' },
-  { number: '05', title: 'Optimise & Handover',      desc: 'Post-migration we right-size resources, implement monitoring and alerting, and hand over full documentation and runbooks so your team is confident on day one.' },
+/* ── content ── */
+const pillars: { title: string; desc: string; icon: LucideIcon }[] = [
+  { title: "On-Premises to Azure", desc: "Move physical servers, VMs, and databases from your data centre to Azure with Azure Migrate — minimal disruption, maximum speed.", icon: CloudUpload },
+  { title: "AWS / GCP to Azure", desc: "Cross-cloud migrations handled end-to-end — compute, storage, networking, and managed services re-mapped to their Azure equivalents with full data integrity.", icon: Workflow },
+  { title: "Database Migration", desc: "SQL Server, Oracle, MySQL, PostgreSQL — migrated to Azure SQL, Cosmos DB, or Azure Database for PostgreSQL with schema conversion and zero data loss.", icon: Database },
 ];
 
-const pillars = [
-  {
-    icon: <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="currentColor" strokeWidth={1.6}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15Z" /></svg>,
-    title: 'On-Premises to Azure',
-    desc: 'Move physical servers, VMs, and databases from your data centre to Azure with Azure Migrate — minimal disruption, maximum speed.',
-  },
-  {
-    icon: <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="currentColor" strokeWidth={1.6}><path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>,
-    title: 'AWS / GCP to Azure',
-    desc: 'Cross-cloud migrations handled end-to-end — compute, storage, networking, and managed services re-mapped to their Azure equivalents with full data integrity.',
-  },
-  {
-    icon: <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="currentColor" strokeWidth={1.6}><path strokeLinecap="round" strokeLinejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 2.625c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" /></svg>,
-    title: 'Database Migration',
-    desc: 'SQL Server, Oracle, MySQL, PostgreSQL — migrated to Azure SQL, Cosmos DB, or Azure Database for PostgreSQL with schema conversion and zero data loss.',
-  },
+const steps = [
+  { number: "01", title: "Discovery & Assessment", desc: "We map your entire estate — workloads, dependencies, data, and integrations — and produce a migration readiness report with a risk-scored inventory of every asset." },
+  { number: "02", title: "Migration Strategy", desc: "We select the right strategy for each workload: Rehost, Replatform, Refactor, Rearchitect, or Retire. No one-size-fits-all approach — every decision is justified." },
+  { number: "03", title: "Landing Zone Setup", desc: "We build a secure, governance-ready Azure Landing Zone following Microsoft CAF best practices — networking, identity, policies, and cost management configured from day one." },
+  { number: "04", title: "Migration & Cutover", desc: "We execute migrations in waves with parallel-run validation, automated rollback plans, and zero-downtime cutovers — keeping your business running throughout." },
+  { number: "05", title: "Optimise & Handover", desc: "Post-migration we right-size resources, implement monitoring and alerting, and hand over full documentation and runbooks so your team is confident on day one." },
 ];
 
 const reasons = [
-  { stat: '99.99%', label: 'Azure SLA uptime',    desc: 'Global redundancy and geo-replication keep your workloads available.' },
-  { stat: '35%',   label: 'Average cost saving',  desc: 'Azure Hybrid Benefit, Reserved Instances, and right-sizing deliver measurable savings.' },
-  { stat: '0 h',   label: 'Target downtime',       desc: 'We plan every cutover for zero business impact using live migration techniques.' },
+  { stat: "99.99%", label: "Azure SLA uptime", desc: "Global redundancy and geo-replication keep your workloads available." },
+  { stat: "35%", label: "Average cost saving", desc: "Azure Hybrid Benefit, Reserved Instances, and right-sizing deliver measurable savings." },
+  { stat: "0 h", label: "Target downtime", desc: "We plan every cutover for zero business impact using live migration techniques." },
 ];
 
 const faqs = [
-  { q: 'How long does a migration take?',              a: 'Timelines vary by estate size. A typical mid-market migration (50–200 workloads) completes in 8–16 weeks. We provide a firm schedule after the Discovery phase.' },
-  { q: 'Will my applications need to be rewritten?',   a: 'Most workloads can be rehosted or replatformed with no code changes. Where refactoring adds clear value (cost, performance, scalability), we recommend it — but it is never mandatory.' },
-  { q: 'What about compliance and data residency?',    a: 'Azure offers data residency in 60+ regions. We configure Azure Policy, Microsoft Defender, and regulatory compliance blueprints to meet GDPR, ISO 27001, SOC 2, and more.' },
-  { q: 'Do you provide support after the migration?',  a: 'Yes. We offer Managed Services post-migration — from 8×5 monitoring up to 24×7 NOC support — so you never face Azure alone.' },
+  { q: "How long does a migration take?", a: "Timelines vary by estate size. A typical mid-market migration (50–200 workloads) completes in 8–16 weeks. We provide a firm schedule after the Discovery phase." },
+  { q: "Will my applications need to be rewritten?", a: "Most workloads can be rehosted or replatformed with no code changes. Where refactoring adds clear value (cost, performance, scalability), we recommend it — but it is never mandatory." },
+  { q: "What about compliance and data residency?", a: "Azure offers data residency in 60+ regions. We configure Azure Policy, Microsoft Defender, and regulatory compliance blueprints to meet GDPR, ISO 27001, SOC 2, and more." },
+  { q: "Do you provide support after the migration?", a: "Yes. We offer Managed Services post-migration — from 8×5 monitoring up to 24×7 NOC support — so you never face Azure alone." },
 ];
 
-/* ── Liquid glass tokens ── */
-const lg: React.CSSProperties = {
-  background: "rgba(255,255,255,0.60)",
-  backdropFilter: "blur(40px) saturate(160%)",
-  WebkitBackdropFilter: "blur(40px) saturate(160%)",
-  border: "1px solid rgba(255,255,255,0.82)",
-  boxShadow: "0 2px 24px rgba(232,154,120,0.10), 0 1px 2px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.95)",
-};
-const lgCard: React.CSSProperties = {
-  background: "rgba(255,255,255,0.52)",
-  backdropFilter: "blur(32px) saturate(150%)",
-  WebkitBackdropFilter: "blur(32px) saturate(150%)",
-  border: "1px solid rgba(255,255,255,0.78)",
-  boxShadow: "0 4px 32px rgba(232,154,120,0.08), 0 1px 3px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.90)",
-};
+const migration: { label: string; state: "done" | "active" | "pending"; progress?: number }[] = [
+  { label: "Discovery complete", state: "done" },
+  { label: "Landing Zone deployed", state: "done" },
+  { label: "Wave 1 — 18 / 43 workloads", state: "active", progress: 42 },
+  { label: "Wave 2 — pending", state: "pending" },
+  { label: "Cutover — scheduled", state: "pending" },
+];
 
 export default function MigrateToAzurePage() {
   return (
-    <div className={`relative min-h-full overflow-x-clip ${jakarta.className}`}>
+    <div className="font-switzer">
 
-      {/* ── Hero ──────────────────────────────────────── */}
-      <section className="relative overflow-hidden min-h-[100svh] flex items-center" style={{ background: "linear-gradient(145deg, #fff5ee 0%, #fdf0e8 30%, #fef6f0 60%, #fff8f2 100%)" }}>
-
-        {/* Blobs */}
-        <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute rounded-full" style={{ width: 820, height: 820, top: "-15%", right: "-10%", background: "radial-gradient(circle, rgba(240,140,60,0.30) 0%, transparent 65%)", filter: "blur(70px)" }} />
-          <div className="absolute rounded-full" style={{ width: 680, height: 680, top: "28%",  left: "-18%", background: "radial-gradient(circle, rgba(232,154,120,0.18) 0%, transparent 65%)", filter: "blur(60px)" }} />
-          <div className="absolute rounded-full" style={{ width: 500, height: 500, bottom: "-10%", left: "25%", background: "radial-gradient(circle, rgba(232,154,120,0.16) 0%, transparent 65%)", filter: "blur(60px)" }} />
-        </div>
-
-        <div className="relative w-full max-w-7xl mx-auto px-6 md:px-12 pt-36 pb-24">
-          <div className="flex flex-col lg:flex-row lg:items-center gap-14 xl:gap-20">
+      {/* ── Hero ── */}
+      <div className="industries-hero-bg">
+        <div className={`${CONTAINER} pb-12 pt-32 lg:pt-28`}>
+          <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
 
             {/* Left */}
-            <motion.div className="flex-1 min-w-0" initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, ease: [0.25,0.46,0.45,0.94] }}>
-              <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-10" style={lg}>
-                <span className="text-[11px] font-semibold tracking-widest uppercase" style={{ color: '#b86a30' }}>Cloud Migration</span>
-              </div>
-
-              <h1 className="text-6xl md:text-7xl lg:text-[96px] font-extrabold text-[#0a0e1a] leading-[0.97] tracking-[-0.045em] mb-8">
-                Move to Azure<br />without<br />
-                <span style={{ background: "linear-gradient(120deg, #f0a060 0%, #e89a78 40%, #d4845c 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                  the risk.
-                </span>
+            <div className="flex-1">
+              <div className="mb-6"><Eyebrow>Cloud Migration</Eyebrow></div>
+              <h1 className="m-0 text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
+                Move to Azure without the risk.
               </h1>
-
-              <motion.p className="text-[#0a0e1a]/52 text-[18px] font-normal leading-[1.75] max-w-[460px] mb-10" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }}>
-                We migrate your workloads, databases, and infrastructure to Azure — on time, on budget, and with zero unplanned downtime. Every stage handled end-to-end.
-              </motion.p>
-
-              <motion.div className="flex flex-wrap gap-3" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25 }}>
-                <Link href={Constants.PAGES.SCHEDULE_CALL} className="bg-[#e89a78] hover:bg-[#d4836a] text-white font-bold px-8 py-4 rounded-full text-base transition-colors whitespace-nowrap shadow-lg shadow-black/10">
-                  Schedule a free assessment
-                </Link>
-                <Link href={Constants.PAGES.SOLUTIONS} className="font-medium px-8 py-4 rounded-full text-base transition-colors whitespace-nowrap" style={{ ...lg, color: '#b86a30' }}>
-                  View all solutions
-                </Link>
-              </motion.div>
-            </motion.div>
+              <p className="mt-6 max-w-[520px] text-[18px] font-light leading-[1.6] text-[#111]">
+                We migrate your workloads, databases, and infrastructure to Azure — on time, on
+                budget, and with zero unplanned downtime. Every stage handled end-to-end.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <PrimaryButton href="/schedule-call">Schedule a free assessment</PrimaryButton>
+                <SecondaryButton href="/solutions">View all solutions</SecondaryButton>
+              </div>
+            </div>
 
             {/* Right — migration progress dashboard */}
-            <motion.div className="lg:flex-1 lg:max-w-[480px] w-full" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.95, delay: 0.08, ease: [0.25,0.46,0.45,0.94] }}>
-              <motion.div animate={{ y: [0, -12, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}>
-                <div className="rounded-[28px] p-7 flex flex-col gap-5" style={lgCard}>
-
-                  {/* Header */}
-                  <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-bold uppercase tracking-widest" style={{ color: '#b86a30' }}>Migration Progress</span>
-                    <div className="flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400" style={{ boxShadow: "0 0 6px #34d399" }} />
-                      <span className="text-[10px] font-semibold" style={{ color: '#c4743c' }}>Active</span>
-                    </div>
+            <div className="w-full lg:max-w-[480px] lg:flex-1">
+              <div className="flex flex-col gap-5 rounded-2xl border border-[#e6e6e6] bg-white p-6">
+                <div className="flex items-center justify-between">
+                  <Eyebrow>Migration Progress</Eyebrow>
+                  <div className="flex items-center gap-1.5">
+                    <span className="h-2 w-2 rounded-full bg-[#059669]" />
+                    <span className="text-[11px] font-medium text-[#059669]">Active</span>
                   </div>
+                </div>
 
-                  {/* Steps */}
-                  <div className="flex flex-col gap-3">
-                    {[
-                      { label: "Discovery complete",         done: true  },
-                      { label: "Landing Zone deployed",      done: true  },
-                      { label: "Wave 1 — 18 / 43 workloads",done: false, progress: 42 },
-                      { label: "Wave 2 — pending",           done: false, pending: true },
-                      { label: "Cutover — scheduled",        done: false, pending: true },
-                    ].map((row, i) => (
-                      <div key={i} className="flex flex-col gap-1.5">
-                        <div className="flex items-center gap-3">
-                          <span className={`text-xs shrink-0 w-4 ${row.done ? "text-emerald-500" : row.pending ? "text-slate-400" : ""}`} style={!row.done && !row.pending ? { color: '#c4743c' } : {}}>
-                            {row.done ? "✓" : row.pending ? "○" : "▸"}
-                          </span>
-                          <span className={`text-sm ${row.pending ? "text-slate-400" : ""}`} style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, ...(!row.pending ? { color: '#0a0e1a', fontWeight: row.done ? 500 : 600 } : {}) }}>
-                            {row.label}
-                          </span>
-                        </div>
-                        {row.progress !== undefined && (
-                          <div className="ml-7 flex items-center gap-2">
-                            <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(240,160,96,0.15)' }}>
-                              <div className="h-full rounded-full" style={{ width: `${row.progress}%`, background: "linear-gradient(90deg, #e89a78, #f0a060)" }} />
-                            </div>
-                            <span className="text-[10px] font-bold" style={{ color: '#c4743c' }}>{row.progress}%</span>
-                          </div>
-                        )}
+                <div className="flex flex-col gap-3">
+                  {migration.map((row) => (
+                    <div key={row.label} className="flex flex-col gap-1.5">
+                      <div className="flex items-center gap-3">
+                        <span
+                          className={
+                            "h-3 w-3 shrink-0 rounded-full " +
+                            (row.state === "done"
+                              ? "bg-[#111]"
+                              : row.state === "active"
+                                ? "border-2 border-[#111]"
+                                : "bg-[#e6e6e6]")
+                          }
+                        />
+                        <span className={`text-[13px] ${row.state === "pending" ? "font-light text-[#9ca3af]" : "font-normal text-[#111]"}`}>
+                          {row.label}
+                        </span>
                       </div>
-                    ))}
-                  </div>
-
-                  {/* Tech tags */}
-                  <div className="flex flex-wrap gap-2 pt-1 border-t border-black/[0.06]">
-                    {["Azure Migrate", "CAF", "Terraform", "Azure Policy"].map((t) => (
-                      <span key={t} className="text-[10px] font-semibold px-2.5 py-1 rounded-full" style={{ color: '#b86a30', background: 'rgba(240,160,96,0.12)', border: '1px solid rgba(240,160,96,0.25)' }}>{t}</span>
-                    ))}
-                  </div>
+                      {row.progress !== undefined && (
+                        <div className="ml-6 flex items-center gap-2">
+                          <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-[#eee]">
+                            <div className="h-full rounded-full bg-[#111]" style={{ width: `${row.progress}%` }} />
+                          </div>
+                          <span className="text-[11px] font-medium text-[#111]">{row.progress}%</span>
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </div>
-              </motion.div>
-            </motion.div>
 
-          </div>
-        </div>
-      </section>
-
-      {/* ── Migration types ───────────────────────────── */}
-      <section className="relative overflow-hidden" style={{ background: "linear-gradient(160deg, #fdf0e8 0%, #fff5ee 40%, #fef6f0 100%)" }}>
-        <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute rounded-full" style={{ width: 700, height: 700, top: "-25%", right: "-15%", background: "radial-gradient(circle, rgba(240,140,60,0.22) 0%, transparent 65%)", filter: "blur(70px)" }} />
-          <div className="absolute rounded-full" style={{ width: 500, height: 500, bottom: "-15%", left: "-5%",  background: "radial-gradient(circle, rgba(232,154,120,0.18) 0%, transparent 65%)", filter: "blur(60px)" }} />
-        </div>
-        <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-28">
-          <div className="flex items-center gap-2 mb-5">
-            <p className="text-xs uppercase tracking-wider font-semibold" style={{ color: '#b86a30' }}>Migration types</p>
-          </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#0a0e1a] leading-[1.05] tracking-[-0.035em] mb-14 max-w-2xl">
-            We migrate from<br />
-            <span style={{ background: "linear-gradient(120deg, #f0a060 0%, #d4845c 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-              anywhere to Azure.
-            </span>
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {pillars.map((p, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-8%" }} transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="rounded-[22px] p-8 flex flex-col gap-5 hover:shadow-lg transition-shadow duration-300" style={lgCard}>
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center" style={{ color: '#c4743c', background: "rgba(240,160,96,0.14)", border: "1px solid rgba(240,160,96,0.22)" }}>
-                  {p.icon}
+                <div className="flex flex-wrap gap-2 border-t border-[#eee] pt-4">
+                  {["Azure Migrate", "CAF", "Terraform", "Azure Policy"].map((t) => (
+                    <span key={t} className="rounded-full border border-[#e6e6e6] px-2.5 py-1 text-[11px] font-medium text-[#111]">
+                      {t}
+                    </span>
+                  ))}
                 </div>
-                <h3 className="text-base font-bold text-[#0a0e1a] leading-snug">{p.title}</h3>
-                <p className="text-[#0a0e1a]/52 text-sm font-normal leading-relaxed">{p.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── How it works ──────────────────────────────── */}
-      <section className="relative overflow-hidden" style={{ background: "linear-gradient(145deg, #fff5ee 0%, #fdf0e8 30%, #fef6f0 60%, #fff8f2 100%)" }}>
-        <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute rounded-full" style={{ width: 600, height: 600, top: "-20%", right: "-10%", background: "radial-gradient(circle, rgba(240,140,60,0.22) 0%, transparent 65%)", filter: "blur(70px)" }} />
-          <div className="absolute rounded-full" style={{ width: 400, height: 400, bottom: "0%", left: "5%", background: "radial-gradient(circle, rgba(232,154,120,0.18) 0%, transparent 65%)", filter: "blur(60px)" }} />
-        </div>
-        <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-28">
-          <div className="flex items-center gap-2 mb-5">
-            <p className="text-xs uppercase tracking-wider font-semibold" style={{ color: '#b86a30' }}>How it works</p>
-          </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#0a0e1a] leading-[1.05] tracking-[-0.035em] mb-14">
-            A proven five-step<br />migration process.
-          </h2>
-
-          <div className="flex flex-col gap-3">
-            {steps.map((step, i) => (
-              <motion.div key={i} initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-8%" }} transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="rounded-[22px] p-8 flex gap-8 items-start hover:shadow-md transition-shadow duration-200" style={lgCard}>
-                <span className="text-4xl font-extrabold shrink-0 leading-none pt-1 tracking-[-0.04em]" style={{ background: "linear-gradient(135deg, #f0a060 0%, #d4845c 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                  {step.number}
-                </span>
-                <div className="flex flex-col gap-2">
-                  <h3 className="text-lg font-bold text-[#0a0e1a] tracking-[-0.01em]">{step.title}</h3>
-                  <p className="text-[#0a0e1a]/48 text-[15px] font-normal leading-relaxed max-w-2xl">{step.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Stats ─────────────────────────────────────── */}
-      <section className="relative overflow-hidden" style={{ background: "linear-gradient(160deg, #fdf0e8 0%, #fff5ee 40%, #fff8f2 100%)" }}>
-        <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute rounded-full" style={{ width: 600, height: 600, top: "0%", left: "20%", background: "radial-gradient(circle, rgba(240,140,60,0.20) 0%, transparent 65%)", filter: "blur(70px)" }} />
-        </div>
-        <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-28">
-          <div className="flex items-center gap-2 mb-5">
-            <p className="text-xs uppercase tracking-wider font-semibold" style={{ color: '#b86a30' }}>Why Azure</p>
-          </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#0a0e1a] leading-[1.05] tracking-[-0.035em] mb-14">
-            The numbers speak<br />for themselves.
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-20">
-            {reasons.map((r, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-8%" }} transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="rounded-[22px] p-8 flex flex-col gap-3 hover:shadow-lg transition-shadow duration-300" style={lgCard}>
-                <span className="text-5xl font-extrabold tracking-[-0.04em]" style={{ background: "linear-gradient(120deg, #f0a060 0%, #d4845c 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                  {r.stat}
-                </span>
-                <h3 className="text-base font-bold text-[#0a0e1a]">{r.label}</h3>
-                <p className="text-[#0a0e1a]/52 text-sm font-normal leading-relaxed">{r.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* FAQ */}
-          <div className="flex items-center gap-2 mb-5">
-            <p className="text-xs uppercase tracking-wider font-semibold" style={{ color: '#b86a30' }}>Common questions</p>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-[#0a0e1a] leading-[1.05] tracking-[-0.035em] mb-12">
-            Frequently asked questions.
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
-            {faqs.map((faq, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-8%" }} transition={{ duration: 0.45, delay: i * 0.07 }}
-                className="rounded-[22px] p-8 flex flex-col gap-3 hover:shadow-lg transition-shadow duration-300" style={lgCard}>
-                <h3 className="text-base font-bold text-[#0a0e1a] leading-snug">{faq.q}</h3>
-                <p className="text-[#0a0e1a]/52 text-sm font-normal leading-relaxed">{faq.a}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* CTA banner */}
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-8%" }} transition={{ duration: 0.6 }}
-            className="rounded-[24px] px-10 py-10 flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between"
-            style={lg}
-          >
-            <div className="max-w-lg">
-              <h3 className="text-2xl font-extrabold text-[#0a0e1a] tracking-[-0.025em] mb-2">Ready to start your migration?</h3>
-              <p className="text-[#0a0e1a]/52 text-[15px] font-normal leading-relaxed">Book a free 30-minute assessment. We&apos;ll review your current estate and give you a clear migration roadmap — no obligation.</p>
+              </div>
             </div>
-            <Link href={Constants.PAGES.SCHEDULE_CALL}
-              className="shrink-0 inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-[#e89a78] hover:bg-[#d4836a] text-white font-bold text-sm transition-all whitespace-nowrap shadow-lg shadow-black/10">
-              Schedule a free assessment
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </Link>
-          </motion.div>
+
+          </div>
+        </div>
+
+        {/* multicolour divider — full viewport width */}
+        <hr className="linegrad-divider m-0 h-1 w-full border-0" />
+      </div>
+
+      {/* ── Migration types ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} py-20 lg:py-24`}>
+          <div className="mb-12">
+            <div className="mb-4"><Eyebrow>Migration types</Eyebrow></div>
+            <h2 className="m-0 max-w-[560px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              We migrate from anywhere to Azure.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-6">
+            {pillars.map(({ title, desc, icon: Icon }) => (
+              <article
+                key={title}
+                className="group flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6 transition-[filter,box-shadow] duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.2)] hover:[filter:invert(1)]"
+              >
+                <Icon className="mb-5 h-7 w-7 text-[#111]" strokeWidth={1.6} aria-hidden="true" />
+                <h3 className="m-0 text-[20px] font-medium leading-[1.25] text-[#111] lg:text-[22px]">{title}</h3>
+                <p className="mt-2 text-[16px] font-normal leading-[1.5] text-[#111]">{desc}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── How it works ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-12">
+            <div className="mb-4"><Eyebrow>How it works</Eyebrow></div>
+            <h2 className="m-0 text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              A proven five-step migration process.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+            {steps.map(({ number, title, desc }) => (
+              <div key={number} className="flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6">
+                <span className="text-[34px] font-light leading-none text-[#e6e6e6]">{number}</span>
+                <h3 className="mt-4 text-[20px] font-medium leading-[1.25] text-[#111]">{title}</h3>
+                <p className="mt-2 text-[16px] font-normal leading-[1.5] text-[#111]">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Stats ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-12">
+            <div className="mb-4"><Eyebrow>Why Azure</Eyebrow></div>
+            <h2 className="m-0 text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              The numbers speak for themselves.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:gap-6">
+            {reasons.map(({ stat, label, desc }) => (
+              <div key={label} className="flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-8">
+                <span className="text-[48px] font-medium leading-none text-[#111]">{stat}</span>
+                <h3 className="mt-4 text-[18px] font-medium text-[#111]">{label}</h3>
+                <p className="mt-2 text-[16px] font-normal leading-[1.5] text-[#111]">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-12">
+            <div className="mb-4"><Eyebrow>Common questions</Eyebrow></div>
+            <h2 className="m-0 text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              Frequently asked questions.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-6">
+            {faqs.map(({ q, a }) => (
+              <div key={q} className="flex flex-col gap-2 rounded-lg border border-[#e6e6e6] bg-white p-6">
+                <h3 className="m-0 text-[18px] font-medium leading-[1.3] text-[#111]">{q}</h3>
+                <p className="m-0 text-[16px] font-normal leading-[1.5] text-[#111]">{a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="bg-[#0a0e1a]">
+        <div className={`${CONTAINER} flex flex-col gap-10 py-20 md:flex-row md:items-center md:justify-between`}>
+          <div className="flex max-w-xl flex-col gap-4">
+            <h2 className="m-0 text-[28px] font-medium leading-[1.1] text-white md:text-[44px]">
+              Ready to start your migration?
+            </h2>
+            <p className="m-0 text-[18px] font-light leading-[1.6] text-white/70">
+              Book a free 30-minute assessment. We&apos;ll review your current estate and give you
+              a clear migration roadmap — no obligation.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <PrimaryButton href="/schedule-call" dark>Schedule a free assessment</PrimaryButton>
+            <SecondaryButton href="/solutions" onDark>All solutions</SecondaryButton>
+          </div>
         </div>
       </section>
 

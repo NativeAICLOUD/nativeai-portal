@@ -58,19 +58,13 @@ const KnowledgeBasePage = async () => {
 
         {/* Hero */}
         <div className="pt-40 pb-12 lg:pt-48 lg:pb-16">
-          <div
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest mb-5"
-            style={{ background: 'rgba(248,146,1,0.10)', color: '#c4743c', border: '1px solid rgba(248,146,1,0.25)' }}
-          >
+          <p className="text-[12px] font-medium uppercase tracking-[0.14em] text-[#9ca3af] mb-5">
             Guides · Articles · News
-          </div>
-          <h1 className="text-4xl sm:text-5xl xl:text-6xl font-extrabold leading-[1.1] tracking-tight text-[#0a0e1a] max-w-3xl mb-5">
-            Knowledge{' '}
-            <span className="bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] bg-clip-text text-transparent">
-              base
-            </span>
+          </p>
+          <h1 className="text-[40px] sm:text-[52px] xl:text-[64px] font-medium leading-[1.05] tracking-tight text-[#111] max-w-3xl mb-5">
+            Knowledge base
           </h1>
-          <p className="text-[#0a0e1a]/55 text-base lg:text-lg max-w-xl leading-relaxed">
+          <p className="text-[#6b7280] text-base lg:text-lg max-w-xl leading-relaxed font-light">
             Stay up-to-date with articles, guides, and news on cloud, AI, Azure, Kubernetes, and modern software architecture.
           </p>
 

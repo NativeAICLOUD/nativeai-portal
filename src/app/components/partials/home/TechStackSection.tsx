@@ -9,7 +9,7 @@ export default function TechStackSection() {
   const [active, setActive] = useState(categories[0]);
 
   return (
-    <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+    <section className="font-switzer py-24 px-6 md:px-12 max-w-7xl mx-auto">
 
       {/* Top row */}
       <motion.div
@@ -19,10 +19,10 @@ export default function TechStackSection() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         viewport={{ once: true, margin: "-80px" }}
       >
-        <span className="text-sm tracking-widest uppercase text-[#1a1d2e] font-medium shrink-0 pt-1">
+        <span className="text-[12px] tracking-[0.14em] uppercase text-[#9ca3af] font-medium shrink-0 pt-1">
           Tech Stack
         </span>
-        <p className="text-base text-[#1a1d2e]/70 max-w-[500px] leading-relaxed">
+        <p className="text-[16px] font-light text-[#6b7280] max-w-[500px] leading-relaxed">
           Our tech stack covers everything: design, frontend, backend, mobile, AI, and cloud. We pick tools that are proven, reliable, and ready to grow with your business.
         </p>
       </motion.div>
@@ -39,7 +39,7 @@ export default function TechStackSection() {
           viewport={{ once: true, margin: "-60px" }}
         >
           {categories.map((cat) => (
-            <li key={cat} className="shrink-0 md:border-b md:border-[#1a1d2e]/10 last:border-0">
+            <li key={cat} className="shrink-0 md:border-b md:border-[#e6e6e6] last:border-0">
               <button
                 onClick={() => setActive(cat)}
                 className={`
@@ -48,8 +48,8 @@ export default function TechStackSection() {
                   text-base md:text-xl transition-all duration-200 cursor-pointer
                   rounded-xl md:rounded-none
                   ${active === cat
-                    ? "text-[#1a1d2e] md:bg-transparent bg-[#f0e6e0]"
-                    : "text-[#1a1d2e]/45 hover:text-[#1a1d2e]/80"
+                    ? "text-[#111] md:bg-transparent bg-[#fafafa]"
+                    : "text-[#9ca3af] hover:text-[#111]"
                   }
                 `}
               >
@@ -57,7 +57,7 @@ export default function TechStackSection() {
                 {active === cat && (
                   <motion.span
                     layoutId="activeDot"
-                    className="hidden md:block w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0 ml-3"
+                    className="hidden md:block w-1.5 h-1.5 rounded-full bg-[#111] shrink-0 ml-3"
                   />
                 )}
               </button>
@@ -82,7 +82,7 @@ export default function TechStackSection() {
                   initial={{ opacity: 0, scale: 0.93 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3, delay: i * 0.05, ease: "easeOut" }}
-                  className="group bg-[#ece2dc] hover:bg-[#e4d5cc] rounded-2xl aspect-square flex flex-col items-center justify-center p-8 gap-3 transition-colors duration-200"
+                  className="group bg-white border border-[#e6e6e6] hover:bg-[#fafafa] rounded-lg aspect-square flex flex-col items-center justify-center p-8 gap-3 transition-colors duration-200"
                 >
                   {item.logo ? (
                     <img
@@ -91,7 +91,7 @@ export default function TechStackSection() {
                       className="max-w-[65%] max-h-[55%] object-contain"
                     />
                   ) : (
-                    <span className="text-sm font-medium text-[#1a1d2e] text-center leading-snug px-2">
+                    <span className="text-sm font-medium text-[#111] text-center leading-snug px-2">
                       {item.name}
                     </span>
                   )}

@@ -21,7 +21,20 @@
       "Bash(node -e \"const j = require\\('./public/jobs.json'\\); const job = j.find\\(x=>x.id===11\\); console.log\\('description:', job.description\\); console.log\\('\\\\nabout:', job.about\\);\")",
       "Bash(xargs grep -l \"signIn\\\\|login\\\\|auth\")",
       "Bash(New-Item -ItemType Directory -Force src/app/api/auth/otp/send)",
-      "Bash(Out-Null)"
+      "Bash(Out-Null)",
+      "mcp__ide__getDiagnostics",
+      "WebFetch(domain:www.vector8.com)",
+      "Bash(cd /tmp)",
+      "Bash(npx playwright *)",
+      "Bash(grep -oiE \"<img[^>]{0,200}>\" v8.html)",
+      "Bash(grep -iE \"services[\\\\\\\\\\\\\\\\/]\\(design|custom-development\\)|ServiceUI\")",
+      "Bash(taskkill //F //T //PID 59300)",
+      "Bash(taskkill //F //T //PID 67420)",
+      "Bash(wmic process *)",
+      "Bash(curl -s -o /dev/null -w \"home: %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s http://localhost:3000/)",
+      "Read(//c/Users/aajre/AppData/Local/Temp/claude/C--NativeCloud-NativeCloud-Portal/1e124de7-005e-4bc4-82c2-c6f5a16f6e67/scratchpad/**)",
+      "Bash(node shotrhh.js)"
     ]
   }
 }

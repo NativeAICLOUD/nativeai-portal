@@ -1,9 +1,8 @@
-﻿import fs from 'fs';
+import fs from 'fs';
 import path from 'path';
-import Image from 'next/image';
 import type { Metadata } from 'next';
-import { BG3Img, BGGroupLogo, BG_INVERSE } from '@/ImagePath';
 import CareersClient from '../components/partials/careers/CareersClient';
+import { CONTAINER, Eyebrow } from '@/app/components/partials/services/ServiceUI';
 
 export const metadata: Metadata = {
   title: 'Careers | NativeCloud',
@@ -66,86 +65,76 @@ export default function CareersPage() {
   const jobs = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 
   return (
-    <div className="relative min-h-full">
-      {/* Background */}
-      <div className="absolute w-full h-full z-[-1] top-16 inset-x-0">
-        <Image src={BG3Img} alt="Background" className="!h-auto md:!-top-36" layout="fill" objectFit="cover" objectPosition="top" quality={100} />
-        <Image src={BGGroupLogo} alt="Design Element" layout="fill" objectFit="contain" objectPosition="top right" quality={100} />
+    <div className="font-switzer">
+
+      {/* ── Hero ── */}
+      <div className="industries-hero-bg">
+        <div className={`${CONTAINER} pb-12 pt-32 lg:pt-28`}>
+          <div className="mb-6"><Eyebrow>Careers · We&apos;re hiring</Eyebrow></div>
+          <h1 className="m-0 max-w-3xl text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
+            Build the future of enterprise cloud.
+          </h1>
+          <p className="mt-6 max-w-[560px] text-[18px] font-light leading-[1.6] text-[#111]">
+            Join a small, senior team of cloud engineers, architects, and AI specialists — solving
+            real problems for real businesses on Azure and AWS.
+          </p>
+          <div className="mt-8">
+            <a
+              href="https://www.linkedin.com/company/nativecloud"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 rounded-full bg-[#111] px-6 py-3 text-[15px] font-medium text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.22)] active:translate-y-0"
+            >
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+              Follow us on LinkedIn
+            </a>
+          </div>
+        </div>
+
+        {/* multicolour divider — full viewport width */}
+        <hr className="linegrad-divider m-0 h-1 w-full border-0" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-10 2xl:px-0">
-
-        {/* ── Hero ── */}
-        <div className="pt-40 pb-14 lg:pt-48 lg:pb-20">
-          <div
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest mb-5"
-            style={{ background: 'rgba(248,146,1,0.10)', color: '#c4743c', border: '1px solid rgba(248,146,1,0.25)' }}
-          >
-            We&apos;re hiring
+      {/* ── Open positions ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pt-16 lg:pt-20`}>
+          <div className="mb-8">
+            <div className="mb-4"><Eyebrow>Open positions</Eyebrow></div>
+            <h2 className="m-0 text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              Find your role.
+            </h2>
+            <p className="mt-3 text-[16px] font-normal leading-[1.5] text-[#6b7280]">
+              Filter by department or work model, or search by role name.
+            </p>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl xl:text-6xl font-extrabold leading-[1.1] tracking-tight text-[#0a0e1a] max-w-3xl mb-5">
-            Build the future of{' '}
-            <span className="bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] bg-clip-text text-transparent">
-              enterprise cloud
-            </span>
-          </h1>
+          <CareersClient jobs={jobs} />
 
-          <p className="text-[#0a0e1a]/55 text-base lg:text-lg max-w-xl leading-relaxed mb-8">
-            We build cloud infrastructure for enterprise clients across Europe. If you want to work with the best Azure and AI stack, ship real solutions, and grow fast alongside a senior team — this is your place.
-          </p>
-
-          <a
-            href="https://www.linkedin.com/company/nativecloud"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full text-sm font-semibold transition-all hover:opacity-90 hover:scale-[1.02] mb-10"
-            style={{ background: '#0077b5', color: '#fff' }}
-          >
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-            </svg>
-            Follow us on LinkedIn
-          </a>
-
-        </div>
-
-        {/* ── Open positions ── */}
-        <div className="mb-6">
-          <h2 className="text-2xl font-extrabold text-[#0a0e1a] mb-1">Open positions</h2>
-          <p className="text-sm text-[#0a0e1a]/60">Filter by department or work model, or search by role name.</p>
-        </div>
-
-        <CareersClient jobs={jobs} />
-
-        {/* ── Perks ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-16 mb-24">
-          {perks.map((p) => (
-            <div
-              key={p.title}
-              className="flex flex-col gap-3 px-5 py-5 rounded-2xl border border-black/[0.07] bg-white/70 backdrop-blur-sm"
-            >
-              <span
-                className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
-                style={{ background: 'rgba(232,154,120,0.12)', color: '#e89a78' }}
+          {/* ── Perks ── */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-16 mb-24">
+            {perks.map((p) => (
+              <div
+                key={p.title}
+                className="flex flex-col gap-3 px-5 py-5 rounded-lg border border-[#e6e6e6] bg-white"
               >
-                {p.icon}
-              </span>
-              <div>
-                <p className="font-bold text-[#0a0e1a] text-sm mb-0.5">{p.title}</p>
-                <p className="text-xs text-[#0a0e1a]/50 leading-relaxed">{p.desc}</p>
+                <span
+                  className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+                  style={{ background: '#f5f4f2', color: '#111' }}
+                >
+                  {p.icon}
+                </span>
+                <div>
+                  <p className="font-medium text-[#111] text-[15px] mb-0.5">{p.title}</p>
+                  <p className="text-[13px] text-[#6b7280] leading-relaxed">{p.desc}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
 
-      <Image
-        src={BG_INVERSE}
-        alt="Design Element"
-        className="absolute bottom-0 left-0 w-full h-full max-w-[800px] z-[-1] object-contain object-left-bottom"
-        quality={100}
-      />
     </div>
   );
 }

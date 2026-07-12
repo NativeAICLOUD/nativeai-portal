@@ -1,8 +1,10 @@
 ﻿'use client';
 
 import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-transition-progress/next';
 import { Constants } from '@/Constants';
+import { Eyebrow } from '@/app/components/partials/services/ServiceUI';
 
 /* ── Country codes ── */
 type Country = { code: string; dial: string; name: string; flag: string };
@@ -124,19 +126,19 @@ function PhoneInputField({
         className="flex items-center gap-1.5 shrink-0 px-3 py-4 sm:py-3.5 rounded-l-2xl transition-all duration-150 focus:outline-none"
         style={{
           minWidth: 84,
-          background: open ? 'rgba(255,255,255,0.09)' : 'rgba(255,255,255,0.04)',
-          border: '1px solid rgba(255,255,255,0.09)',
-          borderRight: '1px solid rgba(255,255,255,0.07)',
+          background: open ? 'rgba(0,0,0,0.04)' : '#ffffff',
+          border: '1px solid #e6e6e6',
+          borderRight: '1px solid #eeeeee',
           borderRadius: '16px 0 0 16px',
           transition: 'background 0.15s',
         }}
       >
         <span className="text-[17px] leading-none">{country.flag}</span>
-        <span className="text-[12px] font-semibold text-white/55 tabular-nums">{country.dial}</span>
+        <span className="text-[12px] font-semibold text-[#6b7280] tabular-nums">{country.dial}</span>
         <svg
           width="9" height="9" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-          className={`shrink-0 text-white/25 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+          className={`shrink-0 text-[#9ca3af] transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
         >
           <polyline points="6 9 12 15 18 9" />
         </svg>
@@ -373,6 +375,7 @@ export default function ScheduleCallPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [started, setStarted] = useState(false);
 
   const errors = useMemo<Partial<Record<FieldKey, string | undefined>>>(() => {
     const result: Partial<Record<FieldKey, string | undefined>> = {};
@@ -447,15 +450,15 @@ export default function ScheduleCallPage() {
 
   const inputCls = (field: FieldKey, extra = '') => {
     const { err, valid } = fieldState(field);
-    const base = `w-full outline-none rounded-2xl px-4 py-3.5 text-[15px] text-white placeholder:text-white/20 transition-all duration-200 ${extra}`;
-    if (err) return `${base} bg-red-950/40 border border-red-500/30 focus:border-red-500/60`;
-    if (valid) return `${base} bg-emerald-950/30 border border-emerald-500/25 focus:border-emerald-500/50`;
-    return `${base} bg-white/[0.04] border border-white/[0.09] focus:bg-white/[0.07] focus:border-white/[0.22]`;
+    const base = `w-full outline-none rounded-2xl px-4 py-3 text-sm text-[#111] placeholder:text-[#9ca3af] transition-all duration-200 ${extra}`;
+    if (err) return `${base} bg-red-50 border border-red-300 focus:border-red-400 focus:ring-2 focus:ring-red-100`;
+    if (valid) return `${base} bg-emerald-50 border border-emerald-300 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100`;
+    return `${base} bg-white border border-[#e6e6e6] focus:border-[#111] focus:ring-2 focus:ring-black/[0.05]`;
   };
 
   return (
-    <div className="min-h-screen bg-[#000000] relative overflow-hidden">
-      {/* Background layers */}
+    <div className="font-switzer min-h-screen bg-white relative overflow-hidden">
+      {/* Background layers (white-on-white → subtle/none, kept harmless) */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         {/* Vercel-style subtle top radial */}
         <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[400px] rounded-full" style={{ background: 'radial-gradient(ellipse, rgba(255,255,255,0.04) 0%, transparent 70%)' }} />
@@ -482,61 +485,63 @@ export default function ScheduleCallPage() {
       </div>
 
       {/* Hero */}
-      <div className="relative max-w-9xl mx-auto px-5 sm:px-12 pt-28 sm:pt-40 pb-8 sm:pb-12">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-white/80 transition-colors mb-8 group"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 transition-transform group-hover:-translate-x-0.5">
-            <path d="M19 12H5M12 5l-7 7 7 7" />
-          </svg>
-          Back to home
-        </Link>
+      <div className="industries-hero-bg">
+        <div className="relative max-w-6xl mx-auto px-5 sm:px-12 pt-28 sm:pt-36 pb-12">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-sm text-[#6b7280] hover:text-[#111] transition-colors mb-8 group"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 transition-transform group-hover:-translate-x-0.5">
+              <path d="M19 12H5M12 5l-7 7 7 7" />
+            </svg>
+            Back to home
+          </Link>
 
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight mb-4 max-w-2xl">
-          Schedule a{' '}
-          <span className="bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] bg-clip-text text-transparent">
-            free call
-          </span>{' '}
-          with our team
-        </h1>
-        <p className="text-white/50 text-base sm:text-lg max-w-xl leading-relaxed">
-          Tell us where you are and where you want to go. We&apos;ll map out the best path forward — together.
-        </p>
+          <div className="mb-6"><Eyebrow>Schedule a call</Eyebrow></div>
+          <h1 className="m-0 max-w-2xl text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[60px]">
+            Schedule a free call with our team.
+          </h1>
+          <p className="mt-5 max-w-xl text-[18px] font-light leading-[1.6] text-[#111]">
+            Tell us where you are and where you want to go. We&apos;ll map out the best path forward — together.
+          </p>
+        </div>
+
+        {/* multicolour divider — full viewport width */}
+        <hr className="linegrad-divider m-0 h-1 w-full border-0" />
       </div>
 
       {/* Main content */}
-      <div className="relative max-w-9xl mx-auto px-5 sm:px-12 pb-20 grid lg:grid-cols-[1fr_1.6fr] gap-8 lg:gap-20 items-start">
+      <div className="relative max-w-6xl mx-auto px-5 sm:px-12 pt-12 pb-20 grid lg:grid-cols-[1fr_1.6fr] gap-8 lg:gap-20 items-start">
 
         {/* Left — What to expect — shows BELOW form on mobile */}
         <div className="flex flex-col gap-8 order-2 lg:order-1">
           <div>
-            <h2 className="text-lg font-bold text-white mb-6">What to expect</h2>
+            <h2 className="text-lg font-semibold text-[#111] mb-6">What to expect</h2>
             <div className="flex flex-col gap-5">
               {expectations.map((item, i) => (
                 <div key={i} className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-white/[0.07] border border-white/10 flex items-center justify-center text-[#e89a78] shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-[#fafafa] border border-[#e6e6e6] flex items-center justify-center text-[#111] shrink-0">
                     {item.icon}
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-white mb-0.5">{item.title}</p>
-                    <p className="text-sm text-white/45 leading-relaxed">{item.desc}</p>
+                    <p className="text-sm font-semibold text-[#111] mb-0.5">{item.title}</p>
+                    <p className="text-sm text-[#6b7280] leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="border-t border-white/[0.08]" />
+          <div className="border-t border-[#eee]" />
 
           <div className="flex flex-col gap-3">
-            <p className="text-xs font-bold uppercase tracking-widest text-white/25">Prefer email or phone?</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-[#9ca3af]">Prefer email or phone?</p>
             <a
               href={`mailto:${Constants.MAIL}`}
-              className="inline-flex items-center gap-2.5 text-sm text-white/60 hover:text-[#e89a78] transition-colors font-medium group"
+              className="inline-flex items-center gap-2.5 text-sm text-[#6b7280] hover:text-[#111] transition-colors font-medium group"
             >
-              <span className="w-8 h-8 rounded-lg bg-white/[0.07] border border-white/10 flex items-center justify-center shrink-0">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-[#e89a78]">
+              <span className="w-8 h-8 rounded-lg bg-[#fafafa] border border-[#e6e6e6] flex items-center justify-center shrink-0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-[#111]">
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
                 </svg>
               </span>
@@ -544,10 +549,10 @@ export default function ScheduleCallPage() {
             </a>
             <a
               href={`tel:${Constants.PHONE}`}
-              className="inline-flex items-center gap-2.5 text-sm text-white/60 hover:text-[#e89a78] transition-colors font-medium"
+              className="inline-flex items-center gap-2.5 text-sm text-[#6b7280] hover:text-[#111] transition-colors font-medium"
             >
-              <span className="w-8 h-8 rounded-lg bg-white/[0.07] border border-white/10 flex items-center justify-center shrink-0">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-[#e89a78]">
+              <span className="w-8 h-8 rounded-lg bg-[#fafafa] border border-[#e6e6e6] flex items-center justify-center shrink-0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-[#111]">
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
                 </svg>
               </span>
@@ -560,25 +565,68 @@ export default function ScheduleCallPage() {
         <div
           className="overflow-hidden order-1 lg:order-2"
           style={{
-            background: '#0a0a0a',
-            border: '1px solid rgba(255,255,255,0.08)',
+            background: '#ffffff',
+            border: '1px solid #e6e6e6',
             borderRadius: 28,
-            boxShadow: '0 0 0 0.5px rgba(255,255,255,0.03), 0 32px 80px rgba(0,0,0,0.9)',
+            boxShadow: '0 24px 64px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04)',
           }}
         >
           {!submitted ? (
-            <>
+            !started ? (
+              /* ── AI-era launcher: one gradient CTA that reveals the form ── */
+              <motion.div
+                key="launcher"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.35 }}
+                className="flex flex-col items-center gap-6 px-6 sm:px-8 py-14 text-center"
+              >
+                <div className="flex flex-col gap-2">
+                  <h2 className="m-0 text-xl font-semibold text-[#111]">Book your session</h2>
+                  <p className="m-0 max-w-xs text-sm text-[#6b7280]">
+                    A few quick questions and we&apos;ll map the best path forward — together.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setStarted(true)}
+                  className="ai-search-wrap w-full max-w-sm transition-transform duration-200 hover:scale-[1.01] active:scale-[0.99] focus-visible:outline-none"
+                >
+                  <span className="ai-search-inner flex items-center justify-center gap-2.5 px-6 py-4">
+                    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" className="shrink-0">
+                      <defs>
+                        <linearGradient id="launch-grad" x1="0" y1="0" x2="1" y2="1">
+                          <stop offset="0%" stopColor="#60a5fa" />
+                          <stop offset="50%" stopColor="#3b82f6" />
+                          <stop offset="100%" stopColor="#1e4fd6" />
+                        </linearGradient>
+                      </defs>
+                      <path fill="url(#launch-grad)" d="M12 0c0 6.627-5.373 12-12 12 6.627 0 12 5.373 12 12 0-6.627 5.373-12 12-12-6.627 0-12-5.373-12-12Z" />
+                    </svg>
+                    <span className="text-[15px] font-medium text-[#111]">Start your request</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-[#111]"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                  </span>
+                </button>
+                <p className="m-0 text-[11px] text-[#9ca3af]">Takes ~2 minutes · No commitment</p>
+              </motion.div>
+            ) : (
+            <motion.div
+              key="form-reveal"
+              initial={{ opacity: 0, y: 24, filter: 'blur(10px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            >
               {/* Progress header */}
-              <div className="border-b border-white/[0.07] px-6 sm:px-8 pt-7 pb-5" style={{ background: '#0a0a0a' }}>
+              <div className="border-b border-[#eee] px-6 sm:px-8 pt-7 pb-5" style={{ background: '#fafafa' }}>
                 <div className="flex items-center justify-between mb-3">
-                  <h2 className="text-base font-semibold text-white tracking-tight">Book your session</h2>
-                  <span className={`text-[11px] font-medium tabular-nums transition-colors duration-300 ${completionScore === 100 ? 'text-emerald-400' : 'text-white/30'}`}>
+                  <h2 className="text-base font-semibold text-[#111] tracking-tight">Book your session</h2>
+                  <span className={`text-[11px] font-medium tabular-nums transition-colors duration-300 ${completionScore === 100 ? 'text-emerald-500' : 'text-[#9ca3af]'}`}>
                     {completionScore}%
                   </span>
                 </div>
-                <div className="h-[2px] bg-white/[0.07] rounded-full overflow-hidden">
+                <div className="h-[2px] bg-[#eee] rounded-full overflow-hidden">
                   <div
-                    className={`h-full rounded-full transition-all duration-500 ease-out ${completionScore === 100 ? 'bg-emerald-400' : 'bg-white/50'}`}
+                    className={`h-full rounded-full transition-all duration-500 ease-out ${completionScore === 100 ? 'bg-emerald-500' : 'bg-[#111]'}`}
                     style={{ width: `${completionScore}%` }}
                   />
                 </div>
@@ -591,8 +639,8 @@ export default function ScheduleCallPage() {
                 {/* Row 1: Name + Company */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-2">
-                    <label className="text-[12px] text-white/40 font-medium">
-                      Full name <span className="text-white/20">*</span>
+                    <label className="text-[10.5px] font-semibold uppercase tracking-[0.10em] text-[#6b7280]">
+                      Full name <span className="text-[#9ca3af]">*</span>
                     </label>
                     <div className="relative">
                       <input
@@ -607,12 +655,12 @@ export default function ScheduleCallPage() {
                       {fieldState('name').valid && <span className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none"><CheckIcon /></span>}
                       {fieldState('name').err   && <span className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none"><ErrorIcon /></span>}
                     </div>
-                    {fieldState('name').err && <p className="text-[11px] text-red-400">{fieldState('name').err}</p>}
+                    {fieldState('name').err && <p className="text-[11px] text-red-500">{fieldState('name').err}</p>}
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <label className="text-[12px] text-white/40 font-medium">
-                      Company <span className="text-white/20 font-normal">optional</span>
+                    <label className="text-[10.5px] font-semibold uppercase tracking-[0.10em] text-[#6b7280]">
+                      Company <span className="text-[#9ca3af] font-normal">optional</span>
                     </label>
                     <div className="relative">
                       <input
@@ -632,8 +680,8 @@ export default function ScheduleCallPage() {
                 {/* Row 2: Email + Phone */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-2">
-                    <label className="text-[12px] text-white/40 font-medium">
-                      Work email <span className="text-white/20">*</span>
+                    <label className="text-[10.5px] font-semibold uppercase tracking-[0.10em] text-[#6b7280]">
+                      Work email <span className="text-[#9ca3af]">*</span>
                     </label>
                     <div className="relative">
                       <input
@@ -648,12 +696,12 @@ export default function ScheduleCallPage() {
                       {fieldState('email').valid && <span className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none"><CheckIcon /></span>}
                       {fieldState('email').err   && <span className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none"><ErrorIcon /></span>}
                     </div>
-                    {fieldState('email').err && <p className="text-[11px] text-red-400">{fieldState('email').err}</p>}
+                    {fieldState('email').err && <p className="text-[11px] text-red-500">{fieldState('email').err}</p>}
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <label className="text-[12px] text-white/40 font-medium">
-                      Phone <span className="text-white/20 font-normal">optional</span>
+                    <label className="text-[10.5px] font-semibold uppercase tracking-[0.10em] text-[#6b7280]">
+                      Phone <span className="text-[#9ca3af] font-normal">optional</span>
                     </label>
                     <PhoneInputField
                       value={form.phone}
@@ -661,41 +709,49 @@ export default function ScheduleCallPage() {
                       onBlur={handleBlur('phone')}
                       className={inputCls('phone')}
                     />
-                    {fieldState('phone').err && <p className="text-[11px] text-red-400">{fieldState('phone').err}</p>}
+                    {fieldState('phone').err && <p className="text-[11px] text-red-500">{fieldState('phone').err}</p>}
                   </div>
                 </div>
 
                 {/* Topic — pill grid */}
                 <div className="flex flex-col gap-2">
-                  <label className="text-[12px] text-white/40 font-medium">
-                    What would you like to discuss? <span className="text-white/20">*</span>
+                  <label className="text-[10.5px] font-semibold uppercase tracking-[0.10em] text-[#6b7280]">
+                    What would you like to discuss? <span className="text-[#9ca3af]">*</span>
                   </label>
                   <div className="grid grid-cols-2 gap-2">
-                    {topics.map((t) => (
-                      <button
-                        key={t}
-                        type="button"
-                        onClick={() => { setForm(f => ({ ...f, topic: t })); setTouched(tt => ({ ...tt, topic: true })); }}
-                        className={`px-4 py-3 rounded-2xl text-[13px] text-left transition-all duration-150 ${
-                          form.topic === t
-                            ? 'bg-white text-[#0a0a0a] font-semibold'
-                            : 'bg-white/[0.04] border border-white/[0.09] text-white/50 hover:bg-white/[0.08] hover:text-white/80 hover:border-white/[0.16]'
-                        }`}
-                      >
-                        {t}
-                      </button>
-                    ))}
+                    {topics.map((t) => {
+                      const selected = form.topic === t;
+                      return (
+                        <button
+                          key={t}
+                          type="button"
+                          onClick={() => { setForm(f => ({ ...f, topic: t })); setTouched(tt => ({ ...tt, topic: true })); }}
+                          className={`flex items-center justify-between gap-2 px-4 py-3 rounded-xl text-[13px] text-left transition-all duration-150 ${
+                            selected
+                              ? 'bg-[#111] text-white border border-[#111]'
+                              : 'bg-white border border-[#e6e6e6] text-[#6b7280] hover:border-[#111] hover:text-[#111]'
+                          }`}
+                        >
+                          <span className="font-medium">{t}</span>
+                          {selected && (
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5 shrink-0">
+                              <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                          )}
+                        </button>
+                      );
+                    })}
                   </div>
-                  {fieldState('topic').err && <p className="text-[11px] text-red-400">{fieldState('topic').err}</p>}
+                  {fieldState('topic').err && <p className="text-[11px] text-red-500">{fieldState('topic').err}</p>}
                 </div>
 
                 {/* Message */}
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between">
-                    <label className="text-[12px] text-white/40 font-medium">
-                      Tell us more <span className="text-white/20 font-normal">optional</span>
+                    <label className="text-[10.5px] font-semibold uppercase tracking-[0.10em] text-[#6b7280]">
+                      Tell us more <span className="text-[#9ca3af] font-normal">optional</span>
                     </label>
-                    <span className={`text-[11px] tabular-nums transition-colors ${form.message.length > MSG_MAX ? 'text-red-400 font-semibold' : form.message.length > MSG_MAX * 0.8 ? 'text-amber-400' : 'text-white/20'}`}>
+                    <span className={`text-[11px] tabular-nums transition-colors ${form.message.length > MSG_MAX ? 'text-red-500 font-semibold' : form.message.length > MSG_MAX * 0.8 ? 'text-amber-500' : 'text-[#9ca3af]'}`}>
                       {form.message.length}/{MSG_MAX}
                     </span>
                   </div>
@@ -707,11 +763,11 @@ export default function ScheduleCallPage() {
                     onBlur={handleBlur('message')}
                     className={`${inputCls('message')} resize-none`}
                   />
-                  {fieldState('message').err && <p className="text-[11px] text-red-400">{fieldState('message').err}</p>}
+                  {fieldState('message').err && <p className="text-[11px] text-red-500">{fieldState('message').err}</p>}
                 </div>
 
                 {error && (
-                  <div className="flex items-start gap-3 text-[13px] text-red-400 bg-red-950/40 border border-red-500/25 rounded-2xl px-4 py-3">
+                  <div className="flex items-start gap-3 text-[13px] text-red-600 bg-red-50 border border-red-200 rounded-2xl px-4 py-3">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0 mt-0.5">
                       <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
                     </svg>
@@ -722,7 +778,7 @@ export default function ScheduleCallPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="group w-full inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl bg-white hover:bg-[#f0f0f0] text-[#0a0a0a] font-semibold text-[15px] transition-all duration-150 disabled:opacity-40 disabled:pointer-events-none mt-1"
+                  className="group w-full inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-[#111] hover:opacity-90 text-white font-medium text-sm transition-all duration-150 disabled:opacity-40 disabled:pointer-events-none mt-1"
                 >
                   {loading ? (
                     <>
@@ -742,13 +798,14 @@ export default function ScheduleCallPage() {
                   )}
                 </button>
 
-                <p className="text-[11px] text-center text-white/25">
+                <p className="text-[11px] text-center text-[#9ca3af]">
                   By submitting you agree to our{' '}
-                  <Link href={Constants.PAGES.PRIVACY} className="underline hover:text-white/60 transition-colors">Privacy Policy</Link>.
+                  <Link href={Constants.PAGES.PRIVACY} className="underline hover:text-[#111] transition-colors">Privacy Policy</Link>.
                 </p>
               </form>
               </div>
-            </>
+            </motion.div>
+            )
           ) : (
             /* Success state */
             <div className="flex flex-col items-center text-center px-5 sm:px-8 py-10 gap-6">
@@ -758,19 +815,19 @@ export default function ScheduleCallPage() {
                 </svg>
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-white mb-2">You&apos;re all set!</h2>
-                <p className="text-white/55 text-sm leading-relaxed max-w-xs mx-auto">
+                <h2 className="text-2xl font-bold text-[#111] mb-2">You&apos;re all set!</h2>
+                <p className="text-[#6b7280] text-sm leading-relaxed max-w-xs mx-auto">
                   Thanks {form.name.split(' ')[0]}! We&apos;ve received your request and will be in touch within one business day to confirm your call.
                 </p>
               </div>
-              <div className="rounded-xl p-5 w-full text-left flex flex-col gap-2" style={{ background: '#111', border: '1px solid rgba(255,255,255,0.08)' }}>
-                <p className="text-xs font-bold uppercase tracking-widest text-white/30 mb-1">Confirmation sent to</p>
-                <p className="text-sm font-semibold text-white">{form.email}</p>
-                <p className="text-sm text-white/50">Topic: <span className="font-medium text-white">{form.topic}</span></p>
+              <div className="rounded-xl p-5 w-full text-left flex flex-col gap-2" style={{ background: '#fafafa', border: '1px solid #e6e6e6' }}>
+                <p className="text-xs font-bold uppercase tracking-widest text-[#9ca3af] mb-1">Confirmation sent to</p>
+                <p className="text-sm font-semibold text-[#111]">{form.email}</p>
+                <p className="text-sm text-[#6b7280]">Topic: <span className="font-medium text-[#111]">{form.topic}</span></p>
               </div>
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 text-sm text-[#6b7280] hover:text-[#111] transition-colors"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
                   <path d="M19 12H5M12 5l-7 7 7 7" />

@@ -1,444 +1,216 @@
-'use client';
-
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import {
+  Code2, Palette, Bot, Database, CloudCog, CloudUpload, Boxes, Workflow,
+  type LucideIcon,
+} from "lucide-react";
 import { KCSP, KTP, MSP } from "@/ImagePath";
+import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from "@/app/components/partials/services/ServiceUI";
 
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  display: "swap",
-});
+export const metadata: Metadata = {
+  title: "Solutions",
+  description:
+    "From AI agents and cloud infrastructure to fully managed SaaS products — we design, build, and ship software that scales with your business.",
+};
 
-/* ── shared palette (matches the main page) ── */
-const ACCENT = "#6f8aa6";        // soft slate-blue accent (replaces the old peach)
-const SILVER_GRAD = "linear-gradient(135deg, #5b7a96 0%, #8f9aa3 55%, #9fb4c9 100%)";
-const ACCENT_GRAD = "linear-gradient(135deg, #6f8aa6, #9fb4c9)";
-const LIGHT_BG = "linear-gradient(160deg, #ffffff 0%, #f6f8fb 45%, #eef2f7 100%)";
-
-const services = [
-  { title: "Custom Development",       body: "Tailored software built precisely for your business workflows — from API design to production-ready delivery.",                                href: "/services/custom-development",  tag: "Engineering" },
-  { title: "Design",                   body: "Beautiful, intuitive interfaces that users love — from UX research and wireframes through to pixel-perfect UI.",                             href: "/services/design",               tag: "Design" },
-  { title: "AI Agents & RAG",          body: "Intelligent automation and retrieval-augmented generation connected to your data, documents, and workflows.",                                href: "/services/ai-agents-rag",        tag: "AI & LLMs" },
-  { title: "Data Lifecycle",           body: "End-to-end data platforms on Azure — from raw ingestion and transformation to analytics layers and Power BI dashboards.",                   href: "/data-lifecycle-management",     tag: "Data" },
-  { title: "Cloud Architecture",       body: "Scalable, resilient cloud-native architectures designed for your team's size, traffic patterns, and growth trajectory.",                    href: "/cloud-software-architecture",   tag: "Cloud" },
-  { title: "Migrate to Azure",         body: "A structured, low-risk migration from on-premises or any cloud provider to Microsoft Azure — without disrupting your operations.",          href: "/migrate-to-azure",              tag: "Cloud" },
-  { title: "Cloud Native Development", body: "Microservices, containers, and Kubernetes — modern application architectures built to scale on Azure from day one.",                        href: "/cloud-native-sd",               tag: "Engineering" },
-  { title: "DevOps on Azure",          body: "CI/CD pipelines, infrastructure-as-code, and automated testing workflows that let your team ship faster and safer.",                       href: "/devops-on-azure",               tag: "DevOps" },
+/* ── content ── */
+const services: { title: string; body: string; href: string; tag: string; icon: LucideIcon }[] = [
+  { title: "Custom Development", body: "Tailored software built precisely for your business workflows — from API design to production-ready delivery.", href: "/services/custom-development", tag: "Engineering", icon: Code2 },
+  { title: "Design", body: "Beautiful, intuitive interfaces that users love — from UX research and wireframes through to pixel-perfect UI.", href: "/services/design", tag: "Design", icon: Palette },
+  { title: "AI Agents & RAG", body: "Intelligent automation and retrieval-augmented generation connected to your data, documents, and workflows.", href: "/services/ai-agents-rag", tag: "AI & LLMs", icon: Bot },
+  { title: "Data Lifecycle", body: "End-to-end data platforms on Azure — from raw ingestion and transformation to analytics layers and Power BI dashboards.", href: "/data-lifecycle-management", tag: "Data", icon: Database },
+  { title: "Cloud Architecture", body: "Scalable, resilient cloud-native architectures designed for your team's size, traffic patterns, and growth trajectory.", href: "/cloud-software-architecture", tag: "Cloud", icon: CloudCog },
+  { title: "Migrate to Azure", body: "A structured, low-risk migration from on-premises or any cloud provider to Microsoft Azure — without disrupting your operations.", href: "/migrate-to-azure", tag: "Cloud", icon: CloudUpload },
+  { title: "Cloud Native Development", body: "Microservices, containers, and Kubernetes — modern application architectures built to scale on Azure from day one.", href: "/cloud-native-sd", tag: "Engineering", icon: Boxes },
+  { title: "DevOps on Azure", body: "CI/CD pipelines, infrastructure-as-code, and automated testing workflows that let your team ship faster and safer.", href: "/devops-on-azure", tag: "DevOps", icon: Workflow },
 ];
 
 const products = [
   { title: "Airline & Travel Booking", body: "A cloud-based platform for airlines, travel agencies, and tour operators — reservations, ticketing, GDS connectivity, and passenger management in one system.", href: "/airline-booking" },
-  { title: "AI Legal Workspace",       body: "AI-powered document analysis, contract review, and legal research — built for law firms and in-house legal teams that want to move faster.",                   href: "/ai-legal-workspace" },
-  { title: "Payment Automation",       body: "Recurring billing, rent collection, and payment reconciliation — automated end-to-end so your finance team focuses on decisions, not data entry.",             href: "/payment-automation" },
+  { title: "AI Legal Workspace", body: "AI-powered document analysis, contract review, and legal research — built for law firms and in-house legal teams that want to move faster.", href: "/ai-legal-workspace" },
+  { title: "Payment Automation", body: "Recurring billing, rent collection, and payment reconciliation — automated end-to-end so your finance team focuses on decisions, not data entry.", href: "/payment-automation" },
 ];
 
 const certifications = [
-  { src: MSP,  alt: "Microsoft Solutions Partner",           title: "Microsoft Solutions Partner",  body: "Recognised by Microsoft for consistent delivery of Azure solutions across cloud adoption, migration, and modern application development." },
-  { src: KCSP, alt: "Kubernetes Certified Service Provider", title: "KCSP",                         body: "Certified by the CNCF to deliver Kubernetes production support, consulting, and professional services at enterprise scale." },
-  { src: KTP,  alt: "Kubernetes Training Partner",           title: "Kubernetes Training Partner",  body: "Authorised to deliver official Kubernetes training — from fundamentals to advanced cluster operations and application deployment." },
+  { src: MSP, alt: "Microsoft Solutions Partner", title: "Microsoft Solutions Partner", body: "Recognised by Microsoft for consistent delivery of Azure solutions across cloud adoption, migration, and modern application development." },
+  { src: KCSP, alt: "Kubernetes Certified Service Provider", title: "KCSP", body: "Certified by the CNCF to deliver Kubernetes production support, consulting, and professional services at enterprise scale." },
+  { src: KTP, alt: "Kubernetes Training Partner", title: "Kubernetes Training Partner", body: "Authorised to deliver official Kubernetes training — from fundamentals to advanced cluster operations and application deployment." },
 ];
 
-/* ── glass tokens ── */
-const lg: React.CSSProperties = {
-  background: "rgba(255,255,255,0.58)",
-  backdropFilter: "blur(48px) saturate(200%)",
-  WebkitBackdropFilter: "blur(48px) saturate(200%)",
-  border: "1px solid rgba(255,255,255,0.88)",
-  boxShadow: "0 8px 40px rgba(40,60,90,0.10), 0 1px 2px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.98)",
-};
-
-const lgCard: React.CSSProperties = {
-  background: "rgba(255,255,255,0.52)",
-  backdropFilter: "blur(40px) saturate(190%)",
-  WebkitBackdropFilter: "blur(40px) saturate(190%)",
-  border: "1px solid rgba(255,255,255,0.84)",
-  boxShadow: "0 4px 28px rgba(40,60,90,0.08), inset 0 1px 0 rgba(255,255,255,0.95)",
-};
-
-function Blobs({ items }: { items: { w: number; h: number; top?: string; left?: string; right?: string; bottom?: string; color: string; delay: string }[] }) {
+function ArrowLink({ children }: { children: React.ReactNode }) {
   return (
-    <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
-      {items.map((b, i) => (
-        <div
-          key={i}
-          className="absolute rounded-full"
-          style={{
-            width: b.w, height: b.h,
-            top: b.top, left: b.left, right: b.right, bottom: b.bottom,
-            background: `radial-gradient(circle, ${b.color} 0%, transparent 68%)`,
-            filter: "blur(64px)",
-            animation: `pulse-blob 6s ease-in-out ${b.delay} infinite`,
-          }}
-        />
-      ))}
-    </div>
+    <span className="mt-4 inline-flex items-center gap-1.5 text-[13px] font-medium text-[#111]">
+      {children}
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+    </span>
   );
 }
 
 export default function SolutionsPage() {
   return (
-    <>
-      <style>{`
-        @keyframes pulse-blob {
-          0%, 100% { opacity: 0.65; transform: scale(1); }
-          50%       { opacity: 1;   transform: scale(1.06); }
-        }
-      `}</style>
+    <div className="font-switzer">
 
-      <div className={jakarta.className}>
+      {/* ── Hero ── */}
+      <div className="industries-hero-bg">
+        <div className={`${CONTAINER} pb-12 pt-32 lg:pt-28`}>
+          <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
 
-        {/* ── Hero — white with cool silver/blue blobs ── */}
-        <section
-          className="relative overflow-hidden min-h-[85svh] flex items-center"
-          style={{ background: LIGHT_BG }}
-        >
-          <Blobs items={[
-            { w: 900, h: 900, top: "-25%",    left: "-18%",  color: "rgba(159,180,201,0.50)",  delay: "0s" },
-            { w: 750, h: 750, top: "5%",      right: "-15%", color: "rgba(125,139,150,0.34)",  delay: "1.5s" },
-            { w: 650, h: 650, bottom: "-20%", left: "28%",   color: "rgba(184,195,201,0.36)",  delay: "3s" },
-            { w: 400, h: 400, top: "45%",     left: "-5%",   color: "rgba(207,213,220,0.30)",  delay: "2s" },
-          ]} />
-
-          <div className="relative w-full max-w-7xl mx-auto px-6 md:px-12 pt-40 pb-24">
-            <motion.div
-              initial={{ opacity: 0, y: 32 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.75, ease: "easeOut" }}
-            >
-              {/* Pill */}
-              <div
-                className="inline-flex items-center gap-2.5 rounded-full px-4 py-1.5 mb-10"
-                style={{ background: "rgba(111,138,166,0.10)", border: "1px solid rgba(111,138,166,0.28)", backdropFilter: "blur(12px)" }}
-              >
-                <span className="text-[11px] font-bold tracking-widest uppercase" style={{ fontFamily: "'JetBrains Mono', monospace", color: ACCENT }}>
-                  What we build
-                </span>
-              </div>
-
-              <div className="flex flex-col lg:flex-row lg:items-center gap-14 xl:gap-20">
-                <div className="flex-1 min-w-0">
-                  <h1
-                    className="font-extrabold text-[#0a0e1a] leading-[0.95] mb-7"
-                    style={{ fontSize: "clamp(52px, 7.5vw, 100px)", letterSpacing: "-0.045em" }}
-                  >
-                    Solutions<br />
-                    <span style={{
-                      background: SILVER_GRAD,
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                      backgroundClip: "text",
-                    }}>
-                      built to last.
-                    </span>
-                  </h1>
-
-                  <motion.p
-                    className="text-[#6b7280] text-xl leading-[1.75] max-w-[480px] mb-10"
-                    initial={{ opacity: 0, y: 14 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.75, delay: 0.15, ease: "easeOut" }}
-                  >
-                    From AI agents and cloud infrastructure to fully managed SaaS products — we design, build, and ship software that scales with your business.
-                  </motion.p>
-
-                  <motion.div
-                    className="flex flex-wrap gap-3"
-                    initial={{ opacity: 0, y: 14 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.75, delay: 0.27, ease: "easeOut" }}
-                  >
-                    <Link
-                      href="/schedule-call"
-                      className="inline-flex items-center px-8 py-4 rounded-full text-base font-bold text-white"
-                      style={{ background: "#0a0e1a" }}
-                    >
-                      Schedule a free call
-                    </Link>
-                    <Link
-                      href="/about"
-                      className="inline-flex items-center px-8 py-4 rounded-full text-base font-medium text-[#374151] border border-[#e5e7eb] hover:border-[#9fb4c9] transition-colors"
-                    >
-                      About us
-                    </Link>
-                  </motion.div>
-                </div>
-
-                {/* Floating glass card */}
-                <motion.div
-                  className="lg:w-[340px] w-full shrink-0"
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.9, delay: 0.18, ease: "easeOut" }}
-                >
-                  <motion.div
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    <div className="relative">
-                      <div
-                        className="absolute inset-0 rounded-[28px] -z-10"
-                        style={{ background: "radial-gradient(ellipse at 50% 40%, rgba(159,180,201,0.35) 0%, transparent 70%)", filter: "blur(28px)", transform: "scale(1.1)" }}
-                      />
-                      <div className="rounded-[24px] p-6 flex flex-col gap-5" style={lg}>
-                        <div className="flex items-center gap-2.5">
-                          <div
-                            className="w-9 h-9 rounded-xl flex items-center justify-center"
-                            style={{ background: ACCENT_GRAD, boxShadow: "0 2px 12px rgba(111,138,166,0.40)" }}
-                          >
-                            <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="white" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" /></svg>
-                          </div>
-                          <p className="text-[13px] font-bold text-[#0a0e1a]">Our portfolio</p>
-                        </div>
-
-                        <div className="grid grid-cols-2 gap-2.5">
-                          {[
-                            { n: "8", l: "Services" },
-                            { n: "3", l: "Products" },
-                            { n: "3", l: "Certifications" },
-                            { n: "∞", l: "Scale" },
-                          ].map(item => (
-                            <div
-                              key={item.l}
-                              className="rounded-xl px-4 py-3 flex flex-col gap-0.5"
-                              style={{ background: "rgba(111,138,166,0.09)", border: "1px solid rgba(111,138,166,0.20)" }}
-                            >
-                              <p className="text-xl font-extrabold text-[#0a0e1a]" style={{ letterSpacing: "-0.03em" }}>{item.n}</p>
-                              <p className="text-[11px] text-[#6b7280] font-medium">{item.l}</p>
-                            </div>
-                          ))}
-                        </div>
-
-                        <Link
-                          href="/schedule-call"
-                          className="flex items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold text-white"
-                          style={{ background: ACCENT_GRAD, boxShadow: "0 4px 16px rgba(111,138,166,0.38)" }}
-                        >
-                          Schedule a free call
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7" /><path d="M7 7h10v10" /></svg>
-                        </Link>
-                      </div>
-                    </div>
-                  </motion.div>
-                </motion.div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ── Services — glass cards on white + soft cool blobs ── */}
-        <section
-          className="relative overflow-hidden"
-          style={{ background: LIGHT_BG }}
-        >
-          <Blobs items={[
-            { w: 950, h: 950, top: "-20%",    right: "-16%", color: "rgba(159,180,201,0.44)",  delay: "0s" },
-            { w: 750, h: 750, bottom: "-16%", left: "-12%",  color: "rgba(125,139,150,0.34)",  delay: "1.8s" },
-            { w: 600, h: 600, top: "35%",     left: "38%",   color: "rgba(207,213,220,0.30)",  delay: "3s" },
-            { w: 450, h: 450, top: "10%",     left: "25%",   color: "rgba(184,195,201,0.32)",  delay: "1s" },
-          ]} />
-
-          <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-28">
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
-              <div>
-                <div className="flex items-center gap-2 mb-5">
-                  <p className="text-xs uppercase tracking-wider text-[#9ca3af] font-medium">Services</p>
-                </div>
-                <h2
-                  className="font-extrabold text-[#0a0e1a] leading-[1.05]"
-                  style={{ fontSize: "clamp(32px, 4.5vw, 56px)", letterSpacing: "-0.035em" }}
-                >
-                  Everything you need<br />to build at scale.
-                </h2>
-              </div>
-              <Link
-                href="/schedule-call"
-                className="shrink-0 self-start md:self-end inline-flex items-center px-6 py-3 rounded-full text-sm font-bold whitespace-nowrap text-white"
-                style={{ background: "#0a0e1a" }}
-              >
-                Schedule a free call
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {services.map((s, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 22 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.5, delay: i * 0.06, ease: "easeOut" }}
-                >
-                  <Link href={s.href} className="group block h-full">
-                    <div
-                      className="h-full rounded-[22px] p-7 flex flex-col gap-4 transition-all duration-200 group-hover:scale-[1.02]"
-                      style={lgCard}
-                    >
-                      <div className="flex items-center gap-2">
-                        <span
-                          className="text-[10px] font-bold uppercase tracking-widest"
-                          style={{ fontFamily: "'JetBrains Mono', monospace", color: ACCENT }}
-                        >{s.tag}</span>
-                      </div>
-                      <h3 className="text-[17px] font-bold text-[#0a0e1a] leading-snug group-hover:text-[#6f8aa6] transition-colors">
-                        {s.title}
-                      </h3>
-                      <p className="text-[#6b7280] text-sm leading-relaxed flex-1">{s.body}</p>
-                      <div className="flex items-center gap-1.5 text-[#6f8aa6]/50 group-hover:text-[#6f8aa6] group-hover:gap-3 transition-all text-xs font-semibold mt-2">
-                        Learn more
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── Products — white with cool blobs ── */}
-        <section
-          className="relative overflow-hidden"
-          style={{ background: LIGHT_BG }}
-        >
-          <Blobs items={[
-            { w: 900, h: 900, top: "-18%",    left: "-14%",  color: "rgba(159,180,201,0.40)",  delay: "0s" },
-            { w: 700, h: 700, bottom: "-16%", right: "-10%", color: "rgba(125,139,150,0.30)",  delay: "2s" },
-            { w: 520, h: 520, top: "30%",     right: "30%",  color: "rgba(207,213,220,0.28)",  delay: "1.2s" },
-          ]} />
-
-          <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-28">
-            <div className="flex items-center gap-2 mb-5">
-              <p className="text-xs uppercase tracking-wider font-medium" style={{ color: ACCENT }}>Products</p>
-            </div>
-            <h2
-              className="font-extrabold text-[#0a0e1a] leading-[1.05] mb-14"
-              style={{ fontSize: "clamp(32px, 4.5vw, 56px)", letterSpacing: "-0.035em" }}
-            >
-              Ready-made platforms.<br />Production-ready today.
-            </h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {products.map((p, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 22 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
-                >
-                  <Link href={p.href} className="group block h-full">
-                    <div
-                      className="h-full rounded-[22px] p-8 flex flex-col gap-5 transition-all duration-200 group-hover:scale-[1.02]"
-                      style={lgCard}
-                    >
-                      <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-bold uppercase tracking-widest" style={{ fontFamily: "'JetBrains Mono', monospace", color: ACCENT }}>
-                          NativeCloud Product
-                        </span>
-                      </div>
-                      <h3 className="text-xl font-bold text-[#0a0e1a] leading-snug group-hover:text-[#6f8aa6] transition-colors">{p.title}</h3>
-                      <p className="text-[#6b7280] text-sm leading-relaxed flex-1">{p.body}</p>
-                      <div className="flex items-center gap-1.5 text-[#6f8aa6]/50 group-hover:text-[#6f8aa6] group-hover:gap-3 transition-all text-xs font-semibold mt-auto">
-                        See the product
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── Certifications — white + soft blobs ── */}
-        <section
-          className="relative overflow-hidden"
-          style={{ background: "linear-gradient(160deg, #ffffff 0%, #f4f7fb 50%, #eef4fb 100%)" }}
-        >
-          <Blobs items={[
-            { w: 850, h: 850, top: "-18%",    right: "-12%", color: "rgba(159,180,201,0.40)",  delay: "0s" },
-            { w: 700, h: 700, bottom: "-14%", left: "-8%",   color: "rgba(125,139,150,0.30)",  delay: "2s" },
-            { w: 500, h: 500, top: "40%",     left: "35%",   color: "rgba(167,197,253,0.28)",  delay: "1.2s" },
-          ]} />
-
-          <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-28">
-            <div className="flex items-center gap-2 mb-5">
-              <p className="text-xs uppercase tracking-wider text-[#9ca3af] font-medium">Certifications</p>
-            </div>
-            <h2
-              className="font-extrabold text-[#0a0e1a] leading-[1.05] mb-14"
-              style={{ fontSize: "clamp(32px, 4.5vw, 56px)", letterSpacing: "-0.035em" }}
-            >
-              Recognised expertise.<br />Trusted by industry.
-            </h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {certifications.map((c, i) => (
-                <motion.div
-                  key={i}
-                  className="rounded-[22px] p-8 flex flex-col gap-6"
-                  style={lgCard}
-                  initial={{ opacity: 0, y: 22 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
-                >
-                  <Image src={c.src} alt={c.alt} className="h-14 w-auto object-contain self-start" />
-                  <div className="flex flex-col gap-2">
-                    <h3 className="text-base font-bold text-[#0a0e1a]">{c.title}</h3>
-                    <p className="text-[#6b7280] text-sm leading-relaxed">{c.body}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── CTA — white with cool glow ── */}
-        <section
-          className="relative overflow-hidden"
-          style={{ background: "linear-gradient(160deg, #f6f8fb 0%, #eef2f7 100%)" }}
-        >
-          <Blobs items={[
-            { w: 760, h: 760, top: "-22%",    left: "8%",    color: "rgba(159,180,201,0.40)",  delay: "0s" },
-            { w: 560, h: 560, bottom: "-24%", right: "6%",   color: "rgba(125,139,150,0.28)",  delay: "1.6s" },
-          ]} />
-
-          <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-20 flex flex-col md:flex-row md:items-center md:justify-between gap-10">
-            <div className="flex flex-col gap-4 max-w-xl">
-              <h2
-                className="font-extrabold text-[#0a0e1a] leading-[1.05]"
-                style={{ fontSize: "clamp(28px, 4vw, 48px)", letterSpacing: "-0.035em" }}
-              >
-                Ready to build<br />something that lasts?
-              </h2>
-              <p className="text-[#6b7280] text-lg leading-[1.75]">
-                Talk to our team about your project — we&apos;ll map out the right solution in a free 15-minute call.
+            {/* Left */}
+            <div className="flex-1">
+              <div className="mb-6"><Eyebrow>What we build</Eyebrow></div>
+              <h1 className="m-0 text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
+                Solutions built to last.
+              </h1>
+              <p className="mt-6 max-w-[520px] text-[18px] font-light leading-[1.6] text-[#111]">
+                From AI agents and cloud infrastructure to fully managed SaaS products — we
+                design, build, and ship software that scales with your business.
               </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <PrimaryButton href="/schedule-call">Schedule a free call</PrimaryButton>
+                <SecondaryButton href="/about">About us</SecondaryButton>
+              </div>
             </div>
-            <div className="flex flex-wrap gap-3 shrink-0">
-              <Link
-                href="/schedule-call"
-                className="inline-flex items-center px-8 py-4 rounded-full text-base font-bold text-white"
-                style={{ background: ACCENT_GRAD, boxShadow: "0 4px 20px rgba(111,138,166,0.40)" }}
-              >
-                Book a free call
-              </Link>
-              <Link
-                href="/about"
-                className="inline-flex items-center px-8 py-4 rounded-full text-base font-semibold text-[#374151] bg-white/70 border border-[#e5e7eb] hover:border-[#9fb4c9] transition-colors"
-                style={{ backdropFilter: "blur(16px)" }}
-              >
-                About us
-              </Link>
-            </div>
-          </div>
-        </section>
 
+            {/* Right — portfolio card */}
+            <div className="w-full lg:max-w-[380px] lg:flex-1">
+              <div className="flex flex-col gap-5 rounded-2xl border border-[#e6e6e6] bg-white p-6">
+                <div className="flex items-center gap-2.5">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#111]">
+                    <Boxes className="h-4 w-4 text-white" strokeWidth={1.8} aria-hidden="true" />
+                  </div>
+                  <p className="m-0 text-[14px] font-medium text-[#111]">Our portfolio</p>
+                </div>
+                <div className="grid grid-cols-2 gap-2.5">
+                  {[
+                    { n: "8", l: "Services" },
+                    { n: "3", l: "Products" },
+                    { n: "3", l: "Certifications" },
+                    { n: "∞", l: "Scale" },
+                  ].map((item) => (
+                    <div key={item.l} className="flex flex-col gap-0.5 rounded-xl border border-[#eee] bg-[#fafafa] px-4 py-3">
+                      <p className="m-0 text-[20px] font-medium leading-none text-[#111]">{item.n}</p>
+                      <p className="m-0 text-[11px] font-normal text-[#6b7280]">{item.l}</p>
+                    </div>
+                  ))}
+                </div>
+                <Link href="/schedule-call" className="flex items-center justify-center gap-2 rounded-full bg-[#111] py-3 text-[14px] font-medium text-white transition-opacity hover:opacity-90">
+                  Schedule a free call
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                </Link>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* multicolour divider — full viewport width */}
+        <hr className="linegrad-divider m-0 h-1 w-full border-0" />
       </div>
-    </>
+
+      {/* ── Services ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} py-20 lg:py-24`}>
+          <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div>
+              <div className="mb-4"><Eyebrow>Services</Eyebrow></div>
+              <h2 className="m-0 max-w-[520px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+                Everything you need to build at scale.
+              </h2>
+            </div>
+            <PrimaryButton href="/schedule-call">Schedule a free call</PrimaryButton>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+            {services.map(({ title, body, href, tag, icon: Icon }) => (
+              <Link
+                key={title}
+                href={href}
+                className="group flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6 transition-[filter,box-shadow] duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.2)] hover:[filter:invert(1)]"
+              >
+                <div className="mb-5 flex items-center justify-between">
+                  <Icon className="h-7 w-7 text-[#111]" strokeWidth={1.6} aria-hidden="true" />
+                  <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#9ca3af]">{tag}</span>
+                </div>
+                <h3 className="m-0 text-[18px] font-medium leading-[1.25] text-[#111]">{title}</h3>
+                <p className="mt-2 flex-1 text-[15px] font-normal leading-[1.5] text-[#111]">{body}</p>
+                <ArrowLink>Learn more</ArrowLink>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Products ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-12">
+            <div className="mb-4"><Eyebrow>Products</Eyebrow></div>
+            <h2 className="m-0 text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              Ready-made platforms. Production-ready today.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-6">
+            {products.map(({ title, body, href }) => (
+              <Link
+                key={title}
+                href={href}
+                className="group flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6 transition-[filter,box-shadow] duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.2)] hover:[filter:invert(1)]"
+              >
+                <span className="mb-3 text-[11px] font-medium uppercase tracking-[0.14em] text-[#9ca3af]">NativeCloud Product</span>
+                <h3 className="m-0 text-[20px] font-medium leading-[1.25] text-[#111]">{title}</h3>
+                <p className="mt-2 flex-1 text-[16px] font-normal leading-[1.5] text-[#111]">{body}</p>
+                <ArrowLink>See the product</ArrowLink>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Certifications ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-12">
+            <div className="mb-4"><Eyebrow>Certifications</Eyebrow></div>
+            <h2 className="m-0 text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              Recognised expertise. Trusted by industry.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-6">
+            {certifications.map(({ src, alt, title, body }) => (
+              <div key={title} className="flex h-full flex-col gap-6 rounded-lg border border-[#e6e6e6] bg-white p-8">
+                <Image src={src} alt={alt} className="h-14 w-auto self-start object-contain" />
+                <div className="flex flex-col gap-2">
+                  <h3 className="m-0 text-[18px] font-medium text-[#111]">{title}</h3>
+                  <p className="m-0 text-[16px] font-normal leading-[1.5] text-[#111]">{body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="bg-[#0a0e1a]">
+        <div className={`${CONTAINER} flex flex-col gap-10 py-20 md:flex-row md:items-center md:justify-between`}>
+          <div className="flex max-w-xl flex-col gap-4">
+            <h2 className="m-0 text-[28px] font-medium leading-[1.1] text-white md:text-[44px]">
+              Ready to build something that lasts?
+            </h2>
+            <p className="m-0 text-[18px] font-light leading-[1.6] text-white/70">
+              Talk to our team about your project — we&apos;ll map out the right solution in a
+              free 15-minute call.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <PrimaryButton href="/schedule-call" dark>Book a free call</PrimaryButton>
+            <SecondaryButton href="/about" onDark>About us</SecondaryButton>
+          </div>
+        </div>
+      </section>
+
+    </div>
   );
 }

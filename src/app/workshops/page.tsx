@@ -1,7 +1,6 @@
-﻿import { BG3Img, BG_INVERSE, BGGroupLogo } from '@/ImagePath';
 import type { Metadata } from 'next';
 import WorkshopCards from '../components/partials/workshop';
-import Image from 'next/image';
+import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from '@/app/components/partials/services/ServiceUI';
 
 export const metadata: Metadata = {
   title: 'Workshops | NativeCloud',
@@ -108,57 +107,82 @@ const stats = [
   { value: 'Live', label: 'Online sessions' },
 ];
 
-const WorkshopPage = () => {
+export default function WorkshopPage() {
   return (
-    <div className="relative min-h-full">
-      {/* Background */}
-      <div className="absolute w-full h-full z-[-1] top-16 inset-x-0">
-        <Image src={BG3Img} alt="Background" className="!h-auto md:!-top-36" layout="fill" objectFit="cover" objectPosition="top" quality={100} />
-        <Image src={BGGroupLogo} alt="Design Element" layout="fill" objectFit="contain" objectPosition="top right" quality={100} />
-      </div>
+    <div className="font-switzer">
 
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-10 2xl:px-0">
+      {/* ── Hero ── */}
+      <div className="industries-hero-bg">
+        <div className={`${CONTAINER} pb-12 pt-32 lg:pt-28`}>
+          <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:gap-16">
 
-        {/* Hero */}
-        <div className="pt-40 pb-12 lg:pt-48 lg:pb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest mb-5"
-            style={{ background: 'rgba(248,146,1,0.10)', color: '#c4743c', border: '1px solid rgba(248,146,1,0.25)' }}>
-            Azure & AI Training
-          </div>
-          <h1 className="text-4xl sm:text-5xl xl:text-6xl font-extrabold leading-[1.1] tracking-tight text-[#0a0e1a] max-w-3xl mb-5">
-            Hands-on{' '}
-            <span className="bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] bg-clip-text text-transparent">
-              workshops
-            </span>{' '}
-            for your team
-          </h1>
-          <p className="text-[#0a0e1a]/55 text-base lg:text-lg max-w-xl leading-relaxed mb-10">
-            Master Microsoft Azure, Kubernetes, and AI in live online sessions — designed for developers and architects who learn by doing.
-          </p>
-
-          {/* Stats strip */}
-          <div className="flex flex-wrap gap-6 sm:gap-10">
-            {stats.map((s) => (
-              <div key={s.label} className="flex flex-col">
-                <span className="text-2xl font-extrabold text-[#0a0e1a]">{s.value}</span>
-                <span className="text-xs text-[#0a0e1a]/40 font-medium uppercase tracking-wider mt-0.5">{s.label}</span>
+            {/* Left */}
+            <div className="flex-1">
+              <div className="mb-6"><Eyebrow>Workshops · Azure &amp; AI Training</Eyebrow></div>
+              <h1 className="m-0 max-w-3xl text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
+                Hands-on workshops for your team.
+              </h1>
+              <p className="mt-6 max-w-[560px] text-[18px] font-light leading-[1.6] text-[#111]">
+                Master Microsoft Azure, Kubernetes, and AI in live online sessions — designed for
+                developers and architects who learn by doing.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <PrimaryButton href="/schedule-call">Book a private workshop</PrimaryButton>
+                <SecondaryButton href="/solutions">All solutions</SecondaryButton>
               </div>
-            ))}
+            </div>
+
+            {/* Right — stats card */}
+            <div className="w-full lg:max-w-[380px] lg:flex-1">
+              <div className="grid grid-cols-2 gap-3">
+                {stats.map((s) => (
+                  <div key={s.label} className="rounded-2xl border border-[#e6e6e6] bg-white p-5">
+                    <p className="m-0 text-[28px] font-medium leading-none text-[#111]">{s.value}</p>
+                    <p className="m-0 mt-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-[#9ca3af]">{s.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
         </div>
 
-        {/* Cards */}
-        <WorkshopCards data={cards} />
+        {/* multicolour divider — full viewport width */}
+        <hr className="linegrad-divider m-0 h-1 w-full border-0" />
       </div>
 
-      <Image
-        src={BG_INVERSE}
-        alt="Design Element"
-        className="absolute bottom-0 left-0 w-full h-full max-w-[800px] z-[-1] object-contain object-left-bottom"
-        quality={100}
-      />
+      {/* ── Workshops grid ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pt-16 lg:pt-20`}>
+          <div className="mb-10">
+            <div className="mb-4"><Eyebrow>Upcoming sessions</Eyebrow></div>
+            <h2 className="m-0 max-w-[560px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              Live, hands-on, and built around real workloads.
+            </h2>
+          </div>
+          <WorkshopCards data={cards} />
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="bg-[#0a0e1a]">
+        <div className={`${CONTAINER} flex flex-col gap-10 py-20 md:flex-row md:items-center md:justify-between`}>
+          <div className="flex max-w-xl flex-col gap-4">
+            <h2 className="m-0 text-[28px] font-medium leading-[1.1] text-white md:text-[44px]">
+              Want a private workshop for your team?
+            </h2>
+            <p className="m-0 text-[18px] font-light leading-[1.6] text-white/70">
+              We tailor the agenda to your stack and goals, and run it live for your engineers —
+              on your schedule.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <PrimaryButton href="/schedule-call" dark>Book a private workshop</PrimaryButton>
+            <SecondaryButton href="/solutions" onDark>All solutions</SecondaryButton>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
-};
-
-export default WorkshopPage;
+}

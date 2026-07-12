@@ -127,7 +127,7 @@ export default function ServicesScrollSection() {
         const isPast   = i < activeIdx;
         dot.style.opacity   = isActive || isPast ? '1' : '0.25';
         dot.style.transform = isActive ? 'scale(1.6)' : 'scale(1)';
-        dot.style.background = isPast ? '#e89a78' : '#0a0e1a';
+        dot.style.background = isPast ? '#9ca3af' : '#0a0e1a';
       });
 
       /* cards — dist: negative = incoming from right, positive = outgoing to left */
@@ -183,17 +183,9 @@ export default function ServicesScrollSection() {
   /* ── shared heading ──────────────────────────────────── */
   const headingBlock = (
     <div>
-      <div className="flex items-center gap-2 mb-3">
-        <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">What we deliver</p>
-      </div>
-      <h2 className="text-2xl lg:text-4xl font-bold text-[#0a0e1a] leading-tight">
-        Every service your business needs —{' '}
-        <span className="relative inline-block">
-          <span className="bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] bg-clip-text text-transparent italic">
-            under one roof
-          </span>
-          <span className="absolute -bottom-0.5 left-0 w-full h-[2px] rounded-full bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] opacity-50" />
-        </span>
+      <p className="text-[12px] font-medium uppercase tracking-[0.14em] text-[#9ca3af] mb-3">What we deliver</p>
+      <h2 className="text-[26px] lg:text-[40px] font-medium text-[#111] leading-[1.1]">
+        Every service your business needs — under one roof
       </h2>
     </div>
   );
@@ -226,7 +218,7 @@ export default function ServicesScrollSection() {
   return (
     <>
       {/* ══ MOBILE  ≤ 768 px ══════════════════════════════════════ */}
-      <section className="md:hidden bg-[#faf7f4] py-14">
+      <section className="md:hidden bg-white py-14">
 
         {/* heading */}
         <div className="px-6 mb-8">{headingBlock}</div>
@@ -244,7 +236,7 @@ export default function ServicesScrollSection() {
                 style={{
                   width:      i === activeCard ? 18 : 5,
                   height:     5,
-                  background: i < activeCard ? '#e89a78' : i === activeCard ? '#0a0e1a' : 'rgba(10,14,26,0.2)',
+                  background: i < activeCard ? '#9ca3af' : i === activeCard ? '#0a0e1a' : 'rgba(10,14,26,0.2)',
                 }}
               />
             ))}
@@ -253,9 +245,9 @@ export default function ServicesScrollSection() {
 
         {/* progress rail */}
         <div className="px-6 mb-6">
-          <div className="h-[1.5px] bg-[#e8e0d8] rounded-full overflow-hidden">
+          <div className="h-[1.5px] bg-[#e6e6e6] rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] rounded-full transition-all duration-300"
+              className="h-full bg-[#111] rounded-full transition-all duration-300"
               style={{ width: `${((activeCard + 1) / CARD_COUNT) * 100}%` }}
             />
           </div>
@@ -360,7 +352,7 @@ export default function ServicesScrollSection() {
         className="hidden md:block relative"
         style={{ height: `${CARD_COUNT * DWELL * 100}vh` }}
       >
-        <div className="sticky top-0 h-screen bg-[#faf7f4] flex flex-col overflow-hidden">
+        <div className="sticky top-0 h-screen bg-white flex flex-col overflow-hidden">
 
           {/* Header row */}
           <div className="max-w-9xl mx-auto w-full px-8 sm:px-12 xl:px-16 pt-12 pb-5 flex items-end justify-between gap-8 shrink-0">
@@ -389,10 +381,10 @@ export default function ServicesScrollSection() {
 
           {/* Progress rail */}
           <div className="max-w-9xl mx-auto w-full px-8 sm:px-12 xl:px-16 shrink-0 mb-1">
-            <div className="h-[1.5px] bg-[#e8e0d8] rounded-full overflow-hidden">
+            <div className="h-[1.5px] bg-[#e6e6e6] rounded-full overflow-hidden">
               <div
                 ref={fillRef}
-                className="h-full bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] origin-left"
+                className="h-full bg-[#111] origin-left"
                 style={{ transform: 'scaleX(0)' }}
               />
             </div>

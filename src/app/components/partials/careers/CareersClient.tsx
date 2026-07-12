@@ -27,14 +27,14 @@ type Job = {
 };
 
 const MODEL_COLORS: Record<string, { bg: string; color: string }> = {
-  Remote:    { bg: 'rgba(10,14,26,0.07)',    color: 'rgba(10,14,26,0.55)' },
-  Hybrid:    { bg: 'rgba(232,154,120,0.14)', color: '#c4743c' },
-  'On-site': { bg: 'rgba(91,124,250,0.12)',  color: '#4a5fd4' },
+  Remote:    { bg: '#f3f4f6', color: '#6b7280' },
+  Hybrid:    { bg: '#f3f4f6', color: '#6b7280' },
+  'On-site': { bg: '#f3f4f6', color: '#6b7280' },
 };
 
 const TYPE_COLORS: Record<string, { bg: string; color: string }> = {
-  'Full-time': { bg: 'rgba(10,14,26,0.06)',  color: 'rgba(10,14,26,0.5)' },
-  Contract:    { bg: 'rgba(248,146,1,0.10)', color: '#b86a30' },
+  'Full-time': { bg: '#f3f4f6', color: '#6b7280' },
+  Contract:    { bg: '#f3f4f6', color: '#6b7280' },
 };
 
 export default function CareersClient({ jobs }: { jobs: Job[] }) {
@@ -88,7 +88,7 @@ export default function CareersClient({ jobs }: { jobs: Job[] }) {
       <div
         className="w-full rounded-2xl py-8 px-6 sm:px-10 mb-4 relative overflow-hidden"
         style={{
-          background: 'linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 40%, #edfaf4 100%)',
+          background: '#ffffff',
           border: '1px solid rgba(0,0,0,0.06)',
           boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
         }}
@@ -96,7 +96,7 @@ export default function CareersClient({ jobs }: { jobs: Job[] }) {
         {/* Green glow */}
         <div
           className="absolute top-0 right-0 w-[420px] h-full pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 80% 50%, rgba(52,211,153,0.18) 0%, transparent 65%)' }}
+          style={{ background: 'radial-gradient(ellipse at 80% 50%, rgba(0,0,0,0) 0%, transparent 65%)' }}
         />
 
         <div className="relative flex flex-col gap-3">
@@ -197,7 +197,7 @@ export default function CareersClient({ jobs }: { jobs: Job[] }) {
               <span
                 key={pill.label}
                 className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium shrink-0"
-                style={{ background: 'rgba(232,154,120,0.10)', color: '#c4743c', border: '1px solid rgba(232,154,120,0.25)' }}
+                style={{ background: '#f3f4f6', color: '#6b7280', border: '1px solid #e6e6e6' }}
               >
                 {pill.label}
                 <button onClick={pill.clear} className="hover:opacity-70 transition-opacity">
@@ -228,7 +228,7 @@ export default function CareersClient({ jobs }: { jobs: Job[] }) {
               <button
                 onClick={() => { setActiveDept('All'); setActiveModel('All'); setActiveType('All'); }}
                 className="text-xs font-medium transition-colors"
-                style={{ color: '#e89a78' }}
+                style={{ color: '#111' }}
               >
                 Clear all
               </button>
@@ -273,14 +273,14 @@ export default function CareersClient({ jobs }: { jobs: Job[] }) {
                     onClick={() => setActiveModel(activeModel === m ? 'All' : m)}
                     className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-150"
                     style={activeModel === m
-                      ? { background: '#e89a78', color: '#fff' }
-                      : { background: 'rgba(232,154,120,0.10)', color: '#c4743c' }
+                      ? { background: '#111', color: '#fff' }
+                      : { background: '#f3f4f6', color: '#6b7280' }
                     }
                   >
                     {m}
                     <span
                       className="text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center"
-                      style={{ background: activeModel === m ? 'rgba(255,255,255,0.20)' : 'rgba(232,154,120,0.15)' }}
+                      style={{ background: activeModel === m ? 'rgba(255,255,255,0.20)' : 'rgba(0,0,0,0.06)' }}
                     >
                       {modelCounts[m]}
                     </span>
@@ -321,7 +321,7 @@ export default function CareersClient({ jobs }: { jobs: Job[] }) {
 
       {/* ── Results count ── */}
       <p className="text-sm text-[#0a0e1a]/40 mb-4">
-        <span style={{ color: '#e89a78', fontWeight: 700 }}>{filtered.length}</span> open position{filtered.length !== 1 ? 's' : ''}
+        <span style={{ color: '#111', fontWeight: 700 }}>{filtered.length}</span> open position{filtered.length !== 1 ? 's' : ''}
         {activeDept !== 'All' && ` in ${activeDept}`}
       </p>
 
@@ -347,35 +347,36 @@ export default function CareersClient({ jobs }: { jobs: Job[] }) {
                 >
                   <div
                     onClick={() => router.push(`/careers/${job.slug}`)}
-                    className="group flex flex-col gap-3.5 px-6 py-5 rounded-2xl border border-black/[0.07] bg-white hover:border-[#e89a78]/40 hover:shadow-[0_4px_24px_rgba(232,154,120,0.12)] transition-all duration-200 cursor-pointer"
+                    className="group flex flex-col gap-4 px-6 py-6 rounded-2xl border border-black/[0.07] bg-white hover:border-[#111]/30 hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] transition-all duration-200 cursor-pointer"
                   >
                     {/* Row 1: Title + Hiring Now */}
                     <div className="flex items-start justify-between gap-3">
-                      <p className="font-bold text-[#0a0e1a] text-[15px] leading-snug group-hover:text-[#e89a78] transition-colors">
+                      <p className="font-semibold text-[#111] text-[18px] leading-snug tracking-[-0.01em] group-hover:text-[#2563eb] transition-colors">
                         {job.title}
                       </p>
                       <span
-                        className="shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide"
-                        style={{ background: 'rgba(52,211,153,0.10)', color: '#0d9f6e', border: '1px solid rgba(52,211,153,0.18)' }}
+                        className="shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wide"
+                        style={{ background: 'rgba(5,150,105,0.10)', color: '#059669', border: '1px solid rgba(5,150,105,0.25)' }}
                       >
+                        <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: '#059669' }} />
                         Hiring Now
                       </span>
                     </div>
 
                     {/* Row 2: Description */}
-                    <p className="text-sm text-[#0a0e1a]/50 leading-relaxed line-clamp-2">
+                    <p className="text-[15px] text-[#4b5563] leading-[1.6] line-clamp-2">
                       {job.description}
                     </p>
 
                     {/* Row 3: Skills */}
                     {job.skills && job.skills.length > 0 && (
                       <div className="flex flex-wrap items-center gap-1.5">
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-[#0a0e1a]/25 mr-0.5">Skills</span>
+                        <span className="text-[10px] font-semibold uppercase tracking-widest text-[#9ca3af] mr-0.5">Skills</span>
                         {job.skills.map(skill => (
                           <span
                             key={skill}
                             className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium"
-                            style={{ background: 'rgba(91,124,250,0.08)', color: '#4a5fd4', border: '1px solid rgba(91,124,250,0.18)' }}
+                            style={{ background: '#f3f4f6', color: '#6b7280', border: '1px solid #e6e6e6' }}
                           >
                             {skill}
                           </span>
@@ -392,7 +393,7 @@ export default function CareersClient({ jobs }: { jobs: Job[] }) {
                         {job.type}
                       </span>
                       {job.duration && (
-                        <span className="text-[11px] text-[#0a0e1a]/35 font-medium">{job.duration}</span>
+                        <span className="text-[12px] text-[#6b7280] font-medium">{job.duration}</span>
                       )}
                       <span
                         className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold"
@@ -400,14 +401,14 @@ export default function CareersClient({ jobs }: { jobs: Job[] }) {
                       >
                         {job.workModel}
                       </span>
-                      <span className="flex items-center gap-1 text-[11px] text-[#0a0e1a]/35">
+                      <span className="flex items-center gap-1 text-[12px] text-[#6b7280]">
                         <svg className="w-3 h-3 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
                           <path d="M20 10c0 6-8 13-8 13s-8-7-8-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
                         </svg>
                         {job.location}
                       </span>
-                      <span className="text-[11px] text-[#0a0e1a]/35">{job.department}</span>
-                      <div className="ml-auto flex items-center gap-1.5 text-sm font-bold text-[#e89a78] group-hover:gap-2.5 transition-all">
+                      <span className="text-[12px] text-[#6b7280]">{job.department}</span>
+                      <div className="ml-auto flex items-center gap-1.5 text-sm font-bold text-[#111] group-hover:gap-2.5 transition-all">
                         View job
                         <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
                           <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -435,7 +436,7 @@ export default function CareersClient({ jobs }: { jobs: Job[] }) {
           <a
             href="mailto:careers@nativeai.cloud"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold transition-all hover:opacity-90"
-            style={{ background: '#e89a78', color: '#fff' }}
+            style={{ background: '#111', color: '#fff' }}
           >
             Get in touch
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
@@ -448,7 +449,7 @@ export default function CareersClient({ jobs }: { jobs: Job[] }) {
             rel="noopener noreferrer"
             title="Follow us on LinkedIn"
             className="w-11 h-11 flex items-center justify-center rounded-full transition-all hover:scale-105"
-            style={{ background: '#0077b5', color: '#fff' }}
+            style={{ background: '#111', color: '#fff' }}
           >
             <LinkedInIcon className="w-5 h-5" />
           </a>

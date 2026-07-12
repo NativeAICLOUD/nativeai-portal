@@ -8,6 +8,79 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Switzer — matches the reference Industries typography (loaded via Fontshare) */
+  .font-switzer {
+    font-family: "Switzer", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  /* Industries hero atmospheric glow (approximates the reference "Bottom Gradient") */
+  .industries-hero-bg {
+    background:
+      radial-gradient(circle at 15% 100%, rgba(224, 225, 255, 0.75), transparent 43%),
+      radial-gradient(circle at 80% 100%, rgba(255, 237, 189, 0.7), transparent 48%),
+      radial-gradient(circle at 100% 70%, rgba(255, 225, 215, 0.6), transparent 43%),
+      #ffffff;
+  }
+
+  /* Full-width multicolour divider under the Industries hero */
+  .linegrad-divider {
+    background-image: linear-gradient(
+      260deg,
+      #fff,
+      #f66 7.5%,
+      #ffc966 15%,
+      #ff6 30%,
+      #6f6 50%,
+      #6fd2f6 65%,
+      #c0c 85% 92.5%,
+      #fff
+    );
+    border-radius: 100px;
+  }
+
+  /* Google "AI Mode" style animated gradient ring around the navbar search */
+  .ai-search-wrap {
+    position: relative;
+    padding: 2.5px;
+    border-radius: 52px;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .ai-search-wrap::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 250%;
+    height: 250%;
+    z-index: -1;
+    background: conic-gradient(
+      from 0deg,
+      #93c5fd,
+      #3b82f6,
+      #1e4fd6,
+      #2563eb,
+      #60a5fa,
+      #93c5fd
+    );
+    transform: translate(-50%, -50%) rotate(0deg);
+    animation: ai-search-spin 4s linear infinite;
+  }
+  .ai-search-inner {
+    border-radius: 50px;
+    background: #f5f5f5;
+  }
+  @keyframes ai-search-spin {
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ai-search-wrap::before {
+      animation: none;
+    }
+  }
 }
 
 html {
@@ -27,6 +100,66 @@ body {
 ::selection {
   background: rgba(232, 154, 120, 0.25);
   color: #0a0e1a;
+}
+
+/* ── Aurora top loading bar ── */
+.modern-progress {
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    #d4845c 0%,
+    #f0a060 18%,
+    #ffcaa0 36%,
+    #ffe0c8 54%,
+    #f0a060 72%,
+    #e8926a 90%,
+    #d4845c 100%
+  );
+  background-size: 300% 100%;
+  border-radius: 0 4px 4px 0;
+  box-shadow:
+    0 0 16px rgba(240, 160, 96, 0.7),
+    0 0 8px rgba(255, 202, 160, 0.55),
+    0 0 4px rgba(232, 146, 106, 0.55);
+  /* flow = colors drift sideways; breathe = glow/height gently pulses */
+  animation:
+    aurora-flow 3s linear infinite,
+    aurora-breathe 2.2s ease-in-out infinite;
+}
+/* Soft bright bloom riding the leading edge */
+.modern-progress::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 110px;
+  height: 100%;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, transparent, rgba(255, 224, 200, 0.9), #fff6ee);
+  filter: blur(3px);
+  opacity: 0.9;
+}
+@keyframes aurora-flow {
+  to { background-position: 300% 0; }
+}
+@keyframes aurora-breathe {
+  0%, 100% {
+    filter: brightness(1) saturate(1);
+    box-shadow:
+      0 0 16px rgba(240, 160, 96, 0.7),
+      0 0 8px rgba(255, 202, 160, 0.55),
+      0 0 4px rgba(232, 146, 106, 0.55);
+  }
+  50% {
+    filter: brightness(1.2) saturate(1.3);
+    box-shadow:
+      0 0 26px rgba(240, 160, 96, 0.9),
+      0 0 14px rgba(255, 202, 160, 0.75),
+      0 0 7px rgba(232, 146, 106, 0.7);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .modern-progress { animation: none; }
 }
 
 /* Ensure all interactive elements have pointer cursor */

@@ -6,12 +6,11 @@ import Image from 'next/image';
 import MobileAgentFlow from './MobileAgentFlow';
 import RotatingHeroHeadline from './RotatingHeroHeadline';
 
-const MONO: React.CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
 const tags = ['AI', 'DATA', 'CLOUD'];
 
 function HomeHeader() {
   return (
-    <main className="relative overflow-hidden min-h-screen flex flex-col justify-center pt-[80px] pb-6">
+    <main className="font-switzer relative overflow-hidden min-h-screen flex flex-col justify-center pt-[80px] pb-6">
 
       {/* ── Page backgrounds ── */}
       <div className="absolute w-full h-full z-[-1] left-0 top-0 after:absolute after:bottom-0 after:bg-main-gradient after:w-full after:h-1/5">
@@ -46,17 +45,8 @@ function HomeHeader() {
 
               {/* eyebrow badge */}
               <div className="flex flex-wrap items-center gap-2 mb-8">
-                <span
-                  style={{
-                    ...MONO,
-                    background: 'rgba(37,99,235,0.10)',
-                    border: '1px solid rgba(37,99,235,0.32)',
-                    color: '#1d4ed8',
-                    letterSpacing: '0.08em',
-                  }}
-                  className="inline-flex items-center px-3.5 py-1 rounded-full text-sm font-semibold select-none"
-                >
-                  {tags.join(' ')}
+                <span className="inline-flex items-center rounded-full border border-[#e6e6e6] bg-white/70 px-3.5 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-[#6b7280] select-none">
+                  {tags.join(' · ')}
                 </span>
               </div>
 

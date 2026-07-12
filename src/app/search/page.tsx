@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import AiOverview from '../components/ui/AiOverview';
 
 const DOMAIN = 'nativeai.cloud';
 
@@ -103,6 +104,11 @@ function SearchResults() {
             </svg>
           </button>
         </div>
+
+        {/* AI Overview */}
+        {query.trim() && results.length > 0 && (
+          <AiOverview query={query} results={results} />
+        )}
 
         {/* Results list */}
         {query.trim() && results.length === 0 ? (

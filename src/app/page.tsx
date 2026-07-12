@@ -1,5 +1,4 @@
 import AIServicesSection from "./components/partials/home/AIServicesSection";
-import CloudServicesSection from "./components/partials/home/CloudServicesSection";
 import ServicesScrollSection from "./components/partials/home/ServicesScrollSection";
 import HomeHeader from "./components/partials/home/Header";
 import HomeLowerSection from "./components/partials/home/HomeLowerSection";
@@ -21,9 +20,6 @@ export default function Home() {
 
       {/* Metallic shimmer headline hero */}
       <RotatingHeadlineHero />
-
-      {/* AI Agents · LLMs · Azure & AWS */}
-      <CloudServicesSection />
 
       {/* Industries Section */}
       <IndustriesBusinessDomain />

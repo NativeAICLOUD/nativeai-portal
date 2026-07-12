@@ -1,10 +1,9 @@
-﻿'use client';
+'use client';
 
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { useState } from 'react';
-import ContactUsFooter from '@/app/components/partials/ContactUsFooter';
 import { Constants } from '@/Constants';
+import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from '@/app/components/partials/services/ServiceUI';
 
 type Industry =
   | 'All'
@@ -151,27 +150,11 @@ const heroStats = [
 
 function ArrowIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5 shrink-0">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5 shrink-0">
       <path d="M5 12h14M12 5l7 7-7 7" />
     </svg>
   );
 }
-
-const lg: React.CSSProperties = {
-  background: "rgba(255,255,255,0.62)",
-  backdropFilter: "blur(40px) saturate(180%)",
-  WebkitBackdropFilter: "blur(40px) saturate(180%)",
-  border: "1px solid rgba(255,255,255,0.85)",
-  boxShadow: "0 4px 32px rgba(232,154,120,0.10), 0 1px 2px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.95)",
-};
-
-const lgCard: React.CSSProperties = {
-  background: "rgba(255,255,255,0.55)",
-  backdropFilter: "blur(32px) saturate(160%)",
-  WebkitBackdropFilter: "blur(32px) saturate(160%)",
-  border: "1px solid rgba(255,255,255,0.80)",
-  boxShadow: "0 2px 20px rgba(232,154,120,0.08), inset 0 1px 0 rgba(255,255,255,0.92)",
-};
 
 export default function CaseStudiesPage() {
   const [active, setActive] = useState<Industry>('All');
@@ -179,199 +162,168 @@ export default function CaseStudiesPage() {
   const [featured, ...rest] = filtered;
 
   return (
-    <div className="relative min-h-full overflow-x-clip">
+    <div className="font-switzer">
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden min-h-[100svh] flex items-center" style={{ background: "linear-gradient(145deg, #fff5ee 0%, #fdf0e8 30%, #fef6f0 60%, #fff8f2 100%)" }}>
-        <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute rounded-full" style={{ width: 820, height: 820, top: "-15%", right: "-10%", background: "radial-gradient(circle, rgba(240,140,60,0.30) 0%, transparent 65%)", filter: "blur(70px)" }} />
-          <div className="absolute rounded-full" style={{ width: 680, height: 680, top: "28%", left: "-18%", background: "radial-gradient(circle, rgba(232,154,120,0.18) 0%, transparent 65%)", filter: "blur(60px)" }} />
-          <div className="absolute rounded-full" style={{ width: 500, height: 500, bottom: "-10%", left: "25%", background: "radial-gradient(circle, rgba(232,154,120,0.16) 0%, transparent 65%)", filter: "blur(60px)" }} />
-        </div>
-
-        <div className="relative w-full max-w-7xl mx-auto px-6 md:px-12 pt-36 pb-24">
-          <div className="flex flex-col lg:flex-row lg:items-center gap-14 xl:gap-20">
+      <div className="industries-hero-bg">
+        <div className={`${CONTAINER} pb-12 pt-32 lg:pt-28`}>
+          <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
 
             {/* Left */}
-            <motion.div className="flex-1 min-w-0" initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, ease: [0.25,0.46,0.45,0.94] }}>
-              <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-10" style={{ ...lg, borderRadius: 999 }}>
-                <span className="text-[11px] font-semibold tracking-widest uppercase" style={{ color: '#b86a30' }}>Solutions · Case Studies</span>
-              </div>
-
-              <h1 className="font-black text-[#0a0e1a] leading-[1.05] tracking-[-0.045em] mb-8" style={{ fontSize: "clamp(44px, 6vw, 80px)" }}>
-                Proven results{' '}
-                <span style={{ background: "linear-gradient(120deg, #f0a060 0%, #e89a78 50%, #d4845c 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                  across every industry
-                </span>
+            <div className="flex-1">
+              <div className="mb-6"><Eyebrow>Case Studies</Eyebrow></div>
+              <h1 className="m-0 text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
+                Proven results across every industry.
               </h1>
+              <p className="mt-6 max-w-[520px] text-[18px] font-light leading-[1.6] text-[#111]">
+                Real outcomes for real organisations — from financial services to healthcare. See
+                how we help businesses modernise, scale, and cut costs on Azure.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <PrimaryButton href={Constants.PAGES.SCHEDULE_CALL}>Schedule a free call</PrimaryButton>
+                <SecondaryButton href={Constants.PAGES.SOLUTIONS}>View all solutions</SecondaryButton>
+              </div>
+            </div>
 
-              <motion.p className="text-[#0a0e1a]/52 text-lg leading-[1.75] max-w-[480px] mb-10" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }}>
-                Real outcomes for real organisations — from financial services to healthcare. See how we help businesses modernise, scale, and cut costs on Azure.
-              </motion.p>
-
-              <motion.div className="flex flex-wrap gap-3" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25 }}>
-                <Link href={Constants.PAGES.SCHEDULE_CALL} className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-base font-bold transition-all text-white whitespace-nowrap" style={{ background: "#e89a78", boxShadow: "0 4px 16px rgba(232,154,120,0.35)" }}>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg>
-                  Schedule a free call
-                </Link>
-                <Link href={Constants.PAGES.SOLUTIONS} className="inline-flex items-center px-8 py-4 rounded-full text-base font-semibold transition-all whitespace-nowrap" style={{ ...lg, color: '#b86a30', borderRadius: 999 }}>
-                  View all solutions
-                </Link>
-              </motion.div>
-            </motion.div>
-
-            {/* Right — stats glass card */}
-            <motion.div className="lg:flex-1 lg:max-w-[420px] w-full" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.95, delay: 0.08 }}>
-              <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}>
-                <div className="rounded-[28px] p-7 flex flex-col gap-5" style={lgCard}>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[11px] font-bold uppercase tracking-widest" style={{ color: '#b86a30' }}>Our Track Record</span>
-                    <div className="flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400" style={{ boxShadow: "0 0 6px #34d399" }} />
-                      <span className="text-[10px] font-medium" style={{ color: '#c4743c' }}>Verified</span>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-3">
-                    {heroStats.map((s, i) => (
-                      <div key={i} className="rounded-2xl p-4 flex flex-col gap-1" style={{ background: 'rgba(255,255,255,0.60)', border: '1px solid rgba(255,255,255,0.80)' }}>
-                        <p className="text-2xl font-black text-[#0a0e1a]" style={{ letterSpacing: '-0.03em' }}>{s.value}</p>
-                        <p className="text-[10px] text-[#0a0e1a]/40 font-medium leading-snug">{s.label}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="flex flex-wrap gap-2 pt-1">
-                    {['Financial Services', 'Healthcare', 'Retail', 'SaaS'].map(t => (
-                      <span key={t} className="text-[10px] font-semibold px-2.5 py-1 rounded-full" style={{ color: '#b86a30', background: 'rgba(240,160,96,0.12)', border: '1px solid rgba(240,160,96,0.25)' }}>{t}</span>
-                    ))}
+            {/* Right — track record card */}
+            <div className="w-full lg:max-w-[440px] lg:flex-1">
+              <div className="flex flex-col gap-5 rounded-2xl border border-[#e6e6e6] bg-white p-6">
+                <div className="flex items-center justify-between">
+                  <Eyebrow>Our track record</Eyebrow>
+                  <div className="flex items-center gap-1.5">
+                    <span className="h-2 w-2 rounded-full bg-[#059669]" />
+                    <span className="text-[11px] font-medium text-[#059669]">Verified</span>
                   </div>
                 </div>
-              </motion.div>
-            </motion.div>
+                <div className="grid grid-cols-2 gap-3">
+                  {heroStats.map((s) => (
+                    <div key={s.label} className="rounded-xl border border-[#eee] bg-[#fafafa] p-4">
+                      <p className="m-0 text-[24px] font-medium leading-none text-[#111]">{s.value}</p>
+                      <p className="m-0 mt-1.5 text-[11px] font-light leading-snug text-[#9ca3af]">{s.label}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {['Financial Services', 'Healthcare', 'Retail', 'SaaS'].map((t) => (
+                    <span key={t} className="rounded-full border border-[#e6e6e6] px-2.5 py-1 text-[11px] font-medium text-[#111]">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
 
           </div>
         </div>
-      </section>
+
+        {/* multicolour divider — full viewport width */}
+        <hr className="linegrad-divider m-0 h-1 w-full border-0" />
+      </div>
 
       {/* ── Filter + Cards ── */}
-      <section className="relative overflow-hidden" style={{ background: "linear-gradient(160deg, #fdf0e8 0%, #fff5ee 40%, #fef6f0 100%)" }}>
-        <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute rounded-full" style={{ width: 700, height: 700, top: "-10%", right: "-10%", background: "radial-gradient(circle, rgba(240,140,60,0.18) 0%, transparent 65%)", filter: "blur(70px)" }} />
-          <div className="absolute rounded-full" style={{ width: 500, height: 500, bottom: "-10%", left: "10%", background: "radial-gradient(circle, rgba(232,154,120,0.15) 0%, transparent 65%)", filter: "blur(60px)" }} />
-        </div>
-
-        <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-16 sm:py-24">
+      <section className="bg-white">
+        <div className={`${CONTAINER} py-20 lg:py-24`}>
 
           {/* Filter pills */}
-          <motion.div className="flex flex-wrap gap-2 mb-12" initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true, margin: '-60px' }}>
-            {filters.map((f) => (
-              <button
-                key={f}
-                onClick={() => setActive(f)}
-                className="px-4 py-2 rounded-full text-xs font-semibold tracking-wide border transition-all duration-200"
-                style={active === f
-                  ? { background: '#e89a78', borderColor: '#e89a78', color: '#ffffff' }
-                  : { background: 'rgba(255,255,255,0.60)', borderColor: '#e8d0b8', color: '#6b6b6b' }
-                }
-              >
-                {f}
-              </button>
-            ))}
-          </motion.div>
+          <div className="mb-12 flex flex-wrap gap-2">
+            {filters.map((f) => {
+              const isActive = active === f;
+              return (
+                <button
+                  key={f}
+                  onClick={() => setActive(f)}
+                  className={`rounded-full border px-4 py-2 text-[13px] font-medium transition-colors ${
+                    isActive
+                      ? 'border-[#111] bg-[#111] text-white'
+                      : 'border-[#e6e6e6] bg-white text-[#6b7280] hover:border-[#111] hover:text-[#111]'
+                  }`}
+                >
+                  {f}
+                </button>
+              );
+            })}
+          </div>
 
           {filtered.length === 0 ? (
             <div className="flex items-center justify-center py-24">
-              <p className="text-sm text-[#9b9589]">No case studies in this category yet.</p>
+              <p className="text-sm text-[#9ca3af]">No case studies in this category yet.</p>
             </div>
           ) : (
             <div className="flex flex-col gap-6">
 
               {/* Featured card */}
               {featured && (
-                <motion.div
-                  key={`${featured.id}-featured`}
-                  className="group rounded-2xl overflow-hidden"
-                  style={lgCard}
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                >
+                <div className="overflow-hidden rounded-2xl border border-[#e6e6e6] bg-white">
                   <div className="h-[3px]" style={{ backgroundColor: industryStyle[featured.industry].bar }} />
                   <div className="p-7 sm:p-10 lg:p-12">
-                    <div className="flex flex-col lg:flex-row lg:items-start gap-8 lg:gap-16">
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between mb-6">
-                          <span className={`inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold ${industryStyle[featured.industry].pill}`}>
+                    <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-16">
+                      <div className="min-w-0 flex-1">
+                        <div className="mb-6 flex items-center justify-between">
+                          <span className={`inline-flex items-center rounded-full px-3 py-1 text-[11px] font-semibold ${industryStyle[featured.industry].pill}`}>
                             {featured.industry}
                           </span>
-                          <span className="hidden sm:block text-[10px] uppercase tracking-[0.15em] text-[#0a0e1a]/30 font-semibold">Featured</span>
+                          <span className="hidden text-[10px] font-semibold uppercase tracking-[0.15em] text-[#9ca3af] sm:block">Featured</span>
                         </div>
-                        <p className="text-[10px] uppercase tracking-[0.15em] text-[#0a0e1a]/35 font-semibold mb-3">{featured.client}</p>
-                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0a0e1a] leading-tight mb-5 max-w-2xl">{featured.title}</h2>
-                        <p className="text-[#0a0e1a]/52 text-base leading-relaxed mb-8 max-w-2xl">{featured.desc}</p>
-                        <div className="flex flex-wrap gap-2 mb-8">
+                        <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.12em] text-[#9ca3af]">{featured.client}</p>
+                        <h2 className="m-0 mb-5 max-w-2xl text-[26px] font-medium leading-[1.15] text-[#111] sm:text-[32px] lg:text-[40px]">{featured.title}</h2>
+                        <p className="mb-8 max-w-2xl text-[16px] font-normal leading-[1.5] text-[#111]">{featured.desc}</p>
+                        <div className="mb-8 flex flex-wrap gap-2">
                           {featured.tags.map((tag) => (
-                            <span key={tag} className="text-[11px] px-3 py-1 rounded-lg font-medium" style={{ color: '#b86a30', background: 'rgba(240,160,96,0.12)', border: '1px solid rgba(240,160,96,0.20)' }}>{tag}</span>
+                            <span key={tag} className="rounded-md border border-[#e6e6e6] px-2.5 py-1 text-[11px] font-medium text-[#111]">{tag}</span>
                           ))}
                         </div>
-                        <div className="flex items-center gap-5">
-                          <Link href={featured.serviceUrl} className="inline-flex items-center gap-2 px-5 min-h-[44px] rounded-full font-semibold text-sm transition-all text-white hover:opacity-90" style={{ background: '#e89a78' }}>
-                            View {featured.service}
-                            <ArrowIcon />
-                          </Link>
-                          <span className="text-xs text-[#0a0e1a]/30 font-medium">NativeCloud · {featured.service}</span>
-                        </div>
+                        <Link href={featured.serviceUrl} className="inline-flex items-center gap-2 rounded-full bg-[#111] px-5 py-3 text-[14px] font-medium text-white transition-opacity hover:opacity-90">
+                          View {featured.service}
+                          <ArrowIcon />
+                        </Link>
                       </div>
-                      <div className="lg:w-52 shrink-0">
-                        <div className="p-6 rounded-2xl" style={{ background: 'rgba(255,255,255,0.70)', border: '1px solid rgba(255,255,255,0.90)', boxShadow: '0 2px 12px rgba(232,154,120,0.10)' }}>
-                          <p className="text-5xl sm:text-6xl font-black leading-none mb-2" style={{ color: industryStyle[featured.industry].bar }}>{featured.metric.value}</p>
-                          <p className="text-xs text-[#0a0e1a]/40 font-medium leading-snug">{featured.metric.label}</p>
+                      <div className="shrink-0 lg:w-52">
+                        <div className="rounded-2xl border border-[#eee] bg-[#fafafa] p-6">
+                          <p className="mb-2 text-[48px] font-medium leading-none sm:text-[56px]" style={{ color: industryStyle[featured.industry].metricColor }}>{featured.metric.value}</p>
+                          <p className="text-[13px] font-normal leading-snug text-[#6b7280]">{featured.metric.label}</p>
                         </div>
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               )}
 
               {/* Regular cards grid */}
               {rest.length > 0 && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {rest.map((cs, i) => {
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {rest.map((cs) => {
                     const sty = industryStyle[cs.industry];
                     return (
-                      <motion.div
+                      <div
                         key={cs.id}
-                        className="group flex flex-col rounded-2xl overflow-hidden hover:-translate-y-1 transition-all duration-300"
-                        style={lgCard}
-                        initial={{ opacity: 0, y: 24 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.45, ease: 'easeOut', delay: i * 0.07 }}
+                        className="flex flex-col overflow-hidden rounded-2xl border border-[#e6e6e6] bg-white transition-shadow duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)]"
                       >
                         <div className="h-[3px] shrink-0" style={{ backgroundColor: sty.bar }} />
-                        <div className="flex flex-col flex-1 p-6">
+                        <div className="flex flex-1 flex-col p-6">
                           <div className="mb-5">
-                            <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold ${sty.pill}`}>{cs.industry}</span>
+                            <span className={`inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold ${sty.pill}`}>{cs.industry}</span>
                           </div>
                           <div className="mb-5">
-                            <p className="text-4xl font-black leading-none mb-1" style={{ color: sty.metricColor }}>{cs.metric.value}</p>
-                            <p className="text-xs text-[#0a0e1a]/40 font-medium">{cs.metric.label}</p>
+                            <p className="mb-1 text-[36px] font-medium leading-none" style={{ color: sty.metricColor }}>{cs.metric.value}</p>
+                            <p className="text-[12px] font-normal text-[#9ca3af]">{cs.metric.label}</p>
                           </div>
-                          <div className="border-t border-[#f0e0d0] mb-5" />
-                          <p className="text-[10px] uppercase tracking-[0.15em] text-[#0a0e1a]/40 font-semibold mb-2">{cs.client}</p>
-                          <h3 className="text-[15px] font-bold text-[#0a0e1a] leading-snug mb-3">{cs.title}</h3>
-                          <p className="text-sm text-[#0a0e1a]/52 leading-relaxed mb-5 flex-1">{cs.desc}</p>
-                          <div className="flex flex-wrap gap-1.5 mb-5">
+                          <div className="mb-5 border-t border-[#eee]" />
+                          <p className="mb-2 text-[10px] font-medium uppercase tracking-[0.12em] text-[#9ca3af]">{cs.client}</p>
+                          <h3 className="mb-3 text-[16px] font-medium leading-snug text-[#111]">{cs.title}</h3>
+                          <p className="mb-5 flex-1 text-[14px] font-normal leading-[1.5] text-[#111]">{cs.desc}</p>
+                          <div className="mb-5 flex flex-wrap gap-1.5">
                             {cs.tags.map((tag) => (
-                              <span key={tag} className="text-[11px] px-2.5 py-1 rounded-lg font-medium" style={{ color: '#b86a30', background: 'rgba(240,160,96,0.10)', border: '1px solid rgba(240,160,96,0.18)' }}>{tag}</span>
+                              <span key={tag} className="rounded-md border border-[#e6e6e6] px-2 py-0.5 text-[11px] font-medium text-[#111]">{tag}</span>
                             ))}
                           </div>
-                          <div className="flex items-center justify-between pt-4 border-t border-[#f0e0d0]">
-                            <Link href={cs.serviceUrl} className="text-xs font-medium hover:text-[#e89a78] transition-colors" style={{ color: '#9b9589' }}>{cs.service}</Link>
-                            <span className="inline-flex items-center gap-1.5 text-xs font-semibold group-hover:gap-2.5 transition-all duration-200 cursor-pointer" style={{ color: '#e89a78' }}>
+                          <div className="flex items-center justify-between border-t border-[#eee] pt-4">
+                            <Link href={cs.serviceUrl} className="text-[12px] font-medium text-[#6b7280] transition-colors hover:text-[#111]">{cs.service}</Link>
+                            <Link href={cs.serviceUrl} className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[#111]">
                               Read more <ArrowIcon />
-                            </span>
+                            </Link>
                           </div>
                         </div>
-                      </motion.div>
+                      </div>
                     );
                   })}
                 </div>
@@ -382,33 +334,24 @@ export default function CaseStudiesPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="relative overflow-hidden" style={{ background: "linear-gradient(145deg, #fdf0e8 0%, #fff5ee 40%, #fff8f2 100%)" }}>
-        <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute rounded-full" style={{ width: 600, height: 600, top: "-20%", right: "-10%", background: "radial-gradient(circle, rgba(240,140,60,0.22) 0%, transparent 65%)", filter: "blur(70px)" }} />
-        </div>
-        <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-20">
-          <motion.div
-            className="rounded-[24px] px-10 py-10 flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between"
-            style={lg}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true, margin: '-40px' }}
-          >
-            <div className="max-w-lg">
-              <p className="text-xs uppercase tracking-widest font-semibold mb-3" style={{ color: '#b86a30' }}>Ready to be next?</p>
-              <h3 className="text-2xl sm:text-3xl font-bold text-[#0a0e1a] mb-3 leading-tight">Let&apos;s build your success story on Azure</h3>
-              <p className="text-[#0a0e1a]/48 text-sm leading-relaxed">Book a free 30-minute call. We&apos;ll assess where you are today and outline a realistic path forward — no obligation, no pressure.</p>
-            </div>
-            <Link href={Constants.PAGES.SCHEDULE_CALL} className="shrink-0 inline-flex items-center justify-center gap-2.5 px-7 min-h-[52px] rounded-full font-semibold text-sm transition-all text-white w-full sm:w-auto hover:opacity-90" style={{ background: '#e89a78', boxShadow: '0 4px 16px rgba(232,154,120,0.35)' }}>
-              Schedule a free call
-              <ArrowIcon />
-            </Link>
-          </motion.div>
+      <section className="bg-[#0a0e1a]">
+        <div className={`${CONTAINER} flex flex-col gap-10 py-20 md:flex-row md:items-center md:justify-between`}>
+          <div className="flex max-w-xl flex-col gap-4">
+            <h2 className="m-0 text-[28px] font-medium leading-[1.1] text-white md:text-[44px]">
+              Let&apos;s build your success story on Azure.
+            </h2>
+            <p className="m-0 text-[18px] font-light leading-[1.6] text-white/70">
+              Book a free 30-minute call. We&apos;ll assess where you are today and outline a
+              realistic path forward — no obligation, no pressure.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <PrimaryButton href={Constants.PAGES.SCHEDULE_CALL} dark>Schedule a free call</PrimaryButton>
+            <SecondaryButton href={Constants.PAGES.SOLUTIONS} onDark>All solutions</SecondaryButton>
+          </div>
         </div>
       </section>
 
-      <ContactUsFooter />
     </div>
   );
 }

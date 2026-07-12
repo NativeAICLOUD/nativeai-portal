@@ -1,15 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Manrope } from 'next/font/google';
-
-// Manrope is scoped to this hero only (applied via className) so it
-// doesn't override the app-wide Montserrat font.
-const manrope = Manrope({
-  weight: ['400', '500', '700', '800'],
-  subsets: ['latin'],
-  display: 'swap',
-});
 
 // ── Edit these lists to change the rotating words ──
 const WORDS = ['Cloud', 'AI', 'Azure', 'DevOps', 'Software', 'Data', 'Consulting'];
@@ -27,7 +18,7 @@ export default function RotatingHeadlineHero() {
   }, []);
 
   return (
-    <section className={`${manrope.className} rhh-hero`} aria-label="Intro">
+    <section className="rhh-hero" aria-label="Intro">
       <div className="rhh-inner">
         <h1 className="rhh-headline">
           {/* key={index} remounts the span each change → replays fade + un-blur */}
@@ -46,8 +37,12 @@ export default function RotatingHeadlineHero() {
 
       <style>{`
         .rhh-hero {
-          background: #060606;
-          color: #fff;
+          background:
+            radial-gradient(circle at 15% 100%, rgba(224,225,255,0.75), transparent 43%),
+            radial-gradient(circle at 80% 100%, rgba(255,237,189,0.70), transparent 48%),
+            radial-gradient(circle at 100% 70%, rgba(255,225,215,0.60), transparent 43%),
+            #ffffff;
+          color: #111;
           min-height: 100vh;
           display: flex;
           align-items: center;
@@ -61,59 +56,36 @@ export default function RotatingHeadlineHero() {
           width: 100%;
         }
         .rhh-headline {
-          font-weight: 800;
-          letter-spacing: -0.03em;
+          font-weight: 600;
+          letter-spacing: -0.02em;
           line-height: 1.04;
           font-size: clamp(2.8rem, 9vw, 7rem);
           margin: 0;
+          color: #111;
         }
         .rhh-rotating {
           display: inline-block;
-          /* room for descenders (g, p, y) so background-clip:text doesn't cut them */
           line-height: 1.2;
           padding-bottom: 0.12em;
-          /* Metallic gradient text, animated shimmer */
-          background: linear-gradient(
-            100deg,
-            #8a7b6b 0%,
-            #cfc4ba 18%,
-            #ffffff 38%,
-            #b9c3c9 58%,
-            #7d8b96 78%,
-            #d8cfc6 100%
-          );
-          background-size: 250% 100%;
-          -webkit-background-clip: text;
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
-          color: transparent;
-          /* fade + un-blur in, then a continuous shimmer */
-          animation:
-            rhh-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) both,
-            rhh-shimmer 6s linear infinite;
+          color: #111;
+          animation: rhh-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
         .rhh-fixed {
           display: inline-block;
-          /* room for descenders (g, p, y) so background-clip:text doesn't cut them */
           line-height: 1.2;
           padding-bottom: 0.12em;
-          /* Static silver gradient */
-          background: linear-gradient(100deg, #9a9a9a, #ffffff 45%, #8f9aa3 90%);
-          -webkit-background-clip: text;
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
-          color: transparent;
+          color: rgba(17,17,17,0.4);
           animation: rhh-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
         .rhh-tagline {
           margin: 28px 0 0;
-          font-weight: 500;
-          color: #cfcfcf;
+          font-weight: 300;
+          color: #6b7280;
           font-size: clamp(1rem, 2.4vw, 1.6rem);
           letter-spacing: 0.01em;
         }
         .rhh-accent {
-          color: #9fb4c9;
+          color: #111;
         }
         @keyframes rhh-reveal {
           from { opacity: 0; filter: blur(16px); }

@@ -8,6 +8,8 @@ export type ProcessStep = {
   step: string;
   heading: string;
   body: string;
+  /** optional lucide icon name, resolved in ProcessTimeline */
+  icon?: string;
 };
 
 export type ServiceData = {

@@ -21,9 +21,9 @@ type TCard = {
 const LEVELS = ['All', 'Basic', 'Deep Dive', 'Special'];
 
 const levelStyle: Record<string, { bg: string; text: string; dot: string }> = {
-  Basic:      { bg: 'rgba(248,146,1,0.10)',  text: '#c4743c', dot: '#F89201' },
-  'Deep Dive': { bg: 'rgba(239,96,25,0.10)',  text: '#b84a10', dot: '#EF6019' },
-  Special:    { bg: 'rgba(19,28,40,0.08)',   text: '#1e3a5f', dot: '#131C28' },
+  Basic:      { bg: 'rgba(10,14,26,0.06)',   text: '#374151', dot: '#6b7280' },
+  'Deep Dive': { bg: 'rgba(37,99,235,0.10)',  text: '#1d4ed8', dot: '#3b82f6' },
+  Special:    { bg: 'rgba(5,150,105,0.10)',  text: '#065f46', dot: '#059669' },
 };
 
 function WorkshopCards({ data }: { data: TCard[] }) {
@@ -96,7 +96,7 @@ const Card = ({ id, level, title, desc, date, duration, language, format, tags }
             ))}
           </div>
         </div>
-        <h2 className="text-[#0a0e1a] font-bold text-lg leading-snug group-hover:text-[#e89a78] transition-colors duration-200">
+        <h2 className="text-[#0a0e1a] font-bold text-lg leading-snug group-hover:text-[#2563eb] transition-colors duration-200">
           {title}
         </h2>
       </div>

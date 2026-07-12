@@ -6,32 +6,34 @@ import { useEffect, useState } from 'react';
 // Each slogan is split so the middle phrase keeps the shimmer + underline accent.
 const SLOGANS = [
   { pre: 'We make ', highlight: 'AI work', post: ' inside your business' },
-  { pre: 'Web intelligence for the ', highlight: 'agentic era', post: '' },
+  { pre: '', highlight: 'Web intelligence', post: ' for the agentic era' },
 ];
 const ROTATE_INTERVAL = 4200; // ms between slogan changes
 
 const VARIANTS = {
   desktop: {
     h1Style: {
+      fontFamily: "'Switzer', sans-serif",
       fontSize: 'clamp(2.8rem, 5vw, 5rem)',
-      fontWeight: 900,
+      fontWeight: 600,
       lineHeight: 1.06,
-      letterSpacing: '-0.03em',
-      color: '#0a0e1a',
+      letterSpacing: '-0.02em',
+      color: '#111',
       margin: '0 0 28px',
-      maxWidth: 520,
+      maxWidth: 560,
     } as React.CSSProperties,
     underlineClass:
       'absolute bottom-1 left-0 w-full h-[3px] rounded-full bg-gradient-to-r from-[#3b82f6] via-[#60a5fa] to-[#2563eb] opacity-70',
   },
   mobile: {
     h1Style: {
+      fontFamily: "'Switzer', sans-serif",
       fontSize: 'clamp(1.75rem, 6.5vw, 2.4rem)',
-      fontWeight: 900,
+      fontWeight: 600,
       lineHeight: 1.08,
-      letterSpacing: '-0.03em',
+      letterSpacing: '-0.02em',
       margin: '0 0 20px',
-      color: '#0a0e1a',
+      color: '#111',
       textAlign: 'center',
     } as React.CSSProperties,
     underlineClass:

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion } from 'framer-motion';
 import { Link } from 'react-transition-progress/next';
@@ -6,12 +6,9 @@ import { Constants } from '@/Constants';
 
 const solutions = [
   {
-    label:  'Legal',
-    accent: '#9B6BFF',
-    accentBg: 'rgba(155,107,255,0.08)',
-    accentBorder: 'rgba(155,107,255,0.20)',
+    label: 'Legal',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
       </svg>
     ),
@@ -21,12 +18,9 @@ const solutions = [
     href:  Constants.PAGES.AI_LEGAL_WORKSPACE,
   },
   {
-    label:  'Finance',
-    accent: '#59C28A',
-    accentBg: 'rgba(89,194,138,0.08)',
-    accentBorder: 'rgba(89,194,138,0.20)',
+    label: 'Finance',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
         <rect width="20" height="14" x="2" y="5" rx="2"/>
         <path d="M2 10h20"/>
       </svg>
@@ -37,12 +31,9 @@ const solutions = [
     href:  Constants.PAGES.PAYMENT_AUTOMATION,
   },
   {
-    label:  'Cloud',
-    accent: '#5B7CFA',
-    accentBg: 'rgba(91,124,250,0.08)',
-    accentBorder: 'rgba(91,124,250,0.20)',
+    label: 'Cloud',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
         <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/>
         <path d="M12 12v9M8 17l4-4 4 4"/>
       </svg>
@@ -55,7 +46,7 @@ const solutions = [
 ];
 
 const PracticalSolutionsSection = () => (
-  <section className="max-w-9xl mx-auto px-6 sm:px-12 xl:px-16 pb-20 sm:pb-28">
+  <section className="font-switzer max-w-9xl mx-auto px-6 sm:px-12 xl:px-16 pb-20 sm:pb-28">
 
     {/* Section header */}
     <motion.div
@@ -65,16 +56,12 @@ const PracticalSolutionsSection = () => (
       transition={{ duration: 0.5, ease: 'easeOut' }}
       viewport={{ once: true, margin: '-60px' }}
     >
-      <div className="flex items-center gap-2 mb-4">
-        <span className="w-5 h-px bg-[#e89a78]" />
-        <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">Practical Solutions</p>
-      </div>
+      <p className="text-[12px] font-medium uppercase tracking-[0.14em] text-[#9ca3af] mb-4">Practical Solutions</p>
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0a0e1a] max-w-lg leading-tight">
-          Practical AI &amp; Cloud solutions{' '}
-          <span style={{ color: '#e89a78' }}>we can deliver</span>
+        <h2 className="text-[30px] md:text-[40px] font-medium text-[#111] leading-[1.1] max-w-lg">
+          Practical AI &amp; Cloud solutions we can deliver
         </h2>
-        <p className="text-[#6b6b6b] text-sm max-w-xs sm:text-right leading-relaxed">
+        <p className="text-[#6b7280] text-[15px] font-light max-w-xs sm:text-right leading-relaxed">
           Industry-specific starting points — ready to adapt to your business in weeks, not months.
         </p>
       </div>
@@ -92,41 +79,31 @@ const PracticalSolutionsSection = () => (
         >
           <Link
             href={s.href}
-            className="group flex flex-col gap-5 rounded-2xl p-7 border border-[#e8e0d8] bg-white hover:border-[#e89a78]/50 hover:shadow-lg transition-all duration-300 h-full"
+            className="group flex h-full flex-col gap-5 rounded-lg border border-[#e6e6e6] bg-white p-7 transition-[filter,box-shadow] duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.2)] hover:[filter:invert(1)]"
           >
             {/* top row */}
             <div className="flex items-start justify-between gap-3">
-              <div
-                className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110"
-                style={{ background: s.accentBg, border: `1px solid ${s.accentBorder}`, color: s.accent }}
-              >
-                {s.icon}
-              </div>
-              <span
-                className="text-[11px] font-semibold px-2.5 py-1 rounded-full tracking-wide"
-                style={{ background: s.accentBg, color: s.accent, border: `1px solid ${s.accentBorder}` }}
-              >
-                {s.label}
-              </span>
+              <span className="text-[#111]">{s.icon}</span>
+              <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#9ca3af]">{s.label}</span>
             </div>
 
             {/* content */}
             <div className="flex-1">
-              <h3 className="text-base font-bold text-[#0a0e1a] mb-2 leading-snug">{s.title}</h3>
-              <p className="text-[#6b6b6b] text-sm leading-relaxed">{s.desc}</p>
+              <h3 className="text-[18px] font-medium text-[#111] mb-2 leading-[1.3]">{s.title}</h3>
+              <p className="text-[#111] text-[15px] font-normal leading-[1.5]">{s.desc}</p>
             </div>
 
             {/* tags */}
             <div className="flex flex-wrap gap-1.5">
               {s.tags.map((tag) => (
-                <span key={tag} className="text-[11px] font-medium text-[#8c8c99] bg-[#f4f4f7] border border-[#e8e8ed] px-2.5 py-0.5 rounded-full">
+                <span key={tag} className="text-[11px] font-medium text-[#6b7280] bg-[#fafafa] border border-[#e6e6e6] px-2.5 py-0.5 rounded-full">
                   {tag}
                 </span>
               ))}
             </div>
 
             {/* cta */}
-            <span className="inline-flex items-center gap-1.5 text-sm font-semibold group-hover:gap-2.5 transition-all" style={{ color: s.accent }}>
+            <span className="inline-flex items-center gap-1.5 text-[13px] font-medium text-[#111]">
               Explore solution
               <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
                 <path d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />

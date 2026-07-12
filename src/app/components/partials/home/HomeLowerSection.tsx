@@ -97,18 +97,9 @@ const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v
 /* ── heading block ── */
 const headingBlock = (
   <div>
-    <div className="flex items-center gap-2 mb-3">
-      <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] shrink-0" />
-      <p className="text-xs uppercase tracking-wider text-[#6b6b6b] font-medium">What we specialise in</p>
-    </div>
-    <h2 className="text-2xl lg:text-4xl font-bold text-[#0a0e1a] leading-tight">
-      Four areas. One team.{' '}
-      <span className="relative inline-block">
-        <span className="bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] bg-clip-text text-transparent italic">
-          Full delivery.
-        </span>
-        <span className="absolute -bottom-0.5 left-0 w-full h-[2px] rounded-full bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] opacity-50" />
-      </span>
+    <p className="text-[12px] font-medium uppercase tracking-[0.14em] text-[#9ca3af] mb-3">What we specialise in</p>
+    <h2 className="text-[26px] lg:text-[40px] font-medium text-[#111] leading-[1.1]">
+      Four areas. One team. Full delivery.
     </h2>
   </div>
 );
@@ -156,7 +147,7 @@ export default function HomeLowerSection() {
         if (!dot) return;
         dot.style.opacity    = i === activeIdx || i < activeIdx ? '1' : '0.25';
         dot.style.transform  = i === activeIdx ? 'scale(1.6)' : 'scale(1)';
-        dot.style.background = i < activeIdx ? '#e89a78' : '#0a0e1a';
+        dot.style.background = i < activeIdx ? '#9ca3af' : '#0a0e1a';
       });
 
       cardRefs.current.forEach((card, i) => {
@@ -196,7 +187,7 @@ export default function HomeLowerSection() {
   return (
     <>
       {/* ══ MOBILE  < 768 px ══════════════════════════════════════ */}
-      <section className="md:hidden bg-[#faf7f4] px-6 py-14">
+      <section className="md:hidden bg-white px-6 py-14">
         <div className="mb-8">{headingBlock}</div>
         <div className="grid grid-cols-1 gap-4">
           {services.map((svc, i) => {
@@ -243,7 +234,7 @@ export default function HomeLowerSection() {
         className="hidden md:block relative"
         style={{ height: `${CARD_COUNT * DWELL * 100}vh` }}
       >
-        <div className="sticky top-0 h-screen bg-[#faf7f4] flex flex-col overflow-hidden">
+        <div className="sticky top-0 h-screen bg-white flex flex-col overflow-hidden">
 
           {/* Header row */}
           <div className="max-w-9xl mx-auto w-full px-8 sm:px-12 xl:px-16 pt-12 pb-5 flex items-end justify-between gap-8 shrink-0">
@@ -267,10 +258,10 @@ export default function HomeLowerSection() {
 
           {/* Progress rail */}
           <div className="max-w-9xl mx-auto w-full px-8 sm:px-12 xl:px-16 shrink-0 mb-1">
-            <div className="h-[1.5px] bg-[#e8e0d8] rounded-full overflow-hidden">
+            <div className="h-[1.5px] bg-[#e6e6e6] rounded-full overflow-hidden">
               <div
                 ref={fillRef}
-                className="h-full bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] origin-left"
+                className="h-full bg-[#111] origin-left"
                 style={{ transform: 'scaleX(0)' }}
               />
             </div>

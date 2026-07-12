@@ -110,7 +110,7 @@ const CloudServicesSection = () => {
   return (
     <section className="-mt-38 bg-white">
       {/* Dark AI pillars block — full-bleed */}
-      <div className="relative w-full bg-[#060606] text-white pt-14 sm:pt-24 px-8 sm:px-16 pb-10 sm:pb-14 overflow-hidden">
+      <div className="relative w-full bg-[#0a0e1a] text-white pt-14 sm:pt-24 px-8 sm:px-16 pb-10 sm:pb-14 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_15%_70%,_rgba(154,163,175,0.10)_0%,_transparent_55%)]" />
 
 

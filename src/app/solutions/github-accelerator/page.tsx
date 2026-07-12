@@ -3,15 +3,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus_Jakarta_Sans } from 'next/font/google';
 import { useState } from 'react';
 import { Constants } from '@/Constants';
-
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800'],
-  display: 'swap',
-});
 
 const MONO: React.CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
 
@@ -298,7 +291,7 @@ export default function GitHubAcceleratorPage() {
         }
       `}</style>
 
-      <div className={jakarta.className}>
+      <div>
 
         {/* ── HERO ── */}
         <section

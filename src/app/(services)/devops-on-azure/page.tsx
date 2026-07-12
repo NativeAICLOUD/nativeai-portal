@@ -1,450 +1,220 @@
-﻿'use client';
+import type { Metadata } from "next";
+import Image from "next/image";
+import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from "@/app/components/partials/services/ServiceUI";
 
-import { Plus_Jakarta_Sans } from "next/font/google";
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import Image from 'next/image';
-import ProcessTimeline from '@/app/components/partials/services/ProcessTimeline';
+export const metadata: Metadata = {
+  title: "DevOps on Azure",
+  description:
+    "We design and implement world-class DevOps practices on Azure — CI/CD pipelines, Infrastructure as Code, and automated testing that lets your team deploy with confidence.",
+};
 
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  display: "swap",
-});
+/* ── content ── */
+const capabilities = [
+  { num: "01", title: "CI/CD Pipelines", body: "End-to-end automated pipelines from code commit to production — with parallel jobs, caching, and zero-downtime release strategies." },
+  { num: "02", title: "Azure Boards", body: "Agile planning with Kanban boards, sprint backlogs, and work item tracking integrated directly with your repos and pipelines for full traceability." },
+  { num: "03", title: "Azure Repos", body: "Git repositories with branch policies, pull request workflows, code review gates, and fine-grained access control for every team." },
+  { num: "04", title: "Infrastructure as Code", body: "Terraform, Bicep, and ARM templates version-controlled and deployed through pipelines — your infrastructure defined, tested, and shipped like code." },
+  { num: "05", title: "Test Automation", body: "Automated unit, integration, and end-to-end tests built into every pipeline stage — quality gates that prevent broken code from reaching production." },
+  { num: "06", title: "Monitoring & Observability", body: "Azure Monitor, Application Insights, and Log Analytics configured from day one — custom dashboards and proactive alerting for every environment." },
+];
 
 const steps = [
-  { step: '01', heading: 'Assessment & Planning',    body: 'We audit your current SDLC — tools, workflows, team structure, and pain points — and produce a DevOps transformation roadmap aligned to your delivery goals.' },
-  { step: '02', heading: 'Azure DevOps Setup',        body: 'We configure your Azure DevOps organisation: projects, repos, boards, pipelines, and artifact feeds — all with RBAC, branch policies, and security best practices from day one.' },
-  { step: '03', heading: 'CI/CD Pipeline Build',      body: 'We build automated build and release pipelines for your applications — from commit to production — with quality gates, automated tests, and environment-specific approvals baked in.' },
-  { step: '04', heading: 'Infrastructure as Code',    body: 'We define your Azure infrastructure in Terraform or Bicep, version-controlled and pipeline-deployed — so your environments are reproducible, auditable, and consistent.' },
-  { step: '05', heading: 'Monitoring & Optimisation', body: 'Azure Monitor, Application Insights, and custom dashboards give you full observability. We tune pipelines for speed, set up alerting, and continuously optimise your delivery flow.' },
+  { step: "01", heading: "Assessment & Planning", body: "We audit your current SDLC — tools, workflows, team structure, and pain points — and produce a DevOps transformation roadmap aligned to your delivery goals." },
+  { step: "02", heading: "Azure DevOps Setup", body: "We configure your Azure DevOps organisation: projects, repos, boards, pipelines, and artifact feeds — all with RBAC, branch policies, and security best practices from day one." },
+  { step: "03", heading: "CI/CD Pipeline Build", body: "We build automated build and release pipelines for your applications — from commit to production — with quality gates, automated tests, and environment-specific approvals baked in." },
+  { step: "04", heading: "Infrastructure as Code", body: "We define your Azure infrastructure in Terraform or Bicep, version-controlled and pipeline-deployed — so your environments are reproducible, auditable, and consistent." },
+  { step: "05", heading: "Monitoring & Optimisation", body: "Azure Monitor, Application Insights, and custom dashboards give you full observability. We tune pipelines for speed, set up alerting, and continuously optimise your delivery flow." },
 ];
-
-const capabilities = [
-  { num: '01', title: 'CI/CD Pipelines',          body: 'End-to-end automated pipelines from code commit to production — with parallel jobs, caching, and zero-downtime release strategies.',                           dot: '#0078d4' },
-  { num: '02', title: 'Azure Boards',              body: 'Agile planning with Kanban boards, sprint backlogs, and work item tracking integrated directly with your repos and pipelines for full traceability.',          dot: '#7c3aed' },
-  { num: '03', title: 'Azure Repos',               body: 'Git repositories with branch policies, pull request workflows, code review gates, and fine-grained access control for every team.',                           dot: '#059669' },
-  { num: '04', title: 'Infrastructure as Code',    body: 'Terraform, Bicep, and ARM templates version-controlled and deployed through pipelines — your infrastructure defined, tested, and shipped like code.',          dot: '#d97706' },
-  { num: '05', title: 'Test Automation',           body: 'Automated unit, integration, and end-to-end tests built into every pipeline stage — quality gates that prevent broken code from reaching production.',          dot: '#0891b2' },
-  { num: '06', title: 'Monitoring & Observability', body: 'Azure Monitor, Application Insights, and Log Analytics configured from day one — custom dashboards and proactive alerting for every environment.',           dot: '#db2777' },
-];
-
 
 const faqs = [
-  { q: 'Can you migrate us from Jenkins / GitLab CI?',         a: 'Yes. We handle full migrations from Jenkins, GitLab CI, GitHub Actions, or Bamboo — mapping your existing pipelines to Azure DevOps equivalents with minimal disruption.' },
-  { q: 'Do we need to be on Azure to use Azure DevOps?',       a: 'No. Azure DevOps is a standalone SaaS platform. We can deploy to any cloud or on-premises environment — Azure, AWS, GCP, or hybrid.' },
-  { q: 'What happens to our existing source code and history?', a: 'All git history is preserved. We import repositories, branches, tags, and commit history into Azure Repos with zero data loss.' },
-  { q: 'How long does a DevOps transformation take?',           a: 'Initial setup and first pipelines typically take 2–4 weeks. A full transformation covering all teams usually completes within 8–12 weeks.' },
+  { q: "Can you migrate us from Jenkins / GitLab CI?", a: "Yes. We handle full migrations from Jenkins, GitLab CI, GitHub Actions, or Bamboo — mapping your existing pipelines to Azure DevOps equivalents with minimal disruption." },
+  { q: "Do we need to be on Azure to use Azure DevOps?", a: "No. Azure DevOps is a standalone SaaS platform. We can deploy to any cloud or on-premises environment — Azure, AWS, GCP, or hybrid." },
+  { q: "What happens to our existing source code and history?", a: "All git history is preserved. We import repositories, branches, tags, and commit history into Azure Repos with zero data loss." },
+  { q: "How long does a DevOps transformation take?", a: "Initial setup and first pipelines typically take 2–4 weeks. A full transformation covering all teams usually completes within 8–12 weeks." },
 ];
 
-/* ── Authentic Apple liquid glass tokens ── */
-const lg: React.CSSProperties = {
-  background: "rgba(255,255,255,0.62)",
-  backdropFilter: "blur(40px) saturate(180%)",
-  WebkitBackdropFilter: "blur(40px) saturate(180%)",
-  border: "1px solid rgba(255,255,255,0.85)",
-  boxShadow: "0 4px 32px rgba(232,154,120,0.10), 0 1px 2px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.95)",
-};
-
-const lgCard: React.CSSProperties = {
-  background: "rgba(255,255,255,0.55)",
-  backdropFilter: "blur(32px) saturate(160%)",
-  WebkitBackdropFilter: "blur(32px) saturate(160%)",
-  border: "1px solid rgba(255,255,255,0.80)",
-  boxShadow: "0 2px 20px rgba(232,154,120,0.08), inset 0 1px 0 rgba(255,255,255,0.92)",
-};
-
-function Blobs({ items }: { items: { w: number; h: number; top?: string; left?: string; right?: string; bottom?: string; color: string; delay: string }[] }) {
-  return (
-    <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
-      {items.map((b, i) => (
-        <div
-          key={i}
-          className="absolute rounded-full"
-          style={{
-            width: b.w, height: b.h,
-            top: b.top, left: b.left, right: b.right, bottom: b.bottom,
-            background: `radial-gradient(circle, ${b.color} 0%, transparent 68%)`,
-            filter: "blur(72px)",
-            animation: `pulse-blob 5s ease-in-out ${b.delay} infinite`,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
+const tags = ["Azure Pipelines", "Azure Repos", "Terraform", "Bicep", "Azure Monitor"];
 
 export default function DevOpsOnAzurePage() {
   return (
-    <>
-      <style>{`
-        @keyframes pulse-blob {
-          0%, 100% { opacity: 0.75; transform: scale(1); }
-          50%       { opacity: 1;   transform: scale(1.07); }
-        }
-      `}</style>
+    <div className="font-switzer">
 
-      <div className={jakarta.className}>
+      {/* ── Hero ── */}
+      <div className="industries-hero-bg">
+        <div className={`${CONTAINER} pb-12 pt-32 lg:pt-28`}>
+          <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
 
-        {/* ── Hero ── */}
-        <section
-          className="relative overflow-hidden min-h-[100svh] flex items-center"
-          style={{ background: "linear-gradient(145deg, #fff5ee 0%, #fdf0e8 30%, #fef6f0 60%, #fff8f2 100%)" }}
-        >
-          <Blobs items={[
-            { w: 820, h: 820, top: "-15%",    right: "-10%", color: "rgba(240,140,60,0.30)",  delay: "0s" },
-            { w: 680, h: 680, top: "28%",     left: "-18%",  color: "rgba(232,154,120,0.18)", delay: "1.2s" },
-            { w: 500, h: 500, bottom: "-10%", left: "25%",   color: "rgba(212,132,92,0.16)",  delay: "2.4s" },
-          ]} />
-
-<div className="relative w-full max-w-7xl mx-auto px-6 md:px-12 pt-36 pb-28">
-            <div className="flex flex-col lg:flex-row lg:items-center gap-14 xl:gap-20">
-
-              {/* Left */}
-              <motion.div
-                className="flex-1 min-w-0"
-                initial={{ opacity: 0, y: 36 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-              >
-                <div
-                  className="inline-flex items-center gap-2.5 rounded-full px-4 py-1.5 mb-8"
-                  style={{ ...lg, borderRadius: 999 }}
-                >
-                  <span className="text-[11px] font-bold tracking-widest uppercase" style={{ color: '#b86a30', fontFamily: "'JetBrains Mono', monospace" }}>
-                    DevOps on Azure
-                  </span>
-                </div>
-
-                <h1
-                  className="font-extrabold text-[#0a0e1a] mb-8 leading-[0.95]"
-                  style={{ fontSize: "clamp(52px, 7vw, 96px)", letterSpacing: "-0.045em" }}
-                >
-                  Automate delivery.<br />
-                  Eliminate risk.<br />
-                  <span style={{
-                    background: "linear-gradient(90deg, #f0a060 0%, #e89a78 60%, #d4845c 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}>
-                    Scale with confidence.
-                  </span>
-                </h1>
-
-                <motion.p
-                  className="text-[#0a0e1a]/52 text-lg leading-[1.75] max-w-[480px] mb-10"
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
-                >
-                  We design and implement world-class DevOps practices on Azure — CI/CD pipelines, Infrastructure as Code, and automated testing that lets your team deploy with confidence, every time.
-                </motion.p>
-
-                <motion.div
-                  className="flex flex-wrap gap-3"
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.28, ease: "easeOut" }}
-                >
-                  <Link
-                    href="/schedule-call"
-                    className="inline-flex items-center px-8 py-4 rounded-full text-base font-bold transition-all"
-                    style={{ background: "#e89a78", color: "#ffffff", boxShadow: "0 4px 16px rgba(232,154,120,0.35)" }}
-                  >
-                    Book a 15-min call
-                  </Link>
-                  <Link
-                    href="/solutions"
-                    className="inline-flex items-center px-8 py-4 rounded-full text-base font-semibold transition-all"
-                    style={{ ...lg, color: '#b86a30', borderRadius: 999 }}
-                  >
-                    All solutions
-                  </Link>
-                </motion.div>
-
-                <motion.div
-                  className="flex flex-wrap gap-2 mt-10"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.45, ease: "easeOut" }}
-                >
-                  {['Azure Pipelines', 'Azure Repos', 'Terraform', 'Bicep', 'Azure Monitor'].map(tag => (
-                    <span
-                      key={tag}
-                      className="text-[11px] font-bold px-3 py-1 rounded-full"
-                      style={{ color: '#b86a30', background: 'rgba(240,160,96,0.12)', border: '1px solid rgba(240,160,96,0.25)', fontFamily: "'JetBrains Mono', monospace" }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </motion.div>
-              </motion.div>
-
-              {/* Right — devops image */}
-              <motion.div
-                className="lg:flex-1 lg:max-w-[500px] w-full"
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.9, delay: 0.18, ease: "easeOut" }}
-              >
-                <div className="relative rounded-3xl overflow-hidden" style={{ boxShadow: "0 24px 80px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.08)" }}>
-                  {/* ambient glow */}
-                  <div className="absolute -inset-4 -z-10 rounded-[40px]" style={{ background: "radial-gradient(ellipse at 60% 40%, rgba(0,188,242,0.30) 0%, transparent 65%)", filter: "blur(28px)" }} />
-
-                  <Image
-                    src="/img/devops1.jpeg"
-                    alt="DevOps engineering"
-                    width={600}
-                    height={520}
-                    style={{ width: '100%', height: 'auto', display: 'block' }}
-                    quality={92}
-                  />
-
-                  {/* gradient overlay */}
-                  <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(5,16,43,0.75) 0%, rgba(5,16,43,0.10) 50%, transparent 75%)" }} />
-
-                  {/* bottom caption */}
-                  <div className="absolute bottom-6 left-6">
-                    <p className="text-white font-bold text-sm leading-tight">DevOps on Azure</p>
-                    <p className="text-white/50 text-xs mt-0.5">From commit to production — automated.</p>
-                  </div>
-                </div>
-              </motion.div>
-
-            </div>
-          </div>
-        </section>
-
-
-        {/* ── Capabilities — glass on pastel blobs ── */}
-        <section
-          className="relative overflow-hidden"
-          style={{ background: "linear-gradient(160deg, #fdf0e8 0%, #fff5ee 40%, #fef6f0 100%)" }}
-        >
-          <Blobs items={[
-            { w: 900, h: 900, top: "-20%",    right: "-18%", color: "rgba(240,140,60,0.22)",  delay: "0s" },
-            { w: 700, h: 700, bottom: "-15%", left: "-12%",  color: "rgba(232,154,120,0.18)", delay: "1.5s" },
-            { w: 500, h: 500, top: "35%",     left: "40%",   color: "rgba(212,132,92,0.14)",  delay: "3s" },
-          ]} />
-
-          <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-28">
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
-              <div>
-                <div className="flex items-center gap-2 mb-5">
-                  <p className="text-xs uppercase tracking-wider font-medium" style={{ color: '#b86a30' }}>What we deliver</p>
-                </div>
-                <h2
-                  className="font-extrabold text-[#0a0e1a] leading-[1.05] max-w-xl"
-                  style={{ fontSize: "clamp(32px, 4.5vw, 56px)", letterSpacing: "-0.035em" }}
-                >
-                  Every layer of your<br />DevOps pipeline, covered.
-                </h2>
+            {/* Left */}
+            <div className="flex-1">
+              <div className="mb-6"><Eyebrow>DevOps on Azure</Eyebrow></div>
+              <h1 className="m-0 text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[60px]">
+                Automate delivery. Eliminate risk. Scale with confidence.
+              </h1>
+              <p className="mt-6 max-w-[520px] text-[18px] font-light leading-[1.6] text-[#111]">
+                We design and implement world-class DevOps practices on Azure — CI/CD pipelines,
+                Infrastructure as Code, and automated testing that lets your team deploy with
+                confidence, every time.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <PrimaryButton href="/schedule-call">Book a 15-min call</PrimaryButton>
+                <SecondaryButton href="/solutions">All solutions</SecondaryButton>
               </div>
-              <Link
-                href="/schedule-call"
-                className="shrink-0 self-start md:self-end inline-flex items-center px-6 py-3 rounded-full text-sm font-bold whitespace-nowrap"
-                style={{ background: "#e89a78", color: "#fff", boxShadow: "0 4px 16px rgba(232,154,120,0.35)" }}
-              >
-                Schedule a quick intro
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {capabilities.map((c, i) => (
-                <motion.div
-                  key={c.num}
-                  className="rounded-[22px] p-8 flex flex-col gap-4"
-                  style={lgCard}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.5, delay: i * 0.07, ease: "easeOut" }}
-                >
-                  <div className="flex items-center gap-2.5">
-                    <span
-                      className="w-2 h-2 rounded-full shrink-0"
-                      style={{ background: c.dot, boxShadow: `0 0 8px ${c.dot}60` }}
-                    />
-                    <span
-                      className="text-[11px] font-bold uppercase tracking-widest"
-                      style={{ color: c.dot, fontFamily: "'JetBrains Mono', monospace" }}
-                    >{c.num}</span>
-                  </div>
-                  <h3 className="text-[17px] font-bold text-[#0a0e1a] leading-snug">{c.title}</h3>
-                  <p className="text-[#0a0e1a]/52 text-sm leading-relaxed">{c.body}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── Two-column callout — glass panels on blob bg ── */}
-        <section
-          className="relative overflow-hidden"
-          style={{ background: "linear-gradient(160deg, #fff5ee 0%, #fef6f0 50%, #fff8f2 100%)" }}
-        >
-          <Blobs items={[
-            { w: 800, h: 800, top: "-25%",    left: "-15%",  color: "rgba(240,140,60,0.20)",  delay: "0.5s" },
-            { w: 600, h: 600, bottom: "-20%", right: "-10%", color: "rgba(232,154,120,0.18)", delay: "2s" },
-          ]} />
-
-          <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-24">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-              {/* Dark glass panel */}
-              <div
-                className="rounded-3xl px-10 py-12 flex flex-col gap-5"
-                style={{
-                  background: "rgba(8,11,20,0.72)",
-                  backdropFilter: "blur(80px) saturate(200%) brightness(90%)",
-                  WebkitBackdropFilter: "blur(80px) saturate(200%) brightness(90%)",
-                  border: "1px solid rgba(255,255,255,0.10)",
-                  boxShadow: "0 0 0 0.5px rgba(0,0,0,0.25), 0 40px 100px rgba(0,0,0,0.28), inset 0 1.5px 0 rgba(255,255,255,0.08)",
-                }}
-              >
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: '#e89a78', boxShadow: "0 0 6px #e89a78" }} />
-                  <p className="text-xs uppercase tracking-wider text-white/50 font-medium">Our philosophy</p>
-                </div>
-                <p className="text-white/85 text-lg leading-[1.75]">
-                  DevOps isn&apos;t a tool — it&apos;s a culture. We don&apos;t just configure pipelines; we work alongside your team to embed the practices, habits, and automation that make fast, reliable delivery the norm — not the exception.
-                </p>
+              <div className="mt-8 flex flex-wrap gap-2">
+                {tags.map((t) => (
+                  <span key={t} className="rounded-full border border-[#e6e6e6] px-3 py-1 text-[12px] font-medium text-[#111]">{t}</span>
+                ))}
               </div>
+            </div>
 
-              {/* Image panel */}
-              <div className="rounded-3xl overflow-hidden relative min-h-[320px]" style={{ boxShadow: "0 4px 32px rgba(0,80,180,0.12)" }}>
+            {/* Right — devops image */}
+            <div className="w-full lg:max-w-[500px] lg:flex-1">
+              <div className="relative h-[340px] w-full overflow-hidden rounded-2xl border border-[#e6e6e6] sm:h-[420px]">
                 <Image
                   src="/img/devops1.jpeg"
-                  alt="DevOps engineering team"
+                  alt="DevOps engineering on Azure"
                   fill
-                  style={{ objectFit: 'cover', objectPosition: 'center' }}
-                  quality={90}
+                  priority
+                  sizes="(max-width: 500px) 100vw, 500px"
+                  className="object-cover"
                 />
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(5,16,43,0.55) 0%, transparent 60%)' }} />
-                <div className="absolute bottom-6 left-8">
-                  <p className="text-white font-semibold text-sm">DevOps engineering, done right.</p>
-                  <p className="text-white/55 text-xs mt-1">Faster delivery. Less friction. Every time.</p>
+                <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(5,16,43,0.75) 0%, rgba(5,16,43,0.05) 55%, transparent 80%)" }} />
+                <div className="absolute bottom-6 left-6">
+                  <p className="m-0 text-[14px] font-medium text-white">DevOps on Azure</p>
+                  <p className="m-0 mt-0.5 text-[12px] text-white/60">From commit to production — automated.</p>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
 
-        {/* ── How it works — ProcessTimeline ── */}
-        <section
-          className="relative overflow-hidden"
-          style={{ background: "linear-gradient(160deg, #fdf0e8 0%, #fff5ee 45%, #fef6f0 100%)" }}
-        >
-          <Blobs items={[
-            { w: 900, h: 900, top: "-20%",    right: "-15%", color: "rgba(240,140,60,0.22)",  delay: "0s" },
-            { w: 700, h: 700, bottom: "-20%", left: "-12%",  color: "rgba(232,154,120,0.18)", delay: "1.8s" },
-            { w: 500, h: 500, top: "35%",     left: "40%",   color: "rgba(212,132,92,0.14)",  delay: "3.2s" },
-          ]} />
-          <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-24">
-            <div className="flex items-center gap-2 mb-10">
-              <p className="text-xs uppercase tracking-wider font-medium" style={{ color: '#b86a30' }}>How it works</p>
-            </div>
-            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
-              <h2
-                className="font-extrabold text-[#0a0e1a] leading-[1.05] max-w-[700px]"
-                style={{ fontSize: "clamp(32px, 4.5vw, 56px)", letterSpacing: "-0.035em" }}
-              >
-                From assessment to<br />fully automated delivery.
+          </div>
+        </div>
+
+        {/* multicolour divider — full viewport width */}
+        <hr className="linegrad-divider m-0 h-1 w-full border-0" />
+      </div>
+
+      {/* ── Capabilities ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} py-20 lg:py-24`}>
+          <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div>
+              <div className="mb-4"><Eyebrow>What we deliver</Eyebrow></div>
+              <h2 className="m-0 max-w-[520px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+                Every layer of your DevOps pipeline, covered.
               </h2>
-              <Link
-                href="/schedule-call"
-                className="shrink-0 self-start lg:self-end inline-flex items-center px-6 py-3 rounded-full text-sm font-bold whitespace-nowrap"
-                style={{ background: "#e89a78", color: "#fff", boxShadow: "0 4px 16px rgba(232,154,120,0.35)" }}
-              >
-                Start the journey
-              </Link>
             </div>
-            <ProcessTimeline steps={steps} />
+            <PrimaryButton href="/schedule-call">Schedule a quick intro</PrimaryButton>
           </div>
-        </section>
 
-        {/* ── FAQ — glass on Azure pastel blobs ── */}
-        <section
-          className="relative overflow-hidden"
-          style={{ background: "linear-gradient(160deg, #fff5ee 0%, #fef6f0 50%, #fff8f2 100%)" }}
-        >
-          <Blobs items={[
-            { w: 800, h: 800, top: "-15%",    right: "-15%", color: "rgba(240,140,60,0.20)",  delay: "0s" },
-            { w: 600, h: 600, bottom: "-10%", left: "-8%",   color: "rgba(232,154,120,0.16)", delay: "1.8s" },
-          ]} />
-
-          <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-28">
-            <div className="flex items-center gap-2 mb-5">
-              <p className="text-xs uppercase tracking-wider font-medium" style={{ color: '#b86a30' }}>Common questions</p>
-            </div>
-            <h2
-              className="font-extrabold text-[#0a0e1a] mb-14 leading-[1.05]"
-              style={{ fontSize: "clamp(32px, 4.5vw, 56px)", letterSpacing: "-0.035em" }}
-            >
-              Questions we hear<br />every day.
-            </h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {faqs.map((f, i) => (
-                <motion.div
-                  key={f.q}
-                  className="rounded-[22px] p-8 flex flex-col gap-3"
-                  style={lgCard}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.5, delay: i * 0.08, ease: "easeOut" }}
-                >
-                  <h3 className="text-[15px] font-bold text-[#0a0e1a] leading-snug">{f.q}</h3>
-                  <p className="text-[#0a0e1a]/52 text-sm leading-relaxed">{f.a}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── CTA Banner ── */}
-        <section
-          className="relative overflow-hidden"
-          style={{ background: "linear-gradient(145deg, #fdf0e8 0%, #fff5ee 40%, #fff8f2 100%)" }}
-        >
-          <Blobs items={[
-            { w: 700, h: 700, top: "-30%",    right: "-10%", color: "rgba(240,140,60,0.28)",  delay: "0s" },
-            { w: 500, h: 500, bottom: "-20%", left: "20%",   color: "rgba(232,154,120,0.20)", delay: "1.5s" },
-          ]} />
-          <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-20 flex flex-col md:flex-row md:items-center md:justify-between gap-10">
-            <div className="flex flex-col gap-4 max-w-xl">
-              <h2
-                className="font-extrabold text-[#0a0e1a] leading-[1.05]"
-                style={{ fontSize: "clamp(28px, 4vw, 48px)", letterSpacing: "-0.035em" }}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+            {capabilities.map(({ num, title, body }) => (
+              <article
+                key={num}
+                className="group flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6 transition-[filter,box-shadow] duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.2)] hover:[filter:invert(1)]"
               >
-                Ready to transform<br />your delivery pipeline?
-              </h2>
-              <p className="text-[#0a0e1a]/52 text-lg leading-[1.75]">
-                Let&apos;s talk about your current setup and map out what modern DevOps looks like for your team.
+                <span className="mb-3 text-[13px] font-light text-[#9ca3af]">{num}</span>
+                <h3 className="m-0 text-[20px] font-medium leading-[1.25] text-[#111]">{title}</h3>
+                <p className="mt-2 text-[16px] font-normal leading-[1.5] text-[#111]">{body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Philosophy / image callout ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+            <div className="flex flex-col gap-4 rounded-lg bg-[#111] p-8 lg:p-10">
+              <Eyebrow><span className="text-white/50">Our philosophy</span></Eyebrow>
+              <p className="m-0 text-[18px] font-light leading-[1.6] text-white/90">
+                DevOps isn&apos;t a tool — it&apos;s a culture. We don&apos;t just configure
+                pipelines; we work alongside your team to embed the practices, habits, and
+                automation that make fast, reliable delivery the norm — not the exception.
               </p>
             </div>
-            <div className="flex flex-wrap gap-3 shrink-0">
-              <Link
-                href="/schedule-call"
-                className="inline-flex items-center px-8 py-4 rounded-full text-base font-bold"
-                style={{ background: "#e89a78", color: "#ffffff", boxShadow: "0 4px 16px rgba(232,154,120,0.35)" }}
-              >
-                Book a discovery call
-              </Link>
-              <Link
-                href="/solutions"
-                className="inline-flex items-center px-8 py-4 rounded-full text-base font-semibold"
-                style={{ ...lg, color: '#b86a30', borderRadius: 999 }}
-              >
-                All solutions
-              </Link>
+            <div className="relative min-h-[320px] overflow-hidden rounded-lg border border-[#e6e6e6]">
+              <Image
+                src="/img/devops1.jpeg"
+                alt="DevOps engineering team"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(5,16,43,0.55) 0%, transparent 60%)" }} />
+              <div className="absolute bottom-6 left-8">
+                <p className="m-0 text-[14px] font-medium text-white">DevOps engineering, done right.</p>
+                <p className="m-0 mt-1 text-[12px] text-white/60">Faster delivery. Less friction. Every time.</p>
+              </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-      </div>
-    </>
+      {/* ── How it works ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <div className="mb-4"><Eyebrow>How it works</Eyebrow></div>
+              <h2 className="m-0 max-w-[720px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+                From assessment to fully automated delivery.
+              </h2>
+            </div>
+            <PrimaryButton href="/schedule-call">Start the journey</PrimaryButton>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+            {steps.map(({ step, heading, body }) => (
+              <div key={step} className="flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6">
+                <span className="text-[34px] font-light leading-none text-[#e6e6e6]">{step}</span>
+                <h3 className="mt-4 text-[20px] font-medium leading-[1.25] text-[#111]">{heading}</h3>
+                <p className="mt-2 text-[16px] font-normal leading-[1.5] text-[#111]">{body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-12">
+            <div className="mb-4"><Eyebrow>Common questions</Eyebrow></div>
+            <h2 className="m-0 text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              Questions we hear every day.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-6">
+            {faqs.map(({ q, a }) => (
+              <div key={q} className="flex flex-col gap-2 rounded-lg border border-[#e6e6e6] bg-white p-6">
+                <h3 className="m-0 text-[18px] font-medium leading-[1.3] text-[#111]">{q}</h3>
+                <p className="m-0 text-[16px] font-normal leading-[1.5] text-[#111]">{a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="bg-[#0a0e1a]">
+        <div className={`${CONTAINER} flex flex-col gap-10 py-20 md:flex-row md:items-center md:justify-between`}>
+          <div className="flex max-w-xl flex-col gap-4">
+            <h2 className="m-0 text-[28px] font-medium leading-[1.1] text-white md:text-[44px]">
+              Ready to transform your delivery pipeline?
+            </h2>
+            <p className="m-0 text-[18px] font-light leading-[1.6] text-white/70">
+              Let&apos;s talk about your current setup and map out what modern DevOps looks like
+              for your team.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <PrimaryButton href="/schedule-call" dark>Book a discovery call</PrimaryButton>
+            <SecondaryButton href="/solutions" onDark>All solutions</SecondaryButton>
+          </div>
+        </div>
+      </section>
+
+    </div>
   );
 }

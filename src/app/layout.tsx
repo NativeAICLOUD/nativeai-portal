@@ -42,10 +42,11 @@ export default function RootLayout({
         <head>
           <link rel="preconnect" href="https://api.fontshare.com" />
           <link href="https://api.fontshare.com/v2/css?f[]=fk-grotesk@400,500,600,700,800&display=swap" rel="stylesheet" />
+          <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800&display=swap" rel="stylesheet" />
         </head>
-        <body className={montserrat.className}>
+        <body className={`${montserrat.variable} font-switzer`}>
           <ProgressBarProvider>
-            <ProgressBar className="fixed z-[9999] top-0 left-0 h-[3px] bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#f5b87a] shadow-[0_0_12px_rgba(232,154,120,0.7),0_0_4px_rgba(232,154,120,0.5)] rounded-full" />
+            <ProgressBar className="modern-progress fixed z-[9999] top-0 left-0" />
             <AppProviders>
               <div style={{ width: '100%', maxWidth: '100vw', overflowX: 'clip', overflowY: 'visible', position: 'relative' }}>
                 <Navbar />
