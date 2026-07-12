@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 import Image from "next/image";
 import { Link } from 'react-transition-progress/next';
 import { Constants } from "@/Constants";
@@ -57,10 +59,11 @@ type NavLink = { url: string; title: string };
 
 function Footer() {
   const pathname = usePathname();
+  const [subscribeOpen, setSubscribeOpen] = useState(false);
   if (pathname === '/login' || pathname === '/sign-up') return null;
 
   return (
-    <footer className="font-switzer bg-[#0a0e1a] text-white">
+    <footer className="font-switzer bg-[#0a0a0a] text-white">
       <div className="mx-auto max-w-[1440px] px-5 md:px-12">
 
         {/* ── CTA band ── */}
@@ -141,35 +144,66 @@ function Footer() {
               Subscribe to our newsletter — no spam, just product updates and AI insights.
             </p>
           </div>
-          <form className="w-full lg:max-w-xl" onSubmit={(e) => e.preventDefault()}>
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <input
-                type="text"
-                placeholder="First name"
-                className="flex-1 rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm text-white outline-none transition-colors placeholder:text-white/30 focus:border-white/40"
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                className="flex-1 rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm text-white outline-none transition-colors placeholder:text-white/30 focus:border-white/40"
-              />
+          {!subscribeOpen ? (
+            <div className="w-full lg:max-w-xl lg:flex lg:justify-end">
               <button
-                type="submit"
-                className="whitespace-nowrap rounded-full bg-white px-8 py-3 text-sm font-medium text-[#111] transition-opacity hover:opacity-90"
+                type="button"
+                onClick={() => setSubscribeOpen(true)}
+                className="ai-search-wrap w-full sm:max-w-sm transition-transform duration-200 hover:scale-[1.01] active:scale-[0.99] focus-visible:outline-none"
               >
-                Sign Up
+                <span className="ai-search-inner flex items-center justify-center gap-2.5 px-6 py-3.5">
+                  <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" className="shrink-0">
+                    <defs>
+                      <linearGradient id="footer-sub-grad" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stopColor="#60a5fa" />
+                        <stop offset="50%" stopColor="#3b82f6" />
+                        <stop offset="100%" stopColor="#1e4fd6" />
+                      </linearGradient>
+                    </defs>
+                    <path fill="url(#footer-sub-grad)" d="M12 0c0 6.627-5.373 12-12 12 6.627 0 12 5.373 12 12 0-6.627 5.373-12 12-12-6.627 0-12-5.373-12-12Z" />
+                  </svg>
+                  <span className="text-[15px] font-medium text-[#111]">Subscribe to updates</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-[#111]"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                </span>
               </button>
             </div>
-            <label className="mt-3 flex cursor-pointer items-start gap-2.5">
-              <input type="checkbox" required className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-white" />
-              <span className="text-xs leading-relaxed text-white/40">
-                I accept the{" "}
-                <Link href={Constants.PAGES.PRIVACY} className="text-white underline transition-opacity hover:opacity-70">
-                  NativeAI Privacy Policy
-                </Link>
-              </span>
-            </label>
-          </form>
+          ) : (
+            <motion.form
+              className="w-full lg:max-w-xl"
+              onSubmit={(e) => e.preventDefault()}
+              initial={{ opacity: 0, y: 16, filter: 'blur(8px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <input
+                  type="text"
+                  placeholder="First name"
+                  className="flex-1 rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm text-white outline-none transition-colors placeholder:text-white/30 focus:border-white/40"
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  className="flex-1 rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm text-white outline-none transition-colors placeholder:text-white/30 focus:border-white/40"
+                />
+                <button
+                  type="submit"
+                  className="whitespace-nowrap rounded-full bg-white px-8 py-3 text-sm font-medium text-[#111] transition-opacity hover:opacity-90"
+                >
+                  Sign Up
+                </button>
+              </div>
+              <label className="mt-3 flex cursor-pointer items-start gap-2.5">
+                <input type="checkbox" required className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-white" />
+                <span className="text-xs leading-relaxed text-white/40">
+                  I accept the{" "}
+                  <Link href={Constants.PAGES.PRIVACY} className="text-white underline transition-opacity hover:opacity-70">
+                    NativeAI Privacy Policy
+                  </Link>
+                </span>
+              </label>
+            </motion.form>
+          )}
         </div>
 
         {/* ── Bottom bar ── */}

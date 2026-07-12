@@ -7,8 +7,6 @@ export const metadata: Metadata = {
     "We design and build end-to-end data platforms on Azure — from raw ingestion to clean analytics layers — so your organisation can act on data instead of just storing it.",
 };
 
-const MONO = "'JetBrains Mono', monospace";
-
 /* ── content ── */
 const features = [
   { num: "01", title: "Azure Landing Zone", body: "Enterprise-grade cloud foundation — networking, security, RBAC, Key Vault, and storage tiers provisioned and compliant before your first byte arrives." },
@@ -26,18 +24,6 @@ const processSteps = [
   { step: "04", heading: "Transformation & Enrichment", body: "We build silver and gold layer pipelines that clean, join, and enrich your data — making it ready for reporting, analytics, and machine learning." },
   { step: "05", heading: "Visualisation & Validation", body: "We build Power BI reports and dashboards, then validate every metric with your business stakeholders before the platform is handed over." },
   { step: "06", heading: "Handover, Training & Support", body: "Your team gets full ownership, thorough documentation, and access to our support desk — so you can scale the platform confidently without depending on us." },
-];
-
-const layers = [
-  { label: "Bronze", color: "#cd7f32", desc: "Raw ingested data", status: "ingesting" },
-  { label: "Silver", color: "#9ca3af", desc: "Cleaned & validated", status: "processing" },
-  { label: "Gold", color: "#f59e0b", desc: "Ready for analytics", status: "live" },
-];
-
-const logRows = [
-  { icon: "✓", color: "#28c840", text: "14 sources connected · last run 2m ago" },
-  { icon: "✓", color: "#28c840", text: "2.4 M rows processed · 0 validation errors" },
-  { icon: "→", color: "#e89a78", text: "Power BI refresh scheduled in 8 min" },
 ];
 
 const techStack = ["Azure Data Lake", "Data Factory", "Synapse Analytics", "Databricks", "Power BI", "Azure ML", "Key Vault"];
@@ -67,62 +53,6 @@ export default function DataLifecycleManagementPage() {
               </div>
             </div>
 
-            {/* Right — pipeline monitor + stats */}
-            <div className="w-full lg:max-w-[480px] lg:flex-1">
-              <div className="overflow-hidden rounded-2xl border border-[#e6e6e6] bg-[#0d1220]" style={{ fontFamily: MONO }}>
-                <div className="flex items-center gap-2 border-b border-white/[0.07] px-5 py-3.5" style={{ background: "#111827" }}>
-                  <span className="h-3 w-3 rounded-full" style={{ background: "#ff5f57" }} />
-                  <span className="h-3 w-3 rounded-full" style={{ background: "#febc2e" }} />
-                  <span className="h-3 w-3 rounded-full" style={{ background: "#28c840" }} />
-                  <span className="ml-3 text-xs text-white/30">data-platform — pipeline monitor</span>
-                </div>
-
-                <div className="flex flex-col gap-3 p-5">
-                  {layers.map((layer, i) => (
-                    <div key={layer.label} className="flex items-center justify-between rounded-xl px-4 py-3.5" style={{ background: `${layer.color}1f`, border: `1px solid ${layer.color}33` }}>
-                      <div className="flex items-center gap-3">
-                        <span className="text-xs font-bold tracking-widest" style={{ color: layer.color }}>{layer.label}</span>
-                        <span className="text-xs text-white/50">{layer.desc}</span>
-                      </div>
-                      <span className="flex items-center gap-1.5 text-xs" style={{ color: layer.color }}>
-                        <span className="h-1.5 w-1.5 rounded-full" style={{ background: layer.color }} />
-                        {layer.status}
-                      </span>
-                    </div>
-                  ))}
-
-                  <div className="mt-1 flex flex-col gap-2 text-xs">
-                    {logRows.map((row) => (
-                      <div key={row.text} className="flex items-start gap-2.5">
-                        <span className="shrink-0" style={{ color: row.color }}>{row.icon}</span>
-                        <span className="text-white/60">{row.text}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between border-t border-white/[0.06] px-5 py-3 text-xs" style={{ background: "#111827" }}>
-                  <span className="text-white/40">Azure Data Lake Gen2 · Synapse · Power BI</span>
-                  <span className="flex items-center gap-1.5 text-white/40">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#28c840]" />
-                    running
-                  </span>
-                </div>
-              </div>
-
-              <div className="mt-4 grid grid-cols-3 gap-3">
-                {[
-                  { val: "14+", label: "data sources" },
-                  { val: "< 5m", label: "refresh time" },
-                  { val: "100%", label: "data lineage" },
-                ].map((s) => (
-                  <div key={s.label} className="rounded-xl border border-[#e6e6e6] bg-white px-4 py-3 text-center">
-                    <p className="m-0 mb-1 text-[18px] font-medium leading-none text-[#111]">{s.val}</p>
-                    <p className="m-0 text-[11px] leading-snug text-[#9ca3af]">{s.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
 
