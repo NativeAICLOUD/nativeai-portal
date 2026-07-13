@@ -93,6 +93,31 @@ const pages: Pages[] = [
 
 const MONO: React.CSSProperties = { fontFamily: "'Switzer', sans-serif" };
 
+/* Searchable site pages (services, solutions, company) */
+const SITE_PAGES: { title: string; desc: string; url: string }[] = [
+  { title: 'Custom Development',        desc: 'Web & app development, APIs, backend and frontend engineering', url: '/services/custom-development' },
+  { title: 'Design',                    desc: 'UX research, UI design, design systems and prototyping',          url: '/services/design' },
+  { title: 'AI Agents & RAG',           desc: 'AI agents, LLM integration and RAG pipelines on Azure',           url: '/services/ai-agents-rag' },
+  { title: 'Cloud Architecture',        desc: 'Cloud-native architecture, microservices and system design',       url: '/cloud-software-architecture' },
+  { title: 'Migrate to Azure',          desc: 'Low-risk cloud migration and modernisation',                       url: '/migrate-to-azure' },
+  { title: 'Cloud Native Development',  desc: 'Kubernetes, microservices and CI/CD development',                   url: '/cloud-native-sd' },
+  { title: 'DevOps on Azure',           desc: 'CI/CD pipelines and infrastructure-as-code',                       url: '/devops-on-azure' },
+  { title: 'Data Lifecycle Management', desc: 'Data platforms, analytics and Power BI',                           url: '/data-lifecycle-management' },
+  { title: 'Managed Services',          desc: 'Ongoing cloud managed services and support',                       url: '/managed-services' },
+  { title: 'Payment Automation',        desc: 'Recurring billing, payments and reconciliation',                   url: '/payment-automation' },
+  { title: 'AI Legal Workspace',        desc: 'AI document and case workflows for legal teams',                   url: '/ai-legal-workspace' },
+  { title: 'Airline & Travel Booking',  desc: 'GDS-connected airline and travel booking platform',                url: '/airline-booking' },
+  { title: 'AI Accelerator',            desc: 'Adopt Azure AI services from use case to production',              url: '/solutions/ai-accelerator' },
+  { title: 'GitHub Accelerator',        desc: 'GitHub Copilot adoption, migration and DevSecOps',                 url: '/solutions/github-accelerator' },
+  { title: 'Nearshore Teams',           desc: 'Dedicated nearshore engineering and delivery teams',               url: '/nearshore-teams' },
+  { title: 'Solutions',                 desc: 'All services and solutions',                                       url: Constants.PAGES.SOLUTIONS },
+  { title: 'Case Studies',              desc: 'Client results and success stories',                               url: Constants.PAGES.CASE_STUDIES },
+  { title: 'Workshops',                 desc: 'Azure, Kubernetes and AI training',                                url: Constants.PAGES.WORKSHOPS },
+  { title: 'Knowledge Base',            desc: 'Guides, tutorials and articles',                                   url: Constants.PAGES.KNOWLEDGE_BASE },
+  { title: 'Careers',                   desc: 'Open positions and jobs',                                          url: Constants.PAGES.CAREERS },
+  { title: 'About Us',                  desc: 'Our team, mission and partners',                                   url: Constants.PAGES.ABOUT_US },
+];
+
 
 function Navbar() {
   const pathname = usePathname();
@@ -162,6 +187,17 @@ function Navbar() {
       setSearchQuery('');
     }
   }, [searchOpen]);
+
+  useEffect(() => {
+    if (openSide && allPosts.length === 0) {
+      fetch('/blogs.json')
+        .then(r => r.json())
+        .then((data: IPost[]) =>
+          setAllPosts(data.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()))
+        )
+        .catch(() => {});
+    }
+  }, [openSide]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setSearchOpen(false); };
@@ -482,11 +518,20 @@ function Navbar() {
               {/* Live results */}
               {searchQuery.trim().length > 0 && (() => {
                 const q = searchQuery.toLowerCase();
+                const pageHits = SITE_PAGES.filter(p =>
+                  p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)
+                ).slice(0, 6);
                 const hits = allPosts.filter(p =>
                   p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)
                 ).slice(0, 5);
-                return hits.length > 0 ? (
-                  <div className="rounded-2xl overflow-hidden" style={{ background: 'rgba(255,255,255,0.90)', border: '1px solid rgba(0,0,0,0.07)', boxShadow: '0 4px 24px rgba(0,0,0,0.06)' }}>
+                return (pageHits.length > 0 || hits.length > 0) ? (
+                  <motion.div
+                    initial={{ opacity: 0, y: -6, scale: 0.99 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    className="max-h-[62vh] overflow-y-auto thin-scroll rounded-2xl"
+                    style={{ background: 'rgba(255,255,255,0.97)', border: '1px solid rgba(0,0,0,0.07)', boxShadow: '0 12px 48px rgba(0,0,0,0.12)' }}
+                  >
                     {/* AI Overview entry — full experience lives on /search */}
                     <button
                       onClick={() => { router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`); setSearchOpen(false); }}
@@ -522,6 +567,34 @@ function Navbar() {
                         <path d="M9 18l6-6-6-6"/>
                       </svg>
                     </button>
+                    {pageHits.length > 0 && (
+                      <>
+                        <p className="px-5 pt-3 pb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#0a0e1a]/35">Pages</p>
+                        {pageHits.map((page) => (
+                          <button
+                            key={page.url}
+                            onClick={() => { router.push(page.url); setSearchOpen(false); }}
+                            className="w-full flex items-center gap-4 px-5 py-3 text-left hover:bg-[#f5f5f5] transition-colors"
+                          >
+                            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-black/[0.06] bg-[#fafafa] text-[#0a0e1a]/55">
+                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>
+                              </svg>
+                            </span>
+                            <div className="min-w-0 flex-1">
+                              <p className="text-[13.5px] font-semibold text-[#0a0e1a] leading-snug truncate">{page.title}</p>
+                              <p className="text-[11.5px] text-[#0a0e1a]/45 mt-0.5 leading-snug line-clamp-1">{page.desc}</p>
+                            </div>
+                            <svg className="shrink-0 w-3.5 h-3.5 text-[#cccccc]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M9 18l6-6-6-6"/>
+                            </svg>
+                          </button>
+                        ))}
+                      </>
+                    )}
+                    {hits.length > 0 && (
+                      <p className="px-5 pt-3 pb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#0a0e1a]/35 border-t border-black/[0.05]">Articles</p>
+                    )}
                     {hits.map((post, i) => (
                       <button
                         key={post.id}
@@ -550,9 +623,9 @@ function Navbar() {
                         See all results for &ldquo;{searchQuery}&rdquo; →
                       </button>
                     </div>
-                  </div>
+                  </motion.div>
                 ) : (
-                  <p className="text-sm text-[#0a0e1a]/40 px-2">No articles found for &ldquo;{searchQuery}&rdquo;</p>
+                  <p className="text-sm text-[#0a0e1a]/40 px-2">No results for &ldquo;{searchQuery}&rdquo;</p>
                 );
               })()}
             </div>
@@ -719,41 +792,113 @@ function Navbar() {
 
       {/* Search bar */}
       <div className="px-4 pt-2 pb-4 shrink-0">
-        <div className="relative flex items-center">
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
-            onKeyDown={e => {
-              if (e.key === 'Enter' && searchQuery.trim()) {
-                router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
-                setOpenSide(false);
-              }
-            }}
-            placeholder="Search…"
-            className="w-full outline-none text-[15px] text-white placeholder:text-white/30"
-            style={{
-              background: 'rgba(255,255,255,0.07)',
-              borderRadius: 50,
-              border: '1px solid rgba(255,255,255,0.10)',
-              padding: '14px 56px 14px 20px',
-            }}
-          />
-          <button
-            onClick={() => {
-              if (searchQuery.trim()) {
-                router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
-                setOpenSide(false);
-              }
-            }}
-            className="absolute right-2 w-9 h-9 flex items-center justify-center rounded-full transition-all hover:bg-white/10"
-            style={{ color: 'rgba(255,255,255,0.50)' }}
-          >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
-            </svg>
-          </button>
+        {/* AI-era gradient-ring search */}
+        <div className="ai-search-wrap">
+          <div className="ai-search-inner relative flex items-center">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              onKeyDown={e => {
+                if (e.key === 'Enter' && searchQuery.trim()) {
+                  router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+                  setOpenSide(false);
+                }
+              }}
+              placeholder="Search…"
+              className="w-full bg-transparent outline-none text-[15px] text-[#0a0e1a] placeholder:text-[#aaaaaa]"
+              style={{ border: 'none', padding: '14px 52px 14px 20px' }}
+            />
+            <button
+              onClick={() => {
+                if (searchQuery.trim()) {
+                  router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+                  setOpenSide(false);
+                }
+              }}
+              className="absolute right-1.5 flex h-9 w-9 items-center justify-center rounded-full text-[#0a0e1a]/50 transition-colors hover:bg-black/[0.06]"
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+              </svg>
+            </button>
+          </div>
         </div>
+
+        {/* Live results */}
+        {searchQuery.trim().length > 0 && (() => {
+          const q = searchQuery.toLowerCase();
+          const pageHits = SITE_PAGES.filter(p =>
+            p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)
+          ).slice(0, 5);
+          const postHits = allPosts.filter(p =>
+            p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)
+          ).slice(0, 4);
+          if (pageHits.length === 0 && postHits.length === 0) {
+            return <p className="mt-3 px-1 text-sm text-white/40">No results for &ldquo;{searchQuery.trim()}&rdquo;</p>;
+          }
+          return (
+            <div className="mt-3 max-h-[46vh] overflow-y-auto rounded-2xl border border-white/[0.08] bg-white/[0.04]">
+              <motion.button
+                whileTap={{ scale: 0.96 }}
+                transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+                onClick={() => { router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`); setOpenSide(false); }}
+                className="flex w-full items-center gap-3 border-b border-white/[0.07] px-4 py-3 text-left"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" className="shrink-0" aria-hidden>
+                  <path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2z" fill="url(#ai-mode-grad)" />
+                </svg>
+                <span
+                  className="text-[13px] font-semibold"
+                  style={{ background: 'linear-gradient(100deg,#60a5fa,#3b82f6,#1e4fd6)', WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent', color: 'transparent' }}
+                >
+                  AI Overview for &ldquo;{searchQuery.trim()}&rdquo;
+                </span>
+              </motion.button>
+
+              {pageHits.length > 0 && (
+                <p className="px-4 pt-3 pb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/30">Pages</p>
+              )}
+              {pageHits.map((page) => (
+                <motion.button
+                  key={page.url}
+                  whileTap={{ scale: 0.97 }}
+                  transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+                  onClick={() => { router.push(page.url); setOpenSide(false); }}
+                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left active:bg-white/[0.06]"
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.05] text-white/70">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>
+                    </svg>
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate text-[14px] font-medium text-white/90">{page.title}</span>
+                    <span className="block truncate text-[11px] text-white/40">{page.desc}</span>
+                  </span>
+                </motion.button>
+              ))}
+
+              {postHits.length > 0 && (
+                <p className="border-t border-white/[0.07] px-4 pt-3 pb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/30">Articles</p>
+              )}
+              {postHits.map((post) => (
+                <motion.button
+                  key={post.id}
+                  whileTap={{ scale: 0.97 }}
+                  transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+                  onClick={() => { router.push(`/knowledge-base/${post.id}`); setOpenSide(false); }}
+                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left active:bg-white/[0.06]"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 shrink-0 text-white/35">
+                    <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+                  </svg>
+                  <span className="block min-w-0 flex-1 truncate text-[14px] font-medium text-white/90">{post.title}</span>
+                </motion.button>
+              ))}
+            </div>
+          );
+        })()}
       </div>
 
       {/* Nav items */}

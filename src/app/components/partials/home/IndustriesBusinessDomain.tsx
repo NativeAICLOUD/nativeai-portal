@@ -1,8 +1,8 @@
 ﻿"use client";
 
 import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Plane, Scale, Wallet, ShoppingBag, ShieldCheck, Factory, FlaskConical, HardHat, Leaf, Building2, type LucideIcon } from 'lucide-react';
 
 const industries = [
   {
@@ -97,6 +97,10 @@ const industries = [
   },
 ];
 
+const industryIcons: LucideIcon[] = [
+  Plane, Scale, Wallet, ShoppingBag, ShieldCheck, Factory, FlaskConical, HardHat, Leaf, Building2,
+];
+
 const INTERVAL = 3500;
 
 export default function IndustriesBusinessDomain() {
@@ -122,9 +126,20 @@ export default function IndustriesBusinessDomain() {
   }, [paused]);
 
   const item = industries[active];
+  const Icon = industryIcons[active];
 
   return (
     <section className="font-switzer relative bg-white py-20 sm:py-28 overflow-hidden">
+      {/* AI-era gradient for the industry icons */}
+      <svg width="0" height="0" className="absolute" aria-hidden="true">
+        <defs>
+          <linearGradient id="ind-grad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#60a5fa" />
+            <stop offset="50%" stopColor="#3b82f6" />
+            <stop offset="100%" stopColor="#1e4fd6" />
+          </linearGradient>
+        </defs>
+      </svg>
       <div className="max-w-9xl mx-auto px-6 sm:px-12 xl:px-16">
 
         {/* ── Header ── */}
@@ -137,8 +152,23 @@ export default function IndustriesBusinessDomain() {
         >
           <p className="text-[12px] font-medium uppercase tracking-[0.14em] text-[#9ca3af] mb-4">Industries we serve</p>
           <h2 className="text-[30px] md:text-[40px] font-medium text-[#111] leading-[1.1] max-w-2xl">
-            Move your industry forward
+            Move your industry forward{' '}
+            <span
+              style={{
+                background: 'linear-gradient(120deg, #60a5fa 0%, #3b82f6 45%, #1e4fd6 100%)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                color: 'transparent',
+              }}
+            >
+              with AI.
+            </span>
           </h2>
+          <p className="mt-4 max-w-xl text-[16px] font-light leading-[1.6] text-[#6b7280]">
+            From booking platforms to claims automation — we bring AI agents, LLMs, and cloud
+            engineering to the problems that matter in your sector.
+          </p>
         </motion.div>
 
         {/* ══ DESKTOP  lg+ ══════════════════════════════════════════ */}
@@ -148,8 +178,8 @@ export default function IndustriesBusinessDomain() {
           onMouseLeave={() => setPaused(false)}
         >
 
-          {/* Left — industry list */}
-          <div>
+          {/* Left — industry list (scrollable, ChatGPT/DeepSeek-style) */}
+          <div className="thin-scroll relative max-h-[70vh] overflow-y-auto pr-3">
             {industries.map((ind, i) => (
               <motion.div
                 key={i}
@@ -241,13 +271,7 @@ export default function IndustriesBusinessDomain() {
                 <div className="flex items-center justify-center py-12 px-8"
                   style={{ background: 'rgba(255,255,255,0.03)', borderBottom: '1px solid rgba(255,255,255,0.07)' }}
                 >
-                  <Image
-                    src={item.src}
-                    alt={item.title}
-                    width={item.w}
-                    height={item.h}
-                    className="max-w-[100px] max-h-[100px] object-contain"
-                  />
+                  <Icon className="h-16 w-16" strokeWidth={1.3} stroke="url(#ind-grad)" aria-hidden="true" />
                 </div>
 
                 {/* content */}
@@ -286,7 +310,7 @@ export default function IndustriesBusinessDomain() {
                       initial={{ width: '0%' }}
                       animate={{ width: '100%' }}
                       transition={{ duration: INTERVAL / 1000, ease: 'linear' }}
-                      style={{ height: '100%', background: '#ffffff' }}
+                      style={{ height: '100%', background: 'linear-gradient(90deg, #60a5fa, #3b82f6, #1e4fd6)' }}
                     />
                   )}
                 </div>
@@ -355,7 +379,7 @@ export default function IndustriesBusinessDomain() {
               >
                 {/* icon */}
                 <div className="flex justify-center py-10" style={{ background: 'rgba(255,255,255,0.03)', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-                  <Image src={item.src} alt={item.title} width={item.w} height={item.h} className="max-w-[80px] max-h-[80px] object-contain" />
+                  <Icon className="h-14 w-14" strokeWidth={1.3} stroke="url(#ind-grad)" aria-hidden="true" />
                 </div>
 
                 {/* content */}
