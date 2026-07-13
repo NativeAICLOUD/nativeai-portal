@@ -1,127 +1,26 @@
-﻿'use client';
+'use client';
 
-import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Target, Code2, Zap, Boxes, ShieldCheck, LineChart, type LucideIcon } from 'lucide-react';
 import { Constants } from '@/Constants';
+import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from '@/app/components/partials/services/ServiceUI';
 
-const MONO: React.CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
+/* ── content ── */
+const stats = [
+  { value: '3', label: 'Core modules' },
+  { value: '4wk', label: 'Avg. PoC delivery' },
+  { value: '100%', label: 'Data stays yours' },
+  { value: '0', label: 'Vendor lock-in' },
+];
 
-const lgCard: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.52)',
-  backdropFilter: 'blur(40px) saturate(190%)',
-  WebkitBackdropFilter: 'blur(40px) saturate(190%)',
-  border: '1px solid rgba(255,255,255,0.84)',
-  boxShadow: '0 4px 28px rgba(180,80,20,0.08), inset 0 1px 0 rgba(255,255,255,0.95)',
-};
-
-const lgDark: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.07)',
-  backdropFilter: 'blur(40px) saturate(160%)',
-  WebkitBackdropFilter: 'blur(40px) saturate(160%)',
-  border: '1px solid rgba(255,255,255,0.12)',
-  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.18)',
-};
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: 'easeOut' } },
-};
-
-function Blobs({ items }: { items: { w: number; h: number; top?: string; left?: string; right?: string; bottom?: string; color: string; delay: string }[] }) {
-  return (
-    <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
-      {items.map((b, i) => (
-        <div
-          key={i}
-          className="absolute rounded-full"
-          style={{
-            width: b.w, height: b.h,
-            top: b.top, left: b.left, right: b.right, bottom: b.bottom,
-            background: `radial-gradient(circle, ${b.color} 0%, transparent 68%)`,
-            filter: 'blur(64px)',
-            animation: `pulse-blob 6s ease-in-out ${b.delay} infinite`,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-function Pill({ label, dark = false }: { label: string; dark?: boolean }) {
-  return (
-    <div
-      className="inline-flex items-center gap-2.5 rounded-full px-4 py-1.5 mb-6"
-      style={{ background: 'rgba(232,154,120,0.10)', border: '1px solid rgba(232,154,120,0.28)' }}
-    >
-      <span
-        className="text-[11px] font-bold tracking-widest uppercase"
-        style={{ ...MONO, color: dark ? 'rgba(232,154,120,0.85)' : '#b8714e' }}
-      >
-        {label}
-      </span>
-    </div>
-  );
-}
-
-/* ── DATA ── */
-
-const benefits = [
-  {
-    title: 'Expert AI use case identification',
-    body: 'We help you cut through the noise — identifying AI use cases that are realistic, impactful, and aligned with your actual business goals.',
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e89a78" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="3" /><circle cx="12" cy="12" r="8" /><path d="M12 2v2M12 20v2M2 12h2M20 12h2" />
-      </svg>
-    ),
-  },
-  {
-    title: 'End-to-end technical support',
-    body: 'From first discovery workshop to production deployment — hands-on engineering guidance at every step, with no deep in-house AI expertise required.',
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4A90D9" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Production-grade PoC delivery',
-    body: 'Every proof of concept is built with production in mind — scalable Azure services, proper architecture, no throwaway prototypes.',
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6ECFB0" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z" />
-      </svg>
-    ),
-  },
-  {
-    title: 'AI Landing Zone infrastructure',
-    body: 'We design and deploy a proven Azure AI Landing Zone — secure, cost-efficient, and compliant from day one.',
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9b7fe8" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Data governance & compliance',
-    body: 'Privacy, compliance, and security are baked into every solution from the start — not bolted on afterwards.',
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e89a78" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2 4 6v6c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V6l-8-4z" />
-        <path d="m9 12 2 2 4-4" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Long-term scalability guidance',
-    body: 'Post-deployment, we provide an advice report covering how to run, optimise, and scale your AI solutions over time.',
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4A90D9" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 3v18h18" /><path d="m19 9-5 5-4-4-3 3" />
-      </svg>
-    ),
-  },
+const benefits: { title: string; body: string; icon: LucideIcon }[] = [
+  { title: 'Expert AI use case identification', body: 'We help you cut through the noise — identifying AI use cases that are realistic, impactful, and aligned with your actual business goals.', icon: Target },
+  { title: 'End-to-end technical support', body: 'From first discovery workshop to production deployment — hands-on engineering guidance at every step, with no deep in-house AI expertise required.', icon: Code2 },
+  { title: 'Production-grade PoC delivery', body: 'Every proof of concept is built with production in mind — scalable Azure services, proper architecture, no throwaway prototypes.', icon: Zap },
+  { title: 'AI Landing Zone infrastructure', body: 'We design and deploy a proven Azure AI Landing Zone — secure, cost-efficient, and compliant from day one.', icon: Boxes },
+  { title: 'Data governance & compliance', body: 'Privacy, compliance, and security are baked into every solution from the start — not bolted on afterwards.', icon: ShieldCheck },
+  { title: 'Long-term scalability guidance', body: 'Post-deployment, we provide an advice report covering how to run, optimise, and scale your AI solutions over time.', icon: LineChart },
 ];
 
 const modules = [
@@ -135,7 +34,6 @@ const modules = [
       'PoC delivery with production-ready architecture',
       'Business value measurement & KPI definition',
     ],
-    accent: '#e89a78',
   },
   {
     tag: 'Module 02',
@@ -147,7 +45,6 @@ const modules = [
       'Cost guardrails & budget alerting',
       'Monitoring, logging & observability setup',
     ],
-    accent: '#4A90D9',
   },
   {
     tag: 'Module 03',
@@ -159,88 +56,42 @@ const modules = [
       'RBAC, audit logging & access governance',
       'GDPR / compliance alignment review',
     ],
-    accent: '#6ECFB0',
   },
 ];
 
 const phases = [
-  {
-    number: '01',
-    title: 'Discover',
-    body: 'A structured workshop to understand your business goals, identify realistic AI use cases, and produce a prioritised roadmap — with clear criteria for what success looks like before any code is written.',
-    duration: '1–2 weeks',
-  },
-  {
-    number: '02',
-    title: 'Build',
-    body: 'We develop your proof of concept using the right Azure AI services, deploying on a governed Landing Zone. Parallel validation ensures every PoC is production-aligned before handover.',
-    duration: '3–6 weeks',
-  },
-  {
-    number: '03',
-    title: 'Scale',
-    body: 'Post-PoC, we help you move from validated concept to live product — expanding AI adoption across teams, optimising costs, and providing ongoing advisory to keep your AI running efficiently.',
-    duration: 'Ongoing',
-  },
+  { number: '01', title: 'Discover', body: 'A structured workshop to understand your business goals, identify realistic AI use cases, and produce a prioritised roadmap — with clear criteria for what success looks like before any code is written.', duration: '1–2 weeks' },
+  { number: '02', title: 'Build', body: 'We develop your proof of concept using the right Azure AI services, deploying on a governed Landing Zone. Parallel validation ensures every PoC is production-aligned before handover.', duration: '3–6 weeks' },
+  { number: '03', title: 'Scale', body: 'Post-PoC, we help you move from validated concept to live product — expanding AI adoption across teams, optimising costs, and providing ongoing advisory to keep your AI running efficiently.', duration: 'Ongoing' },
 ];
 
 const pillars = [
-  {
-    title: 'Your data stays yours',
-    body: 'We configure Azure AI services with private endpoints and your own data residency requirements. Your data never leaves your tenant and is never used to train shared models.',
-    accent: '#e89a78',
-  },
-  {
-    title: 'Compliance from day one',
-    body: 'Governance and compliance measures — GDPR alignment, audit trails, role-based access — are embedded into the architecture from the very beginning, not added later.',
-    accent: '#4A90D9',
-  },
-  {
-    title: 'Responsible AI by design',
-    body: 'We implement Microsoft\'s Responsible AI principles: fairness, reliability, transparency, and accountability — with guardrails that enforce safe outputs across every use case.',
-    accent: '#6ECFB0',
-  },
+  { title: 'Your data stays yours', body: 'We configure Azure AI services with private endpoints and your own data residency requirements. Your data never leaves your tenant and is never used to train shared models.' },
+  { title: 'Compliance from day one', body: 'Governance and compliance measures — GDPR alignment, audit trails, role-based access — are embedded into the architecture from the very beginning, not added later.' },
+  { title: 'Responsible AI by design', body: "We implement Microsoft's Responsible AI principles: fairness, reliability, transparency, and accountability — with guardrails that enforce safe outputs across every use case." },
 ];
 
 const faqs = [
-  {
-    q: 'What Azure AI services do you work with?',
-    a: 'We work across the full Azure AI portfolio — Azure OpenAI Service, Azure AI Search, Document Intelligence, Language Service, Azure Machine Learning, and Azure Cognitive Services. We select the right service for each use case rather than defaulting to one.',
-  },
-  {
-    q: 'Do we need an in-house AI team to get started?',
-    a: 'No. The AI Accelerator is specifically designed for teams without deep in-house AI expertise. We provide the engineering, architecture, and guidance — your team focuses on the product and business outcomes.',
-  },
-  {
-    q: 'How long does a typical PoC take to deliver?',
-    a: 'Most proofs of concept are delivered in 3–6 weeks after the discovery phase. The timeline depends on integration complexity and data readiness — we give you a fixed estimate after the discovery workshop.',
-  },
-  {
-    q: 'How do you handle data privacy and GDPR compliance?',
-    a: 'All AI solutions are deployed within your own Azure tenant using private networking. We configure data residency, access controls, and audit logging to meet your compliance requirements from day one — no data is shared externally.',
-  },
-  {
-    q: "What if our systems aren't fully on Azure yet?",
-    a: 'No problem. We can connect your existing on-premises or multi-cloud systems to Azure using our Cloud Native development and migration capabilities, so you can start adopting AI even before a full migration is complete.',
-  },
+  { q: 'What Azure AI services do you work with?', a: 'We work across the full Azure AI portfolio — Azure OpenAI Service, Azure AI Search, Document Intelligence, Language Service, Azure Machine Learning, and Azure Cognitive Services. We select the right service for each use case rather than defaulting to one.' },
+  { q: 'Do we need an in-house AI team to get started?', a: 'No. The AI Accelerator is specifically designed for teams without deep in-house AI expertise. We provide the engineering, architecture, and guidance — your team focuses on the product and business outcomes.' },
+  { q: 'How long does a typical PoC take to deliver?', a: 'Most proofs of concept are delivered in 3–6 weeks after the discovery phase. The timeline depends on integration complexity and data readiness — we give you a fixed estimate after the discovery workshop.' },
+  { q: 'How do you handle data privacy and GDPR compliance?', a: 'All AI solutions are deployed within your own Azure tenant using private networking. We configure data residency, access controls, and audit logging to meet your compliance requirements from day one — no data is shared externally.' },
+  { q: "What if our systems aren't fully on Azure yet?", a: 'No problem. We can connect your existing on-premises or multi-cloud systems to Azure using our Cloud Native development and migration capabilities, so you can start adopting AI even before a full migration is complete.' },
 ];
 
 function FAQItem({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boolean; onToggle: () => void }) {
   return (
-    <div className="border-b border-[#f0e8df] last:border-0">
-      <button className="w-full flex items-center justify-between gap-4 py-5 text-left group" onClick={onToggle}>
-        <span className="text-base font-semibold text-[#0a0e1a] leading-snug group-hover:text-[#e89a78] transition-colors duration-200">
-          {q}
-        </span>
+    <div className="border-b border-[#eee] last:border-0">
+      <button className="w-full flex items-center justify-between gap-4 py-5 text-left" onClick={onToggle}>
+        <span className="text-base font-medium text-[#111] leading-snug">{q}</span>
         <span
           className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200"
-          style={{ background: isOpen ? '#e89a78' : 'rgba(232,154,120,0.10)', border: '1px solid rgba(232,154,120,0.25)' }}
+          style={{ background: isOpen ? '#111' : '#f3f4f6', border: '1px solid #e6e6e6' }}
         >
           <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
             {isOpen
               ? <path d="M1 6h10" stroke="white" strokeWidth="1.6" strokeLinecap="round" />
-              : <path d="M6 1v10M1 6h10" stroke="#e89a78" strokeWidth="1.6" strokeLinecap="round" />
-            }
+              : <path d="M6 1v10M1 6h10" stroke="#111" strokeWidth="1.6" strokeLinecap="round" />}
           </svg>
         </span>
       </button>
@@ -261,373 +112,222 @@ function FAQItem({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boo
   );
 }
 
-/* ── PAGE ── */
-
+/* ── page ── */
 export default function AIAcceleratorPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return (
-    <>
-      <style>{`
-        @keyframes pulse-blob {
-          0%, 100% { opacity: 0.65; transform: scale(1); }
-          50%       { opacity: 1;   transform: scale(1.06); }
-        }
-      `}</style>
+    <div className="font-switzer">
 
-      <div>
+      {/* ── Hero ── */}
+      <div className="industries-hero-bg">
+        <div className={`${CONTAINER} pb-12 pt-32 lg:pt-28`}>
+          <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
 
-        {/* ── HERO ── */}
-        <section
-          className="relative overflow-hidden min-h-[92svh] flex items-center"
-          style={{ background: 'linear-gradient(160deg, #fff8f3 0%, #fef2e8 45%, #f5f0ff 100%)' }}
-        >
-          <Blobs items={[
-            { w: 850, h: 850, top: '-20%',    left: '-15%',  color: 'rgba(232,154,120,0.46)', delay: '0s'   },
-            { w: 650, h: 650, top: '5%',      right: '-12%', color: 'rgba(155,127,232,0.28)', delay: '1.5s' },
-            { w: 500, h: 500, bottom: '-15%', left: '30%',   color: 'rgba(110,207,176,0.24)', delay: '3s'   },
-          ]} />
-
-          <div className="relative w-full max-w-7xl mx-auto px-6 md:px-12 pt-44 pb-28">
-            <motion.div initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, ease: 'easeOut' }}>
-
-              <Pill label="AI Accelerator" />
-
-              <div className="flex flex-col lg:flex-row lg:items-center gap-16 xl:gap-20">
-
-                {/* Left — text */}
-                <div className="flex-1 min-w-0">
-                  <h1
-                    className="font-extrabold text-[#0a0e1a] leading-[0.96] mb-6"
-                    style={{ fontSize: 'clamp(44px, 6.8vw, 86px)', letterSpacing: '-0.045em' }}
-                  >
-                    Build AI solutions<br />
-                    <span style={{
-                      background: 'linear-gradient(135deg, #e89a78 0%, #f0a060 50%, #9b7fe8 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
-                    }}>
-                      with confidence.
-                    </span>
-                  </h1>
-
-                  <motion.p
-                    className="text-[#6b7280] text-xl leading-[1.75] max-w-[500px] mb-10"
-                    initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.75, delay: 0.15, ease: 'easeOut' }}
-                  >
-                    Adopt Azure AI services quickly and cost-efficiently — without the compliance risk. We guide you from use case to proof of concept to production, following best practices and embedding governance from day one.
-                  </motion.p>
-
-                  <motion.div
-                    className="flex flex-wrap gap-3"
-                    initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.75, delay: 0.27, ease: 'easeOut' }}
-                  >
-                    <Link
-                      href={Constants.PAGES.SCHEDULE_CALL}
-                      className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full text-[0.925rem] font-semibold text-white transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
-                      style={{ background: '#0a0e1a', boxShadow: '0 6px 22px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.07)' }}
-                    >
-                      Talk to our Experts
-                    </Link>
-                    <a
-                      href="#modules"
-                      className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-[0.925rem] font-semibold text-[#0a0e1a] border border-[#e5e7eb] hover:border-[#e89a78] transition-colors duration-200"
-                    >
-                      Explore the Approach
-                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                      </svg>
-                    </a>
-                  </motion.div>
-                </div>
-
-                {/* Right — stat card */}
-                <motion.div
-                  className="lg:w-[310px] w-full shrink-0"
-                  initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.9, delay: 0.18, ease: 'easeOut' }}
-                >
-                  <div className="rounded-3xl p-7" style={lgCard}>
-                    <p className="text-[10px] font-bold text-[#b8714e] tracking-widest uppercase mb-6" style={MONO}>
-                      What you get
-                    </p>
-                    <div className="grid grid-cols-2 gap-5">
-                      {[
-                        { value: '3',     label: 'Core modules'      },
-                        { value: '4wk',   label: 'Avg. PoC delivery' },
-                        { value: '100%',  label: 'Data stays yours'  },
-                        { value: '0',     label: 'Vendor lock-in'    },
-                      ].map((s) => (
-                        <div key={s.label} className="flex flex-col gap-1">
-                          <span className="text-[2.4rem] font-extrabold text-[#0a0e1a] leading-none" style={{ letterSpacing: '-0.04em' }}>{s.value}</span>
-                          <span className="text-xs text-[#9ca3af] font-medium mt-1">{s.label}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="mt-6 pt-5 border-t border-[#f0e8df]">
-                      <p className="text-xs text-[#9ca3af] leading-relaxed">
-                        Use case to production.<br />
-                        Secure, compliant, and built to scale.
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-
+            {/* Left */}
+            <div className="flex-1">
+              <div className="mb-6"><Eyebrow>AI Accelerator</Eyebrow></div>
+              <h1 className="m-0 max-w-[560px] text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
+                Build AI solutions with confidence.
+              </h1>
+              <p className="mt-6 max-w-[520px] text-[18px] font-light leading-[1.6] text-[#111]">
+                Adopt Azure AI services quickly and cost-efficiently — without the compliance risk.
+                We guide you from use case to proof of concept to production, embedding governance
+                from day one.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <PrimaryButton href={Constants.PAGES.SCHEDULE_CALL}>Talk to our Experts</PrimaryButton>
+                <SecondaryButton href="#modules">Explore the approach</SecondaryButton>
               </div>
-            </motion.div>
-          </div>
-        </section>
+            </div>
 
-        {/* ── BENEFITS ── */}
-        <section
-          className="relative overflow-hidden py-28"
-          style={{ background: 'linear-gradient(180deg, #fff8f3 0%, #fef6f0 100%)' }}
-        >
-          <Blobs items={[
-            { w: 600, h: 600, top: '-8%', right: '-8%', color: 'rgba(155,127,232,0.14)', delay: '0s' },
-          ]} />
-          <div className="relative max-w-7xl mx-auto px-6 md:px-12">
-
-            <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }} className="mb-16">
-              <Pill label="Why AI Accelerator" />
-              <h2 className="text-4xl md:text-5xl font-extrabold text-[#0a0e1a] leading-[1.06]" style={{ letterSpacing: '-0.035em' }}>
-                AI that actually works<br />
-                <span className="text-[#e89a78]">for your business.</span>
-              </h2>
-              <p className="text-[#6b7280] text-lg mt-5 max-w-[520px]">
-                We reduce the complexity, risk, and guesswork of AI adoption — so you can focus on outcomes, not infrastructure.
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {benefits.map((b, i) => (
-                <motion.div
-                  key={b.title}
-                  variants={fadeUp} initial="hidden" whileInView="show"
-                  viewport={{ once: true, margin: '-60px' }}
-                  transition={{ delay: i * 0.07 }}
-                  className="rounded-2xl p-7"
-                  style={lgCard}
-                >
-                  <div
-                    className="w-10 h-10 rounded-xl flex items-center justify-center mb-5"
-                    style={{ background: 'rgba(232,154,120,0.08)', border: '1px solid rgba(232,154,120,0.18)' }}
-                  >
-                    {b.icon}
-                  </div>
-                  <h3 className="text-base font-bold text-[#0a0e1a] mb-2.5">{b.title}</h3>
-                  <p className="text-[#6b7280] text-sm leading-relaxed">{b.body}</p>
-                </motion.div>
-              ))}
+            {/* Right — stat card */}
+            <div className="w-full lg:max-w-[380px] lg:flex-1">
+              <div className="rounded-2xl border border-[#e6e6e6] bg-white p-6">
+                <p className="m-0 mb-5"><Eyebrow>What you get</Eyebrow></p>
+                <div className="grid grid-cols-2 gap-4">
+                  {stats.map((s) => (
+                    <div key={s.label} className="rounded-xl border border-[#eee] bg-[#fafafa] p-4">
+                      <p className="m-0 text-[28px] font-medium leading-none text-[#111]">{s.value}</p>
+                      <p className="m-0 mt-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-[#9ca3af]">{s.label}</p>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-5 border-t border-[#eee] pt-4 text-[13px] leading-relaxed text-[#6b7280]">
+                  Use case to production — secure, compliant, and built to scale.
+                </p>
+              </div>
             </div>
 
           </div>
-        </section>
+        </div>
 
-        {/* ── MODULES ── */}
-        <section id="modules" className="relative overflow-hidden py-28 bg-[#0a0e1a]">
-          <Blobs items={[
-            { w: 700, h: 700, top: '-10%',    left: '-10%',  color: 'rgba(232,154,120,0.12)', delay: '0s'   },
-            { w: 600, h: 600, bottom: '-10%', right: '-8%',  color: 'rgba(155,127,232,0.10)', delay: '2s'   },
-          ]} />
-          <div className="relative max-w-7xl mx-auto px-6 md:px-12">
-
-            <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }} className="mb-16">
-              <Pill label="Our Approach" dark />
-              <h2 className="text-4xl md:text-5xl font-extrabold text-white leading-[1.06]" style={{ letterSpacing: '-0.035em' }}>
-                Three modules.<br />
-                <span style={{
-                  background: 'linear-gradient(135deg, #e89a78 0%, #f0a060 100%)',
-                  WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-                }}>
-                  One complete program.
-                </span>
-              </h2>
-              <p className="text-white/50 text-lg mt-5 max-w-[480px]">
-                Pick all three or start with the module that moves the needle most for your team right now.
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {modules.map((m, i) => (
-                <motion.div
-                  key={m.tag}
-                  variants={fadeUp} initial="hidden" whileInView="show"
-                  viewport={{ once: true, margin: '-60px' }}
-                  transition={{ delay: i * 0.1 }}
-                  className="rounded-2xl p-8 flex flex-col gap-6"
-                  style={{ ...lgDark, borderColor: `${m.accent}28` }}
-                >
-                  <div>
-                    <span className="text-[10px] font-bold tracking-widest uppercase mb-4 block" style={{ ...MONO, color: m.accent }}>
-                      {m.tag}
-                    </span>
-                    <h3 className="text-xl font-bold text-white mb-3">{m.title}</h3>
-                    <p className="text-white/50 text-sm leading-relaxed">{m.body}</p>
-                  </div>
-                  <div className="flex flex-col gap-3 pt-2 border-t border-white/[0.07] mt-auto">
-                    {m.items.map((item) => (
-                      <div key={item} className="flex items-start gap-3">
-                        <span
-                          className="mt-0.5 w-4 h-4 rounded-full shrink-0 flex items-center justify-center"
-                          style={{ background: `${m.accent}1a` }}
-                        >
-                          <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
-                            <path d="M1.5 4L3.5 6L6.5 2" stroke={m.accent} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        </span>
-                        <span className="text-white/55 text-xs leading-relaxed">{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-          </div>
-        </section>
-
-        {/* ── DELIVERY PHASES ── */}
-        <section
-          className="relative overflow-hidden py-28"
-          style={{ background: 'linear-gradient(180deg, #fef6f0 0%, #fff8f3 100%)' }}
-        >
-          <div className="relative max-w-7xl mx-auto px-6 md:px-12">
-
-            <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }} className="mb-16">
-              <Pill label="How we deliver" />
-              <h2 className="text-4xl md:text-5xl font-extrabold text-[#0a0e1a] leading-[1.06]" style={{ letterSpacing: '-0.035em' }}>
-                From idea to production.<br />
-                <span className="text-[#e89a78]">In three clear steps.</span>
-              </h2>
-            </motion.div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-              {phases.map((p, i) => (
-                <motion.div
-                  key={p.number}
-                  variants={fadeUp} initial="hidden" whileInView="show"
-                  viewport={{ once: true, margin: '-60px' }}
-                  transition={{ delay: i * 0.12 }}
-                  className="relative flex flex-col"
-                >
-                  {i < phases.length - 1 && (
-                    <div
-                      className="hidden lg:block absolute"
-                      style={{ top: 32, left: 'calc(100% + 20px)', width: 40, height: 1, background: 'rgba(232,154,120,0.25)' }}
-                    />
-                  )}
-                  <span
-                    className="block text-[5rem] font-extrabold leading-none mb-5"
-                    style={{
-                      ...MONO,
-                      background: 'linear-gradient(135deg, #e89a78, #f0c090)',
-                      WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-                      letterSpacing: '-0.05em',
-                    }}
-                  >
-                    {p.number}
-                  </span>
-                  <h3 className="text-xl font-bold text-[#0a0e1a] mb-3">{p.title}</h3>
-                  <p className="text-[#6b7280] text-sm leading-relaxed mb-5 flex-1">{p.body}</p>
-                  <span
-                    className="inline-flex items-center self-start px-3.5 py-1 rounded-full text-xs font-semibold"
-                    style={{ ...MONO, background: 'rgba(232,154,120,0.10)', color: '#c4743c', border: '1px solid rgba(232,154,120,0.28)' }}
-                  >
-                    {p.duration}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-
-          </div>
-        </section>
-
-        {/* ── DATA & GOVERNANCE ── */}
-        <section className="relative overflow-hidden py-28 bg-[#0a0e1a]">
-          <Blobs items={[
-            { w: 600, h: 600, top: '10%',     right: '-8%',  color: 'rgba(110,207,176,0.09)', delay: '0s'   },
-            { w: 550, h: 550, bottom: '-12%', left: '-6%',   color: 'rgba(232,154,120,0.09)', delay: '2s'   },
-          ]} />
-          <div className="relative max-w-7xl mx-auto px-6 md:px-12">
-
-            <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }} className="mb-14">
-              <Pill label="Data & Governance" dark />
-              <h2 className="text-4xl md:text-5xl font-extrabold text-white leading-[1.06]" style={{ letterSpacing: '-0.035em' }}>
-                Innovate freely.<br />
-                <span style={{
-                  background: 'linear-gradient(135deg, #e89a78 0%, #f0a060 100%)',
-                  WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-                }}>
-                  Stay in control.
-                </span>
-              </h2>
-              <p className="text-white/50 text-lg mt-5 max-w-[480px]">
-                Security, privacy, and compliance are never an afterthought — they are the foundation every solution is built on.
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              {pillars.map((p, i) => (
-                <motion.div
-                  key={p.title}
-                  variants={fadeUp} initial="hidden" whileInView="show"
-                  viewport={{ once: true, margin: '-60px' }}
-                  transition={{ delay: i * 0.1 }}
-                  className="rounded-2xl p-7"
-                  style={{ ...lgDark, borderColor: `${p.accent}28` }}
-                >
-                  <div
-                    className="w-2 h-2 rounded-full mb-5"
-                    style={{ background: p.accent }}
-                  />
-                  <h3 className="text-base font-bold text-white mb-3">{p.title}</h3>
-                  <p className="text-white/45 text-sm leading-relaxed">{p.body}</p>
-                </motion.div>
-              ))}
-            </div>
-
-          </div>
-        </section>
-
-        {/* ── FAQ ── */}
-        <section
-          className="relative overflow-hidden py-28"
-          style={{ background: 'linear-gradient(180deg, #fff8f3 0%, #fef6f0 100%)' }}
-        >
-          <div className="relative max-w-3xl mx-auto px-6 md:px-12">
-
-            <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }} className="mb-14 text-center">
-              <Pill label="FAQ" />
-              <h2 className="text-4xl md:text-5xl font-extrabold text-[#0a0e1a] leading-[1.06]" style={{ letterSpacing: '-0.035em' }}>
-                Common questions
-              </h2>
-            </motion.div>
-
-            <motion.div
-              variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }}
-              className="rounded-3xl px-8 py-2"
-              style={lgCard}
-            >
-              {faqs.map((faq, i) => (
-                <FAQItem
-                  key={i}
-                  q={faq.q}
-                  a={faq.a}
-                  isOpen={openFaq === i}
-                  onToggle={() => setOpenFaq(openFaq === i ? null : i)}
-                />
-              ))}
-            </motion.div>
-
-          </div>
-        </section>
-
-
+        {/* AI-era blue divider (page-scoped) — full viewport width */}
+        <hr
+          className="m-0 h-1 w-full border-0"
+          style={{
+            backgroundImage: 'linear-gradient(260deg, #fff, #60a5fa 20%, #3b82f6 50%, #1e4fd6 80%, #fff)',
+            borderRadius: 100,
+          }}
+        />
       </div>
-    </>
+
+      {/* ── Benefits ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} py-20 lg:py-24`}>
+          <div className="mb-12">
+            <div className="mb-4"><Eyebrow>Why AI Accelerator</Eyebrow></div>
+            <h2 className="m-0 max-w-[560px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              AI that actually works for your business.
+            </h2>
+            <p className="mt-3 max-w-[520px] text-[16px] font-normal leading-[1.5] text-[#6b7280]">
+              We reduce the complexity, risk, and guesswork of AI adoption — so you can focus on
+              outcomes, not infrastructure.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+            {benefits.map(({ title, body, icon: Icon }) => (
+              <article
+                key={title}
+                className="group flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6 transition-[filter,box-shadow] duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.2)] hover:[filter:invert(1)]"
+              >
+                <Icon className="mb-5 h-7 w-7 text-[#111]" strokeWidth={1.6} aria-hidden="true" />
+                <h3 className="m-0 text-[18px] font-medium leading-[1.3] text-[#111]">{title}</h3>
+                <p className="mt-2 text-[15px] font-normal leading-[1.5] text-[#111]">{body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Modules ── */}
+      <section id="modules" className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div>
+              <div className="mb-4"><Eyebrow>Our approach</Eyebrow></div>
+              <h2 className="m-0 max-w-[520px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+                Three modules. One complete program.
+              </h2>
+            </div>
+            <PrimaryButton href={Constants.PAGES.SCHEDULE_CALL}>Book a discovery call</PrimaryButton>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-6">
+            {modules.map((m) => (
+              <div key={m.tag} className="flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6">
+                <span className="text-[11px] font-medium uppercase tracking-[0.12em] text-[#9ca3af]">{m.tag}</span>
+                <h3 className="mt-3 text-[20px] font-medium leading-[1.25] text-[#111]">{m.title}</h3>
+                <p className="mt-2 text-[15px] font-normal leading-[1.5] text-[#111]">{m.body}</p>
+                <div className="mt-5 flex flex-col gap-2.5 border-t border-[#eee] pt-5">
+                  {m.items.map((item) => (
+                    <div key={item} className="flex items-start gap-2.5">
+                      <svg className="mt-0.5 h-4 w-4 shrink-0 text-[#111]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                      <span className="text-[13.5px] leading-relaxed text-[#6b7280]">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Delivery phases ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-12">
+            <div className="mb-4"><Eyebrow>How we deliver</Eyebrow></div>
+            <h2 className="m-0 max-w-[520px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              From idea to production, in three clear steps.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:gap-6">
+            {phases.map((p) => (
+              <div key={p.number} className="flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6">
+                <span className="text-[34px] font-light leading-none text-[#e6e6e6]">{p.number}</span>
+                <h3 className="mt-4 text-[20px] font-medium leading-[1.25] text-[#111]">{p.title}</h3>
+                <p className="mt-2 flex-1 text-[15px] font-normal leading-[1.5] text-[#111]">{p.body}</p>
+                <span className="mt-5 inline-flex w-fit items-center rounded-full border border-[#e6e6e6] bg-[#fafafa] px-3 py-1 text-[12px] font-medium text-[#6b7280]">
+                  {p.duration}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Data & governance ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-12">
+            <div className="mb-4"><Eyebrow>Data &amp; governance</Eyebrow></div>
+            <h2 className="m-0 max-w-[560px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              Innovate freely. Stay in control.
+            </h2>
+            <p className="mt-3 max-w-[520px] text-[16px] font-normal leading-[1.5] text-[#6b7280]">
+              Security, privacy, and compliance are never an afterthought — they are the foundation
+              every solution is built on.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-6">
+            {pillars.map((p) => (
+              <div key={p.title} className="flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6">
+                <h3 className="m-0 text-[18px] font-medium leading-[1.3] text-[#111]">{p.title}</h3>
+                <p className="mt-2 text-[15px] font-normal leading-[1.5] text-[#111]">{p.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section className="bg-white">
+        <div className="mx-auto max-w-3xl px-5 pb-20 md:px-12 lg:pb-24">
+          <div className="mb-10">
+            <div className="mb-4"><Eyebrow>FAQ</Eyebrow></div>
+            <h2 className="m-0 text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              Common questions.
+            </h2>
+          </div>
+          <div className="rounded-2xl border border-[#e6e6e6] bg-white px-6 sm:px-8">
+            {faqs.map((faq, i) => (
+              <FAQItem
+                key={i}
+                q={faq.q}
+                a={faq.a}
+                isOpen={openFaq === i}
+                onToggle={() => setOpenFaq(openFaq === i ? null : i)}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="bg-[#0a0e1a]">
+        <div className={`${CONTAINER} flex flex-col gap-10 py-20 md:flex-row md:items-center md:justify-between`}>
+          <div className="flex max-w-xl flex-col gap-4">
+            <h2 className="m-0 text-[28px] font-medium leading-[1.1] text-white md:text-[44px]">
+              Ready to accelerate your AI adoption?
+            </h2>
+            <p className="m-0 text-[18px] font-light leading-[1.6] text-white/70">
+              Book a free discovery call. We&apos;ll identify your highest-value use cases and outline
+              a practical path to production.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <PrimaryButton href={Constants.PAGES.SCHEDULE_CALL} dark>Talk to our Experts</PrimaryButton>
+            <SecondaryButton href="/solutions" onDark>All solutions</SecondaryButton>
+          </div>
+        </div>
+      </section>
+
+    </div>
   );
 }

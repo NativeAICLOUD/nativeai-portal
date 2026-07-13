@@ -123,8 +123,14 @@ export default function MigrateToAzurePage() {
           </div>
         </div>
 
-        {/* multicolour divider — full viewport width */}
-        <hr className="linegrad-divider m-0 h-1 w-full border-0" />
+        {/* Azure blue divider (page-scoped) — full viewport width */}
+        <hr
+          className="m-0 h-1 w-full border-0"
+          style={{
+            backgroundImage: 'linear-gradient(260deg, #fff, #50e6ff 18%, #0089d6 50%, #0050ef 82%, #fff)',
+            borderRadius: 100,
+          }}
+        />
       </div>
 
       {/* ── Migration types ── */}

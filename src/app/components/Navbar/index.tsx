@@ -835,12 +835,7 @@ function Navbar() {
                                         <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/[0.06] border border-white/[0.08] transition-colors group-active:bg-white/[0.12]">
                                           {Icon && <Icon size={16} strokeWidth={1.6} className="text-white/80" />}
                                         </span>
-                                        <div className="flex flex-col min-w-0 flex-1">
-                                          <span className="text-[14px] font-medium text-white/90 leading-snug">{child.title}</span>
-                                          {child.desc && (
-                                            <span className="text-[11.5px] text-white/40 leading-snug mt-0.5 truncate">{child.desc}</span>
-                                          )}
-                                        </div>
+                                        <span className="min-w-0 flex-1 text-[14px] font-medium text-white/90 leading-snug">{child.title}</span>
                                         <svg className="shrink-0 w-3.5 h-3.5 text-white/25 transition-transform group-active:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
                                           <path d="M9 18l6-6-6-6" />
                                         </svg>

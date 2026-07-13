@@ -34,7 +34,9 @@
       "Bash(curl -s -o /dev/null -w \"home: %{http_code}\\\\n\" http://localhost:3000/)",
       "Bash(curl -s http://localhost:3000/)",
       "Read(//c/Users/aajre/AppData/Local/Temp/claude/C--NativeCloud-NativeCloud-Portal/1e124de7-005e-4bc4-82c2-c6f5a16f6e67/scratchpad/**)",
-      "Bash(node shotrhh.js)"
+      "Bash(node shotrhh.js)",
+      "WebFetch(domain:reesure.com)",
+      "Bash(git push *)"
     ]
   }
 }

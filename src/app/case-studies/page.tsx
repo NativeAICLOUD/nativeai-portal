@@ -3,10 +3,12 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { Constants } from '@/Constants';
+import { Landmark, HeartPulse, ShoppingBag, Factory, Truck, Cloud, Building2, type LucideIcon } from 'lucide-react';
 import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from '@/app/components/partials/services/ServiceUI';
 
 type Industry =
   | 'All'
+  | 'PropTech'
   | 'Financial Services'
   | 'Healthcare'
   | 'Retail'
@@ -14,40 +16,14 @@ type Industry =
   | 'Logistics'
   | 'SaaS / ISV';
 
-const industryStyle: Record<
-  Exclude<Industry, 'All'>,
-  { pill: string; bar: string; metricColor: string }
-> = {
-  'Financial Services': {
-    pill: 'bg-[#eff6ff] text-[#1d4ed8] border border-[#bfdbfe]',
-    bar: '#3b82f6',
-    metricColor: '#1d4ed8',
-  },
-  Healthcare: {
-    pill: 'bg-[#ecfdf5] text-[#065f46] border border-[#a7f3d0]',
-    bar: '#10b981',
-    metricColor: '#065f46',
-  },
-  Retail: {
-    pill: 'bg-[#f5f3ff] text-[#5b21b6] border border-[#ddd6fe]',
-    bar: '#8b5cf6',
-    metricColor: '#5b21b6',
-  },
-  Manufacturing: {
-    pill: 'bg-[#fffbeb] text-[#92400e] border border-[#fde68a]',
-    bar: '#f59e0b',
-    metricColor: '#92400e',
-  },
-  Logistics: {
-    pill: 'bg-[#f0f9ff] text-[#075985] border border-[#bae6fd]',
-    bar: '#0ea5e9',
-    metricColor: '#075985',
-  },
-  'SaaS / ISV': {
-    pill: 'bg-[#fff7ed] text-[#9a3412] border border-[#fed7aa]',
-    bar: '#e89a78',
-    metricColor: '#c2612d',
-  },
+const industryIcon: Record<Exclude<Industry, 'All'>, LucideIcon> = {
+  PropTech: Building2,
+  'Financial Services': Landmark,
+  Healthcare: HeartPulse,
+  Retail: ShoppingBag,
+  Manufacturing: Factory,
+  Logistics: Truck,
+  'SaaS / ISV': Cloud,
 };
 
 type CaseStudy = {
@@ -63,6 +39,28 @@ type CaseStudy = {
 };
 
 const caseStudies: CaseStudy[] = [
+  {
+    id: 'reesure-document-intelligence',
+    industry: 'PropTech',
+    client: 'Reesure',
+    title: 'Document Intelligence for automated rent & tenancy operations',
+    desc: 'We built an Azure Document Intelligence pipeline that reads tenancy agreements, statements, and arrears documents — extracting structured, validated data into Reesure’s AI rent-operations layer with zero manual keying.',
+    service: 'AI Agents & RAG',
+    serviceUrl: '/services/ai-agents-rag',
+    tags: ['Azure Document Intelligence', 'Azure OpenAI', 'GDPR'],
+    metric: { value: '90%', label: 'Manual document handling removed' },
+  },
+  {
+    id: 'reesure-payment-automation',
+    industry: 'PropTech',
+    client: 'Reesure',
+    title: 'Automated rent collection, reconciliation & arrears recovery',
+    desc: 'We implemented end-to-end payment automation — rent collection, reconciliation, and AI-prioritised arrears recovery — integrated with existing property management systems and fully audit-ready.',
+    service: 'Payment Automation',
+    serviceUrl: Constants.PAGES.PAYMENT_AUTOMATION,
+    tags: ['Payment Automation', 'Reconciliation', 'PMS Integration'],
+    metric: { value: '4×', label: 'Faster arrears recovery' },
+  },
   {
     id: 'banking-migration',
     industry: 'Financial Services',
@@ -133,6 +131,7 @@ const caseStudies: CaseStudy[] = [
 
 const filters: Industry[] = [
   'All',
+  'PropTech',
   'Financial Services',
   'Healthcare',
   'Retail',
@@ -142,8 +141,8 @@ const filters: Industry[] = [
 ];
 
 const heroStats = [
-  { value: '6+', label: 'Engagements delivered' },
-  { value: '6', label: 'Industries served' },
+  { value: '8+', label: 'Engagements delivered' },
+  { value: '7', label: 'Industries served' },
   { value: '40%', label: 'Average cost reduction' },
   { value: '99.99%', label: 'Uptime achieved' },
 ];
@@ -216,8 +215,14 @@ export default function CaseStudiesPage() {
           </div>
         </div>
 
-        {/* multicolour divider — full viewport width */}
-        <hr className="linegrad-divider m-0 h-1 w-full border-0" />
+        {/* Amazon-style divider (page-scoped) — full viewport width */}
+        <hr
+          className="m-0 h-1 w-full border-0"
+          style={{
+            backgroundImage: 'linear-gradient(260deg, #fff, #ff9900 20%, #ff6a3d 50%, #ff4f8b 80%, #fff)',
+            borderRadius: 100,
+          }}
+        />
       </div>
 
       {/* ── Filter + Cards ── */}
@@ -252,78 +257,68 @@ export default function CaseStudiesPage() {
             <div className="flex flex-col gap-6">
 
               {/* Featured card */}
-              {featured && (
-                <div className="overflow-hidden rounded-2xl border border-[#e6e6e6] bg-white">
-                  <div className="h-[3px]" style={{ backgroundColor: industryStyle[featured.industry].bar }} />
-                  <div className="p-7 sm:p-10 lg:p-12">
+              {featured && (() => {
+                const Icon = industryIcon[featured.industry];
+                return (
+                  <Link
+                    href={featured.serviceUrl}
+                    className="group block overflow-hidden rounded-2xl border border-[#e6e6e6] bg-white p-7 transition-shadow duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] sm:p-10 lg:p-12"
+                  >
                     <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-16">
                       <div className="min-w-0 flex-1">
-                        <div className="mb-6 flex items-center justify-between">
-                          <span className={`inline-flex items-center rounded-full px-3 py-1 text-[11px] font-semibold ${industryStyle[featured.industry].pill}`}>
-                            {featured.industry}
+                        <div className="mb-6 flex items-center gap-3">
+                          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#eee] bg-[#fafafa]">
+                            <Icon className="h-5 w-5 text-[#111]" strokeWidth={1.6} aria-hidden="true" />
                           </span>
-                          <span className="hidden text-[10px] font-semibold uppercase tracking-[0.15em] text-[#9ca3af] sm:block">Featured</span>
+                          <span className="text-[11px] font-medium uppercase tracking-[0.12em] text-[#9ca3af]">{featured.industry}</span>
+                          <span className="ml-auto hidden text-[10px] font-semibold uppercase tracking-[0.15em] text-[#9ca3af] sm:block">Featured</span>
                         </div>
                         <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.12em] text-[#9ca3af]">{featured.client}</p>
                         <h2 className="m-0 mb-5 max-w-2xl text-[26px] font-medium leading-[1.15] text-[#111] sm:text-[32px] lg:text-[40px]">{featured.title}</h2>
-                        <p className="mb-8 max-w-2xl text-[16px] font-normal leading-[1.5] text-[#111]">{featured.desc}</p>
-                        <div className="mb-8 flex flex-wrap gap-2">
-                          {featured.tags.map((tag) => (
-                            <span key={tag} className="rounded-md border border-[#e6e6e6] px-2.5 py-1 text-[11px] font-medium text-[#111]">{tag}</span>
-                          ))}
-                        </div>
-                        <Link href={featured.serviceUrl} className="inline-flex items-center gap-2 rounded-full bg-[#111] px-5 py-3 text-[14px] font-medium text-white transition-opacity hover:opacity-90">
+                        <p className="mb-8 max-w-2xl text-[16px] font-normal leading-[1.5] text-[#6b7280]">{featured.desc}</p>
+                        <span className="inline-flex items-center gap-2 rounded-full bg-[#111] px-5 py-3 text-[14px] font-medium text-white transition-opacity group-hover:opacity-90">
                           View {featured.service}
                           <ArrowIcon />
-                        </Link>
+                        </span>
                       </div>
                       <div className="shrink-0 lg:w-52">
                         <div className="rounded-2xl border border-[#eee] bg-[#fafafa] p-6">
-                          <p className="mb-2 text-[48px] font-medium leading-none sm:text-[56px]" style={{ color: industryStyle[featured.industry].metricColor }}>{featured.metric.value}</p>
+                          <p className="mb-2 text-[40px] font-medium leading-none text-[#111] sm:text-[48px]">{featured.metric.value}</p>
                           <p className="text-[13px] font-normal leading-snug text-[#6b7280]">{featured.metric.label}</p>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              )}
+                  </Link>
+                );
+              })()}
 
               {/* Regular cards grid */}
               {rest.length > 0 && (
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {rest.map((cs) => {
-                    const sty = industryStyle[cs.industry];
+                    const Icon = industryIcon[cs.industry];
                     return (
-                      <div
+                      <Link
                         key={cs.id}
-                        className="flex flex-col overflow-hidden rounded-2xl border border-[#e6e6e6] bg-white transition-shadow duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)]"
+                        href={cs.serviceUrl}
+                        className="group flex flex-col rounded-2xl border border-[#e6e6e6] bg-white p-6 transition-shadow duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)]"
                       >
-                        <div className="h-[3px] shrink-0" style={{ backgroundColor: sty.bar }} />
-                        <div className="flex flex-1 flex-col p-6">
-                          <div className="mb-5">
-                            <span className={`inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold ${sty.pill}`}>{cs.industry}</span>
-                          </div>
-                          <div className="mb-5">
-                            <p className="mb-1 text-[36px] font-medium leading-none" style={{ color: sty.metricColor }}>{cs.metric.value}</p>
-                            <p className="text-[12px] font-normal text-[#9ca3af]">{cs.metric.label}</p>
-                          </div>
-                          <div className="mb-5 border-t border-[#eee]" />
-                          <p className="mb-2 text-[10px] font-medium uppercase tracking-[0.12em] text-[#9ca3af]">{cs.client}</p>
-                          <h3 className="mb-3 text-[16px] font-medium leading-snug text-[#111]">{cs.title}</h3>
-                          <p className="mb-5 flex-1 text-[14px] font-normal leading-[1.5] text-[#111]">{cs.desc}</p>
-                          <div className="mb-5 flex flex-wrap gap-1.5">
-                            {cs.tags.map((tag) => (
-                              <span key={tag} className="rounded-md border border-[#e6e6e6] px-2 py-0.5 text-[11px] font-medium text-[#111]">{tag}</span>
-                            ))}
-                          </div>
-                          <div className="flex items-center justify-between border-t border-[#eee] pt-4">
-                            <Link href={cs.serviceUrl} className="text-[12px] font-medium text-[#6b7280] transition-colors hover:text-[#111]">{cs.service}</Link>
-                            <Link href={cs.serviceUrl} className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[#111]">
-                              Read more <ArrowIcon />
-                            </Link>
-                          </div>
+                        <div className="mb-6 flex items-center justify-between">
+                          <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#eee] bg-[#fafafa]">
+                            <Icon className="h-5 w-5 text-[#111]" strokeWidth={1.6} aria-hidden="true" />
+                          </span>
+                          <span className="text-[11px] font-medium uppercase tracking-[0.12em] text-[#9ca3af]">{cs.industry}</span>
                         </div>
-                      </div>
+                        <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.12em] text-[#9ca3af]">{cs.client}</p>
+                        <h3 className="mb-3 text-[17px] font-medium leading-snug text-[#111]">{cs.title}</h3>
+                        <p className="mb-5 flex-1 text-[14px] font-normal leading-[1.5] text-[#6b7280]">{cs.desc}</p>
+                        <div className="flex items-center justify-between border-t border-[#eee] pt-4">
+                          <span className="text-[12px] font-medium text-[#6b7280]">{cs.metric.value} · {cs.metric.label}</span>
+                          <span className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[#111] transition-all group-hover:gap-2.5">
+                            Read more <ArrowIcon />
+                          </span>
+                        </div>
+                      </Link>
                     );
                   })}
                 </div>

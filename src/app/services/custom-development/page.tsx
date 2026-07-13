@@ -7,17 +7,28 @@ import {
 import { CONTAINER, Eyebrow, SecondaryButton } from "@/app/components/partials/services/ServiceUI";
 
 /* Page-scoped blue-concept primary button (matches the cloud-native-sd redesign) */
-const BLUE_GRADIENT = "linear-gradient(135deg, #3b82f6 0%, #1e4fd6 100%)";
-const BLUE_GLOW = "0 6px 24px rgba(37,99,235,0.35)";
-
 function BlueButton({ href, children }: { href: string; children: React.ReactNode }) {
   return (
     <Link
       href={href}
-      className="inline-flex items-center rounded-full px-6 py-3 text-[15px] font-medium text-white transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
-      style={{ background: BLUE_GRADIENT, boxShadow: BLUE_GLOW }}
+      className="ai-search-wrap inline-block transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none"
     >
-      {children}
+      <span className="ai-search-inner flex items-center gap-2.5 px-6 py-3">
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" className="shrink-0">
+          <defs>
+            <linearGradient id="cd-spark-grad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#60a5fa" />
+              <stop offset="50%" stopColor="#3b82f6" />
+              <stop offset="100%" stopColor="#1e4fd6" />
+            </linearGradient>
+          </defs>
+          <path fill="url(#cd-spark-grad)" d="M12 0c0 6.627-5.373 12-12 12 6.627 0 12 5.373 12 12 0-6.627 5.373-12 12-12-6.627 0-12-5.373-12-12Z" />
+        </svg>
+        <span className="text-[15px] font-medium text-[#111]">{children}</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0 text-[#111]">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </span>
     </Link>
   );
 }
@@ -70,17 +81,7 @@ export default function CustomDevelopmentPage() {
               </div>
               <h1 className="m-0 text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
                 We build products that{" "}
-                <span
-                  style={{
-                    background: "linear-gradient(120deg, #2563eb 0%, #3b82f6 45%, #1e4fd6 100%)",
-                    WebkitBackgroundClip: "text",
-                    backgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    color: "transparent",
-                  }}
-                >
-                  don&apos;t break.
-                </span>
+                <span className="text-[#111]">don&apos;t break.</span>
               </h1>
               <p className="mt-6 max-w-[520px] text-[18px] font-light leading-[1.6] text-[#111]">
                 From MVPs to full-scale platforms — reliable software that grows with your
@@ -138,11 +139,11 @@ export default function CustomDevelopmentPage() {
           </div>
         </div>
 
-        {/* blue-concept divider — full viewport width */}
+        {/* Amazon-style divider (page-scoped) — full viewport width */}
         <hr
           className="m-0 h-1 w-full border-0"
           style={{
-            backgroundImage: "linear-gradient(260deg, #fff, #60a5fa 15%, #3b82f6 50%, #1e4fd6 85%, #fff)",
+            backgroundImage: "linear-gradient(260deg, #fff, #ff9900 20%, #ff6a3d 50%, #ff4f8b 80%, #fff)",
             borderRadius: 100,
           }}
         />
