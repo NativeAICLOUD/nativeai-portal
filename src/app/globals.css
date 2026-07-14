@@ -58,6 +58,19 @@
     background: rgba(0, 0, 0, 0.3);
   }
 
+  /* Industries auto-scroller (seamless infinite vertical loop) */
+  .industry-scroller {
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overscroll-behavior: contain;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 94%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 94%, transparent);
+  }
+  .industry-scroller::-webkit-scrollbar {
+    display: none;
+  }
+
   /* Google "AI Mode" style animated gradient ring around the navbar search */
   .ai-search-wrap {
     position: relative;

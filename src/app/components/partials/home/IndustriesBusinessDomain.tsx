@@ -1,430 +1,147 @@
-﻿"use client";
+'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Plane, Scale, Wallet, ShoppingBag, ShieldCheck, Factory, FlaskConical, HardHat, Leaf, Building2, type LucideIcon } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+import Link from 'next/link';
+import {
+  Zap, Landmark, ShieldCheck, CreditCard, Truck, Cpu, Plane,
+  Scale, Wallet, ShoppingBag, HardHat, Boxes, ArrowRight,
+  type LucideIcon,
+} from 'lucide-react';
 
-const industries = [
-  {
-    number: '01',
-    title:  'Travel',
-    desc:   'Tourism & mobility',
-    src:    '/img/industry1.png',
-    w: 81, h: 81,
-    detail: 'We build booking platforms, traveller experience apps, and AI-powered operations for airlines, hotels, and mobility providers — faster journeys from search to seat.',
-    tags:   ['Booking Platforms', 'AI Personalisation', 'Real-time Ops', 'Loyalty Systems'],
-  },
-  {
-    number: '02',
-    title:  'Legal & Compliance',
-    desc:   'Law firms & legal teams',
-    src:    '/img/industry-legal.svg',
-    w: 78, h: 80,
-    detail: 'We build AI workspaces for law firms and legal teams — document classification, deadline extraction, contract analysis, and case workflow automation that keeps every matter on track.',
-    tags:   ['Document AI', 'Deadline Extraction', 'Contract Analysis', 'Case Workflows'],
-  },
-  {
-    number: '03',
-    title:  'Fintech',
-    desc:   'Banking & payments',
-    src:    '/img/industry2.png',
-    w: 77, h: 74,
-    detail: 'We help financial institutions automate compliance, detect fraud in real time, and build customer-facing products that scale from startup to enterprise.',
-    tags:   ['AI Fraud Detection', 'Payment Automation', 'RegTech', 'Open Banking'],
-  },
-  {
-    number: '04',
-    title:  'E-commerce & Retail',
-    desc:   'Online & in-store',
-    src:    '/img/industry3.png',
-    w: 67, h: 74,
-    detail: 'From personalised product recommendations to inventory automation and omnichannel platforms — we help retailers sell smarter and operate leaner.',
-    tags:   ['AI Recommendations', 'Inventory Automation', 'Omnichannel', 'Analytics'],
-  },
-  {
-    number: '05',
-    title:  'Insurance',
-    desc:   'Claims & InsurTech',
-    src:    '/img/industry4.png',
-    w: 78, h: 80,
-    detail: 'We automate claims processing, accelerate underwriting with AI, and build digital portals that modernise the full insurance value chain.',
-    tags:   ['Claims Automation', 'Underwriting AI', 'Risk Assessment', 'Customer Portal'],
-  },
-  {
-    number: '06',
-    title:  'Manufacturing',
-    desc:   'Industry 4.0',
-    src:    '/img/industry5.png',
-    w: 72, h: 80,
-    detail: 'We connect factory floors to intelligent systems — predictive maintenance, quality control AI, and supply chain visibility that cuts downtime and waste.',
-    tags:   ['Predictive Maintenance', 'Quality Control AI', 'Supply Chain', 'IoT Integration'],
-  },
-  {
-    number: '07',
-    title:  'Chemical',
-    desc:   'Process & compliance',
-    src:    '/img/industry6.png',
-    w: 80, h: 79,
-    detail: 'We build compliance management systems, process optimisation tools, and safety monitoring platforms tailored to the regulatory demands of chemical industries.',
-    tags:   ['Process Optimisation', 'Safety Monitoring', 'Compliance Mgmt', 'ERP Integration'],
-  },
-  {
-    number: '08',
-    title:  'Construction',
-    desc:   'Build & project mgmt',
-    src:    '/img/industry7.png',
-    w: 79, h: 79,
-    detail: 'From project management platforms to BIM integrations and on-site IoT — we deliver digital tools that keep construction projects on time and on budget.',
-    tags:   ['Project Management', 'BIM Integration', 'On-site IoT', 'Document Automation'],
-  },
-  {
-    number: '09',
-    title:  'Renewable Energy',
-    desc:   'Clean tech & grid',
-    src:    '/img/industry8.png',
-    w: 74, h: 89,
-    detail: 'We develop monitoring platforms, grid optimisation tools, and data pipelines that help energy companies maximise output and manage assets at scale.',
-    tags:   ['Grid Optimisation', 'Asset Monitoring', 'Data Pipelines', 'Forecasting AI'],
-  },
-  {
-    number: '10',
-    title:  'B2B Solutions',
-    desc:   'Enterprise platforms',
-    src:    '/img/industry9.png',
-    w: 90, h: 82,
-    detail: 'We build the platforms, portals, and integrations that power B2B operations — from CRM automation to partner ecosystems and self-serve customer hubs.',
-    tags:   ['CRM Automation', 'Partner Portals', 'API Integrations', 'Self-serve Hubs'],
-  },
+type Industry = {
+  title: string;
+  description?: string;
+  href: string;
+  icon: LucideIcon;
+};
+
+const industries: Industry[] = [
+  { title: 'Energy and Resources',       href: '/industries',          icon: Zap },
+  { title: 'Finance and Banking',        href: '/industries',          icon: Landmark },
+  { title: 'Insurance',                  href: '/industries',          icon: ShieldCheck },
+  { title: 'Payments',                   href: '/payment-automation',  icon: CreditCard },
+  { title: 'Supply Chain and Logistics', href: '/industries',          icon: Truck },
+  { title: 'Technology',                 href: '/industries',          icon: Cpu },
+  { title: 'Travel',                     href: '/airline-booking',     icon: Plane },
+  { title: 'Legal & Compliance',         href: '/ai-legal-workspace',  icon: Scale },
+  { title: 'Fintech',                    href: '/payment-automation',  icon: Wallet },
+  { title: 'E-commerce & Retail',        href: '/industries',          icon: ShoppingBag },
+  { title: 'Construction',               href: '/industries',          icon: HardHat },
+  { title: 'B2B Solutions',              href: '/industries',          icon: Boxes },
 ];
 
-const industryIcons: LucideIcon[] = [
-  Plane, Scale, Wallet, ShoppingBag, ShieldCheck, Factory, FlaskConical, HardHat, Leaf, Building2,
-];
+function IndustryCard({ title, href, icon: Icon, duplicate = false }: Industry & { duplicate?: boolean }) {
+  return (
+    <Link
+      href={href}
+      aria-hidden={duplicate || undefined}
+      tabIndex={duplicate ? -1 : undefined}
+      className="group mb-6 flex items-center gap-6 rounded-[24px] border border-[#e6e6e6] bg-white px-7 py-9 transition-[transform,background-color,border-color,box-shadow] duration-200 hover:translate-x-1 hover:border-[#111]/20 hover:shadow-[0_6px_20px_rgba(0,0,0,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111]/20 sm:px-9 sm:py-11 lg:mb-8"
+    >
+      <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-[#e6e6e6] bg-[#f3f4f6] transition-transform duration-200 group-hover:scale-105 sm:h-[70px] sm:w-[70px]">
+        <Icon className="h-7 w-7 text-[#2563eb] sm:h-8 sm:w-8" strokeWidth={1.6} aria-hidden="true" />
+      </span>
+      <span className="text-[21px] font-semibold leading-tight text-[#111] sm:text-[25px]">{title}</span>
+    </Link>
+  );
+}
 
-const INTERVAL = 3500;
+function IndustryScroller() {
+  const ref = useRef<HTMLDivElement>(null);
 
-export default function IndustriesBusinessDomain() {
-  const [active,  setActive]  = useState(0);
-  const [dir,     setDir]     = useState(1);
-  const [paused,  setPaused]  = useState(false);
-  const activeRef             = useRef(active);
-  activeRef.current           = active;
-
-  const go = (i: number) => { setDir(i > activeRef.current ? 1 : -1); setActive(i); };
-  const prev = () => go((activeRef.current - 1 + industries.length) % industries.length);
-  const next = () => go((activeRef.current + 1) % industries.length);
-
-  /* auto-advance */
   useEffect(() => {
-    if (paused) return;
-    const id = setInterval(() => {
-      const n = (activeRef.current + 1) % industries.length;
-      setDir(1);
-      setActive(n);
-    }, INTERVAL);
-    return () => clearInterval(id);
-  }, [paused]);
+    const el = ref.current;
+    if (!el) return;
+    if (typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
 
-  const item = industries[active];
-  const Icon = industryIcons[active];
+    let raf = 0;
+    let last = performance.now();
+    let paused = false;
+    const SPEED = 55; // px per second — one pass in ~24–30s, then stops at the last card
+
+    const pause = () => { paused = true; };
+    const resume = () => { paused = false; };
+    el.addEventListener('pointerenter', pause);
+    el.addEventListener('pointerleave', resume);
+
+    const tick = (now: number) => {
+      const dt = now - last;
+      last = now;
+      const max = el.scrollHeight - el.clientHeight;
+      if (!paused && el.scrollTop < max - 0.5) {
+        el.scrollTop = Math.min(max, el.scrollTop + (dt / 1000) * SPEED);
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      el.removeEventListener('pointerenter', pause);
+      el.removeEventListener('pointerleave', resume);
+    };
+  }, []);
 
   return (
-    <section className="font-switzer relative bg-white py-20 sm:py-28 overflow-hidden">
-      {/* AI-era gradient for the industry icons */}
-      <svg width="0" height="0" className="absolute" aria-hidden="true">
-        <defs>
-          <linearGradient id="ind-grad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#60a5fa" />
-            <stop offset="50%" stopColor="#3b82f6" />
-            <stop offset="100%" stopColor="#1e4fd6" />
-          </linearGradient>
-        </defs>
-      </svg>
-      <div className="max-w-9xl mx-auto px-6 sm:px-12 xl:px-16">
+    <div ref={ref} className="industry-scroller relative h-[460px] sm:h-[560px] lg:h-[720px]">
+      <div className="flex flex-col pb-2">
+        {industries.map((ind) => (
+          <IndustryCard key={ind.title} {...ind} />
+        ))}
+      </div>
+    </div>
+  );
+}
 
-        {/* ── Header ── */}
-        <motion.div
-          className="mb-12 sm:mb-16"
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, ease: 'easeOut' }}
-          viewport={{ once: true, margin: '-80px' }}
-        >
-          <p className="text-[12px] font-medium uppercase tracking-[0.14em] text-[#9ca3af] mb-4">Industries we serve</p>
-          <h2 className="text-[30px] md:text-[40px] font-medium text-[#111] leading-[1.1] max-w-2xl">
-            Move your industry forward{' '}
-            <span
-              style={{
-                background: 'linear-gradient(120deg, #60a5fa 0%, #3b82f6 45%, #1e4fd6 100%)',
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                color: 'transparent',
-              }}
-            >
-              with AI.
-            </span>
-          </h2>
-          <p className="mt-4 max-w-xl text-[16px] font-light leading-[1.6] text-[#6b7280]">
-            From booking platforms to claims automation — we bring AI agents, LLMs, and cloud
-            engineering to the problems that matter in your sector.
-          </p>
-        </motion.div>
+export default function IndustriesBusinessDomain() {
+  return (
+    <section className="font-switzer relative overflow-hidden bg-[#f6f7f9]">
 
-        {/* ══ DESKTOP  lg+ ══════════════════════════════════════════ */}
-        <div
-          className="hidden lg:grid lg:grid-cols-[1fr_420px] xl:grid-cols-[1fr_480px] gap-16 items-start"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-        >
+      {/* Decorative glow — top-right */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-24 right-[6%] h-80 w-80 rounded-full"
+        style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.10) 0%, transparent 70%)' }}
+      />
 
-          {/* Left — industry list (scrollable, ChatGPT/DeepSeek-style) */}
-          <div className="thin-scroll relative max-h-[70vh] overflow-y-auto pr-3">
-            {industries.map((ind, i) => (
-              <motion.div
-                key={i}
-                onMouseEnter={() => setActive(i)}
-                onClick={() => setActive(i)}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, ease: 'easeOut', delay: i * 0.05 }}
-                viewport={{ once: true, margin: '-40px' }}
-                className="group flex items-center justify-between py-5 border-b cursor-pointer select-none"
-                style={{ borderColor: '#e6e6e6' }}
+      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-2 lg:gap-16 lg:py-24">
+
+            {/* Left — static content */}
+            <div className="flex flex-col">
+              <p className="mb-5 text-[12px] font-medium uppercase tracking-[0.14em] text-[#9ca3af]">
+                Industries we serve
+              </p>
+              <h2 className="m-0 text-[clamp(2.4rem,5vw,4.4rem)] font-medium leading-[1.04] tracking-tight text-[#111]">
+                Move your industry forward
+              </h2>
+              <p className="mt-6 max-w-[440px] text-[16px] font-light leading-[1.7] text-[#6b7280]">
+                From legal intelligence and financial services to healthcare and technology, our
+                sector-specific expertise allows us to build AI-powered solutions that address what
+                is happening in your industry today — and prepare you for what comes next.
+              </p>
+              <Link
+                href="/industries"
+                className="ai-search-wrap group mt-9 inline-block w-fit transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none"
               >
-                {/* left: number + title */}
-                <div className="flex items-center gap-5">
-                  <span
-                    className="font-mono text-[11px] tracking-widest shrink-0 transition-colors duration-200"
-                    style={{ color: i === active ? '#111' : '#c4c4c4' }}
-                  >
-                    {ind.number}
-                  </span>
-                  <span
-                    className="font-medium leading-tight transition-all duration-200"
-                    style={{
-                      fontSize:   'clamp(1.1rem, 2vw, 1.6rem)',
-                      color:      i === active ? '#111' : '#9ca3af',
-                    }}
-                  >
-                    {ind.title}
-                  </span>
-                </div>
-
-                {/* right: desc + arrow */}
-                <div className="flex items-center gap-3 shrink-0">
-                  <span
-                    className="text-xs font-medium transition-all duration-200"
-                    style={{ color: i === active ? '#6b7280' : 'transparent' }}
-                  >
-                    {ind.desc}
-                  </span>
-                  <div
-                    className="w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-200"
-                    style={{
-                      borderColor:     i === active ? '#111'  : '#e6e6e6',
-                      backgroundColor: i === active ? '#111'  : 'transparent',
-                      color:           i === active ? '#ffffff'  : '#c4c4c4',
-                    }}
-                  >
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
-                      <path d="M7 17L17 7M17 7H7M17 7v10" />
-                    </svg>
-                  </div>
-                </div>
-
-                {/* active line */}
-                {i === active && (
-                  <motion.div
-                    layoutId="activeLine"
-                    className="absolute left-0 w-[3px] rounded-full bg-[#111]"
-                    style={{ height: 40 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 35 }}
-                  />
-                )}
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Right — sticky panel */}
-          <div className="sticky top-24">
-            <AnimatePresence mode="wait" custom={dir}>
-              <motion.div
-                key={active}
-                custom={dir}
-                variants={{
-                  enter:  (d: number) => ({ y: d * 24, opacity: 0, scale: 0.97 }),
-                  center: { y: 0, opacity: 1, scale: 1 },
-                  exit:   (d: number) => ({ y: -d * 24, opacity: 0, scale: 0.97 }),
-                }}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.3, ease: 'easeInOut' }}
-                className="rounded-2xl overflow-hidden"
-                style={{
-                  background: '#0a0e1a',
-                  boxShadow:  '0 24px 64px rgba(10,14,26,0.18), 0 4px 16px rgba(0,0,0,0.08)',
-                }}
-              >
-                {/* icon area */}
-                <div className="flex items-center justify-center py-12 px-8"
-                  style={{ background: 'rgba(255,255,255,0.03)', borderBottom: '1px solid rgba(255,255,255,0.07)' }}
-                >
-                  <Icon className="h-16 w-16" strokeWidth={1.3} stroke="url(#ind-grad)" aria-hidden="true" />
-                </div>
-
-                {/* content */}
-                <div className="p-7">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="font-mono text-[11px] tracking-widest text-white/60 font-semibold">{item.number}</span>
-                    <span
-                      className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full"
-                      style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.6)' }}
-                    >
-                      {item.desc}
-                    </span>
-                  </div>
-
-                  <h3 className="text-xl font-bold text-white mb-3 leading-tight">{item.title}</h3>
-                  <p className="text-white/50 text-sm leading-relaxed mb-5">{item.detail}</p>
-
-                  <div className="flex flex-wrap gap-1.5">
-                    {item.tags.map(tag => (
-                      <span
-                        key={tag}
-                        className="text-[11px] font-medium px-2.5 py-1 rounded-full"
-                        style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.10)', color: 'rgba(255,255,255,0.55)' }}
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* auto-advance progress bar */}
-                <div style={{ height: 2, background: 'rgba(255,255,255,0.07)' }}>
-                  {!paused && (
-                    <motion.div
-                      key={active}
-                      initial={{ width: '0%' }}
-                      animate={{ width: '100%' }}
-                      transition={{ duration: INTERVAL / 1000, ease: 'linear' }}
-                      style={{ height: '100%', background: 'linear-gradient(90deg, #60a5fa, #3b82f6, #1e4fd6)' }}
-                    />
-                  )}
-                </div>
-
-                {/* nav */}
-                <div className="flex items-center justify-between px-7 py-4" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-                  <span className="font-mono text-xs text-white/25 tabular-nums">
-                    {String(active + 1).padStart(2, '0')} / {String(industries.length).padStart(2, '0')}
-                  </span>
-                  <div className="flex gap-2">
-                    {[prev, next].map((fn, j) => (
-                      <button
-                        key={j}
-                        onClick={fn}
-                        className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white/10"
-                        style={{ border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.4)' }}
-                      >
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
-                          <path d={j === 0 ? 'M15 18l-6-6 6-6' : 'M9 18l6-6-6-6'} />
-                        </svg>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
-
-        {/* ══ MOBILE  < lg ═══════════════════════════════════════════ */}
-        <div className="lg:hidden" onTouchStart={() => setPaused(true)}>
-
-          {/* pills */}
-          <div className="flex flex-wrap gap-2 mb-6">
-            {industries.map((ind, i) => (
-              <button
-                key={i}
-                onClick={() => go(i)}
-                className="text-[12px] font-medium px-3.5 py-1.5 rounded-full border transition-all duration-200"
-                style={{
-                  background:  i === active ? '#111' : 'transparent',
-                  borderColor: i === active ? '#111' : '#e6e6e6',
-                  color:       i === active ? '#fff' : '#6b7280',
-                }}
-              >
-                {ind.title}
-              </button>
-            ))}
-          </div>
-
-          {/* card */}
-          <div className="rounded-2xl overflow-hidden" style={{ background: '#0a0e1a', boxShadow: '0 16px 48px rgba(10,14,26,0.18)' }}>
-            <AnimatePresence mode="wait" custom={dir}>
-              <motion.div
-                key={active}
-                custom={dir}
-                variants={{
-                  enter:  (d: number) => ({ x: d * 40, opacity: 0 }),
-                  center: { x: 0, opacity: 1 },
-                  exit:   (d: number) => ({ x: -d * 40, opacity: 0 }),
-                }}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.26, ease: 'easeInOut' }}
-              >
-                {/* icon */}
-                <div className="flex justify-center py-10" style={{ background: 'rgba(255,255,255,0.03)', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-                  <Icon className="h-14 w-14" strokeWidth={1.3} stroke="url(#ind-grad)" aria-hidden="true" />
-                </div>
-
-                {/* content */}
-                <div className="p-6">
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="font-mono text-[11px] tracking-widest text-white/60 font-semibold">{item.number}</span>
-                    <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.6)' }}>
-                      {item.desc}
-                    </span>
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-                  <p className="text-white/50 text-sm leading-relaxed mb-4">{item.detail}</p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {item.tags.map(tag => (
-                      <span key={tag} className="text-[11px] font-medium px-2.5 py-1 rounded-full" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.10)', color: 'rgba(255,255,255,0.55)' }}>
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-
-            {/* nav */}
-            <div className="flex items-center justify-between px-6 py-4" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-              <div className="flex gap-1.5">
-                {industries.map((_, i) => (
-                  <button key={i} onClick={() => go(i)} className="rounded-full transition-all duration-200"
-                    style={{ width: i === active ? 18 : 5, height: 5, background: i < active ? 'rgba(255,255,255,0.5)' : i === active ? '#fff' : 'rgba(255,255,255,0.18)' }}
-                  />
-                ))}
-              </div>
-              <div className="flex gap-2">
-                {[prev, next].map((fn, j) => (
-                  <button key={j} onClick={fn} className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white/10"
-                    style={{ border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.4)' }}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
-                      <path d={j === 0 ? 'M15 18l-6-6 6-6' : 'M9 18l6-6-6-6'} />
-                    </svg>
-                  </button>
-                ))}
-              </div>
+                <span className="ai-search-inner flex items-center gap-2.5 px-6 py-3">
+                  <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" className="shrink-0">
+                    <defs>
+                      <linearGradient id="ind-cta-grad" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stopColor="#60a5fa" />
+                        <stop offset="50%" stopColor="#3b82f6" />
+                        <stop offset="100%" stopColor="#1e4fd6" />
+                      </linearGradient>
+                    </defs>
+                    <path fill="url(#ind-cta-grad)" d="M12 0c0 6.627-5.373 12-12 12 6.627 0 12 5.373 12 12 0-6.627 5.373-12 12-12-6.627 0-12-5.373-12-12Z" />
+                  </svg>
+                  <span className="text-[15px] font-medium text-[#111]">Explore our industries</span>
+                  <ArrowRight className="h-4 w-4 text-[#111] transition-transform duration-200 group-hover:translate-x-1.5" aria-hidden="true" />
+                </span>
+              </Link>
             </div>
-          </div>
-        </div>
+
+            {/* Right — auto-scrolling industry cards */}
+            <IndustryScroller />
 
       </div>
     </section>
