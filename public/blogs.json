@@ -54,5 +54,12 @@
     "title": "Azure Security Fundamentals: Zero Trust for Cloud Workloads",
     "date": "2025-03-10T09:00:00.000Z",
     "desc": "The traditional perimeter-based security model does not work in the cloud. With resources spread across regions, teams accessing systems from anywhere, and workloads communicating over public networks, Zero Trust — never trust, always verify — is the only viable approach. In this article, we implement Zero Trust across an Azure workload step by step: enabling Microsoft Defender for Cloud and addressing its security score recommendations, configuring Entra ID Conditional Access policies to require MFA and compliant devices, applying Just-in-Time VM access to eliminate persistent inbound ports, using Private Endpoints to remove public exposure from storage accounts and databases, and setting up Microsoft Sentinel for centralised security monitoring and automated incident response. This article is a practical starting point for any team that wants to harden their Azure environment against modern threats."
+  },
+  {
+    "id": 10,
+    "image": "/img/Article 1.png",
+    "title": "Claude Opus 5 Is Now Available in Microsoft Foundry",
+    "date": "2026-07-26T09:00:00.000Z",
+    "desc": "Anthropic's Claude Opus 5 — the most advanced model in the Claude 5 family — is now available directly in Microsoft Foundry, giving enterprises a new frontier option for complex reasoning and long-running agentic workloads alongside Foundry's evaluation tools, native security controls, and governed deployment. Opus 5 plans multi-step workflows, adapts when something breaks, and holds context across tools and subagents to see a task through to completion. In this article, we cover what's new in Opus 5, how to deploy and authenticate against it in Foundry, and what it means for developers already building on Microsoft's AI stack."
   }
 ]

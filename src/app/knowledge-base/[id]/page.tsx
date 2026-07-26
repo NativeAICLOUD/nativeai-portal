@@ -57,6 +57,7 @@ const SECTION_HEADINGS: Record<number, string[]> = {
   6: ['Why Cloud Costs Spiral', 'Right-Sizing & Reserved Instances', 'Auto-Shutdown & Serverless', 'Cost Alerts & Budgets'],
   7: ['What is RAG?', 'Indexing Your Data', 'Retrieval & Prompt Assembly', 'Evaluation & Quality'],
   8: ['The Zero Trust Mindset', 'Identity & Access Controls', 'Network Hardening', 'Security Monitoring'],
+  10: ['Claude Opus 5 Arrives in Microsoft Foundry', 'Built for Complex Workflows', 'Agentic AI, Natively', 'Deploying Claude Opus 5 in Foundry', 'What This Means for Developers'],
 };
 
 const CATEGORIES: Record<number, string> = {
@@ -69,6 +70,7 @@ const CATEGORIES: Record<number, string> = {
   7: 'AI & RAG',
   8: 'Security',
   9: 'Infrastructure as Code',
+  10: 'Azure AI',
 };
 
 function buildSections(desc: string, id: number) {

@@ -13,6 +13,7 @@ const CATEGORIES: Record<number, string> = {
   7: 'AI & RAG',
   8: 'Security',
   9: 'Infrastructure as Code',
+  10: 'Azure AI',
 };
 
 export const metadata: Metadata = {
