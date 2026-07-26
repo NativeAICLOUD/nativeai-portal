@@ -94,7 +94,7 @@ export default function ArticleClient({ post, sections, related, readingTime, pu
                   <Image src="/img/Artan.png" alt="Artan Ajredini" width={64} height={64} className="w-16 h-16 rounded-full object-cover shrink-0" style={{ border: '1.5px solid rgba(232,154,120,0.4)' }} />
                   <div>
                     <p className="text-[13px] font-bold text-[#0a0e1a]">Artan Ajredini</p>
-                    <p className="text-[11px] text-[#0a0e1a]/45 mt-0.5">CEO & Cloud Architect</p>
+                    <p className="text-[11px] text-[#0a0e1a]/45 mt-0.5">Founder/CEO AI Architect</p>
                   </div>
                 </div>
                 <div className="border-t border-black/[0.07] pt-3 flex flex-col gap-1.5">

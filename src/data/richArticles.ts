@@ -1650,7 +1650,7 @@ def retrieve(query: str, top_k: int = 5) -> list[dict]:
       blocks: [
         { type: 'paragraph', text: 'What happens if you have run out of backups or your backups do not work? If you have to rebuild loads of servers and deploy all the software, that is going to take ages.' },
         { type: 'paragraph', text: 'But using Infrastructure as Code you can rebuild environments quickly. This is crucial for ensuring business continuity.' },
-        { type: 'quote', text: 'If you have run out of backups or your backups do not work... having infrastructure as code means you can rebuild that environment super quickly.', author: 'Artan Ajredini — CEO & Software Cloud Architect', authorPhoto: '/img/Artan.png' },
+        { type: 'quote', text: 'If you have run out of backups or your backups do not work... having infrastructure as code means you can rebuild that environment super quickly.', author: 'Artan Ajredini — Founder/CEO AI Architect', authorPhoto: '/img/Artan.png' },
       ],
     },
     {

@@ -1,8 +1,7 @@
-﻿import { BG5Img } from '@/ImagePath';
-import type { Metadata } from 'next';
-import Image from 'next/image';
+﻿import type { Metadata } from 'next';
 import KnowledgeBasePosts from '../components/partials/knowledge-base';
 import { getBlogPosts } from '@/lib/blogsPosts';
+import { CONTAINER, Eyebrow } from '@/app/components/partials/services/ServiceUI';
 
 const CATEGORIES: Record<number, string> = {
   1: 'Azure AI',
@@ -37,42 +36,31 @@ const KnowledgeBasePage = async () => {
   const posts = await getBlogPosts();
 
   return (
-    <div className="relative min-h-full overflow-hidden">
-      <div className="absolute w-full h-full z-[-1] top-16 inset-x-0">
-        <Image src={BG5Img} alt="Background" className="!h-auto md:!-top-36" layout="fill" objectFit="cover" objectPosition="top" quality={100} />
-      </div>
+    <div className="font-switzer">
 
-      {/* Decorative grid lines */}
-      <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
-        {/* Vertical lines */}
-        <div className="absolute inset-0 flex justify-between px-[10%]">
-          {[...Array(4)].map((_, i) => (
-            <div key={i} className="w-px h-full bg-gradient-to-b from-transparent via-black/[0.055] to-transparent" />
-          ))}
-        </div>
-        {/* Horizontal accent lines */}
-        <div className="absolute top-[22%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-black/[0.07] to-transparent" />
-        <div className="absolute top-[55%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-black/[0.05] to-transparent" />
-      </div>
-
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-10 2xl:px-0">
-
-        {/* Hero */}
-        <div className="pt-40 pb-12 lg:pt-48 lg:pb-16">
-          <p className="text-[12px] font-medium uppercase tracking-[0.14em] text-[#9ca3af] mb-5">
-            Guides · Articles · News
-          </p>
-          <h1 className="text-[40px] sm:text-[52px] xl:text-[64px] font-medium leading-[1.05] tracking-tight text-[#111] max-w-3xl mb-5">
+      {/* ── Hero ── */}
+      <div className="industries-hero-bg">
+        <div className={`${CONTAINER} pb-12 pt-32 lg:pt-28`}>
+          <div className="mb-6"><Eyebrow>Guides · Articles · News</Eyebrow></div>
+          <h1 className="m-0 max-w-3xl text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
             Knowledge base
           </h1>
-          <p className="text-[#6b7280] text-base lg:text-lg max-w-xl leading-relaxed font-light">
+          <p className="mt-6 max-w-[560px] text-[18px] font-light leading-[1.6] text-[#111]">
             Stay up-to-date with articles, guides, and news on cloud, AI, Azure, Kubernetes, and modern software architecture.
           </p>
-
         </div>
 
-        <KnowledgeBasePosts posts={posts} categories={CATEGORIES} />
+        {/* multicolour divider — full viewport width */}
+        <hr className="linegrad-divider m-0 h-1 w-full border-0" />
       </div>
+
+      {/* ── Articles ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pt-16 lg:pt-20`}>
+          <KnowledgeBasePosts posts={posts} categories={CATEGORIES} />
+        </div>
+      </section>
+
     </div>
   );
 };
