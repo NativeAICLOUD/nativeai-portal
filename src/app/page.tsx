@@ -9,41 +9,64 @@ import PracticalSolutionsSection from "./components/partials/home/PracticalSolut
 import ScrollCardsSection from "./components/partials/home/ScrollCardsSection";
 import RotatingHeadlineHero from "./components/partials/home/RotatingHeadlineHero";
 import TechStackSection from "./components/partials/home/TechStackSection";
+import ScrollSectionNav from "./components/partials/home/ScrollSectionNav";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <HomeHeader />
+      <ScrollSectionNav />
 
-      {/* Scroll-animated 3-card services */}
-      <ScrollCardsSection />
+      <div id="home-hero" style={{ scrollMarginTop: 90 }}>
+        <HomeHeader />
+      </div>
 
-      {/* Metallic shimmer headline hero */}
-      <RotatingHeadlineHero />
+      <div id="highlights" style={{ scrollMarginTop: 90 }}>
+        {/* Scroll-animated 3-card services */}
+        <ScrollCardsSection />
 
-      {/* Industries Section */}
-      <IndustriesBusinessDomain />
+        {/* Metallic shimmer headline hero */}
+        <RotatingHeadlineHero />
+      </div>
 
-      {/* What We Deliver — pinned scroll card experience */}
-      <ServicesScrollSection />
+      <div id="industries" style={{ scrollMarginTop: 90 }}>
+        {/* Industries Section */}
+        <IndustriesBusinessDomain />
+      </div>
 
-      {/* AI Services — 3 core services */}
-      <AIServicesSection />
+      <div id="services" style={{ scrollMarginTop: 90 }}>
+        {/* What We Deliver — pinned scroll card experience */}
+        <ServicesScrollSection />
+      </div>
 
-      {/* Practical AI & Cloud solutions */}
-      <PracticalSolutionsSection />
+      <div id="ai-services" style={{ scrollMarginTop: 90 }}>
+        {/* AI Services — 3 core services */}
+        <AIServicesSection />
+      </div>
 
-      {/* Mission statement */}
-      <MissionSection />
+      <div id="solutions" style={{ scrollMarginTop: 90 }}>
+        {/* Practical AI & Cloud solutions */}
+        <PracticalSolutionsSection />
+      </div>
 
-      {/* Existing Blog Section */}
-      <HomeLowerSection />
+      <div id="mission" style={{ scrollMarginTop: 90 }}>
+        {/* Mission statement */}
+        <MissionSection />
+      </div>
 
-      {/* Interactive Tech Stack */}
-      <TechStackSection />
+      <div id="capabilities" style={{ scrollMarginTop: 90 }}>
+        {/* Existing Blog Section */}
+        <HomeLowerSection />
+      </div>
 
-      {/* Home Partner Section */}
-      <HomePartner />
+      <div id="tech-stack" style={{ scrollMarginTop: 90 }}>
+        {/* Interactive Tech Stack */}
+        <TechStackSection />
+      </div>
+
+      <div id="partners" style={{ scrollMarginTop: 90 }}>
+        {/* Home Partner Section */}
+        <HomePartner />
+      </div>
     </main>
   );
 }

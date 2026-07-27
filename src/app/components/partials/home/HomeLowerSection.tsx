@@ -35,7 +35,7 @@ const services = [
     meta:   'dotnet.dev',
     icon:   '/img/icon-net.svg',
     desc:   'Robust, scalable .NET solutions — from APIs and microservices to full enterprise platforms.',
-    chips:  ['.NET 8', 'C#', 'Microservices', 'REST APIs', 'EF Core'],
+    chips:  ['.NET 9', 'C#', 'Agentic AI', 'Microservices', 'EF Core'],
   },
   {
     number: '04',
