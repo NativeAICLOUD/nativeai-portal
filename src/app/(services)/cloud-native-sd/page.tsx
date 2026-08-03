@@ -126,8 +126,8 @@ export default function CloudNativeSD() {
       </section>
 
       {/* ── Benefits grid ── */}
-      <section className="bg-white">
-        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+      <section className="industries-hero-bg">
+        <div className={`${CONTAINER} py-20 lg:py-24`}>
           <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
               <div className="mb-4"><Eyebrow>Why go cloud-native</Eyebrow></div>
@@ -153,7 +153,7 @@ export default function CloudNativeSD() {
 
       {/* ── Process ── */}
       <section className="bg-white">
-        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+        <div className={`${CONTAINER} py-20 lg:py-24`}>
           <div className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <div className="mb-4"><Eyebrow>How we work</Eyebrow></div>

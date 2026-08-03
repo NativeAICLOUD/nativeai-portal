@@ -72,12 +72,13 @@ function detectCountry(): Country {
 }
 
 function PhoneInputField({
-  value, onChange, onBlur, className,
+  value, onChange, onBlur, className, id,
 }: {
   value: string;
   onChange: (v: string) => void;
   onBlur: () => void;
   className?: string;
+  id?: string;
 }) {
   const [country, setCountry] = useState<Country>(COUNTRIES[0]);
   const [number, setNumber] = useState('');
@@ -123,13 +124,13 @@ function PhoneInputField({
       <button
         type="button"
         onClick={() => setOpen(o => !o)}
-        className="flex items-center gap-1.5 shrink-0 px-3 py-4 sm:py-3.5 rounded-l-2xl transition-all duration-150 focus:outline-none"
+        className="flex items-center gap-1.5 shrink-0 px-3 py-4 sm:py-3.5 rounded-l-lg transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0969da] focus-visible:border-[#0969da]"
         style={{
           minWidth: 84,
           background: open ? 'rgba(0,0,0,0.04)' : '#ffffff',
-          border: '1px solid #e6e6e6',
+          border: '1px solid #d0d7de',
           borderRight: '1px solid #eeeeee',
-          borderRadius: '16px 0 0 16px',
+          borderRadius: '8px 0 0 8px',
           transition: 'background 0.15s',
         }}
       >
@@ -146,13 +147,14 @@ function PhoneInputField({
 
       {/* ── Number input ── */}
       <input
+        id={id}
         type="tel"
         value={number}
         onChange={e => setNumber(e.target.value)}
         onBlur={onBlur}
         placeholder="79 123 45 67"
         className={className}
-        style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0, borderLeft: 'none', borderTopRightRadius: 16, borderBottomRightRadius: 16 }}
+        style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0, borderLeft: 'none', borderTopRightRadius: 8, borderBottomRightRadius: 8 }}
       />
 
       {/* ── Dropdown — Apple liquid glass ── */}
@@ -292,7 +294,8 @@ const expectations = [
   {
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
-        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+        <path d="M22 2 11 13" />
+        <path d="M22 2 15 22l-4-9-9-4 20-7z" />
       </svg>
     ),
     title: 'Fast follow-up',
@@ -376,6 +379,7 @@ export default function ScheduleCallPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [started, setStarted] = useState(false);
+  const [step, setStep] = useState<0 | 1>(0);
 
   const errors = useMemo<Partial<Record<FieldKey, string | undefined>>>(() => {
     const result: Partial<Record<FieldKey, string | undefined>> = {};
@@ -417,13 +421,24 @@ export default function ScheduleCallPage() {
     }
   }, []);
 
+  const handleContinue = useCallback(() => {
+    setTouched((t) => ({ ...t, name: true, email: true }));
+    if (!validateField('name', form.name) && !validateField('email', form.email)) {
+      setStep(1);
+    }
+  }, [form.name, form.email]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const allTouched = Object.fromEntries(
       (Object.keys(form) as FieldKey[]).map((k) => [k, true])
     ) as Record<FieldKey, boolean>;
     setTouched(allTouched);
-    if (!isFormValid) return;
+    if (!isFormValid) {
+      // Required fields live on the first tab — bring the user back to them
+      if (errors.name || errors.email) setStep(0);
+      return;
+    }
     setLoading(true);
     setError(null);
     try {
@@ -448,12 +463,14 @@ export default function ScheduleCallPage() {
     return { err, valid };
   };
 
+  // GitHub-style inputs: 8px radius, #d0d7de border, hairline inset shadow,
+  // blue focus ring; validation switches the border/ring colour, not the bg
   const inputCls = (field: FieldKey, extra = '') => {
     const { err, valid } = fieldState(field);
-    const base = `w-full outline-none rounded-2xl px-4 py-3 text-sm text-[#111] placeholder:text-[#9ca3af] transition-all duration-200 ${extra}`;
-    if (err) return `${base} bg-red-50 border border-red-300 focus:border-red-400 focus:ring-2 focus:ring-red-100`;
-    if (valid) return `${base} bg-emerald-50 border border-emerald-300 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100`;
-    return `${base} bg-white border border-[#e6e6e6] focus:border-[#111] focus:ring-2 focus:ring-black/[0.05]`;
+    const base = `w-full outline-none rounded-lg px-3.5 py-3 text-sm bg-white text-[#1f2328] placeholder:text-[#6e7781] shadow-[inset_0_1px_2px_rgba(31,35,40,0.04)] transition-all duration-150 ${extra}`;
+    if (err) return `${base} border border-[#cf222e] focus:border-[#cf222e] focus:ring-2 focus:ring-[#cf222e]`;
+    if (valid) return `${base} border border-[#1a7f37] focus:border-[#1a7f37] focus:ring-2 focus:ring-[#1a7f37]`;
+    return `${base} border border-[#d0d7de] hover:border-[#8c959f] focus:border-[#0969da] focus:ring-2 focus:ring-[#0969da]`;
   };
 
   return (
@@ -563,7 +580,7 @@ export default function ScheduleCallPage() {
 
         {/* Right — Form or success — shows FIRST on mobile */}
         <div
-          className="overflow-hidden order-1 lg:order-2"
+          className="order-1 lg:order-2"
           style={{
             background: '#ffffff',
             border: '1px solid #e6e6e6',
@@ -617,7 +634,7 @@ export default function ScheduleCallPage() {
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
               {/* Progress header */}
-              <div className="border-b border-[#eee] px-6 sm:px-8 pt-7 pb-5" style={{ background: '#fafafa' }}>
+              <div className="border-b border-[#eee] px-6 sm:px-8 pt-7 pb-5" style={{ background: '#fafafa', borderRadius: '27px 27px 0 0' }}>
                 <div className="flex items-center justify-between mb-3">
                   <h2 className="text-base font-semibold text-[#111] tracking-tight">Book your session</h2>
                   <span className={`text-[11px] font-medium tabular-nums transition-colors duration-300 ${completionScore === 100 ? 'text-emerald-500' : 'text-[#9ca3af]'}`}>
@@ -632,19 +649,57 @@ export default function ScheduleCallPage() {
                 </div>
               </div>
 
+              {/* Tabs — GitHub underline nav */}
+              <div className="flex items-end gap-1 border-b border-[#eee] px-4 sm:px-6" style={{ background: '#fafafa' }}>
+                {['Your details', 'Your project'].map((label, i) => {
+                  const active = step === i;
+                  const detailsDone = !!form.name && !errors.name && !!form.email && !errors.email;
+                  return (
+                    <button
+                      key={label}
+                      type="button"
+                      onClick={() => (i === 0 ? setStep(0) : handleContinue())}
+                      className={`relative flex items-center gap-2 px-3 py-3 text-[13px] transition-colors ${active ? 'font-semibold text-[#1f2328]' : 'font-medium text-[#6e7781] hover:text-[#1f2328]'}`}
+                    >
+                      <span className={`flex h-5 w-5 items-center justify-center rounded-full text-[11px] font-semibold tabular-nums ${
+                        i === 0 && detailsDone && !active
+                          ? 'bg-emerald-100 text-emerald-600'
+                          : active ? 'bg-[linear-gradient(135deg,#3b82f6_0%,#1e4fd6_100%)] text-white' : 'bg-[#eaeef2] text-[#57606a]'
+                      }`}>
+                        {i === 0 && detailsDone && !active ? '✓' : i + 1}
+                      </span>
+                      {label}
+                      {active && <span className="absolute inset-x-2 bottom-0 h-[2px] rounded-full bg-[linear-gradient(135deg,#3b82f6_0%,#1e4fd6_100%)]" />}
+                    </button>
+                  );
+                })}
+              </div>
+
               {/* Form body */}
               <div className="px-6 sm:px-8 pt-7 pb-8 sm:pb-10">
               <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-6">
 
+                {step === 0 ? (
+                <motion.div
+                  key="step-details"
+                  initial={{ opacity: 0, x: -16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.25, ease: 'easeOut' }}
+                  className="flex flex-col gap-6"
+                >
+
                 {/* Row 1: Name + Company */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-2">
-                    <label className="text-[10.5px] font-semibold uppercase tracking-[0.10em] text-[#6b7280]">
-                      Full name <span className="text-[#9ca3af]">*</span>
+                    <label htmlFor="sc-name" className="text-[13px] font-semibold text-[#1f2328]">
+                      Full name <span className="text-[#cf222e]">*</span>
                     </label>
                     <div className="relative">
                       <input
+                        id="sc-name"
                         type="text"
+                        autoFocus
+                        aria-invalid={!!fieldState('name').err}
                         autoComplete="name"
                         placeholder="Jane Smith"
                         value={form.name}
@@ -655,15 +710,16 @@ export default function ScheduleCallPage() {
                       {fieldState('name').valid && <span className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none"><CheckIcon /></span>}
                       {fieldState('name').err   && <span className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none"><ErrorIcon /></span>}
                     </div>
-                    {fieldState('name').err && <p className="text-[11px] text-red-500">{fieldState('name').err}</p>}
+                    {fieldState('name').err && <p className="text-[12px] font-medium text-[#cf222e]">{fieldState('name').err}</p>}
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <label className="text-[10.5px] font-semibold uppercase tracking-[0.10em] text-[#6b7280]">
-                      Company <span className="text-[#9ca3af] font-normal">optional</span>
+                    <label htmlFor="sc-company" className="text-[13px] font-semibold text-[#1f2328]">
+                      Company <span className="text-[12px] font-normal text-[#6e7781]">(optional)</span>
                     </label>
                     <div className="relative">
                       <input
+                        id="sc-company"
                         type="text"
                         autoComplete="organization"
                         placeholder="Acme Corp"
@@ -680,12 +736,14 @@ export default function ScheduleCallPage() {
                 {/* Row 2: Email + Phone */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-2">
-                    <label className="text-[10.5px] font-semibold uppercase tracking-[0.10em] text-[#6b7280]">
-                      Work email <span className="text-[#9ca3af]">*</span>
+                    <label htmlFor="sc-email" className="text-[13px] font-semibold text-[#1f2328]">
+                      Work email <span className="text-[#cf222e]">*</span>
                     </label>
                     <div className="relative">
                       <input
+                        id="sc-email"
                         type="email"
+                        aria-invalid={!!fieldState('email').err}
                         autoComplete="email"
                         placeholder="jane@company.com"
                         value={form.email}
@@ -696,27 +754,49 @@ export default function ScheduleCallPage() {
                       {fieldState('email').valid && <span className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none"><CheckIcon /></span>}
                       {fieldState('email').err   && <span className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none"><ErrorIcon /></span>}
                     </div>
-                    {fieldState('email').err && <p className="text-[11px] text-red-500">{fieldState('email').err}</p>}
+                    {fieldState('email').err && <p className="text-[12px] font-medium text-[#cf222e]">{fieldState('email').err}</p>}
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <label className="text-[10.5px] font-semibold uppercase tracking-[0.10em] text-[#6b7280]">
-                      Phone <span className="text-[#9ca3af] font-normal">optional</span>
+                    <label htmlFor="sc-phone" className="text-[13px] font-semibold text-[#1f2328]">
+                      Phone <span className="text-[12px] font-normal text-[#6e7781]">(optional)</span>
                     </label>
                     <PhoneInputField
+                      id="sc-phone"
                       value={form.phone}
                       onChange={(v) => setForm(f => ({ ...f, phone: v }))}
                       onBlur={handleBlur('phone')}
                       className={inputCls('phone')}
                     />
-                    {fieldState('phone').err && <p className="text-[11px] text-red-500">{fieldState('phone').err}</p>}
+                    {fieldState('phone').err && <p className="text-[12px] font-medium text-[#cf222e]">{fieldState('phone').err}</p>}
                   </div>
                 </div>
 
+                <button
+                  type="button"
+                  onClick={handleContinue}
+                  className="group w-full inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-[#111] hover:opacity-90 text-white font-medium text-sm transition-all duration-150 mt-1"
+                >
+                  Continue
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </button>
+
+                </motion.div>
+                ) : (
+                <motion.div
+                  key="step-project"
+                  initial={{ opacity: 0, x: 16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.25, ease: 'easeOut' }}
+                  className="flex flex-col gap-6"
+                >
+
                 {/* Topic — pill grid */}
                 <div className="flex flex-col gap-2">
-                  <label className="text-[10.5px] font-semibold uppercase tracking-[0.10em] text-[#6b7280]">
-                    What would you like to discuss? <span className="text-[#9ca3af]">*</span>
+                  <label className="text-[13px] font-semibold text-[#1f2328]">
+                    What would you like to discuss? <span className="text-[#cf222e]">*</span>
                   </label>
                   <div className="grid grid-cols-2 gap-2">
                     {topics.map((t) => {
@@ -742,20 +822,21 @@ export default function ScheduleCallPage() {
                       );
                     })}
                   </div>
-                  {fieldState('topic').err && <p className="text-[11px] text-red-500">{fieldState('topic').err}</p>}
+                  {fieldState('topic').err && <p className="text-[12px] font-medium text-[#cf222e]">{fieldState('topic').err}</p>}
                 </div>
 
                 {/* Message */}
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between">
-                    <label className="text-[10.5px] font-semibold uppercase tracking-[0.10em] text-[#6b7280]">
-                      Tell us more <span className="text-[#9ca3af] font-normal">optional</span>
+                    <label htmlFor="sc-message" className="text-[13px] font-semibold text-[#1f2328]">
+                      Tell us more <span className="text-[12px] font-normal text-[#6e7781]">(optional)</span>
                     </label>
                     <span className={`text-[11px] tabular-nums transition-colors ${form.message.length > MSG_MAX ? 'text-red-500 font-semibold' : form.message.length > MSG_MAX * 0.8 ? 'text-amber-500' : 'text-[#9ca3af]'}`}>
                       {form.message.length}/{MSG_MAX}
                     </span>
                   </div>
                   <textarea
+                    id="sc-message"
                     rows={4}
                     placeholder="Brief context about your project or challenges…"
                     value={form.message}
@@ -763,7 +844,7 @@ export default function ScheduleCallPage() {
                     onBlur={handleBlur('message')}
                     className={`${inputCls('message')} resize-none`}
                   />
-                  {fieldState('message').err && <p className="text-[11px] text-red-500">{fieldState('message').err}</p>}
+                  {fieldState('message').err && <p className="text-[12px] font-medium text-[#cf222e]">{fieldState('message').err}</p>}
                 </div>
 
                 {error && (
@@ -774,6 +855,17 @@ export default function ScheduleCallPage() {
                     {error}
                   </div>
                 )}
+
+                <button
+                  type="button"
+                  onClick={() => setStep(0)}
+                  className="self-start inline-flex items-center gap-1.5 text-[13px] font-medium text-[#6e7781] hover:text-[#1f2328] transition-colors"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
+                    <path d="M19 12H5M12 5l-7 7 7 7" />
+                  </svg>
+                  Back to your details
+                </button>
 
                 <button
                   type="submit"
@@ -802,6 +894,9 @@ export default function ScheduleCallPage() {
                   By submitting you agree to our{' '}
                   <Link href={Constants.PAGES.PRIVACY} className="underline hover:text-[#111] transition-colors">Privacy Policy</Link>.
                 </p>
+
+                </motion.div>
+                )}
               </form>
               </div>
             </motion.div>
