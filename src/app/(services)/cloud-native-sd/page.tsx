@@ -16,11 +16,31 @@ const pillars: { title: string; desc: string; icon: LucideIcon }[] = [
 ];
 
 const benefits = [
-  { num: "01", title: "Faster deployment", desc: "Ship from commit to production continuously. Automated pipelines mean every build is a potential release — no manual gates." },
-  { num: "02", title: "Elastic scalability", desc: "Scale each service independently on demand. Add capacity as load grows and release it when it drops — no over-provisioning." },
-  { num: "03", title: "CI/CD by default", desc: "Every repo starts with a pipeline. Automated testing, staging deploys, and production promotion are built in from day one." },
-  { num: "04", title: "Cost-effectiveness", desc: "Pay only for what you use. Cloud-native eliminates idle on-premises infrastructure and cuts the overhead of manual ops." },
-  { num: "05", title: "Improved security", desc: "Identity-based access, automated compliance checks, and secret management baked in — not bolted on after the fact." },
+  {
+    icon: "/img/faster-development.svg",
+    title: "Faster deployment",
+    desc: "Cloud-native software development allows developers to quickly deploy applications and services with minimal set-up and configuration. This helps to reduce time and to save costs associated with manual deployments.",
+  },
+  {
+    icon: "/img/scalability-blue-purple.svg",
+    title: "Scalability",
+    desc: "Cloud-native software solutions are highly scalable. This means it can be adjusted depending on changing demand. Organizations can quickly add extra users or features without consequences for the manual configuration.",
+  },
+  {
+    icon: "/img/continue-integratie-en-delivery.svg",
+    title: "Continuous integration and delivery",
+    desc: "Cloud-native software solutions are designed for continuous integration and continuous delivery. This enables developers to quickly move applications/services from development to production with ease.",
+  },
+  {
+    icon: "/img/cost-effectiveness.svg",
+    title: "Cost-effectiveness",
+    desc: "Cloud-native solutions are way more cost-effective than traditional software solutions, requiring less overhead and maintenance.",
+  },
+  {
+    icon: "/img/improved-security-blue-purple.svg",
+    title: "Improved security",
+    desc: "Cloud-native solutions are designed for effective security, to provide tools and processes for organisations that are needed to protect data and applications.",
+  },
 ];
 
 const processSteps = [
@@ -111,18 +131,19 @@ export default function CloudNativeSD() {
           <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
               <div className="mb-4"><Eyebrow>Why go cloud-native</Eyebrow></div>
-              <h2 className="m-0 max-w-[560px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
-                Five reasons to make the switch.
+              <h2 className="m-0 max-w-[620px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+                Why should you consider Cloud-Native Software Development?
               </h2>
             </div>
             <PrimaryButton href="/schedule-call">Schedule a call</PrimaryButton>
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-            {benefits.map(({ num, title, desc }) => (
-              <div key={num} className="flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6">
-                <span className="text-[34px] font-light leading-none text-[#e6e6e6]">{num}</span>
-                <h3 className="mt-4 text-[20px] font-medium leading-[1.25] text-[#111]">{title}</h3>
+            {benefits.map(({ icon, title, desc }) => (
+              <div key={title} className="flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={icon} alt={title} width={160} height={160} className="mb-4 h-40 w-40 object-contain" />
+                <h3 className="text-[20px] font-medium leading-[1.25] text-[#111]">{title}</h3>
                 <p className="mt-2 text-[16px] font-normal leading-[1.5] text-[#111]">{desc}</p>
               </div>
             ))}
