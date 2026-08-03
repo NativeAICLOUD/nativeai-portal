@@ -1,0 +1,72 @@
+﻿import { Montserrat } from "next/font/google";
+import type { Viewport } from "next";
+import seoConfig from "../../seo.config";
+import "./globals.css";
+
+import { ViewTransitions } from "next-view-transitions";
+import { ProgressBar, ProgressBarProvider } from "react-transition-progress";
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import AppProviders from "./components/AppProviders";
+import CookieBanner from "./components/ui/CookieBanner";
+
+const montserrat = Montserrat({
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-montserrat'
+})
+
+
+export const metadata = seoConfig;
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <ViewTransitions>
+      <html lang="en">
+        <head>
+          <link rel="preconnect" href="https://api.fontshare.com" />
+          <link href="https://api.fontshare.com/v2/css?f[]=fk-grotesk@400,500,600,700,800&display=swap" rel="stylesheet" />
+          <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800&display=swap" rel="stylesheet" />
+        </head>
+        <body className={`${montserrat.variable} font-switzer`}>
+          <ProgressBarProvider>
+            <ProgressBar className="modern-progress fixed z-[9999] top-0 left-0" />
+            <AppProviders>
+              <div style={{ width: '100%', maxWidth: '100vw', overflowX: 'clip', overflowY: 'visible', position: 'relative' }}>
+                <Navbar />
+                {children}
+                <Footer />
+              </div>
+              <CookieBanner />
+            </AppProviders>
+          </ProgressBarProvider>
+          <ToastContainer
+            position="top-right"
+            autoClose={8000}
+            hideProgressBar={true}
+            newestOnTop={false}
+            rtl={false}
+            draggable
+            theme="light"
+          />
+        </body>
+      </html>
+    </ViewTransitions>
+  );
+}

@@ -1,22 +1,419 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Switzer — matches the reference Industries typography (loaded via Fontshare) */
+  .font-switzer {
+    font-family: "Switzer", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  /* Industries hero atmospheric glow (approximates the reference "Bottom Gradient") */
+  .industries-hero-bg {
+    background:
+      radial-gradient(circle at 15% 100%, rgba(224, 225, 255, 0.75), transparent 43%),
+      radial-gradient(circle at 80% 100%, rgba(255, 237, 189, 0.7), transparent 48%),
+      radial-gradient(circle at 100% 70%, rgba(255, 225, 215, 0.6), transparent 43%),
+      #ffffff;
+  }
+
+  /* Full-width multicolour divider under the Industries hero */
+  .linegrad-divider {
+    background-image: linear-gradient(
+      260deg,
+      #fff,
+      #f66 7.5%,
+      #ffc966 15%,
+      #ff6 30%,
+      #6f6 50%,
+      #6fd2f6 65%,
+      #c0c 85% 92.5%,
+      #fff
+    );
+    border-radius: 100px;
+  }
+
+  /* ChatGPT / DeepSeek-style thin minimal scrollbar */
+  .thin-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
+  }
+  .thin-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+  .thin-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .thin-scroll::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 999px;
+  }
+  .thin-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  /* Industries auto-scroller (seamless infinite vertical loop) */
+  .industry-scroller {
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overscroll-behavior: contain;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 94%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 94%, transparent);
+  }
+  .industry-scroller::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Google "AI Mode" style animated gradient ring around the navbar search */
+  .ai-search-wrap {
+    position: relative;
+    padding: 2.5px;
+    border-radius: 52px;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .ai-search-wrap::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 250%;
+    height: 250%;
+    z-index: -1;
+    background: conic-gradient(
+      from 0deg,
+      #93c5fd,
+      #3b82f6,
+      #1e4fd6,
+      #2563eb,
+      #60a5fa,
+      #93c5fd
+    );
+    transform: translate(-50%, -50%) rotate(0deg);
+    animation: ai-search-spin 4s linear infinite;
+  }
+  .ai-search-inner {
+    border-radius: 50px;
+    background: #f5f5f5;
+  }
+  @keyframes ai-search-spin {
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ai-search-wrap::before {
+      animation: none;
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+  max-width: 100%;
+}
 
 body {
-  font-family: 'Montserrat', sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html, body {
+  background: #fff;
+  overflow-x: clip;
   width: 100%;
-  height: 100%;
+  max-width: 100%;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+
+::selection {
+  background: rgba(232, 154, 120, 0.25);
+  color: #0a0e1a;
 }
+
+/* ── Aurora top loading bar ── */
+.modern-progress {
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    #e8532e 0%,
+    #ff6b4a 18%,
+    #ff9575 36%,
+    #ffd4c4 54%,
+    #ff9575 72%,
+    #ff6b4a 90%,
+    #e8532e 100%
+  );
+  background-size: 300% 100%;
+  border-radius: 0 4px 4px 0;
+  box-shadow:
+    0 0 16px rgba(255, 107, 74, 0.7),
+    0 0 8px rgba(255, 149, 117, 0.55),
+    0 0 4px rgba(232, 83, 46, 0.55);
+  /* flow = colors drift sideways; breathe = glow/height gently pulses */
+  animation:
+    aurora-flow 3s linear infinite,
+    aurora-breathe 2.2s ease-in-out infinite;
+}
+/* Soft bright bloom riding the leading edge */
+.modern-progress::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 110px;
+  height: 100%;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, transparent, rgba(255, 149, 117, 0.9), #fff1ec);
+  filter: blur(3px);
+  opacity: 0.9;
+}
+@keyframes aurora-flow {
+  to { background-position: 300% 0; }
+}
+@keyframes aurora-breathe {
+  0%, 100% {
+    filter: brightness(1) saturate(1);
+    box-shadow:
+      0 0 16px rgba(255, 107, 74, 0.7),
+      0 0 8px rgba(255, 149, 117, 0.55),
+      0 0 4px rgba(232, 83, 46, 0.55);
+  }
+  50% {
+    filter: brightness(1.2) saturate(1.3);
+    box-shadow:
+      0 0 26px rgba(255, 107, 74, 0.9),
+      0 0 14px rgba(255, 149, 117, 0.75),
+      0 0 7px rgba(232, 83, 46, 0.7);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .modern-progress { animation: none; }
+}
+
+/* Ensure all interactive elements have pointer cursor */
+button, a, [role="button"] {
+  cursor: pointer;
+}
+
+div[data-radix-popper-content-wrapper] {
+  z-index: 999 !important;
+}
+
+
+/* TOOLTIP */
+
+/* 
+  Layer Components
+*/
+
+@layer components {
+  .TooltipContent {
+    @apply max-w-xs text-center leading-5 rounded-lg text-black bg-white shadow-tooltip border border-tooltip-border;
+  }
+
+  .TooltipArrow {
+    @apply fill-white;
+  }
+}
+
+[data-radix-popper-content-wrapper] {
+  z-index: 50 !important;
+}
+
+/* Toooltip */
+
+.r-tooltip>* {
+  cursor: default;
+}
+
+.r-tooltip button {
+  margin: 1px;
+}
+
+.TooltipContent {
+  text-wrap: balance;
+  padding: 0.7rem 1rem;
+  font-size: 15px;
+  user-select: none;
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.TooltipContent[data-state='delayed-open'][data-side='top'] {
+  animation-name: slideDownAndFade;
+}
+
+.TooltipContent[data-state='delayed-open'][data-side='right'] {
+  animation-name: slideLeftAndFade;
+}
+
+.TooltipContent[data-state='delayed-open'][data-side='bottom'] {
+  animation-name: slideUpAndFade;
+}
+
+.TooltipContent[data-state='delayed-open'][data-side='left'] {
+  animation-name: slideRightAndFade;
+}
+
+@keyframes slideUpAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideRightAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(-2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideDownAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeftAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* End Toooltip */
+/* Gradient Avatar */
+
+
+/* Accordion */
+.AccordionItem {
+  overflow: hidden;
+  margin-top: 1px;
+}
+
+.AccordionItem:focus-within {
+  position: relative;
+  z-index: 1;
+}
+
+.AccordionHeader {
+  display: flex;
+}
+
+.AccordionTrigger {
+  font-family: inherit;
+  background-color: transparent;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 15px;
+  line-height: 1;
+}
+
+.AccordionItem[data-state='open'] .AccordionContent {
+  visibility: visible;
+  max-height: 4000px;
+  transition: all 1.4s cubic-bezier(.56,.33,.65,.61);
+}
+.AccordionItem[data-state='closed'] .AccordionContent {
+  visibility: hidden;
+  max-height: 0;
+  transition: all .4s cubic-bezier(.01,.7,.06,.99);
+}
+
+.AccordionContentText {
+  padding: 15px 20px;
+}
+
+.AccordionTrigger[data-state='open'] .plus-icon {
+  display: none;
+}
+
+.AccordionTrigger[data-state='closed'] .minus-icon {
+  display: none;
+}
+
+/* End Accordion */
+
+
+/* Marque */
+
+.marquee-partner {
+  --duration: 40s;
+  --space: 60px;
+  --gap: var(--space);
+
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  gap: var(--gap);
+}
+
+@media screen and (max-width: 600px) {
+  .marquee-partner {
+    --space: 40px;
+  }
+}
+
+.marquee-partner .marquee-group {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: var(--gap);
+  min-width: 100%;
+  animation: scroll var(--duration) linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-partner .marquee-group {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(calc(-100% - var(--gap) + 6px));
+  }
+}
+
+/* Orbital decoration pulse dots */
+@keyframes nc-orbit-pulse {
+  0%, 100% { opacity: 0.22; }
+  50%       { opacity: 0.0;  }
+}
+.nc-orbit-pulse      { animation: nc-orbit-pulse 3.5s ease-in-out infinite; }
+.nc-orbit-pulse-slow { animation: nc-orbit-pulse 4.5s ease-in-out infinite 1s; }
+

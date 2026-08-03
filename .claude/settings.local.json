@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:nativeai.cloud)",
+      "Bash(curl -s \"https://careers.intercept.cloud/o/netc-developer\")",
+      "Bash(npx tsc *)",
+      "Bash(Get-ChildItem \"C:\\\\NativeCloud\\\\NativeCloud-Portal\\\\public\\\\img\")",
+      "Bash(Sort-Object LastWriteTime -Descending)",
+      "Bash(Select-Object -First 15)",
+      "Bash(Format-Table Name, LastWriteTime)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(find src/app/api -type f)",
+      "Bash(dir /s /b src\\\\app\\\\api)",
+      "Bash(type .env.local)",
+      "Bash(type .env)",
+      "Bash(dir /b .env*)",
+      "Bash(node -e \"const p = require\\('./package.json'\\); console.log\\(p.dependencies?.resend || p.devDependencies?.resend || 'NOT FOUND'\\)\")",
+      "Bash(node -e \"const j = require\\('./public/jobs.json'\\); console.log\\(j.length + ' jobs, last added:', j.find\\(x=>x.id===11\\).title\\)\")",
+      "Bash(node -e ' *)",
+      "Bash(node -e \"const j = require\\('./public/jobs.json'\\); const job = j.find\\(x=>x.id===11\\); console.log\\('description:', job.description\\); console.log\\('\\\\nabout:', job.about\\);\")",
+      "Bash(xargs grep -l \"signIn\\\\|login\\\\|auth\")",
+      "Bash(New-Item -ItemType Directory -Force src/app/api/auth/otp/send)",
+      "Bash(Out-Null)",
+      "mcp__ide__getDiagnostics",
+      "WebFetch(domain:www.vector8.com)",
+      "Bash(cd /tmp)",
+      "Bash(npx playwright *)",
+      "Bash(grep -oiE \"<img[^>]{0,200}>\" v8.html)",
+      "Bash(grep -iE \"services[\\\\\\\\\\\\\\\\/]\\(design|custom-development\\)|ServiceUI\")",
+      "Bash(taskkill //F //T //PID 59300)",
+      "Bash(taskkill //F //T //PID 67420)",
+      "Bash(wmic process *)",
+      "Bash(curl -s -o /dev/null -w \"home: %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s http://localhost:3000/)",
+      "Read(//c/Users/aajre/AppData/Local/Temp/claude/C--NativeCloud-NativeCloud-Portal/1e124de7-005e-4bc4-82c2-c6f5a16f6e67/scratchpad/**)",
+      "Bash(node shotrhh.js)",
+      "WebFetch(domain:reesure.com)",
+      "Bash(git push *)"
+    ]
+  }
+}

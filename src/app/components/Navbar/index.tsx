@@ -1,0 +1,1034 @@
+﻿'use client';
+
+import { Link } from 'react-transition-progress/next';
+import { Constants } from '@/Constants';
+import { PlusIcon, MinusIcon, CaretDownIcon } from '@radix-ui/react-icons';
+import { AnimatePresence, motion } from 'framer-motion';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
+import CoomingSoon from '../ui/CoomingSoon';
+import Logo from '../ui/Logo';
+import { NavMenuItemCard, NavMenuItemDisabled } from './NavMenuItem';
+import {
+  Code2, Palette, CloudCog, CloudUpload,
+  Bot, Database, Boxes, Workflow,
+  Plane, Scale, Landmark, HeartPulse, ShoppingBag, Factory,
+  BookOpen, GraduationCap, Library, Building2,
+  GitBranch, Sparkles,
+  Users,
+  LucideIcon,
+} from 'lucide-react';
+
+type Pages = {
+  url: string;
+  title: string;
+  desc?: string;
+  soon?: true;
+  icon?: LucideIcon;
+  color?: string;
+  children?: Pages[];
+};
+
+const PALETTE = {
+  blue:   '#5B7CFA',
+  green:  '#59C28A',
+  purple: '#9B6BFF',
+  orange: '#E59B47',
+  teal:   '#46B5B0',
+} as const;
+
+const pages: Pages[] = [
+  {
+    url: Constants.PAGES.SOLUTIONS, title: 'Solutions', children: [
+      {
+        url: Constants.PAGES.SOLUTIONS, title: 'Services', children: [
+          { url: '/services/custom-development',               title: 'Custom Development', desc: 'Tailored software for your workflows',  icon: Code2,       color: PALETTE.blue   },
+          { url: '/services/design',                           title: 'Design',             desc: 'Interfaces your users will love',        icon: Palette,     color: PALETTE.purple },
+          { url: Constants.PAGES.CLOUD_SOFTWARE_ARCHITECTURE,  title: 'Cloud Architecture', desc: 'Scalable infrastructure design',         icon: CloudCog,    color: PALETTE.teal   },
+          { url: Constants.PAGES.MIGRATE_TO_AZURE,             title: 'Migrate to Azure',   desc: 'Low-risk migration to the cloud',        icon: CloudUpload, color: PALETTE.green  },
+        ],
+      },
+      {
+        url: '/services/ai-agents-rag', title: 'AI & Data', children: [
+          { url: '/services/ai-agents-rag',                    title: 'AI Agents & RAG',   desc: 'Intelligent automation & LLMs',          icon: Bot,         color: PALETTE.teal   },
+          { url: Constants.PAGES.DATA_LIFECYCLE_MANAGEMENT,    title: 'Data Lifecycle',    desc: 'Raw data to live dashboards',            icon: Database,    color: PALETTE.orange },
+          { url: Constants.PAGES.CLOUD_NATIVE_SD,              title: 'Cloud Native Dev',  desc: 'Kubernetes & microservices',             icon: Boxes,       color: PALETTE.blue   },
+          { url: Constants.PAGES.DEVOPS_ON_AZURE,              title: 'DevOps on Azure',   desc: 'CI/CD & infrastructure-as-code',         icon: Workflow,    color: PALETTE.green  },
+        ],
+      },
+      {
+        url: Constants.PAGES.ABOUT_US, title: 'Innovate', children: [
+          { url: Constants.PAGES.CASE_STUDIES,                 title: 'Case Studies',      desc: 'How we deliver for clients',             icon: BookOpen,    color: PALETTE.orange },
+          { url: Constants.PAGES.GITHUB_ACCELERATOR,           title: 'GitHub Accelerator', desc: 'Copilot, migration & DevSecOps',        icon: GitBranch,   color: PALETTE.purple },
+          { url: Constants.PAGES.AI_ACCELERATOR,               title: 'AI Accelerator',    desc: 'Azure AI from use case to production',   icon: Sparkles,    color: PALETTE.blue   },
+        ],
+      },
+      {
+        url: Constants.PAGES.NEARSHORE_TEAMS, title: 'Nearshore', children: [
+          { url: Constants.PAGES.NEARSHORE_TEAMS,              title: 'Dedicated Dev Teams',    desc: 'Senior engineers in your workflow',       icon: Users,       color: PALETTE.blue   },
+        ],
+      },
+    ],
+  },
+  {
+    url: Constants.PAGES.SOLUTIONS, title: 'Industries', children: [
+      {
+        url: Constants.PAGES.SOLUTIONS, title: 'Industries', children: [
+          { url: Constants.PAGES.AIRLINE_BOOKING,    title: 'Travel & Aviation',   desc: 'GDS booking & airline platforms',     icon: Plane,       color: PALETTE.blue   },
+          { url: Constants.PAGES.AI_LEGAL_WORKSPACE, title: 'Legal & Compliance',  desc: 'AI for law firms & legal teams',      icon: Scale,       color: PALETTE.purple },
+          { url: Constants.PAGES.PAYMENT_AUTOMATION, title: 'Finance & Banking',   desc: 'Payments, billing & reconciliation',  icon: Landmark,    color: PALETTE.green  },
+          { url: Constants.PAGES.SOLUTIONS,          title: 'Healthcare',          desc: 'Secure data & clinical workflows',    icon: HeartPulse,  color: PALETTE.orange },
+          { url: Constants.PAGES.SOLUTIONS,          title: 'Retail & E-commerce', desc: 'Scalable storefronts & logistics',    icon: ShoppingBag, color: PALETTE.teal   },
+          { url: Constants.PAGES.SOLUTIONS,          title: 'Manufacturing',       desc: 'IoT, automation & supply chain',      icon: Factory,     color: PALETTE.blue   },
+        ],
+      },
+    ],
+  },
+  { url: Constants.PAGES.WORKSHOPS,    title: 'Workshops'     },
+  { url: Constants.PAGES.KNOWLEDGE_BASE, title: 'Knowledge base' },
+  { url: Constants.PAGES.CAREERS,     title: 'Careers'       },
+  { url: Constants.PAGES.ABOUT_US,     title: 'About'         },
+  { url: Constants.PAGES.SCHEDULE_CALL, title: 'Schedule a call' },
+];
+
+const MONO: React.CSSProperties = { fontFamily: "'Switzer', sans-serif" };
+
+/* Searchable site pages (services, solutions, company) */
+const SITE_PAGES: { title: string; desc: string; url: string }[] = [
+  { title: 'Custom Development',        desc: 'Web & app development, APIs, backend and frontend engineering', url: '/services/custom-development' },
+  { title: 'Design',                    desc: 'UX research, UI design, design systems and prototyping',          url: '/services/design' },
+  { title: 'AI Agents & RAG',           desc: 'AI agents, LLM integration and RAG pipelines on Azure',           url: '/services/ai-agents-rag' },
+  { title: 'Cloud Architecture',        desc: 'Cloud-native architecture, microservices and system design',       url: '/cloud-software-architecture' },
+  { title: 'Migrate to Azure',          desc: 'Low-risk cloud migration and modernisation',                       url: '/migrate-to-azure' },
+  { title: 'Cloud Native Development',  desc: 'Kubernetes, microservices and CI/CD development',                   url: '/cloud-native-sd' },
+  { title: 'DevOps on Azure',           desc: 'CI/CD pipelines and infrastructure-as-code',                       url: '/devops-on-azure' },
+  { title: 'Data Lifecycle Management', desc: 'Data platforms, analytics and Power BI',                           url: '/data-lifecycle-management' },
+  { title: 'Managed Services',          desc: 'Ongoing cloud managed services and support',                       url: '/managed-services' },
+  { title: 'Payment Automation',        desc: 'Recurring billing, payments and reconciliation',                   url: '/payment-automation' },
+  { title: 'AI Legal Workspace',        desc: 'AI document and case workflows for legal teams',                   url: '/ai-legal-workspace' },
+  { title: 'Airline & Travel Booking',  desc: 'GDS-connected airline and travel booking platform',                url: '/airline-booking' },
+  { title: 'AI Accelerator',            desc: 'Adopt Azure AI services from use case to production',              url: '/solutions/ai-accelerator' },
+  { title: 'GitHub Accelerator',        desc: 'GitHub Copilot adoption, migration and DevSecOps',                 url: '/solutions/github-accelerator' },
+  { title: 'Nearshore Teams',           desc: 'Dedicated nearshore engineering and delivery teams',               url: '/nearshore-teams' },
+  { title: 'Solutions',                 desc: 'All services and solutions',                                       url: Constants.PAGES.SOLUTIONS },
+  { title: 'Case Studies',              desc: 'Client results and success stories',                               url: Constants.PAGES.CASE_STUDIES },
+  { title: 'Workshops',                 desc: 'Azure, Kubernetes and AI training',                                url: Constants.PAGES.WORKSHOPS },
+  { title: 'Knowledge Base',            desc: 'Guides, tutorials and articles',                                   url: Constants.PAGES.KNOWLEDGE_BASE },
+  { title: 'Careers',                   desc: 'Open positions and jobs',                                          url: Constants.PAGES.CAREERS },
+  { title: 'About Us',                  desc: 'Our team, mission and partners',                                   url: Constants.PAGES.ABOUT_US },
+];
+
+
+function Navbar() {
+  const pathname = usePathname();
+  const [openSide, setOpenSide] = useState(false);
+  const [slideMenu, setSlideMenu] = useState(false);
+  const [activeNav, setActiveNav] = useState<string>('');
+  const [isExpanded, setExpanded] = useState<string | null>(null);
+  const [navHidden, setNavHidden] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [hamburgerRipple, setHamburgerRipple] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [allPosts, setAllPosts] = useState<IPost[]>([]);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const searchPanelRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const scrollTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastScrollY = useRef(0);
+  const isScrolling = useRef(false);
+
+  const navH = 72;
+
+  const isAuthPage = pathname === '/login' || pathname === '/sign-up';
+  // Solid black nav (rich black bar, white text/logo) on every page.
+  const lightNav = false;
+
+  useEffect(() => {
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      const diff = currentY - lastScrollY.current;
+      if (Math.abs(diff) > 2) setSlideMenu(false);
+      if (diff > 4 && currentY > 60) {
+        setNavHidden(true);
+      } else if (diff < -4 || currentY < 60) {
+        setNavHidden(false);
+      }
+      setScrolled(currentY > 60);
+      lastScrollY.current = currentY;
+      isScrolling.current = true;
+      if (scrollTimer.current) clearTimeout(scrollTimer.current);
+      scrollTimer.current = setTimeout(() => { isScrolling.current = false; }, 400);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    setSlideMenu(false);
+    setOpenSide(false);
+    setExpanded(null);
+    setSearchOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (searchOpen) {
+      setTimeout(() => searchInputRef.current?.focus(), 50);
+      if (allPosts.length === 0) {
+        fetch('/blogs.json')
+          .then(r => r.json())
+          .then((data: IPost[]) =>
+            setAllPosts(data.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()))
+          )
+          .catch(() => {});
+      }
+    } else {
+      setSearchQuery('');
+    }
+  }, [searchOpen]);
+
+  useEffect(() => {
+    if (openSide && allPosts.length === 0) {
+      fetch('/blogs.json')
+        .then(r => r.json())
+        .then((data: IPost[]) =>
+          setAllPosts(data.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()))
+        )
+        .catch(() => {});
+    }
+  }, [openSide]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setSearchOpen(false); };
+    const onClickOutside = (e: MouseEvent) => {
+      if (searchPanelRef.current && !searchPanelRef.current.contains(e.target as Node)) {
+        setSearchOpen(false);
+      }
+    };
+    if (searchOpen) {
+      document.addEventListener('keydown', onKey);
+      document.addEventListener('mousedown', onClickOutside);
+    }
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('mousedown', onClickOutside);
+    };
+  }, [searchOpen]);
+
+  useEffect(() => {
+    if (!slideMenu) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setSlideMenu(false); };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [slideMenu]);
+
+  const openMenu = (title = '') => {
+    if (isScrolling.current) return;
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    if (title) setActiveNav(title);
+    setSlideMenu(true);
+  };
+
+  const closeMenu = () => {
+    closeTimer.current = setTimeout(() => setSlideMenu(false), 150);
+  };
+
+  if (isAuthPage) return null;
+
+  return (
+    <>
+    <header
+      className={`fixed top-0 left-0 right-0 z-[999] transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${navHidden || openSide ? '-translate-y-full' : 'translate-y-0'}`}
+      style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
+    >
+
+      {/* ── Full-width nav bar ── */}
+      <nav className={`w-full flex items-center justify-between px-5 sm:px-8 h-[76px] sm:h-[72px] transition-colors duration-300 ${
+        lightNav
+          ? scrolled
+            ? 'bg-white/85 backdrop-blur-xl border-b border-black/[0.06] shadow-[0_4px_32px_rgba(0,0,0,0.06)]'
+            : 'bg-transparent shadow-none'
+          : scrolled
+          ? 'bg-[#0a0a0a]/90 backdrop-blur-xl border-b border-white/[0.08] shadow-[0_4px_32px_rgba(0,0,0,0.35)]'
+          : 'bg-[#0a0a0a] border-b border-white/[0.06]'
+      }`}>
+        <div className="max-w-7xl mx-auto w-full flex items-center justify-between">
+
+        {/* Logo */}
+        <div
+          className="shrink-0 cursor-pointer px-3 py-1.5 rounded-xl"
+          onClick={() => setSlideMenu(false)}
+        >
+          <Logo isInvert={!lightNav} className="!h-13" />
+        </div>
+
+        {/* Desktop nav links */}
+        <ul className="hidden lg:flex items-center gap-0.5">
+          {pages.map((item) => {
+            const isOpen = slideMenu && activeNav === item.title;
+            const isParentActive = !!item.children?.some(
+              (col) => col.children?.some((c) => !c.soon && c.url === pathname)
+            );
+            return (
+            <li
+              key={item.url + item.title}
+              className="relative flex items-center"
+              onPointerEnter={(e) => {
+                if (e.pointerType !== 'mouse') return;
+                if (item.children) openMenu(item.title);
+                else closeMenu();
+              }}
+              onPointerLeave={(e) => { if (e.pointerType === 'mouse') closeMenu(); }}
+            >
+              {item.soon ? (
+                <CoomingSoon>
+                  <span style={MONO} className="px-3 py-1.5 text-sm text-white/25 cursor-default select-none">
+                    {item.title}
+                  </span>
+                </CoomingSoon>
+              ) : item.title === 'Schedule a call' ? (
+                <Link
+                  href={item.url}
+                  onClick={() => setSlideMenu(false)}
+                  className="flex items-center gap-2 text-white text-sm font-semibold px-4 py-2 rounded-full transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] whitespace-nowrap ml-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3b82f6]/60 focus-visible:ring-offset-2"
+                  style={{ ...MONO, background: 'linear-gradient(135deg, #3b82f6 0%, #1e4fd6 100%)', boxShadow: '0 4px 16px rgba(37,99,235,0.35)' }}
+                >
+                  Schedule a call
+                </Link>
+              ) : item.children ? (
+                <button
+                  type="button"
+                  aria-haspopup="true"
+                  aria-expanded={isOpen}
+                  onClick={() => {
+                    if (isOpen) { setSlideMenu(false); return; }
+                    if (closeTimer.current) clearTimeout(closeTimer.current);
+                    setActiveNav(item.title);
+                    setSlideMenu(true);
+                  }}
+                  style={MONO}
+                  className={`relative flex items-center gap-1 px-3 py-1.5 rounded-lg text-base font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0a0e1a]/25 ${
+                    lightNav
+                      ? isOpen || isParentActive
+                        ? 'text-[#0a0e1a] bg-black/[0.05]'
+                        : 'text-[#0a0e1a]/70 hover:text-[#0a0e1a] hover:bg-black/[0.05]'
+                      : isOpen || isParentActive
+                      ? 'text-white bg-white/[0.06]'
+                      : 'text-white/70 hover:text-white hover:bg-white/[0.06]'
+                  }`}
+                >
+                  {item.title}
+                  <motion.span
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ duration: 0.2, ease: 'easeInOut' }}
+                    className="flex items-center"
+                  >
+                    <CaretDownIcon className="relative top-px opacity-50" aria-hidden />
+                  </motion.span>
+                  {isParentActive && (
+                    <span className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full bg-white" />
+                  )}
+                </button>
+              ) : (
+                <Link
+                  href={item.url}
+                  onClick={() => setSlideMenu(false)}
+                  aria-current={pathname === item.url ? 'page' : undefined}
+                  style={MONO}
+                  className={`relative flex items-center gap-1 px-3 py-1.5 rounded-lg text-base font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0a0e1a]/25 ${
+                    lightNav
+                      ? pathname === item.url
+                        ? 'text-[#0a0e1a]'
+                        : 'text-[#0a0e1a]/70 hover:text-[#0a0e1a] hover:bg-black/[0.05]'
+                      : pathname === item.url
+                      ? 'text-white'
+                      : 'text-white/70 hover:text-white hover:bg-white/[0.06]'
+                  }`}
+                >
+                  {item.title}
+                  {pathname === item.url && (
+                    <span className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full bg-white" />
+                  )}
+                </Link>
+              )}
+            </li>
+            );
+          })}
+        </ul>
+
+        {/* Right: Search + Login + Hamburger */}
+        <div className="flex items-center gap-3 shrink-0">
+          {/* AI Mode search toggle — Google-style gradient pill */}
+          <button
+            onClick={() => { setSearchOpen(!searchOpen); setSlideMenu(false); setOpenSide(false); }}
+            aria-label="Search"
+            aria-expanded={searchOpen}
+            className="ai-search-wrap transition-transform duration-200 hover:scale-[1.03] active:scale-[0.97] focus-visible:outline-none"
+          >
+            <span className="ai-search-inner flex items-center gap-2 px-3.5 py-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" className="shrink-0">
+                <defs>
+                  <linearGradient id="ai-mode-grad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#60a5fa" />
+                    <stop offset="50%" stopColor="#3b82f6" />
+                    <stop offset="100%" stopColor="#1e4fd6" />
+                  </linearGradient>
+                </defs>
+                <path fill="url(#ai-mode-grad)" d="M12 0c0 6.627-5.373 12-12 12 6.627 0 12 5.373 12 12 0-6.627 5.373-12 12-12-6.627 0-12-5.373-12-12Z" />
+              </svg>
+              <span className="text-[13px] font-medium text-[#0a0e1a]">AI Mode</span>
+            </span>
+          </button>
+
+          <Link
+            href="/login"
+            style={MONO}
+            className={`hidden lg:flex items-center gap-1.5 text-sm transition-colors rounded-lg px-2 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0a0e1a]/25 ${lightNav ? 'text-[#0a0e1a]/60 hover:text-[#0a0e1a]/90' : 'text-white/60 hover:text-white/90'}`}
+          >
+            <svg width={15} height={15}>
+              <use href="/icons/all-icons.svg#icon-login" />
+            </svg>
+            Login
+          </Link>
+
+          {/* Hamburger */}
+          <motion.button
+            className={`w-11 h-11 rounded-full lg:hidden flex flex-col items-center justify-center gap-[6px] transition-colors px-3 relative overflow-hidden ${lightNav ? 'bg-black/[0.07] hover:bg-black/[0.12]' : 'bg-white/[0.07] hover:bg-white/[0.12]'}`}
+            whileTap={{ scale: 0.82 }}
+            transition={{ type: 'spring', stiffness: 520, damping: 22 }}
+            onClick={() => {
+              setOpenSide(!openSide);
+              setHamburgerRipple(true);
+              setTimeout(() => setHamburgerRipple(false), 380);
+            }}
+            aria-label="Toggle menu"
+          >
+            <AnimatePresence>
+              {hamburgerRipple && (
+                <motion.span
+                  key="ripple"
+                  className="absolute inset-0 rounded-full pointer-events-none"
+                  initial={{ scale: 0, opacity: 0.55 }}
+                  animate={{ scale: 2.8, opacity: 0 }}
+                  exit={{}}
+                  transition={{ duration: 0.38, ease: 'easeOut' }}
+                  style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.55) 0%, transparent 65%)' }}
+                />
+              )}
+            </AnimatePresence>
+            {openSide ? (
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className={`relative z-[1] ${lightNav ? 'text-[#0a0e1a]' : 'text-white'}`}>
+                <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/>
+              </svg>
+            ) : (
+              <>
+                <span className={`block h-[1.5px] w-full rounded-full transition-all relative z-[1] ${lightNav ? 'bg-[#0a0e1a]' : 'bg-white'}`} />
+                <span className={`block h-[1.5px] w-[65%] rounded-full transition-all self-start relative z-[1] ${lightNav ? 'bg-[#0a0e1a]/60' : 'bg-white/60'}`} />
+              </>
+            )}
+          </motion.button>
+        </div>
+        </div>
+      </nav>
+
+    </header>
+
+    {/* ── Search panel ── */}
+    <AnimatePresence>
+      {searchOpen && (
+        <>
+          {/* Blurred backdrop */}
+          <motion.div
+            key="search-backdrop"
+            className="fixed left-0 right-0 bottom-0 z-[997]"
+            style={{
+              top: navH,
+              background: 'rgba(10,14,26,0.28)',
+              backdropFilter: 'blur(6px)',
+              WebkitBackdropFilter: 'blur(6px)',
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            onClick={() => setSearchOpen(false)}
+          />
+          <motion.div
+            key="search-panel"
+            ref={searchPanelRef}
+            className="fixed left-0 right-0 z-[998]"
+            style={{ top: navH, transformOrigin: 'top center' }}
+            initial={{ opacity: 0, y: -28, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.98 }}
+            transition={{ type: 'spring', stiffness: 320, damping: 30, mass: 0.85 }}
+          >
+          <div
+            className="w-full py-12 px-5 sm:px-8 relative overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 40%, #edfaf4 100%)',
+              borderBottom: '1px solid rgba(0,0,0,0.06)',
+              boxShadow: '0 8px 40px rgba(0,0,0,0.08)',
+            }}
+          >
+            {/* Right green glow */}
+            <div className="absolute top-0 right-0 w-[500px] h-full pointer-events-none" style={{ background: 'radial-gradient(ellipse at 80% 50%, rgba(52,211,153,0.18) 0%, transparent 65%)' }} />
+
+            <div className="relative max-w-[1200px] mx-auto flex flex-col gap-4">
+              {/* Input row — Google "AI Mode" animated gradient ring */}
+              <div className="ai-search-wrap">
+                <div className="ai-search-inner relative flex items-center">
+                  <input
+                    ref={searchInputRef}
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && searchQuery.trim()) {
+                        router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+                        setSearchOpen(false);
+                      }
+                    }}
+                    placeholder="Add your search term"
+                    className="w-full bg-transparent outline-none text-[16px] text-[#0a0e1a] placeholder:text-[#aaaaaa]"
+                    style={{
+                      border: 'none',
+                      padding: '20px 200px 20px 32px',
+                    }}
+                  />
+                  <button
+                    onClick={() => {
+                      if (searchQuery.trim()) {
+                        router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+                        setSearchOpen(false);
+                      }
+                    }}
+                    className="absolute right-2 flex items-center gap-2 text-white text-sm font-semibold px-6 py-3.5 transition-all duration-200 hover:opacity-90 active:scale-[0.97]"
+                    style={{ background: '#0a0e1a', borderRadius: 50 }}
+                  >
+                    <span className="hidden sm:inline">Find results</span>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              {/* Live results */}
+              {searchQuery.trim().length > 0 && (() => {
+                const q = searchQuery.toLowerCase();
+                const pageHits = SITE_PAGES.filter(p =>
+                  p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)
+                ).slice(0, 6);
+                const hits = allPosts.filter(p =>
+                  p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)
+                ).slice(0, 5);
+                return (pageHits.length > 0 || hits.length > 0) ? (
+                  <motion.div
+                    initial={{ opacity: 0, y: -6, scale: 0.99 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    className="max-h-[62vh] overflow-y-auto thin-scroll rounded-2xl"
+                    style={{ background: 'rgba(255,255,255,0.97)', border: '1px solid rgba(0,0,0,0.07)', boxShadow: '0 12px 48px rgba(0,0,0,0.12)' }}
+                  >
+                    {/* AI Overview entry — full experience lives on /search */}
+                    <button
+                      onClick={() => { router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`); setSearchOpen(false); }}
+                      className="w-full flex items-center gap-4 px-5 py-3.5 text-left transition-colors border-b border-black/[0.05]"
+                      style={{ background: 'linear-gradient(90deg, rgba(66,133,244,0.05) 0%, rgba(155,114,203,0.05) 50%, rgba(232,154,120,0.05) 100%)' }}
+                    >
+                      <svg width="18" height="18" viewBox="0 0 24 24" className="shrink-0" aria-hidden>
+                        <defs>
+                          <linearGradient id="nav-ai-star" x1="0" y1="0" x2="24" y2="24">
+                            <stop offset="0%" stopColor="#4285f4" />
+                            <stop offset="55%" stopColor="#9b72cb" />
+                            <stop offset="100%" stopColor="#e89a78" />
+                          </linearGradient>
+                        </defs>
+                        <path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2z" fill="url(#nav-ai-star)" />
+                      </svg>
+                      <div className="min-w-0">
+                        <p
+                          className="text-[13.5px] font-semibold leading-snug"
+                          style={{
+                            background: 'linear-gradient(100deg, #4285f4 0%, #9b72cb 45%, #e89a78 100%)',
+                            WebkitBackgroundClip: 'text',
+                            backgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent',
+                            color: 'transparent',
+                          }}
+                        >
+                          AI Overview for &ldquo;{searchQuery.trim()}&rdquo;
+                        </p>
+                        <p className="text-[11.5px] text-[#0a0e1a]/45 mt-0.5 leading-snug">Get an AI-generated answer with sources</p>
+                      </div>
+                      <svg className="shrink-0 ml-auto w-3.5 h-3.5 text-[#9b72cb]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M9 18l6-6-6-6"/>
+                      </svg>
+                    </button>
+                    {pageHits.length > 0 && (
+                      <>
+                        <p className="px-5 pt-3 pb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#0a0e1a]/35">Pages</p>
+                        {pageHits.map((page) => (
+                          <button
+                            key={page.url}
+                            onClick={() => { router.push(page.url); setSearchOpen(false); }}
+                            className="w-full flex items-center gap-4 px-5 py-3 text-left hover:bg-[#f5f5f5] transition-colors"
+                          >
+                            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-black/[0.06] bg-[#fafafa] text-[#0a0e1a]/55">
+                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>
+                              </svg>
+                            </span>
+                            <div className="min-w-0 flex-1">
+                              <p className="text-[13.5px] font-semibold text-[#0a0e1a] leading-snug truncate">{page.title}</p>
+                              <p className="text-[11.5px] text-[#0a0e1a]/45 mt-0.5 leading-snug line-clamp-1">{page.desc}</p>
+                            </div>
+                            <svg className="shrink-0 w-3.5 h-3.5 text-[#cccccc]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M9 18l6-6-6-6"/>
+                            </svg>
+                          </button>
+                        ))}
+                      </>
+                    )}
+                    {hits.length > 0 && (
+                      <p className="px-5 pt-3 pb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#0a0e1a]/35 border-t border-black/[0.05]">Articles</p>
+                    )}
+                    {hits.map((post, i) => (
+                      <button
+                        key={post.id}
+                        onClick={() => { router.push(`/knowledge-base/${post.id}`); setSearchOpen(false); }}
+                        className={`w-full flex items-start gap-4 px-5 py-3.5 text-left hover:bg-[#f5f5f5] transition-colors ${i > 0 ? 'border-t border-black/[0.05]' : ''}`}
+                      >
+                        <div className="w-5 h-5 mt-0.5 shrink-0 text-[#aaaaaa]">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+                          </svg>
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-[13.5px] font-semibold text-[#0a0e1a] leading-snug truncate">{post.title}</p>
+                          <p className="text-[11.5px] text-[#0a0e1a]/45 mt-0.5 leading-snug line-clamp-1">{post.desc}</p>
+                        </div>
+                        <svg className="shrink-0 mt-1 w-3.5 h-3.5 text-[#cccccc]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                      </button>
+                    ))}
+                    <div className="px-5 py-3 border-t border-black/[0.05]" style={{ background: 'rgba(248,249,255,0.80)' }}>
+                      <button
+                        onClick={() => { router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`); setSearchOpen(false); }}
+                        className="text-[12px] font-medium text-[#0a0e1a] hover:opacity-75 transition-opacity"
+                      >
+                        See all results for &ldquo;{searchQuery}&rdquo; →
+                      </button>
+                    </div>
+                  </motion.div>
+                ) : (
+                  <p className="text-sm text-[#0a0e1a]/40 px-2">No results for &ldquo;{searchQuery}&rdquo;</p>
+                );
+              })()}
+            </div>
+          </div>
+        </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+
+    {/* ── Mega menu dropdown ── */}
+    <AnimatePresence>
+        {slideMenu && (
+          <>
+            {/* Floating centered card */}
+            <motion.div
+              key="megamenu"
+              className="fixed left-0 right-0 z-[998] px-5"
+              style={{ top: navH }}
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.18, ease: 'easeOut' }}
+              onMouseEnter={() => openMenu()}
+              onMouseLeave={closeMenu}
+            >
+              <div
+                className="max-w-[1200px] mx-auto overflow-hidden font-switzer"
+                style={{
+                  background: "rgba(255,255,255,0.72)",
+                  backdropFilter: "blur(48px) saturate(200%)",
+                  WebkitBackdropFilter: "blur(48px) saturate(200%)",
+                  border: "1px solid rgba(255,255,255,0.90)",
+                  borderRadius: 20,
+                  boxShadow: "0 24px 64px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.98)",
+                }}
+              >
+                {activeNav === 'Industries' ? (
+                  <>
+                    {/* Industries grid — 3 cols */}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-1 p-6">
+                      {pages.find(p => p.title === 'Industries')?.children?.[0]?.children?.map((item, j) => (
+                        item.soon ? (
+                          <CoomingSoon key={j}>
+                            <NavMenuItemDisabled
+                              title={item.title}
+                              desc={item.desc}
+                              icon={item.icon!}
+                              color={item.color ?? PALETTE.blue}
+                              compact
+                            />
+                          </CoomingSoon>
+                        ) : (
+                          <NavMenuItemCard
+                            key={j}
+                            href={item.url}
+                            title={item.title}
+                            desc={item.desc}
+                            icon={item.icon!}
+                            color={item.color ?? PALETTE.blue}
+                            onClick={() => setSlideMenu(false)}
+                            compact
+                          />
+                        )
+                      ))}
+                    </div>
+                    <div className="px-8 py-4 border-t border-black/[0.07] flex items-center justify-between" style={{ background: "rgba(255,255,255,0.40)" }}>
+                      <p className="text-[13px] text-[#9ca3af]">Need a tailored solution?</p>
+                      <Link href={Constants.PAGES.SCHEDULE_CALL} onClick={() => setSlideMenu(false)} className="inline-flex items-center gap-2 text-[13px] font-medium text-[#111] hover:opacity-70 transition-opacity">
+                        Talk to us
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                      </Link>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {/* Solutions grid — 3 cols */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-8 pb-6">
+                      {pages[0].children?.map((col, i) => (
+                        <div key={i} className="flex flex-col">
+                          <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#9ca3af] mb-4">{col.title}</p>
+                          <ul className="flex flex-col gap-1">
+                            {col.children?.map((item, j) => (
+                              <li key={j}>
+                                {item.soon ? (
+                                  <CoomingSoon>
+                                    <NavMenuItemDisabled
+                                      title={item.title}
+                                      desc={item.desc}
+                                      icon={item.icon!}
+                                      color={item.color ?? PALETTE.blue}
+                                    />
+                                  </CoomingSoon>
+                                ) : (
+                                  <NavMenuItemCard
+                                    href={item.url}
+                                    title={item.title}
+                                    desc={item.desc}
+                                    icon={item.icon!}
+                                    color={item.color ?? PALETTE.blue}
+                                    onClick={() => setSlideMenu(false)}
+                                  />
+                                )}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="px-8 py-4 border-t border-black/[0.07] flex items-center justify-between" style={{ background: "rgba(255,255,255,0.40)" }}>
+                      <p className="text-[13px] text-[#9ca3af]">Not sure where to start?</p>
+                      <Link href={Constants.PAGES.SCHEDULE_CALL} onClick={() => setSlideMenu(false)} className="inline-flex items-center gap-2 text-[13px] font-medium text-[#111] hover:opacity-70 transition-opacity">
+                        Schedule a free call
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                      </Link>
+                    </div>
+                  </>
+                )}
+              </div>
+            </motion.div>
+
+            {/* Backdrop */}
+            <motion.div
+              key="megamenu-backdrop"
+              className="fixed left-0 right-0 bottom-0 bg-black/10 backdrop-blur-[2px] z-[997]"
+              style={{ top: navH }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setSlideMenu(false)}
+            />
+          </>
+        )}
+    </AnimatePresence>
+
+    {/* ── Mobile full-screen overlay ── */}
+    <aside
+      className={`${
+        openSide ? 'translate-x-0 visible pointer-events-auto' : 'translate-x-full invisible pointer-events-none'
+      } fixed inset-0 z-[100] bg-[#0a0a0a] transform transition-all duration-300 ease-in-out flex flex-col overflow-y-auto`}
+      style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 12px)' }}
+    >
+      {/* Top bar */}
+      <div className="flex items-center justify-between shrink-0 px-4 pb-2">
+        <div
+          className="flex items-center cursor-pointer px-3 py-1.5 rounded-xl"
+          style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 60%, transparent 100%)' }}
+          onClick={() => setOpenSide(false)}
+        >
+          <Logo isInvert />
+        </div>
+        <motion.button
+          className="w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white transition-all"
+          whileTap={{ scale: 0.82, backgroundColor: 'rgba(255,255,255,0.22)' }}
+          transition={{ type: 'spring', stiffness: 520, damping: 22 }}
+          onClick={() => { setOpenSide(false); setExpanded(null); }}
+          aria-label="Close menu"
+        >
+          <svg viewBox="0 0 24 24" fill="none" className="w-[18px] h-[18px]" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </motion.button>
+      </div>
+
+      {/* Search bar */}
+      <div className="px-4 pt-2 pb-4 shrink-0">
+        {/* AI-era gradient-ring search */}
+        <div className="ai-search-wrap">
+          <div className="ai-search-inner relative flex items-center">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              onKeyDown={e => {
+                if (e.key === 'Enter' && searchQuery.trim()) {
+                  router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+                  setOpenSide(false);
+                }
+              }}
+              placeholder="Search…"
+              className="w-full bg-transparent outline-none text-[15px] text-[#0a0e1a] placeholder:text-[#aaaaaa]"
+              style={{ border: 'none', padding: '14px 52px 14px 20px' }}
+            />
+            <button
+              onClick={() => {
+                if (searchQuery.trim()) {
+                  router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+                  setOpenSide(false);
+                }
+              }}
+              className="absolute right-1.5 flex h-9 w-9 items-center justify-center rounded-full text-[#0a0e1a]/50 transition-colors hover:bg-black/[0.06]"
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Live results */}
+        {searchQuery.trim().length > 0 && (() => {
+          const q = searchQuery.toLowerCase();
+          const pageHits = SITE_PAGES.filter(p =>
+            p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)
+          ).slice(0, 5);
+          const postHits = allPosts.filter(p =>
+            p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)
+          ).slice(0, 4);
+          if (pageHits.length === 0 && postHits.length === 0) {
+            return <p className="mt-3 px-1 text-sm text-white/40">No results for &ldquo;{searchQuery.trim()}&rdquo;</p>;
+          }
+          return (
+            <div className="mt-3 max-h-[46vh] overflow-y-auto rounded-2xl border border-white/[0.08] bg-white/[0.04]">
+              <motion.button
+                whileTap={{ scale: 0.96 }}
+                transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+                onClick={() => { router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`); setOpenSide(false); }}
+                className="flex w-full items-center gap-3 border-b border-white/[0.07] px-4 py-3 text-left"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" className="shrink-0" aria-hidden>
+                  <path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2z" fill="url(#ai-mode-grad)" />
+                </svg>
+                <span
+                  className="text-[13px] font-semibold"
+                  style={{ background: 'linear-gradient(100deg,#60a5fa,#3b82f6,#1e4fd6)', WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent', color: 'transparent' }}
+                >
+                  AI Overview for &ldquo;{searchQuery.trim()}&rdquo;
+                </span>
+              </motion.button>
+
+              {pageHits.length > 0 && (
+                <p className="px-4 pt-3 pb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/30">Pages</p>
+              )}
+              {pageHits.map((page) => (
+                <motion.button
+                  key={page.url}
+                  whileTap={{ scale: 0.97 }}
+                  transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+                  onClick={() => { router.push(page.url); setOpenSide(false); }}
+                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left active:bg-white/[0.06]"
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.05] text-white/70">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>
+                    </svg>
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate text-[14px] font-medium text-white/90">{page.title}</span>
+                    <span className="block truncate text-[11px] text-white/40">{page.desc}</span>
+                  </span>
+                </motion.button>
+              ))}
+
+              {postHits.length > 0 && (
+                <p className="border-t border-white/[0.07] px-4 pt-3 pb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/30">Articles</p>
+              )}
+              {postHits.map((post) => (
+                <motion.button
+                  key={post.id}
+                  whileTap={{ scale: 0.97 }}
+                  transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+                  onClick={() => { router.push(`/knowledge-base/${post.id}`); setOpenSide(false); }}
+                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left active:bg-white/[0.06]"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 shrink-0 text-white/35">
+                    <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+                  </svg>
+                  <span className="block min-w-0 flex-1 truncate text-[14px] font-medium text-white/90">{post.title}</span>
+                </motion.button>
+              ))}
+            </div>
+          );
+        })()}
+      </div>
+
+      {/* Nav items */}
+      <nav className="flex-1 flex flex-col justify-center pt-4 pb-4 px-4">
+        <ul className="flex flex-col" style={{ gap: 36 }}>
+          {pages
+            .filter((item) => item.title !== 'Schedule a call')
+            .map((item) => (
+              <li key={item.url + item.title}>
+                <div className="flex items-center gap-3">
+                  {item.soon ? (
+                    <CoomingSoon>
+                      <span style={MONO} className="text-[32px] leading-none text-white/60 select-none">
+                        {item.title}
+                      </span>
+                    </CoomingSoon>
+                  ) : (
+                    <Link
+                      href={item.url}
+                      onClick={() => { if (!item.children) setOpenSide(false); }}
+                      style={MONO}
+                      className="text-[32px] leading-none text-white/60 hover:text-white hover:translate-x-1.5 transition-all duration-200 inline-block"
+                    >
+                      {item.title}
+                    </Link>
+                  )}
+                  {item.children && (
+                    <motion.button
+                      onClick={() => setExpanded(isExpanded === item.title ? null : item.title)}
+                      className="w-8 h-8 rounded-xl bg-white/[0.07] hover:bg-white/[0.13] flex items-center justify-center shrink-0 transition-colors"
+                      whileTap={{ scale: 0.82, backgroundColor: 'rgba(255,255,255,0.22)' }}
+                      transition={{ type: 'spring', stiffness: 520, damping: 22 }}
+                      aria-label={isExpanded === item.title ? 'Collapse' : 'Expand'}
+                    >
+                      {isExpanded === item.title
+                        ? <MinusIcon className="size-3.5 text-white relative z-[1]" />
+                        : <PlusIcon className="size-3.5 text-white/60 relative z-[1]" />}
+                    </motion.button>
+                  )}
+                </div>
+
+                {/* Sub-items accordion */}
+                <AnimatePresence initial={false}>
+                  {item.children && isExpanded === item.title && (
+                    <motion.div
+                      key={item.url + '-accordion'}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="mt-4 flex flex-col gap-5">
+                        {item.children.map((col) => (
+                          <div key={col.url + col.title}>
+                            <p className="px-1 pb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/35">
+                              {col.title}
+                            </p>
+                            <ul className="flex flex-col gap-1">
+                              {col.children?.map((child) => {
+                                const Icon = child.icon;
+                                return (
+                                  <li key={child.url + child.title}>
+                                    {child.soon ? (
+                                      <CoomingSoon>
+                                        <span className="flex items-center gap-3 rounded-xl px-2.5 py-2.5 opacity-30">
+                                          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/[0.06] border border-white/[0.08]">
+                                            {Icon && <Icon size={16} strokeWidth={1.6} className="text-white" />}
+                                          </span>
+                                          <span className="text-[14px] text-white">{child.title}</span>
+                                        </span>
+                                      </CoomingSoon>
+                                    ) : (
+                                      <Link
+                                        href={child.url}
+                                        onClick={() => setOpenSide(false)}
+                                        className="group flex items-center gap-3 rounded-xl px-2.5 py-2.5 active:bg-white/[0.06] transition-colors"
+                                      >
+                                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/[0.06] border border-white/[0.08] transition-colors group-active:bg-white/[0.12]">
+                                          {Icon && <Icon size={16} strokeWidth={1.6} className="text-white/80" />}
+                                        </span>
+                                        <span className="min-w-0 flex-1 text-[14px] font-medium text-white/90 leading-snug">{child.title}</span>
+                                        <svg className="shrink-0 w-3.5 h-3.5 text-white/25 transition-transform group-active:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                                          <path d="M9 18l6-6-6-6" />
+                                        </svg>
+                                      </Link>
+                                    )}
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </li>
+            ))}
+        </ul>
+      </nav>
+
+      {/* Bottom CTA */}
+      <div className="shrink-0 px-4 pt-4 pb-6" style={{ paddingBottom: 'max(24px, env(safe-area-inset-bottom, 24px))' }}>
+        <Link
+          href="/login"
+          onClick={() => setOpenSide(false)}
+          style={MONO}
+          className="w-full flex items-center justify-center gap-2 text-white/60 hover:text-white text-sm py-3 mb-2 transition-colors"
+        >
+          <svg width={15} height={15}>
+            <use href="/icons/all-icons.svg#icon-login" />
+          </svg>
+          Login
+        </Link>
+        <Link
+          href={Constants.PAGES.SCHEDULE_CALL}
+          onClick={() => setOpenSide(false)}
+          className="w-full text-white font-semibold text-base flex items-center justify-center gap-3 py-4 rounded-2xl transition-all duration-200 hover:scale-[1.01] active:scale-[0.99]"
+          style={{ ...MONO, background: 'linear-gradient(135deg, #3b82f6 0%, #1e4fd6 100%)', boxShadow: '0 8px 24px rgba(37,99,235,0.30)' }}
+        >
+          Schedule a free call
+          <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </Link>
+      </div>
+    </aside>
+    </>
+  );
+}
+
+export default Navbar;

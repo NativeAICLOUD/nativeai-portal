@@ -1,0 +1,216 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  Code2, Palette, Bot, Database, CloudCog, CloudUpload, Boxes, Workflow,
+  type LucideIcon,
+} from "lucide-react";
+import { KCSP, KTP, MSP } from "@/ImagePath";
+import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from "@/app/components/partials/services/ServiceUI";
+
+export const metadata: Metadata = {
+  title: "Solutions",
+  description:
+    "From AI agents and cloud infrastructure to fully managed SaaS products — we design, build, and ship software that scales with your business.",
+};
+
+/* ── content ── */
+const services: { title: string; body: string; href: string; tag: string; icon: LucideIcon }[] = [
+  { title: "Custom Development", body: "Tailored software built precisely for your business workflows — from API design to production-ready delivery.", href: "/services/custom-development", tag: "Engineering", icon: Code2 },
+  { title: "Design", body: "Beautiful, intuitive interfaces that users love — from UX research and wireframes through to pixel-perfect UI.", href: "/services/design", tag: "Design", icon: Palette },
+  { title: "AI Agents & RAG", body: "Intelligent automation and retrieval-augmented generation connected to your data, documents, and workflows.", href: "/services/ai-agents-rag", tag: "AI & LLMs", icon: Bot },
+  { title: "Data Lifecycle", body: "End-to-end data platforms on Azure — from raw ingestion and transformation to analytics layers and Power BI dashboards.", href: "/data-lifecycle-management", tag: "Data", icon: Database },
+  { title: "Cloud Architecture", body: "Scalable, resilient cloud-native architectures designed for your team's size, traffic patterns, and growth trajectory.", href: "/cloud-software-architecture", tag: "Cloud", icon: CloudCog },
+  { title: "Migrate to Azure", body: "A structured, low-risk migration from on-premises or any cloud provider to Microsoft Azure — without disrupting your operations.", href: "/migrate-to-azure", tag: "Cloud", icon: CloudUpload },
+  { title: "Cloud Native Development", body: "Microservices, containers, and Kubernetes — modern application architectures built to scale on Azure from day one.", href: "/cloud-native-sd", tag: "Engineering", icon: Boxes },
+  { title: "DevOps on Azure", body: "CI/CD pipelines, infrastructure-as-code, and automated testing workflows that let your team ship faster and safer.", href: "/devops-on-azure", tag: "DevOps", icon: Workflow },
+];
+
+const products = [
+  { title: "Airline & Travel Booking", body: "A cloud-based platform for airlines, travel agencies, and tour operators — reservations, ticketing, GDS connectivity, and passenger management in one system.", href: "/airline-booking" },
+  { title: "AI Legal Workspace", body: "AI-powered document analysis, contract review, and legal research — built for law firms and in-house legal teams that want to move faster.", href: "/ai-legal-workspace" },
+  { title: "Payment Automation", body: "Recurring billing, rent collection, and payment reconciliation — automated end-to-end so your finance team focuses on decisions, not data entry.", href: "/payment-automation" },
+];
+
+const certifications = [
+  { src: MSP, alt: "Microsoft Solutions Partner", title: "Microsoft Solutions Partner", body: "Recognised by Microsoft for consistent delivery of Azure solutions across cloud adoption, migration, and modern application development." },
+  { src: KCSP, alt: "Kubernetes Certified Service Provider", title: "KCSP", body: "Certified by the CNCF to deliver Kubernetes production support, consulting, and professional services at enterprise scale." },
+  { src: KTP, alt: "Kubernetes Training Partner", title: "Kubernetes Training Partner", body: "Authorised to deliver official Kubernetes training — from fundamentals to advanced cluster operations and application deployment." },
+];
+
+function ArrowLink({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="mt-4 inline-flex items-center gap-1.5 text-[13px] font-medium text-[#111]">
+      {children}
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+    </span>
+  );
+}
+
+export default function SolutionsPage() {
+  return (
+    <div className="font-switzer">
+
+      {/* ── Hero ── */}
+      <div className="industries-hero-bg">
+        <div className={`${CONTAINER} pb-12 pt-32 lg:pt-28`}>
+          <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
+
+            {/* Left */}
+            <div className="flex-1">
+              <div className="mb-6"><Eyebrow>What we build</Eyebrow></div>
+              <h1 className="m-0 text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
+                Solutions built to last.
+              </h1>
+              <p className="mt-6 max-w-[520px] text-[18px] font-light leading-[1.6] text-[#111]">
+                From AI agents and cloud infrastructure to fully managed SaaS products — we
+                design, build, and ship software that scales with your business.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <PrimaryButton href="/schedule-call">Schedule a free call</PrimaryButton>
+                <SecondaryButton href="/about">About us</SecondaryButton>
+              </div>
+            </div>
+
+            {/* Right — portfolio card */}
+            <div className="w-full lg:max-w-[380px] lg:flex-1">
+              <div className="flex flex-col gap-5 rounded-2xl border border-[#e6e6e6] bg-white p-6">
+                <div className="flex items-center gap-2.5">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#111]">
+                    <Boxes className="h-4 w-4 text-white" strokeWidth={1.8} aria-hidden="true" />
+                  </div>
+                  <p className="m-0 text-[14px] font-medium text-[#111]">Our portfolio</p>
+                </div>
+                <div className="grid grid-cols-2 gap-2.5">
+                  {[
+                    { n: "8", l: "Services" },
+                    { n: "3", l: "Products" },
+                    { n: "3", l: "Certifications" },
+                    { n: "∞", l: "Scale" },
+                  ].map((item) => (
+                    <div key={item.l} className="flex flex-col gap-0.5 rounded-xl border border-[#eee] bg-[#fafafa] px-4 py-3">
+                      <p className="m-0 text-[20px] font-medium leading-none text-[#111]">{item.n}</p>
+                      <p className="m-0 text-[11px] font-normal text-[#6b7280]">{item.l}</p>
+                    </div>
+                  ))}
+                </div>
+                <Link href="/schedule-call" className="flex items-center justify-center gap-2 rounded-full bg-[#111] py-3 text-[14px] font-medium text-white transition-opacity hover:opacity-90">
+                  Schedule a free call
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                </Link>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* multicolour divider — full viewport width */}
+        <hr className="linegrad-divider m-0 h-1 w-full border-0" />
+      </div>
+
+      {/* ── Services ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} py-20 lg:py-24`}>
+          <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div>
+              <div className="mb-4"><Eyebrow>Services</Eyebrow></div>
+              <h2 className="m-0 max-w-[520px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+                Everything you need to build at scale.
+              </h2>
+            </div>
+            <PrimaryButton href="/schedule-call">Schedule a free call</PrimaryButton>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+            {services.map(({ title, body, href, tag, icon: Icon }) => (
+              <Link
+                key={title}
+                href={href}
+                className="group flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6 transition-[filter,box-shadow] duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.2)] hover:[filter:invert(1)]"
+              >
+                <div className="mb-5 flex items-center justify-between">
+                  <Icon className="h-7 w-7 text-[#111]" strokeWidth={1.6} aria-hidden="true" />
+                  <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#9ca3af]">{tag}</span>
+                </div>
+                <h3 className="m-0 text-[18px] font-medium leading-[1.25] text-[#111]">{title}</h3>
+                <p className="mt-2 flex-1 text-[15px] font-normal leading-[1.5] text-[#111]">{body}</p>
+                <ArrowLink>Learn more</ArrowLink>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Products ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-12">
+            <div className="mb-4"><Eyebrow>Products</Eyebrow></div>
+            <h2 className="m-0 text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              Ready-made platforms. Production-ready today.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-6">
+            {products.map(({ title, body, href }) => (
+              <Link
+                key={title}
+                href={href}
+                className="group flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6 transition-[filter,box-shadow] duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.2)] hover:[filter:invert(1)]"
+              >
+                <span className="mb-3 text-[11px] font-medium uppercase tracking-[0.14em] text-[#9ca3af]">NativeCloud Product</span>
+                <h3 className="m-0 text-[20px] font-medium leading-[1.25] text-[#111]">{title}</h3>
+                <p className="mt-2 flex-1 text-[16px] font-normal leading-[1.5] text-[#111]">{body}</p>
+                <ArrowLink>See the product</ArrowLink>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Certifications ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-12">
+            <div className="mb-4"><Eyebrow>Certifications</Eyebrow></div>
+            <h2 className="m-0 text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              Recognised expertise. Trusted by industry.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-6">
+            {certifications.map(({ src, alt, title, body }) => (
+              <div key={title} className="flex h-full flex-col gap-6 rounded-lg border border-[#e6e6e6] bg-white p-8">
+                <Image src={src} alt={alt} className="h-14 w-auto self-start object-contain" />
+                <div className="flex flex-col gap-2">
+                  <h3 className="m-0 text-[18px] font-medium text-[#111]">{title}</h3>
+                  <p className="m-0 text-[16px] font-normal leading-[1.5] text-[#111]">{body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="bg-[#0a0e1a]">
+        <div className={`${CONTAINER} flex flex-col gap-10 py-20 md:flex-row md:items-center md:justify-between`}>
+          <div className="flex max-w-xl flex-col gap-4">
+            <h2 className="m-0 text-[28px] font-medium leading-[1.1] text-white md:text-[44px]">
+              Ready to build something that lasts?
+            </h2>
+            <p className="m-0 text-[18px] font-light leading-[1.6] text-white/70">
+              Talk to our team about your project — we&apos;ll map out the right solution in a
+              free 15-minute call.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <PrimaryButton href="/schedule-call" dark>Book a free call</PrimaryButton>
+            <SecondaryButton href="/about" onDark>About us</SecondaryButton>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  );
+}

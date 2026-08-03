@@ -1,0 +1,497 @@
+[
+  {
+    "id": 11,
+    "title": "AI Enablement Lead",
+    "department": "AI Enablement",
+    "location": "Remote",
+    "workModel": "Remote",
+    "type": "Full-time",
+    "slug": "ai-enablement-lead",
+    "description": "Lead AI adoption across NativeCloud — evaluating tools, governing use cases, training staff, and embedding alongside teams to make AI work in practice. The go-to AI resource for the whole company, reporting directly to the CTO.",
+    "about": "The AI Enablement Lead evaluates tools, builds and automates workflows, supports live projects, trains staff, and manages the intake and review of new AI use cases across the company. This person must be a genuine AI enthusiast — someone who follows the space closely, experiments constantly, and brings real energy to helping others see what's possible.",
+    "responsibilities": [
+      "Serve as the primary AI resource across the company — the person teams turn to with questions, ideas, or problems.",
+      "Work with teams to identify where AI can add value, scope practical solutions, and guide implementation.",
+      "Help non-technical staff build their own AI workflows. The goal is capability-building, not creating a bottleneck.",
+      "Translate between technical capability and business need.",
+      "Research, evaluate, and document new AI tools and capabilities.",
+      "Prepare risk assessments and recommendations, including security and data protection considerations.",
+      "Manage the intake and review process for new AI tools and use cases.",
+      "Monitor the AI landscape and keep leadership informed of relevant developments.",
+      "Embed alongside active projects to accelerate AI adoption within existing workflows.",
+      "Work with engineering teams to define reusable patterns and best practices for AI-assisted development.",
+      "Design and deliver AI training for technical and non-technical staff.",
+      "Create practical documentation, onboarding materials, and reference guides."
+    ],
+    "requirements": [
+      "Leadership experience — you have run teams, managed stakeholders, and been accountable for outcomes.",
+      "Comfortable with ambiguity — you can take a loosely defined mandate and turn it into a structured programme of work without waiting for someone to hand you a plan.",
+      "Strong people skills — patience, a natural teaching instinct, and the ability to make non-technical people feel capable rather than overwhelmed. Your success is measured by how independently others can work after you've helped them.",
+      "Strong software engineering foundation. You can read production code, understand cloud architectures, and work within modern development workflows.",
+      "Ability to communicate across levels — from an engineering standup to an executive briefing.",
+      "Sound judgment around data security and enterprise risk."
+    ],
+    "benefits": [
+      "Fully remote — work from anywhere in Europe",
+      "Competitive salary based on experience",
+      "Direct access to AI tools, credits, and sandbox environments for experimentation",
+      "High-trust role reporting directly to the CTO with real company-wide impact",
+      "Small, senior team where your ideas shape how AI is adopted across the business"
+    ],
+    "preferredRequirements": [
+      "Experience in financial services or regulated industries.",
+      "Hands-on experience with AI/LLM platforms and agentic workflows.",
+      "Background in project management or business analysis alongside technical delivery.",
+      "Experience working with globally distributed teams."
+    ],
+    "skills": [
+      "AI Strategy",
+      "LLM Platforms",
+      "Workflow Automation",
+      "Governance"
+    ]
+  },
+  {
+    "id": 1,
+    "title": "Azure Cloud Engineer",
+    "department": "Cloud Engineering",
+    "location": "Skopje, MK",
+    "workModel": "Hybrid",
+    "type": "Full-time",
+    "slug": "azure-cloud-engineer",
+    "description": "Design and implement Azure infrastructure using IaC (Bicep, Terraform). Work alongside our cloud architects to deliver scalable, secure environments for enterprise clients.",
+    "about": "At NativeCloud we help enterprise organisations modernise, migrate, and operate on Microsoft Azure. Our Cloud Engineering team designs the foundation that everything else runs on — landing zones, networking, identity, and secure-by-default IaC pipelines. You will work directly with clients and architects to turn requirements into production-ready infrastructure.",
+    "responsibilities": [
+      "Design and deploy Azure infrastructure using Bicep and Terraform",
+      "Build and maintain Azure Landing Zones following CAF and WAF best practices",
+      "Configure networking (VNets, NSGs, Private Endpoints, Azure Firewall)",
+      "Implement identity and access management with Entra ID and RBAC",
+      "Collaborate with DevOps and Architecture teams on client engagements",
+      "Write clear documentation and runbooks for every environment delivered"
+    ],
+    "requirements": [
+      "3+ years of hands-on Azure infrastructure experience",
+      "Strong knowledge of Bicep or Terraform for infrastructure-as-code",
+      "Familiarity with Azure networking, identity, and governance concepts",
+      "Experience with Azure DevOps or GitHub Actions for IaC pipelines",
+      "AZ-104 or AZ-305 certification is a plus",
+      "Good written and spoken English"
+    ],
+    "benefits": [
+      "Competitive salary based on experience",
+      "Microsoft certification exam fees covered",
+      "Hybrid working — Skopje office + remote flexibility",
+      "Direct exposure to enterprise-scale Azure environments",
+      "Small, senior team — no bureaucracy, real ownership"
+    ],
+    "skills": [
+      "Azure",
+      "Bicep",
+      "Terraform",
+      "IaC"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "DevOps Engineer",
+    "department": "DevOps",
+    "location": "Skopje, MK",
+    "workModel": "Hybrid",
+    "type": "Full-time",
+    "slug": "devops-engineer",
+    "description": "Build and maintain CI/CD pipelines on Azure DevOps and GitHub Actions. Drive automation, reliability, and developer experience across client delivery teams.",
+    "about": "Our DevOps team is the connective tissue between development and production. You will work across multiple client environments, designing and running CI/CD pipelines, release automation, and observability setups that keep modern cloud-native applications shipping safely.",
+    "responsibilities": [
+      "Design and maintain CI/CD pipelines on Azure DevOps and GitHub Actions",
+      "Automate infrastructure provisioning and environment management",
+      "Implement deployment strategies — blue/green, canary, rolling",
+      "Set up monitoring and alerting with Azure Monitor, Application Insights, and Grafana",
+      "Collaborate with developers to improve build and release performance",
+      "Drive a shift-left security culture through pipeline scanning and policy-as-code"
+    ],
+    "requirements": [
+      "3+ years in a DevOps or Platform Engineering role",
+      "Strong experience with Azure DevOps pipelines and GitHub Actions",
+      "Solid knowledge of Docker, container registries, and AKS deployments",
+      "Familiar with IaC tools — Bicep, Terraform, or Ansible",
+      "Experience with observability tooling (Azure Monitor, Prometheus, Grafana)",
+      "Good written and spoken English"
+    ],
+    "benefits": [
+      "Competitive salary based on experience",
+      "Microsoft and GitHub certification fees covered",
+      "Hybrid working — Skopje office + remote flexibility",
+      "Work across diverse client stacks — no two projects are the same",
+      "Small, senior team — real ownership from day one"
+    ],
+    "skills": [
+      "Azure DevOps",
+      "GitHub Actions",
+      "Docker",
+      "Kubernetes"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "AI & LLM Engineer",
+    "department": "AI Engineering",
+    "location": "Remote",
+    "workModel": "Remote",
+    "type": "Full-time",
+    "slug": "ai-llm-engineer",
+    "description": "Build RAG pipelines, AI agents, and LLM-powered features using Azure OpenAI, GPT-4o, and Semantic Kernel. Turn AI prototypes into production-ready systems.",
+    "about": "NativeCloud's AI Engineering team builds the intelligent layer on top of Azure infrastructure. We work with GPT-4o, Azure AI Search, and Semantic Kernel to deliver real production AI systems — not demos. If you are passionate about making LLMs actually work in enterprise environments, this role is for you.",
+    "responsibilities": [
+      "Design and build RAG pipelines using Azure AI Search and Azure OpenAI",
+      "Develop AI agents and multi-step reasoning workflows with Semantic Kernel",
+      "Integrate LLM-powered features into .NET and web applications",
+      "Evaluate and improve retrieval quality, chunking strategies, and prompt engineering",
+      "Work with clients to translate business requirements into AI architectures",
+      "Monitor production AI systems for quality, cost, and latency"
+    ],
+    "requirements": [
+      "2+ years building LLM-based applications in production",
+      "Hands-on experience with Azure OpenAI Service and Azure AI Search",
+      "Strong Python or C# skills for backend AI development",
+      "Understanding of vector search, embeddings, and semantic similarity",
+      "Experience with Semantic Kernel or LangChain is a strong plus",
+      "Good written and spoken English"
+    ],
+    "benefits": [
+      "Fully remote — work from anywhere in Europe",
+      "Competitive salary based on experience",
+      "Access to Azure OpenAI credits and sandbox environments",
+      "Microsoft AI certification fees covered",
+      "Small, senior team working on cutting-edge production AI"
+    ],
+    "skills": [
+      "Azure OpenAI",
+      "RAG Pipelines",
+      "Semantic Kernel",
+      "Python"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Senior .NET / C# Developer",
+    "department": "Software Engineering",
+    "location": "Skopje, MK",
+    "workModel": "Hybrid",
+    "type": "Full-time",
+    "slug": "senior-dotnet-developer",
+    "description": "Develop cloud-native .NET applications and APIs deployed on Azure. Collaborate with architects and DevOps teams to ship reliable, well-tested software.",
+    "about": "Our Software Engineering team builds the applications and APIs that run on the infrastructure we design. You will work on cloud-native .NET systems — microservices, event-driven architectures, and Azure-native integrations — delivered to enterprise clients across Europe.",
+    "responsibilities": [
+      "Build and maintain cloud-native .NET applications and REST APIs on Azure",
+      "Design and implement microservices using Azure Service Bus and Event Grid",
+      "Collaborate with architects to define system design and API contracts",
+      "Write clean, well-tested code with comprehensive unit and integration test coverage",
+      "Participate in code reviews, technical discussions, and architecture decisions",
+      "Deploy and monitor services on AKS and Azure App Service"
+    ],
+    "requirements": [
+      "5+ years of professional .NET / C# development experience",
+      "Strong understanding of SOLID principles and clean architecture",
+      "Experience building and consuming REST APIs",
+      "Familiarity with Azure services — Service Bus, App Service, AKS, Key Vault",
+      "Knowledge of Entity Framework Core and SQL Server",
+      "Good written and spoken English"
+    ],
+    "benefits": [
+      "Competitive salary based on experience",
+      "Microsoft certification fees covered",
+      "Hybrid working — Skopje office + remote flexibility",
+      "Work on complex, greenfield cloud-native systems",
+      "Direct collaboration with cloud architects and DevOps engineers"
+    ],
+    "skills": [
+      ".NET",
+      "C#",
+      "Azure",
+      "Microservices"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Kubernetes & AKS Specialist",
+    "department": "Cloud Engineering",
+    "location": "Remote",
+    "workModel": "Remote",
+    "type": "Full-time",
+    "slug": "kubernetes-aks-specialist",
+    "description": "Own AKS cluster architecture, workload identity, autoscaling, and production reliability. Work with engineering teams to migrate and optimise containerised workloads.",
+    "about": "Kubernetes is at the heart of how our enterprise clients run containerised workloads at scale. As our AKS Specialist, you will own cluster design, security, and day-2 operations — ensuring applications run reliably, scale efficiently, and stay secure in production.",
+    "responsibilities": [
+      "Design and operate AKS clusters for enterprise production workloads",
+      "Implement workload identity, RBAC, and network policies for security hardening",
+      "Configure autoscaling — Horizontal Pod Autoscaler, KEDA, and cluster autoscaler",
+      "Set up observability with Prometheus, Grafana, and Azure Monitor",
+      "Lead containerisation and migration of legacy workloads to AKS",
+      "Define Helm chart standards and GitOps workflows using Flux or Argo CD"
+    ],
+    "requirements": [
+      "4+ years of hands-on Kubernetes experience in production",
+      "Deep knowledge of AKS — node pools, networking, managed identities",
+      "Experience with Helm, Kustomize, and GitOps tooling",
+      "Familiarity with service mesh (Istio or Linkerd) is a plus",
+      "CKA or CKAD certification preferred",
+      "Good written and spoken English"
+    ],
+    "benefits": [
+      "Fully remote — work from anywhere in Europe",
+      "Competitive salary based on experience",
+      "CNCF and Microsoft certification fees covered",
+      "Work on complex, high-traffic AKS environments",
+      "Small, senior team — real technical ownership"
+    ],
+    "skills": [
+      "Kubernetes",
+      "AKS",
+      "Helm",
+      "GitOps"
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Cloud Solutions Architect",
+    "department": "Architecture",
+    "location": "Skopje, MK",
+    "workModel": "Hybrid",
+    "type": "Full-time",
+    "slug": "cloud-solutions-architect",
+    "description": "Lead cloud architecture engagements for enterprise clients. Define Azure landing zones, network topology, security posture, and migration strategies.",
+    "about": "The Architecture team is the technical authority at NativeCloud. As a Cloud Solutions Architect, you will lead pre-sales and delivery engagements — designing the cloud foundations that our clients build on for years. Your decisions shape network topologies, security postures, cost structures, and migration paths for organisations across Europe.",
+    "responsibilities": [
+      "Lead cloud architecture engagements from discovery through to delivery",
+      "Define Azure Landing Zones, hub-spoke networking, and governance frameworks",
+      "Design migration strategies for on-premises and legacy cloud workloads",
+      "Produce architecture decision records, HLDs, and LLDs",
+      "Act as the technical escalation point for cloud engineering and DevOps teams",
+      "Support pre-sales — solution scoping, estimations, and client workshops"
+    ],
+    "requirements": [
+      "6+ years of Azure cloud architecture experience",
+      "Deep knowledge of Azure networking, identity, governance, and security",
+      "Experience leading architecture for enterprise-scale migrations",
+      "AZ-305 (Azure Solutions Architect Expert) certification required",
+      "Strong communication skills — able to present to technical and executive audiences",
+      "Good written and spoken English"
+    ],
+    "benefits": [
+      "Competitive salary commensurate with seniority",
+      "All Microsoft certification exam fees covered",
+      "Hybrid working — Skopje office + travel to client sites",
+      "High-impact role with direct client ownership",
+      "Small, senior team — architecture decisions are yours to lead"
+    ],
+    "skills": [
+      "Azure Architecture",
+      "Landing Zones",
+      "Migration",
+      "WAF"
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Frontend Developer (React / Next.js)",
+    "department": "Software Engineering",
+    "location": "Skopje, MK",
+    "workModel": "Hybrid",
+    "type": "Full-time",
+    "slug": "frontend-developer",
+    "description": "Build performant, accessible web applications with React and Next.js. Work closely with designers and backend engineers to deliver polished user experiences.",
+    "about": "Our Software Engineering team builds the client-facing layer of cloud-native products and portals. As a Frontend Developer, you will work on Next.js applications that sit on top of Azure backends — from internal enterprise dashboards to customer-facing web products.",
+    "responsibilities": [
+      "Build responsive, accessible web applications using React and Next.js (App Router)",
+      "Implement UI components from design specifications using Tailwind CSS",
+      "Integrate frontend applications with .NET REST APIs and Azure services",
+      "Optimise performance — Core Web Vitals, lazy loading, and caching strategies",
+      "Write unit and integration tests with Vitest and React Testing Library",
+      "Collaborate closely with designers, backend engineers, and product owners"
+    ],
+    "requirements": [
+      "3+ years of professional React and TypeScript development",
+      "Strong knowledge of Next.js — App Router, SSR, SSG, and API routes",
+      "Experience with Tailwind CSS and component library patterns",
+      "Familiarity with REST API integration and authentication flows",
+      "Understanding of web performance and accessibility best practices",
+      "Good written and spoken English"
+    ],
+    "benefits": [
+      "Competitive salary based on experience",
+      "Hybrid working — Skopje office + remote flexibility",
+      "Work on polished products with real design quality",
+      "Collaborate directly with cloud architects and backend engineers",
+      "Small, senior team — your code ships to production fast"
+    ],
+    "skills": [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS"
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Full-Stack Developer (.NET / React / AWS)",
+    "department": "Software Engineering",
+    "location": "Skopje, MK",
+    "workModel": "Hybrid",
+    "type": "Full-time",
+    "slug": "fullstack-dotnet-react-aws",
+    "description": "Build full-stack applications with .NET backends, React frontends, and AWS infrastructure. Work on end-to-end delivery for client projects spanning API design, UI, and cloud deployment.",
+    "about": "This role sits at the intersection of backend, frontend, and cloud. You will work on full-stack product delivery — .NET APIs and services on the backend, React / Next.js on the frontend, deployed and operated on AWS. You will own features end-to-end and collaborate closely with architects and DevOps engineers on real enterprise projects.",
+    "responsibilities": [
+      "Build and maintain .NET / C# REST APIs and backend services",
+      "Develop React and Next.js frontends integrated with .NET backends",
+      "Deploy and manage applications on AWS — EC2, ECS, Lambda, RDS, and S3",
+      "Write infrastructure-as-code using AWS CDK or Terraform for AWS",
+      "Implement CI/CD pipelines on GitHub Actions targeting AWS environments",
+      "Collaborate with architects on system design, API contracts, and cloud patterns"
+    ],
+    "requirements": [
+      "3+ years of full-stack development experience with .NET and React",
+      "Solid knowledge of C# and RESTful API design patterns",
+      "Proficiency in React (hooks, state management) and TypeScript",
+      "Hands-on experience deploying applications on AWS",
+      "Familiarity with containerisation — Docker and ECS or EKS",
+      "Good written and spoken English"
+    ],
+    "benefits": [
+      "Competitive salary based on experience",
+      "AWS and Microsoft certification fees covered",
+      "Hybrid working — Skopje office + remote flexibility",
+      "End-to-end ownership across the full stack",
+      "Small, senior team — no bureaucracy, fast shipping"
+    ],
+    "skills": [
+      ".NET",
+      "React",
+      "AWS",
+      "TypeScript"
+    ]
+  },
+  {
+    "id": 9,
+    "title": ".NET / C# Developer",
+    "department": "Software Engineering",
+    "location": "Skopje, MK",
+    "workModel": "Hybrid",
+    "type": "Full-time",
+    "slug": "dotnet-csharp-developer",
+    "description": "Build and maintain .NET / C# applications and REST APIs on Azure. Work within delivery teams on cloud-native backends, integrations, and business logic for enterprise clients.",
+    "about": "NativeCloud's Software Engineering team delivers cloud-native .NET systems for enterprise clients across Europe. As a .NET / C# Developer, you will be a core contributor to backend services and APIs — working alongside senior engineers, architects, and DevOps to ship well-structured, well-tested code that runs reliably on Azure.",
+    "responsibilities": [
+      "Develop .NET / C# applications and REST APIs deployed on Azure App Service or AKS",
+      "Implement business logic, data access layers, and service integrations",
+      "Work with Azure services — Service Bus, Blob Storage, Key Vault, and SQL",
+      "Write unit and integration tests to maintain high code quality",
+      "Participate in code reviews, sprint planning, and technical discussions",
+      "Collaborate with DevOps teams to optimise deployment and release pipelines"
+    ],
+    "requirements": [
+      "2+ years of professional .NET / C# development experience",
+      "Solid understanding of OOP principles and RESTful API design",
+      "Experience with Entity Framework Core and SQL Server",
+      "Familiarity with Azure fundamentals — App Service, Storage, Key Vault",
+      "Comfortable working in Agile delivery teams with Git-based workflows",
+      "Good written and spoken English"
+    ],
+    "benefits": [
+      "Competitive salary based on experience",
+      "Microsoft certification fees covered",
+      "Hybrid working — Skopje office + remote flexibility",
+      "Mentorship from senior engineers and cloud architects",
+      "Real ownership — your code ships to enterprise production environments"
+    ],
+    "skills": [
+      ".NET",
+      "C#",
+      "Azure",
+      "REST APIs"
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Security Engineer (Azure)",
+    "department": "Security",
+    "location": "Remote",
+    "workModel": "Remote",
+    "type": "Contract",
+    "slug": "security-engineer-azure",
+    "description": "Implement Zero Trust security controls across Azure environments. Harden identity, network, and workload layers using Defender for Cloud, Sentinel, and Entra ID.",
+    "about": "Security is not an afterthought at NativeCloud — it is built into every landing zone, every pipeline, and every deployment. As our Azure Security Engineer, you will define and enforce security posture across client environments, operating across the full stack from identity and network to workload and data.",
+    "responsibilities": [
+      "Design and implement Zero Trust architecture across Azure environments",
+      "Configure and tune Microsoft Defender for Cloud and Microsoft Sentinel",
+      "Manage Entra ID security — Conditional Access, PIM, MFA, and identity governance",
+      "Harden Azure networking — Firewall, DDoS, Private Endpoints, NSG policies",
+      "Conduct security assessments and produce remediation roadmaps",
+      "Support compliance workstreams for ISO 27001, NIS2, and GDPR"
+    ],
+    "requirements": [
+      "4+ years of Azure security engineering experience",
+      "Deep knowledge of Microsoft Defender for Cloud and Microsoft Sentinel",
+      "Strong understanding of Entra ID, Conditional Access, and PIM",
+      "Experience with network security — Firewall, NSGs, and Private Endpoints",
+      "SC-200 or AZ-500 certification preferred",
+      "Good written and spoken English"
+    ],
+    "benefits": [
+      "Fully remote — work from anywhere in Europe",
+      "Competitive contract rate",
+      "Microsoft security certification fees covered",
+      "High-impact work securing enterprise Azure environments",
+      "Flexible engagement — contract with potential to convert to permanent"
+    ],
+    "skills": [
+      "Azure Security",
+      "Sentinel",
+      "Zero Trust",
+      "Entra ID"
+    ],
+    "duration": "Flexible engagement"
+  },
+  {
+    "id": 12,
+    "title": "Senior TypeScript Backend Developer",
+    "department": "AI Engineering",
+    "location": "Remote",
+    "workModel": "Remote",
+    "type": "Contract",
+    "slug": "senior-typescript-backend-developer",
+    "description": "Build backend TypeScript services powering AI workflows, multi-agent systems, and enterprise integrations. Strong hands-on engineering in a fast-moving AI environment.",
+    "about": "We are looking for a Senior TypeScript Backend Developer with experience in AI workflows and orchestration. The ideal candidate has strong hands-on backend development skills in TypeScript, along with experience building and managing AI-driven workflows, multi-agent systems, and enterprise integrations.",
+    "responsibilities": [
+      "Design and build backend TypeScript services and APIs that power AI-driven products",
+      "Build and manage AI workflow orchestration systems and multi-agent pipelines",
+      "Integrate with AI/LLM platforms such as OpenAI, Azure OpenAI, and Anthropic",
+      "Develop enterprise integrations with third-party platforms and internal services",
+      "Define reusable patterns and best practices for AI-assisted backend development",
+      "Write clean, well-tested TypeScript with high reliability standards",
+      "Collaborate with frontend and cloud engineering teams to deliver end-to-end features"
+    ],
+    "requirements": [
+      "4+ years of backend development experience with TypeScript and Node.js",
+      "Proven experience building AI workflows and orchestration systems",
+      "Hands-on experience with multi-agent frameworks such as LangChain, AutoGen, or similar",
+      "Strong understanding of REST APIs, message queues, and event-driven architecture",
+      "Experience integrating with AI/LLM platforms (OpenAI, Azure OpenAI, or Anthropic)",
+      "Good written and spoken English"
+    ],
+    "benefits": [
+      "Fully remote — work from anywhere in Europe",
+      "Competitive contract rate",
+      "3–6 month engagement with potential to extend",
+      "Direct access to AI tools and cloud sandbox environments",
+      "Work alongside a senior engineering team on production AI systems"
+    ],
+    "skills": [
+      "TypeScript",
+      "AI Workflows",
+      "Multi-agent Systems",
+      "Node.js"
+    ],
+    "duration": "3–6 months"
+  }
+]

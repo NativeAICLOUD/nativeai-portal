@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "image": "/img/azureopenai.png",
+    "title": "Getting Started with Azure OpenAI Service",
+    "date": "2025-04-28T09:00:00.000Z",
+    "desc": "Azure OpenAI Service brings powerful large language models — including GPT-4o, GPT-4 Turbo, and Embeddings — directly into your Azure environment, giving you enterprise-grade security, compliance, and regional data residency. In this guide, we walk through provisioning your first Azure OpenAI resource, deploying a model, and making your first API call from a .NET or Python application. We also cover key concepts like token limits, system prompts, temperature settings, and how to structure effective prompts for consistent results. Whether you are building a customer support chatbot, a document summarisation tool, or an internal knowledge assistant, this article gives you a solid foundation to start shipping AI features with confidence."
+  },
+  {
+    "id": 3,
+    "image": "/img/githubactions.png",
+    "title": "CI/CD Pipelines with Azure DevOps and GitHub Actions",
+    "date": "2025-04-14T09:00:00.000Z",
+    "desc": "A well-designed CI/CD pipeline is the backbone of a high-performing engineering team. In this article, we compare Azure DevOps Pipelines and GitHub Actions and explain how to combine both tools to get the best of each ecosystem. We build a complete pipeline from scratch: code commit triggers a GitHub Actions workflow that runs unit tests and builds a Docker image, pushes it to Azure Container Registry, and then hands off to an Azure DevOps release pipeline for staged deployment to AKS — with approval gates between environments. We also cover secrets management with Azure Key Vault, environment-specific configuration using variable groups, and how to set up rollback strategies using deployment slots and blue-green releases. Practical YAML examples are included throughout."
+  },
+  {
+    "id": 4,
+    "image": "/img/microservices.png",
+    "title": "Building Cloud-Native Microservices on Azure",
+    "date": "2025-04-07T09:00:00.000Z",
+    "desc": "Moving from a monolithic architecture to microservices unlocks independent deployability, targeted scaling, and team autonomy — but it also introduces complexity around service discovery, distributed tracing, and data consistency. In this deep-dive, we design a cloud-native order processing system using Azure Kubernetes Service, Azure Service Bus for asynchronous messaging, and Azure Cosmos DB for per-service data isolation. We implement the Outbox Pattern to ensure reliable event publishing, add distributed tracing with Azure Monitor and OpenTelemetry, and set up a service mesh using NGINX Ingress with rate limiting and TLS termination. The article concludes with practical advice on when microservices are the right choice and how to avoid the most common pitfalls teams fall into during decomposition."
+  },
+  {
+    "id": 5,
+    "image": "/img/kubernetesonaks.png",
+    "title": "Kubernetes on AKS: Production Best Practices",
+    "date": "2025-03-31T09:00:00.000Z",
+    "desc": "Running Kubernetes in production is very different from running it in a demo. Cluster configuration decisions made early can be difficult and costly to undo later. In this article, we share the production best practices we apply on every AKS cluster we deploy: node pool design with system and user pools separated, cluster autoscaler tuning, Pod Disruption Budgets for zero-downtime maintenance, resource requests and limits to prevent noisy-neighbour problems, and Network Policies to enforce micro-segmentation. We also cover workload identity using Azure Workload Identity (replacing the deprecated pod-managed identities), secret injection from Azure Key Vault using the Secrets Store CSI Driver, and multi-zone node pools for high availability. Each section includes real configuration examples you can adapt for your own clusters."
+  },
+  {
+    "id": 6,
+    "image": "/img/Azurecosts.png",
+    "title": "Azure Cost Optimisation: Cut Your Cloud Bill by 40%",
+    "date": "2025-03-24T09:00:00.000Z",
+    "desc": "Cloud costs have a habit of growing faster than the business value they deliver. In our experience working with Azure customers across industries, most organisations have between 25% and 45% immediate savings available without any impact on performance or reliability. In this article, we walk through the most impactful cost reduction techniques: right-sizing virtual machines using Azure Advisor recommendations, converting pay-as-you-go workloads to Reserved Instances or Savings Plans, enabling auto-shutdown for non-production environments, replacing always-on VMs with Azure Container Apps or Functions for batch workloads, and deleting orphaned resources like unused disks and public IPs. We also show how to set up cost alerts and budgets in Azure Cost Management so that surprises are caught early, before they appear on the invoice."
+  },
+  {
+    "id": 7,
+    "image": "/img/azureopenairag.png",
+    "title": "Building RAG Pipelines with Azure AI Search and GPT-4o",
+    "date": "2025-03-17T09:00:00.000Z",
+    "desc": "Retrieval-Augmented Generation (RAG) is the architecture that turns a general-purpose language model into a domain expert grounded in your own data. Instead of fine-tuning — which is expensive and produces models that go stale — RAG retrieves the most relevant documents at query time and passes them as context to the model. In this article, we build a complete RAG pipeline on Azure: documents are uploaded to Azure Blob Storage, indexed by Azure AI Search using vector embeddings from Azure OpenAI, and retrieved at query time using hybrid search (vector + keyword). The retrieved chunks are then assembled into a prompt sent to GPT-4o, which generates a grounded answer with source citations. We cover chunking strategies, embedding model selection, index schema design, semantic ranking, and how to evaluate retrieval quality. Full code examples in Python using the Azure SDK are included."
+  },
+  {
+    "id": 9,
+    "image": "/img/infrastructure-as-code.png",
+    "title": "Azure Infrastructure as Code (IaC) Guide: 10 Best Practices",
+    "date": "2025-07-04T09:00:00.000Z",
+    "desc": "Are you still deploying Azure resources manually in the Azure Portal? What starts as a quick setup often turns into inconsistencies across environments, undocumented changes, and errors that are hard to trace. The solution is Infrastructure as Code. This guide covers what IaC is, its benefits, how it works in Azure, the best tools (Bicep, ARM, Terraform, Pulumi), and 10 best practices to get you started."
+  },
+  {
+    "id": 8,
+    "image": "/img/security.png",
+    "title": "Azure Security Fundamentals: Zero Trust for Cloud Workloads",
+    "date": "2025-03-10T09:00:00.000Z",
+    "desc": "The traditional perimeter-based security model does not work in the cloud. With resources spread across regions, teams accessing systems from anywhere, and workloads communicating over public networks, Zero Trust — never trust, always verify — is the only viable approach. In this article, we implement Zero Trust across an Azure workload step by step: enabling Microsoft Defender for Cloud and addressing its security score recommendations, configuring Entra ID Conditional Access policies to require MFA and compliant devices, applying Just-in-Time VM access to eliminate persistent inbound ports, using Private Endpoints to remove public exposure from storage accounts and databases, and setting up Microsoft Sentinel for centralised security monitoring and automated incident response. This article is a practical starting point for any team that wants to harden their Azure environment against modern threats."
+  },
+  {
+    "id": 10,
+    "image": "/img/Article 1.png",
+    "title": "Claude Opus 5 Is Now Available in Microsoft Foundry",
+    "date": "2026-07-26T09:00:00.000Z",
+    "desc": "Anthropic's Claude Opus 5 — the most advanced model in the Claude 5 family — is now available directly in Microsoft Foundry, giving enterprises a new frontier option for complex reasoning and long-running agentic workloads alongside Foundry's evaluation tools, native security controls, and governed deployment. Opus 5 plans multi-step workflows, adapts when something breaks, and holds context across tools and subagents to see a task through to completion. In this article, we cover what's new in Opus 5, how to deploy and authenticate against it in Foundry, and what it means for developers already building on Microsoft's AI stack."
+  }
+]
