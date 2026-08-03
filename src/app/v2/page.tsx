@@ -386,16 +386,16 @@ export default function HomeV2() {
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold leading-tight mb-6">
               Every hour wasted is a problem{' '}
-              <span className="text-[#e89a78]">we've solved before.</span>
+              <span className="text-[#e89a78]">we&apos;ve solved before.</span>
             </h2>
             <p className="text-white/35 text-base leading-relaxed mb-10">
-              We've seen the same patterns across dozens of companies. Here's what we replace.
+              We&apos;ve seen the same patterns across dozens of companies. Here&apos;s what we replace.
             </p>
             <Link
               href={Constants.PAGES.SCHEDULE_CALL}
               className="inline-flex items-center gap-2.5 bg-[#e89a78]/10 border border-[#e89a78]/25 hover:bg-[#e89a78]/15 hover:border-[#e89a78]/40 text-[#e89a78] font-semibold text-sm px-6 py-3.5 rounded-full transition-all duration-200"
             >
-              Let's solve yours
+              Let&apos;s solve yours
               <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
                 <path d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
               </svg>
@@ -499,10 +499,10 @@ export default function HomeV2() {
                 Ready to start?
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6 max-w-2xl mx-auto leading-[1.05]">
-                Let's build something your business actually needs.
+                Let&apos;s build something your business actually needs.
               </h2>
               <p className="text-white/55 text-base sm:text-lg max-w-xl mx-auto mb-10 leading-relaxed">
-                A 30-minute call with our team. No commitment, no sales pitch — just a straight conversation about what's possible for your business.
+                A 30-minute call with our team. No commitment, no sales pitch — just a straight conversation about what&apos;s possible for your business.
               </p>
               <Link
                 href={Constants.PAGES.SCHEDULE_CALL}
