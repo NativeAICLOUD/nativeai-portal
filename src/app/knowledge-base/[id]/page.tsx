@@ -1,9 +1,23 @@
 import { getBlogPosts, getSinglePost } from '@/lib/blogsPosts';
 import { shuffle, take } from 'lodash';
 import type { Metadata } from 'next';
-import { redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import ArticleClient from '@/app/components/partials/knowledge-base/ArticleClient';
 import richArticles from '@/data/richArticles';
+
+type PageProps = { params: { id: string } };
+
+// Prerender every article at build time so production requests are served
+// statically instead of rendering on-demand in a serverless function.
+export async function generateStaticParams() {
+  const posts = await getBlogPosts();
+  return posts.map((post) => ({ id: String(post.id) }));
+}
+
+function parseArticleId(raw: unknown): number | undefined {
+  if (typeof raw !== 'string' || !/^\d+$/.test(raw)) return undefined;
+  return Number(raw);
+}
 
 function resolveOgImage(imagePath: string): string {
   const base = 'https://nativeai.cloud';
@@ -14,9 +28,10 @@ function resolveOgImage(imagePath: string): string {
   return `${base}${encoded}`;
 }
 
-export async function generateMetadata({ params }: any): Promise<Metadata> {
-  const post = await getSinglePost(+params?.id);
-  if (!post?.id) return {};
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const id = parseArticleId(params?.id);
+  const post = id !== undefined ? await getSinglePost(id) : undefined;
+  if (!post) return {};
   const desc = post.desc.slice(0, 160);
   const imageUrl = resolveOgImage(post.image);
   const articleUrl = `https://nativeai.cloud/knowledge-base/${post.id}`;
@@ -86,9 +101,18 @@ function buildSections(desc: string, id: number) {
   })).filter((s) => s.content.length > 0);
 }
 
-const KnowledgeBaseDetailPage = async ({ params }: any) => {
-  const post = await getSinglePost(+params?.id);
-  if (!post.id) redirect('/not-found');
+const KnowledgeBaseDetailPage = async ({ params }: PageProps) => {
+  const id = parseArticleId(params?.id);
+  if (id === undefined) {
+    console.error(`[knowledge-base] Invalid article id in URL: "${params?.id}"`);
+    notFound();
+  }
+
+  const post = await getSinglePost(id);
+  if (!post) {
+    console.error(`[knowledge-base] No article found for id ${id}`);
+    notFound();
+  }
 
   const posts = await getBlogPosts();
   const related = take(shuffle(posts.filter((p) => p.id !== post.id)), 3);

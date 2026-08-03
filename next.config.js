@@ -18,6 +18,9 @@ const withPWA = require('next-pwa')({
 });
 
 const nextConfig = {
+  // Allows building into a separate dir (e.g. NEXT_DIST_DIR=.next-build) so a
+  // production build can run while `next dev` holds locks on .next
+  distDir: process.env.NEXT_DIST_DIR || '.next',
   reactStrictMode: false,
   experimental: {
     scrollRestoration: true,
