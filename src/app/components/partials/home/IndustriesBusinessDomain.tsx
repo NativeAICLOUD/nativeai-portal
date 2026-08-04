@@ -9,8 +9,8 @@ import { Eyebrow } from '@/app/components/partials/services/ServiceUI';
 /* Premium icon tile — solid Azure icon on an 8% Azure tint */
 const TILE_STYLE: React.CSSProperties = {
   background: 'rgba(37,99,235,0.08)',
-  border: '1px solid rgba(8,27,58,0.06)',
-  boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
+  border: '1px solid rgba(15,23,42,0.06)',
+  boxShadow: '0 8px 24px rgba(15,23,42,0.06)',
 };
 
 type Industry = {
@@ -60,7 +60,7 @@ export default function IndustriesBusinessDomain() {
                 className="mb-5 flex h-16 w-16 items-center justify-center rounded-[18px] transition-transform duration-200 group-hover:scale-105"
                 style={TILE_STYLE}
               >
-                <Icon className="h-7 w-7 text-[#2563EB]" strokeWidth={2} aria-hidden="true" />
+                <Icon className="h-8 w-8 text-[#2563EB]" strokeWidth={1.8} aria-hidden="true" />
               </div>
               <h3 className="m-0 text-[16px] font-medium leading-[1.3] text-[#111]">{title}</h3>
               <p className="mt-2 text-[14px] font-normal leading-[1.5] text-[#6b7280]">{desc}</p>

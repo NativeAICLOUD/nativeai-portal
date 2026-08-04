@@ -1,109 +1,187 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { techStack } from "@/lib/tech-stack-data";
-import { Eyebrow } from "@/app/components/partials/services/ServiceUI";
+import { Sparkles, Globe, Palette, type LucideIcon } from "lucide-react";
+import { techStack, type TechItem } from "@/lib/tech-stack-data";
 
+/* ── Category configuration (data-driven) ─────────────────────────
+   Icons: provided glyph SVGs where available, matching vectors elsewhere.
+   Each category carries its own icon colour and soft background tint. */
+type CatVisual =
+  | { type: "glyph"; src: string }
+  | { type: "lucide"; icon: LucideIcon };
+
+type CategoryMeta = { visual: CatVisual; color: string; bg: string };
+
+const CATEGORY_META: Record<string, CategoryMeta> = {
+  "generative AI":      { visual: { type: "lucide", icon: Sparkles },                        color: "#FF8A3D", bg: "rgba(255,138,61,0.10)" },
+  backend:              { visual: { type: "glyph", src: "/icons/web-backend.svg" },          color: "#2563EB", bg: "rgba(37,99,235,0.08)" },
+  frontend:             { visual: { type: "glyph", src: "/icons/web-frontend.svg" },         color: "#4F46E5", bg: "rgba(79,70,229,0.08)" },
+  mobile:               { visual: { type: "glyph", src: "/icons/mobile-icons.png" },         color: "#0F8B83", bg: "rgba(15,139,131,0.08)" },
+  devOps:               { visual: { type: "glyph", src: "/icons/cloud-and-devops.svg" },     color: "#7C3AED", bg: "rgba(124,58,237,0.08)" },
+  "API & integrations": { visual: { type: "glyph", src: "/icons/api-and-integrations.svg" }, color: "#E11D48", bg: "rgba(225,29,72,0.08)" },
+  webflow:              { visual: { type: "lucide", icon: Globe },                           color: "#1D4ED8", bg: "rgba(29,78,216,0.08)" },
+  design:               { visual: { type: "lucide", icon: Palette },                         color: "#DB2777", bg: "rgba(219,39,119,0.08)" },
+};
+
+const FALLBACK_META: CategoryMeta = {
+  visual: { type: "lucide", icon: Sparkles },
+  color: "#2563EB",
+  bg: "rgba(37,99,235,0.08)",
+};
+
+/* ── Category icon ── */
+function CategoryIcon({ meta, size = 21 }: { meta: CategoryMeta; size?: number }) {
+  if (meta.visual.type === "glyph") {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={meta.visual.src}
+        alt=""
+        style={{ height: size, width: "auto" }}
+        className="object-contain"
+        aria-hidden="true"
+      />
+    );
+  }
+  const Icon = meta.visual.icon;
+  return (
+    <Icon
+      style={{ color: meta.color, height: size, width: size }}
+      strokeWidth={2}
+      aria-hidden="true"
+    />
+  );
+}
+
+/* ── Technology card ── */
+function TechnologyCard({ item }: { item: TechItem }) {
+  return (
+    <div className="flex min-h-[76px] items-center gap-[18px] rounded-xl border border-[#E9EBEF] bg-white p-3.5 shadow-[0_3px_12px_rgba(15,23,42,0.035)] transition-[transform,box-shadow] duration-200 hover:-translate-y-[1px] hover:shadow-[0_7px_18px_rgba(15,23,42,0.06)] md:min-h-[86px] md:px-[18px] md:py-4">
+      {/* logo container — identical size for every technology */}
+      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-[12px] bg-[#F1F5FD] md:h-[50px] md:w-[50px]">
+        {item.logo ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={item.logo}
+            alt={`${item.name} logo`}
+            className="h-auto max-h-[28px] w-auto max-w-[28px] object-contain"
+          />
+        ) : (
+          <span className="text-[13px] font-semibold text-[#2563EB]" aria-hidden="true">
+            {item.name.slice(0, 2).toUpperCase()}
+          </span>
+        )}
+      </span>
+      <span className="text-[15px] font-medium leading-[1.2] text-[#0F172A] md:text-[17px]">
+        {item.name}
+      </span>
+    </div>
+  );
+}
+
+/* ── Section ───────────────────────────────────────────────────── */
 export default function TechStackSection() {
   const categories = Object.keys(techStack);
-  const [active, setActive] = useState(categories[0]);
+  const [activeCategory, setActiveCategory] = useState(categories[0]);
 
   return (
-    <section className="font-switzer py-20 lg:py-24 px-6 md:px-12 max-w-7xl mx-auto">
+    <section className="font-switzer bg-white">
+      <div className="mx-auto w-full max-w-[1180px] px-5 pb-20 pt-[72px] sm:px-6 md:pb-[110px] md:pt-24">
 
-      {/* Header — same pattern as the nearshore/delivery sections */}
-      <motion.div
-        className="mb-12"
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        viewport={{ once: true, margin: "-80px" }}
-      >
-        <div className="mb-4"><Eyebrow>Tech Stack</Eyebrow></div>
-        <h2 className="m-0 max-w-[560px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
-          Proven tools, ready to grow with you.
-        </h2>
-        <p className="mt-6 max-w-[540px] text-[16px] font-light leading-[1.7] text-[#6b7280]">
-          Our tech stack covers everything: design, frontend, backend, mobile, AI, and cloud. We pick
-          tools that are proven, reliable, and ready to grow with your business.
-        </p>
-      </motion.div>
+        {/* ── Header ── */}
+        <header>
+          <p className="m-0 mb-[14px] text-[11px] font-medium uppercase tracking-[0.18em] text-[#64748B]">
+            State-of-the-Art
+          </p>
+          <h2 className="m-0 text-[31px] font-medium leading-[1.08] tracking-[-0.025em] text-[#111827] md:text-[36px] lg:text-[42px]">
+            Technologies we use
+          </h2>
+          <p className="m-0 mt-[22px] max-w-[500px] text-[14px] font-normal leading-[1.65] text-[#7A8392]">
+            Our tech stack covers everything: design, frontend, backend, mobile, AI, and cloud. We
+            pick tools that are proven, reliable, and ready to grow with your business.
+          </p>
+        </header>
 
-      {/* Two-column layout */}
-      <div className="flex flex-col md:grid md:grid-cols-[1fr_3fr] gap-12">
+        {/* ── Technology explorer ── */}
+        <div className="mt-10 md:mt-14 md:grid md:grid-cols-[290px_minmax(0,1fr)] md:items-start md:gap-x-8 lg:grid-cols-[360px_minmax(0,1fr)] lg:gap-x-[52px]">
 
-        {/* Left — category list (vertical on desktop, scrollable row on mobile) */}
-        <motion.ul
-          className="flex flex-row md:flex-col overflow-x-auto md:overflow-visible gap-1 md:gap-0 pb-2 md:pb-0 scrollbar-hide"
-          initial={{ opacity: 0, x: -16 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
-          viewport={{ once: true, margin: "-60px" }}
-        >
-          {categories.map((cat) => (
-            <li key={cat} className="shrink-0 md:border-b md:border-[#e6e6e6] last:border-0">
-              <button
-                onClick={() => setActive(cat)}
-                className={`
-                  w-full py-3 md:py-6 px-4 md:px-0
-                  flex items-center justify-between text-left
-                  text-base md:text-xl transition-all duration-200 cursor-pointer
-                  rounded-xl md:rounded-none
-                  ${active === cat
-                    ? "text-[#111] md:bg-transparent bg-[#fafafa]"
-                    : "text-[#9ca3af] hover:text-[#111]"
-                  }
-                `}
-              >
-                <span className="capitalize">{cat}</span>
-                {active === cat && (
-                  <motion.span
-                    layoutId="activeDot"
-                    className="hidden md:block w-1.5 h-1.5 rounded-full bg-[#111] shrink-0 ml-3"
-                  />
-                )}
-              </button>
-            </li>
-          ))}
-        </motion.ul>
-
-        {/* Right — logo grid */}
-        <div className="min-h-[400px]">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.28, ease: "easeInOut" }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-4"
-            >
-              {techStack[active].map((item, i) => (
-                <motion.div
-                  key={item.name}
-                  initial={{ opacity: 0, scale: 0.93 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3, delay: i * 0.05, ease: "easeOut" }}
-                  className="group bg-white border border-[#e6e6e6] rounded-lg aspect-square flex flex-col items-center justify-center p-8 gap-3 transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-1 hover:border-[#111]/20 hover:shadow-[0_8px_24px_rgba(0,0,0,0.10)]"
+          {/* Mobile — horizontally scrollable category tabs */}
+          <nav className="scrollbar-hide -mx-5 flex gap-2.5 overflow-x-auto px-5 pb-2 md:hidden" aria-label="Technology categories">
+            {categories.map((cat) => {
+              const isActive = activeCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  aria-pressed={isActive}
+                  className={`shrink-0 whitespace-nowrap rounded-full px-4 py-2 text-[13.5px] font-medium capitalize transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]/40 ${
+                    isActive
+                      ? 'bg-[rgba(255,138,61,0.12)] text-[#D96B1F]'
+                      : 'bg-[#F3F4F6] text-[#6B7280]'
+                  }`}
                 >
-                  {item.logo ? (
-                    <img
-                      src={item.logo}
-                      alt={item.name}
-                      className="max-w-[65%] max-h-[55%] object-contain transition-transform duration-200 group-hover:scale-110"
-                    />
-                  ) : (
-                    <span className="text-sm font-medium text-[#111] text-center leading-snug px-2">
-                      {item.name}
-                    </span>
-                  )}
-                </motion.div>
-              ))}
-            </motion.div>
-          </AnimatePresence>
-        </div>
+                  {cat}
+                </button>
+              );
+            })}
+          </nav>
 
+          {/* Desktop / tablet — vertical category navigation (sticky on desktop) */}
+          <nav className="hidden md:block lg:sticky lg:top-[120px]" aria-label="Technology categories">
+            {categories.map((cat) => {
+              const meta = CATEGORY_META[cat] ?? FALLBACK_META;
+              const isActive = activeCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  aria-pressed={isActive}
+                  className="flex h-[78px] w-full cursor-pointer items-center gap-4 border-b border-[#ECEEF1] bg-transparent text-left transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]/40"
+                >
+                  <span
+                    className="grid h-11 w-11 shrink-0 place-items-center rounded-[12px] transition-all duration-200"
+                    style={{
+                      background: meta.bg,
+                      border: isActive ? `1.5px solid ${meta.color}55` : '1px solid rgba(15,23,42,0.05)',
+                    }}
+                  >
+                    <CategoryIcon meta={meta} />
+                  </span>
+                  <span
+                    className={`capitalize text-[16px] leading-[1.2] transition-colors duration-200 lg:text-[18px] ${
+                      isActive
+                        ? 'font-semibold text-[#111827]'
+                        : 'font-normal text-[#697386] hover:text-[#111827]'
+                    }`}
+                  >
+                    {cat}
+                  </span>
+                </button>
+              );
+            })}
+          </nav>
+
+          {/* Right — technology panel */}
+          <div className="mt-5 w-full overflow-hidden rounded-[15px] bg-[#FAFAF8] p-3.5 md:mt-0 md:min-h-[720px] md:rounded-[18px] md:p-[22px] lg:p-7">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeCategory}
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                className="flex flex-col gap-4"
+              >
+                {techStack[activeCategory].map((item) => (
+                  <TechnologyCard key={item.name} item={item} />
+                ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+        </div>
       </div>
     </section>
   );

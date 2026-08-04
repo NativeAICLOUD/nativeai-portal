@@ -71,7 +71,7 @@ export default function HeroSearch() {
   };
 
   return (
-    <div ref={wrapRef} className="relative mt-7 w-full max-w-[620px]">
+    <div ref={wrapRef} className="relative mt-[52px] w-full max-w-[680px]">
       {/* AI-era animated gradient ring — same treatment as the navbar AI Mode search */}
       <div className="ai-search-wrap w-full">
         <form
@@ -98,10 +98,10 @@ export default function HeroSearch() {
           <button
             type="submit"
             aria-label="Search"
-            className="shrink-0 flex h-9 w-9 items-center justify-center rounded-full text-white transition-transform duration-150 hover:scale-105 active:scale-95"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white transition-transform duration-150 hover:scale-105 active:scale-95"
             style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #1e4fd6 100%)' }}
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </button>

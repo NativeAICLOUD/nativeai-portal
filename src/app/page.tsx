@@ -3,18 +3,20 @@ import ExpertiseSection from "./components/partials/home/ExpertiseSection";
 import NearshoreIntroSection from "./components/partials/home/NearshoreIntroSection";
 import ServicesScrollSection from "./components/partials/home/ServicesScrollSection";
 import HomeHeader from "./components/partials/home/Header";
-import HomeLowerSection from "./components/partials/home/HomeLowerSection";
 import HomePartner from "./components/partials/home/homepartner";
 import IndustriesBusinessDomain from "./components/partials/home/IndustriesBusinessDomain";
 import IndustriesIntroSection from "./components/partials/home/IndustriesIntroSection";
 import PracticalSolutionsSection from "./components/partials/home/PracticalSolutionsSection";
-import RotatingHeadlineHero from "./components/partials/home/RotatingHeadlineHero";
+import ProductDevelopmentSection from "./components/partials/home/ProductDevelopmentSection";
 import TechStackSection from "./components/partials/home/TechStackSection";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       <HomeHeader />
+
+      {/* What we do — end-to-end product development */}
+      <ProductDevelopmentSection />
 
       {/* Industries intro — same design as the nearshore intro */}
       <IndustriesIntroSection />
@@ -34,14 +36,8 @@ export default function Home() {
       {/* Full delivery spectrum, collaboration models, product development */}
       <DeliverySpectrumSection />
 
-      {/* Metallic shimmer headline hero */}
-      <RotatingHeadlineHero />
-
-      {/* Areas of Expertise — Azure & cloud security */}
+      {/* Areas of Expertise — Azure & cloud security (with rotating headline) */}
       <ExpertiseSection />
-
-      {/* Existing Blog Section */}
-      <HomeLowerSection />
 
       {/* Interactive Tech Stack */}
       <TechStackSection />
