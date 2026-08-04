@@ -1,4 +1,3 @@
-import AIServicesSection from "./components/partials/home/AIServicesSection";
 import ExpertiseSection from "./components/partials/home/ExpertiseSection";
 import ServicesScrollSection from "./components/partials/home/ServicesScrollSection";
 import HomeHeader from "./components/partials/home/Header";
@@ -26,9 +25,6 @@ export default function Home() {
 
       {/* What We Deliver — pinned scroll card experience */}
       <ServicesScrollSection />
-
-      {/* AI Services — 3 core services */}
-      <AIServicesSection />
 
       {/* Areas of Expertise — Azure & cloud security */}
       <ExpertiseSection />
