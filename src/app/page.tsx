@@ -5,7 +5,6 @@ import HomeHeader from "./components/partials/home/Header";
 import HomeLowerSection from "./components/partials/home/HomeLowerSection";
 import HomePartner from "./components/partials/home/homepartner";
 import IndustriesBusinessDomain from "./components/partials/home/IndustriesBusinessDomain";
-import MissionSection from "./components/partials/home/MissionSection";
 import PracticalSolutionsSection from "./components/partials/home/PracticalSolutionsSection";
 import ScrollCardsSection from "./components/partials/home/ScrollCardsSection";
 import RotatingHeadlineHero from "./components/partials/home/RotatingHeadlineHero";
@@ -36,9 +35,6 @@ export default function Home() {
 
       {/* Practical AI & Cloud solutions */}
       <PracticalSolutionsSection />
-
-      {/* Mission statement */}
-      <MissionSection />
 
       {/* Existing Blog Section */}
       <HomeLowerSection />

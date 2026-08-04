@@ -33,7 +33,7 @@ export default function ExpertiseSection() {
         style={{ background: 'radial-gradient(circle, rgba(37,99,235,0.10) 0%, transparent 70%)' }}
       />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-2 lg:gap-16 lg:py-24">
+      <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
 
         {/* Left — text + chip cloud */}
         <motion.div
@@ -55,47 +55,27 @@ export default function ExpertiseSection() {
             cloud infrastructure design.
           </p>
 
-          <div className="flex flex-wrap gap-3 mt-2">
+          <div className="mt-2 flex flex-wrap gap-x-8 gap-y-5">
             {expertiseTags.map((tag, i) => (
               <motion.div
                 key={tag.label}
+                className="flex items-center gap-3.5"
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, ease: "easeOut", delay: i * 0.06 }}
                 viewport={{ once: true, margin: "-40px" }}
               >
+                <tag.icon className="h-12 w-12 shrink-0 text-[#2563eb]" strokeWidth={1.3} aria-hidden="true" />
                 <Link
                   href={tag.href}
-                  className="group inline-flex items-center gap-2.5 rounded-full border border-[#e6e6e6] bg-white px-5 py-2.5 transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-0.5 hover:border-[#111]/20 hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111]/20"
+                  className="group inline-flex items-center rounded-full border border-[#e6e6e6] bg-white px-5 py-2.5 transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-0.5 hover:border-[#111]/20 hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111]/20"
                 >
-                  <tag.icon className="h-4 w-4 text-[#2563eb]" strokeWidth={1.75} aria-hidden="true" />
                   <span className="text-[15px] font-medium text-[#111]">{tag.label}</span>
                 </Link>
               </motion.div>
             ))}
           </div>
         </motion.div>
-
-        {/* Right — precision/architecture illustration */}
-        <div className="relative">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background: 'radial-gradient(ellipse 80% 55% at 48% 92%, rgba(37,99,235,0.13) 0%, rgba(59,130,246,0.04) 48%, transparent 68%)',
-            }}
-          />
-          <video
-            src="/img/digital-control.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            aria-label="Precision cloud architecture"
-            className="relative block w-full h-auto rounded-[24px]"
-            style={{ aspectRatio: '1 / 1', objectFit: 'cover' }}
-          />
-        </div>
 
       </div>
     </section>

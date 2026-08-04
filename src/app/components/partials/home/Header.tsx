@@ -5,6 +5,7 @@ import { Link } from 'react-transition-progress/next';
 import Image from 'next/image';
 import MobileAgentFlow from './MobileAgentFlow';
 import RotatingHeroHeadline from './RotatingHeroHeadline';
+import HeroSearch from './HeroSearch';
 
 const tags = ['AI', 'DATA', 'CLOUD'];
 
@@ -53,8 +54,11 @@ function HomeHeader() {
               {/* headline (rotates between slogans) */}
               <RotatingHeroHeadline variant="desktop" />
 
+              {/* Fresha-style site search — primary action, right under the headline */}
+              <HeroSearch />
+
               {/* buttons */}
-              <div className="flex items-center gap-3 flex-wrap">
+              <div className="mt-8 flex items-center gap-3 flex-wrap">
                 <Link
                   href={Constants.PAGES.SCHEDULE_CALL}
                   className="inline-flex items-center justify-center gap-2.5 whitespace-nowrap px-7 py-3.5 rounded-full text-base font-semibold text-white transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"

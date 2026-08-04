@@ -8,8 +8,8 @@ import BracketFrame from "../../ui/BracketFrame";
 const cards = [
   {
     number: "01",
-    title: "Custom Development",
-    subtitle: "Tailored software built precisely for your business workflows and goals.",
+    title: "AI Development",
+    subtitle: "Production-grade AI features and custom software, engineered for your workflows.",
     href: "/services/custom-development",
     background: "linear-gradient(135deg, #F0A062 0%, #E85D2F 100%)",
     border: undefined,
@@ -17,11 +17,12 @@ const cards = [
     numColor: "rgba(245,242,234,0.7)",
     bracketColor: "rgba(245,242,234,0.5)",
     hatch: false,
+    glows: [] as string[],
   },
   {
     number: "02",
-    title: "Design",
-    subtitle: "Beautiful, intuitive interfaces that users actually love to use.",
+    title: "AI Design",
+    subtitle: "Interfaces for AI products that feel effortless — clear, intuitive, on-brand.",
     href: "/services/design",
     background: "#F5F2EA",
     border: "1.5px solid #1A1A1A",
@@ -29,20 +30,35 @@ const cards = [
     numColor: "#888888",
     bracketColor: "#1A1A1A",
     hatch: true,
+    glows: [] as string[],
   },
   {
     number: "03",
-    title: "AI Agents & RAG",
-    subtitle: "Intelligent automation and retrieval-augmented generation for your data.",
+    title: "AI Product",
+    subtitle: "From idea to shipped AI product — strategy, build, and iteration in sprints.",
     href: "/services/ai-agents-rag",
-    background: "linear-gradient(135deg, #1A1A1A 0%, #E85D2F 140%)",
-    border: undefined,
-    textColor: "#F5F2EA",
-    numColor: "#F0A062",
-    bracketColor: "rgba(245,242,234,0.5)",
+    background:
+      "radial-gradient(ellipse 60% 45% at 32% 48%, rgba(240,160,98,0.35), transparent 65%), " +
+      "radial-gradient(ellipse 45% 35% at 80% 28%, rgba(240,160,98,0.28), transparent 60%), " +
+      "#fffcf7",
+    border: "1px solid #f0e4d8",
+    textColor: "#111111",
+    numColor: "#E85D2F",
+    bracketColor: "rgba(26,26,26,0.4)",
     hatch: false,
+    glows: [] as string[],
   },
 ];
+
+function CardGlows({ glows }: { glows: string[] }) {
+  return (
+    <>
+      {glows.map((cls, i) => (
+        <div key={i} aria-hidden className={`pointer-events-none ${cls}`} />
+      ))}
+    </>
+  );
+}
 
 /* ── Mobile ── */
 function MobileCards() {
@@ -63,6 +79,7 @@ function MobileCards() {
               borderRadius: 18,
             }}
           >
+            <CardGlows glows={card.glows} />
             {card.hatch && (
               <div
                 aria-hidden
@@ -75,22 +92,18 @@ function MobileCards() {
               />
             )}
             <BracketFrame color={card.bracketColor} />
+            <h3
+              className="relative max-w-[85%] text-4xl font-bold leading-[0.98] tracking-[-0.04em]"
+              style={{ color: card.textColor }}
+            >
+              {card.title}
+            </h3>
             <p
-              className="relative text-sm font-medium leading-relaxed max-w-[85%]"
+              className="relative mt-6 text-sm font-medium leading-relaxed max-w-[85%]"
               style={{ color: card.textColor, opacity: 0.7 }}
             >
               {card.subtitle}
             </p>
-            <h3
-              className="relative font-semibold leading-[1.05] mt-4"
-              style={{
-                color: card.textColor,
-                fontSize: 22,
-                letterSpacing: "-0.01em",
-              }}
-            >
-              {card.title}
-            </h3>
           </motion.div>
         </Link>
       ))}
@@ -126,7 +139,7 @@ function DesktopCards() {
       {cards.map((card, i) => (
         <Link key={i} href={card.href} className="block">
           <motion.div
-            className="relative overflow-hidden flex flex-col justify-end cursor-pointer"
+            className="relative overflow-hidden cursor-pointer"
             style={{
               x: transforms[i].x as any,
               rotate: transforms[i].rotate as any,
@@ -143,21 +156,7 @@ function DesktopCards() {
               transition: { duration: 0.2 },
             }}
           >
-            {/* Number badge */}
-            <span
-              aria-hidden
-              className="absolute"
-              style={{
-                top: 16,
-                left: 18,
-                fontFamily: "monospace",
-                fontSize: 10,
-                letterSpacing: "0.12em",
-                color: card.numColor,
-              }}
-            >
-              {card.number}
-            </span>
+            <CardGlows glows={card.glows} />
 
             {/* Diagonal hatch overlay (card 2 only) */}
             {card.hatch && (
@@ -172,20 +171,41 @@ function DesktopCards() {
               />
             )}
 
+            {/* Number badge */}
+            <span
+              aria-hidden
+              className="absolute"
+              style={{
+                top: 16,
+                right: 18,
+                fontFamily: "monospace",
+                fontSize: 10,
+                letterSpacing: "0.12em",
+                color: card.numColor,
+              }}
+            >
+              {card.number}
+            </span>
+
             <BracketFrame color={card.bracketColor} />
 
             <motion.h3
-              className="relative font-semibold leading-[1.05]"
+              className="absolute left-7 top-8 max-w-[85%] text-4xl font-bold leading-[0.98] tracking-[-0.04em] md:text-5xl lg:text-6xl"
               style={{
                 color: card.textColor,
-                fontSize: 24,
-                letterSpacing: "-0.01em",
                 opacity: titleOpacity,
                 filter: titleBlur,
               }}
             >
               {card.title}
             </motion.h3>
+
+            <p
+              className="absolute bottom-7 left-7 max-w-[80%] text-sm font-medium leading-relaxed"
+              style={{ color: card.textColor, opacity: 0.65 }}
+            >
+              {card.subtitle}
+            </p>
           </motion.div>
         </Link>
       ))}

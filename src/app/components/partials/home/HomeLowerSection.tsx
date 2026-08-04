@@ -75,15 +75,19 @@ const variants = [
     hatch:        true,
   },
   {
-    background:   'linear-gradient(135deg, #1A1A1A 0%, #6B3A2A 130%)',
-    border:       undefined,
-    textColor:    '#F5F2EA',
-    numColor:     '#F0A062',
-    metaColor:    'rgba(240,160,98,0.58)',
-    bracketColor: 'rgba(245,242,234,0.30)',
-    iconBg:       'rgba(255,255,255,0.09)',
-    chipBg:       'rgba(255,255,255,0.08)',
-    chipColor:    'rgba(245,242,234,0.65)',
+    background:
+      'radial-gradient(circle at 15% 100%, rgba(224,225,255,0.75), transparent 43%), ' +
+      'radial-gradient(circle at 80% 100%, rgba(255,237,189,0.70), transparent 48%), ' +
+      'radial-gradient(circle at 100% 70%, rgba(255,225,215,0.60), transparent 43%), ' +
+      '#ffffff',
+    border:       '1px solid #e6e6e6',
+    textColor:    '#111111',
+    numColor:     '#9ca3af',
+    metaColor:    '#9ca3af',
+    bracketColor: 'rgba(17,17,17,0.4)',
+    iconBg:       'rgba(17,17,17,0.05)',
+    chipBg:       'rgba(17,17,17,0.06)',
+    chipColor:    '#555555',
     hatch:        false,
   },
 ];
