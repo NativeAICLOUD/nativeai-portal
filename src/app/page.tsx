@@ -26,11 +26,11 @@ export default function Home() {
       {/* What We Deliver — pinned scroll card experience */}
       <ServicesScrollSection />
 
+      {/* Practical AI & Cloud solutions — where Core Services used to be */}
+      <PracticalSolutionsSection />
+
       {/* Areas of Expertise — Azure & cloud security */}
       <ExpertiseSection />
-
-      {/* Practical AI & Cloud solutions */}
-      <PracticalSolutionsSection />
 
       {/* Existing Blog Section */}
       <HomeLowerSection />
