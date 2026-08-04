@@ -1,11 +1,13 @@
+import DeliverySpectrumSection from "./components/partials/home/DeliverySpectrumSection";
 import ExpertiseSection from "./components/partials/home/ExpertiseSection";
+import NearshoreIntroSection from "./components/partials/home/NearshoreIntroSection";
 import ServicesScrollSection from "./components/partials/home/ServicesScrollSection";
 import HomeHeader from "./components/partials/home/Header";
 import HomeLowerSection from "./components/partials/home/HomeLowerSection";
 import HomePartner from "./components/partials/home/homepartner";
 import IndustriesBusinessDomain from "./components/partials/home/IndustriesBusinessDomain";
+import IndustriesIntroSection from "./components/partials/home/IndustriesIntroSection";
 import PracticalSolutionsSection from "./components/partials/home/PracticalSolutionsSection";
-import ScrollCardsSection from "./components/partials/home/ScrollCardsSection";
 import RotatingHeadlineHero from "./components/partials/home/RotatingHeadlineHero";
 import TechStackSection from "./components/partials/home/TechStackSection";
 
@@ -14,11 +16,8 @@ export default function Home() {
     <main className="min-h-screen">
       <HomeHeader />
 
-      {/* Scroll-animated 3-card services */}
-      <ScrollCardsSection />
-
-      {/* Metallic shimmer headline hero */}
-      <RotatingHeadlineHero />
+      {/* Industries intro — same design as the nearshore intro */}
+      <IndustriesIntroSection />
 
       {/* Industries Section */}
       <IndustriesBusinessDomain />
@@ -28,6 +27,15 @@ export default function Home() {
 
       {/* Practical AI & Cloud solutions — where Core Services used to be */}
       <PracticalSolutionsSection />
+
+      {/* Dedicated nearshore teams — same design as /nearshore-teams hero */}
+      <NearshoreIntroSection />
+
+      {/* Full delivery spectrum, collaboration models, product development */}
+      <DeliverySpectrumSection />
+
+      {/* Metallic shimmer headline hero */}
+      <RotatingHeadlineHero />
 
       {/* Areas of Expertise — Azure & cloud security */}
       <ExpertiseSection />

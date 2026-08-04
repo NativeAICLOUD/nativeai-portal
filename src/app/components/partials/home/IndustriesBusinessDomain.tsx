@@ -1,147 +1,72 @@
-'use client';
-
-import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import {
   Zap, Landmark, ShieldCheck, CreditCard, Truck, Cpu, Plane,
-  Scale, Wallet, ShoppingBag, HardHat, Boxes, ArrowRight,
+  Scale, Wallet, ShoppingBag, HardHat, Boxes,
   type LucideIcon,
 } from 'lucide-react';
+import { Eyebrow } from '@/app/components/partials/services/ServiceUI';
+
+/* Premium icon tile — solid Azure icon on an 8% Azure tint */
+const TILE_STYLE: React.CSSProperties = {
+  background: 'rgba(37,99,235,0.08)',
+  border: '1px solid rgba(8,27,58,0.06)',
+  boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
+};
 
 type Industry = {
   title: string;
-  description?: string;
+  desc: string;
   href: string;
   icon: LucideIcon;
 };
 
 const industries: Industry[] = [
-  { title: 'Energy and Resources',       href: '/industries',          icon: Zap },
-  { title: 'Finance and Banking',        href: '/industries',          icon: Landmark },
-  { title: 'Insurance',                  href: '/industries',          icon: ShieldCheck },
-  { title: 'Payments',                   href: '/payment-automation',  icon: CreditCard },
-  { title: 'Supply Chain and Logistics', href: '/industries',          icon: Truck },
-  { title: 'Technology',                 href: '/industries',          icon: Cpu },
-  { title: 'Travel',                     href: '/airline-booking',     icon: Plane },
-  { title: 'Legal & Compliance',         href: '/ai-legal-workspace',  icon: Scale },
-  { title: 'Fintech',                    href: '/payment-automation',  icon: Wallet },
-  { title: 'E-commerce & Retail',        href: '/industries',          icon: ShoppingBag },
-  { title: 'Construction',               href: '/industries',          icon: HardHat },
-  { title: 'B2B Solutions',              href: '/industries',          icon: Boxes },
+  { title: 'Energy and Resources',       desc: 'Data platforms and automation for energy, utilities and resource operations.', href: '/industries',         icon: Zap },
+  { title: 'Finance and Banking',        desc: 'Secure, compliant platforms for banks and financial institutions.',            href: '/industries',         icon: Landmark },
+  { title: 'Insurance',                  desc: 'Claims automation, risk analytics and policy workflows.',                      href: '/industries',         icon: ShieldCheck },
+  { title: 'Payments',                   desc: 'Billing, reconciliation and payment automation at scale.',                     href: '/payment-automation', icon: CreditCard },
+  { title: 'Supply Chain and Logistics', desc: 'Visibility, tracking and optimisation across the whole chain.',               href: '/industries',         icon: Truck },
+  { title: 'Technology',                 desc: 'Product engineering for software and SaaS companies.',                         href: '/industries',         icon: Cpu },
+  { title: 'Travel',                     desc: 'GDS-connected booking and travel platforms.',                                  href: '/airline-booking',    icon: Plane },
+  { title: 'Legal & Compliance',         desc: 'AI document and case workflows for legal teams.',                              href: '/ai-legal-workspace', icon: Scale },
+  { title: 'Fintech',                    desc: 'Modern rails for lending, payments and wealth products.',                      href: '/payment-automation', icon: Wallet },
+  { title: 'E-commerce & Retail',        desc: 'Scalable storefronts, logistics and personalisation.',                         href: '/industries',         icon: ShoppingBag },
+  { title: 'Construction',               desc: 'Project, site and resource management systems.',                               href: '/industries',         icon: HardHat },
+  { title: 'B2B Solutions',              desc: 'Portals, integrations and workflow platforms for B2B.',                        href: '/industries',         icon: Boxes },
 ];
-
-function IndustryCard({ title, href, icon: Icon, duplicate = false }: Industry & { duplicate?: boolean }) {
-  return (
-    <Link
-      href={href}
-      aria-hidden={duplicate || undefined}
-      tabIndex={duplicate ? -1 : undefined}
-      className="group mb-6 flex items-center gap-6 rounded-[24px] border border-[#e6e6e6] bg-white px-7 py-9 transition-[transform,background-color,border-color,box-shadow] duration-200 hover:translate-x-1 hover:border-[#111]/20 hover:shadow-[0_6px_20px_rgba(0,0,0,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111]/20 sm:px-9 sm:py-11 lg:mb-8"
-    >
-      <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-[#e6e6e6] bg-[#f3f4f6] transition-transform duration-200 group-hover:scale-105 sm:h-[70px] sm:w-[70px]">
-        <Icon className="h-7 w-7 text-[#2563eb] sm:h-8 sm:w-8" strokeWidth={1.6} aria-hidden="true" />
-      </span>
-      <span className="text-[21px] font-semibold leading-tight text-[#111] sm:text-[25px]">{title}</span>
-    </Link>
-  );
-}
-
-function IndustryScroller() {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    if (typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
-
-    let raf = 0;
-    let last = performance.now();
-    let paused = false;
-    const SPEED = 55; // px per second — one pass in ~24–30s, then stops at the last card
-
-    const pause = () => { paused = true; };
-    const resume = () => { paused = false; };
-    el.addEventListener('pointerenter', pause);
-    el.addEventListener('pointerleave', resume);
-
-    const tick = (now: number) => {
-      const dt = now - last;
-      last = now;
-      const max = el.scrollHeight - el.clientHeight;
-      if (!paused && el.scrollTop < max - 0.5) {
-        el.scrollTop = Math.min(max, el.scrollTop + (dt / 1000) * SPEED);
-      }
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-
-    return () => {
-      cancelAnimationFrame(raf);
-      el.removeEventListener('pointerenter', pause);
-      el.removeEventListener('pointerleave', resume);
-    };
-  }, []);
-
-  return (
-    <div ref={ref} className="industry-scroller relative h-[460px] sm:h-[560px] lg:h-[720px]">
-      <div className="flex flex-col pb-2">
-        {industries.map((ind) => (
-          <IndustryCard key={ind.title} {...ind} />
-        ))}
-      </div>
-    </div>
-  );
-}
 
 export default function IndustriesBusinessDomain() {
   return (
-    <section className="font-switzer relative overflow-hidden bg-[#f6f7f9]">
+    <section className="font-switzer bg-white">
+      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-24">
 
-      {/* Decorative glow — top-right */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-24 right-[6%] h-80 w-80 rounded-full"
-        style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.10) 0%, transparent 70%)' }}
-      />
+        {/* Header */}
+        <div className="mb-12">
+          <div className="mb-4"><Eyebrow>Industries we serve</Eyebrow></div>
+          <h2 className="m-0 max-w-[560px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+            Move your industry forward
+          </h2>
+        </div>
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-2 lg:gap-16 lg:py-24">
-
-            {/* Left — static content */}
-            <div className="flex flex-col">
-              <p className="mb-5 text-[12px] font-medium uppercase tracking-[0.14em] text-[#9ca3af]">
-                Industries we serve
-              </p>
-              <h2 className="m-0 text-[clamp(2.4rem,5vw,4.4rem)] font-medium leading-[1.04] tracking-tight text-[#111]">
-                Move your industry forward
-              </h2>
-              <p className="mt-6 max-w-[440px] text-[16px] font-light leading-[1.7] text-[#6b7280]">
-                From legal intelligence and financial services to healthcare and technology, our
-                sector-specific expertise allows us to build AI-powered solutions that address what
-                is happening in your industry today — and prepare you for what comes next.
-              </p>
-              <Link
-                href="/industries"
-                className="ai-search-wrap group mt-9 inline-block w-fit transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none"
+        {/* Industry cards — same design as the delivery-spectrum sections */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+          {industries.map(({ title, desc, href, icon: Icon }) => (
+            <Link
+              key={title}
+              href={href}
+              className="group flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6 transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-1 hover:border-[#111]/20 hover:shadow-[0_8px_24px_rgba(0,0,0,0.10)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111]/20"
+            >
+              <div
+                className="mb-5 flex h-16 w-16 items-center justify-center rounded-[18px] transition-transform duration-200 group-hover:scale-105"
+                style={TILE_STYLE}
               >
-                <span className="ai-search-inner flex items-center gap-2.5 px-6 py-3">
-                  <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" className="shrink-0">
-                    <defs>
-                      <linearGradient id="ind-cta-grad" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stopColor="#60a5fa" />
-                        <stop offset="50%" stopColor="#3b82f6" />
-                        <stop offset="100%" stopColor="#1e4fd6" />
-                      </linearGradient>
-                    </defs>
-                    <path fill="url(#ind-cta-grad)" d="M12 0c0 6.627-5.373 12-12 12 6.627 0 12 5.373 12 12 0-6.627 5.373-12 12-12-6.627 0-12-5.373-12-12Z" />
-                  </svg>
-                  <span className="text-[15px] font-medium text-[#111]">Explore our industries</span>
-                  <ArrowRight className="h-4 w-4 text-[#111] transition-transform duration-200 group-hover:translate-x-1.5" aria-hidden="true" />
-                </span>
-              </Link>
-            </div>
-
-            {/* Right — auto-scrolling industry cards */}
-            <IndustryScroller />
+                <Icon className="h-7 w-7 text-[#2563EB]" strokeWidth={2} aria-hidden="true" />
+              </div>
+              <h3 className="m-0 text-[16px] font-medium leading-[1.3] text-[#111]">{title}</h3>
+              <p className="mt-2 text-[14px] font-normal leading-[1.5] text-[#6b7280]">{desc}</p>
+            </Link>
+          ))}
+        </div>
 
       </div>
     </section>

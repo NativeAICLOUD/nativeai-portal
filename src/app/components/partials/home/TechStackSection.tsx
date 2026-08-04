@@ -3,27 +3,30 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { techStack } from "@/lib/tech-stack-data";
+import { Eyebrow } from "@/app/components/partials/services/ServiceUI";
 
 export default function TechStackSection() {
   const categories = Object.keys(techStack);
   const [active, setActive] = useState(categories[0]);
 
   return (
-    <section className="font-switzer py-24 px-6 md:px-12 max-w-7xl mx-auto">
+    <section className="font-switzer py-20 lg:py-24 px-6 md:px-12 max-w-7xl mx-auto">
 
-      {/* Top row */}
+      {/* Header — same pattern as the nearshore/delivery sections */}
       <motion.div
-        className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-6 mb-20"
+        className="mb-12"
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         viewport={{ once: true, margin: "-80px" }}
       >
-        <span className="text-[12px] tracking-[0.14em] uppercase text-[#9ca3af] font-medium shrink-0 pt-1">
-          Tech Stack
-        </span>
-        <p className="text-[16px] font-light text-[#6b7280] max-w-[500px] leading-relaxed">
-          Our tech stack covers everything: design, frontend, backend, mobile, AI, and cloud. We pick tools that are proven, reliable, and ready to grow with your business.
+        <div className="mb-4"><Eyebrow>Tech Stack</Eyebrow></div>
+        <h2 className="m-0 max-w-[560px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+          Proven tools, ready to grow with you.
+        </h2>
+        <p className="mt-6 max-w-[540px] text-[16px] font-light leading-[1.7] text-[#6b7280]">
+          Our tech stack covers everything: design, frontend, backend, mobile, AI, and cloud. We pick
+          tools that are proven, reliable, and ready to grow with your business.
         </p>
       </motion.div>
 
@@ -82,13 +85,13 @@ export default function TechStackSection() {
                   initial={{ opacity: 0, scale: 0.93 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3, delay: i * 0.05, ease: "easeOut" }}
-                  className="group bg-white border border-[#e6e6e6] hover:bg-[#fafafa] rounded-lg aspect-square flex flex-col items-center justify-center p-8 gap-3 transition-colors duration-200"
+                  className="group bg-white border border-[#e6e6e6] rounded-lg aspect-square flex flex-col items-center justify-center p-8 gap-3 transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-1 hover:border-[#111]/20 hover:shadow-[0_8px_24px_rgba(0,0,0,0.10)]"
                 >
                   {item.logo ? (
                     <img
                       src={item.logo}
                       alt={item.name}
-                      className="max-w-[65%] max-h-[55%] object-contain"
+                      className="max-w-[65%] max-h-[55%] object-contain transition-transform duration-200 group-hover:scale-110"
                     />
                   ) : (
                     <span className="text-sm font-medium text-[#111] text-center leading-snug px-2">
