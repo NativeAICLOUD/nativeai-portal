@@ -67,7 +67,7 @@ export default function RotatingHeroHeadline({
       {/* key={index} remounts the headline each change → replays fade + un-blur */}
       <h1 key={index} className="hdr-rot-headline" style={cfg.h1Style}>
         {slogan.pre}
-        <span style={HIGHLIGHT_STYLE}>{slogan.highlight}</span>
+        <span className="hdr-highlight" style={HIGHLIGHT_STYLE}>{slogan.highlight}</span>
         {slogan.post}
       </h1>
 

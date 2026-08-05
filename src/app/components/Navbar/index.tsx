@@ -2,7 +2,7 @@
 
 import { Link } from 'react-transition-progress/next';
 import { Constants } from '@/Constants';
-import { PlusIcon, MinusIcon, CaretDownIcon } from '@radix-ui/react-icons';
+import { CaretDownIcon } from '@radix-ui/react-icons';
 import { AnimatePresence, motion } from 'framer-motion';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
@@ -10,9 +10,10 @@ import CoomingSoon from '../ui/CoomingSoon';
 import Logo from '../ui/Logo';
 import { SITE_PAGES } from '@/lib/sitePages';
 import { NavMenuItemCard, NavMenuItemDisabled } from './NavMenuItem';
+import MobileNavigationV2 from './MobileNavigationV2';
 import {
   Code2, Palette, CloudCog, CloudUpload,
-  Bot, Database, Boxes, Workflow,
+  Bot, Boxes,
   Plane, Scale, Landmark, HeartPulse, ShoppingBag, Factory,
   BookOpen, GraduationCap, Library, Building2,
   GitBranch, Sparkles,
@@ -102,6 +103,7 @@ type SolutionEntry = {
   bg: string;
   icon: LucideIcon;
   details: string[];
+  desc?: string;
 };
 
 const INDUSTRIES_MENU: SolutionEntry[] = [
@@ -157,12 +159,13 @@ const INDUSTRIES_MENU: SolutionEntry[] = [
 
 const SOLUTIONS_MENU: SolutionEntry[] = [
   {
-    title: 'Digital Health Solutions',
+    title: 'Digital Solutions',
     href: Constants.PAGES.SOLUTIONS,
     color: '#E11D48',
     bg: 'rgba(225,29,72,0.08)',
     icon: Bot,
-    details: ['Patient Portals', 'Appointment Management', 'Clinical Workflows', 'Secure Health Data', 'Telehealth Integrations', 'Reporting & Compliance'],
+    details: ['Customer Portals', 'Workflow Automation', 'Data & Analytics Dashboards', 'Secure Data Management', 'Third-Party Integrations', 'Reporting & Compliance'],
+    desc: 'Custom software to improve customer experience and operational efficiency.',
   },
   {
     title: 'HR Management Systems',
@@ -171,6 +174,7 @@ const SOLUTIONS_MENU: SolutionEntry[] = [
     bg: 'rgba(37,99,235,0.08)',
     icon: UserCog,
     details: ['Employee Management', 'Recruitment & Onboarding', 'Time & Attendance', 'Leave & Holiday Management', 'Employee Experience', 'Reporting & Analytics'],
+    desc: 'People platform for effective employee management and compliance.',
   },
   {
     title: 'Launching New Products',
@@ -179,6 +183,7 @@ const SOLUTIONS_MENU: SolutionEntry[] = [
     bg: 'rgba(15,139,131,0.08)',
     icon: Rocket,
     details: ['Product Discovery', 'UX & Prototyping', 'MVP Development', 'Architecture & Engineering', 'Product Launch', 'Iterative Improvement'],
+    desc: 'Design, prototype, and deliver beloved products for your users.',
   },
   {
     title: 'Legacy Software Modernization',
@@ -187,16 +192,15 @@ const SOLUTIONS_MENU: SolutionEntry[] = [
     bg: 'rgba(124,58,237,0.08)',
     icon: RefreshCw,
     details: ['Legacy Assessment', 'Cloud Migration', 'Application Refactoring', 'API Modernization', 'Database Modernization', 'DevOps Enablement'],
+    desc: 'Modernize and innovate on critical business applications.',
   },
 ];
-
 
 function Navbar() {
   const pathname = usePathname();
   const [openSide, setOpenSide] = useState(false);
   const [slideMenu, setSlideMenu] = useState(false);
   const [activeNav, setActiveNav] = useState<string>('');
-  const [isExpanded, setExpanded] = useState<string | null>(null);
   const [navHidden, setNavHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hamburgerRipple, setHamburgerRipple] = useState(false);
@@ -213,7 +217,7 @@ function Navbar() {
   const lastScrollY = useRef(0);
   const isScrolling = useRef(false);
 
-  const navH = 72;
+  const navH = 76; // matches the nav bar's h-[76px] — keeps the mega menu/search panel flush with no gap or overlap
 
   const isAuthPage = pathname === '/login' || pathname === '/sign-up';
   // Light nav (Fresha-style): transparent over light heroes, frosted white on scroll.
@@ -242,7 +246,6 @@ function Navbar() {
   useEffect(() => {
     setSlideMenu(false);
     setOpenSide(false);
-    setExpanded(null);
     setSearchOpen(false);
   }, [pathname]);
 
@@ -261,17 +264,6 @@ function Navbar() {
       setSearchQuery('');
     }
   }, [searchOpen]);
-
-  useEffect(() => {
-    if (openSide && allPosts.length === 0) {
-      fetch('/blogs.json')
-        .then(r => r.json())
-        .then((data: IPost[]) =>
-          setAllPosts(data.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()))
-        )
-        .catch(() => {});
-    }
-  }, [openSide]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setSearchOpen(false); };
@@ -317,8 +309,13 @@ function Navbar() {
       style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
     >
 
+      <style>{`
+        :root { --nc-navh: 76px; }
+        @media (max-width: 767px) { :root { --nc-navh: 60px; } }
+      `}</style>
+
       {/* ── Full-width nav bar ── */}
-      <nav className={`w-full flex items-center justify-between px-6 h-[76px] transition-colors duration-300 ${
+      <nav className={`w-full flex items-center justify-between px-6 max-md:px-5 h-[76px] max-md:h-auto max-md:py-2 max-md:border-b-2 max-md:border-[#E1E6E8] max-md:shadow-none max-md:backdrop-blur-none transition-colors duration-300 ${
         lightNav
           ? scrolled
             ? 'bg-white/90 backdrop-blur-xl'
@@ -326,15 +323,15 @@ function Navbar() {
           : scrolled
           ? 'bg-[#0a0a0a]/90 backdrop-blur-xl border-b border-white/[0.08] shadow-[0_4px_32px_rgba(0,0,0,0.35)]'
           : 'bg-[#0a0a0a] border-b border-white/[0.06]'
-      }`}>
+      } max-md:!bg-white`}>
         <div className="max-w-[1240px] mx-auto w-full flex items-center justify-between">
 
         {/* Logo */}
         <div
-          className="shrink-0 cursor-pointer px-3 py-1.5 rounded-xl"
+          className="shrink-0 cursor-pointer px-3 py-1.5 rounded-xl max-md:px-0"
           onClick={() => setSlideMenu(false)}
         >
-          <Logo isInvert={!lightNav} className="!h-14" />
+          <Logo isInvert={!lightNav} className="!h-14 max-md:!h-9" />
         </div>
 
         {/* Desktop nav links */}
@@ -365,10 +362,10 @@ function Navbar() {
                 <Link
                   href={item.url}
                   onClick={() => setSlideMenu(false)}
-                  className="flex h-10 items-center gap-2 whitespace-nowrap rounded-full bg-[#2563EB] px-[18px] text-[14px] font-semibold text-white shadow-[0_6px_16px_rgba(37,99,235,0.16)] transition-all duration-200 hover:-translate-y-px hover:bg-[#1D4ED8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3b82f6]/60 focus-visible:ring-offset-2"
+                  className="flex h-10 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#2563EB] px-9 text-[14px] font-semibold text-white shadow-[0_6px_16px_rgba(37,99,235,0.16)] transition-all duration-200 hover:-translate-y-px hover:bg-[#1D4ED8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3b82f6]/60 focus-visible:ring-offset-2"
                   style={MONO}
                 >
-                  Schedule a call
+                  Let&apos;s talk
                 </Link>
               ) : item.children ? (
                 <button
@@ -376,6 +373,11 @@ function Navbar() {
                   aria-haspopup="true"
                   aria-expanded={isOpen}
                   onClick={() => {
+                    if (item.title === 'Solutions') {
+                      setSlideMenu(false);
+                      router.push(item.url);
+                      return;
+                    }
                     if (isOpen) { setSlideMenu(false); return; }
                     if (closeTimer.current) clearTimeout(closeTimer.current);
                     setActiveNav(item.title);
@@ -432,13 +434,13 @@ function Navbar() {
         </ul>
 
         {/* Right: Search + Login + Hamburger */}
-        <div className="flex items-center gap-3 shrink-0">
-          {/* AI Mode search toggle — Google-style gradient pill */}
+        <div className="flex items-center gap-3 max-md:gap-2 shrink-0">
+          {/* AI Mode search toggle — Google-style gradient pill. Hidden on mobile; lives inside the mobile menu instead. */}
           <button
             onClick={() => { setSearchOpen(!searchOpen); setSlideMenu(false); setOpenSide(false); }}
             aria-label="Search"
             aria-expanded={searchOpen}
-            className="flex h-10 items-center gap-2 rounded-full border border-[#2563EB] bg-white px-[18px] transition-colors duration-200 hover:bg-[#F8FAFF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]/40"
+            className="hidden md:flex h-10 items-center gap-2 rounded-full border border-[#2563EB] bg-white px-[18px] transition-colors duration-200 hover:bg-[#F8FAFF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]/40"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" className="shrink-0">
               <defs>
@@ -466,7 +468,7 @@ function Navbar() {
 
           {/* Hamburger */}
           <motion.button
-            className={`w-11 h-11 rounded-full lg:hidden flex flex-col items-center justify-center gap-[6px] transition-colors px-3 relative overflow-hidden ${lightNav ? 'bg-black/[0.07] hover:bg-black/[0.12]' : 'bg-white/[0.07] hover:bg-white/[0.12]'}`}
+            className={`w-10 h-10 max-md:w-11 max-md:h-11 rounded-full max-md:rounded-none lg:hidden flex flex-col items-center justify-center gap-[6px] max-md:gap-[7px] transition-colors px-3 max-md:px-0 relative overflow-hidden max-md:!bg-transparent ${lightNav ? 'bg-[#2563EB]/[0.06] hover:bg-[#2563EB]/[0.12]' : 'bg-white/[0.07] hover:bg-white/[0.12]'}`}
             whileTap={{ scale: 0.82 }}
             transition={{ type: 'spring', stiffness: 520, damping: 22 }}
             onClick={() => {
@@ -490,13 +492,13 @@ function Navbar() {
               )}
             </AnimatePresence>
             {openSide ? (
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className={`relative z-[1] ${lightNav ? 'text-[#0a0e1a]' : 'text-white'}`}>
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className={`relative z-[1] max-md:h-3 max-md:w-3 ${lightNav ? 'text-[#0a0e1a]' : 'text-white'}`}>
                 <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/>
               </svg>
             ) : (
               <>
-                <span className={`block h-[1.5px] w-full rounded-full transition-all relative z-[1] ${lightNav ? 'bg-[#0a0e1a]' : 'bg-white'}`} />
-                <span className={`block h-[1.5px] w-[65%] rounded-full transition-all self-start relative z-[1] ${lightNav ? 'bg-[#0a0e1a]/60' : 'bg-white/60'}`} />
+                <span className={`block h-[1.5px] max-md:h-[2px] w-full max-md:w-[27px] rounded-full max-md:rounded-none transition-all relative z-[1] ${lightNav ? 'bg-[#0a0e1a]' : 'bg-white'}`} />
+                <span className={`block h-[1.5px] max-md:h-[2px] w-[65%] max-md:w-[27px] rounded-full max-md:rounded-none transition-all self-start max-md:self-center relative z-[1] ${lightNav ? 'bg-[#0a0e1a]' : 'bg-white'}`} />
               </>
             )}
           </motion.button>
@@ -515,7 +517,7 @@ function Navbar() {
             key="search-backdrop"
             className="fixed left-0 right-0 bottom-0 z-[997]"
             style={{
-              top: navH,
+              top: 'var(--nc-navh)',
               background: 'rgba(10,14,26,0.28)',
               backdropFilter: 'blur(6px)',
               WebkitBackdropFilter: 'blur(6px)',
@@ -530,7 +532,7 @@ function Navbar() {
             key="search-panel"
             ref={searchPanelRef}
             className="fixed left-0 right-0 z-[998]"
-            style={{ top: navH, transformOrigin: 'top center' }}
+            style={{ top: 'var(--nc-navh)', transformOrigin: 'top center' }}
             initial={{ opacity: 0, y: -28, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.98 }}
@@ -707,14 +709,13 @@ function Navbar() {
       )}
     </AnimatePresence>
 
-    {/* ── Mega menu dropdown ── */}
+    {/* ── Mega menu dropdown — full-width layer attached to the header, desktop only ── */}
     <AnimatePresence>
         {slideMenu && (
           <>
-            {/* Floating centered card */}
             <motion.div
               key="megamenu"
-              className="mega-menu-full-width fixed left-0 right-0 z-[998]"
+              className="mega-menu-full-width fixed left-0 right-0 z-[998] hidden overflow-visible rounded-none lg:block"
               style={{
                 top: navH,
                 background: '#ffffff',
@@ -905,322 +906,12 @@ function Navbar() {
         )}
     </AnimatePresence>
 
-    {/* ── Mobile full-screen overlay ── */}
-    <aside
-      className={`${
-        openSide ? 'translate-x-0 visible pointer-events-auto' : 'translate-x-full invisible pointer-events-none'
-      } fixed inset-0 z-[100] bg-[#0a0a0a] transform transition-all duration-300 ease-in-out flex flex-col overflow-y-auto`}
-      style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 12px)' }}
-    >
-      {/* Top bar */}
-      <div className="flex items-center justify-between shrink-0 px-4 pb-2">
-        <div
-          className="flex items-center cursor-pointer px-3 py-1.5 rounded-xl"
-          style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 60%, transparent 100%)' }}
-          onClick={() => setOpenSide(false)}
-        >
-          <Logo isInvert />
-        </div>
-        <motion.button
-          className="w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white transition-all"
-          whileTap={{ scale: 0.82, backgroundColor: 'rgba(255,255,255,0.22)' }}
-          transition={{ type: 'spring', stiffness: 520, damping: 22 }}
-          onClick={() => { setOpenSide(false); setExpanded(null); }}
-          aria-label="Close menu"
-        >
-          <svg viewBox="0 0 24 24" fill="none" className="w-[18px] h-[18px]" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-            <path d="M18 6 6 18M6 6l12 12" />
-          </svg>
-        </motion.button>
-      </div>
-
-      {/* Search bar */}
-      <div className="px-4 pt-2 pb-4 shrink-0">
-        {/* AI-era gradient-ring search */}
-        <div className="ai-search-wrap">
-          <div className="ai-search-inner relative flex items-center">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={e => setSearchQuery(e.target.value)}
-              onKeyDown={e => {
-                if (e.key === 'Enter' && searchQuery.trim()) {
-                  router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
-                  setOpenSide(false);
-                }
-              }}
-              placeholder="Search…"
-              className="w-full bg-transparent outline-none text-[15px] text-[#0a0e1a] placeholder:text-[#aaaaaa]"
-              style={{ border: 'none', padding: '14px 52px 14px 20px' }}
-            />
-            <button
-              onClick={() => {
-                if (searchQuery.trim()) {
-                  router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
-                  setOpenSide(false);
-                }
-              }}
-              className="absolute right-1.5 flex h-9 w-9 items-center justify-center rounded-full text-[#0a0e1a]/50 transition-colors hover:bg-black/[0.06]"
-            >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        {/* Live results */}
-        {searchQuery.trim().length > 0 && (() => {
-          const q = searchQuery.toLowerCase();
-          const pageHits = SITE_PAGES.filter(p =>
-            p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)
-          ).slice(0, 5);
-          const postHits = allPosts.filter(p =>
-            p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)
-          ).slice(0, 4);
-          if (pageHits.length === 0 && postHits.length === 0) {
-            return <p className="mt-3 px-1 text-sm text-white/40">No results for &ldquo;{searchQuery.trim()}&rdquo;</p>;
-          }
-          return (
-            <div className="mt-3 max-h-[46vh] overflow-y-auto rounded-2xl border border-white/[0.08] bg-white/[0.04]">
-              <motion.button
-                whileTap={{ scale: 0.96 }}
-                transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-                onClick={() => { router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`); setOpenSide(false); }}
-                className="flex w-full items-center gap-3 border-b border-white/[0.07] px-4 py-3 text-left"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" className="shrink-0" aria-hidden>
-                  <path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2z" fill="url(#ai-mode-grad)" />
-                </svg>
-                <span
-                  className="text-[13px] font-semibold"
-                  style={{ background: 'linear-gradient(100deg,#60a5fa,#3b82f6,#1e4fd6)', WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent', color: 'transparent' }}
-                >
-                  AI Overview for &ldquo;{searchQuery.trim()}&rdquo;
-                </span>
-              </motion.button>
-
-              {pageHits.length > 0 && (
-                <p className="px-4 pt-3 pb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/30">Pages</p>
-              )}
-              {pageHits.map((page) => (
-                <motion.button
-                  key={page.url}
-                  whileTap={{ scale: 0.97 }}
-                  transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-                  onClick={() => { router.push(page.url); setOpenSide(false); }}
-                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left active:bg-white/[0.06]"
-                >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.05] text-white/70">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
-                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>
-                    </svg>
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block truncate text-[14px] font-medium text-white/90">{page.title}</span>
-                    <span className="block truncate text-[11px] text-white/40">{page.desc}</span>
-                  </span>
-                </motion.button>
-              ))}
-
-              {postHits.length > 0 && (
-                <p className="border-t border-white/[0.07] px-4 pt-3 pb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/30">Articles</p>
-              )}
-              {postHits.map((post) => (
-                <motion.button
-                  key={post.id}
-                  whileTap={{ scale: 0.97 }}
-                  transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-                  onClick={() => { router.push(`/knowledge-base/${post.id}`); setOpenSide(false); }}
-                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left active:bg-white/[0.06]"
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 shrink-0 text-white/35">
-                    <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
-                  </svg>
-                  <span className="block min-w-0 flex-1 truncate text-[14px] font-medium text-white/90">{post.title}</span>
-                </motion.button>
-              ))}
-            </div>
-          );
-        })()}
-      </div>
-
-      {/* Nav items */}
-      <nav className="flex-1 flex flex-col justify-center pt-4 pb-4 px-4">
-        <ul className="flex flex-col" style={{ gap: 36 }}>
-          {pages
-            .filter((item) => item.title !== 'Schedule a call')
-            .map((item) => (
-              <li key={item.url + item.title}>
-                <div className="flex items-center gap-3">
-                  {item.soon ? (
-                    <CoomingSoon>
-                      <span style={MONO} className="text-[32px] leading-none text-white/60 select-none">
-                        {item.title}
-                      </span>
-                    </CoomingSoon>
-                  ) : (
-                    <Link
-                      href={item.url}
-                      onClick={() => { if (!item.children) setOpenSide(false); }}
-                      style={MONO}
-                      className="text-[32px] leading-none text-white/60 hover:text-white hover:translate-x-1.5 transition-all duration-200 inline-block"
-                    >
-                      {item.title}
-                    </Link>
-                  )}
-                  {item.children && (
-                    <motion.button
-                      onClick={() => setExpanded(isExpanded === item.title ? null : item.title)}
-                      className="w-8 h-8 rounded-xl bg-white/[0.07] hover:bg-white/[0.13] flex items-center justify-center shrink-0 transition-colors"
-                      whileTap={{ scale: 0.82, backgroundColor: 'rgba(255,255,255,0.22)' }}
-                      transition={{ type: 'spring', stiffness: 520, damping: 22 }}
-                      aria-label={isExpanded === item.title ? 'Collapse' : 'Expand'}
-                    >
-                      {isExpanded === item.title
-                        ? <MinusIcon className="size-3.5 text-white relative z-[1]" />
-                        : <PlusIcon className="size-3.5 text-white/60 relative z-[1]" />}
-                    </motion.button>
-                  )}
-                </div>
-
-                {/* Sub-items accordion */}
-                <AnimatePresence initial={false}>
-                  {item.children && isExpanded === item.title && (
-                    <motion.div
-                      key={item.url + '-accordion'}
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
-                      className="overflow-hidden"
-                    >
-                      {(item.title === 'Solutions' || item.title === 'Industries') ? (
-                        /* Curated list — mirrors the desktop mega menu */
-                        <div className="mt-4">
-                          <ul className="flex flex-col gap-1">
-                            {(item.title === 'Solutions' ? SOLUTIONS_MENU : INDUSTRIES_MENU).map((s) => {
-                              const SIcon = s.icon;
-                              return (
-                                <li key={s.title}>
-                                  <Link
-                                    href={s.href}
-                                    onClick={() => setOpenSide(false)}
-                                    className="group flex items-center gap-3 rounded-xl px-2.5 py-2.5 active:bg-white/[0.06] transition-colors"
-                                  >
-                                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.06]">
-                                      <SIcon size={16} strokeWidth={1.8} style={{ color: s.color }} aria-hidden="true" />
-                                    </span>
-                                    <span className="min-w-0 flex-1 text-[14px] font-medium leading-snug text-white/90">{s.title}</span>
-                                    <svg className="w-3.5 h-3.5 shrink-0 text-white/25 transition-transform group-active:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-                                      <path d="M9 18l6-6-6-6" />
-                                    </svg>
-                                  </Link>
-                                </li>
-                              );
-                            })}
-                            <li>
-                              <Link
-                                href={item.title === 'Solutions' ? Constants.PAGES.SOLUTIONS : '/industries'}
-                                onClick={() => setOpenSide(false)}
-                                className="group mt-1 flex items-center justify-between rounded-xl bg-white/[0.06] px-3.5 py-3 text-[13px] font-semibold text-white/90 transition-colors active:bg-white/[0.12]"
-                              >
-                                All {item.title}
-                                <svg className="w-3.5 h-3.5 shrink-0 text-white/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                                  <path d="M5 12h14M12 5l7 7-7 7" />
-                                </svg>
-                              </Link>
-                            </li>
-                          </ul>
-                        </div>
-                      ) : (
-                      <div className="mt-4 flex flex-col gap-5">
-                        {item.children.map((col) => (
-                          <div key={col.url + col.title}>
-                            <p className="px-1 pb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/35">
-                              {col.title}
-                            </p>
-                            <ul className="flex flex-col gap-1">
-                              {col.children?.map((child) => {
-                                const Icon = child.icon;
-                                return (
-                                  <li key={child.url + child.title}>
-                                    {child.soon ? (
-                                      <CoomingSoon>
-                                        <span className="flex items-center gap-3 rounded-xl px-2.5 py-2.5 opacity-30">
-                                          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/[0.06] border border-white/[0.08]">
-                                            {typeof Icon === 'string' ? (
-                                              // eslint-disable-next-line @next/next/no-img-element
-                                              <img src={Icon} alt="" className="h-4 w-auto object-contain brightness-0 invert" aria-hidden="true" />
-                                            ) : (
-                                              Icon && <Icon size={16} strokeWidth={1.6} className="text-white" />
-                                            )}
-                                          </span>
-                                          <span className="text-[14px] text-white">{child.title}</span>
-                                        </span>
-                                      </CoomingSoon>
-                                    ) : (
-                                      <Link
-                                        href={child.url}
-                                        onClick={() => setOpenSide(false)}
-                                        className="group flex items-center gap-3 rounded-xl px-2.5 py-2.5 active:bg-white/[0.06] transition-colors"
-                                      >
-                                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/[0.06] border border-white/[0.08] transition-colors group-active:bg-white/[0.12]">
-                                          {typeof Icon === 'string' ? (
-                                            // eslint-disable-next-line @next/next/no-img-element
-                                            <img src={Icon} alt="" className="h-4 w-auto object-contain brightness-0 invert opacity-80" aria-hidden="true" />
-                                          ) : (
-                                            Icon && <Icon size={16} strokeWidth={1.6} className="text-white/80" />
-                                          )}
-                                        </span>
-                                        <span className="min-w-0 flex-1 text-[14px] font-medium text-white/90 leading-snug">{child.title}</span>
-                                        <svg className="shrink-0 w-3.5 h-3.5 text-white/25 transition-transform group-active:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-                                          <path d="M9 18l6-6-6-6" />
-                                        </svg>
-                                      </Link>
-                                    )}
-                                  </li>
-                                );
-                              })}
-                            </ul>
-                          </div>
-                        ))}
-                      </div>
-                      )}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </li>
-            ))}
-        </ul>
-      </nav>
-
-      {/* Bottom CTA */}
-      <div className="shrink-0 px-4 pt-4 pb-6" style={{ paddingBottom: 'max(24px, env(safe-area-inset-bottom, 24px))' }}>
-        <Link
-          href="/login"
-          onClick={() => setOpenSide(false)}
-          style={MONO}
-          className="w-full flex items-center justify-center gap-2 text-white/60 hover:text-white text-sm py-3 mb-2 transition-colors"
-        >
-          <svg width={15} height={15}>
-            <use href="/icons/all-icons.svg#icon-login" />
-          </svg>
-          Login
-        </Link>
-        <Link
-          href={Constants.PAGES.SCHEDULE_CALL}
-          onClick={() => setOpenSide(false)}
-          className="w-full text-white font-semibold text-base flex items-center justify-center gap-3 py-4 rounded-2xl transition-all duration-200 hover:scale-[1.01] active:scale-[0.99]"
-          style={{ ...MONO, background: 'linear-gradient(135deg, #3b82f6 0%, #1e4fd6 100%)', boxShadow: '0 8px 24px rgba(37,99,235,0.30)' }}
-        >
-          Schedule a free call
-          <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </Link>
-      </div>
-    </aside>
+    {/* ── Mobile navigation — brand new, built from scratch ── */}
+    <MobileNavigationV2
+      open={openSide}
+      onClose={() => setOpenSide(false)}
+      onOpenSearch={() => { setSearchOpen(true); setOpenSide(false); }}
+    />
     </>
   );
 }

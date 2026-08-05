@@ -2,7 +2,7 @@ import { Bot, type LucideIcon } from 'lucide-react';
 
 /* Reference pairing: icon colour and tile tint are intentionally different hues */
 const useCases: { title: string; desc: string; icon: LucideIcon | string; color: string; bg: string }[] = [
-  { title: 'Digital Health Solutions',                  icon: Bot,                                  color: '#E11D48', bg: 'rgba(225,29,72,0.07)',  desc: 'Custom software to improve patient care and operational efficiency.' },
+  { title: 'Digital Solutions',                         icon: Bot,                                  color: '#E11D48', bg: 'rgba(225,29,72,0.07)',  desc: 'Custom software to improve customer experience and operational efficiency.' },
   { title: 'HR Management Systems',                     icon: '/icons/hr-management-systems.svg',   color: '#FF6A3D', bg: 'rgba(79,70,229,0.07)',  desc: 'People platform for effective employee management and compliance.' },
   { title: 'Launching New Products (from zero-to-one)', icon: '/icons/launching-new-products.svg',  color: '#FF4F8B', bg: 'rgba(15,139,131,0.08)', desc: 'Design, prototype, and deliver beloved products for your users.' },
   { title: 'Legacy Software Modernization',             icon: '/icons/legacy-software-modernization.svg', color: '#7C3AED', bg: 'rgba(124,58,237,0.08)', desc: 'Modernize and innovate on critical business applications.' },

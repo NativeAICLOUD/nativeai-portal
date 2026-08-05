@@ -71,18 +71,17 @@ export default function HeroSearch() {
   };
 
   return (
-    <div ref={wrapRef} className="relative mt-[52px] w-full max-w-[680px]">
-      {/* AI-era animated gradient ring — same treatment as the navbar AI Mode search */}
-      <div className="ai-search-wrap w-full">
+    <div ref={wrapRef} className="relative mt-[52px] max-md:mt-9 w-full max-w-[680px]">
+      {/* Clean pill — no outline ring */}
+      <div className="w-full">
         <form
           onSubmit={submit}
-          className="ai-search-inner flex w-full items-center gap-3 px-5 py-1"
-          style={{ background: '#ffffff' }}
+          className="flex w-full items-center gap-3 rounded-full bg-white px-5 py-1 shadow-[0_2px_12px_rgba(15,23,42,0.06)] max-md:min-h-[70px] max-md:px-4 max-md:py-2 max-md:border max-md:border-black/[0.08]"
         >
           <svg
             width="17" height="17" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-            className="shrink-0 text-[#9ca3af]"
+            className="shrink-0 text-[#9ca3af] max-md:h-[23px] max-md:w-[23px]"
           >
             <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
           </svg>
@@ -91,14 +90,23 @@ export default function HeroSearch() {
             value={q}
             onChange={(e) => { setQ(e.target.value); setOpen(true); }}
             onFocus={() => { loadPosts(); setOpen(true); }}
+            placeholder="Search AI solutions…"
+            aria-label="Search the site"
+            className="min-w-0 flex-1 bg-transparent py-3 text-[17px] text-[#0a0e1a] placeholder:text-[#9ca3af] outline-none md:hidden"
+          />
+          <input
+            type="search"
+            value={q}
+            onChange={(e) => { setQ(e.target.value); setOpen(true); }}
+            onFocus={() => { loadPosts(); setOpen(true); }}
             placeholder="Search services, solutions and articles"
             aria-label="Search the site"
-            className="min-w-0 flex-1 bg-transparent py-3 text-[15px] text-[#0a0e1a] placeholder:text-[#9ca3af] outline-none"
+            className="hidden min-w-0 flex-1 bg-transparent py-3 text-[15px] text-[#0a0e1a] placeholder:text-[#9ca3af] outline-none md:block"
           />
           <button
             type="submit"
             aria-label="Search"
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white transition-transform duration-150 hover:scale-105 active:scale-95"
+            className="flex h-9 w-9 max-md:h-[58px] max-md:w-[58px] shrink-0 items-center justify-center rounded-full text-white transition-transform duration-150 hover:scale-105 active:scale-95"
             style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #1e4fd6 100%)' }}
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">

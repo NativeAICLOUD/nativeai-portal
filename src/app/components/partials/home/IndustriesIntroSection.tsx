@@ -26,11 +26,6 @@ export default function IndustriesIntroSection() {
               <h2 className="m-0 max-w-[560px] text-[36px] font-medium leading-[1.05] text-[#111] sm:text-[46px] lg:text-[56px]">
                 Solutions built for your industry.
               </h2>
-              <p className="mt-6 max-w-[540px] text-[18px] font-light leading-[1.6] text-[#111]">
-                From legal intelligence and financial services to healthcare and technology — sector-specific
-                expertise that addresses what is happening in your industry today, and prepares you for
-                what comes next.
-              </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <PrimaryButton href="/industries">Explore our industries</PrimaryButton>
                 <SecondaryButton href={Constants.PAGES.SCHEDULE_CALL}>Book a discovery call</SecondaryButton>
