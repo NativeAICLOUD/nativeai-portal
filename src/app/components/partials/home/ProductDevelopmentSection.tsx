@@ -1,3 +1,6 @@
+'use client';
+
+import { motion } from 'framer-motion';
 import { Bot, type LucideIcon } from 'lucide-react';
 
 /* Reference pairing: icon colour and tile tint are intentionally different hues */
@@ -12,24 +15,35 @@ const useCases: { title: string; desc: string; icon: LucideIcon | string; color:
 export default function ProductDevelopmentSection() {
   return (
     <section className="font-switzer bg-white">
-      <div className="mx-auto w-full max-w-[1080px] px-5 pb-20 pt-6 sm:px-8 lg:pb-24 lg:pt-8">
+      <div className="mx-auto w-full max-w-[1240px] px-5 pb-20 pt-6 sm:px-6 lg:pb-24 lg:pt-8">
         {/* header — aligned to the cards container's left edge */}
-        <p className="m-0 mb-4 text-[12px] font-medium uppercase tracking-[0.18em] text-[#64748B]">
-          What we do
-        </p>
-        <h2 className="m-0 mb-9 text-[28px] font-medium leading-[1.15] tracking-[-0.01em] text-[#111827] md:whitespace-nowrap md:text-[34px] lg:text-[38px]">
-          End-to-end product development
-        </h2>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          viewport={{ once: true, margin: '-60px' }}
+        >
+          <p className="m-0 mb-4 text-[12px] font-medium uppercase tracking-[0.18em] text-[#64748B]">
+            What we do
+          </p>
+          <h2 className="m-0 mb-9 text-[28px] font-medium leading-[1.15] tracking-[-0.01em] text-[#111827] md:whitespace-nowrap md:text-[34px] lg:text-[38px]">
+            End-to-end product development
+          </h2>
+        </motion.div>
 
         {/* grouped warm-gray wrapper hugging the cards */}
         <div className="w-full rounded-2xl bg-[#FAFAF8] p-3 sm:p-5">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {useCases.map(({ title, desc, icon, color, bg }) => {
+            {useCases.map(({ title, desc, icon, color, bg }, i) => {
               const GlyphIcon = typeof icon === 'string' ? null : icon;
               return (
-                <div
+                <motion.div
                   key={title}
-                  className="group flex min-h-[146px] w-full flex-col rounded-[10px] border border-[#ECECEC] bg-white p-[18px] shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-1 hover:border-[rgba(37,99,235,0.2)] hover:shadow-[0_10px_28px_rgba(15,23,42,0.08)]"
+                  initial={{ opacity: 0, y: 28 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45, ease: 'easeOut', delay: i * 0.1 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  className="group flex min-h-[146px] w-full flex-col rounded-lg border border-[#ECECEC] bg-white p-[18px] shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-200 hover:-translate-y-1 hover:border-[rgba(37,99,235,0.2)] hover:shadow-[0_8px_24px_rgba(15,23,42,0.08)]"
                 >
                   {/* top: icon + title */}
                   <div className="flex min-h-[56px] items-center gap-3.5">
@@ -56,7 +70,7 @@ export default function ProductDevelopmentSection() {
                   <p className="m-0 text-[14px] font-normal leading-[1.5] text-[#6B7280]">
                     {desc}
                   </p>
-                </div>
+                </motion.div>
               );
             })}
           </div>

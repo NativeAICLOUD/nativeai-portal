@@ -5,9 +5,10 @@ import { motion } from 'framer-motion';
 import Image from "next/image";
 import { Link } from 'react-transition-progress/next';
 import { Constants } from "@/Constants";
+import { Eyebrow } from "@/app/components/partials/services/ServiceUI";
 import Logo from "../ui/Logo";
-import MicrosoftPartner from "../../../../public/img/microsoft.png";
-import AWSPartner from "../../../../public/img/aws.png";
+import MicrosoftPartner from "../../../../public/img/microsoft-partner.png";
+import AWSPartner from "../../../../public/img/aws-partner.png";
 import { usePathname } from 'next/navigation';
 
 const navColumns = [
@@ -63,41 +64,65 @@ function Footer() {
   if (pathname === '/login' || pathname === '/sign-up') return null;
 
   return (
-    <footer className="font-switzer bg-[#0a0a0a] text-white">
-      <div className="mx-auto max-w-[1440px] px-5 md:px-12">
+    <footer className="font-switzer relative overflow-hidden text-[#111827]">
+      <style>{`
+        .footer-gradient-bg {
+          background:
+            radial-gradient(circle at 15% 0%, rgba(37,99,235,0.14), transparent 50%),
+            #FAFAF8;
+        }
+      `}</style>
+      <div className="footer-gradient-bg absolute inset-0" aria-hidden="true" />
+
+      {/* Gradient divider — same signature as the hero/industries transitions */}
+      <hr
+        className="relative m-0 h-1 w-full border-0"
+        style={{
+          backgroundImage: 'linear-gradient(260deg, #fff, #BECBFF 20%, #5B7CFA 50%, #2563EB 80%, #fff)',
+          borderRadius: 100,
+        }}
+      />
+
+      <div className="relative mx-auto max-w-[1440px] px-5 md:px-12">
 
         {/* ── CTA band ── */}
-        <div className="flex flex-col gap-6 border-b border-white/10 py-16 sm:flex-row sm:items-center sm:justify-between">
-          <h2 className="m-0 max-w-xl text-[26px] font-medium leading-[1.15] text-white sm:text-[34px]">
-            Let&apos;s build something that actually lasts.
-          </h2>
+        <motion.div
+          className="flex flex-col gap-6 border-b border-[#ECECEC] py-16 sm:py-20 sm:flex-row sm:items-center sm:justify-between"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          viewport={{ once: true, margin: '-60px' }}
+        >
+          <div><Eyebrow>Get in touch</Eyebrow></div>
           <div className="flex shrink-0 flex-col items-start gap-2 sm:items-end">
             <a
               href={`mailto:${Constants.MAIL}`}
-              className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-[15px] font-medium text-[#111] transition-opacity hover:opacity-90"
+              className="inline-flex items-center gap-2 rounded-full bg-black px-7 py-3.5 text-[15px] font-medium text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#2563EB] hover:shadow-[0_10px_28px_rgba(37,99,235,0.25)] active:translate-y-0 active:shadow-none"
             >
               {Constants.MAIL}
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                 <path d="M7 17L17 7" /><path d="M7 7h10v10" />
               </svg>
             </a>
-            <p className="text-xs text-white/35">We reply within one business day.</p>
           </div>
-        </div>
+        </motion.div>
 
         {/* ── Brand + nav columns ── */}
-        <div className="grid grid-cols-2 gap-x-8 gap-y-12 border-b border-white/10 py-14 md:grid-cols-4 lg:grid-cols-12">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-12 border-b border-[#ECECEC] py-14 sm:py-16 md:grid-cols-4 lg:grid-cols-12">
           {/* Brand */}
-          <div className="col-span-2 flex flex-col gap-5 md:col-span-4 lg:col-span-4">
-            <Logo isInvert={true} />
-            <p className="max-w-[220px] text-[13px] font-light leading-relaxed text-white/50">
-              AI Agents · LLMs · Azure &amp; AWS — we build what your business actually needs.
-            </p>
+          <motion.div
+            className="col-span-2 flex flex-col gap-5 md:col-span-4 lg:col-span-4"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, ease: 'easeOut' }}
+            viewport={{ once: true, margin: '-40px' }}
+          >
+            <Logo animated={false} />
             <div className="flex flex-col gap-1.5">
-              <a href={`tel:${Constants.PHONE}`} className="text-[13px] text-white/45 transition-colors hover:text-white">
+              <a href={`tel:${Constants.PHONE}`} className="text-[13px] text-[#6B7280] transition-colors hover:text-[#111827]">
                 {Constants.PHONE}
               </a>
-              <a href={`mailto:${Constants.MAIL}`} className="text-[13px] text-white/45 transition-colors hover:text-white">
+              <a href={`mailto:${Constants.MAIL}`} className="text-[13px] text-[#6B7280] transition-colors hover:text-[#111827]">
                 {Constants.MAIL}
               </a>
             </div>
@@ -109,38 +134,45 @@ function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.name}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 transition-colors duration-200 hover:border-white/30 hover:bg-white/10"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-[#ECECEC] bg-white shadow-[0_2px_8px_rgba(15,23,42,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[rgba(37,99,235,0.3)] hover:shadow-[0_8px_20px_rgba(37,99,235,0.12)]"
                 >
-                  <svg className="text-white/60" width={14} height={14}>
+                  <svg className="text-[#6B7280]" width={15} height={15}>
                     <use href={`/icons/all-icons.svg#${s.icon}`} />
                   </svg>
                 </a>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Nav columns */}
-          {navColumns.map((col) => (
-            <div key={col.title} className="col-span-1 flex flex-col gap-4 lg:col-span-2">
-              <h3 className="text-[11px] font-medium uppercase tracking-[0.14em] text-white/45">{col.title}</h3>
+          {navColumns.map((col, i) => (
+            <motion.div
+              key={col.title}
+              className="col-span-1 flex flex-col gap-4 lg:col-span-2"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, ease: 'easeOut', delay: i * 0.08 }}
+              viewport={{ once: true, margin: '-40px' }}
+            >
+              <h3 className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#6B7280]">{col.title}</h3>
               <ul className="flex flex-col gap-2.5">
                 {col.links.map((link: NavLink) => (
                   <li key={link.title}>
-                    <Link href={link.url} className="text-[14px] text-white/60 transition-colors duration-200 hover:text-white">
+                    <Link href={link.url} className="text-[14px] text-[#6B7280] transition-colors duration-200 hover:text-[#111827]">
                       {link.title}
                     </Link>
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* ── Newsletter band ── */}
-        <div className="flex flex-col gap-8 border-b border-white/10 py-12 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex flex-col gap-8 border-b border-[#ECECEC] py-12 sm:py-14 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-sm">
-            <p className="m-0 mb-1 text-[16px] font-medium text-white">Stay up to date</p>
-            <p className="m-0 text-[14px] font-light leading-relaxed text-white/45">
+            <p className="m-0 mb-1 text-[16px] font-medium text-[#101828]">Stay up to date</p>
+            <p className="m-0 text-[14px] font-normal leading-relaxed text-[#6B7280]">
               Subscribe to our newsletter — no spam, just product updates and AI insights.
             </p>
           </div>
@@ -149,22 +181,10 @@ function Footer() {
               <button
                 type="button"
                 onClick={() => setSubscribeOpen(true)}
-                className="ai-search-wrap w-full sm:max-w-sm transition-transform duration-200 hover:scale-[1.01] active:scale-[0.99] focus-visible:outline-none"
+                className="flex w-full items-center justify-center gap-2.5 rounded-full border border-[#e6e6e6] bg-white px-6 py-3.5 shadow-[0_2px_8px_rgba(15,23,42,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[rgba(37,99,235,0.25)] hover:shadow-[0_8px_20px_rgba(37,99,235,0.1)] sm:max-w-sm"
               >
-                <span className="ai-search-inner flex items-center justify-center gap-2.5 px-6 py-3.5">
-                  <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" className="shrink-0">
-                    <defs>
-                      <linearGradient id="footer-sub-grad" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stopColor="#60a5fa" />
-                        <stop offset="50%" stopColor="#3b82f6" />
-                        <stop offset="100%" stopColor="#1e4fd6" />
-                      </linearGradient>
-                    </defs>
-                    <path fill="url(#footer-sub-grad)" d="M12 0c0 6.627-5.373 12-12 12 6.627 0 12 5.373 12 12 0-6.627 5.373-12 12-12-6.627 0-12-5.373-12-12Z" />
-                  </svg>
-                  <span className="text-[15px] font-medium text-[#111]">Subscribe to updates</span>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-[#111]"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-                </span>
+                <span className="text-[15px] font-medium text-[#111]">Subscribe to updates</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-[#111]"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
               </button>
             </div>
           ) : (
@@ -179,25 +199,25 @@ function Footer() {
                 <input
                   type="text"
                   placeholder="First name"
-                  className="flex-1 rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm text-white outline-none transition-colors placeholder:text-white/30 focus:border-white/40"
+                  className="flex-1 rounded-full border border-[#e6e6e6] bg-white px-5 py-3 text-sm text-[#111827] shadow-[0_1px_4px_rgba(15,23,42,0.03)] outline-none transition-colors placeholder:text-[#9CA3AF] focus:border-[rgba(37,99,235,0.4)]"
                 />
                 <input
                   type="email"
                   placeholder="Email"
-                  className="flex-1 rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm text-white outline-none transition-colors placeholder:text-white/30 focus:border-white/40"
+                  className="flex-1 rounded-full border border-[#e6e6e6] bg-white px-5 py-3 text-sm text-[#111827] shadow-[0_1px_4px_rgba(15,23,42,0.03)] outline-none transition-colors placeholder:text-[#9CA3AF] focus:border-[rgba(37,99,235,0.4)]"
                 />
                 <button
                   type="submit"
-                  className="whitespace-nowrap rounded-full bg-white px-8 py-3 text-sm font-medium text-[#111] transition-opacity hover:opacity-90"
+                  className="whitespace-nowrap rounded-full bg-black px-8 py-3 text-sm font-medium text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#2563EB] hover:shadow-[0_10px_28px_rgba(37,99,235,0.25)] active:translate-y-0 active:shadow-none"
                 >
                   Sign Up
                 </button>
               </div>
               <label className="mt-3 flex cursor-pointer items-start gap-2.5">
-                <input type="checkbox" required className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-white" />
-                <span className="text-xs leading-relaxed text-white/40">
+                <input type="checkbox" required className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-black" />
+                <span className="text-xs leading-relaxed text-[#6B7280]">
                   I accept the{" "}
-                  <Link href={Constants.PAGES.PRIVACY} className="text-white underline transition-opacity hover:opacity-70">
+                  <Link href={Constants.PAGES.PRIVACY} className="text-[#111827] underline transition-opacity hover:opacity-70">
                     NativeAI Privacy Policy
                   </Link>
                 </span>
@@ -207,14 +227,14 @@ function Footer() {
         </div>
 
         {/* ── Bottom bar ── */}
-        <div className="flex flex-col gap-5 py-8 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col gap-5 py-8 sm:py-10 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-6">
-            <Image src={MicrosoftPartner} alt="Microsoft" className="h-6 w-auto opacity-30 transition-opacity hover:opacity-50" />
-            <Image src={AWSPartner} alt="AWS Partner" className="h-5 w-auto opacity-30 transition-opacity hover:opacity-50" />
+            <Image src={MicrosoftPartner} alt="Microsoft Partner" className="h-8 w-auto grayscale opacity-70 transition-all duration-200 hover:grayscale-0 hover:opacity-100" />
+            <Image src={AWSPartner} alt="AWS Partner" className="h-9 w-auto grayscale opacity-70 transition-all duration-200 hover:grayscale-0 hover:opacity-100" />
           </div>
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-white/30">
-            <Link href={Constants.PAGES.PRIVACY} className="transition-colors hover:text-white/60">Privacy Policy</Link>
-            <span className="hidden md:inline text-white/15">·</span>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#6B7280]">
+            <Link href={Constants.PAGES.PRIVACY} className="transition-colors hover:text-[#111827]">Privacy Policy</Link>
+            <span className="hidden md:inline text-[#D1D5DB]">·</span>
             <span>© {new Date().getFullYear()} NativeCloud. All rights reserved.</span>
           </div>
         </div>

@@ -1,3 +1,6 @@
+'use client';
+
+import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 import { Constants } from '@/Constants';
 import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from '@/app/components/partials/services/ServiceUI';
@@ -8,12 +11,24 @@ const aiTags = ['GPT-4o', 'RAG', 'Azure OpenAI', 'AI Agents', 'Fine-tuning'];
 export default function NearshoreIntroSection() {
   return (
     <section className="font-switzer">
-      <div className="industries-hero-bg">
-        <div className={`${CONTAINER} py-16 lg:py-20`}>
+      <div
+        style={{
+          background:
+            'radial-gradient(circle at 15% 100%, rgba(224,225,255,0.75), transparent 43%), ' +
+            '#ffffff',
+        }}
+      >
+        <div className={`${CONTAINER} py-16 sm:py-20 lg:py-24`}>
           <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
 
             {/* Left */}
-            <div className="flex-1">
+            <motion.div
+              className="flex-1"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+              viewport={{ once: true, margin: '-60px' }}
+            >
               <div className="mb-6"><Eyebrow>Nearshore Teams · Senior-led delivery</Eyebrow></div>
               <h2 className="m-0 max-w-[560px] text-[36px] font-medium leading-[1.05] text-[#111] sm:text-[46px] lg:text-[56px]">
                 Dedicated nearshore teams.
@@ -27,7 +42,7 @@ export default function NearshoreIntroSection() {
                 <PrimaryButton href={Constants.PAGES.SCHEDULE_CALL}>Book a discovery call</PrimaryButton>
                 <SecondaryButton href={Constants.PAGES.NEARSHORE_TEAMS}>Explore nearshore teams</SecondaryButton>
               </div>
-            </div>
+            </motion.div>
 
             {/* Right — Generative AI card */}
             <div className="w-full lg:max-w-[380px] lg:flex-1">
@@ -36,10 +51,6 @@ export default function NearshoreIntroSection() {
                   <Eyebrow>Generative AI</Eyebrow>
                   <Sparkles className="h-5 w-5 text-[#111]" strokeWidth={1.6} aria-hidden="true" />
                 </div>
-                <p className="m-0 text-[15px] leading-[1.6] text-[#111]">
-                  We build and fine-tune LLMs, AI Agents, and RAG systems that plug into your
-                  real-world operations.
-                </p>
                 <div className="flex flex-wrap gap-1.5">
                   {aiTags.map((tag) => (
                     <span key={tag} className="rounded-md border border-[#e6e6e6] bg-[#fafafa] px-2.5 py-1 text-[11px] font-medium text-[#111]">

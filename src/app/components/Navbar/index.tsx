@@ -331,7 +331,7 @@ function Navbar() {
           className="shrink-0 cursor-pointer px-3 py-1.5 rounded-xl max-md:px-0"
           onClick={() => setSlideMenu(false)}
         >
-          <Logo isInvert={!lightNav} className="!h-14 max-md:!h-9" />
+          <Logo isInvert={!lightNav} animated={false} className="!h-8 max-md:!h-7" />
         </div>
 
         {/* Desktop nav links */}
@@ -362,7 +362,7 @@ function Navbar() {
                 <Link
                   href={item.url}
                   onClick={() => setSlideMenu(false)}
-                  className="flex h-10 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#2563EB] px-9 text-[14px] font-semibold text-white shadow-[0_6px_16px_rgba(37,99,235,0.16)] transition-all duration-200 hover:-translate-y-px hover:bg-[#1D4ED8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3b82f6]/60 focus-visible:ring-offset-2"
+                  className="flex h-10 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#2563EB] px-9 text-[14px] font-semibold text-white shadow-[0_6px_16px_rgba(37,99,235,0.16)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#1D4ED8] hover:shadow-[0_10px_24px_rgba(37,99,235,0.28)] active:translate-y-0 active:shadow-[0_6px_16px_rgba(37,99,235,0.16)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3b82f6]/60 focus-visible:ring-offset-2"
                   style={MONO}
                 >
                   Let&apos;s talk
@@ -492,7 +492,7 @@ function Navbar() {
               )}
             </AnimatePresence>
             {openSide ? (
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className={`relative z-[1] max-md:h-3 max-md:w-3 ${lightNav ? 'text-[#0a0e1a]' : 'text-white'}`}>
+              <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className={`relative z-[1] max-md:h-[18px] max-md:w-[18px] ${lightNav ? 'text-[#0a0e1a]' : 'text-white'}`}>
                 <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/>
               </svg>
             ) : (
@@ -565,11 +565,8 @@ function Navbar() {
                       }
                     }}
                     placeholder="Add your search term"
-                    className="w-full bg-transparent outline-none text-[16px] text-[#0a0e1a] placeholder:text-[#aaaaaa]"
-                    style={{
-                      border: 'none',
-                      padding: '20px 200px 20px 32px',
-                    }}
+                    className="w-full bg-transparent py-5 pl-8 pr-[84px] outline-none text-[16px] text-[#0a0e1a] placeholder:text-[#aaaaaa] sm:pr-[200px]"
+                    style={{ border: 'none' }}
                   />
                   <button
                     onClick={() => {

@@ -25,8 +25,8 @@ function HomeHeader() {
           .hero-gradient-bg {
             background:
               radial-gradient(circle at 15% 100%, rgba(190,203,255,0.5), transparent 48%),
-              radial-gradient(circle at 80% 100%, rgba(255,237,189,0.38), transparent 48%),
-              radial-gradient(circle at 100% 70%, rgba(255,225,215,0.30), transparent 43%),
+              radial-gradient(circle at 80% 100%, rgba(255,237,189,0.26), transparent 48%),
+              radial-gradient(circle at 100% 70%, rgba(255,225,215,0.20), transparent 43%),
               #ffffff;
           }
         `}</style>
@@ -42,7 +42,7 @@ function HomeHeader() {
           <div className="mt-12 flex flex-col items-start md:flex-row md:flex-wrap md:items-center md:gap-6">
             <Link
               href={Constants.PAGES.SCHEDULE_CALL}
-              className="group/cta inline-flex min-w-[210px] cursor-pointer items-center justify-center rounded-full bg-black px-11 py-4 transition-colors duration-300 hover:bg-[#2563EB]"
+              className="group/cta inline-flex min-w-[210px] cursor-pointer items-center justify-center rounded-full bg-black px-11 py-4 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#2563EB] hover:shadow-[0_10px_28px_rgba(37,99,235,0.25)] active:translate-y-0 active:shadow-none"
             >
               <span className="text-[17px] font-semibold leading-none text-white">
                 Let&apos;s talk
@@ -52,10 +52,10 @@ function HomeHeader() {
             {/* secondary — quiet text link */}
             <Link
               href={Constants.PAGES.SOLUTIONS}
-              className="group/sol inline-flex items-center gap-2 text-[17px] font-medium text-[#4B5563] transition-colors duration-300 hover:text-[#0F172A]"
+              className="group/sol inline-flex items-center gap-2 text-[17px] font-medium text-[#4B5563] transition-colors duration-200 hover:text-[#0F172A]"
             >
               Explore our solutions
-              <svg className="h-[18px] w-[18px] shrink-0 transition-transform duration-300 ease-out group-hover/sol:translate-x-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg className="h-[18px] w-[18px] shrink-0 transition-transform duration-200 ease-out group-hover/sol:translate-x-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
             </Link>

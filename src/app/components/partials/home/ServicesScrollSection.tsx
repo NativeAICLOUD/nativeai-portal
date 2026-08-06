@@ -1,3 +1,6 @@
+'use client';
+
+import { motion } from 'framer-motion';
 import {
   Cloud, Layers, Rocket, Workflow, RefreshCw, Building2,
   Sparkles, Briefcase, Palette, CloudUpload, type LucideIcon,
@@ -23,15 +26,21 @@ const services: { title: string; icon: LucideIcon }[] = [
 export default function ServicesScrollSection() {
   return (
     <section className="font-switzer bg-white">
-      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-24">
+      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
 
         {/* Header */}
-        <div className="mb-12">
+        <motion.div
+          className="mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          viewport={{ once: true, margin: '-60px' }}
+        >
           <div className="mb-4"><Eyebrow>What we deliver</Eyebrow></div>
           <h2 className="m-0 max-w-[620px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
             Every service your business needs — under one roof
           </h2>
-        </div>
+        </motion.div>
 
         {/* Service tabs — icon outside the pill, gradient palette colors */}
         <div className="flex flex-wrap gap-x-8 gap-y-5">

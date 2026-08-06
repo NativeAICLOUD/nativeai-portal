@@ -61,7 +61,7 @@ export default function MobileDrawer({ open, onClose, children, footer }: Props)
           aria-label="Close menu"
           className="flex h-11 w-11 items-center justify-center rounded-full bg-transparent text-[#111827] transition-colors duration-200 hover:bg-black/[0.05]"
         >
-          <svg viewBox="0 0 24 24" fill="none" width="18" height="18" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" width="24" height="24" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
             <path d="M18 6 6 18M6 6l12 12" />
           </svg>
         </button>

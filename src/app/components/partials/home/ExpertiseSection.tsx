@@ -50,9 +50,7 @@ export default function ExpertiseSection() {
             Azure &amp; cloud security, done right
           </h2>
           <p className="text-[#6b7280] text-[15px] font-light leading-relaxed max-w-[440px]">
-            NativeCloud is a certified Microsoft Azure partner focused on secure-by-default cloud
-            architecture — from Azure Security posture and DevSecOps pipelines to enterprise-grade
-            cloud infrastructure design.
+            NativeCloud is a certified Microsoft Azure partner focused on secure-by-default cloud architecture.
           </p>
 
           <div className="mt-2 flex flex-wrap gap-x-8 gap-y-5">

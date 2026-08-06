@@ -8,10 +8,10 @@ import { AWSPartnerImg, MicrosotPartnerImg } from '@/ImagePath';
 
 const HomePartner = () => {
   return (
-    <div className="relative home-partner mt-10 xl:mt-14 px-4 xl:px-6">
+    <div className="relative">
 
       {/* Partnership badges */}
-      <div className="font-switzer max-w-9xl mx-auto mt-20 sm:mt-24 sm:pt-20 mb-20 sm:mb-28 px-6 sm:px-12 xl:px-16">
+      <div className="font-switzer max-w-9xl mx-auto px-6 py-16 sm:px-12 sm:py-20 lg:py-24 xl:px-16">
 
         <motion.div
           className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12"
@@ -38,7 +38,7 @@ const HomePartner = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, ease: 'easeOut', delay: 0.05 }}
             viewport={{ once: true, margin: '-60px' }}
-            className="flex flex-col gap-6 rounded-lg border border-[#e6e6e6] bg-white p-8 sm:p-10 transition-shadow duration-300 hover:shadow-[0_4px_16px_rgba(10,14,26,0.08)]"
+            className="flex flex-col gap-6 rounded-lg border border-[#e6e6e6] bg-white p-8 sm:p-10 transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(15,23,42,0.08)]"
           >
             <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#9ca3af]">Microsoft Azure</span>
             <Image
@@ -64,7 +64,7 @@ const HomePartner = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, ease: 'easeOut', delay: 0.15 }}
             viewport={{ once: true, margin: '-60px' }}
-            className="flex flex-col gap-6 rounded-lg border border-[#e6e6e6] bg-white p-8 sm:p-10 transition-shadow duration-300 hover:shadow-[0_4px_16px_rgba(10,14,26,0.08)]"
+            className="flex flex-col gap-6 rounded-lg border border-[#e6e6e6] bg-white p-8 sm:p-10 transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(15,23,42,0.08)]"
           >
             <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#9ca3af]">Amazon Web Services</span>
             <Image

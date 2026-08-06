@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import {
   Zap, Landmark, ShieldCheck, CreditCard, Truck, Cpu, Plane,
   Scale, Wallet, ShoppingBag, HardHat, Boxes,
@@ -38,33 +41,50 @@ const industries: Industry[] = [
 export default function IndustriesBusinessDomain() {
   return (
     <section className="font-switzer bg-white">
-      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-24">
+      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
 
         {/* Header */}
-        <div className="mb-12">
+        <motion.div
+          className="mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          viewport={{ once: true, margin: '-60px' }}
+        >
           <div className="mb-4"><Eyebrow>Industries we serve</Eyebrow></div>
           <h2 className="m-0 max-w-[560px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
-            Move your industry forward
+            Move your{' '}
+            <span style={{ background: 'rgba(37,99,235,0.14)', borderRadius: 0, padding: '2px 6px' }}>
+              industry
+            </span>{' '}
+            forward
           </h2>
-        </div>
+        </motion.div>
 
         {/* Industry cards — same design as the delivery-spectrum sections */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-          {industries.map(({ title, desc, href, icon: Icon }) => (
-            <Link
+          {industries.map(({ title, desc, href, icon: Icon }, i) => (
+            <motion.div
               key={title}
-              href={href}
-              className="group flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6 transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-1 hover:border-[#111]/20 hover:shadow-[0_8px_24px_rgba(0,0,0,0.10)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111]/20"
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, ease: 'easeOut', delay: (i % 4) * 0.1 }}
+              viewport={{ once: true, margin: '-40px' }}
             >
-              <div
-                className="mb-5 flex h-16 w-16 items-center justify-center rounded-[18px] transition-transform duration-200 group-hover:scale-105"
-                style={TILE_STYLE}
+              <Link
+                href={href}
+                className="group flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6 transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-1 hover:border-[#111]/20 hover:shadow-[0_8px_24px_rgba(15,23,42,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111]/20"
               >
-                <Icon className="h-8 w-8 text-[#2563EB]" strokeWidth={1.8} aria-hidden="true" />
-              </div>
-              <h3 className="m-0 text-[16px] font-medium leading-[1.3] text-[#111]">{title}</h3>
-              <p className="mt-2 text-[14px] font-normal leading-[1.5] text-[#6b7280]">{desc}</p>
-            </Link>
+                <div
+                  className="mb-5 flex h-16 w-16 items-center justify-center rounded-[18px] transition-transform duration-200 group-hover:scale-105"
+                  style={TILE_STYLE}
+                >
+                  <Icon className="h-8 w-8 text-[#2563EB]" strokeWidth={1.8} aria-hidden="true" />
+                </div>
+                <h3 className="m-0 text-[16px] font-medium leading-[1.3] text-[#111]">{title}</h3>
+                <p className="mt-2 text-[14px] font-normal leading-[1.5] text-[#6b7280]">{desc}</p>
+              </Link>
+            </motion.div>
           ))}
         </div>
 

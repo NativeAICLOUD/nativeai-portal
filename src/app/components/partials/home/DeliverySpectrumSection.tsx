@@ -1,3 +1,6 @@
+'use client';
+
+import { motion } from 'framer-motion';
 import {
   Compass, PenTool, Code2, Rocket, Sparkles, Lightbulb,
   Users, FolderKanban, Handshake,
@@ -58,7 +61,7 @@ const collaborationModels: { title: string; desc: string; icon: LucideIcon }[] =
 ];
 
 const cardCls =
-  'group flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6 transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-1 hover:border-[#111]/20 hover:shadow-[0_8px_24px_rgba(0,0,0,0.10)]';
+  'group flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6 transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-1 hover:border-[#111]/20 hover:shadow-[0_8px_24px_rgba(15,23,42,0.08)]';
 
 export default function DeliverySpectrumSection() {
   return (
@@ -66,21 +69,34 @@ export default function DeliverySpectrumSection() {
 
       {/* ── End-to-end capability ── */}
       <section className="bg-white">
-        <div className={`${CONTAINER} py-20 lg:py-24`}>
-          <div className="mb-12">
+        <div className={`${CONTAINER} py-16 sm:py-20 lg:py-24`}>
+          <motion.div
+            className="mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            viewport={{ once: true, margin: '-60px' }}
+          >
             <div className="mb-4"><Eyebrow>Full delivery spectrum</Eyebrow></div>
             <h2 className="m-0 max-w-[560px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
               Every capability your product needs.
             </h2>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
             {capabilities.map(({ title, desc, icon }, i) => (
-              <div key={title} className={cardCls}>
+              <motion.div
+                key={title}
+                className={cardCls}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, ease: 'easeOut', delay: (i % 3) * 0.1 }}
+                viewport={{ once: true, margin: '-40px' }}
+              >
                 <IconTile icon={icon} variant={i} />
                 <h3 className="m-0 text-[17px] font-medium leading-[1.3] text-[#111]">{title}</h3>
                 <p className="mt-2 text-[14px] font-normal leading-[1.5] text-[#6b7280]">{desc}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -88,21 +104,34 @@ export default function DeliverySpectrumSection() {
 
       {/* ── Collaboration models ── */}
       <section className="bg-white">
-        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
-          <div className="mb-12">
+        <div className={`${CONTAINER} pb-16 sm:pb-20 lg:pb-24`}>
+          <motion.div
+            className="mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            viewport={{ once: true, margin: '-60px' }}
+          >
             <div className="mb-4"><Eyebrow>How we work together</Eyebrow></div>
             <h2 className="m-0 max-w-[560px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
               Three ways to plug us in.
             </h2>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
             {collaborationModels.map(({ title, desc, icon }, i) => (
-              <div key={title} className={cardCls}>
+              <motion.div
+                key={title}
+                className={cardCls}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, ease: 'easeOut', delay: (i % 3) * 0.1 }}
+                viewport={{ once: true, margin: '-40px' }}
+              >
                 <IconTile icon={icon} variant={i} />
                 <h3 className="m-0 text-[18px] font-medium leading-[1.3] text-[#111]">{title}</h3>
                 <p className="mt-2 text-[14.5px] font-normal leading-[1.55] text-[#6b7280]">{desc}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

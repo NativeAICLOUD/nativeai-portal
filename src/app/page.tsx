@@ -9,6 +9,7 @@ import IndustriesIntroSection from "./components/partials/home/IndustriesIntroSe
 import PracticalSolutionsSection from "./components/partials/home/PracticalSolutionsSection";
 import ProductDevelopmentSection from "./components/partials/home/ProductDevelopmentSection";
 import TechStackSection from "./components/partials/home/TechStackSection";
+import WhatWeOfferSection from "./components/partials/home/WhatWeOfferSection";
 
 export default function Home() {
   return (
@@ -17,6 +18,9 @@ export default function Home() {
 
       {/* What we do — end-to-end product development */}
       <ProductDevelopmentSection />
+
+      {/* What We Offer — Discovery, Prototype, Development & Growth */}
+      <WhatWeOfferSection />
 
       {/* Industries intro — same design as the nearshore intro */}
       <IndustriesIntroSection />

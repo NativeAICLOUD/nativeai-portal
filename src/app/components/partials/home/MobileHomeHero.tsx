@@ -59,17 +59,11 @@ export default function MobileHomeHero() {
 
       <Link
         href={Constants.PAGES.SCHEDULE_CALL}
-        className="flex w-full items-center justify-center text-center text-white transition-[background-color] duration-100 ease-in-out hover:bg-[#0a0b0d]"
-        style={{
-          background: '#0D0E10',
-          padding: '16px 38px',
-          fontSize: 14,
-          lineHeight: '17px',
-          fontWeight: 700,
-          borderRadius: 4,
-        }}
+        className="flex w-full items-center justify-center rounded-full bg-black px-11 py-4 text-center transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#2563EB] hover:shadow-[0_10px_28px_rgba(37,99,235,0.25)] active:translate-y-0 active:shadow-none"
       >
-        Let&apos;s Talk
+        <span className="text-[17px] font-semibold leading-none text-white">
+          Let&apos;s talk
+        </span>
       </Link>
 
       <Link
