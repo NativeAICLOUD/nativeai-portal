@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   Code2, Palette, Bot, Database, CloudCog, CloudUpload, Boxes, Workflow,
-  BookOpen, GitBranch, Sparkles,
+  BookOpen, GitBranch, Sparkles, Plane, Scale, CreditCard,
   type LucideIcon,
 } from "lucide-react";
 import { KCSP, KTP, MSP } from "@/ImagePath";
@@ -16,21 +16,21 @@ export const metadata: Metadata = {
 };
 
 /* ── content ── */
-const services: { title: string; body: string; href: string; icon: LucideIcon; color: string; bg: string }[] = [
-  { title: "Custom Development", body: "Tailored software built precisely for your business workflows — from API design to production-ready delivery.", href: "/services/custom-development", icon: Code2, color: "#2563EB", bg: "rgba(37,99,235,0.08)" },
-  { title: "Design", body: "Beautiful, intuitive interfaces that users love — from UX research and wireframes through to pixel-perfect UI.", href: "/services/design", icon: Palette, color: "#DB2777", bg: "rgba(219,39,119,0.08)" },
-  { title: "AI Agents & RAG", body: "Intelligent automation and retrieval-augmented generation connected to your data, documents, and workflows.", href: "/services/ai-agents-rag", icon: Bot, color: "#7C3AED", bg: "rgba(124,58,237,0.08)" },
-  { title: "Data Lifecycle", body: "End-to-end data platforms on Azure — from raw ingestion and transformation to analytics layers and Power BI dashboards.", href: "/data-lifecycle-management", icon: Database, color: "#0F8B83", bg: "rgba(15,139,131,0.08)" },
-  { title: "Cloud Architecture", body: "Scalable, resilient cloud-native architectures designed for your team's size, traffic patterns, and growth trajectory.", href: "/cloud-software-architecture", icon: CloudCog, color: "#0EA5E9", bg: "rgba(14,165,233,0.08)" },
-  { title: "Migrate to Azure", body: "A structured, low-risk migration from on-premises or any cloud provider to Microsoft Azure — without disrupting your operations.", href: "/migrate-to-azure", icon: CloudUpload, color: "#16A34A", bg: "rgba(22,163,74,0.08)" },
-  { title: "Cloud Native Development", body: "Microservices, containers, and Kubernetes — modern application architectures built to scale on Azure from day one.", href: "/cloud-native-sd", icon: Boxes, color: "#F59E0B", bg: "rgba(245,158,11,0.08)" },
-  { title: "DevOps on Azure", body: "CI/CD pipelines, infrastructure-as-code, and automated testing workflows that let your team ship faster and safer.", href: "/devops-on-azure", icon: Workflow, color: "#E11D48", bg: "rgba(225,29,72,0.08)" },
+const services: { title: string; body: string; href: string; icon: LucideIcon; color: string; bg: string; tags: string[] }[] = [
+  { title: "Custom Development", body: "Tailored software built precisely for your business workflows — from API design to production-ready delivery.", href: "/services/custom-development", icon: Code2, color: "#2563EB", bg: "rgba(37,99,235,0.08)", tags: ["API Design", "Full-Stack", "Production-Ready"] },
+  { title: "Design", body: "Beautiful, intuitive interfaces that users love — from UX research and wireframes through to pixel-perfect UI.", href: "/services/design", icon: Palette, color: "#DB2777", bg: "rgba(219,39,119,0.08)", tags: ["UX Research", "Wireframes", "Pixel-Perfect UI"] },
+  { title: "AI Agents & RAG", body: "Intelligent automation and retrieval-augmented generation connected to your data, documents, and workflows.", href: "/services/ai-agents-rag", icon: Bot, color: "#7C3AED", bg: "rgba(124,58,237,0.08)", tags: ["Automation", "RAG Pipelines", "Azure OpenAI"] },
+  { title: "Data Lifecycle", body: "End-to-end data platforms on Azure — from raw ingestion and transformation to analytics layers and Power BI dashboards.", href: "/data-lifecycle-management", icon: Database, color: "#0F8B83", bg: "rgba(15,139,131,0.08)", tags: ["Ingestion", "Analytics", "Power BI"] },
+  { title: "Cloud Architecture", body: "Scalable, resilient cloud-native architectures designed for your team's size, traffic patterns, and growth trajectory.", href: "/cloud-software-architecture", icon: CloudCog, color: "#0EA5E9", bg: "rgba(14,165,233,0.08)", tags: ["Scalability", "Resilience", "Cost Optimization"] },
+  { title: "Migrate to Azure", body: "A structured, low-risk migration from on-premises or any cloud provider to Microsoft Azure — without disrupting your operations.", href: "/migrate-to-azure", icon: CloudUpload, color: "#16A34A", bg: "rgba(22,163,74,0.08)", tags: ["Zero Downtime", "Assessment", "Re-platforming"] },
+  { title: "Cloud Native Development", body: "Microservices, containers, and Kubernetes — modern application architectures built to scale on Azure from day one.", href: "/cloud-native-sd", icon: Boxes, color: "#F59E0B", bg: "rgba(245,158,11,0.08)", tags: ["Microservices", "Kubernetes", "Containers"] },
+  { title: "DevOps on Azure", body: "CI/CD pipelines, infrastructure-as-code, and automated testing workflows that let your team ship faster and safer.", href: "/devops-on-azure", icon: Workflow, color: "#E11D48", bg: "rgba(225,29,72,0.08)", tags: ["CI/CD", "IaC", "Automated Testing"] },
 ];
 
-const products = [
-  { title: "Airline & Travel Booking", body: "A cloud-based platform for airlines, travel agencies, and tour operators — reservations, ticketing, GDS connectivity, and passenger management in one system.", href: "/airline-booking" },
-  { title: "AI Legal Workspace", body: "AI-powered document analysis, contract review, and legal research — built for law firms and in-house legal teams that want to move faster.", href: "/ai-legal-workspace" },
-  { title: "Payment Automation", body: "Recurring billing, rent collection, and payment reconciliation — automated end-to-end so your finance team focuses on decisions, not data entry.", href: "/payment-automation" },
+const products: { title: string; body: string; href: string; icon: LucideIcon; color: string; bg: string; tags: string[] }[] = [
+  { title: "Airline & Travel Booking", body: "A cloud-based platform for airlines, travel agencies, and tour operators — reservations, ticketing, GDS connectivity, and passenger management in one system.", href: "/airline-booking", icon: Plane, color: "#2563EB", bg: "rgba(37,99,235,0.07)", tags: ["GDS Connectivity", "Ticketing", "Passenger Mgmt"] },
+  { title: "AI Legal Workspace", body: "AI-powered document analysis, contract review, and legal research — built for law firms and in-house legal teams that want to move faster.", href: "/ai-legal-workspace", icon: Scale, color: "#7C3AED", bg: "rgba(124,58,237,0.07)", tags: ["Document AI", "Contract Review", "Legal Research"] },
+  { title: "Payment Automation", body: "Recurring billing, rent collection, and payment reconciliation — automated end-to-end so your finance team focuses on decisions, not data entry.", href: "/payment-automation", icon: CreditCard, color: "#0F8B83", bg: "rgba(15,139,131,0.08)", tags: ["Recurring Billing", "Auto-Reconciliation", "Reporting"] },
 ];
 
 const innovate: { title: string; body: string; href: string; icon: LucideIcon; color: string; bg: string }[] = [
@@ -130,7 +130,7 @@ export default function SolutionsPage() {
 
           <div className="rounded-2xl bg-[#FAFAF8] p-3 sm:p-5">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {services.map(({ title, body, href, icon: Icon, color, bg }) => (
+              {services.map(({ title, body, href, icon: Icon, color, bg, tags }) => (
                 <Link
                   key={title}
                   href={href}
@@ -147,6 +147,13 @@ export default function SolutionsPage() {
                   </div>
                   <div className="my-3 h-px w-full bg-[#EAEAEA]" />
                   <p className="m-0 flex-1 text-[14px] font-normal leading-[1.5] text-[#6B7280]">{body}</p>
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {tags.map((tag) => (
+                      <span key={tag} className="rounded-full border border-[#e6e6e6] bg-[#fafafa] px-2.5 py-0.5 text-[11px] font-medium text-[#6b7280]">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                   <ArrowLink>Learn more</ArrowLink>
                 </Link>
               ))}
@@ -165,19 +172,37 @@ export default function SolutionsPage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-6">
-            {products.map(({ title, body, href }) => (
-              <Link
-                key={title}
-                href={href}
-                className="group flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6 transition-[filter,box-shadow] duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.2)] hover:[filter:invert(1)]"
-              >
-                <span className="mb-3 text-[11px] font-medium uppercase tracking-[0.14em] text-[#9ca3af]">NativeCloud Product</span>
-                <h3 className="m-0 text-[20px] font-medium leading-[1.25] text-[#111]">{title}</h3>
-                <p className="mt-2 flex-1 text-[16px] font-normal leading-[1.5] text-[#111]">{body}</p>
-                <ArrowLink>See the product</ArrowLink>
-              </Link>
-            ))}
+          <div className="rounded-2xl bg-[#FAFAF8] p-3 sm:p-5">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              {products.map(({ title, body, href, icon: Icon, color, bg, tags }) => (
+                <Link
+                  key={title}
+                  href={href}
+                  className="group flex h-full flex-col rounded-[10px] border border-[#ECECEC] bg-white p-[18px] shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-1 hover:border-[rgba(37,99,235,0.2)] hover:shadow-[0_10px_28px_rgba(15,23,42,0.08)]"
+                >
+                  <span className="mb-3 text-[11px] font-medium uppercase tracking-[0.14em] text-[#9ca3af]">NativeCloud Product</span>
+                  <div className="flex min-h-[56px] items-center gap-3.5">
+                    <span
+                      className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[12px] transition-transform duration-200 group-hover:scale-105"
+                      style={{ background: bg }}
+                    >
+                      <Icon className="h-8 w-8" style={{ color }} strokeWidth={1.7} aria-hidden="true" />
+                    </span>
+                    <h3 className="m-0 text-[15.5px] font-semibold leading-[1.25] text-[#111827]">{title}</h3>
+                  </div>
+                  <div className="my-3 h-px w-full bg-[#EAEAEA]" />
+                  <p className="m-0 flex-1 text-[14px] font-normal leading-[1.5] text-[#6B7280]">{body}</p>
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {tags.map((tag) => (
+                      <span key={tag} className="rounded-full border border-[#e6e6e6] bg-[#fafafa] px-2.5 py-0.5 text-[11px] font-medium text-[#6b7280]">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <ArrowLink>Explore solution</ArrowLink>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>

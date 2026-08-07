@@ -10,6 +10,7 @@ import PracticalSolutionsSection from "./components/partials/home/PracticalSolut
 import ProductDevelopmentSection from "./components/partials/home/ProductDevelopmentSection";
 import TechStackSection from "./components/partials/home/TechStackSection";
 import WhatWeOfferSection from "./components/partials/home/WhatWeOfferSection";
+import WhyCloudNativeSection from "./components/partials/home/WhyCloudNativeSection";
 
 export default function Home() {
   return (
@@ -30,6 +31,9 @@ export default function Home() {
 
       {/* What We Deliver — pinned scroll card experience */}
       <ServicesScrollSection />
+
+      {/* Why go cloud-native — moved here from the cloud-native-sd service page */}
+      <WhyCloudNativeSection />
 
       {/* Practical AI & Cloud solutions — where Core Services used to be */}
       <PracticalSolutionsSection />
