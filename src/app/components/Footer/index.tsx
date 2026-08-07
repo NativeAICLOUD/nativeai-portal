@@ -134,7 +134,7 @@ function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.name}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-[#ECECEC] bg-white shadow-[0_2px_8px_rgba(15,23,42,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[rgba(37,99,235,0.3)] hover:shadow-[0_8px_20px_rgba(37,99,235,0.12)]"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E6E6E6] bg-white transition-all duration-200 hover:-translate-y-0.5 hover:border-[rgba(37,99,235,0.3)]"
                 >
                   <svg className="text-[#6B7280]" width={15} height={15}>
                     <use href={`/icons/all-icons.svg#${s.icon}`} />
@@ -181,7 +181,7 @@ function Footer() {
               <button
                 type="button"
                 onClick={() => setSubscribeOpen(true)}
-                className="flex w-full items-center justify-center gap-2.5 rounded-full border border-[#e6e6e6] bg-white px-6 py-3.5 shadow-[0_2px_8px_rgba(15,23,42,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[rgba(37,99,235,0.25)] hover:shadow-[0_8px_20px_rgba(37,99,235,0.1)] sm:max-w-sm"
+                className="flex w-full items-center justify-center gap-2.5 rounded-full border border-[#E6E6E6] bg-white px-6 py-3.5 transition-all duration-200 hover:-translate-y-0.5 hover:border-[rgba(37,99,235,0.25)] sm:max-w-sm"
               >
                 <span className="text-[15px] font-medium text-[#111]">Subscribe to updates</span>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-[#111]"><path d="M5 12h14M12 5l7 7-7 7" /></svg>

@@ -6,44 +6,14 @@ import {
   Users, FolderKanban, Handshake,
   type LucideIcon,
 } from 'lucide-react';
-import { CONTAINER, Eyebrow } from '@/app/components/partials/services/ServiceUI';
+import { CONTAINER, Eyebrow, SECTION_Y, SECTION_PB, H2, FeatureCard } from './HomeUI';
 
-/* Premium icon tiles — solid 2px icon on an 8% tint, cycling the
-   nearshore divider gradient palette (#ff9900 → #ff6a3d → #ff4f8b) */
+/* Icon tint cycle — reuses the nearshore divider palette (#ff9900 → #ff6a3d → #ff4f8b) */
 const TILE = [
   { color: '#FF9900', bg: 'rgba(255,153,0,0.08)' },
   { color: '#FF6A3D', bg: 'rgba(255,106,61,0.08)' },
   { color: '#FF4F8B', bg: 'rgba(255,79,139,0.08)' },
 ];
-
-function IconTile({ icon, variant }: { icon: LucideIcon | string; variant: number }) {
-  const t = TILE[variant % TILE.length];
-  const Icon = typeof icon === 'string' ? null : icon;
-  return (
-    <div
-      className="mb-5 flex h-[72px] w-[72px] items-center justify-center rounded-[20px] transition-transform duration-200 group-hover:scale-105"
-      style={{
-        background: t.bg,
-        border: '1px solid rgba(15,23,42,0.06)',
-        boxShadow: '0 8px 24px rgba(15,23,42,0.06)',
-      }}
-    >
-      {typeof icon === 'string' ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={icon} alt="" className="h-9 w-auto object-contain" aria-hidden="true" />
-      ) : (
-        Icon && (
-          <Icon
-            className="h-9 w-9"
-            style={{ color: t.color }}
-            strokeWidth={1.7}
-            aria-hidden="true"
-          />
-        )
-      )}
-    </div>
-  );
-}
 
 const capabilities: { title: string; desc: string; icon: LucideIcon }[] = [
   { title: 'Discovery',   icon: Compass,   desc: 'Workshops, audits and scoping that de-risk the build before it starts.' },
@@ -60,25 +30,22 @@ const collaborationModels: { title: string; desc: string; icon: LucideIcon }[] =
   { title: 'Digital partner',             icon: Handshake,   desc: 'A long-term partnership covering build, run and evolve — your extended engineering department.' },
 ];
 
-const cardCls =
-  'group flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6 transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-1 hover:border-[#111]/20 hover:shadow-[0_8px_24px_rgba(15,23,42,0.08)]';
-
 export default function DeliverySpectrumSection() {
   return (
     <div className="font-switzer">
 
       {/* ── End-to-end capability ── */}
       <section className="bg-white">
-        <div className={`${CONTAINER} py-16 sm:py-20 lg:py-24`}>
+        <div className={`${CONTAINER} ${SECTION_Y}`}>
           <motion.div
-            className="mb-12"
+            className="mb-14"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
             viewport={{ once: true, margin: '-60px' }}
           >
             <div className="mb-4"><Eyebrow>Full delivery spectrum</Eyebrow></div>
-            <h2 className="m-0 max-w-[560px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+            <h2 className={`m-0 max-w-[560px] ${H2}`}>
               Every capability your product needs.
             </h2>
           </motion.div>
@@ -87,15 +54,12 @@ export default function DeliverySpectrumSection() {
             {capabilities.map(({ title, desc, icon }, i) => (
               <motion.div
                 key={title}
-                className={cardCls}
                 initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.45, ease: 'easeOut', delay: (i % 3) * 0.1 }}
                 viewport={{ once: true, margin: '-40px' }}
               >
-                <IconTile icon={icon} variant={i} />
-                <h3 className="m-0 text-[17px] font-medium leading-[1.3] text-[#111]">{title}</h3>
-                <p className="mt-2 text-[14px] font-normal leading-[1.5] text-[#6b7280]">{desc}</p>
+                <FeatureCard icon={icon} iconColor={TILE[i % TILE.length].color} iconBg={TILE[i % TILE.length].bg} title={title} desc={desc} />
               </motion.div>
             ))}
           </div>
@@ -104,16 +68,16 @@ export default function DeliverySpectrumSection() {
 
       {/* ── Collaboration models ── */}
       <section className="bg-white">
-        <div className={`${CONTAINER} pb-16 sm:pb-20 lg:pb-24`}>
+        <div className={`${CONTAINER} ${SECTION_PB}`}>
           <motion.div
-            className="mb-12"
+            className="mb-14"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
             viewport={{ once: true, margin: '-60px' }}
           >
             <div className="mb-4"><Eyebrow>How we work together</Eyebrow></div>
-            <h2 className="m-0 max-w-[560px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+            <h2 className={`m-0 max-w-[560px] ${H2}`}>
               Three ways to plug us in.
             </h2>
           </motion.div>
@@ -122,15 +86,12 @@ export default function DeliverySpectrumSection() {
             {collaborationModels.map(({ title, desc, icon }, i) => (
               <motion.div
                 key={title}
-                className={cardCls}
                 initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.45, ease: 'easeOut', delay: (i % 3) * 0.1 }}
                 viewport={{ once: true, margin: '-40px' }}
               >
-                <IconTile icon={icon} variant={i} />
-                <h3 className="m-0 text-[18px] font-medium leading-[1.3] text-[#111]">{title}</h3>
-                <p className="mt-2 text-[14.5px] font-normal leading-[1.55] text-[#6b7280]">{desc}</p>
+                <FeatureCard icon={icon} iconColor={TILE[i % TILE.length].color} iconBg={TILE[i % TILE.length].bg} title={title} desc={desc} />
               </motion.div>
             ))}
           </div>

@@ -11,7 +11,7 @@ const useCases: { title: string; desc: string; icon: LucideIcon | string; color:
   { title: 'Legacy Software Modernization',             icon: '/icons/legacy-software-modernization.svg', color: '#7C3AED', bg: 'rgba(124,58,237,0.08)', desc: 'Modernize and innovate on critical business applications.' },
 ];
 
-/* “What we do” — centred 2×2 grid on a soft panel */
+/* "What we do" — centred 2×2 grid on a soft panel */
 export default function ProductDevelopmentSection() {
   return (
     <section className="font-switzer bg-white">

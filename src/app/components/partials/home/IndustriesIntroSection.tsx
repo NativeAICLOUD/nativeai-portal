@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { Landmark } from 'lucide-react';
 import { Constants } from '@/Constants';
-import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from '@/app/components/partials/services/ServiceUI';
+import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton, SECTION_Y } from './HomeUI';
 
 const industryTags = ['Legal & Compliance', 'Finance & Banking', 'Travel & Aviation', 'Healthcare', 'E-commerce'];
 
@@ -20,7 +20,7 @@ export default function IndustriesIntroSection() {
             '#ffffff',
         }}
       >
-        <div className={`${CONTAINER} py-16 sm:py-20 lg:py-24`}>
+        <div className={`${CONTAINER} ${SECTION_Y}`}>
           <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
 
             {/* Left */}
@@ -32,7 +32,7 @@ export default function IndustriesIntroSection() {
               viewport={{ once: true, margin: '-60px' }}
             >
               <div className="mb-6"><Eyebrow>Industries · Sector expertise</Eyebrow></div>
-              <h2 className="m-0 max-w-[560px] text-[36px] font-medium leading-[1.05] text-[#111] sm:text-[46px] lg:text-[56px]">
+              <h2 className="m-0 max-w-[560px] text-[36px] font-medium leading-[1.05] tracking-[-0.02em] text-[#111] sm:text-[46px] lg:text-[56px]">
                 Solutions built for your industry.
               </h2>
               <div className="mt-8 flex flex-wrap gap-3">
@@ -43,7 +43,7 @@ export default function IndustriesIntroSection() {
 
             {/* Right — Industry focus card */}
             <div className="w-full lg:max-w-[380px] lg:flex-1">
-              <div className="flex flex-col gap-5 rounded-2xl border border-[#e6e6e6] bg-white p-6">
+              <div className="flex flex-col gap-5 rounded-2xl border border-[#E6E6E6] bg-white p-6">
                 <div className="flex items-center justify-between">
                   <Eyebrow>Industry focus</Eyebrow>
                   <Landmark className="h-5 w-5 text-[#2563EB]" strokeWidth={1.6} aria-hidden="true" />
@@ -61,14 +61,7 @@ export default function IndustriesIntroSection() {
           </div>
         </div>
 
-        {/* Azure blue divider — same as /migrate-to-azure */}
-        <hr
-          className="m-0 h-1 w-full border-0"
-          style={{
-            backgroundImage: 'linear-gradient(260deg, #fff, #50e6ff 18%, #0089d6 50%, #0050ef 82%, #fff)',
-            borderRadius: 100,
-          }}
-        />
+        <hr className="m-0 h-px w-full border-0 bg-[#E6E6E6]" />
       </div>
     </section>
   );

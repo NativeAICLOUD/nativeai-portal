@@ -94,6 +94,10 @@ const config: Config = {
       },
       spacing: {
         15: '3.75rem',
+        18: '4.5rem',
+        'section-y-sm': '4.5rem',
+        'section-y-md': '6rem',
+        'section-y-lg': '9rem',
       },
       scale: {
         80: '0.80',

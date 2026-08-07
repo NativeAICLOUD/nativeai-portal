@@ -5,28 +5,29 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 import { AWSPartnerImg, MicrosotPartnerImg } from '@/ImagePath';
+import { CONTAINER, SECTION_Y, H2, BODY, TAG_PILL } from './HomeUI';
 
 const HomePartner = () => {
   return (
     <div className="relative">
 
       {/* Partnership badges */}
-      <div className="font-switzer max-w-9xl mx-auto px-6 py-16 sm:px-12 sm:py-20 lg:py-24 xl:px-16">
+      <div className={`font-switzer ${CONTAINER} ${SECTION_Y}`}>
 
         <motion.div
-          className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12"
+          className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-14"
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
           viewport={{ once: true, margin: '-80px' }}
         >
           <div>
-            <p className="text-[12px] font-medium uppercase tracking-[0.14em] text-[#9ca3af] mb-4">Certifications</p>
-            <h2 className="text-[30px] md:text-[40px] font-medium text-[#111] leading-[1.1]">
+            <p className="text-[12px] font-medium uppercase tracking-[0.14em] text-[#6B7280] mb-4">Certifications</p>
+            <h2 className={H2}>
               Our level of partnership
             </h2>
           </div>
-          <p className="text-[#6b7280] text-[15px] font-light max-w-xs sm:text-right leading-relaxed">
+          <p className={`max-w-xs sm:text-right ${BODY}`}>
             Certified by the platforms we build on — so you get expertise, not just familiarity.
           </p>
         </motion.div>
@@ -38,21 +39,21 @@ const HomePartner = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, ease: 'easeOut', delay: 0.05 }}
             viewport={{ once: true, margin: '-60px' }}
-            className="flex flex-col gap-6 rounded-lg border border-[#e6e6e6] bg-white p-8 sm:p-10 transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(15,23,42,0.08)]"
+            className="flex flex-col gap-6 rounded-2xl border border-[#E6E6E6] bg-white p-8 sm:p-10 transition-colors duration-200 hover:border-[#111827]/15"
           >
-            <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#9ca3af]">Microsoft Azure</span>
+            <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#6B7280]">Microsoft Azure</span>
             <Image
               src={MicrosotPartnerImg}
               alt="Microsoft Partner"
               className="h-14 w-auto object-contain object-left"
               placeholder="blur"
             />
-            <p className="text-[15px] leading-relaxed text-[#111] max-w-sm">
+            <p className={`max-w-sm ${BODY}`}>
               Certified Microsoft partner specialising in Azure cloud architecture, AI services, DevOps, and application modernisation.
             </p>
             <div className="flex flex-wrap gap-2 mt-auto">
               {['Azure AI', 'AKS', 'DevOps', 'App Modernisation'].map((tag) => (
-                <span key={tag} className="text-[12px] font-medium text-[#6b7280] bg-[#fafafa] border border-[#e6e6e6] px-3 py-1 rounded-full">
+                <span key={tag} className={TAG_PILL}>
                   {tag}
                 </span>
               ))}
@@ -64,21 +65,21 @@ const HomePartner = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, ease: 'easeOut', delay: 0.15 }}
             viewport={{ once: true, margin: '-60px' }}
-            className="flex flex-col gap-6 rounded-lg border border-[#e6e6e6] bg-white p-8 sm:p-10 transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(15,23,42,0.08)]"
+            className="flex flex-col gap-6 rounded-2xl border border-[#E6E6E6] bg-white p-8 sm:p-10 transition-colors duration-200 hover:border-[#111827]/15"
           >
-            <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#9ca3af]">Amazon Web Services</span>
+            <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#6B7280]">Amazon Web Services</span>
             <Image
               src={AWSPartnerImg}
               alt="AWS Partner"
               className="h-14 w-auto object-contain object-left"
               placeholder="blur"
             />
-            <p className="text-[15px] leading-relaxed text-[#111] max-w-sm">
+            <p className={`max-w-sm ${BODY}`}>
               AWS certified partner delivering scalable cloud infrastructure, serverless architectures, and managed cloud operations on AWS.
             </p>
             <div className="flex flex-wrap gap-2 mt-auto">
               {['EC2 & ECS', 'Lambda', 'Cloud Migrations', 'Managed Ops'].map((tag) => (
-                <span key={tag} className="text-[12px] font-medium text-[#6b7280] bg-[#fafafa] border border-[#e6e6e6] px-3 py-1 rounded-full">
+                <span key={tag} className={TAG_PILL}>
                   {tag}
                 </span>
               ))}

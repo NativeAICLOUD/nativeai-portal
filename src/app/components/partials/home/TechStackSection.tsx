@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Sparkles, Globe, Palette, type LucideIcon } from "lucide-react";
 import { techStack, type TechItem } from "@/lib/tech-stack-data";
+import { CONTAINER, Eyebrow, SECTION_Y, H2, H3, BODY } from "./HomeUI";
 
 /* ── Category configuration (data-driven) ─────────────────────────
    Icons: provided glyph SVGs where available, matching vectors elsewhere.
@@ -112,14 +113,12 @@ function CategoryRow({
   );
 }
 
-/* ── Technology card — floating card, Haselt-style ── */
-function TechnologyCard({ item, meta }: { item: TechItem; meta: CategoryMeta }) {
+/* ── Technology row — flat divided list, minimal icon, restrained hover ── */
+function TechnologyRow({ item, meta }: { item: TechItem; meta: CategoryMeta }) {
   return (
-    <div
-      className="flex h-[100px] items-center gap-[22px] rounded-[22px] border border-[rgba(0,0,0,.04)] bg-white pl-7 pr-7 shadow-[0_8px_30px_rgba(15,23,42,.08)] transition-[transform,box-shadow,border-color] duration-[250ms] ease-[ease] hover:-translate-y-[3px] hover:border-[rgba(0,0,0,.08)] hover:shadow-[0_18px_45px_rgba(15,23,42,.12)] sm:h-[110px]"
-    >
+    <div className="group flex items-center gap-4 py-4 transition-colors duration-200 hover:bg-[rgba(15,23,42,.02)] sm:py-5">
       <span
-        className="grid h-[60px] w-[60px] shrink-0 place-items-center rounded-[16px]"
+        className="grid h-9 w-9 shrink-0 place-items-center rounded-lg"
         style={{ background: meta.bg }}
       >
         {item.logo ? (
@@ -127,19 +126,14 @@ function TechnologyCard({ item, meta }: { item: TechItem; meta: CategoryMeta }) 
           <img
             src={item.logo}
             alt={`${item.name} logo`}
-            className="h-auto max-h-[28px] w-auto max-w-[28px] object-contain"
+            className="h-auto max-h-[18px] w-auto max-w-[18px] object-contain"
           />
         ) : (
-          <CategoryIcon meta={meta} />
+          <CategoryIcon meta={meta} size={16} />
         )}
       </span>
 
-      <span
-        className="min-w-0 text-[#111827]"
-        style={{ fontSize: 18, fontWeight: 600, lineHeight: 1.2 }}
-      >
-        {item.name}
-      </span>
+      <span className={`min-w-0 ${H3}`}>{item.name}</span>
     </div>
   );
 }
@@ -152,17 +146,15 @@ export default function TechStackSection() {
 
   return (
     <section className="font-switzer bg-white">
-      <div className="mx-auto w-full max-w-[1180px] px-5 pb-20 pt-[72px] sm:px-6 md:pb-[110px] md:pt-24">
+      <div className={`${CONTAINER} ${SECTION_Y}`}>
 
         {/* ── Header ── */}
         <header>
-          <p className="m-0 mb-[14px] text-[11px] font-medium uppercase tracking-[0.18em] text-[#64748B]">
-            State-of-the-Art
-          </p>
-          <h2 className="m-0 text-[31px] font-medium leading-[1.08] tracking-[-0.025em] text-[#111827] md:text-[36px] lg:text-[42px]">
+          <div className="mb-4"><Eyebrow>State-of-the-Art</Eyebrow></div>
+          <h2 className={`m-0 ${H2}`}>
             Technologies we use
           </h2>
-          <p className="m-0 mt-[22px] max-w-[500px] text-[14px] font-normal leading-[1.65] text-[#7A8392]">
+          <p className={`m-0 mt-5 max-w-[500px] ${BODY}`}>
             Our tech stack covers everything: design, frontend, backend, mobile, AI, and cloud.
           </p>
         </header>
@@ -180,7 +172,7 @@ export default function TechStackSection() {
           ))}
         </nav>
 
-        {/* ── Technology grid — floating cards inside one soft outer panel (unchanged) ── */}
+        {/* ── Technology list — flat, divided rows, no card/panel ── */}
         <motion.div
           key={activeCategory}
           className="mt-10 sm:mt-14"
@@ -189,19 +181,13 @@ export default function TechStackSection() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           viewport={{ once: true, margin: "-60px" }}
         >
-          <div
-            className="rounded-[32px] p-6 sm:p-10"
-            style={{
-              background: "#FCFBFA",
-              boxShadow: "inset 0 1px 2px rgba(15,23,42,0.03), inset 0 -1px 2px rgba(15,23,42,0.02)",
-            }}
-          >
-            <div className="grid grid-cols-1 gap-[22px] sm:grid-cols-2 lg:grid-cols-3">
-              {techStack[activeCategory].map((item) => (
-                <TechnologyCard key={item.name} item={item} meta={activeMeta} />
-              ))}
-            </div>
-          </div>
+          <ul role="list" className="divide-y divide-[rgba(15,23,42,.08)] border-t border-[rgba(15,23,42,.08)]">
+            {techStack[activeCategory].map((item) => (
+              <li key={item.name}>
+                <TechnologyRow item={item} meta={activeMeta} />
+              </li>
+            ))}
+          </ul>
         </motion.div>
 
       </div>
