@@ -65,7 +65,7 @@ export default function IndustriesBusinessDomain() {
               transition={{ duration: 0.45, ease: 'easeOut', delay: (i % 4) * 0.1 }}
               viewport={{ once: true, margin: '-40px' }}
             >
-              <FeatureCard href={href} icon={icon} iconColor="#2563EB" iconBg={ICON_TINT} title={title} desc={desc} />
+              <FeatureCard href={href} icon={icon} iconColor="#2563EB" iconBg={ICON_TINT} title={title} desc={desc} hoverTint />
             </motion.div>
           ))}
         </div>

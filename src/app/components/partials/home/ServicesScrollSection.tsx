@@ -51,14 +51,18 @@ export default function ServicesScrollSection() {
           {services.map(({ title, icon: Icon }, i) => {
             const tile = TILE[i % TILE.length];
             return (
-              <div key={title} className="group flex items-center gap-3.5">
+              <div
+                key={title}
+                className="group flex items-center gap-3.5"
+                style={{ '--hover-tint': tile.bg } as React.CSSProperties}
+              >
                 <span
                   className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
                   style={{ background: tile.bg }}
                 >
                   <Icon className="h-5 w-5" style={{ color: tile.color }} strokeWidth={1.7} aria-hidden="true" />
                 </span>
-                <span className="inline-flex items-center rounded-full border border-[#E6E6E6] bg-white px-5 py-2.5 transition-[transform,border-color,box-shadow] duration-200 group-hover:-translate-y-0.5 group-hover:border-[#111827]/20 group-hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)]">
+                <span className="inline-flex items-center rounded-full border border-[#E6E6E6] bg-white px-5 py-2.5 transition-[transform,border-color,background-color] duration-200 group-hover:-translate-y-0.5 group-hover:border-[#111827]/20 group-hover:bg-[var(--hover-tint)]">
                   <span className="text-[15px] font-medium text-[#111]">{title}</span>
                 </span>
               </div>

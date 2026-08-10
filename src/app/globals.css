@@ -23,6 +23,33 @@
       #ffffff;
   }
 
+  /* Industries intro background — same soft blue radial glow, but the hue
+     drifts gently over time instead of sitting static (subtle, ~12s cycle). */
+  .industries-intro-bg-animated {
+    background:
+      radial-gradient(circle at 15% 100%, rgba(224, 225, 255, 0.75), transparent 43%),
+      radial-gradient(circle at 80% 100%, rgba(191, 219, 254, 0.55), transparent 48%),
+      radial-gradient(circle at 100% 70%, rgba(219, 234, 254, 0.5), transparent 43%),
+      #ffffff;
+    animation: hue-drift 12s ease-in-out infinite alternate;
+  }
+  @keyframes hue-drift {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(18deg); }
+  }
+
+  /* Services section background — soft coral/orange glow matching this
+     section's own icon-tile palette (#FF9900/#FF6A3D/#FF4F8B), same gentle
+     hue-drift as the Industries intro for consistency. */
+  .services-bg-animated {
+    background:
+      radial-gradient(circle at 85% 0%, rgba(255, 153, 0, 0.09), transparent 45%),
+      radial-gradient(circle at 10% 30%, rgba(255, 106, 61, 0.07), transparent 45%),
+      radial-gradient(circle at 60% 100%, rgba(255, 79, 139, 0.07), transparent 48%),
+      #ffffff;
+    animation: hue-drift 12s ease-in-out infinite alternate;
+  }
+
   /* Full-width multicolour divider under the Industries hero */
   .linegrad-divider {
     background-image: linear-gradient(

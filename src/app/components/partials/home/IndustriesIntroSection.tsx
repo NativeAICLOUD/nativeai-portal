@@ -1,25 +1,23 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Landmark } from 'lucide-react';
+import { Scale, Landmark, Plane, CreditCard, ShoppingBag, type LucideIcon } from 'lucide-react';
 import { Constants } from '@/Constants';
 import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton, SECTION_Y } from './HomeUI';
 
-const industryTags = ['Legal & Compliance', 'Finance & Banking', 'Travel & Aviation', 'Healthcare', 'E-commerce'];
+const industries: { label: string; icon: LucideIcon }[] = [
+  { label: 'Legal & Compliance', icon: Scale },
+  { label: 'Finance & Banking', icon: Landmark },
+  { label: 'Travel & Aviation', icon: Plane },
+  { label: 'Payments', icon: CreditCard },
+  { label: 'E-commerce', icon: ShoppingBag },
+];
 
 /* Same design as the nearshore intro, themed for industries */
 export default function IndustriesIntroSection() {
   return (
     <section className="font-switzer">
-      <div
-        style={{
-          background:
-            'radial-gradient(circle at 15% 100%, rgba(224,225,255,0.75), transparent 43%), ' +
-            'radial-gradient(circle at 80% 100%, rgba(191,219,254,0.55), transparent 48%), ' +
-            'radial-gradient(circle at 100% 70%, rgba(219,234,254,0.50), transparent 43%), ' +
-            '#ffffff',
-        }}
-      >
+      <div className="industries-intro-bg-animated">
         <div className={`${CONTAINER} ${SECTION_Y}`}>
           <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
 
@@ -43,18 +41,18 @@ export default function IndustriesIntroSection() {
 
             {/* Right — Industry focus card */}
             <div className="w-full lg:max-w-[380px] lg:flex-1">
-              <div className="flex flex-col gap-5 rounded-2xl border border-[#E6E6E6] bg-white p-6">
-                <div className="flex items-center justify-between">
-                  <Eyebrow>Industry focus</Eyebrow>
-                  <Landmark className="h-5 w-5 text-[#2563EB]" strokeWidth={1.6} aria-hidden="true" />
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {industryTags.map((tag) => (
-                    <span key={tag} className="rounded-md border border-[rgba(37,99,235,0.18)] bg-[rgba(37,99,235,0.06)] px-2.5 py-1 text-[11px] font-medium text-[#1e4fd6]">
-                      {tag}
-                    </span>
+              <div className="rounded-2xl border border-[#E6E6E6] bg-white p-6">
+                <div className="mb-1 pl-[50px]"><Eyebrow>Industry focus</Eyebrow></div>
+                <ul role="list" className="mt-3 divide-y divide-[#EAEAEA]">
+                  {industries.map(({ label, icon: Icon }) => (
+                    <li key={label} className="flex items-center gap-3.5 py-3 first:pt-0 last:pb-0">
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[rgba(37,99,235,0.07)]">
+                        <Icon className="h-[18px] w-[18px] text-[#2563EB]" strokeWidth={1.7} aria-hidden="true" />
+                      </span>
+                      <span className="text-[14.5px] font-medium text-[#111827]">{label}</span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
             </div>
 

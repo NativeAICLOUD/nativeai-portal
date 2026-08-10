@@ -70,6 +70,10 @@ type FeatureCardProps = {
      inside its padding — a bigger, more prominent icon treatment for
      sections that want the icon to read as its own element. */
   iconOutside?: boolean;
+  /* Washes the card background with the icon's own tint colour on hover,
+     instead of the default border-only hover — an opt-in, bolder
+     interaction for grids where each item should feel distinct on hover. */
+  hoverTint?: boolean;
 };
 
 function CardIcon({ Icon, iconColor, iconBg, size }: { Icon: IconComponent | string; iconColor: string; iconBg: string; size: 'md' | 'lg' }) {
@@ -94,7 +98,7 @@ function CardIcon({ Icon, iconColor, iconBg, size }: { Icon: IconComponent | str
 /* One shared card: icon tile, title, description, optional tags/cta.
    Icon-top layout (not icon-left+divider) — simpler, more open, matches
    the "icon + text block" pattern used for restraint across the pass. */
-export function FeatureCard({ icon: Icon, iconColor, iconBg, title, desc, href, tags, cta, iconOutside }: FeatureCardProps) {
+export function FeatureCard({ icon: Icon, iconColor, iconBg, title, desc, href, tags, cta, iconOutside, hoverTint }: FeatureCardProps) {
   const body = (
     <>
       <h3 className={`m-0 ${H3}`}>{title}</h3>
@@ -115,7 +119,11 @@ export function FeatureCard({ icon: Icon, iconColor, iconBg, title, desc, href, 
     </>
   );
 
-  const cardClassName = `flex h-full flex-col ${RADIUS_MD} p-6 ${href ? CARD_SURFACE_INTERACTIVE : CARD_SURFACE}`;
+  const surface = href ? CARD_SURFACE_INTERACTIVE : CARD_SURFACE;
+  const cardClassName = hoverTint
+    ? `flex h-full flex-col ${RADIUS_MD} p-6 ${surface} transition-[border-color,transform,background-color] duration-200 hover:bg-[var(--hover-tint)]`
+    : `flex h-full flex-col ${RADIUS_MD} p-6 ${surface}`;
+  const cardStyle = hoverTint ? ({ '--hover-tint': iconBg } as React.CSSProperties) : undefined;
 
   if (iconOutside) {
     return (
@@ -124,9 +132,9 @@ export function FeatureCard({ icon: Icon, iconColor, iconBg, title, desc, href, 
           <CardIcon Icon={Icon} iconColor={iconColor} iconBg={iconBg} size="lg" />
         </div>
         {href ? (
-          <Link href={href} className={cardClassName}>{body}</Link>
+          <Link href={href} className={cardClassName} style={cardStyle}>{body}</Link>
         ) : (
-          <div className={cardClassName}>{body}</div>
+          <div className={cardClassName} style={cardStyle}>{body}</div>
         )}
       </div>
     );
@@ -145,10 +153,10 @@ export function FeatureCard({ icon: Icon, iconColor, iconBg, title, desc, href, 
 
   if (href) {
     return (
-      <Link href={href} className={className}>
+      <Link href={href} className={className} style={cardStyle}>
         {inner}
       </Link>
     );
   }
-  return <div className={className}>{inner}</div>;
+  return <div className={className} style={cardStyle}>{inner}</div>;
 }
