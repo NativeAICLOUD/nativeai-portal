@@ -23,6 +23,16 @@
       #ffffff;
   }
 
+  /* Blue-only radial glow (no warm orange/peach tones) — variant of
+     industries-hero-bg for pages that want the blue divider to match. */
+  .hero-bg-blue {
+    background:
+      radial-gradient(circle at 15% 100%, rgba(224, 225, 255, 0.75), transparent 43%),
+      radial-gradient(circle at 80% 100%, rgba(191, 219, 254, 0.55), transparent 48%),
+      radial-gradient(circle at 100% 70%, rgba(219, 234, 254, 0.5), transparent 43%),
+      #ffffff;
+  }
+
   /* Industries intro background — same soft blue radial glow, but the hue
      drifts gently over time instead of sitting static (subtle, ~12s cycle). */
   .industries-intro-bg-animated {
@@ -63,6 +73,18 @@
       #c0c 85% 92.5%,
       #fff
     );
+    border-radius: 100px;
+  }
+
+  /* Orange/red divider variant — used on Knowledge Base and Workshops */
+  .divider-orange-red {
+    background-image: linear-gradient(260deg, #fff, #ffc966 15%, #ff9900 45%, #e11d48 80%, #fff);
+    border-radius: 100px;
+  }
+
+  /* Blue divider variant — matches the footer/hero brand gradient */
+  .divider-blue {
+    background-image: linear-gradient(260deg, #fff, #BECBFF 20%, #5B7CFA 50%, #2563EB 80%, #fff);
     border-radius: 100px;
   }
 

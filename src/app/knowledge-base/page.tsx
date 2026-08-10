@@ -50,8 +50,8 @@ const KnowledgeBasePage = async () => {
           </p>
         </div>
 
-        {/* multicolour divider — full viewport width */}
-        <hr className="linegrad-divider m-0 h-1 w-full border-0" />
+        {/* orange/red divider — full viewport width */}
+        <hr className="divider-orange-red m-0 h-1 w-full border-0" />
       </div>
 
       {/* ── Articles ── */}

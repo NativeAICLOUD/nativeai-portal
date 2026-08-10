@@ -100,13 +100,6 @@ const cards = [
   },
 ];
 
-const stats = [
-  { value: '6', label: 'Workshops' },
-  { value: '19h', label: 'Total content' },
-  { value: '100%', label: 'Hands-on' },
-  { value: 'Live', label: 'Online sessions' },
-];
-
 export default function WorkshopPage() {
   return (
     <div className="font-switzer">
@@ -114,7 +107,7 @@ export default function WorkshopPage() {
       {/* ── Hero ── */}
       <div className="industries-hero-bg">
         <div className={`${CONTAINER} pb-12 pt-32 lg:pt-28`}>
-          <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:gap-16">
+          <div className="flex flex-col gap-10">
 
             {/* Left */}
             <div className="flex-1">
@@ -122,33 +115,17 @@ export default function WorkshopPage() {
               <h1 className="m-0 max-w-3xl text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
                 Hands-on workshops for your team.
               </h1>
-              <p className="mt-6 max-w-[560px] text-[18px] font-light leading-[1.6] text-[#111]">
-                Master Microsoft Azure, Kubernetes, and AI in live online sessions — designed for
-                developers and architects who learn by doing.
-              </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <PrimaryButton href="/schedule-call">Book a private workshop</PrimaryButton>
                 <SecondaryButton href="/solutions">All solutions</SecondaryButton>
               </div>
             </div>
 
-            {/* Right — stats card */}
-            <div className="w-full lg:max-w-[380px] lg:flex-1">
-              <div className="grid grid-cols-2 gap-3">
-                {stats.map((s) => (
-                  <div key={s.label} className="rounded-2xl border border-[#e6e6e6] bg-white p-5">
-                    <p className="m-0 text-[28px] font-medium leading-none text-[#111]">{s.value}</p>
-                    <p className="m-0 mt-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-[#9ca3af]">{s.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
           </div>
         </div>
 
-        {/* multicolour divider — full viewport width */}
-        <hr className="linegrad-divider m-0 h-1 w-full border-0" />
+        {/* orange/red divider — full viewport width */}
+        <hr className="divider-orange-red m-0 h-1 w-full border-0" />
       </div>
 
       {/* ── Workshops grid ── */}

@@ -59,9 +59,9 @@ export default function SolutionsPage() {
     <div className="font-switzer">
 
       {/* ── Hero ── */}
-      <div className="industries-hero-bg">
+      <div className="hero-bg-blue">
         <div className={`${CONTAINER} pb-12 pt-32 lg:pt-28`}>
-          <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
+          <div className="flex flex-col gap-10">
 
             {/* Left */}
             <div className="flex-1">
@@ -70,8 +70,9 @@ export default function SolutionsPage() {
                 Solutions built to last.
               </h1>
               <p className="mt-6 max-w-[520px] text-[18px] font-light leading-[1.6] text-[#111]">
-                From AI agents and cloud infrastructure to fully managed SaaS products — we
-                design, build, and ship software that scales with your business.
+                From AI agents and cloud infrastructure to complete SaaS products, NativeCloud
+                helps businesses turn ideas into reliable software. We design, build, and launch
+                solutions that grow alongside your business.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <PrimaryButton href="/schedule-call">Schedule a free call</PrimaryButton>
@@ -79,40 +80,11 @@ export default function SolutionsPage() {
               </div>
             </div>
 
-            {/* Right — portfolio card */}
-            <div className="w-full lg:max-w-[380px] lg:flex-1">
-              <div className="flex flex-col gap-5 rounded-2xl border border-[#e6e6e6] bg-white p-6">
-                <div className="flex items-center gap-2.5">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#111]">
-                    <Boxes className="h-4 w-4 text-white" strokeWidth={1.8} aria-hidden="true" />
-                  </div>
-                  <p className="m-0 text-[14px] font-medium text-[#111]">Our portfolio</p>
-                </div>
-                <div className="grid grid-cols-2 gap-2.5">
-                  {[
-                    { n: "8", l: "Services" },
-                    { n: "3", l: "Products" },
-                    { n: "3", l: "Certifications" },
-                    { n: "∞", l: "Scale" },
-                  ].map((item) => (
-                    <div key={item.l} className="flex flex-col gap-0.5 rounded-xl border border-[#eee] bg-[#fafafa] px-4 py-3">
-                      <p className="m-0 text-[20px] font-medium leading-none text-[#111]">{item.n}</p>
-                      <p className="m-0 text-[11px] font-normal text-[#6b7280]">{item.l}</p>
-                    </div>
-                  ))}
-                </div>
-                <Link href="/schedule-call" className="flex items-center justify-center gap-2 rounded-full bg-[#111] py-3 text-[14px] font-medium text-white transition-opacity hover:opacity-90">
-                  Schedule a free call
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-                </Link>
-              </div>
-            </div>
-
           </div>
         </div>
 
-        {/* multicolour divider — full viewport width */}
-        <hr className="linegrad-divider m-0 h-1 w-full border-0" />
+        {/* blue divider — full viewport width */}
+        <hr className="divider-blue m-0 h-1 w-full border-0" />
       </div>
 
       {/* ── Services ── */}

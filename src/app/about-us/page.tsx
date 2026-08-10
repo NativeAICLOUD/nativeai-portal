@@ -1,41 +1,44 @@
 'use client';
 
-import { Bot, Database, Boxes, type LucideIcon } from "lucide-react";
 import { Constants } from "@/Constants";
 import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from "@/app/components/partials/services/ServiceUI";
 
-const stats = [
-  { value: '5+',    label: 'Years on Azure & AWS' },
-  { value: '20+',   label: 'AI projects shipped' },
-  { value: '97.8%', label: 'Avg. agent accuracy' },
-  { value: '<8s',   label: 'Avg. AI response time' },
-];
-
-const pillars: { icon: LucideIcon; tag: string; title: string; body: string }[] = [
+const coreValues: { icon: string; title: string; body: string }[] = [
   {
-    icon: Bot,
-    tag: 'AI Agents',
-    title: 'We build AI agents that actually work',
-    body: 'Not demos. Production agents handling real business workflows — document review, data extraction, contract analysis — running on Azure OpenAI and GPT-4o.',
+    icon: '/about-us/handshake.svg',
+    title: 'Transparency & Honesty',
+    body: "We believe in being open and honest with our clients, partners, and team members. We will always communicate openly and transparently, even when it's difficult.",
   },
   {
-    icon: Database,
-    tag: 'RAG & LLMs',
-    title: 'We connect LLMs to your data',
-    body: 'RAG pipelines grounded in your knowledge base. Azure AI Search, vector stores, semantic chunking — accurate, context-aware answers instead of hallucinations.',
+    icon: '/about-us/hand-heart.svg',
+    title: 'Trust & Care',
+    body: 'We believe that trust is the foundation of any successful relationship. We will always act with care and empathy towards our clients and team members, and we will do our best to earn and maintain their trust.',
   },
   {
-    icon: Boxes,
-    tag: 'Cloud Native',
-    title: 'We architect for scale',
-    body: 'Azure and AWS workloads designed from day one for security, resilience, and cost-efficiency. Infrastructure that grows with your business.',
+    icon: '/about-us/compass.svg',
+    title: 'Curiosity & Inspiration',
+    body: 'We believe that the best solutions come from asking questions and exploring new ideas. We will approach every project with a curious and open mind, and we will inspire our clients and team members to do the same.',
   },
-];
-
-const values = [
-  { num: '01', title: 'Practical over theoretical', body: 'We ship working software. Every engagement ends with something deployed and measurable — not a slide deck.' },
-  { num: '02', title: 'Speed without shortcuts', body: "We move fast without cutting corners. You'll see results in weeks, built on a foundation that won't need rebuilding." },
-  { num: '03', title: 'Built to last', body: 'We design systems you can own and extend. No black-box dependencies, no vendor lock-in surprises.' },
+  {
+    icon: '/about-us/hand-heart.svg',
+    title: 'Respect',
+    body: 'We believe that everyone deserves to be treated with respect and dignity. We will treat our clients, team members, and partners with the utmost respect, regardless of their background or experience.',
+  },
+  {
+    icon: '/about-us/trophy.svg',
+    title: 'Excellence',
+    body: 'We believe in delivering the highest quality work possible. We will always strive for excellence in everything we do, from the code we write to the way we interact with our clients and team members.',
+  },
+  {
+    icon: '/about-us/books-open.svg',
+    title: 'Knowledge & Commitment',
+    body: 'We believe in constantly learning and growing as professionals. We will invest in our own knowledge and skills, and we will be committed to helping our clients and team members do the same.',
+  },
+  {
+    icon: '/about-us/four-users.svg',
+    title: 'Inclusiveness & Opportunity',
+    body: 'We believe in creating a culture of inclusiveness where everyone has the opportunity to lead, own, and take responsibility. We will actively seek out diverse perspectives and voices, and we will work to remove barriers to access and advancement for all team members.',
+  },
 ];
 
 const achievements = [
@@ -89,7 +92,7 @@ export default function AboutUsPage() {
     <div className="font-switzer">
 
       {/* ── Hero ── */}
-      <div className="industries-hero-bg">
+      <div className="hero-bg-blue">
         <div className={`${CONTAINER} pb-12 pt-32 lg:pt-28`}>
           <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
 
@@ -100,8 +103,8 @@ export default function AboutUsPage() {
                 We make AI work for you.
               </h1>
               <p className="mt-6 max-w-[520px] text-[18px] font-light leading-[1.6] text-[#111]">
-                NativeCloud is an AI and cloud engineering company. We help businesses move from
-                &ldquo;AI could be useful&rdquo; to production systems that create real, measurable impact.
+                NativeCloud is an AI and cloud engineering company that helps businesses turn ideas
+                into working solutions.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <PrimaryButton href={Constants.PAGES.SCHEDULE_CALL}>Schedule a free call</PrimaryButton>
@@ -125,105 +128,65 @@ export default function AboutUsPage() {
               </div>
             </div>
 
-            {/* Right — stats card */}
-            <div className="w-full lg:max-w-[440px] lg:flex-1">
-              <div className="flex flex-col gap-5 rounded-2xl border border-[#e6e6e6] bg-white p-6">
-                <div className="flex items-center justify-between">
-                  <Eyebrow>By the numbers</Eyebrow>
-                  <div className="flex items-center gap-1.5">
-                    <span className="h-2 w-2 rounded-full bg-[#059669]" />
-                    <span className="text-[11px] font-medium text-[#059669]">Verified</span>
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-3">
-                  {stats.map((s) => (
-                    <div key={s.label} className="rounded-xl border border-[#eee] bg-[#fafafa] p-4">
-                      <p className="m-0 text-[24px] font-medium leading-none text-[#111]">{s.value}</p>
-                      <p className="m-0 mt-1.5 text-[11px] font-light leading-snug text-[#9ca3af]">{s.label}</p>
-                    </div>
-                  ))}
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {['AI Agents', 'LLMs', 'Azure & AWS'].map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-full border border-[#e6e6e6] px-2.5 py-1 text-[11px] font-medium text-[#111]"
-                      style={{ background: 'linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 40%, #edfaf4 100%)' }}
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
           </div>
         </div>
 
-        {/* multicolour divider — full viewport width */}
-        <hr className="linegrad-divider m-0 h-1 w-full border-0" />
+        {/* blue divider — matches the footer's brand gradient */}
+        <hr
+          className="m-0 h-1 w-full border-0"
+          style={{
+            backgroundImage: 'linear-gradient(260deg, #fff, #BECBFF 20%, #5B7CFA 50%, #2563EB 80%, #fff)',
+            borderRadius: 100,
+          }}
+        />
       </div>
 
-      {/* ── Mission ── */}
+      {/* ── Vision & Mission ── */}
       <section className="bg-white">
         <div className={`${CONTAINER} py-20 lg:py-24`}>
-          <div className="mb-8"><Eyebrow>Our mission</Eyebrow></div>
-          <div className="flex flex-col gap-8 lg:flex-row lg:gap-16">
-            <p className="m-0 flex-1 text-[24px] font-medium leading-[1.4] text-[#111] md:text-[30px]">
-              Most businesses know AI can help them. The hard part is making it actually work —
-              reliably, accurately, at production scale.
-            </p>
-            <p className="m-0 flex-1 text-[16px] font-normal leading-[1.6] text-[#111] lg:pt-2">
-              That&apos;s the gap NativeCloud fills. We combine deep cloud engineering with hands-on AI
-              implementation — RAG pipelines, autonomous agents, LLM integrations — built on Azure and
-              AWS, designed to slot into your existing workflows without disruption.
-            </p>
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
+            <div>
+              <div className="mb-4"><Eyebrow>Our vision</Eyebrow></div>
+              <div className="flex flex-col gap-4">
+                <p className="m-0 text-[20px] font-medium leading-[1.5] text-[#111] md:text-[24px]">
+                  We&apos;re dedicated to providing high-quality software development solutions that
+                  help businesses grow, innovate, and succeed in today&apos;s fast-changing digital
+                  world.
+                </p>
+                <p className="m-0 text-[15px] font-normal leading-[1.6] text-[#6b7280]">
+                  We work closely with our clients, using the latest technologies while staying
+                  honest, transparent, and focused on delivering results that meet—and exceed—their
+                  expectations.
+                </p>
+              </div>
+            </div>
+            <div>
+              <div className="mb-4"><Eyebrow>Our mission</Eyebrow></div>
+              <p className="m-0 text-[20px] font-medium leading-[1.5] text-[#111] md:text-[24px]">
+                Our goal is to make technology feel natural, useful, and human. We do this with
+                honesty, transparency, and respect—because the best solutions are built on trust.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── What we do ── */}
+      {/* ── Core Values ── */}
       <section className="bg-white">
         <div className={`${CONTAINER} pb-20 lg:pb-24`}>
           <div className="mb-12">
-            <div className="mb-4"><Eyebrow>What we do</Eyebrow></div>
+            <div className="mb-4"><Eyebrow>Core Values</Eyebrow></div>
             <h2 className="m-0 max-w-[620px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
-              Three things we do exceptionally well.
+              What we stand for.
             </h2>
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-6">
-            {pillars.map(({ icon: Icon, tag, title, body }) => (
-              <article
-                key={tag}
-                className="group flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6 transition-[filter,box-shadow] duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.2)] hover:[filter:invert(1)]"
-              >
-                <div className="mb-5 flex items-center justify-between">
-                  <Icon className="h-7 w-7 text-[#111]" strokeWidth={1.6} aria-hidden="true" />
-                  <span className="text-[11px] font-medium uppercase tracking-[0.12em] text-[#9ca3af]">{tag}</span>
-                </div>
-                <h3 className="m-0 text-[20px] font-medium leading-[1.25] text-[#111] lg:text-[22px]">{title}</h3>
-                <p className="mt-2 text-[16px] font-normal leading-[1.5] text-[#111]">{body}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── How we work ── */}
-      <section className="bg-white">
-        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
-          <div className="mb-12">
-            <div className="mb-4"><Eyebrow>How we work</Eyebrow></div>
-            <h2 className="m-0 max-w-[620px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
-              The principles behind every engagement.
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-6">
-            {values.map(({ num, title, body }) => (
-              <div key={num} className="flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6">
-                <span className="text-[34px] font-light leading-none text-[#e6e6e6]">{num}</span>
-                <h3 className="mt-4 text-[20px] font-medium leading-[1.25] text-[#111]">{title}</h3>
-                <p className="mt-2 text-[16px] font-normal leading-[1.5] text-[#111]">{body}</p>
+            {coreValues.map(({ icon, title, body }) => (
+              <div key={title} className="flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={icon} alt="" className="mb-4 h-10 w-10 object-contain" aria-hidden="true" />
+                <h3 className="m-0 text-[18px] font-medium leading-[1.25] text-[#111]">{title}</h3>
+                <p className="mt-2 text-[14.5px] font-normal leading-[1.55] text-[#6b7280]">{body}</p>
               </div>
             ))}
           </div>
@@ -254,7 +217,7 @@ export default function AboutUsPage() {
       </section>
 
       {/* ── Get in touch ── */}
-      <section className="border-t border-[#eee] industries-hero-bg">
+      <section className="border-t border-[#eee] hero-bg-blue">
         <div className={`${CONTAINER} py-20 lg:py-24`}>
           <div className="flex flex-col gap-10 lg:flex-row lg:gap-16">
             <div className="flex-1">
@@ -262,9 +225,6 @@ export default function AboutUsPage() {
               <h2 className="m-0 text-[28px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
                 Let&apos;s build something that actually works.
               </h2>
-              <p className="mt-5 max-w-[420px] text-[16px] font-light leading-[1.6] text-[#111]">
-                Tell us about your project, timeline, or any questions. We reply within one business day.
-              </p>
             </div>
 
             <div className="flex-1">
