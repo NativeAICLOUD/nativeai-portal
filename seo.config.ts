@@ -4,7 +4,7 @@ const defineMetadata = <T extends Metadata>(metadata: T) => metadata;
 
 const { url, title, description, keywords } = {
   url: 'https://nativeai.cloud',
-  title: 'NativeCloud | AI Agents & Cloud Solutions',
+  title: 'NativeCloud',
   description:
     'We build AI Agents, RAG pipelines and LLM-powered solutions that work inside your business. Specialising in Azure OpenAI, GPT-4o and cloud-native architecture.',
   keywords:

@@ -378,7 +378,6 @@ export default function ScheduleCallPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [started, setStarted] = useState(false);
   const [step, setStep] = useState<0 | 1>(0);
 
   const errors = useMemo<Partial<Record<FieldKey, string | undefined>>>(() => {
@@ -589,49 +588,11 @@ export default function ScheduleCallPage() {
           }}
         >
           {!submitted ? (
-            !started ? (
-              /* ── AI-era launcher: one gradient CTA that reveals the form ── */
-              <motion.div
-                key="launcher"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.35 }}
-                className="flex flex-col items-center gap-6 px-6 sm:px-8 py-14 text-center"
-              >
-                <div className="flex flex-col gap-2">
-                  <h2 className="m-0 text-xl font-semibold text-[#111]">Book your session</h2>
-                  <p className="m-0 max-w-xs text-sm text-[#6b7280]">
-                    A few quick questions and we&apos;ll map the best path forward — together.
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setStarted(true)}
-                  className="ai-search-wrap w-full max-w-sm transition-transform duration-200 hover:scale-[1.01] active:scale-[0.99] focus-visible:outline-none"
-                >
-                  <span className="ai-search-inner flex items-center justify-center gap-2.5 px-6 py-4">
-                    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" className="shrink-0">
-                      <defs>
-                        <linearGradient id="launch-grad" x1="0" y1="0" x2="1" y2="1">
-                          <stop offset="0%" stopColor="#60a5fa" />
-                          <stop offset="50%" stopColor="#3b82f6" />
-                          <stop offset="100%" stopColor="#1e4fd6" />
-                        </linearGradient>
-                      </defs>
-                      <path fill="url(#launch-grad)" d="M12 0c0 6.627-5.373 12-12 12 6.627 0 12 5.373 12 12 0-6.627 5.373-12 12-12-6.627 0-12-5.373-12-12Z" />
-                    </svg>
-                    <span className="text-[15px] font-medium text-[#111]">Start your request</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-[#111]"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-                  </span>
-                </button>
-                <p className="m-0 text-[11px] text-[#9ca3af]">Takes ~2 minutes · No commitment</p>
-              </motion.div>
-            ) : (
             <motion.div
               key="form-reveal"
-              initial={{ opacity: 0, y: 24, filter: 'blur(10px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
               {/* Progress header */}
               <div className="border-b border-[#eee] px-6 sm:px-8 pt-7 pb-5" style={{ background: '#fafafa', borderRadius: '27px 27px 0 0' }}>
@@ -900,7 +861,6 @@ export default function ScheduleCallPage() {
               </form>
               </div>
             </motion.div>
-            )
           ) : (
             /* Success state */
             <div className="flex flex-col items-center text-center px-5 sm:px-8 py-10 gap-6">

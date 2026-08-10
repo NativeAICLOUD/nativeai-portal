@@ -39,14 +39,22 @@ export default function IndustriesIntroSection() {
               </div>
             </motion.div>
 
-            {/* Right — Industry focus card */}
+            {/* Right — Industry focus card (frosted glass, blends with the animated gradient) */}
             <div className="w-full lg:max-w-[380px] lg:flex-1">
-              <div className="rounded-2xl border border-[#E6E6E6] bg-white p-6">
+              <div
+                className="rounded-2xl border border-white/60 p-6"
+                style={{
+                  background: 'rgba(255,255,255,0.65)',
+                  backdropFilter: 'blur(24px) saturate(160%)',
+                  WebkitBackdropFilter: 'blur(24px) saturate(160%)',
+                  boxShadow: '0 8px 32px rgba(15,23,42,0.08)',
+                }}
+              >
                 <div className="mb-1 pl-[50px]"><Eyebrow>Industry focus</Eyebrow></div>
-                <ul role="list" className="mt-3 divide-y divide-[#EAEAEA]">
+                <ul role="list" className="mt-3 divide-y divide-black/[0.06]">
                   {industries.map(({ label, icon: Icon }) => (
                     <li key={label} className="flex items-center gap-3.5 py-3 first:pt-0 last:pb-0">
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[rgba(37,99,235,0.07)]">
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[rgba(37,99,235,0.1)]">
                         <Icon className="h-[18px] w-[18px] text-[#2563EB]" strokeWidth={1.7} aria-hidden="true" />
                       </span>
                       <span className="text-[14.5px] font-medium text-[#111827]">{label}</span>
