@@ -78,8 +78,8 @@ type FeatureCardProps = {
 
 function CardIcon({ Icon, iconColor, iconBg, size }: { Icon: IconComponent | string; iconColor: string; iconBg: string; size: 'md' | 'lg' }) {
   const GlyphIcon = typeof Icon === 'string' ? null : Icon;
-  const tile = size === 'lg' ? 'h-32 w-32' : 'h-16 w-16';
-  const glyph = size === 'lg' ? 'h-20 w-20' : 'h-10 w-10';
+  const tile = size === 'lg' ? 'h-48 w-48' : 'h-16 w-16';
+  const glyph = size === 'lg' ? 'h-36 w-36' : 'h-10 w-10';
   return (
     <div
       className={`flex ${tile} shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105`}

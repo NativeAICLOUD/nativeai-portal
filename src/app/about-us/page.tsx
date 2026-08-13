@@ -1,7 +1,50 @@
 'use client';
 
+import { Briefcase } from "lucide-react";
 import { Constants } from "@/Constants";
 import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from "@/app/components/partials/services/ServiceUI";
+
+const collaborationModels: {
+  icon: string | null;
+  color: string;
+  checkbox: string;
+  title: string;
+  body: string;
+  points: string[];
+}[] = [
+  {
+    icon: null,
+    color: '#0F766E',
+    checkbox: '/collaborate/checkbox-green.svg',
+    title: 'Business Consulting & Technology Advisory',
+    body: 'Elevate your capabilities with our comprehensive consultancy expertise.',
+    points: ['Expert Business & Technical Guidance', 'Holistic Problem-Solving Perspective', 'Solution-Oriented'],
+  },
+  {
+    icon: '/collaborate/digital-partner.svg',
+    color: '#7E22CE',
+    checkbox: '/collaborate/checkbox-purple.svg',
+    title: 'Digital Partner',
+    body: 'We bring strategy, technology, and domain expertise to drive transformation.',
+    points: ['Full-Spectrum Digital Transformation', 'Continuous Innovation & Support', 'Partnership for Growth'],
+  },
+  {
+    icon: '/collaborate/project-based-collaboration.svg',
+    color: '#0369A1',
+    checkbox: '/collaborate/checkbox-blue.svg',
+    title: 'Project-Based Collaboration',
+    body: 'Deliver your projects with precision, on time and within budget.',
+    points: ['Clear Objectives & Deliverables', 'Access to Specialized Expertise', 'Access to Specialized Expertise'],
+  },
+  {
+    icon: '/collaborate/blended-teams.svg',
+    color: '#BE123C',
+    checkbox: '/collaborate/checkbox-red.svg',
+    title: 'Extend Delivery Capacity & Team Augmentation',
+    body: 'Seamlessly integrate our experts into your teams.',
+    points: ['Scalability & Flexibility', 'Diverse Engineering Mix', 'Optimized Output'],
+  },
+];
 
 const coreValues: { icon: string; title: string; body: string }[] = [
   {
@@ -171,6 +214,46 @@ export default function AboutUsPage() {
         </div>
       </section>
 
+      {/* ── How we collaborate ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-12">
+            <div className="mb-4"><Eyebrow>How we collaborate</Eyebrow></div>
+            <h2 className="m-0 max-w-[620px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              Engagement models built around how you work.
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-6">
+            {collaborationModels.map(({ icon, color, checkbox, title, body, points }) => (
+              <div key={title} className="flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6">
+                <span
+                  className="mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
+                  style={{ background: `${color}14` }}
+                >
+                  {icon ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={icon} alt="" className="h-5 w-5 object-contain" aria-hidden="true" />
+                  ) : (
+                    <Briefcase size={20} strokeWidth={1.5} style={{ color }} aria-hidden="true" />
+                  )}
+                </span>
+                <h3 className="m-0 text-[18px] font-medium leading-[1.25] text-[#111]">{title}</h3>
+                <p className="mt-2 text-[14.5px] font-normal leading-[1.55] text-[#6b7280]">{body}</p>
+                <ul className="mt-5 flex flex-col gap-2.5">
+                  {points.map((point, i) => (
+                    <li key={`${point}-${i}`} className="flex items-start gap-2.5">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={checkbox} alt="" className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+                      <span className="text-[14px] font-normal leading-[1.5] text-[#374151]">{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── Core Values ── */}
       <section className="bg-white">
         <div className={`${CONTAINER} pb-20 lg:pb-24`}>
@@ -228,61 +311,55 @@ export default function AboutUsPage() {
             </div>
 
             <div className="flex-1">
-              <div
-                className="overflow-hidden"
-                style={{ background: '#ffffff', border: '1px solid #e6e6e6', borderRadius: 28, boxShadow: '0 24px 64px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04)' }}
-              >
-                <div className="border-b border-[#eee] px-6 sm:px-8 pt-6 pb-5" style={{ background: '#fafafa' }}>
-                  <h3 className="m-0 text-base font-semibold text-[#111]">Send us a message</h3>
-                </div>
-                <div className="px-6 sm:px-8 py-7">
-                  <form onSubmit={(e) => e.preventDefault()} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[10.5px] font-semibold uppercase tracking-[0.10em] text-[#6b7280]">Name</label>
-                <input
-                  type="text"
-                  placeholder="Your full name"
-                  className="w-full rounded-2xl border border-[#e6e6e6] bg-white px-4 py-3 text-sm text-[#111] outline-none transition-colors placeholder:text-[#9ca3af] focus:border-[#111]"
-                />
-              </div>
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[10.5px] font-semibold uppercase tracking-[0.10em] text-[#6b7280]">Email</label>
-                <input
-                  type="email"
-                  placeholder="your@email.com"
-                  className="w-full rounded-2xl border border-[#e6e6e6] bg-white px-4 py-3 text-sm text-[#111] outline-none transition-colors placeholder:text-[#9ca3af] focus:border-[#111]"
-                />
-              </div>
-              <div className="flex flex-col gap-1.5 sm:col-span-2">
-                <label className="text-[10.5px] font-semibold uppercase tracking-[0.10em] text-[#6b7280]">Subject</label>
-                <input
-                  type="text"
-                  placeholder="What are you working on?"
-                  className="w-full rounded-2xl border border-[#e6e6e6] bg-white px-4 py-3 text-sm text-[#111] outline-none transition-colors placeholder:text-[#9ca3af] focus:border-[#111]"
-                />
-              </div>
-              <div className="flex flex-col gap-1.5 sm:col-span-2">
-                <label className="text-[10.5px] font-semibold uppercase tracking-[0.10em] text-[#6b7280]">Message</label>
-                <textarea
-                  rows={5}
-                  placeholder="Tell us about your project, timeline, or any questions…"
-                  className="w-full resize-none rounded-2xl border border-[#e6e6e6] bg-white px-4 py-3 text-sm text-[#111] outline-none transition-colors placeholder:text-[#9ca3af] focus:border-[#111]"
-                />
-              </div>
-              <div className="flex flex-col gap-4 pt-2 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
-                <p className="text-xs text-[#9ca3af]">We reply within one business day.</p>
-                <button
-                  type="submit"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#111] px-8 py-3.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 shrink-0">
-                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
-                  </svg>
-                  Send message
-                </button>
-              </div>
-                  </form>
-                </div>
+              <div className="rounded-lg border border-[#e6e6e6] bg-white p-6 sm:p-8">
+                <div className="mb-6"><Eyebrow>Contact form</Eyebrow></div>
+                <h3 className="m-0 mb-6 text-[18px] font-medium leading-[1.25] text-[#111]">Send us a message</h3>
+                <form onSubmit={(e) => e.preventDefault()} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[13px] font-medium text-[#374151]">Name</label>
+                    <input
+                      type="text"
+                      placeholder="Your full name"
+                      className="w-full rounded-lg border border-[#e6e6e6] bg-white px-4 py-3 text-sm text-[#111] outline-none transition-all placeholder:text-[#9ca3af] focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[13px] font-medium text-[#374151]">Email</label>
+                    <input
+                      type="email"
+                      placeholder="your@email.com"
+                      className="w-full rounded-lg border border-[#e6e6e6] bg-white px-4 py-3 text-sm text-[#111] outline-none transition-all placeholder:text-[#9ca3af] focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-1.5 sm:col-span-2">
+                    <label className="text-[13px] font-medium text-[#374151]">Subject</label>
+                    <input
+                      type="text"
+                      placeholder="What are you working on?"
+                      className="w-full rounded-lg border border-[#e6e6e6] bg-white px-4 py-3 text-sm text-[#111] outline-none transition-all placeholder:text-[#9ca3af] focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-1.5 sm:col-span-2">
+                    <label className="text-[13px] font-medium text-[#374151]">Message</label>
+                    <textarea
+                      rows={5}
+                      placeholder="Tell us about your project, timeline, or any questions…"
+                      className="w-full resize-none rounded-lg border border-[#e6e6e6] bg-white px-4 py-3 text-sm text-[#111] outline-none transition-all placeholder:text-[#9ca3af] focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-4 pt-2 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
+                    <p className="text-xs text-[#9ca3af]">We reply within one business day.</p>
+                    <button
+                      type="submit"
+                      className="inline-flex items-center justify-center gap-2 rounded-full bg-[#111] px-6 py-3 text-[15px] font-medium text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.22)] active:translate-y-0 active:shadow-none"
+                    >
+                      Send message
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 shrink-0">
+                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                      </svg>
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>

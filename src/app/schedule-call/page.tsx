@@ -659,7 +659,6 @@ export default function ScheduleCallPage() {
                       <input
                         id="sc-name"
                         type="text"
-                        autoFocus
                         aria-invalid={!!fieldState('name').err}
                         autoComplete="name"
                         placeholder="Jane Smith"

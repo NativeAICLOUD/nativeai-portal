@@ -149,7 +149,7 @@ export default function ApplyForm({ jobTitle, jobSlug, department, location, wor
       {/* Job summary card */}
       <div className="rounded-2xl border border-black/[0.07] bg-white px-6 py-5 flex items-center justify-between gap-4">
         <div>
-          <p className="text-[11px] font-bold uppercase tracking-widest text-[#0a0e1a]/30 mb-1">{department}</p>
+          <p className="text-[11px] font-bold uppercase tracking-widest text-[#0a0e1a]/65 mb-1">{department}</p>
           <p className="font-extrabold text-[#0a0e1a] text-base">{jobTitle}</p>
           <p className="text-xs text-[#0a0e1a]/40 mt-0.5">{location}</p>
         </div>
@@ -174,7 +174,7 @@ export default function ApplyForm({ jobTitle, jobSlug, department, location, wor
               onChange={e => setName(e.target.value)}
               required
               placeholder="Jane Smith"
-              className="w-full px-4 py-3 rounded-xl border border-black/[0.09] bg-[#fafafa] text-[#0a0e1a] text-sm placeholder:text-[#0a0e1a]/25 focus:outline-none focus:border-[#3b82f6] focus:ring-2 focus:ring-[#3b82f6]/15 transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-black/[0.09] bg-[#fafafa] text-[#0a0e1a] text-sm placeholder:text-[#0a0e1a]/25 focus:outline-none focus:border-[#3b82f6] focus:ring-2 focus:ring-[#3b82f6] transition-all"
             />
           </Field>
 
@@ -187,7 +187,7 @@ export default function ApplyForm({ jobTitle, jobSlug, department, location, wor
                 onChange={e => setEmail(e.target.value)}
                 required
                 placeholder="jane@example.com"
-                className="w-full px-4 py-3 rounded-xl border border-black/[0.09] bg-[#fafafa] text-[#0a0e1a] text-sm placeholder:text-[#0a0e1a]/25 focus:outline-none focus:border-[#3b82f6] focus:ring-2 focus:ring-[#3b82f6]/15 transition-all"
+                className="w-full px-4 py-3 rounded-xl border border-black/[0.09] bg-[#fafafa] text-[#0a0e1a] text-sm placeholder:text-[#0a0e1a]/25 focus:outline-none focus:border-[#3b82f6] focus:ring-2 focus:ring-[#3b82f6] transition-all"
               />
             </Field>
             <Field label="Phone number">
@@ -196,7 +196,7 @@ export default function ApplyForm({ jobTitle, jobSlug, department, location, wor
                 value={phone}
                 onChange={e => setPhone(e.target.value)}
                 placeholder="+389 70 000 000"
-                className="w-full px-4 py-3 rounded-xl border border-black/[0.09] bg-[#fafafa] text-[#0a0e1a] text-sm placeholder:text-[#0a0e1a]/25 focus:outline-none focus:border-[#3b82f6] focus:ring-2 focus:ring-[#3b82f6]/15 transition-all"
+                className="w-full px-4 py-3 rounded-xl border border-black/[0.09] bg-[#fafafa] text-[#0a0e1a] text-sm placeholder:text-[#0a0e1a]/25 focus:outline-none focus:border-[#3b82f6] focus:ring-2 focus:ring-[#3b82f6] transition-all"
               />
             </Field>
           </div>
@@ -263,7 +263,7 @@ export default function ApplyForm({ jobTitle, jobSlug, department, location, wor
               required
               rows={4}
               placeholder="Tell us what draws you to this role and what you'd bring to the team…"
-              className="w-full px-4 py-3 rounded-xl border border-black/[0.09] bg-[#fafafa] text-[#0a0e1a] text-sm placeholder:text-[#0a0e1a]/25 focus:outline-none focus:border-[#3b82f6] focus:ring-2 focus:ring-[#3b82f6]/15 transition-all resize-none"
+              className="w-full px-4 py-3 rounded-xl border border-black/[0.09] bg-[#fafafa] text-[#0a0e1a] text-sm placeholder:text-[#0a0e1a]/25 focus:outline-none focus:border-[#3b82f6] focus:ring-2 focus:ring-[#3b82f6] transition-all resize-none"
             />
           </Field>
 
@@ -273,7 +273,7 @@ export default function ApplyForm({ jobTitle, jobSlug, department, location, wor
               onChange={e => setCover(e.target.value)}
               rows={5}
               placeholder="Anything else you'd like us to know…"
-              className="w-full px-4 py-3 rounded-xl border border-black/[0.09] bg-[#fafafa] text-[#0a0e1a] text-sm placeholder:text-[#0a0e1a]/25 focus:outline-none focus:border-[#3b82f6] focus:ring-2 focus:ring-[#3b82f6]/15 transition-all resize-none"
+              className="w-full px-4 py-3 rounded-xl border border-black/[0.09] bg-[#fafafa] text-[#0a0e1a] text-sm placeholder:text-[#0a0e1a]/25 focus:outline-none focus:border-[#3b82f6] focus:ring-2 focus:ring-[#3b82f6] transition-all resize-none"
             />
           </Field>
         </div>

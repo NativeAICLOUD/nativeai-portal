@@ -30,7 +30,9 @@ type Tab = typeof TABS[number];
 export default function JobTabs({ job, modelStyle, typeStyle }: Props) {
   const [active, setActive] = useState<Tab>('Job details');
   const [stuck, setStuck]   = useState(false);
+  const [hidden, setHidden] = useState(false);
   const applyRef = useRef<HTMLDivElement>(null);
+  const lastScrollY = useRef(0);
 
   function switchTab(tab: Tab) {
     setActive(tab);
@@ -42,7 +44,17 @@ export default function JobTabs({ job, modelStyle, typeStyle }: Props) {
   }
 
   useEffect(() => {
-    const onScroll = () => setStuck(window.scrollY > 120);
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      const diff = currentY - lastScrollY.current;
+      setStuck(currentY > 120);
+      if (diff > 4 && currentY > 160) {
+        setHidden(true);
+      } else if (diff < -4 || currentY < 160) {
+        setHidden(false);
+      }
+      lastScrollY.current = currentY;
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -74,76 +86,41 @@ export default function JobTabs({ job, modelStyle, typeStyle }: Props) {
       {/* ── Job details tab ── */}
       {active === 'Job details' && (
         <div>
-          <div className="h-px mb-10" style={{ background: '#eee' }} />
-
-          <div className="mb-10">
-            <p className="leading-[1.7] text-[16px]" style={{ color: '#374151' }}>{job.about}</p>
+          <div className="mb-6 rounded-lg border border-[#e6e6e6] bg-white p-6">
+            <p className="leading-[1.7] text-[15px]" style={{ color: '#374151' }}>{job.about}</p>
           </div>
 
           <Section title="What you'll do">
-            <ul className="flex flex-col gap-3">
-              {job.responsibilities.map((r, i) => (
-                <li key={i} className="text-[16px] leading-relaxed" style={{ color: '#374151' }}>
-                  {r}
-                </li>
-              ))}
-            </ul>
+            <CheckList items={job.responsibilities} />
           </Section>
 
           <Section title="What we're looking for">
-            <ul className="flex flex-col gap-3">
-              {job.requirements.map((r, i) => (
-                <li key={i} className="text-[16px] leading-relaxed" style={{ color: '#374151' }}>
-                  {r}
-                </li>
-              ))}
-            </ul>
+            <CheckList items={job.requirements} />
             {job.preferredRequirements && job.preferredRequirements.length > 0 && (
               <>
-                <p className="text-[11px] font-bold uppercase tracking-widest mt-7 mb-3" style={{ color: '#9ca3af' }}>Nice to have</p>
-                <ul className="flex flex-col gap-3">
-                  {job.preferredRequirements.map((r, i) => (
-                    <li key={i} className="text-[16px] leading-relaxed" style={{ color: '#6b7280' }}>
-                      {r}
-                    </li>
-                  ))}
-                </ul>
+                <p className="text-[11px] font-medium uppercase tracking-widest mt-5 mb-3" style={{ color: '#9ca3af' }}>Nice to have</p>
+                <CheckList items={job.preferredRequirements} muted />
               </>
             )}
           </Section>
 
           <Section title="What we offer">
-            <ul className="flex flex-col gap-3">
-              {job.benefits.map((b, i) => (
-                <li key={i} className="text-[16px] leading-relaxed" style={{ color: '#374151' }}>
-                  {b}
-                </li>
-              ))}
-            </ul>
+            <CheckList items={job.benefits} />
           </Section>
 
-          <div className="h-px mb-10" style={{ background: '#eee' }} />
-
           {/* Job details panel */}
-          <div id="job-details" className="mb-10">
-            <h2 className="text-lg font-bold text-[#111] mb-5">Job details</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 rounded-xl overflow-hidden" style={{ border: '1px solid #e6e6e6' }}>
+          <div id="job-details" className="mb-6 rounded-lg border border-[#e6e6e6] bg-white p-6">
+            <h2 className="text-[18px] font-medium leading-[1.3] text-[#111] mb-5">Job details</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-[#eee] pt-5">
               {[
                 { label: 'Department', value: job.department },
                 { label: 'Location',   value: job.location   },
                 { label: 'Work model', value: job.workModel  },
                 { label: 'Type',       value: job.type       },
-              ].map((row, i) => (
-                <div
-                  key={row.label}
-                  className="px-6 py-4 border-b last:border-b-0"
-                  style={{
-                    background: i % 2 === 0 ? '#fafafa' : '#ffffff',
-                    borderColor: '#eee',
-                  }}
-                >
-                  <p className="text-[11px] font-bold uppercase tracking-widest mb-1" style={{ color: '#9ca3af' }}>{row.label}</p>
-                  <p className="text-[15px] font-semibold text-[#111]">{row.value}</p>
+              ].map((row) => (
+                <div key={row.label}>
+                  <p className="text-[11px] font-medium uppercase tracking-widest mb-1" style={{ color: '#9ca3af' }}>{row.label}</p>
+                  <p className="text-[15px] font-medium text-[#111]">{row.value}</p>
                 </div>
               ))}
             </div>
@@ -200,11 +177,11 @@ export default function JobTabs({ job, modelStyle, typeStyle }: Props) {
         </div>
       )}
 
-      {/* ── Sticky bar ── */}
+      {/* ── Sticky bar — hides on scroll-down, reveals on scroll-up, matching the navbar ── */}
       <div
-        className="fixed left-0 right-0 z-[200] transition-all duration-300"
+        className="fixed left-0 right-0 top-0 z-[200] transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
         style={{
-          top: stuck ? 64 : -80,
+          transform: stuck && !hidden ? 'translateY(64px)' : 'translateY(-100%)',
           background: 'rgba(255,255,255,0.90)',
           backdropFilter: 'blur(16px)',
           WebkitBackdropFilter: 'blur(16px)',
@@ -249,9 +226,24 @@ export default function JobTabs({ job, modelStyle, typeStyle }: Props) {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="mb-10">
-      <h2 className="text-xl font-bold text-[#111] mb-4">{title}</h2>
+    <div className="mb-6 rounded-lg border border-[#e6e6e6] bg-white p-6">
+      <h2 className="text-[18px] font-medium leading-[1.3] text-[#111] mb-5">{title}</h2>
       {children}
+    </div>
+  );
+}
+
+function CheckList({ items, muted = false }: { items: string[]; muted?: boolean }) {
+  return (
+    <div className="flex flex-col gap-3">
+      {items.map((item, i) => (
+        <div key={i} className="flex items-start gap-2.5">
+          <svg className="mt-0.5 h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke={muted ? '#9ca3af' : '#111'} strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+          <span className="text-[15px] leading-relaxed" style={{ color: muted ? '#9ca3af' : '#374151' }}>{item}</span>
+        </div>
+      ))}
     </div>
   );
 }

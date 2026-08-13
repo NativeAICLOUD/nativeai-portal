@@ -36,7 +36,21 @@
       "Read(//c/Users/aajre/AppData/Local/Temp/claude/C--NativeCloud-NativeCloud-Portal/1e124de7-005e-4bc4-82c2-c6f5a16f6e67/scratchpad/**)",
       "Bash(node shotrhh.js)",
       "WebFetch(domain:reesure.com)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(curl -s -o /dev/null -w \"list page: %{http_code}\\\\n\" http://localhost:3000/knowledge-base)",
+      "Bash(curl -s -o /dev/null -w \"article page: %{http_code}\\\\n\" http://localhost:3000/knowledge-base/10)",
+      "Skill(run)",
+      "Bash(find . -iname \"*digital-control*\")",
+      "Bash(find . -iname \"*.mp4\")",
+      "Bash(taskkill //F //PID 44920)",
+      "Bash(netstat -ano)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Read(//c/Users/aajre/AppData/Local/Temp/claude/C--NativeCloud-NativeCloud-Portal/ce8aef2e-674b-4e6e-bb54-0adebb551205/tasks/**)",
+      "PowerShell(git ls-remote *)",
+      "mcp__claude_ai_Microsoft_Learn__microsoft_docs_fetch",
+      "PowerShell(npm run *)",
+      "Bash(powershell -NoProfile -Command \"Stop-Process -Id 46096,10248,44628 -Force -ErrorAction SilentlyContinue\")"
     ]
   }
 }

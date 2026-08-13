@@ -4,8 +4,21 @@ import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import { Sparkles, CloudCog, Workflow, Bot, Code2, Boxes, ShieldCheck, type LucideIcon } from 'lucide-react';
 
 const LINKEDIN_COMPANY_URL = 'https://www.linkedin.com/company/nativecloud';
+
+/* Department icon + colour — reuses the Solutions page's icon language. */
+const DEPARTMENT_META: Record<string, { icon: LucideIcon; color: string; bg: string }> = {
+  'AI Enablement':       { icon: Sparkles,    color: '#7C3AED', bg: 'rgba(124,58,237,0.08)' },
+  'Cloud Engineering':   { icon: CloudCog,    color: '#0EA5E9', bg: 'rgba(14,165,233,0.08)' },
+  'DevOps':              { icon: Workflow,    color: '#E11D48', bg: 'rgba(225,29,72,0.08)' },
+  'AI Engineering':      { icon: Bot,         color: '#0F8B83', bg: 'rgba(15,139,131,0.08)' },
+  'Software Engineering':{ icon: Code2,       color: '#2563EB', bg: 'rgba(37,99,235,0.08)' },
+  'Architecture':        { icon: Boxes,       color: '#F59E0B', bg: 'rgba(245,158,11,0.08)' },
+  'Security':            { icon: ShieldCheck, color: '#DC2626', bg: 'rgba(220,38,38,0.08)' },
+};
+const DEFAULT_DEPARTMENT_META = { icon: Sparkles, color: '#2563EB', bg: 'rgba(37,99,235,0.08)' };
 
 const LinkedInIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -85,23 +98,13 @@ export default function CareersClient({ jobs }: { jobs: Job[] }) {
     <div className="pb-32">
 
       {/* ── Search panel ── */}
-      <div
-        className="w-full rounded-2xl py-8 px-6 sm:px-10 mb-4 relative overflow-hidden"
-        style={{
-          background: '#ffffff',
-          border: '1px solid rgba(0,0,0,0.06)',
-          boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
-        }}
-      >
-        {/* Green glow */}
-        <div
-          className="absolute top-0 right-0 w-[420px] h-full pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 80% 50%, rgba(0,0,0,0) 0%, transparent 65%)' }}
-        />
-
-        <div className="relative flex flex-col gap-3">
+      <div className="w-full rounded-2xl border border-[#e6e6e6] bg-white py-6 px-6 sm:px-8 mb-4">
+        <div className="flex flex-col gap-3">
           {/* Input row */}
-          <div className="relative flex items-center">
+          <div className="flex w-full items-center gap-3 rounded-full border border-[#e6e6e6] bg-white pl-5 pr-1.5 py-1.5 transition-colors focus-within:border-[#2563eb]">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-[#9ca3af]">
+              <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+            </svg>
             <input
               ref={inputRef}
               type="text"
@@ -109,23 +112,16 @@ export default function CareersClient({ jobs }: { jobs: Job[] }) {
               onChange={e => setInputVal(e.target.value)}
               onKeyDown={e => { if (e.key === 'Enter') applySearch(); }}
               placeholder="Search roles…"
-              className="w-full outline-none text-[16px] text-[#0a0e1a] placeholder:text-[#aaaaaa]"
-              style={{
-                background: '#F5F5F5',
-                borderRadius: 50,
-                border: 'none',
-                padding: '18px 190px 18px 28px',
-                boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.06)',
-              }}
+              className="min-w-0 flex-1 bg-transparent outline-none text-[15px] text-[#0a0e1a] placeholder:text-[#9ca3af] py-3"
             />
             <button
               onClick={applySearch}
-              className="absolute right-2 flex items-center gap-2 text-white text-sm font-semibold px-6 py-3.5 transition-all duration-200 hover:opacity-90 active:scale-[0.97]"
-              style={{ background: '#0a0e1a', borderRadius: 50 }}
+              aria-label="Search"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white transition-transform duration-150 hover:scale-105 active:scale-95"
+              style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #1e4fd6 100%)' }}
             >
-              <span className="hidden sm:inline">Find results</span>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+                <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
             </button>
           </div>
@@ -336,6 +332,8 @@ export default function CareersClient({ jobs }: { jobs: Job[] }) {
             {filtered.map((job, i) => {
               const modelStyle = MODEL_COLORS[job.workModel] ?? MODEL_COLORS['On-site'];
               const typeStyle  = TYPE_COLORS[job.type] ?? TYPE_COLORS['Full-time'];
+              const deptMeta   = DEPARTMENT_META[job.department] ?? DEFAULT_DEPARTMENT_META;
+              const DeptIcon   = deptMeta.icon;
               return (
                 <motion.div
                   key={job.id}
@@ -347,13 +345,21 @@ export default function CareersClient({ jobs }: { jobs: Job[] }) {
                 >
                   <div
                     onClick={() => router.push(`/careers/${job.slug}`)}
-                    className="group flex flex-col gap-4 px-6 py-6 rounded-2xl border border-black/[0.07] bg-white hover:border-[#111]/30 hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] transition-all duration-200 cursor-pointer"
+                    className="group flex flex-col gap-4 px-6 py-6 rounded-2xl border border-[#e6e6e6] bg-white transition-[border-color,transform] duration-200 hover:border-[#111827]/25 hover:-translate-y-0.5 cursor-pointer"
                   >
-                    {/* Row 1: Title + Hiring Now */}
+                    {/* Row 1: Icon + Title + Hiring Now */}
                     <div className="flex items-start justify-between gap-3">
-                      <p className="font-semibold text-[#111] text-[18px] leading-snug tracking-[-0.01em] group-hover:text-[#2563eb] transition-colors">
-                        {job.title}
-                      </p>
+                      <div className="flex min-w-0 items-center gap-3.5">
+                        <span
+                          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
+                          style={{ background: deptMeta.bg }}
+                        >
+                          <DeptIcon className="h-5 w-5" style={{ color: deptMeta.color }} strokeWidth={1.8} aria-hidden="true" />
+                        </span>
+                        <p className="min-w-0 truncate font-semibold text-[#111] text-[18px] leading-snug tracking-[-0.01em] group-hover:text-[#2563eb] transition-colors">
+                          {job.title}
+                        </p>
+                      </div>
                       <span
                         className="shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wide"
                         style={{ background: 'rgba(5,150,105,0.10)', color: '#059669', border: '1px solid rgba(5,150,105,0.25)' }}

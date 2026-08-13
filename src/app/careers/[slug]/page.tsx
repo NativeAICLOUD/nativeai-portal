@@ -103,8 +103,8 @@ export default function JobDetailPage({ params }: { params: { slug: string } }) 
           </div>
         </div>
 
-        {/* multicolour divider — full viewport width */}
-        <hr className="linegrad-divider m-0 h-1 w-full border-0" />
+        {/* blue divider — matches the homepage hero/footer gradient */}
+        <hr className="divider-blue m-0 h-1 w-full border-0" />
       </div>
 
       {/* ── Content ── */}

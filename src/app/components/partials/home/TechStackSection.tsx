@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Sparkles, Globe, Palette, type LucideIcon } from "lucide-react";
+import { Sparkles, Globe, Palette, Server, type LucideIcon } from "lucide-react";
 import { techStack, type TechItem } from "@/lib/tech-stack-data";
 import { CONTAINER, Eyebrow, SECTION_Y, H2, H3, BODY } from "./HomeUI";
 
@@ -18,6 +18,7 @@ type CategoryMeta = { visual: CatVisual; color: string; bg: string };
 
 const CATEGORY_META: Record<string, CategoryMeta> = {
   "generative AI":      { visual: { type: "lucide", icon: Sparkles },                        color: "#FF8A3D", bg: "#FFF4EA" },
+  backend:              { visual: { type: "lucide", icon: Server },                          color: "#059669", bg: "#ECFDF5" },
   frontend:             { visual: { type: "glyph", src: "/icons/web-frontend.svg" },         color: "#4F46E5", bg: "#F2F0FF" },
   mobile:               { visual: { type: "glyph", src: "/icons/mobile-icons.png" },         color: "#0F8B83", bg: "#EFFAF8" },
   devOps:               { visual: { type: "glyph", src: "/icons/cloud-and-devops.svg" },     color: "#7C3AED", bg: "#F8F0FF" },
@@ -58,6 +59,7 @@ function CategoryIcon({ meta, size = 26 }: { meta: CategoryMeta; size?: number }
 
 const CATEGORY_LABELS: Record<string, string> = {
   "generative AI": "Generative AI",
+  backend: "Backend",
   frontend: "Frontend",
   mobile: "Mobile",
   devOps: "Cloud & DevOps",

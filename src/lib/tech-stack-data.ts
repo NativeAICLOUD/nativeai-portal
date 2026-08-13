@@ -15,6 +15,15 @@ export const techStack: Record<string, TechItem[]> = {
     { name: "LangChain",                 logo: "" },
     { name: "Ollama",                    logo: "" },
   ],
+  "backend": [
+    { name: ".NET",         logo: "/img/partners/dotnet.svg" },
+    { name: "C#",           logo: "/img/partners/csharp.svg" },
+    { name: "ASP.NET Core", logo: "/img/partners/aspnet.svg" },
+    { name: "Blazor",       logo: "/img/partners/blazor.svg" },
+    { name: "Node.js",      logo: "" },
+    { name: "Python",       logo: "" },
+    { name: "PostgreSQL",   logo: "" },
+  ],
   "frontend": [
     { name: "Next.js",      logo: "" },
     { name: "React",        logo: "/img/partners/react.svg" },
