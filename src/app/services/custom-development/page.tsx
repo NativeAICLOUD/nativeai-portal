@@ -166,10 +166,12 @@ export default function CustomDevelopmentPage() {
             {capabilities.map(({ num, title, body, icon: Icon }) => (
               <article
                 key={num}
-                className="group flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6 transition-[filter,box-shadow] duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.2)] hover:[filter:invert(1)]"
+                className="group flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6 transition-[border-color,transform] duration-200 hover:border-[#111827]/25 hover:-translate-y-0.5"
               >
                 <div className="mb-5 flex items-center justify-between">
-                  <Icon className="h-7 w-7 text-[#111]" strokeWidth={1.6} aria-hidden="true" />
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#EFF5FF]">
+                    <Icon className="h-5 w-5 text-[#2563EB]" strokeWidth={1.8} aria-hidden="true" />
+                  </span>
                   <span className="text-[13px] font-light text-[#9ca3af]">{num}</span>
                 </div>
                 <h3 className="m-0 text-[20px] font-medium leading-[1.25] text-[#111] lg:text-[22px]">
