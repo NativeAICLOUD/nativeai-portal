@@ -25,7 +25,7 @@ const pillars: { num: string; title: string; body: string; icon: LucideIcon }[] 
 const capabilities = [
   { tag: "Agents", title: "Custom AI Agents", body: "Autonomous agents that monitor, decide, and act — integrated with your tools via Semantic Kernel or LangChain, deployed on Azure AI Foundry or AWS Bedrock." },
   { tag: "RAG", title: "Retrieval-Augmented Generation", body: "RAG pipelines over your documents, SharePoint, or Confluence — accurate, cited answers with hallucination dramatically reduced." },
-  { tag: "LLMs", title: "LLM Integration & Fine-Tuning", body: "Azure OpenAI, GPT-4o, Claude, or Mistral — we select, fine-tune, and integrate the right model for your use case and data-residency requirements." },
+  { tag: "LLMs", title: "LLM Integration & Fine-Tuning", body: "Azure OpenAI, GPT-4o, or Mistral — we select, fine-tune, and integrate the right model for your use case and data-residency requirements." },
   { tag: "Automation", title: "AI Workflow Automation", body: "Multi-agent pipelines that trigger on events, process with AI, and push results where your team already works — email, Slack, ERP, CRM." },
   { tag: "Knowledge", title: "Knowledge Base AI", body: "Turn internal documentation, support tickets, and tribal knowledge into a searchable, AI-powered source of truth for every team member." },
   { tag: "Ops", title: "Evaluation & Observability", body: "Every deployment includes accuracy benchmarks, latency monitoring, and feedback loops so your AI keeps performing in production." },
@@ -40,7 +40,7 @@ const processSteps = [
 ];
 
 const techStack = [
-  "Azure AI Foundry", "AWS Bedrock", "Azure OpenAI", "GPT-4o", "Claude",
+  "Azure AI Foundry", "AWS Bedrock", "Azure OpenAI", "GPT-4o",
   "Mistral", "Semantic Kernel", "LangChain", "Pinecone", "Azure AI Search",
 ];
 

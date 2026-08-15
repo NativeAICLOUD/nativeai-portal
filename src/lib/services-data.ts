@@ -175,7 +175,7 @@ export const services: Record<string, ServiceData> = {
       },
       {
         title: "LLM Integration & Fine-Tuning",
-        body: "Azure OpenAI, GPT-4o, Claude, or Mistral — we select, fine-tune, and integrate the right model for your use case and compliance requirements.",
+        body: "Azure OpenAI, GPT-4o, or Mistral — we select, fine-tune, and integrate the right model for your use case and compliance requirements.",
       },
       {
         title: "AI Workflow Automation",
