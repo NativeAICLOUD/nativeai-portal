@@ -98,7 +98,7 @@ export default function InvoicesPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-semibold text-[#111] mb-1">Invoices</h1>
-          <p className="text-sm text-[#6b7280]">History of every invoice you've generated.</p>
+          <p className="text-sm text-[#6b7280]">History of every invoice you&apos;ve generated.</p>
         </div>
         <Link
           href="/dashboard/invoices/new"
