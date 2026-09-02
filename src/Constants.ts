@@ -17,6 +17,7 @@ export const Constants = {
     AIRLINE_BOOKING: '/airline-booking',
     AI_LEGAL_WORKSPACE: '/ai-legal-workspace',
     PAYMENT_AUTOMATION: '/payment-automation',
+    NATIVE_INVOICE: '/native-invoice',
 
     WORKSHOPS: '/workshops',
     AZURE_FUNDAMENTALS_FOR_ISVS: '/af-isv',

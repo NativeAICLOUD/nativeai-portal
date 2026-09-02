@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   Code2, Palette, Bot, Database, CloudCog, CloudUpload, Boxes, Workflow,
-  BookOpen, GitBranch, Sparkles, Plane, Scale, CreditCard,
+  BookOpen, GitBranch, Sparkles, Plane, Scale, CreditCard, Receipt,
   type LucideIcon,
 } from "lucide-react";
 import { KCSP, KTP, MSP } from "@/ImagePath";
@@ -31,6 +31,7 @@ const products: { title: string; body: string; href: string; icon: LucideIcon; c
   { title: "Airline & Travel Booking", body: "A cloud-based platform for airlines, travel agencies, and tour operators — reservations, ticketing, GDS connectivity, and passenger management in one system.", href: "/airline-booking", icon: Plane, color: "#2563EB", bg: "rgba(37,99,235,0.07)", tags: ["GDS Connectivity", "Ticketing", "Passenger Mgmt"] },
   { title: "AI Legal Workspace", body: "AI-powered document analysis, contract review, and legal research — built for law firms and in-house legal teams that want to move faster.", href: "/ai-legal-workspace", icon: Scale, color: "#7C3AED", bg: "rgba(124,58,237,0.07)", tags: ["Document AI", "Contract Review", "Legal Research"] },
   { title: "Payment Automation", body: "Recurring billing, rent collection, and payment reconciliation — automated end-to-end so your finance team focuses on decisions, not data entry.", href: "/payment-automation", icon: CreditCard, color: "#0F8B83", bg: "rgba(15,139,131,0.08)", tags: ["Recurring Billing", "Auto-Reconciliation", "Reporting"] },
+  { title: "NativeInvoice", body: "Multi-tenant electronic invoicing for companies, accountants, and finance teams — create, sign, send, and track invoices, connected to the official UJP e-Invoice system.", href: "/native-invoice", icon: Receipt, color: "#D97706", bg: "rgba(217,119,6,0.08)", tags: ["UJP e-Invoicing", "Multi-Tenant", "Macedonia"] },
 ];
 
 const innovate: { title: string; body: string; href: string; icon: LucideIcon; color: string; bg: string }[] = [
@@ -145,7 +146,7 @@ export default function SolutionsPage() {
           </div>
 
           <div className="rounded-2xl bg-[#FAFAF8] p-3 sm:p-5">
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {products.map(({ title, body, href, icon: Icon, color, bg, tags }) => (
                 <Link
                   key={title}
@@ -158,7 +159,17 @@ export default function SolutionsPage() {
                       className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[12px] transition-transform duration-200 group-hover:scale-105"
                       style={{ background: bg }}
                     >
-                      <Icon className="h-8 w-8" style={{ color }} strokeWidth={1.7} aria-hidden="true" />
+                      {title === "NativeInvoice" ? (
+                        <svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                          <rect x="5" y="3" width="18" height="26" rx="3" fill="#2563EB" />
+                          <path d="M23 3h2a3 3 0 0 1 3 3v2l-5-5Z" fill="#1e4fd6" />
+                          <path d="M9.5 11h9M9.5 15h9M9.5 19h5.5" stroke="white" strokeWidth="1.6" strokeLinecap="round" />
+                          <circle cx="22" cy="22" r="6" fill="#34d399" />
+                          <path d="m19.4 22 1.8 1.8 3.4-3.6" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      ) : (
+                        <Icon className="h-8 w-8" style={{ color }} strokeWidth={1.7} aria-hidden="true" />
+                      )}
                     </span>
                     <h3 className="m-0 text-[15.5px] font-semibold leading-[1.25] text-[#111827]">{title}</h3>
                   </div>
