@@ -58,6 +58,13 @@ const processSteps = [
   { step: "06", heading: "Support & Growth", body: "We don't disappear after launch. Continuous support, performance optimisation, and feature development as your product evolves. Most clients stay with us long past the initial build." },
 ];
 
+const trustPoints = [
+  { num: "01", title: "You own the code", body: "No proprietary frameworks, no vendor lock-in. Every repository, pipeline, and credential transfers to you — full ownership, from day one." },
+  { num: "02", title: "Fixed scope, fixed price", body: "We agree the charter before a single sprint starts. What we quote is what you pay — no surprise change orders halfway through the build." },
+  { num: "03", title: "Senior engineers, not juniors", body: "The engineers on your discovery call are the engineers who ship your product. No bait-and-switch, no offshore hand-off." },
+  { num: "04", title: "Partners past launch", body: "Most clients stay with us long after go-live — for support, growth features, and the next product line." },
+];
+
 const faqs = [
   { q: "How long does it take to build an MVP?", a: "Most MVPs take 6–10 weeks from signed charter to live product. We set a fixed scope, ship in sprints, and cut nothing from the core user journey." },
   { q: "Do you work with our existing codebase?", a: "Yes. We start with a code audit, agree on what stays and what gets rebuilt, then work alongside your team without disrupting ongoing delivery." },
@@ -248,6 +255,28 @@ export default function CustomDevelopmentPage() {
               <div key={q} className="flex flex-col gap-2 rounded-lg border border-[#e6e6e6] bg-white p-6">
                 <h3 className="m-0 text-[18px] font-medium leading-[1.3] text-[#111]">{q}</h3>
                 <p className="m-0 text-[16px] font-normal leading-[1.5] text-[#111]">{a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Why clients trust us ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-12">
+            <div className="mb-4"><Eyebrow>Why us</Eyebrow></div>
+            <h2 className="m-0 text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              Why clients trust us with their product.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+            {trustPoints.map(({ num, title, body }) => (
+              <div key={num} className="flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6">
+                <span className="text-[34px] font-light leading-none text-[#e6e6e6]">{num}</span>
+                <h3 className="mt-4 text-[18px] font-medium leading-[1.25] text-[#111]">{title}</h3>
+                <p className="mt-2 text-[16px] font-normal leading-[1.5] text-[#111]">{body}</p>
               </div>
             ))}
           </div>

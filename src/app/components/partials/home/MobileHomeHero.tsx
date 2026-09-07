@@ -52,9 +52,9 @@ export default function MobileHomeHero() {
           marginBottom: 32,
         }}
       >
-        We design and implement{' '}
-        <span className="font-semibold text-[#111111]">AI agents, cloud platforms, and intelligent software</span>{' '}
-        that create measurable business impact.
+        We deliver end-to-end{' '}
+        <span className="font-semibold text-[#111111]">AI and cloud solutions</span>{' '}
+        — SaaS, DevOps, modernization — focused on business outcomes.
       </p>
 
       <Link
