@@ -23,6 +23,17 @@
       #ffffff;
   }
 
+  /* Same atmospheric glow as industries-hero-bg, but with the warm
+     peach/orange tones dialed back — for pages where the full warm glow
+     read as too strong against the page content. */
+  .industries-hero-bg-soft {
+    background:
+      radial-gradient(circle at 15% 100%, rgba(224, 225, 255, 0.75), transparent 43%),
+      radial-gradient(circle at 80% 100%, rgba(255, 237, 189, 0.35), transparent 48%),
+      radial-gradient(circle at 100% 70%, rgba(255, 225, 215, 0.3), transparent 43%),
+      #ffffff;
+  }
+
   /* Blue-only radial glow (no warm orange/peach tones) — variant of
      industries-hero-bg for pages that want the blue divider to match. */
   .hero-bg-blue {

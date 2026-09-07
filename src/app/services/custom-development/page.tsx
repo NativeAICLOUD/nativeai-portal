@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
-  Code2, Workflow, Sparkles, Database, Palette, CloudCog,
+  Code2, Workflow, Sparkles, Database, Palette, CloudCog, Server,
   type LucideIcon,
 } from "lucide-react";
 import { CONTAINER, Eyebrow, SecondaryButton } from "@/app/components/partials/services/ServiceUI";
@@ -58,6 +58,60 @@ const processSteps = [
   { step: "06", heading: "Support & Growth", body: "We don't disappear after launch. Continuous support, performance optimisation, and feature development as your product evolves. Most clients stay with us long past the initial build." },
 ];
 
+const technologies: { title: string; headline: string; body: string; icon: LucideIcon; color: string; groups: { label: string; items: string[] }[] }[] = [
+  {
+    title: "Backend", headline: "Powering robust digital operations.",
+    body: "APIs and services built with .NET, Node.js, and Python — engineered for security, reliability, and the throughput real products need.",
+    icon: Server, color: "#2563EB",
+    groups: [
+      { label: "Frameworks", items: ["ASP.NET Core Web API", "ASP.NET Core SignalR", "ASP.NET Core MVC", "Node.js / Express", "FastAPI (Python)"] },
+      { label: "Data stores", items: ["PostgreSQL", "SQL Server", "Redis", "Azure Blob Storage"] },
+      { label: "Libraries", items: ["Entity Framework Core", "Swagger (OpenAPI)", "Serilog", "FluentValidation", "Polly", "MassTransit"] },
+    ],
+  },
+  {
+    title: "Frontend", headline: "Interfaces that feel as good as they look.",
+    body: "Modern, responsive UIs built with the framework that fits your product — accessible, fast, and pixel-perfect on every device.",
+    icon: Palette, color: "#DB2777",
+    groups: [
+      { label: "Frameworks", items: ["React", "Next.js", "TypeScript", "Vue", "Angular", "Blazor"] },
+      { label: "Styling", items: ["Tailwind CSS", "Radix UI", "Framer Motion"] },
+      { label: "Tooling", items: ["Vite", "ESLint", "Storybook"] },
+    ],
+  },
+  {
+    title: "Data", headline: "Data infrastructure that scales with demand.",
+    body: "From ingestion to dashboards — pipelines and platforms built to handle growth without a rewrite.",
+    icon: Database, color: "#0F8B83",
+    groups: [
+      { label: "Ingestion & pipelines", items: ["Azure Data Factory", "Apache Kafka", "Azure Event Hubs"] },
+      { label: "Storage & warehousing", items: ["PostgreSQL", "Azure Synapse", "Snowflake"] },
+      { label: "Analytics & BI", items: ["Power BI", "dbt", "Azure Databricks"] },
+    ],
+  },
+  {
+    title: "Cloud & DevOps", headline: "Cloud infrastructure your team can trust.",
+    body: "Containerised, automated, and observable from day one — infrastructure that ships changes safely and scales on demand.",
+    icon: CloudCog, color: "#F59E0B",
+    groups: [
+      { label: "Infrastructure", items: ["Azure", "AWS", "Terraform", "Docker", "Kubernetes (AKS)"] },
+      { label: "CI/CD", items: ["GitHub Actions", "Azure DevOps Pipelines", "ArgoCD"] },
+      { label: "Observability", items: ["Application Insights", "Grafana", "Prometheus"] },
+    ],
+  },
+  {
+    title: "API & Integrations", headline: "Bridging systems with smart integrations.",
+    body: "We connect payments, messaging, authentication, and IoT into one coherent system — so your platform talks to the tools your business already runs on.",
+    icon: Workflow, color: "#BE123C",
+    groups: [
+      { label: "Auth & security", items: ["OAuth & OpenID Providers", "BankID Login", "Active Directory (LDAP)", "Google reCAPTCHA"] },
+      { label: "Payments & billing", items: ["Stripe", "PayPal", "Braintree", "Quaderno Taxation"] },
+      { label: "Messaging & notifications", items: ["SendGrid Email", "Twilio SMS", "Firebase Cloud Messaging"] },
+      { label: "Devices & edge", items: ["IoT Device Integrations", "Payment Terminal Integrations", "Edge Computing Devices"] },
+    ],
+  },
+];
+
 const trustPoints = [
   { num: "01", title: "You own the code", body: "No proprietary frameworks, no vendor lock-in. Every repository, pipeline, and credential transfers to you — full ownership, from day one." },
   { num: "02", title: "Fixed scope, fixed price", body: "We agree the charter before a single sprint starts. What we quote is what you pay — no surprise change orders halfway through the build." },
@@ -71,6 +125,15 @@ const faqs = [
   { q: "What tech stack do you use?", a: "We choose the stack that fits your product — React, Next.js, .NET, Node, Python, PostgreSQL, Azure. We don't sell a stack; we match one to your problem." },
   { q: "Can you take over after a failed project?", a: "We specialise in rescues. We'll do a fast technical audit, identify what can be salvaged, and give you an honest plan — no glossing over the hard parts." },
 ];
+
+function ArrowLink({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="mt-4 inline-flex items-center gap-1.5 text-[13px] font-medium text-[#111]">
+      {children}
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+    </span>
+  );
+}
 
 export default function CustomDevelopmentPage() {
   return (
@@ -186,6 +249,68 @@ export default function CustomDevelopmentPage() {
                 </h3>
                 <p className="mt-2 text-[16px] font-normal leading-[1.5] text-[#111]">{body}</p>
               </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Technologies ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-16">
+            <div className="mb-4"><Eyebrow>Technologies</Eyebrow></div>
+            <h2 className="m-0 max-w-[620px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              The stack behind every build.
+            </h2>
+          </div>
+
+          <div className="flex flex-col">
+            {technologies.map(({ title, headline, body, icon: Icon, color, groups }, i) => (
+              <div
+                key={title}
+                className={`grid grid-cols-1 gap-8 py-14 lg:grid-cols-2 lg:gap-16 ${i !== 0 ? "border-t border-[#ECECEC]" : ""}`}
+              >
+                {/* Left — pitch */}
+                <div className="flex flex-col justify-center">
+                  <div className="mb-5 flex items-center gap-3">
+                    <Icon className="h-6 w-6 shrink-0" style={{ color }} strokeWidth={1.5} aria-hidden="true" />
+                    <div>
+                      <p className="m-0 text-[15px] font-semibold leading-[1.2] text-[#111]">{title}</p>
+                      <p className="m-0 text-[12px] font-medium uppercase tracking-[0.1em] text-[#9ca3af]">Technologies</p>
+                    </div>
+                  </div>
+                  <h3 className="m-0 max-w-[440px] text-[26px] font-medium leading-[1.15] text-[#111] md:text-[32px]">
+                    {headline}
+                  </h3>
+                  <p className="mt-4 max-w-[440px] text-[16px] font-normal leading-[1.6] text-[#6B7280]">{body}</p>
+                </div>
+
+                {/* Right — tech list card */}
+                <Link
+                  href="/schedule-call"
+                  className="group flex h-full flex-col rounded-2xl border border-[#ECECEC] bg-[#FAFAF8] p-8 transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] hover:border-[rgba(37,99,235,0.2)] hover:shadow-[0_10px_28px_rgba(15,23,42,0.06)]"
+                >
+                  <div>
+                    <p className="m-0 text-[15px] font-semibold leading-[1.2] text-[#111]">{title}</p>
+                    <p className="m-0 text-[12px] font-medium uppercase tracking-[0.1em] text-[#9ca3af]">Technologies</p>
+                  </div>
+                  <div className="my-6 flex flex-1 flex-col gap-5">
+                    {groups.map((group) => (
+                      <div key={group.label}>
+                        <p className="m-0 mb-2 text-[12px] font-medium uppercase tracking-[0.08em] text-[#9ca3af]">{group.label}</p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {group.items.map((item) => (
+                            <span key={item} className="rounded-lg border border-[#e6e6e6] bg-white px-2.5 py-1 text-[13px] font-medium text-[#111]">
+                              {item}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <ArrowLink>Learn more</ArrowLink>
+                </Link>
+              </div>
             ))}
           </div>
         </div>
