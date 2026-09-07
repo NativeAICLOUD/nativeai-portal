@@ -133,7 +133,9 @@ export default function SolutionsPage() {
                   <ul className="my-6 flex flex-1 flex-col gap-3">
                     {features.map((feature) => (
                       <li key={feature} className="flex items-center gap-2.5 text-[15px] font-normal leading-[1.4] text-[#111]">
-                        <span className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: color }} />
+                        <svg className="h-4 w-4 shrink-0" style={{ color }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
                         {feature}
                       </li>
                     ))}
