@@ -32,39 +32,12 @@ const industries: Industry[] = [
   { title: "B2B Solutions",              description: "Portals, integrations and workflow platforms for B2B.",                         details: ["Partner & Client Portals", "Workflow Automation", "Third-Party Integrations", "Reporting & Analytics"], href: "/industries", color: "#475569", bg: "rgba(71,85,105,0.08)",  icon: Network },
 ];
 
-function CheckIcon({ color }: { color: string }) {
+function ArrowLink({ children }: { children: React.ReactNode }) {
   return (
-    <svg className="mt-0.5 h-4 w-4 shrink-0" style={{ color }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="20 6 9 17 4 12" />
-    </svg>
-  );
-}
-
-function IndustryCard({ title, description, details, href, color, bg, icon: Icon }: Industry) {
-  return (
-    <Link
-      href={href}
-      className="group flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6 transition-[border-color,transform,background-color] duration-200 hover:border-transparent hover:-translate-y-0.5 hover:bg-[var(--hover-tint)]"
-      style={{ '--hover-tint': bg } as React.CSSProperties}
-    >
-      <span className="mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style={{ background: bg }}>
-        <Icon aria-hidden="true" strokeWidth={1.8} className="h-5 w-5" style={{ color }} />
-      </span>
-      <h2 className="m-0 text-[18px] font-medium leading-[1.3] text-[#111]">
-        {title}
-      </h2>
-      <p className="mt-2 text-[14.5px] font-normal leading-[1.55] text-[#6b7280]">
-        {description}
-      </p>
-      <div className="mt-4 flex flex-col gap-2.5 border-t border-[#eee] pt-4">
-        {details.map((d) => (
-          <div key={d} className="flex items-start gap-2.5">
-            <CheckIcon color={color} />
-            <span className="text-[13.5px] leading-relaxed text-[#6b7280]">{d}</span>
-          </div>
-        ))}
-      </div>
-    </Link>
+    <span className="mt-4 inline-flex items-center gap-1.5 text-[13px] font-medium text-[#111]">
+      {children}
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+    </span>
   );
 }
 
@@ -96,12 +69,49 @@ export default function IndustriesSection() {
         <hr className="divider-blue m-0 h-1 w-full border-0" />
       </div>
 
-      {/* ── Industry cards ── */}
+      {/* ── Industry blocks ── */}
       <div className="bg-white">
         <div className="mx-auto w-full max-w-[1536px] px-5 pb-20 pt-16 md:px-12">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-            {industries.map((industry) => (
-              <IndustryCard key={industry.title} {...industry} />
+          <div className="flex flex-col">
+            {industries.map(({ title, description, details, href, color, icon: Icon }, i) => (
+              <div
+                key={title}
+                className={`grid grid-cols-1 gap-8 py-14 lg:grid-cols-2 lg:gap-16 ${i !== 0 ? "border-t border-[#ECECEC]" : ""}`}
+              >
+                {/* Left — pitch */}
+                <div className="flex flex-col justify-center">
+                  <div className="mb-5 flex items-center gap-3">
+                    <Icon className="h-6 w-6 shrink-0" style={{ color }} strokeWidth={1.5} aria-hidden="true" />
+                    <div>
+                      <p className="m-0 text-[15px] font-semibold leading-[1.2] text-[#111]">{title}</p>
+                      <p className="m-0 text-[12px] font-medium uppercase tracking-[0.1em] text-[#9ca3af]">Industries</p>
+                    </div>
+                  </div>
+                  <h3 className="m-0 max-w-[440px] text-[26px] font-medium leading-[1.15] text-[#111] md:text-[32px]">
+                    {description}
+                  </h3>
+                </div>
+
+                {/* Right — feature card */}
+                <Link
+                  href={href}
+                  className="group flex h-full flex-col rounded-2xl border border-[#ECECEC] bg-[#FAFAF8] p-8 transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] hover:border-[rgba(37,99,235,0.2)] hover:shadow-[0_10px_28px_rgba(15,23,42,0.06)]"
+                >
+                  <div>
+                    <p className="m-0 text-[15px] font-semibold leading-[1.2] text-[#111]">{title}</p>
+                    <p className="m-0 text-[12px] font-medium uppercase tracking-[0.1em] text-[#9ca3af]">Industries</p>
+                  </div>
+                  <ul className="my-6 flex flex-1 flex-col gap-3">
+                    {details.map((d) => (
+                      <li key={d} className="flex items-center gap-2.5 text-[15px] font-normal leading-[1.4] text-[#111]">
+                        <span className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: color }} />
+                        {d}
+                      </li>
+                    ))}
+                  </ul>
+                  <ArrowLink>Learn more</ArrowLink>
+                </Link>
+              </div>
             ))}
           </div>
         </div>
