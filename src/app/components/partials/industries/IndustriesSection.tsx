@@ -1,8 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import {
-  Zap, Landmark, ShieldCheck, CreditCard, Truck, Cpu, Plane, Scale,
-  Wallet, ShoppingBag, HardHat, Network, type LucideIcon,
+  Lightbulb, Landmark, ShieldCheck, CreditCard, Route, Cpu, Plane, Scale,
+  Wallet, ShoppingBag, Building2, Network, type LucideIcon,
 } from "lucide-react";
 import { Constants } from "@/Constants";
 import { Eyebrow } from "@/app/components/partials/services/ServiceUI";
@@ -18,17 +21,17 @@ type Industry = {
 };
 
 const industries: Industry[] = [
-  { title: "Energy and Resources",       description: "Data platforms and automation for energy, utilities and resource operations.", details: ["Smart Grid Analytics", "Asset & Resource Tracking", "Usage & Consumption Insights", "Regulatory Reporting"], href: "/industries", color: "#F59E0B", bg: "rgba(245,158,11,0.08)",  icon: Zap },
+  { title: "Energy and Resources",       description: "Data platforms and automation for energy, utilities and resource operations.", details: ["Smart Grid Analytics", "Asset & Resource Tracking", "Usage & Consumption Insights", "Regulatory Reporting"], href: "/industries", color: "#16A34A", bg: "rgba(22,163,74,0.08)",  icon: Lightbulb },
   { title: "Finance and Banking",        description: "Secure, compliant platforms for banks and financial institutions.",             details: ["Core Banking Integrations", "Regulatory Compliance", "Risk & Fraud Monitoring", "Open Banking APIs"], href: "/industries", color: "#0F8B83", bg: "rgba(15,139,131,0.08)", icon: Landmark },
   { title: "Insurance",                  description: "Claims automation, risk analytics and policy workflows.",                       details: ["Claims Automation", "Risk Analytics", "Policy Administration", "Underwriting Workflows"], href: "/industries", color: "#E11D48", bg: "rgba(225,29,72,0.08)",  icon: ShieldCheck },
   { title: "Payments",                   description: "Billing, reconciliation and payment automation at scale.",                      details: ["Payment Automation", "Billing & Reconciliation", "Fraud & Risk Analytics", "Reporting Dashboards"], href: Constants.PAGES.PAYMENT_AUTOMATION, color: "#16A34A", bg: "rgba(22,163,74,0.08)",  icon: CreditCard },
-  { title: "Supply Chain and Logistics", description: "Visibility, tracking and optimisation across the whole chain.",                 details: ["Shipment Tracking", "Inventory Visibility", "Route Optimisation", "Supplier Integrations"], href: "/industries", color: "#0EA5E9", bg: "rgba(14,165,233,0.08)", icon: Truck },
+  { title: "Supply Chain and Logistics", description: "Visibility, tracking and optimisation across the whole chain.",                 details: ["Shipment Tracking", "Inventory Visibility", "Route Optimisation", "Supplier Integrations"], href: "/industries", color: "#0EA5E9", bg: "rgba(14,165,233,0.08)", icon: Route },
   { title: "Technology",                 description: "Product engineering for software and SaaS companies.",                          details: ["Product Engineering", "API & SDK Development", "Cloud-Native Architecture", "DevOps Enablement"], href: "/industries", color: "#DB2777", bg: "rgba(219,39,119,0.08)", icon: Cpu },
   { title: "Travel",                     description: "GDS-connected booking and travel platforms.",                                   details: ["GDS Booking Platforms", "Airline Reservation Systems", "Fare & Ancillary Management", "Loyalty Programmes"], href: Constants.PAGES.AIRLINE_BOOKING, color: "#2563EB", bg: "rgba(37,99,235,0.08)",  icon: Plane },
   { title: "Legal & Compliance",         description: "AI document and case workflows for legal teams.",                               details: ["AI Document Analysis", "Case & Matter Workflows", "Deadline Tracking", "Compliance Reporting"], href: Constants.PAGES.AI_LEGAL_WORKSPACE, color: "#7C3AED", bg: "rgba(124,58,237,0.08)", icon: Scale },
   { title: "Fintech",                    description: "Modern rails for lending, payments and wealth products.",                       details: ["Lending Platforms", "Payments Infrastructure", "Wealth & Investment Tools", "Regulatory Compliance"], href: "/industries", color: "#0369A1", bg: "rgba(3,105,161,0.08)",  icon: Wallet },
   { title: "E-commerce & Retail",        description: "Scalable storefronts, logistics and personalisation.",                          details: ["Scalable Storefronts", "Order & Inventory Management", "Personalisation & AI Search", "Payment Integrations"], href: "/industries", color: "#FF6A3D", bg: "rgba(255,106,61,0.08)", icon: ShoppingBag },
-  { title: "Construction",               description: "Project, site and resource management systems.",                                details: ["Project Management Systems", "Site & Resource Tracking", "Procurement Workflows", "Compliance & Safety Reporting"], href: "/industries", color: "#9333EA", bg: "rgba(147,51,234,0.08)", icon: HardHat },
+  { title: "Construction",               description: "Project, site and resource management systems.",                                details: ["Project Management Systems", "Site & Resource Tracking", "Procurement Workflows", "Compliance & Safety Reporting"], href: "/industries", color: "#9333EA", bg: "rgba(147,51,234,0.08)", icon: Building2 },
   { title: "B2B Solutions",              description: "Portals, integrations and workflow platforms for B2B.",                         details: ["Partner & Client Portals", "Workflow Automation", "Third-Party Integrations", "Reporting & Analytics"], href: "/industries", color: "#475569", bg: "rgba(71,85,105,0.08)",  icon: Network },
 ];
 
@@ -74,9 +77,13 @@ export default function IndustriesSection() {
         <div className="mx-auto w-full max-w-[1536px] px-5 pb-20 pt-16 md:px-12">
           <div className="flex flex-col">
             {industries.map(({ title, description, details, href, color, icon: Icon }, i) => (
-              <div
+              <motion.div
                 key={title}
                 className={`grid grid-cols-1 gap-8 py-14 lg:grid-cols-2 lg:gap-16 ${i !== 0 ? "border-t border-[#ECECEC]" : ""}`}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, ease: "easeOut" }}
+                viewport={{ once: true, margin: "-80px" }}
               >
                 {/* Left — pitch */}
                 <div className="flex flex-col justify-center">
@@ -104,14 +111,16 @@ export default function IndustriesSection() {
                   <ul className="my-6 flex flex-1 flex-col gap-3">
                     {details.map((d) => (
                       <li key={d} className="flex items-center gap-2.5 text-[15px] font-normal leading-[1.4] text-[#111]">
-                        <span className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: color }} />
+                        <svg className="h-4 w-4 shrink-0" style={{ color }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
                         {d}
                       </li>
                     ))}
                   </ul>
                   <ArrowLink>Learn more</ArrowLink>
                 </Link>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

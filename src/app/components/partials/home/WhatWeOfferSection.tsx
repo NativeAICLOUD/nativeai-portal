@@ -1,27 +1,27 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { type LucideIcon } from 'lucide-react';
+import { Compass, FlaskConical, Rocket, type LucideIcon } from 'lucide-react';
 
-const steps: { title: string; desc: string; icon: LucideIcon | string; color: string; bg: string }[] = [
+const steps: { title: string; desc: string; icon: LucideIcon; color: string; bg: string }[] = [
   {
     title: 'Discovery Session',
     desc: 'We use proven decision-making framework to get all stakeholders on the same page.',
-    icon: '/icons/intersect-yellow.svg',
+    icon: Compass,
     color: '#A16207',
     bg: '#FBF7E8',
   },
   {
     title: 'Prototype & Validate',
     desc: 'We use technical POC or clickable prototypes to develop a proven product hypothesis.',
-    icon: '/icons/stack-green.svg',
+    icon: FlaskConical,
     color: '#166962',
     bg: '#EEF8F6',
   },
   {
     title: 'Development & Growth',
     desc: 'Ship a validated Minimum Viable Product and iteratively deliver high-impact enhancements.',
-    icon: '/icons/icon-development-services.svg',
+    icon: Rocket,
     color: '#FF4F8B',
     bg: '#FFF0F5',
   },
@@ -62,9 +62,7 @@ export default function WhatWeOfferSection() {
 
           {/* Columns */}
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8">
-            {steps.map(({ title, desc, icon, color, bg }, i) => {
-              const GlyphIcon = typeof icon === 'string' ? null : icon;
-              return (
+            {steps.map(({ title, desc, icon: Icon, color, bg }, i) => (
               <motion.div
                 key={title}
                 className="group transition-transform duration-[250ms] ease-out hover:-translate-y-[6px]"
@@ -77,14 +75,7 @@ export default function WhatWeOfferSection() {
                   className="grid h-12 w-12 place-items-center rounded-[14px] transition-[filter] duration-[250ms] ease-out group-hover:brightness-[0.97]"
                   style={{ background: bg }}
                 >
-                  {typeof icon === 'string' ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={icon} alt="" className="h-6 w-6 object-contain" aria-hidden="true" />
-                  ) : (
-                    GlyphIcon && (
-                      <GlyphIcon style={{ color, height: 24, width: 24 }} strokeWidth={1.7} aria-hidden="true" />
-                    )
-                  )}
+                  <Icon style={{ color, height: 24, width: 24 }} strokeWidth={1.7} aria-hidden="true" />
                 </span>
 
                 <h3
@@ -100,8 +91,7 @@ export default function WhatWeOfferSection() {
                   {desc}
                 </p>
               </motion.div>
-              );
-            })}
+            ))}
           </div>
         </div>
       </div>

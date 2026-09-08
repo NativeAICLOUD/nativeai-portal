@@ -2,8 +2,8 @@
 
 import { motion } from 'framer-motion';
 import {
-  Zap, Landmark, ShieldCheck, CreditCard, Truck, Cpu, Plane,
-  Scale, Wallet, ShoppingBag, HardHat, Boxes,
+  Lightbulb, Landmark, ShieldCheck, CreditCard, Route, Cpu, Plane,
+  Scale, Wallet, ShoppingBag, Building2, Network,
   type LucideIcon,
 } from 'lucide-react';
 import { CONTAINER, Eyebrow, SECTION_Y, H2, FeatureCard } from './HomeUI';
@@ -18,18 +18,18 @@ type Industry = {
 };
 
 const industries: Industry[] = [
-  { title: 'Energy and Resources',       desc: 'Data platforms and automation for energy, utilities and resource operations.', href: '/industries',         icon: Zap },
+  { title: 'Energy and Resources',       desc: 'Data platforms and automation for energy, utilities and resource operations.', href: '/industries',         icon: Lightbulb },
   { title: 'Finance and Banking',        desc: 'Secure, compliant platforms for banks and financial institutions.',            href: '/industries',         icon: Landmark },
   { title: 'Insurance',                  desc: 'Claims automation, risk analytics and policy workflows.',                      href: '/industries',         icon: ShieldCheck },
   { title: 'Payments',                   desc: 'Billing, reconciliation and payment automation at scale.',                     href: '/payment-automation', icon: CreditCard },
-  { title: 'Supply Chain and Logistics', desc: 'Visibility, tracking and optimisation across the whole chain.',               href: '/industries',         icon: Truck },
+  { title: 'Supply Chain and Logistics', desc: 'Visibility, tracking and optimisation across the whole chain.',               href: '/industries',         icon: Route },
   { title: 'Technology',                 desc: 'Product engineering for software and SaaS companies.',                         href: '/industries',         icon: Cpu },
   { title: 'Travel',                     desc: 'GDS-connected booking and travel platforms.',                                  href: '/airline-booking',    icon: Plane },
   { title: 'Legal & Compliance',         desc: 'AI document and case workflows for legal teams.',                              href: '/ai-legal-workspace', icon: Scale },
   { title: 'Fintech',                    desc: 'Modern rails for lending, payments and wealth products.',                      href: '/payment-automation', icon: Wallet },
   { title: 'E-commerce & Retail',        desc: 'Scalable storefronts, logistics and personalisation.',                         href: '/industries',         icon: ShoppingBag },
-  { title: 'Construction',               desc: 'Project, site and resource management systems.',                               href: '/industries',         icon: HardHat },
-  { title: 'B2B Solutions',              desc: 'Portals, integrations and workflow platforms for B2B.',                        href: '/industries',         icon: Boxes },
+  { title: 'Construction',               desc: 'Project, site and resource management systems.',                               href: '/industries',         icon: Building2 },
+  { title: 'B2B Solutions',              desc: 'Portals, integrations and workflow platforms for B2B.',                        href: '/industries',         icon: Network },
 ];
 
 export default function IndustriesBusinessDomain() {
