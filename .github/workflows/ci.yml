@@ -35,6 +35,13 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Generate Next.js types
+        # `next-env.d.ts` is gitignored and normally regenerated as a side
+        # effect of any `next` CLI command. Under Next 15 that was `next
+        # lint`; Next 16 removes it, so it must be created explicitly before
+        # a standalone `tsc` run, or static asset imports fail to resolve.
+        run: npx next typegen
+
       - name: Type check
         run: npx tsc --noEmit
 
