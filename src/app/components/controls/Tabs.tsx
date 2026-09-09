@@ -1,6 +1,6 @@
 'use client';
 
-import { Tab, Transition } from '@headlessui/react';
+import { Tab, TabGroup, TabList, TabPanel, TabPanels, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
@@ -34,8 +34,8 @@ const MyTabs = ({
 
   return (
     <div className={`w-full ${cls.root || ''}`}>
-      <Tab.Group selectedIndex={tabIndex} onChange={setTabIndex}>
-        <Tab.List className={`flex gap-2 ${cls.tabHeader}`}>
+      <TabGroup selectedIndex={tabIndex} onChange={setTabIndex}>
+        <TabList className={`flex gap-2 ${cls.tabHeader}`}>
           {_labels.map((label, idx) =>
             <Tab as={Fragment} key={idx}>
               {({ selected }) =>
@@ -49,11 +49,11 @@ const MyTabs = ({
                 </div>}
             </Tab>
           )}
-        </Tab.List>
-        <Tab.Panels className={twMerge("p-1", cls.panel)}>
+        </TabList>
+        <TabPanels className={twMerge("p-1", cls.panel)}>
           {children.map((item, idx) =>
-            <Tab.Panel static={true} key={idx}>
-              <Transition appear show={tabIndex === idx}
+            <TabPanel static={true} key={idx}>
+              <Transition as="div" appear show={tabIndex === idx}
                 className="transition-all duration-500 overflow-hidden"
                 enterFrom="transform scale-95 opacity-0"
                 enterTo="transform scale-100 opacity-100"
@@ -63,10 +63,10 @@ const MyTabs = ({
                   {item}
                 </div>
               </Transition>
-            </Tab.Panel>
+            </TabPanel>
           )}
-        </Tab.Panels>
-      </Tab.Group>
+        </TabPanels>
+      </TabGroup>
     </div>
   );
 }

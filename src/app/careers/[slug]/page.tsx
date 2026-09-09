@@ -31,7 +31,8 @@ export async function generateStaticParams() {
   return getJobs().map((j) => ({ slug: j.slug }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const params = await props.params;
   const job = getJobs().find((j) => j.slug === params.slug);
   if (!job) return {};
   return {
@@ -57,7 +58,8 @@ const TYPE_COLORS: Record<string, { bg: string; color: string }> = {
   Contract:    { bg: '#f3f4f6', color: '#374151' },
 };
 
-export default function JobDetailPage({ params }: { params: { slug: string } }) {
+export default async function JobDetailPage(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const job = getJobs().find((j) => j.slug === params.slug);
   if (!job) notFound();
 

@@ -1,9 +1,9 @@
 import db from "@/lib/db";
 import { verifyJwtToken } from "@/lib/jwt";
 import Comment from "@/models/Comment";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
     await db.connect()
 
     const accessToken = req.headers.get('authorization') as any;

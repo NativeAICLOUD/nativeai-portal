@@ -9,7 +9,8 @@ export function generateStaticParams() {
   return Object.keys(services).map((slug) => ({ slug }));
 }
 
-export default function ServicePage({ params }: { params: { slug: string } }) {
+export default async function ServicePage(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const service = services[params.slug];
 
   if (!service) {

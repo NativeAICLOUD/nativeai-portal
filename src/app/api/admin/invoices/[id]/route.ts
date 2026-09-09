@@ -4,7 +4,8 @@ import Invoice from "@/models/Invoice";
 import "@/models/Client";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, props: { params: Promise<{ id: string }> }) {
+    const params = await props.params;
     await db.connect()
     const auth = requireAdmin(req)
     if (!auth.ok) return auth.response
@@ -18,7 +19,8 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     }
 }
 
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(req: NextRequest, props: { params: Promise<{ id: string }> }) {
+    const params = await props.params;
     await db.connect()
     const auth = requireAdmin(req)
     if (!auth.ok) return auth.response

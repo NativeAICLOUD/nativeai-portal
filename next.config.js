@@ -22,9 +22,9 @@ const nextConfig = {
   // production build can run while `next dev` holds locks on .next
   distDir: process.env.NEXT_DIST_DIR || '.next',
   reactStrictMode: false,
+  serverExternalPackages: ["mongoose"],
   experimental: {
     scrollRestoration: true,
-    serverComponentsExternalPackages: ["mongoose"],
   },
   async headers() {
     return [
@@ -39,13 +39,21 @@ const nextConfig = {
       },
     ];
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   images: {
       remotePatterns: [
           { hostname: 'res.cloudinary.com', protocol: 'https', port: '' }
       ]
+  },
+  // `next dev` uses Turbopack by default as of Next.js 16. This mirrors the
+  // webpack `resolve.fallback` below so Node-only builtins still don't leak
+  // into client bundles in dev. Production builds still run on webpack (see
+  // the `build` script's `--webpack` flag) because next-pwa only hooks webpack.
+  turbopack: {
+    resolveAlias: {
+      fs: { browser: './scripts/empty-module.js' },
+      net: { browser: './scripts/empty-module.js' },
+      tls: { browser: './scripts/empty-module.js' },
+    },
   },
 };
 

@@ -5,7 +5,8 @@ import "@/models/Client";
 import { sendInvoiceEmail } from "@/lib/invoice-email";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(req: NextRequest, props: { params: Promise<{ id: string }> }) {
+    const params = await props.params;
     await db.connect()
     const auth = requireAdmin(req)
     if (!auth.ok) return auth.response

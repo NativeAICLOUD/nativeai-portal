@@ -1,11 +1,12 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, use } from 'react';
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { showToast } from '@/app/components/controls/Toast'
 
-const Edit = (ctx: any) => {
+const Edit = (ctx: { params: Promise<{ id: string }> }) => {
+    const params = use(ctx.params);
     const CLOUD_NAME = 'doojo83ea'
     const UPLOAD_PRESET = 'my_blog_project_webdevmania'
     const [title, setTitle] = useState("")
@@ -17,7 +18,7 @@ const Edit = (ctx: any) => {
 
     useEffect(() => {
         async function fetchBlog() {
-            const res = await fetch(`http://localhost:3000/api/blog/${ctx.params.id}`)
+            const res = await fetch(`http://localhost:3000/api/blog/${params.id}`)
 
             const blog = await res.json()
 
@@ -66,7 +67,7 @@ const Edit = (ctx: any) => {
             }
 
             const user = session?.user as any;
-            const res = await fetch(`http://localhost:3000/api/blog/${ctx.params.id}`, {
+            const res = await fetch(`http://localhost:3000/api/blog/${params.id}`, {
                 headers: {
                     "Content-Type": 'application/json',
                     "Authorization": `Bearer ${user?.accessToken}`

@@ -9,7 +9,7 @@ const MONO: React.CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 28 },
   whileInView: { opacity: 1, y: 0 } as const,
-  transition: { duration: 0.55, ease: 'easeOut', delay },
+  transition: { duration: 0.55, ease: 'easeOut', delay } as const,
   viewport: { once: true, margin: '-60px' },
 });
 

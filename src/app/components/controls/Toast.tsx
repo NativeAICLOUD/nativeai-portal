@@ -4,8 +4,8 @@ type Props = {
   title?: string;
   description?: string;
   type?: 'success' | 'error' | 'warning' | 'info';
-  icon?: React.ReactElement;
-  action?: React.ReactElement;
+  icon?: React.ReactElement<any>;
+  action?: React.ReactElement<any>;
   options?: ToastOptions<{}>
 }
 

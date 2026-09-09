@@ -1,9 +1,9 @@
 import db from "@/lib/db";
 import bcrypt from 'bcrypt'
 import User from '@/models/User'
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
     try {
         await db.connect()
 

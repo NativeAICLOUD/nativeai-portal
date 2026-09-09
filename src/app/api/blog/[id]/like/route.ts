@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function PUT(req: NextRequest, res: any) {
     await db.connect()
 
-    const id = res.params.id
+    const id = (await res.params).id
 
     const accessToken = req.headers.get("authorization")
     const token = accessToken ? accessToken?.split(" ")[1] : '';

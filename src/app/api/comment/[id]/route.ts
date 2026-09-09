@@ -7,7 +7,7 @@ export async function GET(req: NextRequest, res: any) {
     await db.connect()
 
     // blog id !!
-    const id = res.params.id
+    const id = (await res.params).id
 
     try {
         const comments = await Comment.find({ blogId: id }).populate('authorId')
@@ -21,7 +21,7 @@ export async function GET(req: NextRequest, res: any) {
 export async function DELETE(req: NextRequest, res: any) {
     await db.connect()
 
-    const id = res?.params?.id
+    const id = (await res?.params)?.id
     const accessToken = req.headers.get('authorization') as any;
     const token = accessToken ? accessToken?.split(" ")[1] : '';
 

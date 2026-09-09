@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import ArticleClient from '@/app/components/partials/knowledge-base/ArticleClient';
 import richArticles from '@/data/richArticles';
 
-type PageProps = { params: { id: string } };
+type PageProps = { params: Promise<{ id: string }> };
 
 // Prerender every article at build time so production requests are served
 // statically instead of rendering on-demand in a serverless function.
@@ -28,7 +28,8 @@ function resolveOgImage(imagePath: string): string {
   return `${base}${encoded}`;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const params = await props.params;
   const id = parseArticleId(params?.id);
   const post = id !== undefined ? await getSinglePost(id) : undefined;
   if (!post) return {};
@@ -101,7 +102,8 @@ function buildSections(desc: string, id: number) {
   })).filter((s) => s.content.length > 0);
 }
 
-const KnowledgeBaseDetailPage = async ({ params }: PageProps) => {
+const KnowledgeBaseDetailPage = async (props: PageProps) => {
+  const params = await props.params;
   const id = parseArticleId(params?.id);
   if (id === undefined) {
     console.error(`[knowledge-base] Invalid article id in URL: "${params?.id}"`);

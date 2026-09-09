@@ -24,7 +24,8 @@ export async function generateStaticParams() {
   return getJobs().map((j) => ({ slug: j.slug }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const params = await props.params;
   const job = getJobs().find((j) => j.slug === params.slug);
   if (!job) return {};
   return {
@@ -33,7 +34,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default function ApplyPage({ params }: { params: { slug: string } }) {
+export default async function ApplyPage(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const job = getJobs().find((j) => j.slug === params.slug);
   if (!job) notFound();
 

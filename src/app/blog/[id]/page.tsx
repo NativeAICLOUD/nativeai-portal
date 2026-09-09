@@ -4,12 +4,13 @@ import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { Link } from 'react-transition-progress/next'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, use } from 'react';
 import { format } from 'timeago.js'
 import person from '../../../../public/img/person.jpg'
 import BlogComment from '@/app/components/partials/blog/BlogComment'
 
-const BlogDetails = (ctx: any) => {
+const BlogDetails = (ctx: { params: Promise<{ id: string }> }) => {
+    const params = use(ctx.params);
     const [blogDetails, setBlogDetails] = useState<any>("")
     const [isLiked, setIsLiked] = useState(false)
     const [blogLikes, setBlogLikes] = useState(0)
@@ -22,7 +23,7 @@ const BlogDetails = (ctx: any) => {
 
     useEffect(() => {
         async function fetchComments() {
-            const res = await fetch(`http://localhost:3000/api/comment/${ctx.params.id}`, { cache: 'no-store' })
+            const res = await fetch(`http://localhost:3000/api/comment/${params.id}`, { cache: 'no-store' })
             const comments = await res.json()
 
             setComments(comments)
@@ -33,7 +34,7 @@ const BlogDetails = (ctx: any) => {
 
     useEffect(() => {
         async function fetchBlog() {
-            const res = await fetch(`http://localhost:3000/api/blog/${ctx.params.id}`, { cache: 'no-store' })
+            const res = await fetch(`http://localhost:3000/api/blog/${params.id}`, { cache: 'no-store' })
             const blog = await res.json()
 
             setBlogDetails(blog)
@@ -48,7 +49,7 @@ const BlogDetails = (ctx: any) => {
             const confirmModal = confirm("Are you sure you want to delete your blog?")
 
             if (confirmModal) {
-                const res = await fetch(`http://localhost:3000/api/blog/${ctx.params.id}`, {
+                const res = await fetch(`http://localhost:3000/api/blog/${params.id}`, {
                     headers: {
                         'Authorization': `Bearer ${(session?.user as any)?.accessToken}`
                     },
@@ -66,7 +67,7 @@ const BlogDetails = (ctx: any) => {
 
     const handleLike = async () => {
         try {
-            const res = await fetch(`http://localhost:3000/api/blog/${ctx.params.id}/like`, {
+            const res = await fetch(`http://localhost:3000/api/blog/${params.id}/like`, {
                 headers: {
                     'Authorization': `Bearer ${(session?.user as any)?.accessToken}`
                 },
@@ -101,7 +102,7 @@ const BlogDetails = (ctx: any) => {
         try {
             const user = session?.user as any;
             const body = {
-                blogId: ctx.params.id,
+                blogId: params.id,
                 authorId: user?._id,
                 text: commentText
             }
@@ -137,7 +138,7 @@ const BlogDetails = (ctx: any) => {
                         blogDetails?.authorId?._id.toString() === (session?.user as any)?._id.toString()
                             ? (
                                 <div className={'controls flex items-center gap-8'}>
-                                    <Link className={'editButton outline-none border border-transparent bg-[#3eda22] text-white py-2 px-5 flex gap-3 items-center rounded-lg cursor-pointer text-lg font-bold transition duration-150 hover:bg-white hover:border-[#3eda22] hover:text-[#3eda22]'} href={`/blog/edit/${ctx.params.id}`}>
+                                    <Link className={'editButton outline-none border border-transparent bg-[#3eda22] text-white py-2 px-5 flex gap-3 items-center rounded-lg cursor-pointer text-lg font-bold transition duration-150 hover:bg-white hover:border-[#3eda22] hover:text-[#3eda22]'} href={`/blog/edit/${params.id}`}>
                                         Edit
                                     </Link>
                                     <button onClick={handleDelete} className={'deleteButton outline-none border border-transparent bg-red-600 text-white py-2 px-5 flex gap-3 items-center rounded-lg cursor-pointer text-lg font-bold transition duration-150 hover:bg-white hover:border-red-600 hover:text-red-600'}>
@@ -183,7 +184,7 @@ const BlogDetails = (ctx: any) => {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default BlogDetails
