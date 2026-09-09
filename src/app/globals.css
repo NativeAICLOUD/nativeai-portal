@@ -29,8 +29,18 @@
   .industries-hero-bg-soft {
     background:
       radial-gradient(circle at 15% 100%, rgba(224, 225, 255, 0.75), transparent 43%),
-      radial-gradient(circle at 80% 100%, rgba(255, 237, 189, 0.35), transparent 48%),
-      radial-gradient(circle at 100% 70%, rgba(255, 225, 215, 0.3), transparent 43%),
+      radial-gradient(circle at 80% 100%, rgba(255, 237, 189, 0.18), transparent 48%),
+      radial-gradient(circle at 100% 70%, rgba(255, 225, 215, 0.15), transparent 43%),
+      #ffffff;
+  }
+
+  /* Even further dialed-back warm tones than industries-hero-bg-soft —
+     for pages where that variant still reads too warm. */
+  .industries-hero-bg-softer {
+    background:
+      radial-gradient(circle at 15% 100%, rgba(224, 225, 255, 0.75), transparent 43%),
+      radial-gradient(circle at 80% 100%, rgba(255, 237, 189, 0.045), transparent 48%),
+      radial-gradient(circle at 100% 70%, rgba(255, 225, 215, 0.035), transparent 43%),
       #ffffff;
   }
 

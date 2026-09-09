@@ -87,7 +87,7 @@ export default function AIAgentsRAGPage() {
     <div className="font-switzer">
 
       {/* ── Hero ── */}
-      <div className="industries-hero-bg-soft">
+      <div className="industries-hero-bg-softer">
         <div className={`${CONTAINER} pb-12 pt-32 lg:pt-28`}>
           <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
 
@@ -97,10 +97,6 @@ export default function AIAgentsRAGPage() {
               <h1 className="m-0 text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
                 AI that works inside your business.
               </h1>
-              <p className="mt-6 max-w-[520px] text-[18px] font-light leading-[1.6] text-[#111]">
-                We implement AI Agents &amp; LLMs that automate decisions, workflows, and
-                operations — connected to your own data and tools.
-              </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <PrimaryButton href="/schedule-call">Book an AI consultation</PrimaryButton>
                 <SecondaryButton href="/solutions">See all solutions</SecondaryButton>

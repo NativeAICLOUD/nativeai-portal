@@ -70,7 +70,7 @@ export default async function JobDetailPage(props: { params: Promise<{ slug: str
     <main className="font-switzer min-h-screen bg-white pb-24">
 
       {/* ── Hero ── */}
-      <div className="industries-hero-bg">
+      <div className="industries-hero-bg-softer">
         <div className="relative mx-auto max-w-[820px] px-5 sm:px-8 pt-32 pb-10">
 
           {/* Breadcrumb */}

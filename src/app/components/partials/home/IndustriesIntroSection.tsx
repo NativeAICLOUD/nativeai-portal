@@ -5,12 +5,12 @@ import { Scale, Landmark, Plane, CreditCard, ShoppingBag, type LucideIcon } from
 import { Constants } from '@/Constants';
 import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton, SECTION_Y } from './HomeUI';
 
-const industries: { label: string; icon: LucideIcon }[] = [
-  { label: 'Legal & Compliance', icon: Scale },
-  { label: 'Finance & Banking', icon: Landmark },
-  { label: 'Travel & Aviation', icon: Plane },
-  { label: 'Payments', icon: CreditCard },
-  { label: 'E-commerce', icon: ShoppingBag },
+const industries: { label: string; icon: LucideIcon; color: string; bg: string }[] = [
+  { label: 'Legal & Compliance', icon: Scale, color: '#7C3AED', bg: '#F4F0FE' },
+  { label: 'Finance & Banking', icon: Landmark, color: '#15803D', bg: '#EBF7EE' },
+  { label: 'Travel & Aviation', icon: Plane, color: '#0284C7', bg: '#E8F6FD' },
+  { label: 'Payments', icon: CreditCard, color: '#B45309', bg: '#FDF3E7' },
+  { label: 'E-commerce', icon: ShoppingBag, color: '#E11D48', bg: '#FDEEF1' },
 ];
 
 /* Same design as the nearshore intro, themed for industries */
@@ -50,12 +50,12 @@ export default function IndustriesIntroSection() {
                   boxShadow: '0 8px 32px rgba(15,23,42,0.08)',
                 }}
               >
-                <div className="mb-1 pl-[50px]"><Eyebrow>Industry focus</Eyebrow></div>
+                <div className="mb-1 pl-16"><Eyebrow>Industry focus</Eyebrow></div>
                 <ul role="list" className="mt-3 divide-y divide-black/[0.06]">
-                  {industries.map(({ label, icon: Icon }) => (
-                    <li key={label} className="flex items-center gap-3.5 py-3 first:pt-0 last:pb-0">
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[rgba(37,99,235,0.1)]">
-                        <Icon className="h-[18px] w-[18px] text-[#2563EB]" strokeWidth={1.7} aria-hidden="true" />
+                  {industries.map(({ label, icon: Icon, color, bg }) => (
+                    <li key={label} className="flex items-center gap-4 py-3.5 first:pt-0 last:pb-0">
+                      <span className="grid h-12 w-12 shrink-0 place-items-center rounded-[14px]" style={{ background: bg }}>
+                        <Icon style={{ color, height: 24, width: 24 }} strokeWidth={1.7} aria-hidden="true" />
                       </span>
                       <span className="text-[14.5px] font-medium text-[#111827]">{label}</span>
                     </li>

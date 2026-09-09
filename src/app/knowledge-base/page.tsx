@@ -39,7 +39,7 @@ const KnowledgeBasePage = async () => {
     <div className="font-switzer">
 
       {/* ── Hero ── */}
-      <div className="industries-hero-bg">
+      <div className="hero-bg-blue">
         <div className={`${CONTAINER} pb-12 pt-32 lg:pt-28`}>
           <div className="mb-6"><Eyebrow>Guides · Articles · News</Eyebrow></div>
           <h1 className="m-0 max-w-3xl text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">

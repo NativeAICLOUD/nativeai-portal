@@ -25,8 +25,8 @@ function HomeHeader() {
           .hero-gradient-bg {
             background:
               radial-gradient(circle at 15% 100%, rgba(190,203,255,0.5), transparent 48%),
-              radial-gradient(circle at 80% 100%, rgba(255,237,189,0.26), transparent 48%),
-              radial-gradient(circle at 100% 70%, rgba(255,225,215,0.20), transparent 43%),
+              radial-gradient(circle at 80% 100%, rgba(255,237,189,0.065), transparent 48%),
+              radial-gradient(circle at 100% 70%, rgba(255,225,215,0.05), transparent 43%),
               #ffffff;
           }
         `}</style>
