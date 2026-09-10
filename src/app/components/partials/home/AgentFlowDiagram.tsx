@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 /* ─── nodes (x/y as % of square container) ─── */
 const nodes = [
   { id: 'input',  x: 50, y:  5, label: 'INPUT',      sub: 'User Request',   cat: 'neutral', hero: false },
-  { id: 'agent',  x: 50, y: 23, label: 'AI AGENT',   sub: 'Orchestrator',   cat: 'orange',  hero: true  },
+  { id: 'agent',  x: 50, y: 23, label: 'AI AGENT',   sub: 'Orchestrator',   cat: 'brand',   hero: true  },
   { id: 'gpt',    x: 17, y: 46, label: 'GPT-4o',     sub: 'Language Model', cat: 'blue',    hero: false },
   { id: 'mcp',    x: 83, y: 46, label: 'MCP',        sub: 'Protocol',       cat: 'purple',  hero: false },
   { id: 'srv',    x: 83, y: 64, label: 'MCP Server', sub: 'Tool Runtime',   cat: 'purple',  hero: false },
@@ -27,7 +27,7 @@ const edges = [
 
 
 const P: Record<string, { bd: string; tx: string; sh: string }> = {
-  orange:  { bd: 'rgba(232,154,120,0.55)', tx: '#e89a78', sh: '0 0 22px rgba(232,154,120,0.28)' },
+  brand:   { bd: 'rgba(37,99,235,0.55)',   tx: '#2563EB', sh: '0 0 22px rgba(37,99,235,0.28)'   },
   blue:    { bd: 'rgba(96,165,250,0.45)',  tx: '#60a5fa', sh: '0 0 16px rgba(96,165,250,0.18)'  },
   purple:  { bd: 'rgba(167,139,250,0.45)', tx: '#a78bfa', sh: '0 0 16px rgba(167,139,250,0.18)' },
   azure:   { bd: 'rgba(56,189,248,0.45)',  tx: '#38bdf8', sh: '0 0 14px rgba(56,189,248,0.18)'  },
@@ -94,7 +94,7 @@ export default function AgentFlowDiagram() {
           transform: 'translate(-50%,-50%)',
           width: 280, height: 280,
           borderRadius: '50%',
-          background: 'radial-gradient(ellipse, rgba(232,154,120,0.08) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse, rgba(37,99,235,0.08) 0%, transparent 70%)',
         }}
       />
 
@@ -127,7 +127,7 @@ export default function AgentFlowDiagram() {
             {/* animated dashes */}
             <motion.path
               d={e.d} fill="none"
-              stroke="rgba(232,154,120,0.45)"
+              stroke="rgba(37,99,235,0.45)"
               strokeWidth="0.4"
               strokeDasharray="2 2.5"
               strokeLinecap="round"
@@ -188,12 +188,12 @@ export default function AgentFlowDiagram() {
                 <motion.span
                   animate={{ scale: [1, 1.55, 1], opacity: [0.4, 0, 0.4] }}
                   transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
-                  style={{ position: 'absolute', inset: -14, borderRadius: 24, border: '1px solid rgba(232,154,120,0.28)', pointerEvents: 'none' }}
+                  style={{ position: 'absolute', inset: -14, borderRadius: 24, border: '1px solid rgba(37,99,235,0.28)', pointerEvents: 'none' }}
                 />
                 <motion.span
                   animate={{ scale: [1, 1.28, 1], opacity: [0.3, 0, 0.3] }}
                   transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
-                  style={{ position: 'absolute', inset: -7, borderRadius: 20, border: '1px solid rgba(232,154,120,0.2)', pointerEvents: 'none' }}
+                  style={{ position: 'absolute', inset: -7, borderRadius: 20, border: '1px solid rgba(37,99,235,0.2)', pointerEvents: 'none' }}
                 />
               </>
             )}

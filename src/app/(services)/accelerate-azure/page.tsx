@@ -69,7 +69,7 @@ export default function AccelerateAzurePage() {
       <div className="relative min-h-screen overflow-x-hidden" style={{ background: '#ffffff' }}>
         {/* ambient glows */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div style={{ position: 'absolute', top: '-10%', right: '-5%', width: 700, height: 700, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(232,154,120,0.10) 0%, transparent 65%)' }} />
+          <div style={{ position: 'absolute', top: '-10%', right: '-5%', width: 700, height: 700, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(37,99,235,0.10) 0%, transparent 65%)' }} />
           <div style={{ position: 'absolute', top: '40%', left: '-8%', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(91,124,250,0.06) 0%, transparent 65%)' }} />
           <div className="absolute inset-0" style={{ backgroundImage: "url('/img/noise-background.jpg')", backgroundSize: '280px 280px', opacity: 0.03 }} />
         </div>
@@ -86,14 +86,14 @@ export default function AccelerateAzurePage() {
             <div className="mt-10 flex flex-wrap items-center gap-3">
               <Link
                 href="/get-in-touch"
-                className="bg-[#e89a78] hover:bg-[#d4836a] text-white px-7 py-3.5 rounded-full text-base font-medium whitespace-nowrap hover:opacity-90 transition-opacity"
+                className="bg-[#2563EB] hover:bg-[#d4836a] text-white px-7 py-3.5 rounded-full text-base font-medium whitespace-nowrap hover:opacity-90 transition-opacity"
               >
                 Book a cloud assessment
               </Link>
               <Link
                 href="/get-in-touch"
                 aria-label="Get started"
-                className="w-12 h-12 rounded-full bg-[#e89a78] hover:bg-[#d4836a] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity"
+                className="w-12 h-12 rounded-full bg-[#2563EB] hover:bg-[#d4836a] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <path d="M7 17L17 7" />
@@ -120,7 +120,7 @@ export default function AccelerateAzurePage() {
             </p>
             <Link
               href="/get-in-touch"
-              className="shrink-0 self-start inline-flex items-center bg-[#e89a78] hover:bg-[#d4836a] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors whitespace-nowrap"
+              className="shrink-0 self-start inline-flex items-center bg-[#2563EB] hover:bg-[#d4836a] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors whitespace-nowrap"
             >
               Start your migration
             </Link>
@@ -162,7 +162,7 @@ export default function AccelerateAzurePage() {
             </h2>
             <Link
               href="/get-in-touch"
-              className="shrink-0 self-start lg:self-end inline-flex items-center bg-[#e89a78] hover:bg-[#d4836a] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors whitespace-nowrap"
+              className="shrink-0 self-start lg:self-end inline-flex items-center bg-[#2563EB] hover:bg-[#d4836a] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors whitespace-nowrap"
             >
               Grow with us
             </Link>

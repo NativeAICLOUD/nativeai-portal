@@ -69,7 +69,7 @@ export default function AILegalWorkspacePage() {
       <div className="relative min-h-screen overflow-x-hidden" style={{ background: '#ffffff' }}>
         {/* ambient glows */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div style={{ position: 'absolute', top: '-10%', right: '-5%', width: 700, height: 700, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(232,154,120,0.10) 0%, transparent 65%)' }} />
+          <div style={{ position: 'absolute', top: '-10%', right: '-5%', width: 700, height: 700, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(37,99,235,0.10) 0%, transparent 65%)' }} />
           <div style={{ position: 'absolute', top: '40%', left: '-8%', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(91,124,250,0.06) 0%, transparent 65%)' }} />
           <div className="absolute inset-0" style={{ backgroundImage: "url('/img/noise-background.jpg')", backgroundSize: '280px 280px', opacity: 0.03 }} />
         </div>
@@ -77,7 +77,7 @@ export default function AILegalWorkspacePage() {
         {/* Hero */}
         <section className="relative min-h-[85vh] overflow-hidden">
           <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-20 min-h-[85vh] flex flex-col">
-            <p className="text-sm font-semibold uppercase tracking-widest text-[#e89a78] mb-4">
+            <p className="text-sm font-semibold uppercase tracking-widest text-[#2563EB] mb-4">
               NativeCloud Product
             </p>
             <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold text-[#0a0e1a] leading-[1.05] max-w-3xl">
@@ -92,14 +92,14 @@ export default function AILegalWorkspacePage() {
             <div className="mt-10 flex flex-wrap items-center gap-3">
               <Link
                 href="/schedule-call"
-                className="bg-[#e89a78] hover:bg-[#d4836a] text-white px-7 py-3.5 rounded-full text-base font-medium whitespace-nowrap hover:opacity-90 transition-opacity"
+                className="bg-[#2563EB] hover:bg-[#d4836a] text-white px-7 py-3.5 rounded-full text-base font-medium whitespace-nowrap hover:opacity-90 transition-opacity"
               >
                 Book a demo
               </Link>
               <Link
                 href="/schedule-call"
                 aria-label="Book a demo"
-                className="w-12 h-12 rounded-full bg-[#e89a78] hover:bg-[#d4836a] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity"
+                className="w-12 h-12 rounded-full bg-[#2563EB] hover:bg-[#d4836a] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <path d="M7 17L17 7" />
@@ -126,7 +126,7 @@ export default function AILegalWorkspacePage() {
             </p>
             <Link
               href="/schedule-call"
-              className="shrink-0 self-start inline-flex items-center bg-[#e89a78] hover:bg-[#d4836a] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors whitespace-nowrap"
+              className="shrink-0 self-start inline-flex items-center bg-[#2563EB] hover:bg-[#d4836a] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors whitespace-nowrap"
             >
               See the platform
             </Link>
@@ -168,7 +168,7 @@ export default function AILegalWorkspacePage() {
             </h2>
             <Link
               href="/schedule-call"
-              className="shrink-0 self-start lg:self-end inline-flex items-center bg-[#e89a78] hover:bg-[#d4836a] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors whitespace-nowrap"
+              className="shrink-0 self-start lg:self-end inline-flex items-center bg-[#2563EB] hover:bg-[#d4836a] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors whitespace-nowrap"
             >
               Book a demo
             </Link>

@@ -27,7 +27,7 @@ const services = [
   {
     title: 'Managed Delivery Teams',
     desc: 'End-to-end delivery ownership with built-in accountability. We bring the team, the process, and the discipline — you focus on outcomes.',
-    color: '#e89a78',
+    color: '#2563EB',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
         <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
@@ -126,10 +126,10 @@ export default function NearshoreTeamsSection() {
           >
             <div
               className="absolute inset-0 pointer-events-none"
-              style={{ background: 'radial-gradient(ellipse 60% 80% at 80% 20%, rgba(232,154,120,0.12) 0%, transparent 60%), radial-gradient(ellipse 50% 60% at 10% 80%, rgba(91,124,250,0.10) 0%, transparent 60%)' }}
+              style={{ background: 'radial-gradient(ellipse 60% 80% at 80% 20%, rgba(37,99,235,0.12) 0%, transparent 60%), radial-gradient(ellipse 50% 60% at 10% 80%, rgba(91,124,250,0.10) 0%, transparent 60%)' }}
             />
             <div className="relative z-[1] flex flex-col gap-4 flex-1">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: 'rgba(232,154,120,0.12)', color: '#e89a78' }}>
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: 'rgba(37,99,235,0.12)', color: '#2563EB' }}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                   <circle cx="9" cy="7" r="4"/>
@@ -143,7 +143,7 @@ export default function NearshoreTeamsSection() {
                 </p>
               </div>
             </div>
-            <div className="relative z-[1] mt-6 flex items-center gap-1.5 text-[12px] font-semibold text-[#e89a78]">
+            <div className="relative z-[1] mt-6 flex items-center gap-1.5 text-[12px] font-semibold text-[#2563EB]">
               Four areas. One team. Full delivery.
             </div>
           </motion.div>
@@ -153,7 +153,7 @@ export default function NearshoreTeamsSection() {
             <motion.div
               key={service.title}
               {...fadeUp((i + 1) * 0.07)}
-              className="group relative rounded-2xl border border-[#e8e0d8] bg-white hover:border-[#e89a78]/50 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-300 overflow-hidden p-6 sm:p-7 flex flex-col gap-5"
+              className="group relative rounded-2xl border border-[#e8e0d8] bg-white hover:border-[#2563EB]/50 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-300 overflow-hidden p-6 sm:p-7 flex flex-col gap-5"
             >
               <div
                 className="absolute -top-6 -right-6 w-32 h-32 rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"

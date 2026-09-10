@@ -10,7 +10,7 @@ function RelatedArticles({ posts }: { posts: IPost[] }) {
     <div>
       <div className="flex items-center justify-between mb-8">
         <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0a0e1a]">More articles</h2>
-        <Link href="/knowledge-base" className="text-sm font-medium text-[#e89a78] hover:text-[#d4836a] transition-colors inline-flex items-center gap-1">
+        <Link href="/knowledge-base" className="text-sm font-medium text-[#2563EB] hover:text-[#d4836a] transition-colors inline-flex items-center gap-1">
           View all
           <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
             <path d="M5 12h14M12 5l7 7-7 7" />

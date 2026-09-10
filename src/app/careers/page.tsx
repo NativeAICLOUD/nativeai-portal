@@ -74,10 +74,6 @@ export default function CareersPage() {
           <h1 className="m-0 max-w-3xl text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
             Build the future of enterprise cloud.
           </h1>
-          <p className="mt-6 max-w-[560px] text-[18px] font-light leading-[1.6] text-[#111]">
-            Join a small, senior team of cloud engineers, architects, and AI specialists — solving
-            real problems for real businesses on Azure and AWS.
-          </p>
           <div className="mt-8">
             <a
               href="https://www.linkedin.com/company/nativecloud"

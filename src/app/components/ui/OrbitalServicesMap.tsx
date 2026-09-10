@@ -44,8 +44,8 @@ export function OrbitalServicesMap() {
             <stop offset="100%" stopColor="#ffffff" stopOpacity="0"    />
           </radialGradient>
           <radialGradient id="nc-glow-coral" cx="50%" cy="50%" r="50%">
-            <stop offset="0%"   stopColor="#e89a78" stopOpacity="0.5" />
-            <stop offset="100%" stopColor="#e89a78" stopOpacity="0"   />
+            <stop offset="0%"   stopColor="#2563EB" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="#2563EB" stopOpacity="0"   />
           </radialGradient>
         </defs>
 
@@ -86,7 +86,7 @@ export function OrbitalServicesMap() {
             <mpath href="#nc-mp-i" />
           </animateMotion>
           <circle r="16" fill="url(#nc-glow-coral)" />
-          <circle r="3.5" fill="#e89a78" opacity="0.95" />
+          <circle r="3.5" fill="#2563EB" opacity="0.95" />
         </g>
       </svg>
     </div>

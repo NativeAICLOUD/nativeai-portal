@@ -49,7 +49,7 @@ const KBCard = ({ id, image, title, desc, date, category }: IPost & { category?:
         {isNew && (
           <span
             className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide"
-            style={{ background: '#e89a78', color: '#fff' }}
+            style={{ background: '#2563EB', color: '#fff' }}
           >
             New
           </span>
@@ -66,7 +66,7 @@ const KBCard = ({ id, image, title, desc, date, category }: IPost & { category?:
           <span className="text-[11px] font-medium text-[#0a0e1a]/35">{readingTime} min read</span>
         </div>
 
-        <h2 className="text-[#0a0e1a] font-bold text-lg leading-snug mb-3 group-hover:text-[#e89a78] transition-colors duration-200 line-clamp-2">
+        <h2 className="text-[#0a0e1a] font-bold text-lg leading-snug mb-3 group-hover:text-[#2563EB] transition-colors duration-200 line-clamp-2">
           {title}
         </h2>
 
@@ -74,7 +74,7 @@ const KBCard = ({ id, image, title, desc, date, category }: IPost & { category?:
           {desc}
         </p>
 
-        <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#e89a78]">
+        <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#2563EB]">
           Read article
           <svg className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
             <path d="M5 12h14M12 5l7 7-7 7" />

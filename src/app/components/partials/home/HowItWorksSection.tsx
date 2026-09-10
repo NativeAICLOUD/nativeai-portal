@@ -29,7 +29,7 @@ export default function HowItWorksSection() {
 
             <h2 className="text-4xl sm:text-5xl font-extrabold leading-[1.08] tracking-tight text-white mb-6">
               AI that plugs into{' '}
-              <span className="bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#3b82f6] via-[#2563EB] to-[#1d4ed8] bg-clip-text text-transparent">
                 your systems.
               </span>
             </h2>
@@ -48,7 +48,7 @@ export default function HowItWorksSection() {
                   viewport={{ once: true }}
                   className="flex items-start gap-3"
                 >
-                  <span className="mt-[7px] w-1 h-1 rounded-full bg-[#e89a78]/70 shrink-0" />
+                  <span className="mt-[7px] w-1 h-1 rounded-full bg-[#2563EB]/70 shrink-0" />
                   <p className="text-sm text-white/55 leading-relaxed">
                     <span className="font-semibold text-white/85">{b.label} — </span>
                     {b.desc}
@@ -59,7 +59,7 @@ export default function HowItWorksSection() {
 
             <Link
               href="/services/ai-agents-rag"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-[#e89a78] hover:gap-3 transition-all duration-200"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-[#2563EB] hover:gap-3 transition-all duration-200"
             >
               Explore AI Agents & RAG
               <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">

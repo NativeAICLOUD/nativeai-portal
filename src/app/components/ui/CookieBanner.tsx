@@ -10,7 +10,7 @@ const glass: React.CSSProperties = {
   backdropFilter: "blur(40px) saturate(160%)",
   WebkitBackdropFilter: "blur(40px) saturate(160%)",
   border: "1px solid rgba(255,255,255,0.88)",
-  boxShadow: "0 8px 48px rgba(232,154,120,0.18), 0 2px 12px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.95)",
+  boxShadow: "0 8px 48px rgba(37,99,235,0.18), 0 2px 12px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.95)",
 };
 
 const categories = [
@@ -88,7 +88,7 @@ export default function CookieBanner() {
               We use this information in order to improve and customize your browsing experience
               and for analytics and metrics about our visitors both on this website and other
               media. To find out more about the cookies we use, see our{" "}
-              <Link href="/privacy-policy" className="underline" style={{ color: "#b86a30" }}>
+              <Link href="/privacy-policy" className="underline" style={{ color: "#1d4ed8" }}>
                 Privacy Policy
               </Link>
               .
@@ -103,9 +103,9 @@ export default function CookieBanner() {
                 onClick={() => setShowSettings(true)}
                 className="px-5 py-2 rounded-full text-[13px] font-semibold transition-all duration-200 hover:opacity-80"
                 style={{
-                  color: "#b86a30",
-                  background: "rgba(240,160,96,0.10)",
-                  border: "1px solid rgba(240,160,96,0.30)",
+                  color: "#1d4ed8",
+                  background: "rgba(37,99,235,0.10)",
+                  border: "1px solid rgba(37,99,235,0.30)",
                 }}
               >
                 Cookies settings
@@ -113,7 +113,7 @@ export default function CookieBanner() {
               <button
                 onClick={accept}
                 className="px-5 py-2 rounded-full text-[13px] font-semibold text-white transition-all duration-200 hover:opacity-90"
-                style={{ background: "#e89a78" }}
+                style={{ background: "#2563EB" }}
               >
                 Accept
               </button>
@@ -139,14 +139,14 @@ export default function CookieBanner() {
                 <div
                   key={cat.key}
                   className="rounded-[14px] overflow-hidden"
-                  style={{ border: "1px solid rgba(240,160,96,0.18)", background: "rgba(255,255,255,0.55)" }}
+                  style={{ border: "1px solid rgba(37,99,235,0.18)", background: "rgba(255,255,255,0.55)" }}
                 >
                   <div className="flex items-center justify-between px-4 pt-3 pb-2">
                     <span className="text-[13px] font-semibold text-[#0a0e1a]">{cat.label}</span>
                     {cat.alwaysActive ? (
                       <span
                         className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full"
-                        style={{ color: "#b86a30", background: "rgba(240,160,96,0.14)", border: "1px solid rgba(240,160,96,0.28)" }}
+                        style={{ color: "#1d4ed8", background: "rgba(37,99,235,0.14)", border: "1px solid rgba(37,99,235,0.28)" }}
                       >
                         Always active
                       </span>
@@ -155,7 +155,7 @@ export default function CookieBanner() {
                         type="button"
                         onClick={() => toggle(cat.key as keyof Prefs)}
                         className="relative shrink-0 w-10 h-[22px] rounded-full transition-all duration-300 focus:outline-none"
-                        style={{ background: prefs[cat.key as keyof Prefs] ? "#e89a78" : "rgba(0,0,0,0.12)" }}
+                        style={{ background: prefs[cat.key as keyof Prefs] ? "#2563EB" : "rgba(0,0,0,0.12)" }}
                         aria-checked={prefs[cat.key as keyof Prefs]}
                         role="switch"
                       >
@@ -178,9 +178,9 @@ export default function CookieBanner() {
                 onClick={save}
                 className="px-5 py-2 rounded-full text-[13px] font-semibold transition-all duration-200 hover:opacity-80"
                 style={{
-                  color: "#b86a30",
-                  background: "rgba(240,160,96,0.10)",
-                  border: "1px solid rgba(240,160,96,0.30)",
+                  color: "#1d4ed8",
+                  background: "rgba(37,99,235,0.10)",
+                  border: "1px solid rgba(37,99,235,0.30)",
                 }}
               >
                 Save settings
@@ -188,7 +188,7 @@ export default function CookieBanner() {
               <button
                 onClick={accept}
                 className="px-5 py-2 rounded-full text-[13px] font-semibold text-white transition-all duration-200 hover:opacity-90"
-                style={{ background: "#e89a78" }}
+                style={{ background: "#2563EB" }}
               >
                 Accept All
               </button>

@@ -106,14 +106,14 @@ const processSteps = [
   { step: "06", heading: "Go-Live & Training", icon: "launch", body: "Your team is trained and live, with minimal manual work." },
 ];
 
-const ACCENT = "#e89a78";
+const ACCENT = "#2563EB";
 const ACCENT_DARK = "#d4836a";
-const iconTile = { background: "rgba(232,154,120,0.14)", color: ACCENT_DARK } as const;
+const iconTile = { background: "rgba(37,99,235,0.14)", color: ACCENT_DARK } as const;
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex items-center gap-2.5 mb-6">
-      <span className="w-6 h-px bg-[#e89a78]" />
+      <span className="w-6 h-px bg-[#2563EB]" />
       <p className="text-xs uppercase tracking-[0.14em] text-[#6b6b6b] font-semibold">{children}</p>
     </div>
   );
@@ -124,7 +124,7 @@ export default function PaymentAutomationPage() {
     <div className="relative min-h-screen overflow-x-hidden" style={{ background: "#ffffff" }}>
       {/* ambient glows */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div style={{ position: "absolute", top: "-10%", right: "-5%", width: 700, height: 700, borderRadius: "50%", background: "radial-gradient(ellipse, rgba(232,154,120,0.10) 0%, transparent 65%)" }} />
+        <div style={{ position: "absolute", top: "-10%", right: "-5%", width: 700, height: 700, borderRadius: "50%", background: "radial-gradient(ellipse, rgba(37,99,235,0.10) 0%, transparent 65%)" }} />
         <div style={{ position: "absolute", top: "40%", left: "-8%", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(ellipse, rgba(91,124,250,0.06) 0%, transparent 65%)" }} />
         <div className="absolute inset-0" style={{ backgroundImage: "url('/img/noise-background.jpg')", backgroundSize: "280px 280px", opacity: 0.03 }} />
       </div>
@@ -132,7 +132,7 @@ export default function PaymentAutomationPage() {
       {/* ── Hero ── */}
       <section className="relative">
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pt-36 pb-20">
-          <p className="text-sm font-semibold uppercase tracking-widest text-[#e89a78] mb-5">
+          <p className="text-sm font-semibold uppercase tracking-widest text-[#2563EB] mb-5">
             NativeCloud Product
           </p>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-[#0a0e1a] leading-[1.03] max-w-4xl">
@@ -143,11 +143,11 @@ export default function PaymentAutomationPage() {
           </p>
 
           {/* Macedonian tagline pill */}
-          <div className="mt-7 inline-flex items-center gap-2.5 rounded-full pl-2 pr-5 py-2" style={{ background: "rgba(232,154,120,0.10)", border: "1px solid rgba(232,154,120,0.30)" }}>
+          <div className="mt-7 inline-flex items-center gap-2.5 rounded-full pl-2 pr-5 py-2" style={{ background: "rgba(37,99,235,0.10)", border: "1px solid rgba(37,99,235,0.30)" }}>
             <span className="inline-flex items-center justify-center w-8 h-8 rounded-full" style={iconTile}>
               <ShieldCheck size={16} strokeWidth={2} aria-hidden />
             </span>
-            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full -ml-4" style={{ ...iconTile, background: "rgba(232,154,120,0.20)" }}>
+            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full -ml-4" style={{ ...iconTile, background: "rgba(37,99,235,0.20)" }}>
               <Zap size={16} strokeWidth={2} aria-hidden />
             </span>
             <span className="text-sm md:text-base font-medium text-[#1a1d2e]">
@@ -158,7 +158,7 @@ export default function PaymentAutomationPage() {
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <Link
               href="/schedule-call"
-              className="inline-flex items-center gap-2 bg-[#e89a78] hover:bg-[#d4836a] text-white px-7 py-3.5 rounded-full text-base font-medium transition-colors"
+              className="inline-flex items-center gap-2 bg-[#2563EB] hover:bg-[#d4836a] text-white px-7 py-3.5 rounded-full text-base font-medium transition-colors"
             >
               Book a demo
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -229,11 +229,11 @@ export default function PaymentAutomationPage() {
       {/* ── Spotlight: frictionless checkout ── */}
       <section className="relative max-w-7xl mx-auto px-6 md:px-12 pb-20 md:pb-28">
         <div className="relative rounded-3xl overflow-hidden p-8 md:p-14" style={{ background: "#0a0e1a" }}>
-          <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 80% at 85% 10%, rgba(232,154,120,0.16) 0%, transparent 60%)" }} />
+          <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 80% at 85% 10%, rgba(37,99,235,0.16) 0%, transparent 60%)" }} />
           <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 50% 70% at 0% 100%, rgba(91,124,250,0.12) 0%, transparent 60%)" }} />
 
           <div className="relative z-10">
-            <p className="text-xs uppercase tracking-widest text-[#e89a78] font-semibold mb-4">
+            <p className="text-xs uppercase tracking-widest text-[#2563EB] font-semibold mb-4">
               Frictionless Checkout
             </p>
             <h2 className="text-3xl md:text-5xl font-bold text-white leading-[1.08] max-w-[820px]">
@@ -255,7 +255,7 @@ export default function PaymentAutomationPage() {
                       <div className="flex items-center justify-between">
                         <span
                           className="inline-flex items-center justify-center w-12 h-12 rounded-full text-white transition-transform duration-300 group-hover:scale-105"
-                          style={{ background: "linear-gradient(135deg, #f0a060 0%, #e89a78 55%, #d4836a 100%)", boxShadow: "0 8px 22px rgba(232,154,120,0.35)" }}
+                          style={{ background: "linear-gradient(135deg, #3b82f6 0%, #2563EB 55%, #d4836a 100%)", boxShadow: "0 8px 22px rgba(37,99,235,0.35)" }}
                         >
                           <Icon size={22} strokeWidth={1.9} aria-hidden />
                         </span>
@@ -265,7 +265,7 @@ export default function PaymentAutomationPage() {
                       <p className="text-white/55 text-sm leading-relaxed">{s.d}</p>
                     </div>
                     {i < payerFlow.length - 1 && (
-                      <div className="hidden lg:flex items-center justify-center shrink-0 text-[#e89a78]/45" aria-hidden>
+                      <div className="hidden lg:flex items-center justify-center shrink-0 text-[#2563EB]/45" aria-hidden>
                         <ChevronRight size={24} strokeWidth={2.2} />
                       </div>
                     )}
@@ -277,7 +277,7 @@ export default function PaymentAutomationPage() {
             <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3.5 max-w-[920px]">
               {paymentCapabilities.map((c, i) => (
                 <div key={i} className="flex items-start gap-3">
-                  <CheckCircle2 size={20} strokeWidth={2} className="shrink-0 mt-0.5 text-[#e89a78]" aria-hidden />
+                  <CheckCircle2 size={20} strokeWidth={2} className="shrink-0 mt-0.5 text-[#2563EB]" aria-hidden />
                   <p className="text-white/80 text-sm leading-relaxed">{c}</p>
                 </div>
               ))}
@@ -326,7 +326,7 @@ export default function PaymentAutomationPage() {
               style={{ background: "#ffffff", border: "1px solid rgba(10,14,26,0.08)" }}
             >
               <div className="flex items-center gap-2.5">
-                <span className="w-2 h-2 rounded-full bg-[#e89a78] shrink-0" />
+                <span className="w-2 h-2 rounded-full bg-[#2563EB] shrink-0" />
                 <h3 className="text-base font-semibold text-[#1a1d2e]">{v.name}</h3>
               </div>
               <p className="text-[#6b6b6b] text-sm leading-relaxed pl-[18px]">{v.note}</p>
@@ -370,7 +370,7 @@ export default function PaymentAutomationPage() {
           </h2>
           <Link
             href="/schedule-call"
-            className="shrink-0 self-start lg:self-end inline-flex items-center bg-[#e89a78] hover:bg-[#d4836a] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors"
+            className="shrink-0 self-start lg:self-end inline-flex items-center bg-[#2563EB] hover:bg-[#d4836a] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors"
           >
             Book a demo
           </Link>
@@ -382,7 +382,7 @@ export default function PaymentAutomationPage() {
       <section className="max-w-7xl mx-auto px-6 md:px-12 pb-24">
         <div
           className="relative overflow-hidden rounded-3xl px-8 py-16 md:px-16 md:py-20 text-center"
-          style={{ background: `linear-gradient(120deg, #f0a060 0%, ${ACCENT} 55%, ${ACCENT_DARK} 100%)` }}
+          style={{ background: `linear-gradient(120deg, #3b82f6 0%, ${ACCENT} 55%, ${ACCENT_DARK} 100%)` }}
         >
           <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight max-w-[680px] mx-auto">
             Stop chasing. Start collecting.

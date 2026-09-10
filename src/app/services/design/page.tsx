@@ -96,7 +96,7 @@ export default function DesignPage() {
                 </div>
                 {/* design tokens */}
                 <div className="flex items-center gap-2.5 pt-1">
-                  {["#c084fc", "#f472b6", "#60a5fa", "#34d399", "#f0a060"].map((c) => (
+                  {["#c084fc", "#f472b6", "#60a5fa", "#34d399", "#3b82f6"].map((c) => (
                     <div key={c} className="h-6 w-6 shrink-0 rounded-full ring-2 ring-white" style={{ background: c }} />
                   ))}
                   <div className="mx-1 h-px flex-1 bg-[#eee]" />

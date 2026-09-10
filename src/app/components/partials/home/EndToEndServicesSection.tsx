@@ -82,7 +82,7 @@ export default function EndToEndServicesSection() {
             </div>
             <h2 className="text-4xl sm:text-5xl font-extrabold leading-[1.08] tracking-tight text-[#0a0e1a] max-w-lg">
               End-to-end services,{' '}
-              <span className="bg-gradient-to-r from-[#f0a060] via-[#e89a78] to-[#d4845c] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#3b82f6] via-[#2563EB] to-[#1d4ed8] bg-clip-text text-transparent">
                 zero gaps.
               </span>
             </h2>
@@ -120,12 +120,12 @@ export default function EndToEndServicesSection() {
                       className="group flex flex-col h-full p-7 hover:bg-white transition-colors duration-200"
                     >
                       {/* Number */}
-                      <span className="text-[11px] font-bold tabular-nums text-[#e89a78]/60 mb-5 font-mono">
+                      <span className="text-[11px] font-bold tabular-nums text-[#2563EB]/60 mb-5 font-mono">
                         {s.num}
                       </span>
 
                       {/* Title */}
-                      <h3 className="text-[15px] font-bold text-[#0a0e1a] mb-3 leading-snug group-hover:text-[#e89a78] transition-colors duration-200">
+                      <h3 className="text-[15px] font-bold text-[#0a0e1a] mb-3 leading-snug group-hover:text-[#2563EB] transition-colors duration-200">
                         {s.title}
                       </h3>
 
@@ -135,7 +135,7 @@ export default function EndToEndServicesSection() {
                       </p>
 
                       {/* Arrow */}
-                      <div className="flex items-center gap-1.5 mt-6 text-[12px] font-semibold text-[#0a0e1a]/30 group-hover:text-[#e89a78] transition-colors duration-200">
+                      <div className="flex items-center gap-1.5 mt-6 text-[12px] font-semibold text-[#0a0e1a]/30 group-hover:text-[#2563EB] transition-colors duration-200">
                         Learn more
                         <svg viewBox="0 0 24 24" fill="none" className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
                           <path d="M5 12h14M12 5l7 7-7 7" />

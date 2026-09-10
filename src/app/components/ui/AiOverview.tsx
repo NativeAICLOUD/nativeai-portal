@@ -11,7 +11,7 @@ import { motion, AnimatePresence } from 'framer-motion';
  * (extractive retrieval) — swap `composeAnswer` for an LLM API call later.
  */
 
-const GRADIENT = 'linear-gradient(100deg, #4285f4 0%, #9b72cb 45%, #e89a78 100%)';
+const GRADIENT = 'linear-gradient(100deg, #4285f4 0%, #9b72cb 45%, #2563EB 100%)';
 
 function firstSentence(text: string, max = 160): string {
   const dot = text.indexOf('. ');
@@ -99,7 +99,7 @@ export default function AiOverview({ query, results }: { query: string; results:
                   <linearGradient id="ai-ov-star" x1="0" y1="0" x2="24" y2="24">
                     <stop offset="0%" stopColor="#4285f4" />
                     <stop offset="55%" stopColor="#9b72cb" />
-                    <stop offset="100%" stopColor="#e89a78" />
+                    <stop offset="100%" stopColor="#2563EB" />
                   </linearGradient>
                 </defs>
                 <path

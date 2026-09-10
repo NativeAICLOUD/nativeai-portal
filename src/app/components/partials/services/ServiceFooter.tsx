@@ -29,7 +29,7 @@ export default function ServiceFooter() {
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-10">
             <div>
               <div className="flex items-center gap-2 mb-5">
-                <p className="text-xs uppercase tracking-wider text-[#e89a78]/80 font-medium">
+                <p className="text-xs uppercase tracking-wider text-[#2563EB]/80 font-medium">
                   Ready to ship?
                 </p>
               </div>
@@ -41,7 +41,7 @@ export default function ServiceFooter() {
             <div className="flex flex-col gap-3 shrink-0">
               <a
                 href={`mailto:${Constants.MAIL}`}
-                className="inline-flex items-center gap-2 bg-[#e89a78] hover:bg-[#d4836a] text-white font-medium px-7 py-3.5 rounded-full transition-colors text-sm whitespace-nowrap"
+                className="inline-flex items-center gap-2 bg-[#2563EB] hover:bg-[#d4836a] text-white font-medium px-7 py-3.5 rounded-full transition-colors text-sm whitespace-nowrap"
               >
                 {Constants.MAIL}
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>

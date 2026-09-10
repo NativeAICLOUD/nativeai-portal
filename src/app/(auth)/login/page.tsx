@@ -77,7 +77,7 @@ export default function LoginPage() {
       >
         <div
           className="shrink-0 px-3 py-1.5 rounded-xl"
-          style={{ background: 'linear-gradient(135deg, rgba(232,154,120,0.18) 0%, rgba(232,154,120,0.06) 60%, transparent 100%)' }}
+          style={{ background: 'linear-gradient(135deg, rgba(37,99,235,0.18) 0%, rgba(37,99,235,0.06) 60%, transparent 100%)' }}
         >
           <Logo isInvert />
         </div>

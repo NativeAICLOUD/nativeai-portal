@@ -123,16 +123,16 @@ function BentoCard({ card, index }: { card: typeof bentoCards[0]; index: number 
   const baseDelay = index * 0.08;
 
   const wrapperCls = {
-    'dark-featured': 'bg-gradient-to-br from-[#0d1428] to-[#12102a] border border-white/[0.07] hover:border-[#e89a78]/25',
-    'orange-tint':   'bg-[#e89a78]/[0.06] border border-[#e89a78]/15 hover:border-[#e89a78]/40',
+    'dark-featured': 'bg-gradient-to-br from-[#0d1428] to-[#12102a] border border-white/[0.07] hover:border-[#2563EB]/25',
+    'orange-tint':   'bg-[#2563EB]/[0.06] border border-[#2563EB]/15 hover:border-[#2563EB]/40',
     'subtle':        'bg-white/[0.03] border border-white/[0.07] hover:border-white/15',
-    'orange-solid':  'bg-gradient-to-br from-[#e89a78] to-[#d4693e] border-0',
+    'orange-solid':  'bg-gradient-to-br from-[#2563EB] to-[#d4693e] border-0',
     'dark-mid':      'bg-[#0d1428] border border-white/[0.07] hover:border-white/15',
   }[card.style];
 
   const tagCls = {
-    'dark-featured': 'text-[#e89a78] bg-[#e89a78]/10 border border-[#e89a78]/20',
-    'orange-tint':   'text-[#f0a060] bg-[#f0a060]/10 border border-[#f0a060]/20',
+    'dark-featured': 'text-[#2563EB] bg-[#2563EB]/10 border border-[#2563EB]/20',
+    'orange-tint':   'text-[#3b82f6] bg-[#3b82f6]/10 border border-[#3b82f6]/20',
     'subtle':        'text-white/40 bg-white/5 border border-white/10',
     'orange-solid':  'text-white/70 bg-white/15 border border-white/20',
     'dark-mid':      'text-white/35 bg-white/5 border border-white/10',
@@ -170,7 +170,7 @@ function BentoCard({ card, index }: { card: typeof bentoCards[0]; index: number 
     >
       {/* Featured glow */}
       {card.style === 'dark-featured' && (
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_25%_55%,_rgba(232,154,120,0.13)_0%,_transparent_60%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_25%_55%,_rgba(37,99,235,0.13)_0%,_transparent_60%)] pointer-events-none" />
       )}
 
       <div className="relative">
@@ -190,7 +190,7 @@ function BentoCard({ card, index }: { card: typeof bentoCards[0]; index: number 
         className={`
           relative mt-6 inline-flex items-center gap-2 text-sm font-semibold
           group-hover:gap-3 transition-all duration-200
-          ${card.style === 'dark-featured' ? 'text-[#e89a78]' : card.style === 'orange-solid' ? 'text-white' : 'text-white/40 hover:text-white'}
+          ${card.style === 'dark-featured' ? 'text-[#2563EB]' : card.style === 'orange-solid' ? 'text-white' : 'text-white/40 hover:text-white'}
         `}
       >
         Learn more
@@ -215,7 +215,7 @@ export default function HomeV2() {
           <motion.div
             animate={{ x: [0, 70, -40, 0], y: [0, -60, 30, 0], scale: [1, 1.15, 0.9, 1] }}
             transition={{ duration: 24, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute -top-48 -left-24 w-[750px] h-[750px] rounded-full bg-[#e89a78]/[0.08] blur-[140px]"
+            className="absolute -top-48 -left-24 w-[750px] h-[750px] rounded-full bg-[#2563EB]/[0.08] blur-[140px]"
           />
           <motion.div
             animate={{ x: [0, -90, 50, 0], y: [0, 70, -40, 0], scale: [1, 0.85, 1.2, 1] }}
@@ -225,7 +225,7 @@ export default function HomeV2() {
           <motion.div
             animate={{ x: [0, 50, -25, 0], y: [0, 40, -70, 0] }}
             transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut', delay: 12 }}
-            className="absolute bottom-10 left-1/3 w-[500px] h-[400px] rounded-full bg-[#e89a78]/[0.06] blur-[110px]"
+            className="absolute bottom-10 left-1/3 w-[500px] h-[400px] rounded-full bg-[#2563EB]/[0.06] blur-[110px]"
           />
           {/* Grid */}
           <div
@@ -247,7 +247,7 @@ export default function HomeV2() {
             transition={{ duration: 0.6, ease: 'easeOut' }}
             className="inline-flex items-center gap-2.5 border border-white/[0.09] bg-white/[0.04] rounded-full px-5 py-2 mb-10"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78] animate-pulse shrink-0" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] animate-pulse shrink-0" />
             <span className="text-xs uppercase tracking-[0.18em] text-white/40 font-medium">
               AI Agents · Cloud Architecture · Custom Dev
             </span>
@@ -262,7 +262,7 @@ export default function HomeV2() {
           >
             <h1 className="text-[clamp(3rem,8vw,8rem)] font-black leading-[0.92] tracking-tight">
               <span className="block text-white">We make</span>
-              <span className="block bg-gradient-to-r from-[#f5a870] via-[#e89a78] to-[#d4845c] bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-[#f5a870] via-[#2563EB] to-[#1d4ed8] bg-clip-text text-transparent">
                 AI work
               </span>
               <span className="block text-white/20 font-light italic">
@@ -290,7 +290,7 @@ export default function HomeV2() {
           >
             <Link
               href={Constants.PAGES.SCHEDULE_CALL}
-              className="group inline-flex items-center gap-3 bg-[#e89a78] hover:bg-[#d4836a] text-white font-semibold text-base px-8 py-4 rounded-full transition-all duration-200 shadow-2xl shadow-[#e89a78]/20 hover:shadow-[#e89a78]/35"
+              className="group inline-flex items-center gap-3 bg-[#2563EB] hover:bg-[#d4836a] text-white font-semibold text-base px-8 py-4 rounded-full transition-all duration-200 shadow-2xl shadow-[#2563EB]/20 hover:shadow-[#2563EB]/35"
             >
               Schedule a free call
               <span className="w-6 h-6 rounded-full bg-white/20 group-hover:bg-white/25 flex items-center justify-center transition-colors shrink-0">
@@ -301,7 +301,7 @@ export default function HomeV2() {
             </Link>
             <Link
               href="/services"
-              className="inline-flex items-center gap-2.5 border border-white/[0.12] hover:border-[#e89a78]/35 text-white/50 hover:text-white/80 text-base font-medium px-8 py-4 rounded-full transition-all duration-200"
+              className="inline-flex items-center gap-2.5 border border-white/[0.12] hover:border-[#2563EB]/35 text-white/50 hover:text-white/80 text-base font-medium px-8 py-4 rounded-full transition-all duration-200"
             >
               Explore services
               <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
@@ -342,17 +342,17 @@ export default function HomeV2() {
           >
             <div>
               <div className="flex items-center gap-2 mb-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB]" />
                 <p className="text-xs uppercase tracking-[0.16em] text-white/30 font-medium">What we build</p>
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.05]">
                 Built for what<br />
-                <span className="text-[#e89a78]">actually matters.</span>
+                <span className="text-[#2563EB]">actually matters.</span>
               </h2>
             </div>
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 text-sm text-white/30 hover:text-[#e89a78] transition-colors font-medium group"
+              className="inline-flex items-center gap-2 text-sm text-white/30 hover:text-[#2563EB] transition-colors font-medium group"
             >
               All services
               <svg viewBox="0 0 24 24" fill="none" className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
@@ -381,19 +381,19 @@ export default function HomeV2() {
             viewport={{ once: true, margin: '-80px' }}
           >
             <div className="flex items-center gap-2 mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB]" />
               <p className="text-xs uppercase tracking-[0.16em] text-white/30 font-medium">Real problems, solved</p>
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold leading-tight mb-6">
               Every hour wasted is a problem{' '}
-              <span className="text-[#e89a78]">we&apos;ve solved before.</span>
+              <span className="text-[#2563EB]">we&apos;ve solved before.</span>
             </h2>
             <p className="text-white/35 text-base leading-relaxed mb-10">
               We&apos;ve seen the same patterns across dozens of companies. Here&apos;s what we replace.
             </p>
             <Link
               href={Constants.PAGES.SCHEDULE_CALL}
-              className="inline-flex items-center gap-2.5 bg-[#e89a78]/10 border border-[#e89a78]/25 hover:bg-[#e89a78]/15 hover:border-[#e89a78]/40 text-[#e89a78] font-semibold text-sm px-6 py-3.5 rounded-full transition-all duration-200"
+              className="inline-flex items-center gap-2.5 bg-[#2563EB]/10 border border-[#2563EB]/25 hover:bg-[#2563EB]/15 hover:border-[#2563EB]/40 text-[#2563EB] font-semibold text-sm px-6 py-3.5 rounded-full transition-all duration-200"
             >
               Let&apos;s solve yours
               <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
@@ -414,7 +414,7 @@ export default function HomeV2() {
               >
                 <p className="text-white/25 text-sm line-through decoration-white/15 mb-2">{p.before}</p>
                 <p className="text-white font-semibold text-base sm:text-lg mb-1.5">{p.after}</p>
-                <span className="inline-block text-xs font-semibold text-[#e89a78] bg-[#e89a78]/8 border border-[#e89a78]/15 px-3 py-1 rounded-full">
+                <span className="inline-block text-xs font-semibold text-[#2563EB] bg-[#2563EB]/8 border border-[#2563EB]/15 px-3 py-1 rounded-full">
                   {p.metric}
                 </span>
               </motion.div>
@@ -435,7 +435,7 @@ export default function HomeV2() {
             className="mb-14"
           >
             <div className="flex items-center gap-2 mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#e89a78]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB]" />
               <p className="text-xs uppercase tracking-[0.16em] text-white/30 font-medium">How it works</p>
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold">
@@ -481,7 +481,7 @@ export default function HomeV2() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65 }}
             viewport={{ once: true, margin: '-80px' }}
-            className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#e89a78] via-[#df7a52] to-[#c4603a] p-12 sm:p-16 md:p-20 text-center"
+            className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#2563EB] via-[#df7a52] to-[#c4603a] p-12 sm:p-16 md:p-20 text-center"
           >
             {/* Dot pattern */}
             <div

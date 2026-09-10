@@ -70,7 +70,7 @@ function SearchResults() {
         {/* Results header */}
         {query.trim() && (
           <h1 className="text-[22px] sm:text-[26px] font-bold text-[#0a0e1a] mb-6 leading-snug">
-            <span style={{ color: '#e89a78' }}>{results.length} result{results.length !== 1 ? 's' : ''} found for:</span>{' '}
+            <span style={{ color: '#2563EB' }}>{results.length} result{results.length !== 1 ? 's' : ''} found for:</span>{' '}
             <span className="text-[#0a0e1a]">&lsquo;{query}&rsquo;</span>
           </h1>
         )}
@@ -118,7 +118,7 @@ function SearchResults() {
             <Link
               href="/knowledge-base"
               className="inline-flex items-center gap-2 text-sm font-semibold text-white px-6 py-3 rounded-full transition-opacity hover:opacity-90"
-              style={{ background: '#e89a78' }}
+              style={{ background: '#2563EB' }}
             >
               Browse Knowledge Base
             </Link>
@@ -139,7 +139,7 @@ function SearchResults() {
                       {category && (
                         <span
                           className="px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide"
-                          style={{ background: 'rgba(232,154,120,0.12)', color: '#c4743c', border: '1px solid rgba(232,154,120,0.25)' }}
+                          style={{ background: 'rgba(37,99,235,0.12)', color: '#c4743c', border: '1px solid rgba(37,99,235,0.25)' }}
                         >
                           {category}
                         </span>
@@ -155,7 +155,7 @@ function SearchResults() {
                     >
                       {post.title}
                     </Link>
-                    <p className="text-[12px] text-[#e89a78] mb-2 font-medium">{url}</p>
+                    <p className="text-[12px] text-[#2563EB] mb-2 font-medium">{url}</p>
                     <p className="text-[13.5px] text-[#444] leading-relaxed">{excerpt}</p>
                   </div>
                   {i < results.length - 1 && <div className="h-px bg-[#eeeeee]" />}

@@ -220,7 +220,7 @@ function PhoneInputField({
                 className="w-full flex items-center gap-3 px-3.5 py-2 text-left transition-all duration-100"
                 style={{
                   background: c.code === country.code
-                    ? 'rgba(240,160,96,0.12)'
+                    ? 'rgba(37,99,235,0.12)'
                     : 'transparent',
                 }}
                 onMouseEnter={e => {
@@ -229,7 +229,7 @@ function PhoneInputField({
                 }}
                 onMouseLeave={e => {
                   (e.currentTarget as HTMLElement).style.background =
-                    c.code === country.code ? 'rgba(240,160,96,0.12)' : 'transparent';
+                    c.code === country.code ? 'rgba(37,99,235,0.12)' : 'transparent';
                 }}
               >
                 <span className="text-[17px] leading-none">{c.flag}</span>
@@ -238,7 +238,7 @@ function PhoneInputField({
                   className="text-[11px] tabular-nums px-1.5 py-0.5 rounded-md"
                   style={{
                     color: c.code === country.code ? '#c4743c' : '#b8b2aa',
-                    background: c.code === country.code ? 'rgba(240,160,96,0.15)' : 'transparent',
+                    background: c.code === country.code ? 'rgba(37,99,235,0.15)' : 'transparent',
                   }}
                 >
                   {c.dial}
@@ -863,8 +863,8 @@ export default function ScheduleCallPage() {
           ) : (
             /* Success state */
             <div className="flex flex-col items-center text-center px-5 sm:px-8 py-10 gap-6">
-              <div className="w-16 h-16 rounded-full bg-[#e89a78]/15 border border-[#e89a78]/30 flex items-center justify-center">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#e89a78" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8">
+              <div className="w-16 h-16 rounded-full bg-[#2563EB]/15 border border-[#2563EB]/30 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8">
                   <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />
                 </svg>
               </div>

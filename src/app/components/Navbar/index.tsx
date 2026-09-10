@@ -607,14 +607,14 @@ function Navbar() {
                     <button
                       onClick={() => { router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`); setSearchOpen(false); }}
                       className="w-full flex items-center gap-4 px-5 py-3.5 text-left transition-colors border-b border-black/[0.05]"
-                      style={{ background: 'linear-gradient(90deg, rgba(66,133,244,0.05) 0%, rgba(155,114,203,0.05) 50%, rgba(232,154,120,0.05) 100%)' }}
+                      style={{ background: 'linear-gradient(90deg, rgba(66,133,244,0.05) 0%, rgba(155,114,203,0.05) 50%, rgba(37,99,235,0.05) 100%)' }}
                     >
                       <svg width="18" height="18" viewBox="0 0 24 24" className="shrink-0" aria-hidden>
                         <defs>
                           <linearGradient id="nav-ai-star" x1="0" y1="0" x2="24" y2="24">
                             <stop offset="0%" stopColor="#4285f4" />
                             <stop offset="55%" stopColor="#9b72cb" />
-                            <stop offset="100%" stopColor="#e89a78" />
+                            <stop offset="100%" stopColor="#2563EB" />
                           </linearGradient>
                         </defs>
                         <path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2z" fill="url(#nav-ai-star)" />
@@ -623,7 +623,7 @@ function Navbar() {
                         <p
                           className="text-[13.5px] font-semibold leading-snug"
                           style={{
-                            background: 'linear-gradient(100deg, #4285f4 0%, #9b72cb 45%, #e89a78 100%)',
+                            background: 'linear-gradient(100deg, #4285f4 0%, #9b72cb 45%, #2563EB 100%)',
                             WebkitBackgroundClip: 'text',
                             backgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
