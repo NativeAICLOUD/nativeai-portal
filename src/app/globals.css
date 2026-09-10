@@ -109,6 +109,13 @@
     border-radius: 100px;
   }
 
+  /* Blue → midnight divider variant — blue ramping into the dark navy
+     used for CTA sections, instead of the orange/red pairing. */
+  .divider-blue-midnight {
+    background-image: linear-gradient(260deg, #fff, #BECBFF 15%, #5B7CFA 40%, #2563EB 65%, #0a0e1a 85%, #fff);
+    border-radius: 100px;
+  }
+
   /* ChatGPT / DeepSeek-style thin minimal scrollbar */
   .thin-scroll {
     scrollbar-width: thin;

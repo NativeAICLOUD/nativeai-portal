@@ -501,7 +501,7 @@ export default function ScheduleCallPage() {
       </div>
 
       {/* Hero */}
-      <div className="industries-hero-bg">
+      <div className="hero-bg-blue">
         <div className="relative max-w-6xl mx-auto px-5 sm:px-12 pt-28 sm:pt-36 pb-12">
           <Link
             href="/"
@@ -522,8 +522,8 @@ export default function ScheduleCallPage() {
           </p>
         </div>
 
-        {/* orange/red divider — full viewport width */}
-        <hr className="divider-orange-red m-0 h-1 w-full border-0" />
+        {/* blue → midnight divider — full viewport width */}
+        <hr className="divider-blue-midnight m-0 h-1 w-full border-0" />
       </div>
 
       {/* Main content */}
