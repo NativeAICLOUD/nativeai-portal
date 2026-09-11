@@ -70,10 +70,6 @@ export default function SolutionsPage() {
               <h1 className="m-0 text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
                 Solutions built to last.
               </h1>
-              <p className="mt-6 max-w-[520px] text-[18px] font-light leading-[1.6] text-[#111]">
-                From AI agents and cloud infrastructure to full SaaS products, NativeCloud turns
-                your ideas into solid, business-ready software.
-              </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <PrimaryButton href="/schedule-call">Schedule a free call</PrimaryButton>
                 <SecondaryButton href="/about">About us</SecondaryButton>

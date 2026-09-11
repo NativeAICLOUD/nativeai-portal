@@ -45,9 +45,6 @@ const KnowledgeBasePage = async () => {
           <h1 className="m-0 max-w-3xl text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
             Knowledge base
           </h1>
-          <p className="mt-6 max-w-[560px] text-[18px] font-light leading-[1.6] text-[#111]">
-            Stay up-to-date with articles, guides, and news on cloud, AI, Azure, Kubernetes, and modern software architecture.
-          </p>
         </div>
 
         {/* orange/red divider — full viewport width */}

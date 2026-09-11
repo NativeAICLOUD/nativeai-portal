@@ -145,13 +145,17 @@ export default function AboutUsPage() {
               <h1 className="m-0 text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
                 We make AI work for you.
               </h1>
-              <p className="mt-6 max-w-[520px] text-[18px] font-light leading-[1.6] text-[#111]">
+              <p className="mt-6 max-w-[520px] text-[12px] font-medium uppercase tracking-[0.14em] leading-[1.6] text-[#6b7280]">
                 NativeCloud is an AI and cloud engineering company that helps businesses turn ideas
                 into working solutions.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <PrimaryButton href={Constants.PAGES.SCHEDULE_CALL}>Schedule a free call</PrimaryButton>
-                <SecondaryButton href={Constants.PAGES.SOLUTIONS}>See all solutions</SecondaryButton>
+                <PrimaryButton href={Constants.PAGES.SCHEDULE_CALL}>
+                  <span className="text-[12px] font-medium uppercase tracking-[0.14em]">Let&apos;s talk</span>
+                </PrimaryButton>
+                <SecondaryButton href={Constants.PAGES.SOLUTIONS}>
+                  <span className="text-[12px] font-medium uppercase tracking-[0.14em]">See all solutions</span>
+                </SecondaryButton>
               </div>
               <div className="mt-8 flex items-center gap-2">
                 {socials.map((s) => (
