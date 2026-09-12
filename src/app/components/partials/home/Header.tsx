@@ -20,7 +20,7 @@ function HomeHeader() {
       </div>
 
       {/* Desktop hero — unchanged */}
-      <div className="hidden md:block hero-gradient-bg">
+      <div className="relative hidden overflow-hidden md:block hero-gradient-bg">
         <style>{`
           .hero-gradient-bg {
             background:
@@ -28,7 +28,8 @@ function HomeHeader() {
               #ffffff;
           }
         `}</style>
-        <div className="mx-auto w-full max-w-[1240px] px-5 pb-[88px] pt-[162px] sm:px-6 md:pb-[130px] md:pt-[182px]">
+
+        <div className="relative z-10 mx-auto w-full max-w-[1240px] px-5 pb-[88px] pt-[162px] sm:px-6 md:pb-[130px] md:pt-[182px]">
 
           {/* headline (rotates between slogans) */}
           <RotatingHeroHeadline variant="desktop" />

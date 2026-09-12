@@ -68,11 +68,20 @@ function Footer() {
       <style>{`
         .footer-gradient-bg {
           background:
-            radial-gradient(circle at 15% 0%, rgba(37,99,235,0.14), transparent 50%),
+            radial-gradient(circle at 50% 0%, rgba(37,99,235,0.18), transparent 55%),
+            radial-gradient(circle at 15% 0%, rgba(37,99,235,0.1), transparent 50%),
             #FAFAF8;
         }
       `}</style>
       <div className="footer-gradient-bg absolute inset-0" aria-hidden="true" />
+      <Image
+        src="/img/logo-blue.png"
+        alt=""
+        width={960}
+        height={960}
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-0 w-[960px] max-w-none -translate-x-1/2 opacity-[0.1] select-none"
+      />
 
       {/* Gradient divider — same signature as the hero/industries transitions */}
       <hr

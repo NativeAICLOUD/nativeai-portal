@@ -1,5 +1,6 @@
 'use client';
 
+import Image from "next/image";
 import { Briefcase } from "lucide-react";
 import { Constants } from "@/Constants";
 import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from "@/app/components/partials/services/ServiceUI";
@@ -135,8 +136,16 @@ export default function AboutUsPage() {
     <div className="font-switzer">
 
       {/* ── Hero ── */}
-      <div className="hero-bg-blue">
-        <div className={`${CONTAINER} pb-12 pt-32 lg:pt-28`}>
+      <div className="relative overflow-hidden hero-bg-blue">
+        <Image
+          src="/img/logo-blue.png"
+          alt=""
+          width={960}
+          height={960}
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 top-1/2 w-[960px] max-w-none -translate-x-1/2 -translate-y-1/2 opacity-[0.06]"
+        />
+        <div className={`relative z-10 ${CONTAINER} pb-12 pt-32 lg:pt-28`}>
           <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
 
             {/* Left */}

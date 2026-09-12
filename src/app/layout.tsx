@@ -13,6 +13,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import AppProviders from "./components/AppProviders";
 import CookieBanner from "./components/ui/CookieBanner";
+import OfflineBanner from "./components/ui/OfflineBanner";
 
 const montserrat = Montserrat({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -45,6 +46,7 @@ export default function RootLayout({
           <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800&display=swap" rel="stylesheet" />
         </head>
         <body className={`${montserrat.variable} font-switzer`}>
+          <OfflineBanner />
           <ProgressBarProvider>
             <ProgressBar className="modern-progress fixed z-[9999] top-0 left-0" />
             <AppProviders>
