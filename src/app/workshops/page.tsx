@@ -124,8 +124,8 @@ export default function WorkshopPage() {
           </div>
         </div>
 
-        {/* orange/red divider — full viewport width */}
-        <hr className="divider-orange-red m-0 h-1 w-full border-0" />
+        {/* blue divider — full viewport width */}
+        <hr className="divider-blue m-0 h-1 w-full border-0" />
       </div>
 
       {/* ── Workshops grid ── */}

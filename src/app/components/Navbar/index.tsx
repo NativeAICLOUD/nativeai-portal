@@ -796,11 +796,34 @@ function Navbar() {
                             {INDUSTRIES_MENU[activeIndustry].title}
                           </p>
                           <div className="mb-6 h-px w-full bg-[#E4E7EB]" />
-                          <ul className="m-0 flex list-disc flex-col gap-1.5 p-0 pl-[18px] text-[13px] leading-[1.45] text-[#484D56]">
-                            {INDUSTRIES_MENU[activeIndustry].details.map((d) => (
-                              <li key={d}>{d}</li>
-                            ))}
-                          </ul>
+                          {INDUSTRIES_MENU[activeIndustry].title === 'Manufacturing' ? (
+                            <ul className="m-0 flex flex-col gap-1.5 p-0 text-[13px] leading-[1.45] text-[#484D56]">
+                              {INDUSTRIES_MENU[activeIndustry].details.map((d) => (
+                                <li key={d} className="flex items-center gap-2">
+                                  <svg
+                                    className="h-3.5 w-3.5 shrink-0"
+                                    style={{ color: INDUSTRIES_MENU[activeIndustry].color }}
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth={2.4}
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    aria-hidden="true"
+                                  >
+                                    <polyline points="20 6 9 17 4 12" />
+                                  </svg>
+                                  {d}
+                                </li>
+                              ))}
+                            </ul>
+                          ) : (
+                            <ul className="m-0 flex list-disc flex-col gap-1.5 p-0 pl-[18px] text-[13px] leading-[1.45] text-[#484D56]">
+                              {INDUSTRIES_MENU[activeIndustry].details.map((d) => (
+                                <li key={d}>{d}</li>
+                              ))}
+                            </ul>
+                          )}
                         </motion.div>
                       </AnimatePresence>
                     </div>
@@ -874,11 +897,34 @@ function Navbar() {
                             {SOLUTIONS_MENU[activeSolution].title}
                           </p>
                           <div className="mb-6 h-px w-full bg-[#E4E7EB]" />
-                          <ul className="m-0 flex list-disc flex-col gap-1.5 p-0 pl-[18px] text-[13px] leading-[1.45] text-[#484D56]">
-                            {SOLUTIONS_MENU[activeSolution].details.map((d) => (
-                              <li key={d}>{d}</li>
-                            ))}
-                          </ul>
+                          {SOLUTIONS_MENU[activeSolution].title === 'Legacy Software Modernization' ? (
+                            <ul className="m-0 flex flex-col gap-1.5 p-0 text-[13px] leading-[1.45] text-[#484D56]">
+                              {SOLUTIONS_MENU[activeSolution].details.map((d) => (
+                                <li key={d} className="flex items-center gap-2">
+                                  <svg
+                                    className="h-3.5 w-3.5 shrink-0"
+                                    style={{ color: SOLUTIONS_MENU[activeSolution].color }}
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth={2.4}
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    aria-hidden="true"
+                                  >
+                                    <polyline points="20 6 9 17 4 12" />
+                                  </svg>
+                                  {d}
+                                </li>
+                              ))}
+                            </ul>
+                          ) : (
+                            <ul className="m-0 flex list-disc flex-col gap-1.5 p-0 pl-[18px] text-[13px] leading-[1.45] text-[#484D56]">
+                              {SOLUTIONS_MENU[activeSolution].details.map((d) => (
+                                <li key={d}>{d}</li>
+                              ))}
+                            </ul>
+                          )}
                         </motion.div>
                       </AnimatePresence>
                     </div>

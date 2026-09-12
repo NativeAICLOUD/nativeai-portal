@@ -50,7 +50,7 @@ export default function IndustriesIntroSection() {
                   boxShadow: '0 8px 32px rgba(15,23,42,0.08)',
                 }}
               >
-                <div className="mb-1 pl-16"><Eyebrow>Industry focus</Eyebrow></div>
+                <div className="mb-1"><Eyebrow>Industry focus</Eyebrow></div>
                 <ul role="list" className="mt-3 divide-y divide-black/[0.06]">
                   {industries.map(({ label, icon: Icon, color, bg }) => (
                     <li key={label} className="flex items-center gap-4 py-3.5 first:pt-0 last:pb-0">
