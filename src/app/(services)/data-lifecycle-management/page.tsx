@@ -33,7 +33,7 @@ export default function DataLifecycleManagementPage() {
     <div className="font-switzer">
 
       {/* ── Hero ── */}
-      <div className="industries-hero-bg-soft">
+      <div className="hero-bg-blue">
         <div className={`${CONTAINER} pb-12 pt-32 lg:pt-28`}>
           <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
 

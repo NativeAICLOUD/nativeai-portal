@@ -209,14 +209,8 @@ export default function CustomDevelopmentPage() {
           </div>
         </div>
 
-        {/* Amazon-style divider (page-scoped) — full viewport width */}
-        <hr
-          className="m-0 h-1 w-full border-0"
-          style={{
-            backgroundImage: "linear-gradient(260deg, #fff, #ff9900 20%, #ff6a3d 50%, #ff4f8b 80%, #fff)",
-            borderRadius: 100,
-          }}
-        />
+        {/* blue divider — full viewport width */}
+        <hr className="divider-blue m-0 h-1 w-full border-0" />
       </div>
 
       {/* ── Capabilities ── */}

@@ -7,7 +7,7 @@ type Props = {
 function CoomingSoon({ children }: Props) {
   return (
     <span>
-      <MyTooltip content="Cooming Soon">
+      <MyTooltip content="Coming Soon">
         {children}
       </MyTooltip>
     </span>

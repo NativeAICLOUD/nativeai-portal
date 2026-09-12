@@ -6,9 +6,7 @@ import { motion } from 'framer-motion';
 
 type TCard = {
   id: number;
-  color: string;
   level: string;
-  link: string;
   title: string;
   desc: string;
   date: string;

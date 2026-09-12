@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import WorkshopCards from '../components/partials/workshop';
 import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from '@/app/components/partials/services/ServiceUI';
+import { workshops } from '@/data/workshops';
 
 export const metadata: Metadata = {
   title: 'Workshops | NativeCloud',
@@ -18,87 +19,6 @@ export const metadata: Metadata = {
     images: ['https://nativeai.cloud/nativeai.cloud-og.png'],
   },
 };
-
-const cards = [
-  {
-    id: 1,
-    level: 'Basic',
-    color: 'orange',
-    link: '',
-    title: 'Azure Cloud Fundamentals',
-    desc: 'Get up to speed with Microsoft Azure. Learn core services, resource management, and how to architect your first cloud workload — no prior cloud experience required.',
-    date: '24 May 2025',
-    duration: '2 hours',
-    language: 'English',
-    format: 'Online',
-    tags: ['Azure', 'Beginner'],
-  },
-  {
-    id: 2,
-    level: 'Deep Dive',
-    color: 'red',
-    link: '',
-    title: 'Kubernetes on AKS',
-    desc: 'Go deep on Azure Kubernetes Service. Cover cluster design, workload scheduling, autoscaling, and production-grade observability for containerised applications.',
-    date: '31 May 2025',
-    duration: '4 hours',
-    language: 'English',
-    format: 'Online',
-    tags: ['Kubernetes', 'AKS'],
-  },
-  {
-    id: 3,
-    level: 'Special',
-    color: 'blue',
-    link: '',
-    title: 'AI Agents & RAG on Azure',
-    desc: 'Build production-ready AI Agents powered by GPT-4o and Azure AI Search. Implement Retrieval-Augmented Generation pipelines connected to your own data.',
-    date: '7 Jun 2025',
-    duration: '3 hours',
-    language: 'English',
-    format: 'Online',
-    tags: ['AI', 'RAG', 'GPT-4o'],
-  },
-  {
-    id: 4,
-    level: 'Basic',
-    color: 'orange',
-    link: '',
-    title: 'DevOps on Azure Bootcamp',
-    desc: 'Set up CI/CD pipelines with Azure DevOps and GitHub Actions. Automate builds, tests, and deployments to Azure with infrastructure-as-code using Bicep and Terraform.',
-    date: '14 Jun 2025',
-    duration: '3 hours',
-    language: 'English',
-    format: 'Online',
-    tags: ['DevOps', 'CI/CD'],
-  },
-  {
-    id: 5,
-    level: 'Deep Dive',
-    color: 'red',
-    link: '',
-    title: 'Cloud-Native Architecture',
-    desc: 'Design scalable, resilient microservices on Azure. Cover event-driven patterns, service mesh, distributed tracing, and zero-downtime deployment strategies.',
-    date: '21 Jun 2025',
-    duration: '4 hours',
-    language: 'English',
-    format: 'Online',
-    tags: ['Architecture', 'Microservices'],
-  },
-  {
-    id: 6,
-    level: 'Special',
-    color: 'blue',
-    link: '',
-    title: 'Azure Security & Compliance',
-    desc: 'Harden your Azure environment. Implement Zero Trust, manage identities with Entra ID, configure Defender for Cloud, and meet compliance requirements in regulated industries.',
-    date: '28 Jun 2025',
-    duration: '3 hours',
-    language: 'English',
-    format: 'Online',
-    tags: ['Security', 'Compliance'],
-  },
-];
 
 export default function WorkshopPage() {
   return (
@@ -137,7 +57,7 @@ export default function WorkshopPage() {
               Live, hands-on, and built around real workloads.
             </h2>
           </div>
-          <WorkshopCards data={cards} />
+          <WorkshopCards data={workshops} />
         </div>
       </section>
 
