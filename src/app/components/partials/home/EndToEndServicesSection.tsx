@@ -56,7 +56,7 @@ const categories = [
       {
         num: '07',
         title: 'Custom Development',
-        desc: 'Bespoke software for the workflows off-the-shelf tools cannot handle — from MVPs through to enterprise platforms, on Azure and AWS.',
+        desc: 'Bespoke software built around your exact workflows — from MVPs through to enterprise platforms, on Azure and AWS.',
         href: '/services/custom-development',
       },
       {

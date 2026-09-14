@@ -17,14 +17,14 @@ export const metadata: Metadata = {
 
 /* ── content ── */
 const services: { title: string; headline: string; body: string; href: string; icon: LucideIcon; color: string; bg: string; features: string[] }[] = [
-  { title: "Custom Development", headline: "Got a workflow that off-the-shelf software can't handle?", body: "We build software around how your business actually works, not the other way around. From the first API call to production deploy, every layer is built to fit.", href: "/services/custom-development", icon: Code2, color: "#2563EB", bg: "rgba(37,99,235,0.08)", features: ["API Design & Integration", "Full-Stack Web & Mobile Development", "AI-Powered Feature Integration", "Backend Engineering & Data Architecture", "Production Deployment & DevOps"] },
+  { title: "Custom Development", headline: "What if your software worked the way you do?", body: "We build software around how your business actually works, not the other way around. From the first API call to production deploy, every layer is built to fit.", href: "/services/custom-development", icon: Code2, color: "#2563EB", bg: "rgba(37,99,235,0.08)", features: ["API Design & Integration", "Full-Stack Web & Mobile Development", "AI-Powered Feature Integration", "Backend Engineering & Data Architecture", "Production Deployment & DevOps"] },
   { title: "Design", headline: "Design and build interfaces users actually enjoy.", body: "We turn rough ideas into refined, market-ready products, research-backed, pixel-perfect, and consistent across every device.", href: "/services/design", icon: Palette, color: "#DB2777", bg: "rgba(219,39,119,0.08)", features: ["UX Research & Discovery", "Wireframing & Prototyping", "Visual & Interaction Design", "Design Systems", "Pixel-Perfect UI Implementation"] },
-  { title: "AI Agents & RAG", headline: "Turn your data into intelligent automation.", body: "We connect AI agents and retrieval-augmented generation directly to your documents, systems, and workflows, so answers come from your data, not guesswork.", href: "/services/ai-agents-rag", icon: Bot, color: "#7C3AED", bg: "rgba(124,58,237,0.08)", features: ["Retrieval-Augmented Generation Pipelines", "Custom AI Agents & Copilots", "Azure OpenAI Integration", "Workflow Automation", "Document Intelligence"] },
-  { title: "Data Lifecycle", headline: "Have every business metric available at a click.", body: "We build the data platform — ingestion to dashboards — that turns raw data into decisions your team can act on.", href: "/data-lifecycle-management", icon: Database, color: "#0F8B83", bg: "rgba(15,139,131,0.08)", features: ["Data Ingestion & Pipelines", "Transformation & Modelling", "Analytics Layers", "Power BI Dashboards", "Data Governance"] },
-  { title: "Cloud Architecture", headline: "Architecture that scales with you, not against you.", body: "We design cloud-native architectures matched to your team's size, traffic patterns, and growth trajectory — built to flex, not to break.", href: "/cloud-software-architecture", icon: CloudCog, color: "#0EA5E9", bg: "rgba(14,165,233,0.08)", features: ["Scalable System Design", "Resilience & Failover Planning", "Cost Optimization", "Multi-Region Architecture", "Capacity Planning"] },
-  { title: "Migrate to Azure", headline: "Move to Azure without disrupting your business.", body: "A structured, low-risk migration from on-premises or any cloud provider — assessed, planned, and executed without downtime.", href: "/migrate-to-azure", icon: CloudUpload, color: "#16A34A", bg: "rgba(22,163,74,0.08)", features: ["Cloud Readiness Assessment", "Migration Planning & Strategy", "Zero-Downtime Cutover", "Re-platforming & Modernisation", "Post-Migration Optimization"] },
-  { title: "Cloud Native Development", headline: "Built for the cloud from day one.", body: "Microservices, containers, and Kubernetes — modern application architecture built to scale on Azure from the first sprint.", href: "/cloud-native-sd", icon: Boxes, color: "#F59E0B", bg: "rgba(245,158,11,0.08)", features: ["Microservices Architecture", "Kubernetes & Container Orchestration", "CI/CD for Cloud-Native Apps", "Observability & Monitoring", "Sprint-Based Delivery"] },
-  { title: "DevOps on Azure", headline: "Ship faster and safer, every time.", body: "CI/CD pipelines, infrastructure-as-code, and automated testing workflows that let your team release with confidence.", href: "/devops-on-azure", icon: Workflow, color: "#E11D48", bg: "rgba(225,29,72,0.08)", features: ["CI/CD Pipeline Design", "Infrastructure as Code", "Automated Testing", "Release Management", "Monitoring & Alerting"] },
+  { title: "AI Agents & RAG", headline: "Make your data work for you.", body: "We connect AI agents and retrieval-augmented generation directly to your documents, systems, and workflows, so answers come from your data, not guesswork.", href: "/services/ai-agents-rag", icon: Bot, color: "#7C3AED", bg: "rgba(124,58,237,0.08)", features: ["Retrieval-Augmented Generation Pipelines", "Custom AI Agents & Copilots", "Azure OpenAI Integration", "Workflow Automation", "Document Intelligence"] },
+  { title: "Data Lifecycle", headline: "Know what’s happening in your business. Instantly.", body: "We build the data platform — ingestion to dashboards — that turns raw data into decisions your team can act on.", href: "/data-lifecycle-management", icon: Database, color: "#0F8B83", bg: "rgba(15,139,131,0.08)", features: ["Data Ingestion & Pipelines", "Transformation & Modelling", "Analytics Layers", "Power BI Dashboards", "Data Governance"] },
+  { title: "Cloud Architecture", headline: "Built to grow with you.", body: "We design cloud-native architectures matched to your team's size, traffic patterns, and growth trajectory — built to flex, not to break.", href: "/cloud-software-architecture", icon: CloudCog, color: "#0EA5E9", bg: "rgba(14,165,233,0.08)", features: ["Scalable System Design", "Resilience & Failover Planning", "Cost Optimization", "Multi-Region Architecture", "Capacity Planning"] },
+  { title: "Migrate to Azure", headline: "Move to Azure. Keep your business moving.", body: "A structured, low-risk migration from on-premises or any cloud provider — assessed, planned, and executed without downtime.", href: "/migrate-to-azure", icon: CloudUpload, color: "#16A34A", bg: "rgba(22,163,74,0.08)", features: ["Cloud Readiness Assessment", "Migration Planning & Strategy", "Zero-Downtime Cutover", "Re-platforming & Modernisation", "Post-Migration Optimization"] },
+  { title: "Cloud Native Development", headline: "Made for the cloud. From the start.", body: "Microservices, containers, and Kubernetes — modern application architecture built to scale on Azure from the first sprint.", href: "/cloud-native-sd", icon: Boxes, color: "#F59E0B", bg: "rgba(245,158,11,0.08)", features: ["Microservices Architecture", "Kubernetes & Container Orchestration", "CI/CD for Cloud-Native Apps", "Observability & Monitoring", "Sprint-Based Delivery"] },
+  { title: "DevOps on Azure", headline: "Move faster. Deliver with confidence.", body: "CI/CD pipelines, infrastructure-as-code, and automated testing workflows that let your team release with confidence.", href: "/devops-on-azure", icon: Workflow, color: "#E11D48", bg: "rgba(225,29,72,0.08)", features: ["CI/CD Pipeline Design", "Infrastructure as Code", "Automated Testing", "Release Management", "Monitoring & Alerting"] },
 ];
 
 const products: { title: string; body: string; href: string; icon: LucideIcon; color: string; bg: string; tags: string[] }[] = [
@@ -68,7 +68,7 @@ export default function SolutionsPage() {
             <div className="flex-1">
               <div className="mb-6"><Eyebrow>What we build</Eyebrow></div>
               <h1 className="m-0 text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
-                Solutions built to last.
+                Made to make a difference.
               </h1>
               <div className="mt-8 flex flex-wrap gap-3">
                 <PrimaryButton href="/schedule-call">Schedule a free call</PrimaryButton>
@@ -90,7 +90,7 @@ export default function SolutionsPage() {
             <div>
               <div className="mb-4"><Eyebrow>Services</Eyebrow></div>
               <h2 className="m-0 max-w-[520px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
-                Everything you need to build at scale.
+                Everything you need to grow.
               </h2>
             </div>
             <PrimaryButton href="/schedule-call">Schedule a free call</PrimaryButton>
@@ -149,7 +149,7 @@ export default function SolutionsPage() {
           <div className="mb-12">
             <div className="mb-4"><Eyebrow>Products</Eyebrow></div>
             <h2 className="m-0 text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
-              Ready-made platforms. Production-ready today.
+              Built. Tested. Ready to go.
             </h2>
           </div>
 

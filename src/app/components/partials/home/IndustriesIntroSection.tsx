@@ -31,7 +31,7 @@ export default function IndustriesIntroSection() {
             >
               <div className="mb-6"><Eyebrow>Industries · Sector expertise</Eyebrow></div>
               <h2 className="m-0 max-w-[560px] text-[36px] font-medium leading-[1.05] tracking-[-0.02em] text-[#111] sm:text-[46px] lg:text-[56px]">
-                Solutions built for your industry.
+                Move your <span style={{ color: '#0284C7' }}>business</span> forward.
               </h2>
               <div className="mt-8 flex flex-wrap gap-3">
                 <PrimaryButton href="/industries">Explore our industries</PrimaryButton>

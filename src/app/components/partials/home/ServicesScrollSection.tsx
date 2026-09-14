@@ -42,7 +42,7 @@ export default function ServicesScrollSection() {
         >
           <div className="mb-4"><Eyebrow>What we deliver</Eyebrow></div>
           <h2 className={`m-0 max-w-[620px] ${H2}`}>
-            Every service your business needs — under one roof
+            Everything your business needs. In one place.
           </h2>
         </motion.div>
 

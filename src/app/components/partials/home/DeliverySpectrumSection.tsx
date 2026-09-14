@@ -46,7 +46,7 @@ export default function DeliverySpectrumSection() {
           >
             <div className="mb-4"><Eyebrow>Full delivery spectrum</Eyebrow></div>
             <h2 className={`m-0 max-w-[560px] ${H2}`}>
-              Every capability your product needs.
+              Everything your product needs to move forward.
             </h2>
           </motion.div>
 
@@ -78,7 +78,7 @@ export default function DeliverySpectrumSection() {
           >
             <div className="mb-4"><Eyebrow>How we work together</Eyebrow></div>
             <h2 className={`m-0 max-w-[560px] ${H2}`}>
-              Three ways to plug us in.
+              Three ways to work with us.
             </h2>
           </motion.div>
 

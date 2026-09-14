@@ -34,6 +34,12 @@ function HomeHeader() {
           {/* headline (rotates between slogans) */}
           <RotatingHeroHeadline variant="desktop" />
 
+          {/* supporting subhead */}
+          <p className="mt-6 max-w-[560px] text-[19px] font-normal leading-[1.6] text-[#4B5563]">
+            We work closely with our clients, use the right technology, and stay focused on
+            what matters most: delivering real results.
+          </p>
+
           {/* site search — same field, placeholder and behaviour */}
           <HeroSearch />
 

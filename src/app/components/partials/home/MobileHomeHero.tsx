@@ -52,9 +52,8 @@ export default function MobileHomeHero() {
           marginBottom: 32,
         }}
       >
-        We deliver end-to-end{' '}
-        <span className="font-semibold text-[#111111]">AI and cloud solutions</span>{' '}
-        — SaaS, DevOps, modernization — focused on business outcomes.
+        We work closely with our clients, use the right technology, and stay focused on
+        what matters most: delivering real results.
       </p>
 
       <Link

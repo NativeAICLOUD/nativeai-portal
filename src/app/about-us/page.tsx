@@ -310,7 +310,7 @@ export default function AboutUsPage() {
             <div className="flex-1">
               <div className="mb-4"><Eyebrow>Get in touch</Eyebrow></div>
               <h2 className="m-0 text-[28px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
-                Let&apos;s build something that actually works.
+                Let&apos;s make it real.
               </h2>
             </div>
 

@@ -79,11 +79,11 @@ const PracticalSolutionsSection = () => (
       <div>
         <p className="text-[12px] font-medium uppercase tracking-[0.14em] text-[#6B7280] mb-4">Practical Solutions</p>
         <h2 className={`max-w-lg ${H2}`}>
-          Practical{' '}
+          Built to make your business{' '}
           <span style={{ background: 'rgba(37,99,235,0.14)', borderRadius: 0, padding: '2px 6px' }}>
-            AI &amp; Cloud
-          </span>{' '}
-          solutions we can deliver
+            work better
+          </span>
+          .
         </h2>
       </div>
       <p className={`max-w-xs sm:text-right ${BODY}`}>
