@@ -15,7 +15,7 @@ function calcReadingTime(desc: string) {
   return Math.max(1, Math.ceil(desc.split(' ').length / 200));
 }
 
-const KBCard = ({ id, image, title, desc, date, category }: IPost & { category?: string }) => {
+const KBCard = ({ id, image, title, desc, date, category, priority }: IPost & { category?: string; priority?: boolean }) => {
   const readingTime = calcReadingTime(desc);
   const isNew = isNewArticle(date);
 
@@ -29,7 +29,7 @@ const KBCard = ({ id, image, title, desc, date, category }: IPost & { category?:
         <Image
           src={image}
           alt={title}
-          priority
+          priority={priority}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
@@ -59,11 +59,11 @@ const KBCard = ({ id, image, title, desc, date, category }: IPost & { category?:
       {/* Body */}
       <div className="flex flex-col flex-1 px-5 py-5">
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-[11px] font-medium text-[#0a0e1a]/35">
+          <span className="text-[11px] font-medium text-[#0a0e1a]/55">
             {formatDistanceToNow(new Date(date), { addSuffix: true })}
           </span>
           <span className="w-1 h-1 rounded-full bg-[#0a0e1a]/20" />
-          <span className="text-[11px] font-medium text-[#0a0e1a]/35">{readingTime} min read</span>
+          <span className="text-[11px] font-medium text-[#0a0e1a]/55">{readingTime} min read</span>
         </div>
 
         <h2 className="text-[#0a0e1a] font-bold text-lg leading-snug mb-3 group-hover:text-[#2563EB] transition-colors duration-200 line-clamp-2">

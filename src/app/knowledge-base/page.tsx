@@ -1,7 +1,8 @@
 ﻿import type { Metadata } from 'next';
 import KnowledgeBasePosts from '../components/partials/knowledge-base';
 import { getBlogPosts } from '@/lib/blogsPosts';
-import { CONTAINER, Eyebrow } from '@/app/components/partials/services/ServiceUI';
+import { CONTAINER, Eyebrow, PrimaryButton } from '@/app/components/partials/services/ServiceUI';
+import { Constants } from '@/Constants';
 
 const CATEGORIES: Record<number, string> = {
   1: 'Azure AI',
@@ -45,6 +46,15 @@ const KnowledgeBasePage = async () => {
           <h1 className="m-0 max-w-3xl text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
             Knowledge base
           </h1>
+          <p className="mt-6 max-w-[560px] text-[17px] font-normal leading-[1.6] text-[#4B5563]">
+            Practical guides and field notes on Azure, AI, Kubernetes and cloud-native
+            architecture — written by the engineers who build it.
+          </p>
+          <div className="mt-8">
+            <PrimaryButton href={Constants.PAGES.SCHEDULE_CALL}>
+              <span className="text-[12px] font-medium uppercase tracking-[0.14em]">Talk to an engineer</span>
+            </PrimaryButton>
+          </div>
         </div>
 
         {/* blue divider — full viewport width */}

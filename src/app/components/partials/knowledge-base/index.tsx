@@ -78,8 +78,8 @@ function KnowledgeBasePosts({
     return matchSearch && matchCategory;
   });
 
-  // Featured = latest article (before filtering)
-  const featured = sortedPosts[0];
+  // Featured = latest article, independent of the sort toggle
+  const featured = [...posts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0];
   const gridPosts = filtered.filter(p => p.id !== featured?.id);
   const featuredVisible = filtered.some(p => p.id === featured?.id);
 
@@ -98,12 +98,12 @@ function KnowledgeBasePosts({
         <div
           className="w-full rounded-2xl py-8 px-6 sm:px-8 relative overflow-hidden"
           style={{
-            background: 'linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 40%, #edfaf4 100%)',
+            background: 'linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 40%, #eef3ff 100%)',
             border: '1px solid rgba(0,0,0,0.06)',
             boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
           }}
         >
-          <div className="absolute top-0 right-0 w-[400px] h-full pointer-events-none" style={{ background: 'radial-gradient(ellipse at 80% 50%, rgba(52,211,153,0.15) 0%, transparent 65%)' }} />
+          <div className="absolute top-0 right-0 w-[400px] h-full pointer-events-none" style={{ background: 'radial-gradient(ellipse at 80% 50%, rgba(37,99,235,0.14) 0%, transparent 65%)' }} />
 
           <div className="relative flex items-center">
             <input
@@ -113,12 +113,9 @@ function KnowledgeBasePosts({
               onChange={e => setSearch(e.target.value)}
               onKeyDown={e => { if (e.key === 'Enter') submitSearch(); }}
               placeholder="Search articles… (press / to focus)"
-              className="w-full outline-none text-[15px] text-[#0a0e1a] placeholder:text-[#aaaaaa]"
+              className="w-full rounded-full border-none py-[18px] pl-7 pr-20 text-[15px] text-[#0a0e1a] outline-none placeholder:text-[#aaaaaa] sm:pr-[168px]"
               style={{
                 background: '#F5F5F5',
-                borderRadius: 50,
-                border: 'none',
-                padding: '18px 190px 18px 28px',
                 boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.06)',
               }}
             />
@@ -329,7 +326,7 @@ function KnowledgeBasePosts({
               <p className="text-[#0a0e1a]/50 text-sm leading-relaxed line-clamp-3 mb-5">
                 {featured.desc}
               </p>
-              <div className="flex items-center gap-3 text-[12px] text-[#0a0e1a]/35 font-medium">
+              <div className="flex items-center gap-3 text-[12px] text-[#0a0e1a]/55 font-medium">
                 <span>{formatDistanceToNow(new Date(featured.date), { addSuffix: true })}</span>
                 <span className="w-1 h-1 rounded-full bg-[#0a0e1a]/20" />
                 <span>{calcReadingTime(featured.desc)} min read</span>
@@ -359,7 +356,7 @@ function KnowledgeBasePosts({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, ease: 'easeOut', delay: i * 0.05 }}
             >
-              <KBCard {...item} category={categories[item.id]} />
+              <KBCard {...item} category={categories[item.id]} priority={i < 3} />
             </motion.div>
           ))}
         </div>
