@@ -455,6 +455,30 @@ function Navbar() {
             <span className="text-[14px] font-medium text-[#111827]">AI Mode</span>
           </button>
 
+          <a
+            href={Constants.SOCIALS.INSTAGRAM}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            className={`hidden lg:flex items-center justify-center w-9 h-9 rounded-full transition-colors duration-[180ms] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0a0e1a]/25 ${lightNav ? 'text-[#4B5563] hover:text-[#111111] hover:bg-[#2563EB]/[0.06]' : 'text-white/60 hover:text-white/90 hover:bg-white/[0.07]'}`}
+          >
+            <svg width={15} height={15}>
+              <use href="/icons/all-icons.svg#icon-instagram" />
+            </svg>
+          </a>
+
+          <a
+            href={Constants.SOCIALS.LINKEDIN}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className={`hidden lg:flex items-center justify-center w-9 h-9 rounded-full transition-colors duration-[180ms] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0a0e1a]/25 ${lightNav ? 'text-[#4B5563] hover:text-[#111111] hover:bg-[#2563EB]/[0.06]' : 'text-white/60 hover:text-white/90 hover:bg-white/[0.07]'}`}
+          >
+            <svg width={15} height={15}>
+              <use href="/icons/all-icons.svg#icon-linkedin" />
+            </svg>
+          </a>
+
           <Link
             href="/login"
             style={MONO}

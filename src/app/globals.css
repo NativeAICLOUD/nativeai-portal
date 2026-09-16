@@ -58,7 +58,6 @@
      drifts gently over time instead of sitting static (subtle, ~12s cycle). */
   .industries-intro-bg-animated {
     background:
-      radial-gradient(circle at 15% 100%, rgba(224, 225, 255, 0.75), transparent 43%),
       radial-gradient(circle at 80% 100%, rgba(191, 219, 254, 0.55), transparent 48%),
       radial-gradient(circle at 100% 70%, rgba(219, 234, 254, 0.5), transparent 43%),
       #ffffff;

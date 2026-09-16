@@ -68,7 +68,12 @@ export default function CareersPage() {
     <div className="font-switzer">
 
       {/* ── Hero ── */}
-      <div className="hero-bg-blue">
+      <div
+        style={{
+          background:
+            'radial-gradient(circle at 80% 100%, rgba(191, 219, 254, 0.55), transparent 48%), radial-gradient(circle at 100% 70%, rgba(219, 234, 254, 0.5), transparent 43%), #ffffff',
+        }}
+      >
         <div className={`${CONTAINER} pb-12 pt-32 lg:pt-28`}>
           <div className="mb-6"><Eyebrow>Careers · We&apos;re hiring</Eyebrow></div>
           <h1 className="m-0 max-w-3xl text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">

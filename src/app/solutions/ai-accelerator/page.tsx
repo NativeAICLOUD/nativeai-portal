@@ -7,13 +7,6 @@ import { Constants } from '@/Constants';
 import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from '@/app/components/partials/services/ServiceUI';
 
 /* ── content ── */
-const stats = [
-  { value: '3', label: 'Core modules' },
-  { value: '4wk', label: 'Avg. PoC delivery' },
-  { value: '100%', label: 'Data stays yours' },
-  { value: '0', label: 'Vendor lock-in' },
-];
-
 const benefits: { title: string; body: string; icon: LucideIcon }[] = [
   { title: 'Expert AI use case identification', body: 'We help you cut through the noise — identifying AI use cases that are realistic, impactful, and aligned with your actual business goals.', icon: Target },
   { title: 'End-to-end technical support', body: 'From first discovery workshop to production deployment — hands-on engineering guidance at every step, with no deep in-house AI expertise required.', icon: Code2 },
@@ -21,6 +14,17 @@ const benefits: { title: string; body: string; icon: LucideIcon }[] = [
   { title: 'AI Landing Zone infrastructure', body: 'We design and deploy a proven Azure AI Landing Zone — secure, cost-efficient, and compliant from day one.', icon: Boxes },
   { title: 'Data governance & compliance', body: 'Privacy, compliance, and security are baked into every solution from the start — not bolted on afterwards.', icon: ShieldCheck },
   { title: 'Long-term scalability guidance', body: 'Post-deployment, we provide an advice report covering how to run, optimise, and scale your AI solutions over time.', icon: LineChart },
+];
+
+const checklist = [
+  'Expert guidance to choose the right Azure AI service for your use case.',
+  'Technical support to deploy a proven model or fine-tune your own.',
+  'Lower complexity and risk when bringing AI into production.',
+  'A governed AI Landing Zone, set up and secured on your behalf.',
+  'Fast validation of ideas through focused, production-aligned proofs of concept.',
+  'Clear, measurable business value from every AI solution we build.',
+  'Confidence in data governance, privacy, and compliance from day one.',
+  'A roadmap and ongoing guidance to scale AI safely across your teams.',
 ];
 
 const modules = [
@@ -120,45 +124,25 @@ export default function AIAcceleratorPage() {
     <div className="font-switzer">
 
       {/* ── Hero ── */}
-      <div className="industries-hero-bg">
+      <div
+        style={{
+          background:
+            'radial-gradient(circle at 80% 100%, rgba(191, 219, 254, 0.55), transparent 48%), radial-gradient(circle at 100% 70%, rgba(219, 234, 254, 0.5), transparent 43%), #ffffff',
+        }}
+      >
         <div className={`${CONTAINER} pb-12 pt-32 lg:pt-28`}>
-          <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
-
-            {/* Left */}
-            <div className="flex-1">
-              <div className="mb-6"><Eyebrow>AI Accelerator</Eyebrow></div>
-              <h1 className="m-0 max-w-[560px] text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
-                Build AI solutions with confidence.
-              </h1>
-              <p className="mt-6 max-w-[520px] text-[18px] font-light leading-[1.6] text-[#111]">
-                Adopt Azure AI services quickly and cost-efficiently — without the compliance risk.
-                We guide you from use case to proof of concept to production, embedding governance
-                from day one.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <PrimaryButton href={Constants.PAGES.SCHEDULE_CALL}>Talk to our Experts</PrimaryButton>
-                <SecondaryButton href="#modules">Explore the approach</SecondaryButton>
-              </div>
+          <div>
+            <div className="mb-6"><Eyebrow>AI Accelerator</Eyebrow></div>
+            <h1 className="m-0 max-w-[560px] text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
+             Accelerate innovation by integrating AI with confidence. 
+            </h1>
+            <p className="mt-6 max-w-[520px] text-[18px] font-light leading-[1.6] text-[#111]">
+              We help you adopt Azure AI quickly and safely — from first use case to production, with governance built in from day one.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <PrimaryButton href={Constants.PAGES.SCHEDULE_CALL}>Talk to our Experts</PrimaryButton>
+              <SecondaryButton href="#modules">Explore the approach</SecondaryButton>
             </div>
-
-            {/* Right — stat card */}
-            <div className="w-full lg:max-w-[380px] lg:flex-1">
-              <div className="rounded-2xl border border-[#e6e6e6] bg-white p-6">
-                <p className="m-0 mb-5"><Eyebrow>What you get</Eyebrow></p>
-                <div className="grid grid-cols-2 gap-4">
-                  {stats.map((s) => (
-                    <div key={s.label} className="rounded-xl border border-[#eee] bg-[#fafafa] p-4">
-                      <p className="m-0 text-[28px] font-medium leading-none text-[#111]">{s.value}</p>
-                      <p className="m-0 mt-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-[#9ca3af]">{s.label}</p>
-                    </div>
-                  ))}
-                </div>
-                <p className="mt-5 border-t border-[#eee] pt-4 text-[13px] leading-relaxed text-[#6b7280]">
-                  Use case to production — secure, compliant, and built to scale.
-                </p>
-              </div>
-            </div>
-
           </div>
         </div>
 
@@ -171,6 +155,38 @@ export default function AIAcceleratorPage() {
           }}
         />
       </div>
+
+      {/* ── Choosing AI Accelerator ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} py-20 lg:py-24`}>
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
+            <div>
+              <div className="mb-4"><Eyebrow>Choosing AI Accelerator</Eyebrow></div>
+              <h2 className="m-0 max-w-[420px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+                Everything you need to adopt AI with confidence.
+              </h2>
+              <p className="mt-3 max-w-[420px] text-[16px] font-normal leading-[1.5] text-[#6b7280]">
+                Weighing up whether AI Accelerator is the right fit? Here&apos;s what working with
+                us gets you.
+              </p>
+              <div className="mt-8">
+                <PrimaryButton href={Constants.PAGES.SCHEDULE_CALL}>Talk to our Experts</PrimaryButton>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
+              {checklist.map((item) => (
+                <div key={item} className="flex items-start gap-2.5">
+                  <svg className="mt-0.5 h-4 w-4 shrink-0 text-[#111]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span className="text-[15px] leading-relaxed text-[#111]">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ── Benefits ── */}
       <section className="bg-white">
