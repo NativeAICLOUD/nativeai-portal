@@ -1,6 +1,7 @@
 'use client';
 
 import { Briefcase } from "lucide-react";
+import { motion } from "framer-motion";
 import { Constants } from "@/Constants";
 import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from "@/app/components/partials/services/ServiceUI";
 
@@ -304,7 +305,14 @@ export default function AboutUsPage() {
       </section>
 
       {/* ── Get in touch ── */}
-      <section className="border-t border-[#eee] hero-bg-blue">
+      <motion.section
+        className="mb-8 rounded-b-[32px] border-t border-[#eee] sm:mb-10 sm:rounded-b-[48px] lg:mb-14 lg:rounded-b-[80px]"
+        style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #EAF2FF 55%, #DBEAFE 100%)' }}
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+        viewport={{ once: true, margin: '-60px' }}
+      >
         <div className={`${CONTAINER} py-20 lg:py-24`}>
           <div className="flex flex-col gap-10 lg:flex-row lg:gap-16">
             <div className="flex-1">
@@ -368,7 +376,7 @@ export default function AboutUsPage() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
     </div>
   );
