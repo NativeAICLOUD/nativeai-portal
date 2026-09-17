@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import WorkshopCards from '../components/partials/workshop';
+import WorkshopCTA from '../components/partials/workshop/WorkshopCTA';
 import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from '@/app/components/partials/services/ServiceUI';
 import { workshops } from '@/data/workshops';
 
@@ -62,23 +63,7 @@ export default function WorkshopPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="bg-[#0a0e1a]">
-        <div className={`${CONTAINER} flex flex-col gap-10 py-20 md:flex-row md:items-center md:justify-between`}>
-          <div className="flex max-w-xl flex-col gap-4">
-            <h2 className="m-0 text-[28px] font-medium leading-[1.1] text-white md:text-[44px]">
-              Want a private workshop for your team?
-            </h2>
-            <p className="m-0 text-[18px] font-light leading-[1.6] text-white/70">
-              We tailor the agenda to your stack and goals, and run it live for your engineers —
-              on your schedule.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <PrimaryButton href="/schedule-call" dark>Book a private workshop</PrimaryButton>
-            <SecondaryButton href="/solutions" onDark>All solutions</SecondaryButton>
-          </div>
-        </div>
-      </section>
+      <WorkshopCTA />
 
     </div>
   );

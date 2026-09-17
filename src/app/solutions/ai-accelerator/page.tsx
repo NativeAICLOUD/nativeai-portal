@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { Link } from 'react-transition-progress/next';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Target, Code2, Zap, Boxes, ShieldCheck, LineChart, type LucideIcon } from 'lucide-react';
 import { Constants } from '@/Constants';
@@ -120,6 +121,40 @@ function FAQItem({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boo
 export default function AIAcceleratorPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
+  const acceleratorCardRef = useRef<HTMLDivElement>(null);
+  const [leadForm, setLeadForm] = useState({ company: '', firstName: '', lastName: '', phone: '', email: '' });
+  const [agreed, setAgreed] = useState(false);
+  const [leadStatus, setLeadStatus] = useState<'idle' | 'submitting' | 'submitted' | 'error'>('idle');
+
+  const updateLeadField = (field: keyof typeof leadForm) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLeadForm((f) => ({ ...f, [field]: e.target.value }));
+  };
+
+  const handleLeadSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!agreed) return;
+    setLeadStatus('submitting');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: `${leadForm.firstName} ${leadForm.lastName}`.trim(),
+          email: leadForm.email,
+          company: leadForm.company,
+          phone: leadForm.phone,
+          topic: 'AI Accelerator',
+        }),
+      });
+      if (!res.ok) throw new Error('server');
+      setLeadStatus('submitted');
+      setLeadForm({ company: '', firstName: '', lastName: '', phone: '', email: '' });
+      setAgreed(false);
+    } catch {
+      setLeadStatus('error');
+    }
+  };
+
   return (
     <div className="font-switzer">
 
@@ -133,8 +168,8 @@ export default function AIAcceleratorPage() {
         <div className={`${CONTAINER} pb-12 pt-32 lg:pt-28`}>
           <div>
             <div className="mb-6"><Eyebrow>AI Accelerator</Eyebrow></div>
-            <h1 className="m-0 max-w-[560px] text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
-             Accelerate innovation by integrating AI with confidence. 
+            <h1 className="m-0 max-w-[560px] text-[30px] font-medium leading-[1.15] text-[#111] sm:text-[38px] lg:text-[44px]">
+             Accelerate innovation by integrating AI with confidence.
             </h1>
             <p className="mt-6 max-w-[520px] text-[18px] font-light leading-[1.6] text-[#111]">
               We help you adopt Azure AI quickly and safely — from first use case to production, with governance built in from day one.
@@ -156,33 +191,172 @@ export default function AIAcceleratorPage() {
         />
       </div>
 
-      {/* ── Choosing AI Accelerator ── */}
+      {/* ── Choosing AI Accelerator (dark CTA card) ── */}
       <section className="bg-white">
-        <div className={`${CONTAINER} py-20 lg:py-24`}>
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
-            <div>
-              <div className="mb-4"><Eyebrow>Choosing AI Accelerator</Eyebrow></div>
-              <h2 className="m-0 max-w-[420px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
-                Everything you need to adopt AI with confidence.
-              </h2>
-              <p className="mt-3 max-w-[420px] text-[16px] font-normal leading-[1.5] text-[#6b7280]">
-                Weighing up whether AI Accelerator is the right fit? Here&apos;s what working with
-                us gets you.
-              </p>
-              <div className="mt-8">
-                <PrimaryButton href={Constants.PAGES.SCHEDULE_CALL}>Talk to our Experts</PrimaryButton>
-              </div>
-            </div>
+        <div className={`${CONTAINER} py-16 lg:py-20`}>
+          <div ref={acceleratorCardRef} className="relative">
+            {/* Top-center arrow notch — sits outside the card's own overflow-hidden
+                clipping context (below) so the ring renders in full, not cut off. */}
+            <button
+              type="button"
+              onClick={() => acceleratorCardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })}
+              aria-label="Scroll down"
+              className="absolute left-1/2 top-0 z-10 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 sm:h-16 sm:w-16"
+              style={{ background: '#17182d', border: '4px solid #ffffff' }}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M12 4v14m0 0-6-6m6 6 6-6" />
+              </svg>
+            </button>
 
-            <div className="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
-              {checklist.map((item) => (
-                <div key={item} className="flex items-start gap-2.5">
-                  <svg className="mt-0.5 h-4 w-4 shrink-0 text-[#111]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  <span className="text-[15px] leading-relaxed text-[#111]">{item}</span>
-                </div>
-              ))}
+            <div
+              className="overflow-hidden rounded-[22px] px-6 py-16 sm:rounded-[28px] sm:px-10 sm:py-20 lg:px-16 lg:py-24"
+              style={{
+                background:
+                  'radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1.4px) 0 0/18px 18px, #17182d',
+              }}
+            >
+            <div className="relative grid grid-cols-1 gap-14 lg:grid-cols-[1.45fr_1fr] lg:gap-10">
+
+              {/* Left column */}
+              <div>
+                <h2
+                  className="m-0 max-w-[540px] text-[32px] font-bold leading-[1.08] sm:text-[42px] lg:text-[54px]"
+                  style={{
+                    background: 'linear-gradient(90deg, #15803D 0%, #59C28A 55%, #EAFBF0 100%)',
+                    WebkitBackgroundClip: 'text',
+                    backgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    color: 'transparent',
+                  }}
+                >
+                  Choosing AI Accelerator
+                </h2>
+                <p className="mt-5 max-w-[460px] text-[18px] leading-[1.6] text-white/90">
+                  Not sure if AI Accelerator is the right fit for your organisation? Here&apos;s what
+                  you get when you work with us:
+                </p>
+
+                <ul className="mt-9 flex flex-col gap-4">
+                  {checklist.map((item) => (
+                    <li key={item} className="flex items-center gap-3.5">
+                      <span className="flex h-[27px] w-[27px] shrink-0 items-center justify-center rounded-full" style={{ background: '#59C28A' }}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0B1220" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                      </span>
+                      <span className="text-[17px] leading-snug text-white">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Right column — lead form */}
+              <div className="lg:pt-2">
+                <h3 className="m-0 text-[28px] font-bold leading-[1.15] sm:text-[32px]" style={{ color: '#59C28A' }}>
+                  Ready to get started?
+                </h3>
+
+                <form onSubmit={handleLeadSubmit} className="mt-8 flex flex-col gap-4">
+                  <div>
+                    <label htmlFor="accel-company" className="sr-only">Company name</label>
+                    <input
+                      id="accel-company"
+                      type="text"
+                      required
+                      placeholder="Company name *"
+                      value={leadForm.company}
+                      onChange={updateLeadField('company')}
+                      className="h-11 w-full rounded-14 border-0 bg-[#F7F7F9] px-[18px] text-[14px] text-[#111827] placeholder:text-[#9CA3AF] outline-none transition-shadow focus:ring-2 focus:ring-[#59C28A]"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div>
+                      <label htmlFor="accel-firstname" className="sr-only">First name</label>
+                      <input
+                        id="accel-firstname"
+                        type="text"
+                        required
+                        placeholder="First name *"
+                        value={leadForm.firstName}
+                        onChange={updateLeadField('firstName')}
+                        className="h-11 w-full rounded-14 border-0 bg-[#F7F7F9] px-[18px] text-[14px] text-[#111827] placeholder:text-[#9CA3AF] outline-none transition-shadow focus:ring-2 focus:ring-[#59C28A]"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="accel-lastname" className="sr-only">Last name</label>
+                      <input
+                        id="accel-lastname"
+                        type="text"
+                        required
+                        placeholder="Last name *"
+                        value={leadForm.lastName}
+                        onChange={updateLeadField('lastName')}
+                        className="h-11 w-full rounded-14 border-0 bg-[#F7F7F9] px-[18px] text-[14px] text-[#111827] placeholder:text-[#9CA3AF] outline-none transition-shadow focus:ring-2 focus:ring-[#59C28A]"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="accel-phone" className="sr-only">Phone number</label>
+                    <input
+                      id="accel-phone"
+                      type="tel"
+                      required
+                      placeholder="Phone number *"
+                      value={leadForm.phone}
+                      onChange={updateLeadField('phone')}
+                      className="h-11 w-full rounded-14 border-0 bg-[#F7F7F9] px-[18px] text-[14px] text-[#111827] placeholder:text-[#9CA3AF] outline-none transition-shadow focus:ring-2 focus:ring-[#59C28A]"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="accel-email" className="sr-only">Email</label>
+                    <input
+                      id="accel-email"
+                      type="email"
+                      required
+                      placeholder="Email *"
+                      value={leadForm.email}
+                      onChange={updateLeadField('email')}
+                      className="h-11 w-full rounded-14 border-0 bg-[#F7F7F9] px-[18px] text-[14px] text-[#111827] placeholder:text-[#9CA3AF] outline-none transition-shadow focus:ring-2 focus:ring-[#59C28A]"
+                    />
+                  </div>
+
+                  <label htmlFor="accel-privacy" className="mt-1 flex items-start gap-2.5 text-[13px] leading-snug text-white/85">
+                    <input
+                      id="accel-privacy"
+                      type="checkbox"
+                      required
+                      checked={agreed}
+                      onChange={(e) => setAgreed(e.target.checked)}
+                      className="mt-0.5 h-4 w-4 shrink-0 rounded border-0 accent-[#59C28A]"
+                    />
+                    <span>
+                      <span className="text-red-400">*</span> By submitting this form, I accept NativeCloud&apos;s{' '}
+                      <Link href={Constants.PAGES.PRIVACY} className="underline hover:text-white">privacy policy</Link>.
+                    </span>
+                  </label>
+
+                  <button
+                    type="submit"
+                    disabled={leadStatus === 'submitting' || !agreed}
+                    className="mt-1 inline-flex h-10 w-fit items-center justify-center rounded-full bg-[#2563EB] px-8 text-[14px] font-bold text-white transition-colors hover:bg-[#1e4fd6] disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    {leadStatus === 'submitting' ? 'Sending…' : 'Submit'}
+                  </button>
+
+                  {leadStatus === 'submitted' && (
+                    <p className="text-[13px] text-[#59C28A]">Thanks — we&apos;ll be in touch shortly.</p>
+                  )}
+                  {leadStatus === 'error' && (
+                    <p className="text-[13px] text-red-400">Something went wrong. Please email us at {Constants.MAIL}.</p>
+                  )}
+                </form>
+              </div>
+
+            </div>
             </div>
           </div>
         </div>
@@ -321,25 +495,6 @@ export default function AIAcceleratorPage() {
                 onToggle={() => setOpenFaq(openFaq === i ? null : i)}
               />
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── CTA ── */}
-      <section className="bg-[#0a0e1a]">
-        <div className={`${CONTAINER} flex flex-col gap-10 py-20 md:flex-row md:items-center md:justify-between`}>
-          <div className="flex max-w-xl flex-col gap-4">
-            <h2 className="m-0 text-[28px] font-medium leading-[1.1] text-white md:text-[44px]">
-              Ready to accelerate your AI adoption?
-            </h2>
-            <p className="m-0 text-[18px] font-light leading-[1.6] text-white/70">
-              Book a free discovery call. We&apos;ll identify your highest-value use cases and outline
-              a practical path to production.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <PrimaryButton href={Constants.PAGES.SCHEDULE_CALL} dark>Talk to our Experts</PrimaryButton>
-            <SecondaryButton href="/solutions" onDark>All solutions</SecondaryButton>
           </div>
         </div>
       </section>
