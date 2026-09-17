@@ -5,7 +5,7 @@ import ContactUsForm from '../components/partials/ContactForm';
 
 const GetInTouchPage = () => {
   return (
-    <div className={`relative min-h-full`}>
+    <div className={`relative min-h-full font-switzer`}>
       <div className="absolute w-full h-full z-[-1] top-16 inset-x-0">
         <Image src={BG3Img} alt="Background" className="!h-auto md:!-top-36" layout="fill" objectFit="cover" objectPosition='top' quality={100} />
         <Image src={BGGroupLogo} alt="Design Element" layout="fill" objectFit="contain" objectPosition='top right' quality={100} />
