@@ -60,10 +60,10 @@ function buildEmail(data: {
 
         <!-- Header -->
         <tr>
-          <td style="background:#0a0e1a;padding:28px 32px;">
-            <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.35);">NativeCloud</p>
-            <h1 style="margin:0;font-size:20px;font-weight:700;color:#fff;">New Consultation Request</h1>
-            <p style="margin:6px 0 0;font-size:13px;color:#e89a78;">Schedule-a-Call form submission</p>
+          <td style="background:#ffffff;padding:28px 32px 20px;border-bottom:1px solid #f0ece8;">
+            <img src="https://nativeai.cloud/img/nativecloud-logo-email.png" alt="NativeCloud" width="132" style="display:block;margin:0 0 18px;border:0;" />
+            <h1 style="margin:0;font-size:20px;font-weight:700;color:#0a0e1a;">New Consultation Request</h1>
+            <p style="margin:6px 0 0;font-size:13px;color:#e89a78;">Website contact form submission</p>
           </td>
         </tr>
 
