@@ -31,8 +31,41 @@ function KnowledgeBasePosts({
   const [filterOpen, setFilterOpen] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
   const [sort, setSort] = useState<SortOption>('newest');
+  const [pressedSort, setPressedSort] = useState<SortOption | null>(null);
+  const sortDragActive = useRef(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+
+  // Press-and-drag scrubbing across the sort pill: pressing an option selects
+  // it immediately, and dragging across neighboring options (finger or mouse)
+  // re-selects as you go, like an iOS segmented control.
+  const optionAtPoint = (x: number, y: number): SortOption | null => {
+    const el = document.elementFromPoint(x, y)?.closest<HTMLElement>('[data-sort-opt]');
+    return (el?.dataset.sortOpt as SortOption | undefined) ?? null;
+  };
+
+  const handleSortPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const opt = optionAtPoint(e.clientX, e.clientY);
+    if (!opt) return;
+    sortDragActive.current = true;
+    (e.currentTarget as HTMLDivElement).setPointerCapture(e.pointerId);
+    setSort(opt);
+    setPressedSort(opt);
+  };
+
+  const handleSortPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!sortDragActive.current) return;
+    const opt = optionAtPoint(e.clientX, e.clientY);
+    if (opt) {
+      setSort(opt);
+      setPressedSort(opt);
+    }
+  };
+
+  const endSortDrag = () => {
+    sortDragActive.current = false;
+    setPressedSort(null);
+  };
 
   const uniqueCategories = Array.from(new Set(Object.values(categories))).sort();
 
@@ -215,20 +248,37 @@ function KnowledgeBasePosts({
           )}
         </div>
 
-        {/* Sort toggle */}
-        <div className="flex items-center gap-1 shrink-0 rounded-full p-1" style={{ background: 'rgba(10,14,26,0.05)' }}>
+        {/* Sort toggle — press-and-drag to scrub between options */}
+        <div
+          className="flex items-center gap-1 shrink-0 touch-none select-none rounded-full p-1"
+          style={{ background: 'rgba(10,14,26,0.05)' }}
+          onPointerDown={handleSortPointerDown}
+          onPointerMove={handleSortPointerMove}
+          onPointerUp={endSortDrag}
+          onPointerCancel={endSortDrag}
+        >
           {(['newest', 'oldest', 'az'] as SortOption[]).map((opt) => (
             <button
               key={opt}
+              data-sort-opt={opt}
               onClick={() => setSort(opt)}
-              className="px-3 py-1.5 rounded-full text-[11px] font-semibold transition-all duration-150"
-              style={
-                sort === opt
+              className="relative px-2.5 py-1 rounded-full text-[10px] font-semibold transition-all duration-150 ease-out"
+              style={{
+                ...(sort === opt
                   ? { background: '#0a0e1a', color: '#fff' }
-                  : { color: 'rgba(10,14,26,0.45)' }
-              }
+                  : { color: 'rgba(10,14,26,0.45)' }),
+                transform: pressedSort === opt ? 'scale(1.28)' : 'scale(1)',
+                zIndex: pressedSort === opt ? 1 : 0,
+                boxShadow: pressedSort === opt ? '0 6px 18px rgba(10,14,26,0.25)' : 'none',
+              }}
             >
-              {opt === 'newest' ? 'Newest' : opt === 'oldest' ? 'Oldest' : 'A–Z'}
+              {pressedSort === opt && (
+                <span
+                  className="pointer-events-none absolute inset-0 rounded-full backdrop-blur-sm"
+                  style={{ background: 'rgba(255,255,255,0.22)' }}
+                />
+              )}
+              <span className="relative">{opt === 'newest' ? 'Newest' : opt === 'oldest' ? 'Oldest' : 'A–Z'}</span>
             </button>
           ))}
         </div>

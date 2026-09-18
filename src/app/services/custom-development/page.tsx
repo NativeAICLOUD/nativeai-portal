@@ -5,6 +5,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { CONTAINER, Eyebrow, SecondaryButton } from "@/app/components/partials/services/ServiceUI";
+import GetInTouchCTASection from "@/app/components/partials/services/GetInTouchCTASection";
 
 /* Page-scoped blue-concept primary button (matches the cloud-native-sd redesign) */
 function BlueButton({ href, children }: { href: string; children: React.ReactNode }) {
@@ -140,77 +141,36 @@ export default function CustomDevelopmentPage() {
     <div className="font-switzer">
 
       {/* ── Hero ── */}
-      <div className="industries-hero-bg">
+      <div className="hero-bg-blue">
         <div className={`${CONTAINER} pb-12 pt-32 lg:pt-28`}>
-          <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
-
-            {/* Left */}
-            <div className="flex-1">
-              <div className="mb-6">
-                <Eyebrow>Custom Development</Eyebrow>
-              </div>
-              <h1 className="m-0 text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
-                We build products that{" "}
-                <span className="text-[#111]">don&apos;t break.</span>
-              </h1>
-              <p className="mt-6 max-w-[520px] text-[18px] font-light leading-[1.6] text-[#111]">
-                From MVPs to full-scale platforms — reliable software that grows with your
-                business. Fast to launch, easy to scale, built to last.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <BlueButton href="/schedule-call">Book a 15-min call</BlueButton>
-                <SecondaryButton href="/solutions">All solutions</SecondaryButton>
-              </div>
-              <div className="mt-8 flex flex-wrap gap-2">
-                {["React", "Next.js", ".NET", "Node.js", "Azure", "PostgreSQL"].map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full border border-[#e6e6e6] px-3 py-1 text-[12px] font-medium text-[#111]"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+          <div className="max-w-3xl">
+            <div className="mb-6">
+              <Eyebrow>Custom Development</Eyebrow>
             </div>
-
-            {/* Right — tech stack card */}
-            <div className="w-full lg:max-w-[440px] lg:flex-1">
-              <div className="flex flex-col gap-5 rounded-2xl border border-[#e6e6e6] bg-white p-6">
-                <div className="flex items-center justify-between">
-                  <p className="m-0 text-[11px] font-medium uppercase tracking-[0.12em] text-[#9ca3af]">
-                    Our modern stack
-                  </p>
-                  <div className="flex items-center gap-1.5 rounded-full border border-[#059669]/30 px-3 py-1">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#059669]" />
-                    <span className="text-[12px] font-medium text-[#059669]">Production-ready</span>
-                  </div>
-                </div>
-
-                {[
-                  { label: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS"] },
-                  { label: "Backend", items: [".NET 9", "Node.js", "Python"] },
-                  { label: "Data", items: ["PostgreSQL", "Redis"] },
-                  { label: "Cloud & DevOps", items: ["Azure", "Docker", "Kubernetes"] },
-                ].map((group) => (
-                  <div key={group.label}>
-                    <p className="m-0 mb-2 text-[12px] font-light text-[#6b7280]">{group.label}</p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {group.items.map((t) => (
-                        <span key={t} className="rounded-lg border border-[#e6e6e6] bg-[#fafafa] px-3 py-1.5 text-[12.5px] font-medium text-[#111]">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <h1 className="m-0 text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
+              We build products that{" "}
+              <span className="text-[#111]">don&apos;t break.</span>
+            </h1>
+            <p className="mt-6 max-w-[520px] text-[18px] font-light leading-[1.6] text-[#111]">
+              From MVPs to full-scale platforms — reliable software that grows with your
+              business. Fast to launch, easy to scale, built to last.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <BlueButton href="/schedule-call">Book a 15-min call</BlueButton>
+              <SecondaryButton href="/solutions">All solutions</SecondaryButton>
             </div>
-
+            <div className="mt-8 flex flex-wrap gap-2">
+              {["React", "Next.js", ".NET", "Node.js", "Azure", "PostgreSQL"].map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-[#e6e6e6] px-3 py-1 text-[12px] font-medium text-[#111]"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
-
-        {/* blue divider — full viewport width */}
-        <hr className="divider-blue m-0 h-1 w-full border-0" />
       </div>
 
       {/* ── Capabilities ── */}
@@ -403,23 +363,11 @@ export default function CustomDevelopmentPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="bg-[#0a0e1a]">
-        <div className={`${CONTAINER} flex flex-col gap-10 py-20 md:flex-row md:items-center md:justify-between`}>
-          <div className="flex max-w-xl flex-col gap-4">
-            <h2 className="m-0 text-[28px] font-medium leading-[1.1] text-white md:text-[44px]">
-              Ready to build something that lasts?
-            </h2>
-            <p className="m-0 text-[18px] font-light leading-[1.6] text-white/70">
-              Let&apos;s talk about your product, your timeline, and what real engineering looks
-              like for your team.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <BlueButton href="/schedule-call">Book a discovery call</BlueButton>
-            <SecondaryButton href="/solutions" onDark>All solutions</SecondaryButton>
-          </div>
-        </div>
-      </section>
+      <GetInTouchCTASection
+        heading="From idea to something real."
+        body="We turn ambitious ideas into reliable digital products that launch quickly, scale smoothly, and keep moving with your business."
+        topic="Custom Development"
+      />
 
     </div>
   );
