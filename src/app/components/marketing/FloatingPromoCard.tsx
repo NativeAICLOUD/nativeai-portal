@@ -6,6 +6,8 @@ import { usePathname } from 'next/navigation';
 import { Link } from 'react-transition-progress/next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Constants } from '@/Constants';
+import { LogoBlue } from '@/ImagePath';
+import Logo from '@/app/components/ui/Logo';
 
 /*
  * Floating promo card — a corner alert that pitches a single offer after
@@ -58,26 +60,22 @@ function ArrowIcon() {
    (#2563EB family) already used for accents across the site. */
 function DefaultVisual() {
   return (
-    <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-gtouch-bg-linear" aria-hidden="true">
+    <div
+      className="relative aspect-[16/9] w-full overflow-hidden rounded-xl"
+      style={{ background: 'linear-gradient(160deg, #0B1220 0%, #17233A 55%, #223652 100%)' }}
+      aria-hidden="true"
+    >
       <div
         className="absolute -right-10 -top-10 h-40 w-40 rounded-full"
-        style={{ background: 'radial-gradient(circle, rgba(37,99,235,0.45) 0%, transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.5) 0%, transparent 70%)' }}
       />
       <div
         className="absolute -bottom-12 -left-8 h-36 w-36 rounded-full"
-        style={{ background: 'radial-gradient(circle, rgba(155,114,203,0.28) 0%, transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, rgba(99,102,241,0.3) 0%, transparent 70%)' }}
       />
-      <svg className="absolute inset-0 h-full w-full" viewBox="0 0 400 225" fill="none">
-        <circle cx="200" cy="112" r="70" stroke="white" strokeOpacity="0.14" />
-        <circle cx="200" cy="112" r="46" stroke="white" strokeOpacity="0.22" />
-        <line x1="200" y1="112" x2="270" y2="68" stroke="white" strokeOpacity="0.25" />
-        <line x1="200" y1="112" x2="128" y2="150" stroke="white" strokeOpacity="0.25" />
-        <line x1="200" y1="112" x2="292" y2="150" stroke="white" strokeOpacity="0.18" />
-        <circle cx="200" cy="112" r="5" fill="#60A5FA" />
-        <circle cx="270" cy="68" r="3" fill="#93C5FD" />
-        <circle cx="128" cy="150" r="3" fill="#93C5FD" />
-        <circle cx="292" cy="150" r="2.5" fill="white" fillOpacity="0.6" />
-      </svg>
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        <Image src={LogoBlue} alt="" className="h-24 w-auto object-contain" />
+      </div>
     </div>
   );
 }
@@ -146,6 +144,9 @@ export default function FloatingPromoCard({
             </button>
 
             <div className="px-6 pb-4 pt-6">
+              <div className="mb-3">
+                <Logo className="h-6" animated={false} />
+              </div>
               <h3 className="m-0 pr-8 text-[24px] font-medium leading-[1.15] tracking-[-0.02em] text-[#111827]">
                 {headline}
               </h3>
