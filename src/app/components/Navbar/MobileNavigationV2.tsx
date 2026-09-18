@@ -187,7 +187,7 @@ export default function MobileNavigationV2({ open, onClose, onOpenSearch }: Prop
       onClose={handleClose}
       footer={
         <Link
-          href={Constants.PAGES.SCHEDULE_CALL}
+          href={Constants.PAGES.GET_IN_TOUCH}
           onClick={handleNavigate}
           className="flex h-[62px] w-full items-center justify-center rounded-lg bg-black text-[17px] font-semibold text-white transition-colors duration-200 hover:bg-[#111827]"
         >

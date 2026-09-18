@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import WorkshopCards from '../components/partials/workshop';
-import WorkshopCTA from '../components/partials/workshop/WorkshopCTA';
+import WorkshopLeadCTASection from '../components/partials/workshop/WorkshopLeadCTASection';
 import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from '@/app/components/partials/services/ServiceUI';
 import { workshops } from '@/data/workshops';
 
@@ -63,7 +63,7 @@ export default function WorkshopPage() {
       </section>
 
       {/* ── CTA ── */}
-      <WorkshopCTA />
+      <WorkshopLeadCTASection />
 
     </div>
   );

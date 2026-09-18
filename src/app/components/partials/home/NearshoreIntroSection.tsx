@@ -43,7 +43,7 @@ export default function NearshoreIntroSection() {
                 Let us help you establish a dedicated team of highly skilled profiles!
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <PrimaryButton href={Constants.PAGES.SCHEDULE_CALL}>Let&apos;s talk</PrimaryButton>
+                <PrimaryButton href={Constants.PAGES.GET_IN_TOUCH}>Let&apos;s talk</PrimaryButton>
                 <SecondaryButton href={Constants.PAGES.NEARSHORE_TEAMS}>Explore nearshore teams</SecondaryButton>
               </div>
             </motion.div>

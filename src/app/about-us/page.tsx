@@ -151,7 +151,7 @@ export default function AboutUsPage() {
                 into working solutions.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <PrimaryButton href={Constants.PAGES.SCHEDULE_CALL}>
+                <PrimaryButton href={Constants.PAGES.GET_IN_TOUCH}>
                   <span className="text-[12px] font-medium uppercase tracking-[0.14em]">Let&apos;s talk</span>
                 </PrimaryButton>
                 <SecondaryButton href={Constants.PAGES.SOLUTIONS}>

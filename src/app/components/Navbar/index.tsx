@@ -90,7 +90,7 @@ const pages: Pages[] = [
   { url: Constants.PAGES.KNOWLEDGE_BASE, title: 'Knowledge base' },
   { url: Constants.PAGES.CAREERS,     title: 'Careers'       },
   { url: Constants.PAGES.ABOUT_US,     title: 'About'         },
-  { url: Constants.PAGES.SCHEDULE_CALL, title: 'Schedule a call' },
+  { url: Constants.PAGES.GET_IN_TOUCH, title: "Let's talk" },
 ];
 
 const MONO: React.CSSProperties = { fontFamily: "'Switzer', sans-serif" };
@@ -335,7 +335,7 @@ function Navbar() {
         </div>
 
         {/* Desktop nav links */}
-        <ul className="hidden lg:flex items-center gap-7">
+        <ul className="hidden lg:flex items-center gap-5 xl:gap-7">
           {pages.map((item) => {
             const isOpen = slideMenu && activeNav === item.title;
             const isParentActive = !!item.children?.some(
@@ -358,7 +358,7 @@ function Navbar() {
                     {item.title}
                   </span>
                 </CoomingSoon>
-              ) : item.title === 'Schedule a call' ? (
+              ) : item.title === "Let's talk" ? (
                 <Link
                   href={item.url}
                   onClick={() => setSlideMenu(false)}
@@ -412,7 +412,7 @@ function Navbar() {
                   onClick={() => setSlideMenu(false)}
                   aria-current={pathname === item.url ? 'page' : undefined}
                   style={MONO}
-                  className={`relative flex items-center gap-1 py-1.5 text-[14px] font-medium transition-colors duration-[180ms] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0a0e1a]/25 ${
+                  className={`relative flex items-center gap-1 whitespace-nowrap py-1.5 text-[14px] font-medium transition-colors duration-[180ms] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0a0e1a]/25 ${
                     lightNav
                       ? pathname === item.url
                         ? 'text-[#111111]'

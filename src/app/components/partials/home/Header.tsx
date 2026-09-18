@@ -46,7 +46,7 @@ function HomeHeader() {
           {/* CTA row */}
           <div className="mt-12 flex flex-col items-start md:flex-row md:flex-wrap md:items-center md:gap-6">
             <Link
-              href={Constants.PAGES.SCHEDULE_CALL}
+              href={Constants.PAGES.GET_IN_TOUCH}
               className="group/cta inline-flex min-w-[210px] cursor-pointer items-center justify-center rounded-full bg-black px-11 py-4 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#2563EB] hover:shadow-[0_10px_28px_rgba(37,99,235,0.25)] active:translate-y-0 active:shadow-none"
             >
               <span className="text-[17px] font-semibold leading-none text-white">
