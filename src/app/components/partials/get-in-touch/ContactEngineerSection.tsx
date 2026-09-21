@@ -64,7 +64,13 @@ export default function ContactEngineerSection() {
   };
 
   return (
-    <section className="rounded-t-[32px] bg-white sm:rounded-t-[48px] lg:rounded-t-[80px]">
+    <section
+      className="rounded-t-[32px] sm:rounded-t-[48px] lg:rounded-t-[80px]"
+      style={{
+        background:
+          'radial-gradient(circle at 80% 100%, rgba(191, 219, 254, 0.55), transparent 48%), radial-gradient(circle at 100% 70%, rgba(219, 234, 254, 0.5), transparent 43%), #ffffff',
+      }}
+    >
       <div className="mx-auto max-w-[1500px] px-5 pb-14 pt-10 sm:px-8 sm:pb-16 sm:pt-12 lg:px-10 lg:pb-20 xl:px-16 xl:pb-24 2xl:px-[90px] 2xl:pb-28 2xl:pt-20">
         <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[47%_1fr] lg:gap-14 xl:gap-20 2xl:gap-24">
 
