@@ -3,9 +3,9 @@
 import { useState } from 'react';
 
 const checklist = [
-  "Schedule a 1:1 consultation with an Azure or AWS engineer",
-  'Learn more about our wide range of cloud services',
-  'Explore the cloud solution that fits your specific needs',
+  "Book 30 minutes with one of our AWS-certified engineers — no sales rep involved.",
+  'Get a clear picture of our AI, cloud, and engineering services.',
+  'Walk away with a solution mapped to your actual goals, not a generic pitch.',
 ];
 
 const subjectOptions = [
@@ -64,13 +64,7 @@ export default function ContactEngineerSection() {
   };
 
   return (
-    <section
-      className="rounded-t-[32px] sm:rounded-t-[48px] lg:rounded-t-[80px]"
-      style={{
-        background:
-          'radial-gradient(circle at 12% 35%, rgba(255, 202, 150, 0.2), transparent 50%), radial-gradient(circle at 45% 10%, rgba(255, 214, 170, 0.12), transparent 45%), #ffffff',
-      }}
-    >
+    <section className="rounded-t-[32px] bg-white sm:rounded-t-[48px] lg:rounded-t-[80px]">
       <div className="mx-auto max-w-[1500px] px-5 pb-14 pt-10 sm:px-8 sm:pb-16 sm:pt-12 lg:px-10 lg:pb-20 xl:px-16 xl:pb-24 2xl:px-[90px] 2xl:pb-28 2xl:pt-20">
         <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[47%_1fr] lg:gap-14 xl:gap-20 2xl:gap-24">
 
@@ -84,13 +78,15 @@ export default function ContactEngineerSection() {
             </span>
 
             <h2 className="m-0 mt-6 font-light leading-[0.98] tracking-tight text-[#1A1A1A] text-[34px] sm:text-[42px] lg:text-[48px] xl:text-[58px] 2xl:mt-10 2xl:text-[84px]">
-              Talk to an
+              Speak With Our
               <br />
-              Engineer
+              Engineering Team
             </h2>
 
             <p className="mt-5 max-w-[640px] text-[15px] leading-[1.4] text-[#1A1A1A] sm:text-[16px] xl:text-[18px] 2xl:mt-8 2xl:text-[22px]">
-              Whether you’re just starting your cloud journey, ready to take the next step in migration or modernization, looking for tailored GenAI solutions, or something else, our team is here to help you cut through the chaos and get the clear results you need.
+              Whether you&apos;re evaluating cloud for the first time, planning a migration, or
+              exploring what AI could do for your product, our engineers are ready to help you cut
+              through the noise and find a clear way forward.
             </p>
 
             <p className="mb-4 mt-5 text-[15px] font-bold text-[#1A1A1A] xl:text-[17px] 2xl:mb-7 2xl:mt-8 2xl:text-[21px]">Fill out the form to:</p>

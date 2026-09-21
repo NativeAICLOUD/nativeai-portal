@@ -1,15 +1,13 @@
 import { Constants } from '@/Constants';
-import { BG3Img, BGGroupLogo, Location, Phone, PinMarker } from '@/ImagePath';
+import { BGGroupLogo, Location, PhoneBlue, PinMarkerBlue } from '@/ImagePath';
 import Image from 'next/image';
 import { Link } from 'react-transition-progress/next';
-import { Eyebrow } from '../components/partials/services/ServiceUI';
 import ContactEngineerSection from '../components/partials/get-in-touch/ContactEngineerSection';
 
 const GetInTouchPage = () => {
   return (
     <div className={`relative min-h-full font-switzer`}>
-      <div className="absolute w-full h-full z-[-1] top-16 inset-x-0">
-        <Image src={BG3Img} alt="Background" className="!h-auto md:!-top-36" layout="fill" objectFit="cover" objectPosition='top' quality={100} />
+      <div className="hero-bg-blue absolute w-full h-full z-[-1] top-16 inset-x-0">
         <Image src={BGGroupLogo} alt="Design Element" layout="fill" objectFit="contain" objectPosition='right 22%' quality={100} />
       </div>
       <div className={'relative mx-auto max-w-9xl px-2 sm:px-4 md:px-6 2xl:px-0'}>
@@ -25,7 +23,7 @@ const GetInTouchPage = () => {
               Back to home
             </Link>
 
-            <div className="mb-3"><Eyebrow>Get in touch</Eyebrow></div>
+            <p className="m-0 mb-3 text-[12px] font-medium uppercase tracking-[0.18em] text-[#64748B]">Get in touch</p>
           </div>
         </div>
 
@@ -44,32 +42,29 @@ const GetInTouchPage = () => {
               priority
               className={'relative w-full h-full rounded-20 object-cover shadow-[0_24px_60px_-12px_rgba(15,23,42,0.35)]'}
             />
-            <div className="info absolute inset-0 top-[4.5rem] left-[34%] sm:top-[27.5%] sm:left-[34%] md:top-[29.5%] md:left-[36%] lg:top-[30%] lg:left-[36.4%] xl:top-[31%]">
-              <div className="content absolute text-black px-4 py-2.5 bg-white/95 backdrop-blur-sm rounded-14 shadow-[0_12px_32px_-6px_rgba(15,23,42,0.28)] -translate-x-[7rem] -translate-y-[4.5rem] before:absolute before:bottom-[-6px] before:left-2/4 before:-translate-x-2.5 before:z-[-1] before:border-x-8 before:rotate-180 before:border-x-transparent before:border-b-8 before:border-b-white/95 before:size-0">
-                <div className="list text-sm">
-                  <a href={Constants.MAPS} target='_blank' className='flex mb-1 gap-2 items-center hover:text-primary'>
-                    <Image
-                      src={PinMarker}
-                      alt="PinMarker"
-                      className='pin size-4'
-                    />
-                    {Constants.ADDRESS}
-                  </a>
-                  <a href={`tel:${Constants.PHONE}`} target='_blank' className='flex gap-2 items-center hover:text-primary'>
-                    <Image
-                      src={Phone}
-                      alt="PinMarker"
-                      className='pin size-4'
-                    />
-                    {Constants.PHONE}
-                  </a>
-                </div>
+            <div className="info absolute inset-0 top-[4.5rem] left-[38%] sm:top-[27.5%] sm:left-[38%] md:top-[29.5%] md:left-[40%] lg:top-[30%] lg:left-[40.4%] xl:top-[31%]">
+              <div className="content absolute flex flex-col gap-2.5 rounded-2xl border border-[#e6e6e6] bg-white px-5 py-4 text-[#1A1A1A] shadow-[0_16px_40px_-8px_rgba(15,23,42,0.28)] -translate-x-[3rem] -translate-y-[8.5rem] transition-all duration-300 hover:scale-105 hover:shadow-[0_20px_50px_-8px_rgba(15,23,42,0.32)]">
+                <a href={Constants.MAPS} target='_blank' className='flex items-center gap-2.5 text-[13.5px] font-medium tracking-tight transition-colors hover:text-primary'>
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#2563EB]/10 transition-all duration-200 hover:scale-125 hover:bg-[#2563EB]/20">
+                    <Image src={PinMarkerBlue} alt="" className='size-3.5' />
+                  </span>
+                  {Constants.ADDRESS}
+                </a>
+                <a href={`tel:${Constants.PHONE}`} target='_blank' className='flex items-center gap-2.5 text-[13.5px] font-medium tracking-tight transition-colors hover:text-primary'>
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#2563EB]/10 transition-all duration-200 hover:scale-125 hover:bg-[#2563EB]/20">
+                    <Image src={PhoneBlue} alt="" className='size-3.5' />
+                  </span>
+                  {Constants.PHONE}
+                </a>
               </div>
-              <Image
-                src={PinMarker}
-                alt="PinMarker"
-                className='pin cursor-pointer'
-              />
+              <a
+                href={Constants.MAPS}
+                target="_blank"
+                aria-label="View on map"
+                className="absolute flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#e6e6e6] bg-white shadow-[0_4px_12px_rgba(15,23,42,0.18)] transition-all duration-300 hover:scale-150 hover:border-transparent hover:bg-[#0a0e1a] hover:shadow-[0_8px_24px_rgba(0,0,0,0.45)]"
+              >
+                <Image src={PinMarkerBlue} alt="" className="size-6 drop-shadow-[0_4px_8px_rgba(0,0,0,0.35)]" />
+              </a>
             </div>
           </div>
         </div>

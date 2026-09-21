@@ -8,7 +8,9 @@ import BGNativeWhite from '../public/img/Native-white.png';
 import SolutionHeader from '../public/img/Solutions.png';
 import Location from '../public/img/Esg.jpg';
 import PinMarker from '../public/img/Pin.svg';
+import PinMarkerBlue from '../public/img/Pin-blue.svg';
 import Phone from '../public/img/Phone.svg';
+import PhoneBlue from '../public/img/Phone-blue.svg';
 import PhoneWhite from '../public/img/PhoneWhite.svg';
 import LogoBlue from '../public/img/logo-blue.png';
 import AzureHero from '../public/img/HeroLarge.png';
@@ -38,7 +40,9 @@ export {
   KTP,
   Location,
   PinMarker,
+  PinMarkerBlue,
   Phone,
+  PhoneBlue,
   PhoneWhite,
   LogoBlue,
   FrameMail,
