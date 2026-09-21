@@ -3,9 +3,9 @@
 import { useState } from 'react';
 
 const checklist = [
-  "Book 30 minutes with one of our AWS-certified engineers — no sales rep involved.",
-  'Get a clear picture of our AI, cloud, and engineering services.',
-  'Walk away with a solution mapped to your actual goals, not a generic pitch.',
+  "Schedule a 1:1 consultation with an Azure or AWS engineer",
+  'Learn more about our wide range of cloud services',
+  'Explore the cloud solution that fits your specific needs',
 ];
 
 const subjectOptions = [
@@ -84,15 +84,13 @@ export default function ContactEngineerSection() {
             </span>
 
             <h2 className="m-0 mt-6 font-light leading-[0.98] tracking-tight text-[#1A1A1A] text-[34px] sm:text-[42px] lg:text-[48px] xl:text-[58px] 2xl:mt-10 2xl:text-[84px]">
-              Speak With Our
+              Talk to an
               <br />
-              Engineering Team
+              Engineer
             </h2>
 
             <p className="mt-5 max-w-[640px] text-[15px] leading-[1.4] text-[#1A1A1A] sm:text-[16px] xl:text-[18px] 2xl:mt-8 2xl:text-[22px]">
-              Whether you&apos;re evaluating cloud for the first time, planning a migration, or
-              exploring what AI could do for your product, our engineers are ready to help you cut
-              through the noise and find a clear way forward.
+              Whether you’re just starting your cloud journey, ready to take the next step in migration or modernization, looking for tailored GenAI solutions, or something else, our team is here to help you cut through the chaos and get the clear results you need.
             </p>
 
             <p className="mb-4 mt-5 text-[15px] font-bold text-[#1A1A1A] xl:text-[17px] 2xl:mb-7 2xl:mt-8 2xl:text-[21px]">Fill out the form to:</p>

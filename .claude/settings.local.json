@@ -56,7 +56,9 @@
       "Bash(npm view *)",
       "Bash(git checkout *)",
       "Bash(git merge *)",
-      "Bash(node cdp-workshop-lead.js)"
+      "Bash(node cdp-workshop-lead.js)",
+      "Bash(ls -d docs)",
+      "Bash(ls *.md)"
     ]
   }
 }
