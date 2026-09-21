@@ -61,17 +61,17 @@ function ArrowIcon() {
 function DefaultVisual() {
   return (
     <div
-      className="relative aspect-[16/9] w-full overflow-hidden rounded-xl"
-      style={{ background: 'linear-gradient(160deg, #0B1220 0%, #17233A 55%, #223652 100%)' }}
+      className="relative aspect-[16/9] w-full overflow-hidden rounded-xl border border-white/15 backdrop-blur-sm"
+      style={{ background: 'rgba(255,255,255,0.08)' }}
       aria-hidden="true"
     >
       <div
         className="absolute -right-10 -top-10 h-40 w-40 rounded-full"
-        style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.5) 0%, transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.35) 0%, transparent 70%)' }}
       />
       <div
         className="absolute -bottom-12 -left-8 h-36 w-36 rounded-full"
-        style={{ background: 'radial-gradient(circle, rgba(99,102,241,0.3) 0%, transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.18) 0%, transparent 70%)' }}
       />
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
         <Image src={LogoBlue} alt="" className="h-24 w-auto object-contain" />
@@ -130,13 +130,14 @@ export default function FloatingPromoCard({
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             role="dialog"
             aria-label={headline}
-            className="pointer-events-auto relative overflow-hidden rounded-2xl border border-[#E6E6E6] bg-white shadow-[0_20px_60px_rgba(15,23,42,0.16),0_4px_16px_rgba(15,23,42,0.08)]"
+            className="pointer-events-auto relative overflow-hidden rounded-2xl border border-white/10 shadow-[0_20px_60px_rgba(15,23,42,0.35),0_4px_16px_rgba(15,23,42,0.2)]"
+            style={{ background: 'linear-gradient(160deg, #0F2557 0%, #1E40AF 55%, #2563EB 100%)' }}
           >
             <button
               type="button"
               onClick={dismiss}
               aria-label="Close"
-              className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full text-[#6B7280] transition-colors hover:bg-black/[0.05] hover:text-[#111827]"
+              className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full text-white/70 transition-colors hover:bg-white/10 hover:text-white"
             >
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M18 6 6 18M6 6l12 12" />
@@ -145,13 +146,13 @@ export default function FloatingPromoCard({
 
             <div className="px-6 pb-4 pt-6">
               <div className="mb-3">
-                <Logo className="h-6" animated={false} />
+                <Logo className="h-6" animated={false} isInvert />
               </div>
-              <h3 className="m-0 pr-8 text-[24px] font-medium leading-[1.15] tracking-[-0.02em] text-[#111827]">
+              <h3 className="m-0 pr-8 text-[24px] font-medium leading-[1.15] tracking-[-0.02em] text-white">
                 {headline}
               </h3>
               {description && (
-                <p className="mt-2 text-[14px] leading-[1.6] text-[#6B7280]">{description}</p>
+                <p className="mt-2 text-[14px] leading-[1.6] text-white/70">{description}</p>
               )}
             </div>
 
@@ -167,7 +168,7 @@ export default function FloatingPromoCard({
 
             <Link
               href={ctaHref}
-              className="group flex items-center justify-between gap-3 bg-btn-color px-6 py-4 text-[15px] font-semibold text-white transition-colors hover:bg-btn-color-hover"
+              className="group flex items-center justify-between gap-3 bg-black/[0.18] px-6 py-4 text-[15px] font-semibold text-white transition-colors hover:bg-black/[0.28]"
             >
               {ctaText}
               <ArrowIcon />
