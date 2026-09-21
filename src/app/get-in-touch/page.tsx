@@ -43,7 +43,7 @@ const GetInTouchPage = () => {
               className={'relative w-full h-full rounded-20 object-cover shadow-[0_24px_60px_-12px_rgba(15,23,42,0.35)]'}
             />
             <div className="info absolute inset-0 top-[4.5rem] left-[38%] sm:top-[27.5%] sm:left-[38%] md:top-[29.5%] md:left-[40%] lg:top-[30%] lg:left-[40.4%] xl:top-[31%]">
-              <div className="content absolute flex flex-col gap-2.5 rounded-2xl border border-[#e6e6e6] bg-white px-5 py-4 text-[#1A1A1A] shadow-[0_16px_40px_-8px_rgba(15,23,42,0.28)] -translate-x-[3rem] -translate-y-[8.5rem] transition-all duration-300 hover:scale-105 hover:shadow-[0_20px_50px_-8px_rgba(15,23,42,0.32)]">
+              <div className="content absolute flex flex-col gap-2.5 rounded-2xl border border-[#e6e6e6] bg-white px-5 py-4 text-[#1A1A1A] shadow-[0_16px_40px_-8px_rgba(15,23,42,0.28)] -translate-x-[3rem] -translate-y-[5.5rem] transition-all duration-300 hover:scale-105 hover:shadow-[0_20px_50px_-8px_rgba(15,23,42,0.32)] sm:-translate-y-[8.5rem]">
                 <a href={Constants.MAPS} target='_blank' className='flex items-center gap-2.5 text-[13.5px] font-medium tracking-tight transition-colors hover:text-primary'>
                   <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#2563EB]/10 transition-all duration-200 hover:scale-125 hover:bg-[#2563EB]/20">
                     <Image src={PinMarkerBlue} alt="" className='size-3.5' />

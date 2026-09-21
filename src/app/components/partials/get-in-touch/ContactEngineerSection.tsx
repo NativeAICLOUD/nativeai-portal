@@ -3,9 +3,9 @@
 import { useState } from 'react';
 
 const checklist = [
-  "Schedule a 1:1 consultation with an Azure or AWS engineer",
-  'Learn more about our wide range of cloud services',
-  'Explore the cloud solution that fits your specific needs',
+  "Book 30 minutes with one of our AWS-certified engineers — no sales rep involved.",
+  'Get a clear picture of our AI, cloud, and engineering services.',
+  'Walk away with a solution mapped to your actual goals, not a generic pitch.',
 ];
 
 const subjectOptions = [
