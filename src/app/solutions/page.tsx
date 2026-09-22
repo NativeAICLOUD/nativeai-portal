@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 const services: { title: string; headline: string; body: string; href: string; icon: LucideIcon; color: string; bg: string; features: string[] }[] = [
   { title: "Custom Development", headline: "Software that moves with your business.", body: "From MVPs to full-scale platforms — reliable software that grows with your business. Fast to launch, easy to scale, built to last.", href: "/services/custom-development", icon: Code2, color: "#2563EB", bg: "rgba(37,99,235,0.08)", features: ["API Design & Integration", "Full-Stack Web & Mobile Development", "AI-Powered Feature Integration", "Backend Engineering & Data Architecture", "Production Deployment & DevOps"] },
   { title: "Design", headline: "Design interfaces people love to use.", body: "We turn rough ideas into refined, market-ready products, research-backed, pixel-perfect, and consistent across every device.", href: "/services/design", icon: Palette, color: "#DB2777", bg: "rgba(219,39,119,0.08)", features: ["UX Research & Discovery", "Wireframing & Prototyping", "Visual & Interaction Design", "Design Systems", "Pixel-Perfect UI Implementation"] },
-  { title: "AI Agents & RAG", headline: "Your data. Smarter decisions.", body: "We connect AI agents and retrieval-augmented generation directly to your documents, systems, and workflows, so answers come from your data, not guesswork.", href: "/services/ai-agents-rag", icon: Bot, color: "#7C3AED", bg: "rgba(124,58,237,0.08)", features: ["Retrieval-Augmented Generation Pipelines", "Custom AI Agents & Copilots", "Azure OpenAI Integration", "Workflow Automation", "Document Intelligence"] },
+  { title: "AI Agents & RAG", headline: "Your data. Smarter decisions.", body: "We bring AI into the way your business actually works.", href: "/services/ai-agents-rag", icon: Bot, color: "#7C3AED", bg: "rgba(124,58,237,0.08)", features: ["Retrieval-Augmented Generation Pipelines", "Custom AI Agents & Copilots", "Azure OpenAI Integration", "Workflow Automation", "Document Intelligence"] },
   { title: "Data Lifecycle", headline: "Your business, always in view.", body: "We build the data platform — ingestion to dashboards — that turns raw data into decisions your team can act on.", href: "/data-lifecycle-management", icon: Database, color: "#0F8B83", bg: "rgba(15,139,131,0.08)", features: ["Data Ingestion & Pipelines", "Transformation & Modelling", "Analytics Layers", "Power BI Dashboards", "Data Governance"] },
   { title: "Cloud Architecture", headline: "Built to grow with you.", body: "We design cloud-native architectures matched to your team's size, traffic patterns, and growth trajectory — built to flex, not to break.", href: "/cloud-software-architecture", icon: CloudCog, color: "#0EA5E9", bg: "rgba(14,165,233,0.08)", features: ["Scalable System Design", "Resilience & Failover Planning", "Cost Optimization", "Multi-Region Architecture", "Capacity Planning"] },
   { title: "Migrate to Azure", headline: "Move to Azure. Keep your business moving.", body: "A structured, low-risk migration from on-premises or any cloud provider — assessed, planned, and executed without downtime.", href: "/migrate-to-azure", icon: CloudUpload, color: "#16A34A", bg: "rgba(22,163,74,0.08)", features: ["Cloud Readiness Assessment", "Migration Planning & Strategy", "Zero-Downtime Cutover", "Re-platforming & Modernisation", "Post-Migration Optimization"] },
@@ -97,7 +97,7 @@ export default function SolutionsPage() {
           </div>
 
           <div className="flex flex-col">
-            {services.map(({ title, headline, href, icon: Icon, color, features }, i) => (
+            {services.map(({ title, headline, body, href, icon: Icon, color, features }, i) => (
               <div
                 key={title}
                 className={`grid grid-cols-1 gap-8 py-14 lg:grid-cols-2 lg:gap-16 ${i !== 0 ? "border-t border-[#ECECEC]" : ""}`}
@@ -114,6 +114,9 @@ export default function SolutionsPage() {
                   <h3 className="m-0 max-w-[440px] text-[26px] font-medium leading-[1.15] text-[#111] md:text-[32px]">
                     {headline}
                   </h3>
+                  <p className="m-0 mt-3 max-w-[440px] text-[16px] font-light leading-[1.6] text-[#4b5563]">
+                    {body}
+                  </p>
                 </div>
 
                 {/* Right — feature card */}
