@@ -4,6 +4,7 @@ import { CONTAINER, Eyebrow } from '@/app/components/partials/services/ServiceUI
 import GetInTouchCTASection from '@/app/components/partials/services/GetInTouchCTASection';
 import db from '@/lib/db';
 import Job from '@/models/Job';
+import { getFallbackJobs } from '@/lib/jobsFallback';
 
 export const dynamic = 'force-dynamic';
 
@@ -67,6 +68,7 @@ async function getJobs() {
   try {
     await db.connect();
     const docs = await Job.find({ active: true }).sort({ order: 1, createdAt: 1 });
+    if (docs.length === 0) throw new Error('no jobs in database yet');
     return docs.map((j) => ({
       id: j.slug,
       title: j.title,
@@ -80,8 +82,19 @@ async function getJobs() {
       duration: j.duration,
     }));
   } catch (err) {
-    console.error('[careers] failed to load jobs:', err);
-    return [];
+    console.error('[careers] falling back to jobs.json:', err);
+    return getFallbackJobs().map((j) => ({
+      id: j.slug,
+      title: j.title,
+      department: j.department,
+      location: j.location,
+      workModel: j.workModel,
+      type: j.type,
+      slug: j.slug,
+      description: j.description,
+      skills: j.skills,
+      duration: j.duration,
+    }));
   }
 }
 

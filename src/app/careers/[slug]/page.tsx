@@ -5,6 +5,7 @@ import JobTabs from '@/app/components/partials/careers/JobTabs';
 import { Eyebrow } from '@/app/components/partials/services/ServiceUI';
 import db from '@/lib/db';
 import Job from '@/models/Job';
+import { getFallbackJob } from '@/lib/jobsFallback';
 
 export const dynamic = 'force-dynamic';
 
@@ -12,7 +13,7 @@ async function getJob(slug: string) {
   try {
     await db.connect();
     const doc = await Job.findOne({ slug, active: true });
-    if (!doc) return null;
+    if (!doc) throw new Error('not in database');
     return {
       title: doc.title,
       department: doc.department,
@@ -28,8 +29,8 @@ async function getJob(slug: string) {
       benefits: doc.benefits,
     };
   } catch (err) {
-    console.error('[careers/[slug]] failed to load job:', err);
-    return null;
+    console.error('[careers/[slug]] falling back to jobs.json:', err);
+    return getFallbackJob(slug);
   }
 }
 

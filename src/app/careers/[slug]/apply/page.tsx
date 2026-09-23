@@ -4,6 +4,7 @@ import Link from 'next/link';
 import ApplyForm from '@/app/components/partials/careers/ApplyForm';
 import db from '@/lib/db';
 import Job from '@/models/Job';
+import { getFallbackJob } from '@/lib/jobsFallback';
 
 export const dynamic = 'force-dynamic';
 
@@ -11,7 +12,7 @@ async function getJob(slug: string) {
   try {
     await db.connect();
     const doc = await Job.findOne({ slug, active: true });
-    if (!doc) return null;
+    if (!doc) throw new Error('not in database');
     return {
       title: doc.title,
       department: doc.department,
@@ -21,8 +22,17 @@ async function getJob(slug: string) {
       slug: doc.slug,
     };
   } catch (err) {
-    console.error('[careers/apply] failed to load job:', err);
-    return null;
+    console.error('[careers/apply] falling back to jobs.json:', err);
+    const fallback = getFallbackJob(slug);
+    if (!fallback) return null;
+    return {
+      title: fallback.title,
+      department: fallback.department,
+      location: fallback.location,
+      workModel: fallback.workModel,
+      type: fallback.type,
+      slug: fallback.slug,
+    };
   }
 }
 
