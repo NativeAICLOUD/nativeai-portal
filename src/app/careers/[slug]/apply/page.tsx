@@ -8,17 +8,22 @@ import Job from '@/models/Job';
 export const dynamic = 'force-dynamic';
 
 async function getJob(slug: string) {
-  await db.connect();
-  const doc = await Job.findOne({ slug, active: true });
-  if (!doc) return null;
-  return {
-    title: doc.title,
-    department: doc.department,
-    location: doc.location,
-    workModel: doc.workModel,
-    type: doc.type,
-    slug: doc.slug,
-  };
+  try {
+    await db.connect();
+    const doc = await Job.findOne({ slug, active: true });
+    if (!doc) return null;
+    return {
+      title: doc.title,
+      department: doc.department,
+      location: doc.location,
+      workModel: doc.workModel,
+      type: doc.type,
+      slug: doc.slug,
+    };
+  } catch (err) {
+    console.error('[careers/apply] failed to load job:', err);
+    return null;
+  }
 }
 
 export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {

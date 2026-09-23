@@ -64,20 +64,25 @@ const perks = [
 ];
 
 async function getJobs() {
-  await db.connect();
-  const docs = await Job.find({ active: true }).sort({ order: 1, createdAt: 1 });
-  return docs.map((j) => ({
-    id: j.slug,
-    title: j.title,
-    department: j.department,
-    location: j.location,
-    workModel: j.workModel,
-    type: j.type,
-    slug: j.slug,
-    description: j.description,
-    skills: j.skills,
-    duration: j.duration,
-  }));
+  try {
+    await db.connect();
+    const docs = await Job.find({ active: true }).sort({ order: 1, createdAt: 1 });
+    return docs.map((j) => ({
+      id: j.slug,
+      title: j.title,
+      department: j.department,
+      location: j.location,
+      workModel: j.workModel,
+      type: j.type,
+      slug: j.slug,
+      description: j.description,
+      skills: j.skills,
+      duration: j.duration,
+    }));
+  } catch (err) {
+    console.error('[careers] failed to load jobs:', err);
+    return [];
+  }
 }
 
 export default async function CareersPage() {
