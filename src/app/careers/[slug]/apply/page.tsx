@@ -1,32 +1,29 @@
-import fs from 'fs';
-import path from 'path';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import ApplyForm from '@/app/components/partials/careers/ApplyForm';
+import db from '@/lib/db';
+import Job from '@/models/Job';
 
-type Job = {
-  id: number;
-  title: string;
-  department: string;
-  location: string;
-  workModel: string;
-  type: string;
-  slug: string;
-};
+export const dynamic = 'force-dynamic';
 
-function getJobs(): Job[] {
-  const filePath = path.join(process.cwd(), 'public', 'jobs.json');
-  return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-}
-
-export async function generateStaticParams() {
-  return getJobs().map((j) => ({ slug: j.slug }));
+async function getJob(slug: string) {
+  await db.connect();
+  const doc = await Job.findOne({ slug, active: true });
+  if (!doc) return null;
+  return {
+    title: doc.title,
+    department: doc.department,
+    location: doc.location,
+    workModel: doc.workModel,
+    type: doc.type,
+    slug: doc.slug,
+  };
 }
 
 export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const params = await props.params;
-  const job = getJobs().find((j) => j.slug === params.slug);
+  const job = await getJob(params.slug);
   if (!job) return {};
   return {
     title: `Apply — ${job.title} | NativeCloud`,
@@ -36,7 +33,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
 
 export default async function ApplyPage(props: { params: Promise<{ slug: string }> }) {
   const params = await props.params;
-  const job = getJobs().find((j) => j.slug === params.slug);
+  const job = await getJob(params.slug);
   if (!job) notFound();
 
   return (

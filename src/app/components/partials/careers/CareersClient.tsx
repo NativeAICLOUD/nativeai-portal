@@ -27,7 +27,7 @@ const LinkedInIcon = ({ className }: { className?: string }) => (
 );
 
 type Job = {
-  id: number;
+  id: string;
   title: string;
   department: string;
   location: string;

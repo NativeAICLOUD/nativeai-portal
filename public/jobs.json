@@ -59,7 +59,7 @@
     "workModel": "Hybrid",
     "type": "Full-time",
     "slug": "azure-cloud-engineer",
-    "description": "Design and implement Azure infrastructure using IaC (Bicep, Terraform). Work alongside our cloud architects to deliver scalable, secure environments for enterprise clients.",
+    "description": "Design secure, scalable Azure environments using Terraform and Bicep. Work with our cloud architects to automate infrastructure, modernize platforms, and deliver cloud foundations built for scale.",
     "about": "At NativeCloud we help enterprise organisations modernise, migrate, and operate on Microsoft Azure. Our Cloud Engineering team designs the foundation that everything else runs on — landing zones, networking, identity, and secure-by-default IaC pipelines. You will work directly with clients and architects to turn requirements into production-ready infrastructure.",
     "responsibilities": [
       "Design and deploy Azure infrastructure using Bicep and Terraform",
@@ -86,8 +86,8 @@
     ],
     "skills": [
       "Azure",
-      "Bicep",
       "Terraform",
+      "Bicep",
       "IaC"
     ]
   },
@@ -289,46 +289,6 @@
       "Landing Zones",
       "Migration",
       "WAF"
-    ]
-  },
-  {
-    "id": 7,
-    "title": "Frontend Developer (React / Next.js)",
-    "department": "Software Engineering",
-    "location": "Skopje, MK",
-    "workModel": "Hybrid",
-    "type": "Full-time",
-    "slug": "frontend-developer",
-    "description": "Build performant, accessible web applications with React and Next.js. Work closely with designers and backend engineers to deliver polished user experiences.",
-    "about": "Our Software Engineering team builds the client-facing layer of cloud-native products and portals. As a Frontend Developer, you will work on Next.js applications that sit on top of Azure backends — from internal enterprise dashboards to customer-facing web products.",
-    "responsibilities": [
-      "Build responsive, accessible web applications using React and Next.js (App Router)",
-      "Implement UI components from design specifications using Tailwind CSS",
-      "Integrate frontend applications with .NET REST APIs and Azure services",
-      "Optimise performance — Core Web Vitals, lazy loading, and caching strategies",
-      "Write unit and integration tests with Vitest and React Testing Library",
-      "Collaborate closely with designers, backend engineers, and product owners"
-    ],
-    "requirements": [
-      "3+ years of professional React and TypeScript development",
-      "Strong knowledge of Next.js — App Router, SSR, SSG, and API routes",
-      "Experience with Tailwind CSS and component library patterns",
-      "Familiarity with REST API integration and authentication flows",
-      "Understanding of web performance and accessibility best practices",
-      "Good written and spoken English"
-    ],
-    "benefits": [
-      "Competitive salary based on experience",
-      "Hybrid working — Skopje office + remote flexibility",
-      "Work on polished products with real design quality",
-      "Collaborate directly with cloud architects and backend engineers",
-      "Small, senior team — your code ships to production fast"
-    ],
-    "skills": [
-      "React",
-      "Next.js",
-      "TypeScript",
-      "Tailwind CSS"
     ]
   },
   {

@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { KCSP, KTP, MSP } from "@/ImagePath";
 import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from "@/app/components/partials/services/ServiceUI";
+import GetInTouchCTASection from "@/app/components/partials/services/GetInTouchCTASection";
 
 export const metadata: Metadata = {
   title: "Solutions",
@@ -260,23 +261,10 @@ export default function SolutionsPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="bg-[#0a0e1a]">
-        <div className={`${CONTAINER} flex flex-col gap-10 py-20 md:flex-row md:items-center md:justify-between`}>
-          <div className="flex max-w-xl flex-col gap-4">
-            <h2 className="m-0 text-[28px] font-medium leading-[1.1] text-white md:text-[44px]">
-              Ready to build something that lasts?
-            </h2>
-            <p className="m-0 text-[18px] font-light leading-[1.6] text-white/70">
-              Talk to our team about your project — we&apos;ll map out the right solution in a
-              free 15-minute call.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <PrimaryButton href="/schedule-call" dark>Book a free call</PrimaryButton>
-            <SecondaryButton href="/about" onDark>About us</SecondaryButton>
-          </div>
-        </div>
-      </section>
+      <GetInTouchCTASection
+        heading="Let's make it real."
+        topic="Solutions"
+      />
 
     </div>
   );

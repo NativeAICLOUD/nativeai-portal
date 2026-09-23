@@ -1,8 +1,11 @@
-import fs from 'fs';
-import path from 'path';
 import type { Metadata } from 'next';
 import CareersClient from '../components/partials/careers/CareersClient';
 import { CONTAINER, Eyebrow } from '@/app/components/partials/services/ServiceUI';
+import GetInTouchCTASection from '@/app/components/partials/services/GetInTouchCTASection';
+import db from '@/lib/db';
+import Job from '@/models/Job';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'Careers | NativeCloud',
@@ -60,9 +63,25 @@ const perks = [
   },
 ];
 
-export default function CareersPage() {
-  const filePath = path.join(process.cwd(), 'public', 'jobs.json');
-  const jobs = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+async function getJobs() {
+  await db.connect();
+  const docs = await Job.find({ active: true }).sort({ order: 1, createdAt: 1 });
+  return docs.map((j) => ({
+    id: j.slug,
+    title: j.title,
+    department: j.department,
+    location: j.location,
+    workModel: j.workModel,
+    type: j.type,
+    slug: j.slug,
+    description: j.description,
+    skills: j.skills,
+    duration: j.duration,
+  }));
+}
+
+export default async function CareersPage() {
+  const jobs = await getJobs();
 
   return (
     <div className="font-switzer">
@@ -135,6 +154,13 @@ export default function CareersPage() {
           </div>
         </div>
       </section>
+
+      {/* ── CTA ── */}
+      <GetInTouchCTASection
+        heading="Don't see the right role?"
+        body="Send us your CV — we're always looking for great engineers to join the team."
+        topic="Careers"
+      />
 
     </div>
   );

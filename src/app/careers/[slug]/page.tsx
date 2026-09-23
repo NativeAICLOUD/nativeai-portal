@@ -1,39 +1,36 @@
-import fs from 'fs';
-import path from 'path';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JobTabs from '@/app/components/partials/careers/JobTabs';
 import { Eyebrow } from '@/app/components/partials/services/ServiceUI';
+import db from '@/lib/db';
+import Job from '@/models/Job';
 
-type Job = {
-  id: number;
-  title: string;
-  department: string;
-  location: string;
-  workModel: string;
-  type: string;
-  slug: string;
-  description: string;
-  about: string;
-  responsibilities: string[];
-  requirements: string[];
-  preferredRequirements?: string[];
-  benefits: string[];
-};
+export const dynamic = 'force-dynamic';
 
-function getJobs(): Job[] {
-  const filePath = path.join(process.cwd(), 'public', 'jobs.json');
-  return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-}
-
-export async function generateStaticParams() {
-  return getJobs().map((j) => ({ slug: j.slug }));
+async function getJob(slug: string) {
+  await db.connect();
+  const doc = await Job.findOne({ slug, active: true });
+  if (!doc) return null;
+  return {
+    title: doc.title,
+    department: doc.department,
+    location: doc.location,
+    workModel: doc.workModel,
+    type: doc.type,
+    slug: doc.slug,
+    description: doc.description,
+    about: doc.about,
+    responsibilities: doc.responsibilities,
+    requirements: doc.requirements,
+    preferredRequirements: doc.preferredRequirements,
+    benefits: doc.benefits,
+  };
 }
 
 export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const params = await props.params;
-  const job = getJobs().find((j) => j.slug === params.slug);
+  const job = await getJob(params.slug);
   if (!job) return {};
   return {
     title: `${job.title} | Careers | NativeCloud`,
@@ -60,7 +57,7 @@ const TYPE_COLORS: Record<string, { bg: string; color: string }> = {
 
 export default async function JobDetailPage(props: { params: Promise<{ slug: string }> }) {
   const params = await props.params;
-  const job = getJobs().find((j) => j.slug === params.slug);
+  const job = await getJob(params.slug);
   if (!job) notFound();
 
   const modelStyle = MODEL_COLORS[job.workModel] ?? MODEL_COLORS['On-site'];
