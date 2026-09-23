@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
 import Logo from '@/app/components/ui/Logo'
 
 type Step = 'email' | 'code'
@@ -72,7 +71,7 @@ export default function LoginPage() {
 
       {/* Auth header */}
       <header
-        className="flex items-center justify-between px-5 sm:px-8 h-[72px] shrink-0"
+        className="flex items-center px-5 sm:px-8 h-[72px] shrink-0"
         style={{ borderBottom: '1px solid #1a1a1a' }}
       >
         <div
@@ -81,15 +80,6 @@ export default function LoginPage() {
         >
           <Logo isInvert />
         </div>
-        <Link
-          href="/sign-up"
-          className="text-[13px] font-medium transition-colors px-3 py-1.5 rounded-lg"
-          style={{ color: '#666', letterSpacing: '-0.01em' }}
-          onMouseEnter={e => { e.currentTarget.style.color = '#fff'; }}
-          onMouseLeave={e => { e.currentTarget.style.color = '#666'; }}
-        >
-          Sign up
-        </Link>
       </header>
 
       {/* Form area */}
@@ -271,18 +261,6 @@ export default function LoginPage() {
               </form>
             </>
           )}
-
-          <p style={{ marginTop: 28, fontSize: 13, color: '#444', letterSpacing: '-0.01em' }}>
-            Don&apos;t have an account?{' '}
-            <Link
-              href="/sign-up"
-              style={{ color: '#666', fontWeight: 500, textDecoration: 'none', transition: 'color 0.15s' }}
-              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#fff'; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#666'; }}
-            >
-              Sign up
-            </Link>
-          </p>
 
         </div>
       </div>
