@@ -8,6 +8,7 @@ import { isAdminSession } from '@/lib/admin';
 const NAV = [
   { href: '/dashboard/invoices', label: 'Invoices' },
   { href: '/dashboard/clients', label: 'Clients' },
+  { href: '/dashboard/contact-subjects', label: 'Contact Subjects' },
 ];
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {

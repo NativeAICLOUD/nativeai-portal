@@ -7,16 +7,7 @@ import { z } from "zod";
 import { twMerge } from "tailwind-merge";
 import { button } from "../utils/tw-variants";
 import { Constants } from "@/Constants";
-
-const subjectOptions = [
-  'AI Agents & LLMs',
-  'Azure Cloud Migration',
-  'Managed Services',
-  'Cloud Native Development',
-  'DevOps on Azure',
-  'Data Lifecycle Management',
-  'Other',
-];
+import { useContactSubjects } from "@/lib/useContactSubjects";
 
 const contactFormValidationSchema = z
   .object({
@@ -54,6 +45,7 @@ function ContactUsForm({
     mode: 'onChange',
   });
   const [status, setStatus] = useState<'idle' | 'submitted' | 'error'>('idle');
+  const subjectOptions = useContactSubjects();
 
   const onSubmitForm = async (data: ContactFormValidationSchema) => {
     if (!isValid) {

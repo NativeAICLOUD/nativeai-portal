@@ -1,21 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import { useContactSubjects } from '@/lib/useContactSubjects';
 
 const checklist = [
   "Book 30 minutes with one of our AWS-certified engineers — no sales rep involved.",
   'Get a clear picture of our AI, cloud, and engineering services.',
   'Walk away with a solution mapped to your actual goals, not a generic pitch.',
-];
-
-const subjectOptions = [
-  'AI Agents & LLMs',
-  'Azure Cloud Migration',
-  'Managed Services',
-  'Cloud Native Development',
-  'DevOps on Azure',
-  'Data Lifecycle Management',
-  'Other',
 ];
 
 type FormState = {
@@ -35,6 +26,7 @@ const inputCls =
 export default function ContactEngineerSection() {
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'submitted' | 'error'>('idle');
+  const subjectOptions = useContactSubjects();
 
   const updateField = (field: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm((f) => ({ ...f, [field]: e.target.value }));

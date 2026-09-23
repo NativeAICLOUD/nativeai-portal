@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-transition-progress/next';
 import { Constants } from '@/Constants';
 import { Eyebrow } from '@/app/components/partials/services/ServiceUI';
+import { useContactSubjects } from '@/lib/useContactSubjects';
 
 /* ── Country codes ── */
 type Country = { code: string; dial: string; name: string; flag: string };
@@ -252,15 +253,6 @@ function PhoneInputField({
   );
 }
 
-const topics = [
-  'AI Agents & LLMs',
-  'Azure Cloud Migration',
-  'Managed Services',
-  'Cloud Native Development',
-  'DevOps on Azure',
-  'Data Lifecycle Management',
-  'Other',
-];
 
 const expectations = [
   {
@@ -379,6 +371,7 @@ export default function ScheduleCallPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [step, setStep] = useState<0 | 1>(0);
+  const topics = useContactSubjects();
 
   const errors = useMemo<Partial<Record<FieldKey, string | undefined>>>(() => {
     const result: Partial<Record<FieldKey, string | undefined>> = {};
