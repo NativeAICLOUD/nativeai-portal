@@ -5,9 +5,9 @@ import {
   Building2, Store, Calculator, KeyRound, type LucideIcon,
 } from "lucide-react";
 import { CONTAINER, Eyebrow } from "@/app/components/partials/services/ServiceUI";
-import GetInTouchCTASection from "@/app/components/partials/services/GetInTouchCTASection";
 import AirlineHero from "./AirlineHero";
 import AirlineHelpWidget from "./AirlineHelpWidget";
+import AirlineAcceleratorCTASection from "./AirlineAcceleratorCTASection";
 
 export const metadata: Metadata = {
   title: "Airline & Travel Booking Platform",
@@ -555,11 +555,7 @@ export default function AirlineBookingPage() {
       </section>
 
       {/* ── Final CTA ── */}
-      <GetInTouchCTASection
-        heading="See what this could look like for your airline."
-        body="Show us how you sell today. We'll show you how NativeCloud can fit into your operation."
-        topic="Airline & Travel Booking"
-      />
+      <AirlineAcceleratorCTASection />
 
     </div>
   );

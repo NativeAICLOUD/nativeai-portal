@@ -76,10 +76,10 @@ export default function AcceleratorCTASection() {
                 'radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1.4px) 0 0/18px 18px, #17182d',
             }}
           >
-          <div className="relative grid grid-cols-1 gap-14 lg:grid-cols-[1.45fr_1fr] lg:gap-10">
+          <div className="relative flex flex-col items-center gap-14">
 
-            {/* Left column */}
-            <div>
+            {/* Checklist */}
+            <div className="w-full max-w-[640px]">
               <h2
                 className="m-0 max-w-[540px] text-[32px] font-bold leading-[1.08] sm:text-[42px] lg:text-[54px]"
                 style={{
@@ -111,9 +111,9 @@ export default function AcceleratorCTASection() {
               </ul>
             </div>
 
-            {/* Right column — lead form */}
-            <div className="lg:pt-2">
-              <h3 className="m-0 text-[28px] font-bold leading-[1.15] sm:text-[32px]" style={{ color: '#59C28A' }}>
+            {/* Lead form */}
+            <div className="w-full max-w-[480px]">
+              <h3 className="m-0 text-center text-[28px] font-bold leading-[1.15] sm:text-[32px]" style={{ color: '#59C28A' }}>
                 Ready to get started?
               </h3>
 
