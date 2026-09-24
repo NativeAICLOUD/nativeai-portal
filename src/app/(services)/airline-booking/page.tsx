@@ -68,11 +68,10 @@ const integrations: { label: string; icon: LucideIcon }[] = [
 ];
 
 const migrationSteps = [
-  { num: "01", title: "Direct booking" },
-  { num: "02", title: "Agency portal" },
-  { num: "03", title: "PSS integration" },
-  { num: "04", title: "Distribution" },
-  { num: "05", title: "Full platform" },
+  { num: "01", title: "Choose the first move", body: "One route. One market. One workflow." },
+  { num: "02", title: "Put it live", body: "Launch a real use case with real passengers or agencies." },
+  { num: "03", title: "Connect the operation", body: "Integrate booking, payments, distribution and existing airline systems." },
+  { num: "04", title: "Expand what works", body: "Add more routes, more partners, more intelligence." },
 ];
 
 const valueStatements = [
@@ -486,27 +485,24 @@ export default function AirlineBookingPage() {
       <section className="bg-white">
         <div className={`${CONTAINER} pb-20 lg:pb-24`}>
           <div className="mb-12">
-            <div className="mb-4"><Eyebrow>Start Small</Eyebrow></div>
+            <div className="mb-4"><Eyebrow>Collaboration Track</Eyebrow></div>
             <h2 className="m-0 text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
-              You don&apos;t have to replace everything.
+              Start with one thing. Make it work. Then scale.
             </h2>
+            <p className="mt-4 max-w-[560px] text-[16px] font-normal leading-[1.5] text-[#6b7280]">
+              Just a focused first step, connected to the operation you already have.
+            </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 rounded-2xl border border-[#e6e6e6] bg-[#FAFAF8] p-6 lg:p-8">
-            {migrationSteps.map((step, i) => (
-              <div key={step.num} className="flex items-center gap-3">
-                <div className="flex flex-col gap-1 rounded-xl border border-[#e6e6e6] bg-white px-5 py-3.5">
-                  <span className="text-[11px] font-light text-[#9ca3af]">{step.num}</span>
-                  <span className="text-[14px] font-medium text-[#111]">{step.title}</span>
-                </div>
-                {i !== migrationSteps.length - 1 && <Arrow />}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+            {migrationSteps.map((step) => (
+              <div key={step.num} className="flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6">
+                <span className="text-[34px] font-light leading-none text-[#e6e6e6]">{step.num}</span>
+                <h3 className="mt-4 text-[20px] font-medium leading-[1.25] text-[#111]">{step.title}</h3>
+                <p className="mt-2 text-[16px] font-normal leading-[1.5] text-[#6b7280]">{step.body}</p>
               </div>
             ))}
           </div>
-
-          <p className="mt-8 max-w-[560px] text-[16px] font-normal leading-[1.5] text-[#6b7280]">
-            Start with one workflow, one market or one route. Expand when it makes sense.
-          </p>
         </div>
       </section>
 

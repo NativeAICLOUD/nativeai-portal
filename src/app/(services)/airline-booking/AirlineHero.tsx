@@ -53,52 +53,51 @@ export default function AirlineHero() {
   return (
     <div className="hero-bg-blue">
       <div className={`${CONTAINER} pb-16 pt-32 lg:pt-28`}>
-        <div className="flex flex-col gap-12 lg:flex-row lg:items-center lg:gap-14">
 
-          {/* Left — 52% */}
-          <motion.div
-            className="w-full lg:basis-[52%]"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
-            <div className="mb-6"><Eyebrow>NativeCloud Airline Platform</Eyebrow></div>
-            <h1 className="m-0 text-[36px] font-medium leading-[1.08] text-[#111] sm:text-[46px] lg:text-[60px]">
-              The platform behind every booking.
-            </h1>
-            <p className="mt-6 max-w-[520px] text-[18px] font-normal leading-[1.6] text-[#111]">
-              One system for reservations, passengers and distribution.
-            </p>
-            <p className="mt-3 max-w-[480px] text-[15px] font-normal leading-[1.5] text-[#6b7280]">
-              Built for airlines, virtual airlines, charter operators and travel networks.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <BlueButton href="/schedule-call">Book a demo</BlueButton>
-              <SecondaryButton href="#channels">Explore the platform</SecondaryButton>
-            </div>
-            <p className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[13px] font-medium tracking-[0.01em] text-[#4b5563]">
-              <span>PSS</span>
-              <span className="text-[#c7cad1]">·</span>
-              <span>B2B Distribution</span>
-              <span className="text-[#c7cad1]">·</span>
-              <span>Payments</span>
-              <span className="text-[#c7cad1]">·</span>
-              <span>APIs</span>
-            </p>
-          </motion.div>
+        {/* Text block */}
+        <motion.div
+          className="mx-auto max-w-[720px] text-center"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <div className="mb-6 flex justify-center"><Eyebrow>NativeCloud Airline Platform</Eyebrow></div>
+          <h1 className="m-0 text-[36px] font-medium leading-[1.08] text-[#111] sm:text-[46px] lg:text-[60px]">
+            The platform behind every booking.
+          </h1>
+          <p className="mx-auto mt-6 max-w-[520px] text-[18px] font-normal leading-[1.6] text-[#111]">
+            One system for reservations, passengers and distribution.
+          </p>
+          <p className="mx-auto mt-3 max-w-[480px] text-[15px] font-normal leading-[1.5] text-[#6b7280]">
+            Built for airlines, virtual airlines, charter operators and travel networks.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <BlueButton href="/schedule-call">Book a demo</BlueButton>
+            <SecondaryButton href="#channels">Explore the platform</SecondaryButton>
+          </div>
+          <p className="mt-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-[13px] font-medium tracking-[0.01em] text-[#4b5563]">
+            <span>PSS</span>
+            <span className="text-[#c7cad1]">·</span>
+            <span>B2B Distribution</span>
+            <span className="text-[#c7cad1]">·</span>
+            <span>Payments</span>
+            <span className="text-[#c7cad1]">·</span>
+            <span>APIs</span>
+          </p>
+        </motion.div>
 
-          {/* Right — 48%, product visual */}
+        {/* Product visual — full width, below the headline */}
+        <motion.div
+          className="mx-auto mt-16 max-w-[900px]"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+        >
           <motion.div
-            className="w-full lg:basis-[48%]"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+            animate={{ y: [0, -8, 0] }}
+            transition={{ duration: 7, ease: "easeInOut", repeat: Infinity }}
+            className="flex flex-col gap-4 rounded-2xl border border-[#e2e4e9] bg-white p-5 shadow-[0_28px_80px_rgba(15,23,42,0.14)] sm:p-6"
           >
-            <motion.div
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 7, ease: "easeInOut", repeat: Infinity }}
-              className="flex flex-col gap-4 rounded-2xl border border-[#e2e4e9] bg-white p-5 shadow-[0_28px_80px_rgba(15,23,42,0.14)]"
-            >
               {/* browser chrome */}
               <div className="flex items-center gap-2">
                 <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
@@ -152,9 +151,8 @@ export default function AirlineHero() {
                 </div>
               </div>
             </motion.div>
-          </motion.div>
+        </motion.div>
 
-        </div>
       </div>
 
       {/* blue divider — full viewport width */}
