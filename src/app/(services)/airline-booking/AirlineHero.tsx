@@ -43,12 +43,6 @@ const statusStyle = {
   Pending: { bg: "rgba(217,119,6,0.10)", color: "#d97706" },
 };
 
-const stats = [
-  { label: "Reservations", value: "1,284" },
-  { label: "Load factor", value: "82%" },
-  { label: "Revenue", value: "€148K" },
-];
-
 export default function AirlineHero() {
   return (
     <div className="hero-bg-blue">
@@ -114,16 +108,6 @@ export default function AirlineHero() {
                 <div className="flex-1" />
                 <span className="rounded-full border border-[#e6e6e6] bg-white px-3 py-1 text-[11px] font-medium text-[#6b7280]">Today</span>
                 <span className="rounded-full bg-[#2563EB] px-3.5 py-1.5 text-[11px] font-semibold text-white">+ New</span>
-              </div>
-
-              {/* stat tiles */}
-              <div className="grid grid-cols-3 gap-2.5">
-                {stats.map(({ label, value }) => (
-                  <div key={label} className="flex flex-col gap-1.5 rounded-xl border border-[#eee] bg-[#fafafa] p-3.5">
-                    <span className="text-[9.5px] font-semibold uppercase tracking-wide text-[#9ca3af]">{label}</span>
-                    <span className="text-[17px] font-semibold leading-none text-[#111]">{value}</span>
-                  </div>
-                ))}
               </div>
 
               {/* reservation table */}

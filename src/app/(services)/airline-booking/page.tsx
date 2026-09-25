@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import {
   Plane, Users2, Share2, Settings2, BookOpen, Boxes, Tag, UserCheck,
-  TicketCheck, Luggage, ChevronDown, Check, Database, Plug, CreditCard,
-  Building2, Store, Calculator, KeyRound, type LucideIcon,
+  TicketCheck, Luggage, ChevronDown, Check, CreditCard, FileText,
+  type LucideIcon,
 } from "lucide-react";
 import { CONTAINER, Eyebrow } from "@/app/components/partials/services/ServiceUI";
 import AirlineHero from "./AirlineHero";
 import AirlineHelpWidget from "./AirlineHelpWidget";
 import AirlineAcceleratorCTASection from "./AirlineAcceleratorCTASection";
+import AirlineConnectivitySection from "./AirlineConnectivitySection";
+import AirlineCollaborationSection from "./AirlineCollaborationSection";
 
 export const metadata: Metadata = {
   title: "Airline & Travel Booking Platform",
@@ -55,24 +57,6 @@ const airlineControls = [
 const bookingSteps = ["Search", "Select flight", "Choose fare", "Passenger details", "Seats & baggage", "Payment", "Confirmation"];
 
 const controlCenterItems = ["Reservations", "Passengers", "Flights", "Inventory", "Fares", "Agencies", "Payments", "Refunds", "Reports"];
-
-const integrations: { label: string; icon: LucideIcon }[] = [
-  { label: "GDS", icon: Database },
-  { label: "NDC", icon: Share2 },
-  { label: "Airline APIs", icon: Plug },
-  { label: "Payment gateways", icon: CreditCard },
-  { label: "Operating carriers", icon: Building2 },
-  { label: "Travel agencies", icon: Store },
-  { label: "Accounting / ERP", icon: Calculator },
-  { label: "Identity providers", icon: KeyRound },
-];
-
-const migrationSteps = [
-  { num: "01", title: "Choose the first move", body: "One route. One market. One workflow." },
-  { num: "02", title: "Put it live", body: "Launch a real use case with real passengers or agencies." },
-  { num: "03", title: "Connect the operation", body: "Integrate booking, payments, distribution and existing airline systems." },
-  { num: "04", title: "Expand what works", body: "Add more routes, more partners, more intelligence." },
-];
 
 const valueStatements = [
   "Own the customer relationship.",
@@ -143,6 +127,68 @@ export default function AirlineBookingPage() {
         </div>
       </section>
 
+      {/* ── The Challenge / Our Approach ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="w-full rounded-2xl bg-[#FAFAF8] p-3 sm:p-5">
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+
+              <div className="flex flex-col rounded-lg border border-[#ECECEC] bg-white p-6 shadow-[0_2px_8px_rgba(0,0,0,0.04)] sm:p-8">
+                <span className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl" style={{ background: "#FBF7E8" }}>
+                  <Boxes className="h-5 w-5" style={{ color: "#A16207" }} strokeWidth={1.8} aria-hidden="true" />
+                </span>
+                <div className="mb-6"><Eyebrow>The Challenge</Eyebrow></div>
+                <div className="flex flex-col gap-5 text-[16px] font-normal leading-[1.7] text-[#374151] sm:text-[17px]">
+                  <p className="m-0">
+                    Airline operations are often spread across disconnected booking tools,
+                    legacy reservation systems, agency channels, payment providers, and
+                    external distribution networks. While these systems may work
+                    individually, managing them together can make change slow, integrations
+                    difficult, and the passenger experience inconsistent.
+                  </p>
+                  <p className="m-0 font-medium text-[#111]">
+                    The challenge was to create a modern airline platform that brings
+                    reservations, passengers, ticketing, payments, agency sales, and
+                    distribution into one connected experience.
+                  </p>
+                  <p className="m-0">
+                    At the same time, the platform had to fit around existing airline
+                    infrastructure — allowing operators to modernize step by step, without
+                    forcing a complete replacement of the systems they already depend on.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-col rounded-lg border border-[#ECECEC] bg-white p-6 shadow-[0_2px_8px_rgba(0,0,0,0.04)] sm:p-8">
+                <span className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl" style={{ background: "#EEF8F6" }}>
+                  <Settings2 className="h-5 w-5" style={{ color: "#166962" }} strokeWidth={1.8} aria-hidden="true" />
+                </span>
+                <div className="mb-6"><Eyebrow>Our Approach</Eyebrow></div>
+                <div className="flex flex-col gap-5 text-[16px] font-normal leading-[1.7] text-[#374151] sm:text-[17px]">
+                  <p className="m-0 font-medium text-[#111]">
+                    We designed the platform around how modern airlines actually operate —
+                    not around a predefined technology stack.
+                  </p>
+                  <p className="m-0">
+                    The work started by mapping the full journey across reservations,
+                    passengers, ticketing, payments, agency sales, and distribution. From
+                    there, we defined a modular architecture that could connect with
+                    existing airline systems instead of requiring everything to be
+                    replaced at once.
+                  </p>
+                  <p className="m-0">
+                    This allowed us to build the platform in focused stages, validate each
+                    workflow, and create a foundation that can grow with new routes,
+                    partners, integrations, and AI capabilities over time.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── One platform, every sales channel ── */}
       <section id="channels" className="bg-white scroll-mt-24">
         <div className={`${CONTAINER} pb-20 lg:pb-24`}>
@@ -197,23 +243,32 @@ export default function AirlineBookingPage() {
 
             {/* row 3 — the platform */}
             <div
-              className="relative mx-auto max-w-[720px] overflow-hidden rounded-xl px-6 py-6 text-center shadow-[0_20px_50px_rgba(37,99,235,0.25)] sm:px-8"
-              style={{ background: "linear-gradient(155deg, #0a0e1a 0%, #10193a 55%, #0d1b3d 100%)" }}
+              className="relative mx-auto max-w-[720px] overflow-hidden rounded-xl border-2 border-[#2563EB]/25 bg-white px-6 py-7 text-center shadow-[0_20px_50px_rgba(37,99,235,0.14)] sm:px-8"
             >
               <div
                 aria-hidden="true"
                 className="pointer-events-none absolute left-1/2 top-0 h-[220px] w-[220px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[70px]"
-                style={{ background: "radial-gradient(circle, rgba(96,165,250,0.5) 0%, transparent 70%)" }}
+                style={{ background: "radial-gradient(circle, rgba(37,99,235,0.14) 0%, transparent 70%)" }}
               />
-              <span className="relative text-[16px] font-semibold text-white">NativeCloud Airline Platform</span>
-              <ul className="relative mx-auto mt-4 grid max-w-[440px] grid-cols-1 gap-3 text-left sm:grid-cols-2">
-                {["Reservations", "PNR", "Inventory", "Fares", "Passengers", "Payments", "Agencies"].map((tag) => (
-                  <li key={tag} className="flex items-start gap-2.5 text-[15px] leading-[1.4] text-white/90">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#60a5fa]" strokeWidth={2.2} aria-hidden="true" />
-                    {tag}
-                  </li>
+              <span className="relative text-[16px] font-semibold text-[#111]">NativeCloud Airline Platform</span>
+              <div className="relative mx-auto mt-6 grid max-w-[520px] grid-cols-3 gap-x-4 gap-y-5 sm:grid-cols-4">
+                {[
+                  { tag: "Reservations", icon: BookOpen, color: "#A16207", bg: "#FBF7E8" },
+                  { tag: "PNR", icon: FileText, color: "#166962", bg: "#EEF8F6" },
+                  { tag: "Inventory", icon: Boxes, color: "#FF4F8B", bg: "#FFF0F5" },
+                  { tag: "Fares", icon: Tag, color: "#2563EB", bg: "#EFF5FF" },
+                  { tag: "Passengers", icon: UserCheck, color: "#A16207", bg: "#FBF7E8" },
+                  { tag: "Payments", icon: CreditCard, color: "#166962", bg: "#EEF8F6" },
+                  { tag: "Agencies", icon: Users2, color: "#FF4F8B", bg: "#FFF0F5" },
+                ].map(({ tag, icon: Icon, color, bg }) => (
+                  <div key={tag} className="flex flex-col items-center gap-2">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px]" style={{ background: bg }}>
+                      <Icon className="h-5 w-5" style={{ color }} strokeWidth={1.8} aria-hidden="true" />
+                    </span>
+                    <span className="text-[12.5px] font-medium leading-[1.2] text-[#111]">{tag}</span>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
 
             <Connector />
@@ -284,8 +339,11 @@ export default function AirlineBookingPage() {
               </ul>
             </div>
             <div
-              className="relative flex flex-col gap-5 overflow-hidden rounded-2xl p-8 shadow-[0_20px_50px_rgba(37,99,235,0.18)] lg:p-10"
-              style={{ background: "linear-gradient(155deg, #0a0e1a 0%, #10193a 55%, #0d1b3d 100%)" }}
+              className="relative flex flex-col gap-5 overflow-hidden rounded-2xl border border-white/[0.08] p-8 shadow-[0_20px_50px_rgba(37,99,235,0.18)] lg:p-10"
+              style={{
+                background:
+                  "radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1.4px) 0 0/18px 18px, #0a0e1a",
+              }}
             >
               <div
                 aria-hidden="true"
@@ -448,63 +506,10 @@ export default function AirlineBookingPage() {
       </section>
 
       {/* ── Distribution & integrations ── */}
-      <section className="bg-white">
-        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
-          <div className="mb-10">
-            <div className="mb-4"><Eyebrow>Connectivity</Eyebrow></div>
-            <h2 className="m-0 text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
-              Built to connect.
-            </h2>
-            <p className="mt-4 max-w-[560px] text-[16px] font-normal leading-[1.5] text-[#6b7280]">
-              NativeCloud is designed to work with the systems already around your airline.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {integrations.map(({ label, icon: Icon }) => (
-              <div key={label} className="flex items-center gap-3 rounded-xl border border-[#e6e6e6] bg-white p-3.5 transition-[border-color,transform] duration-200 hover:border-[#111827]/25 hover:-translate-y-0.5">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#EFF5FF]">
-                  <Icon className="h-4 w-4 text-[#2563EB]" strokeWidth={1.8} aria-hidden="true" />
-                </span>
-                <span className="text-[13px] font-medium leading-[1.25] text-[#111]">{label}</span>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-10 flex gap-5 rounded-lg bg-[#111] p-8 lg:p-10">
-            <span className="mt-1 h-full w-[3px] shrink-0 rounded-full bg-[#2563EB]" />
-            <p className="m-0 text-[18px] font-light leading-[1.6] text-white/90">
-              NativeCloud can be introduced alongside existing airline infrastructure —
-              instead of requiring an immediate full-system replacement.
-            </p>
-          </div>
-        </div>
-      </section>
+      <AirlineConnectivitySection />
 
       {/* ── Migration / adoption ── */}
-      <section className="bg-white">
-        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
-          <div className="mb-12">
-            <div className="mb-4"><Eyebrow>Collaboration Track</Eyebrow></div>
-            <h2 className="m-0 text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
-              Start with one thing. Make it work. Then scale.
-            </h2>
-            <p className="mt-4 max-w-[560px] text-[16px] font-normal leading-[1.5] text-[#6b7280]">
-              Just a focused first step, connected to the operation you already have.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-            {migrationSteps.map((step) => (
-              <div key={step.num} className="flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6">
-                <span className="text-[34px] font-light leading-none text-[#e6e6e6]">{step.num}</span>
-                <h3 className="mt-4 text-[20px] font-medium leading-[1.25] text-[#111]">{step.title}</h3>
-                <p className="mt-2 text-[16px] font-normal leading-[1.5] text-[#6b7280]">{step.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <AirlineCollaborationSection />
 
       {/* ── Business value ── */}
       <section className="bg-white">

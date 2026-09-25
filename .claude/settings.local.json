@@ -58,7 +58,9 @@
       "Bash(git merge *)",
       "Bash(node cdp-workshop-lead.js)",
       "Bash(ls -d docs)",
-      "Bash(ls *.md)"
+      "Bash(ls *.md)",
+      "Bash(curl -s http://localhost:3000/airline-booking -o /tmp/airline20.html -w \"HTTP %{http_code}\\\\n\")",
+      "Read(//tmp/**)"
     ]
   }
 }
