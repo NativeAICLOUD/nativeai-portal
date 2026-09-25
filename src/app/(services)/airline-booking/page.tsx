@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { CONTAINER, Eyebrow } from "@/app/components/partials/services/ServiceUI";
 import AirlineHero from "./AirlineHero";
+import AirlineStatementSection from "./AirlineStatementSection";
 import AirlineHelpWidget from "./AirlineHelpWidget";
 import AirlineAcceleratorCTASection from "./AirlineAcceleratorCTASection";
 import AirlineConnectivitySection from "./AirlineConnectivitySection";
@@ -111,21 +112,7 @@ export default function AirlineBookingPage() {
       <AirlineHero />
 
       {/* ── Big product statement ── */}
-      <section className="bg-white">
-        <div className={`${CONTAINER} py-28 lg:py-40`}>
-          <div className="mx-auto max-w-[820px] text-center">
-            <h2 className="m-0 text-[36px] font-medium leading-[1.15] text-[#111] sm:text-[48px] lg:text-[58px]">
-              Your airline.<br />
-              Your customers.<br />
-              Your distribution.
-            </h2>
-            <p className="mx-auto mt-8 max-w-[560px] text-[18px] font-light leading-[1.6] text-[#6b7280]">
-              Sell directly. Work with agencies. Connect external inventory. Manage the
-              passenger journey from one platform.
-            </p>
-          </div>
-        </div>
-      </section>
+      <AirlineStatementSection />
 
       {/* ── The Challenge / Our Approach ── */}
       <section className="bg-white">
@@ -139,22 +126,29 @@ export default function AirlineBookingPage() {
                 </span>
                 <div className="mb-6"><Eyebrow>The Challenge</Eyebrow></div>
                 <div className="flex flex-col gap-5 text-[16px] font-normal leading-[1.7] text-[#374151] sm:text-[17px]">
+                  <p className="m-0 text-[19px] font-medium leading-[1.4] text-[#111] sm:text-[21px]">
+                    Airlines don&apos;t need more systems.
+                    <br />
+                    They need the systems they already have to work better together.
+                  </p>
                   <p className="m-0">
-                    Airline operations are often spread across disconnected booking tools,
-                    legacy reservation systems, agency channels, payment providers, and
-                    external distribution networks. While these systems may work
-                    individually, managing them together can make change slow, integrations
-                    difficult, and the passenger experience inconsistent.
+                    Reservations, passengers, ticketing, payments, agencies, and
+                    distribution often live across different platforms. Each one does its
+                    job. But together, they create complexity, slow down change, and
+                    fragment the passenger experience.
                   </p>
                   <p className="m-0 font-medium text-[#111]">
-                    The challenge was to create a modern airline platform that brings
-                    reservations, passengers, ticketing, payments, agency sales, and
-                    distribution into one connected experience.
+                    The challenge was to make it feel like one platform.
                   </p>
                   <p className="m-0">
-                    At the same time, the platform had to fit around existing airline
-                    infrastructure — allowing operators to modernize step by step, without
-                    forcing a complete replacement of the systems they already depend on.
+                    A connected experience across booking, ticketing, payments, agency
+                    sales, and distribution — without asking the airline to replace
+                    everything it already depends on.
+                  </p>
+                  <p className="m-0">
+                    Because modernization shouldn&apos;t mean starting over.
+                    <br />
+                    It should mean moving forward, one step at a time.
                   </p>
                 </div>
               </div>
@@ -165,21 +159,31 @@ export default function AirlineBookingPage() {
                 </span>
                 <div className="mb-6"><Eyebrow>Our Approach</Eyebrow></div>
                 <div className="flex flex-col gap-5 text-[16px] font-normal leading-[1.7] text-[#374151] sm:text-[17px]">
+                  <p className="m-0 text-[19px] font-medium leading-[1.4] text-[#111] sm:text-[21px]">
+                    We didn&apos;t start with the technology.
+                    <br />
+                    We started with how the airline actually works.
+                  </p>
+                  <p className="m-0">
+                    Reservations. Passengers. Ticketing. Payments. Agencies. Distribution.
+                    We mapped the full journey first, then designed a modular platform
+                    around it.
+                  </p>
                   <p className="m-0 font-medium text-[#111]">
-                    We designed the platform around how modern airlines actually operate —
-                    not around a predefined technology stack.
+                    The idea was simple: connect what already exists, then improve it step
+                    by step.
                   </p>
                   <p className="m-0">
-                    The work started by mapping the full journey across reservations,
-                    passengers, ticketing, payments, agency sales, and distribution. From
-                    there, we defined a modular architecture that could connect with
-                    existing airline systems instead of requiring everything to be
-                    replaced at once.
+                    Instead of forcing a complete replacement, the platform was built to
+                    work with existing airline systems and introduce new capabilities
+                    gradually.
                   </p>
                   <p className="m-0">
-                    This allowed us to build the platform in focused stages, validate each
-                    workflow, and create a foundation that can grow with new routes,
-                    partners, integrations, and AI capabilities over time.
+                    That meant we could validate each workflow as we went — while creating
+                    a foundation ready for new routes, partners, integrations, and AI.
+                  </p>
+                  <p className="m-0 font-medium text-[#111]">
+                    Built for today. Ready for what comes next.
                   </p>
                 </div>
               </div>
