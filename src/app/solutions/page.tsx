@@ -9,6 +9,7 @@ import {
 import { KCSP, KTP, MSP } from "@/ImagePath";
 import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from "@/app/components/partials/services/ServiceUI";
 import GetInTouchCTASection from "@/app/components/partials/services/GetInTouchCTASection";
+import { EditorialGlow, SerifAccent } from "@/app/components/ui/EditorialGlow";
 
 export const metadata: Metadata = {
   title: "Solutions",
@@ -56,6 +57,58 @@ function ArrowLink({ children }: { children: React.ReactNode }) {
   );
 }
 
+type Service = (typeof services)[number];
+
+/* Custom Development sits above Products; the rest follow below */
+const leadServices = services.slice(0, 1);
+const moreServices = services.slice(1);
+
+function ServiceRow({ service, divider }: { service: Service; divider: boolean }) {
+  const { title, headline, body, href, icon: Icon, color, features } = service;
+  return (
+    <div className={`grid grid-cols-1 gap-8 py-14 lg:grid-cols-2 lg:gap-16 ${divider ? "border-t border-[#ECECEC]" : ""}`}>
+      {/* Left — pitch */}
+      <div className="flex flex-col justify-center">
+        <div className="mb-5 flex items-center gap-3">
+          <Icon className="h-12 w-12 shrink-0" style={{ color }} strokeWidth={1.5} aria-hidden="true" />
+          <div>
+            <p className="m-0 text-[15px] font-semibold leading-[1.2] text-[#111]">{title}</p>
+            <p className="m-0 text-[12px] font-medium uppercase tracking-[0.1em] text-[#9ca3af]">Services</p>
+          </div>
+        </div>
+        <h3 className="m-0 max-w-[440px] text-[26px] font-medium leading-[1.15] text-[#111] md:text-[32px]">
+          {headline}
+        </h3>
+        <p className="m-0 mt-3 max-w-[440px] text-[16px] font-light leading-[1.6] text-[#4b5563]">
+          {body}
+        </p>
+      </div>
+
+      {/* Right — feature card */}
+      <Link
+        href={href}
+        className="group flex h-full flex-col rounded-2xl border border-[#ECECEC] bg-[#FAFAF8] p-8 transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] hover:border-[rgba(37,99,235,0.2)] hover:shadow-[0_10px_28px_rgba(15,23,42,0.06)]"
+      >
+        <div>
+          <p className="m-0 text-[15px] font-semibold leading-[1.2] text-[#111]">{title}</p>
+          <p className="m-0 text-[12px] font-medium uppercase tracking-[0.1em] text-[#9ca3af]">Services</p>
+        </div>
+        <ul className="my-6 flex flex-1 flex-col gap-3">
+          {features.map((feature) => (
+            <li key={feature} className="flex items-center gap-2.5 text-[15px] font-normal leading-[1.4] text-[#111]">
+              <svg className="h-4 w-4 shrink-0" style={{ color }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              {feature}
+            </li>
+          ))}
+        </ul>
+        <ArrowLink>Learn more</ArrowLink>
+      </Link>
+    </div>
+  );
+}
+
 export default function SolutionsPage() {
   return (
     <div className="font-switzer">
@@ -97,69 +150,39 @@ export default function SolutionsPage() {
             <PrimaryButton href="/schedule-call">Schedule a free call</PrimaryButton>
           </div>
 
+          {/* Custom Development leads, then Products, then the remaining services */}
           <div className="flex flex-col">
-            {services.map(({ title, headline, body, href, icon: Icon, color, features }, i) => (
-              <div
-                key={title}
-                className={`grid grid-cols-1 gap-8 py-14 lg:grid-cols-2 lg:gap-16 ${i !== 0 ? "border-t border-[#ECECEC]" : ""}`}
-              >
-                {/* Left — pitch */}
-                <div className="flex flex-col justify-center">
-                  <div className="mb-5 flex items-center gap-3">
-                    <Icon className="h-12 w-12 shrink-0" style={{ color }} strokeWidth={1.5} aria-hidden="true" />
-                    <div>
-                      <p className="m-0 text-[15px] font-semibold leading-[1.2] text-[#111]">{title}</p>
-                      <p className="m-0 text-[12px] font-medium uppercase tracking-[0.1em] text-[#9ca3af]">Services</p>
-                    </div>
-                  </div>
-                  <h3 className="m-0 max-w-[440px] text-[26px] font-medium leading-[1.15] text-[#111] md:text-[32px]">
-                    {headline}
-                  </h3>
-                  <p className="m-0 mt-3 max-w-[440px] text-[16px] font-light leading-[1.6] text-[#4b5563]">
-                    {body}
-                  </p>
-                </div>
-
-                {/* Right — feature card */}
-                <Link
-                  href={href}
-                  className="group flex h-full flex-col rounded-2xl border border-[#ECECEC] bg-[#FAFAF8] p-8 transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] hover:border-[rgba(37,99,235,0.2)] hover:shadow-[0_10px_28px_rgba(15,23,42,0.06)]"
-                >
-                  <div>
-                    <p className="m-0 text-[15px] font-semibold leading-[1.2] text-[#111]">{title}</p>
-                    <p className="m-0 text-[12px] font-medium uppercase tracking-[0.1em] text-[#9ca3af]">Services</p>
-                  </div>
-                  <ul className="my-6 flex flex-1 flex-col gap-3">
-                    {features.map((feature) => (
-                      <li key={feature} className="flex items-center gap-2.5 text-[15px] font-normal leading-[1.4] text-[#111]">
-                        <svg className="h-4 w-4 shrink-0" style={{ color }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                          <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <ArrowLink>Learn more</ArrowLink>
-                </Link>
-              </div>
+            {leadServices.map((service, i) => (
+              <ServiceRow key={service.title} service={service} divider={i !== 0} />
             ))}
           </div>
         </div>
       </section>
 
       {/* ── Products ── */}
+      <section
+        aria-labelledby="products-heading"
+        className="relative isolate overflow-hidden bg-white"
+      >
+        <EditorialGlow />
+        <div
+          className={`${CONTAINER} flex min-h-[70svh] flex-col justify-center pb-[8vh] pt-[18vh] md:min-h-[80vh] md:pt-[22vh] lg:px-20`}
+        >
+          <div className="mb-8"><Eyebrow>Products</Eyebrow></div>
+          <h2
+            id="products-heading"
+            className="m-0 max-w-[1100px] text-[44px] font-light leading-[1.02] tracking-[-0.035em] text-[#141414] sm:text-[64px] md:text-[80px] lg:text-[96px] xl:text-[108px]"
+          >
+            Made for <SerifAccent>real</SerifAccent> work.
+          </h2>
+          <p className="mt-8 max-w-[520px] text-[17px] font-light leading-[1.6] text-[#4B5563] sm:text-[18px] md:mt-10">
+            Practical software, built around real business needs — ready to use, easy to scale.
+          </p>
+        </div>
+      </section>
+
       <section className="bg-white">
         <div className={`${CONTAINER} pb-20 lg:pb-24`}>
-          <div className="mb-12">
-            <div className="mb-4"><Eyebrow>Products</Eyebrow></div>
-            <h2 className="m-0 text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
-              Made for real work.
-            </h2>
-            <p className="mt-4 max-w-[520px] text-[18px] font-light leading-[1.6] text-[#111]">
-              Practical software, built around real business needs — ready to use, easy to scale.
-            </p>
-          </div>
-
           <div className="rounded-2xl bg-[#FAFAF8] p-3 sm:p-5">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {products.map(({ title, tagline, body, href, icon: Icon, color, bg, tags, cta }) => (
@@ -195,6 +218,17 @@ export default function SolutionsPage() {
                 </Link>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Services (continued) ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="flex flex-col">
+            {moreServices.map((service, i) => (
+              <ServiceRow key={service.title} service={service} divider={i !== 0} />
+            ))}
           </div>
         </div>
       </section>
