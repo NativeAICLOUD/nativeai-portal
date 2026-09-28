@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { CONTAINER, Eyebrow } from './ServiceUI';
+import { toast } from '@/app/components/ui/notification-toast';
 
 type FormState = { name: string; email: string; subject: string; message: string };
 const EMPTY_FORM: FormState = { name: '', email: '', subject: '', message: '' };
@@ -40,8 +41,10 @@ export default function GetInTouchCTASection({
       if (!res.ok) throw new Error('server');
       setStatus('submitted');
       setForm(EMPTY_FORM);
+      toast.success("Thanks — we'll be in touch shortly.");
     } catch {
       setStatus('error');
+      toast.error('Something went wrong. Please try again.');
     }
   };
 
@@ -121,11 +124,7 @@ export default function GetInTouchCTASection({
                 </div>
                 <div className="flex flex-col gap-4 pt-2 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
                   <p className="text-xs text-[#9ca3af]">
-                    {status === 'submitted'
-                      ? "Thanks — we'll be in touch shortly."
-                      : status === 'error'
-                        ? 'Something went wrong. Please try again.'
-                        : 'We reply within one business day.'}
+                    We reply within one business day.
                   </p>
                   <button
                     type="submit"

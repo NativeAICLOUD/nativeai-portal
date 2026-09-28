@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from "zod";
@@ -8,6 +7,7 @@ import { twMerge } from "tailwind-merge";
 import { button } from "../utils/tw-variants";
 import { Constants } from "@/Constants";
 import { useContactSubjects } from "@/lib/useContactSubjects";
+import { toast } from "@/app/components/ui/notification-toast";
 
 const contactFormValidationSchema = z
   .object({
@@ -44,14 +44,12 @@ function ContactUsForm({
     resolver: zodResolver(contactFormValidationSchema),
     mode: 'onChange',
   });
-  const [status, setStatus] = useState<'idle' | 'submitted' | 'error'>('idle');
   const subjectOptions = useContactSubjects();
 
   const onSubmitForm = async (data: ContactFormValidationSchema) => {
     if (!isValid) {
       return;
     }
-    setStatus('idle');
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
@@ -65,10 +63,10 @@ function ContactUsForm({
         }),
       });
       if (!res.ok) throw new Error('server');
-      setStatus('submitted');
+      toast.success("Thanks — we'll get back to you within one business day.");
       reset();
     } catch {
-      setStatus('error');
+      toast.error(`Something went wrong. Please email us directly at ${Constants.MAIL}.`, { duration: 8000 });
     }
   }
 
@@ -141,12 +139,6 @@ function ContactUsForm({
         >
           {isSubmitting ? 'Sending…' : 'Submit'}
         </button>
-        {status === 'submitted' && (
-          <p className="text-sm text-[#15803D]">Thanks — we&apos;ll get back to you within one business day.</p>
-        )}
-        {status === 'error' && (
-          <p className="text-sm text-red-500">Something went wrong. Please email us directly at {Constants.MAIL}.</p>
-        )}
       </div>
     </form>
   );

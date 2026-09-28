@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { toast } from '@/app/components/ui/notification-toast';
 
 type Props = {
   jobTitle: string;
@@ -37,8 +38,14 @@ export default function ApplyForm({ jobTitle, jobSlug, department, location, wor
     const allowed = ['application/pdf', 'application/msword',
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
       'image/jpeg', 'image/png'];
-    if (!allowed.includes(file.type)) return;
-    if (file.size > 10 * 1024 * 1024) return;
+    if (!allowed.includes(file.type)) {
+      toast.warning('Please upload your CV as a PDF, Word document, JPG or PNG.');
+      return;
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      toast.warning('Your CV must be 10 MB or smaller.');
+      return;
+    }
     setCvFile(file);
   };
 
@@ -68,8 +75,10 @@ export default function ApplyForm({ jobTitle, jobSlug, department, location, wor
       const res = await fetch('/api/careers/apply', { method: 'POST', body: fd });
       if (!res.ok) throw new Error();
       setStatus('success');
+      toast.success('Your application has been sent successfully.');
     } catch {
       setStatus('error');
+      toast.error('Something went wrong. Please try again or email careers@nativeai.cloud.', { duration: 8000 });
     }
   };
 
@@ -275,10 +284,6 @@ export default function ApplyForm({ jobTitle, jobSlug, department, location, wor
           </button>
         </div>
       </div>
-
-      {status === 'error' && (
-        <p className="text-sm text-red-500 text-right">Something went wrong — please try again or email careers@nativeai.cloud.</p>
-      )}
 
     </motion.form>
   );

@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react';
 import { Constants } from '@/Constants';
 import { CONTAINER } from '@/app/components/partials/services/ServiceUI';
+import { toast } from '@/app/components/ui/notification-toast';
 
 const checklist = [
   { title: 'Start small', body: 'One route, market or workflow.' },
@@ -63,8 +64,10 @@ export default function AirlineAcceleratorCTASection() {
       if (!res.ok) throw new Error('server');
       setStatus('submitted');
       setForm(EMPTY_FORM);
+      toast.success('Your request has been sent successfully.');
     } catch {
       setStatus('error');
+      toast.error(`Something went wrong. Please email us at ${Constants.MAIL}.`, { duration: 8000 });
     }
   };
 
@@ -182,10 +185,6 @@ export default function AirlineAcceleratorCTASection() {
                     >
                       {status === 'submitting' ? 'Sending…' : 'Talk to our team'}
                     </button>
-
-                    {status === 'error' && (
-                      <p className="text-center text-[13px] text-red-400">Something went wrong. Please email us at {Constants.MAIL}.</p>
-                    )}
                   </form>
                 )}
               </div>

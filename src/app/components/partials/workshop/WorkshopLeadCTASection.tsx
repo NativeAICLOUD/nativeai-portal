@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import { Link } from 'react-transition-progress/next';
 import { Constants } from '@/Constants';
 import { CONTAINER } from '@/app/components/partials/services/ServiceUI';
+import { toast } from '@/app/components/ui/notification-toast';
 
 const checklist = [
   'Hands-on sessions built entirely around your real stack and challenges.',
@@ -46,8 +47,10 @@ export default function WorkshopLeadCTASection() {
       setLeadStatus('submitted');
       setLeadForm({ company: '', firstName: '', lastName: '', phone: '', email: '' });
       setAgreed(false);
+      toast.success("Thanks — we'll be in touch shortly.");
     } catch {
       setLeadStatus('error');
+      toast.error(`Something went wrong. Please email us at ${Constants.MAIL}.`, { duration: 8000 });
     }
   };
 
@@ -204,13 +207,6 @@ export default function WorkshopLeadCTASection() {
                 >
                   {leadStatus === 'submitting' ? 'Sending…' : 'Submit'}
                 </button>
-
-                {leadStatus === 'submitted' && (
-                  <p className="text-[13px] text-[#59C28A]">Thanks — we&apos;ll be in touch shortly.</p>
-                )}
-                {leadStatus === 'error' && (
-                  <p className="text-[13px] text-red-400">Something went wrong. Please email us at {Constants.MAIL}.</p>
-                )}
               </form>
             </div>
 

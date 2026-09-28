@@ -501,3 +501,167 @@ div[data-radix-popper-content-wrapper] {
 .nc-orbit-pulse      { animation: nc-orbit-pulse 3.5s ease-in-out infinite; }
 .nc-orbit-pulse-slow { animation: nc-orbit-pulse 4.5s ease-in-out infinite 1s; }
 
+
+/* ── NativeCloud notification toast (components/ui/notification-toast.tsx) ──
+   Blue-first for every state; overrides react-toastify's defaults. Selectors
+   use two classes because ReactToastify.css loads after this file. */
+.Toastify__toast-container.nc-toast-container {
+  --nc-toast-edge: 16px;
+  z-index: 2147483000;
+  top: max(20px, env(safe-area-inset-top));
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(820px, calc(100vw - var(--nc-toast-edge) * 2));
+  margin: 0;
+  padding: 0;
+}
+
+.Toastify__toast.nc-toast-shell {
+  min-height: 0;
+  margin: 0 0 12px;
+  padding: 0;
+  border-radius: 24px;
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+  font-family: inherit;
+  overflow: visible;
+}
+
+.Toastify__toast-body.nc-toast-shell__body {
+  margin: 0;
+  padding: 0;
+}
+.Toastify__toast-body.nc-toast-shell__body > div {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.nc-toast {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 20px 20px 28px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: linear-gradient(135deg, #2F6BF0 0%, #2563EB 45%, #1F55D8 100%);
+  color: #fff;
+  font-family: "Switzer", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.14) inset,
+    0 20px 48px -16px rgba(37, 99, 235, 0.55),
+    0 4px 12px rgba(15, 23, 42, 0.08);
+}
+/* error & warning sit a shade deeper — same blue family, calmer emphasis */
+.nc-toast--error,
+.nc-toast--warning {
+  background: linear-gradient(135deg, #2358D6 0%, #1D4ED8 50%, #1B44BD 100%);
+}
+
+.nc-toast__icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+.nc-toast__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.nc-toast__text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.nc-toast__title {
+  margin: 0 0 2px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.nc-toast__message {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.96);
+}
+.nc-toast__title + .nc-toast__message {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.nc-toast__close {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.nc-toast__close svg {
+  width: 20px;
+  height: 20px;
+}
+.nc-toast__close:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+.nc-toast__close:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .nc-toast {
+    gap: 12px;
+    padding: 16px 12px 16px 18px;
+    border-radius: 22px;
+  }
+  .nc-toast__message {
+    font-size: 15px;
+  }
+  .nc-toast__icon {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* react-toastify's own ≤480px rule makes the container full-bleed — keep our margins */
+@media only screen and (max-width: 480px) {
+  .Toastify__toast-container.nc-toast-container {
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100vw - var(--nc-toast-edge) * 2);
+    top: max(16px, env(safe-area-inset-top));
+  }
+}
+
+@keyframes nc-toast-in {
+  from { opacity: 0; transform: translate3d(0, -12px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes nc-toast-out {
+  from { opacity: 1; transform: translate3d(0, 0, 0); }
+  to   { opacity: 0; transform: translate3d(0, -10px, 0); }
+}
+.nc-toast-enter {
+  animation: nc-toast-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.nc-toast-exit {
+  animation: nc-toast-out 0.22s cubic-bezier(0.4, 0, 1, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .nc-toast-enter,
+  .nc-toast-exit {
+    animation-duration: 0.01ms;
+  }
+}

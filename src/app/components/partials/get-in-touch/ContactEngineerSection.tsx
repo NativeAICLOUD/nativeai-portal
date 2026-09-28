@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useContactSubjects } from '@/lib/useContactSubjects';
+import { toast } from '@/app/components/ui/notification-toast';
 
 const checklist = [
   "Book 30 minutes with one of our AWS-certified engineers — no sales rep involved.",
@@ -50,8 +51,10 @@ export default function ContactEngineerSection() {
       if (!res.ok) throw new Error('server');
       setStatus('submitted');
       setForm(EMPTY_FORM);
+      toast.success("Thanks — we'll be in touch shortly.");
     } catch {
       setStatus('error');
+      toast.error('Something went wrong. Please try again.');
     }
   };
 
@@ -203,12 +206,6 @@ export default function ContactEngineerSection() {
                 >
                   {status === 'submitting' ? 'Sending…' : 'Submit'}
                 </button>
-                {status === 'submitted' && (
-                  <p className="text-[14px] text-[#15803D]">Thanks — we&apos;ll be in touch shortly.</p>
-                )}
-                {status === 'error' && (
-                  <p className="text-[14px] text-red-600">Something went wrong. Please try again.</p>
-                )}
               </div>
             </form>
           </div>

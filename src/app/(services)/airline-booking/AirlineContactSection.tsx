@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { CONTAINER, Eyebrow } from '@/app/components/partials/services/ServiceUI';
+import { toast } from '@/app/components/ui/notification-toast';
 
 type FormState = {
   name: string;
@@ -55,8 +56,10 @@ export default function AirlineContactSection() {
       if (!res.ok) throw new Error('server');
       setStatus('submitted');
       setForm(EMPTY_FORM);
+      toast.success('Your request has been sent successfully.');
     } catch {
       setStatus('error');
+      toast.error('Something went wrong. Please try again.');
     }
   };
 
@@ -135,7 +138,7 @@ export default function AirlineContactSection() {
                   </div>
                   <div className="flex flex-col gap-4 pt-2 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
                     <p className="text-xs text-[#9ca3af]">
-                      {status === 'error' ? 'Something went wrong. Please try again.' : 'We reply within one business day.'}
+                      We reply within one business day.
                     </p>
                     <button
                       type="submit"

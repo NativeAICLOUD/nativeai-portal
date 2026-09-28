@@ -6,6 +6,7 @@ import { Link } from 'react-transition-progress/next';
 import { Constants } from '@/Constants';
 import { Eyebrow } from '@/app/components/partials/services/ServiceUI';
 import { useContactSubjects } from '@/lib/useContactSubjects';
+import { toast } from '@/app/components/ui/notification-toast';
 
 /* ── Country codes ── */
 type Country = { code: string; dial: string; name: string; flag: string };
@@ -369,7 +370,6 @@ export default function ScheduleCallPage() {
   const [touched, setTouched] = useState<Partial<Record<FieldKey, boolean>>>({});
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [step, setStep] = useState<0 | 1>(0);
   const topics = useContactSubjects();
 
@@ -432,7 +432,6 @@ export default function ScheduleCallPage() {
       return;
     }
     setLoading(true);
-    setError(null);
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
@@ -441,8 +440,9 @@ export default function ScheduleCallPage() {
       });
       if (!res.ok) throw new Error('server');
       setSubmitted(true);
+      toast.success('Your request has been sent successfully.');
     } catch {
-      setError('Something went wrong. Please email us directly at artan@nativeai.cloud');
+      toast.error('Something went wrong. Please email us directly at artan@nativeai.cloud', { duration: 8000 });
     } finally {
       setLoading(false);
     }
@@ -799,15 +799,6 @@ export default function ScheduleCallPage() {
                   />
                   {fieldState('message').err && <p className="text-[12px] font-medium text-[#cf222e]">{fieldState('message').err}</p>}
                 </div>
-
-                {error && (
-                  <div className="flex items-start gap-3 text-[13px] text-red-600 bg-red-50 border border-red-200 rounded-2xl px-4 py-3">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0 mt-0.5">
-                      <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
-                    </svg>
-                    {error}
-                  </div>
-                )}
 
                 <button
                   type="button"

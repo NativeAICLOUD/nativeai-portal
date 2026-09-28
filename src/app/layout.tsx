@@ -6,8 +6,8 @@ import "./globals.css";
 import { ViewTransitions } from "next-view-transitions";
 import { ProgressBar, ProgressBarProvider } from "react-transition-progress";
 
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { NotificationToaster } from './components/ui/notification-toast';
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -60,15 +60,7 @@ export default function RootLayout({
               <FloatingPromoCard />
             </AppProviders>
           </ProgressBarProvider>
-          <ToastContainer
-            position="top-right"
-            autoClose={8000}
-            hideProgressBar={true}
-            newestOnTop={false}
-            rtl={false}
-            draggable
-            theme="light"
-          />
+          <NotificationToaster />
         </body>
       </html>
     </ViewTransitions>
