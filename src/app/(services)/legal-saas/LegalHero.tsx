@@ -66,9 +66,9 @@ export default function LegalHero() {
             id="legal-hero-heading"
             className="m-0 max-w-[1100px] text-[44px] font-light leading-[1.02] tracking-[-0.035em] text-[#141414] sm:text-[64px] md:text-[80px] lg:text-[96px] xl:text-[108px]"
           >
-            Legal work,
+            See what matters.
             <br />
-            without the <SerifAccent>paperwork.</SerifAccent>
+            Act with <SerifAccent>confidence.</SerifAccent>
           </h1>
           <p className="mt-8 max-w-[520px] text-[17px] font-light leading-[1.6] text-[#4B5563] sm:text-[18px] md:mt-10">
             One AI workspace for cases, documents, mail, deadlines and billing.
