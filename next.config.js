@@ -26,6 +26,12 @@ const nextConfig = {
   experimental: {
     scrollRestoration: true,
   },
+  async redirects() {
+    return [
+      { source: '/ai-legal-workspace', destination: '/legal-saas', permanent: true },
+      { source: '/ai-legal', destination: '/legal-saas', permanent: true },
+    ];
+  },
   async headers() {
     return [
       {

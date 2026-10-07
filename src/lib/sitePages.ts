@@ -14,7 +14,7 @@ export const SITE_PAGES: { title: string; desc: string; url: string }[] = [
   { title: 'Managed Services',          desc: 'Ongoing cloud managed services and support',                       url: '/managed-services' },
   { title: 'Payment Automation',        desc: 'Recurring billing, payments and reconciliation',                   url: '/payment-automation' },
   { title: 'NativeInvoice',             desc: 'Multi-tenant e-invoicing connected to the UJP e-Invoice system',   url: '/native-invoice' },
-  { title: 'AI Legal Workspace',        desc: 'AI document and case workflows for legal teams',                   url: '/ai-legal-workspace' },
+  { title: 'AI Legal Workspace',        desc: 'AI document and case workflows for legal teams',                   url: '/legal-saas' },
   { title: 'Airline & Travel Booking',  desc: 'GDS-connected airline and travel booking platform',                url: '/airline-booking' },
   { title: 'AI Accelerator',            desc: 'Adopt Azure AI services from use case to production',              url: '/solutions/ai-accelerator' },
   { title: 'GitHub Accelerator',        desc: 'GitHub Copilot adoption, migration and DevSecOps',                 url: '/solutions/github-accelerator' },

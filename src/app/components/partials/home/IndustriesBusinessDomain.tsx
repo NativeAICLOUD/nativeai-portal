@@ -25,7 +25,7 @@ const industries: Industry[] = [
   { title: 'Supply Chain and Logistics', desc: 'Visibility, tracking and optimisation across the whole chain.',               href: '/industries',         icon: Route },
   { title: 'Technology',                 desc: 'Product engineering for software and SaaS companies.',                         href: '/industries',         icon: Cpu },
   { title: 'Travel',                     desc: 'GDS-connected booking and travel platforms.',                                  href: '/airline-booking',    icon: Plane },
-  { title: 'Legal & Compliance',         desc: 'AI document and case workflows for legal teams.',                              href: '/ai-legal-workspace', icon: Scale },
+  { title: 'Legal & Compliance',         desc: 'AI document and case workflows for legal teams.',                              href: '/legal-saas', icon: Scale },
   { title: 'Fintech',                    desc: 'Modern rails for lending, payments and wealth products.',                      href: '/payment-automation', icon: Wallet },
   { title: 'E-commerce & Retail',        desc: 'Scalable storefronts, logistics and personalisation.',                         href: '/industries',         icon: ShoppingBag },
   { title: 'Construction',               desc: 'Project, site and resource management systems.',                               href: '/industries',         icon: Building2 },

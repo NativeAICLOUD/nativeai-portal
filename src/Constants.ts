@@ -15,7 +15,7 @@ export const Constants = {
     CSP_ENTERPRISE: '/csp-enterprise',
 
     AIRLINE_BOOKING: '/airline-booking',
-    AI_LEGAL_WORKSPACE: '/ai-legal-workspace',
+    AI_LEGAL_WORKSPACE: '/legal-saas',
     PAYMENT_AUTOMATION: '/payment-automation',
     NATIVE_INVOICE: '/native-invoice',
 
