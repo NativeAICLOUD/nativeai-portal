@@ -7,7 +7,6 @@ import { Link } from 'react-transition-progress/next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Constants } from '@/Constants';
 import { LogoBlue } from '@/ImagePath';
-import Logo from '@/app/components/ui/Logo';
 
 /*
  * Floating promo card — a corner alert that pitches a single offer after
@@ -55,23 +54,22 @@ function ArrowIcon() {
   );
 }
 
-/* Default illustration — reuses the same dark navy gradient as the
-   "get in touch" section (bg-gtouch-bg-linear) plus the brand blue
-   (#2563EB family) already used for accents across the site. */
+/* Default illustration — the NativeCloud logo on a soft brand-blue panel,
+   toned for the light card. */
 function DefaultVisual() {
   return (
     <div
-      className="relative aspect-[16/9] w-full overflow-hidden rounded-xl border border-white/15 backdrop-blur-sm"
-      style={{ background: 'rgba(255,255,255,0.08)' }}
+      className="relative aspect-[16/9] w-full overflow-hidden rounded-xl border border-[#e6e6e6]"
+      style={{ background: 'linear-gradient(160deg, #F5F8FF 0%, #EEF2FF 100%)' }}
       aria-hidden="true"
     >
       <div
         className="absolute -right-10 -top-10 h-40 w-40 rounded-full"
-        style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.35) 0%, transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, rgba(91,124,250,0.22) 0%, transparent 70%)' }}
       />
       <div
         className="absolute -bottom-12 -left-8 h-36 w-36 rounded-full"
-        style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.18) 0%, transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%)' }}
       />
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
         <Image src={LogoBlue} alt="" className="h-24 w-auto object-contain" />
@@ -82,7 +80,7 @@ function DefaultVisual() {
 
 export default function FloatingPromoCard({
   headline = 'Is your business ready for AI?',
-  description,
+  description = 'See where AI can create real value in your business — and what it takes to get there.',
   imageSrc,
   ctaText = 'Discover your AI readiness',
   ctaHref = Constants.PAGES.AI_ACCELERATOR,
@@ -119,60 +117,94 @@ export default function FloatingPromoCard({
     }
   };
 
+  // Escape closes the card, like any other dismissible overlay.
+  useEffect(() => {
+    if (!shown) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') dismiss();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [shown]);
+
   return (
-    <div className="pointer-events-none fixed right-4 top-[88px] z-[950] w-[calc(100%-2rem)] sm:right-6 sm:top-[104px] sm:w-[380px] lg:w-[400px]">
+    <div className="pointer-events-none fixed right-4 top-[88px] z-[950] w-[calc(100%-2rem)] font-switzer sm:right-6 sm:top-[104px] sm:w-[360px]">
       <AnimatePresence>
         {shown && (
           <motion.div
-            initial={{ opacity: 0, x: 48 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 32 }}
-            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: -12, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.98 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             role="dialog"
             aria-label={headline}
-            className="pointer-events-auto relative overflow-hidden rounded-2xl border border-white/10 shadow-[0_20px_60px_rgba(15,23,42,0.35),0_4px_16px_rgba(15,23,42,0.2)]"
-            style={{ background: 'linear-gradient(160deg, #0F2557 0%, #1E40AF 55%, #2563EB 100%)' }}
+            className="pointer-events-auto relative overflow-hidden rounded-2xl border border-[#e6e6e6] bg-white shadow-[0_24px_60px_rgba(15,23,42,0.14),0_4px_14px_rgba(15,23,42,0.06)]"
           >
+            {/* Brand-blue glow + top rule, same gradient family as the hero divider */}
+            <div
+              className="pointer-events-none absolute inset-x-0 top-0 h-28"
+              style={{ background: 'radial-gradient(120% 100% at 100% 0%, rgba(91,124,250,0.16) 0%, rgba(255,255,255,0) 70%)' }}
+              aria-hidden="true"
+            />
+            <div
+              className="absolute inset-x-0 top-0 h-[3px]"
+              style={{ backgroundImage: 'linear-gradient(90deg, #2563EB, #5B7CFA 50%, #BECBFF)' }}
+              aria-hidden="true"
+            />
+
             <button
               type="button"
               onClick={dismiss}
               aria-label="Close"
-              className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+              className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full text-[#9ca3af] transition-colors hover:bg-[#111]/[0.05] hover:text-[#111]"
             >
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M18 6 6 18M6 6l12 12" />
               </svg>
             </button>
 
-            <div className="px-6 pb-4 pt-6">
-              <div className="mb-3">
-                <Logo className="h-6" animated={false} isInvert />
+            <div className="relative p-6">
+              <div className="mb-4">
+                <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#2563EB]">
+                  AI readiness
+                </span>
               </div>
-              <h3 className="m-0 pr-8 text-[24px] font-medium leading-[1.15] tracking-[-0.02em] text-white">
+
+              <h3 className="m-0 pr-8 text-[22px] font-medium leading-[1.15] tracking-[-0.01em] text-[#111]">
                 {headline}
               </h3>
               {description && (
-                <p className="mt-2 text-[14px] leading-[1.6] text-white/70">{description}</p>
+                <p className="mt-2 text-[14px] leading-[1.55] text-[#6b7280]">{description}</p>
               )}
-            </div>
 
-            <div className="px-6 pb-6">
               {imageSrc ? (
-                <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl">
-                  <Image src={imageSrc} alt="" fill sizes="400px" className="object-cover" />
+                <div className="relative mt-5 aspect-[16/9] w-full overflow-hidden rounded-xl border border-[#eee]">
+                  <Image src={imageSrc} alt="" fill sizes="360px" className="object-cover" />
                 </div>
               ) : (
-                <DefaultVisual />
+                <div className="mt-5">
+                  <DefaultVisual />
+                </div>
               )}
-            </div>
 
-            <Link
-              href={ctaHref}
-              className="group flex items-center justify-between gap-3 bg-black/[0.18] px-6 py-4 text-[15px] font-semibold text-white transition-colors hover:bg-black/[0.28]"
-            >
-              {ctaText}
-              <ArrowIcon />
-            </Link>
+              <div className="mt-6 flex items-center gap-4">
+                <Link
+                  href={ctaHref}
+                  onClick={dismiss}
+                  className="group inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-[#111] px-5 py-3 text-[14px] font-medium text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.22)] active:translate-y-0 active:shadow-none"
+                >
+                  {ctaText}
+                  <ArrowIcon />
+                </Link>
+                <button
+                  type="button"
+                  onClick={dismiss}
+                  className="shrink-0 text-[13px] font-medium text-[#6b7280] transition-colors hover:text-[#111]"
+                >
+                  Not now
+                </button>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
