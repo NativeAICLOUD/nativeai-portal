@@ -1,4 +1,5 @@
 import DeliverySpectrumSection from "./components/partials/home/DeliverySpectrumSection";
+import EngineeredYourWaySection from "./components/partials/home/EngineeredYourWaySection";
 import ExpertiseSection from "./components/partials/home/ExpertiseSection";
 import NearshoreIntroSection from "./components/partials/home/NearshoreIntroSection";
 import ServicesScrollSection from "./components/partials/home/ServicesScrollSection";
@@ -19,6 +20,9 @@ export default function Home() {
 
       {/* What we do — end-to-end product development */}
       <ProductDevelopmentSection />
+
+      {/* Engineered Your Way — Innovate / Modernize / Accelerate accordion */}
+      <EngineeredYourWaySection />
 
       {/* What We Offer — Discovery, Prototype, Development & Growth */}
       <WhatWeOfferSection />
