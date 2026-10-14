@@ -206,11 +206,11 @@ export default function EngineeredYourWaySection() {
             className="m-0 text-[24px] text-[#101828] sm:text-[30px] lg:text-[38px]"
             style={{ fontWeight: 700, lineHeight: 1.1 }}
           >
-            Tailored Technology. Real Results.
+            Technology, made simple.
           </p>
           <p className="m-0 mt-4 max-w-[560px] text-[16px] leading-[1.6] text-[#646B76] sm:text-[17px]">
-            AI-first thinking. Cloud-native engineering. Solutions designed to perform, evolve, and
-            scale.
+            We build intelligent software that solves real problems. Thoughtfully designed. Built to
+            make a difference.
           </p>
         </div>
       </div>
