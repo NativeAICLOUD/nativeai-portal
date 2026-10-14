@@ -315,7 +315,7 @@ function Navbar() {
       `}</style>
 
       {/* ── Full-width nav bar ── */}
-      <nav className={`w-full flex items-center justify-between px-6 max-md:px-5 h-[76px] max-md:h-auto max-md:py-2 max-md:border-b-2 max-md:border-[#E1E6E8] max-md:shadow-none max-md:backdrop-blur-none transition-colors duration-300 ${
+      <nav className={`w-full flex items-center justify-between px-6 max-md:px-5 h-[76px] max-md:h-auto max-md:py-1.5 max-md:border-b max-md:border-black/[0.06] max-md:shadow-none max-md:backdrop-blur-none transition-colors duration-300 ${
         lightNav
           ? scrolled
             ? 'bg-white/90 backdrop-blur-xl'

@@ -2,7 +2,7 @@
 
 import { useId, useRef, useState, type KeyboardEvent } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { ArrowRight, Check, CircleArrowUp, Plus, RefreshCw, type LucideIcon, type LucideProps } from 'lucide-react';
+import { ArrowRight, CircleArrowUp, Plus, RefreshCw, type LucideIcon, type LucideProps } from 'lucide-react';
 import { Link } from 'react-transition-progress/next';
 import { Constants } from '@/Constants';
 
@@ -31,7 +31,6 @@ type Capability = {
   title: string;
   icon: LucideIcon | typeof LaunchRocketIcon;
   description: string;
-  services: string[];
   cta: { label: string; href: string };
 };
 
@@ -39,49 +38,33 @@ const capabilities: Capability[] = [
   {
     title: 'Innovate',
     icon: LaunchRocketIcon,
-    description:
-      'Turn emerging technologies into real business value. We design AI agents, intelligent applications, and enterprise AI solutions built around your business.',
-    services: [
-      'AI Agents & LLM Integration',
-      'Enterprise Generative AI',
-      'Intelligent Business Automation',
-      'AI Product Engineering',
-    ],
+    description: 'Turn ideas into useful AI agents and digital products.',
     cta: { label: 'Explore AI Solutions', href: '/services/ai-agents-rag' },
   },
   {
     title: 'Modernize',
     icon: RefreshCw,
-    description:
-      "Transform legacy systems into secure, scalable cloud platforms. Modernize applications, improve architecture, and build the foundation for what's next.",
-    services: [
-      'Azure Cloud Migration',
-      'Application Modernization',
-      'Cloud-Native Architecture',
-      'Database Modernization',
-    ],
+    description: 'Upgrade legacy applications and move to reliable cloud platforms.',
     cta: { label: 'Explore Cloud Services', href: Constants.PAGES.CLOUD_NATIVE_SD },
   },
   {
     title: 'Accelerate',
     icon: CircleArrowUp,
-    description:
-      'Move from ideas to production faster. We combine DevOps, automation, and modern engineering practices to help your business deliver with confidence.',
-    services: [
-      'DevOps & CI/CD',
-      'Infrastructure as Code',
-      'Kubernetes & Cloud Platforms',
-      'Managed Cloud Services',
-    ],
+    description: 'Improve delivery with DevOps, automation, and scalable architecture.',
     cta: { label: 'Explore Engineering', href: Constants.PAGES.DEVOPS_ON_AZURE },
   },
 ];
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
+// Hover-to-open only when the cards sit in one row with a real mouse. In the stacked layout an
+// opening card pushes the next card under the cursor, which would open/close in a loop.
+const hoverOpens = () => window.matchMedia('(min-width: 1024px) and (hover: hover)').matches;
+
 /*
- * "Engineered Your Way." — three capability cards in one row (2 on tablet, 1 on mobile).
- * Each card is an accordion header: hovering (mouse) or clicking (touch/keyboard) reveals its details.
+ * Home services intro — three compact capability cards (stacked below lg, one row from lg).
+ * Each card header is an accordion button with the icon and title on one row: hovering (mouse)
+ * or clicking (touch/keyboard) reveals a short description and the service link.
  * items-start keeps closed cards at their own height when a neighbour in the row opens.
  */
 export default function EngineeredYourWaySection() {
@@ -106,34 +89,27 @@ export default function EngineeredYourWaySection() {
     triggers.current[target]?.focus();
   };
 
-  const duration = reduceMotion ? 0 : 0.32;
+  const duration = reduceMotion ? 0 : 0.28;
 
   return (
-    <section className="bg-[#FAFAFA] font-switzer" aria-labelledby={`${baseId}-heading`}>
-      <div className="mx-auto w-full max-w-[1440px] px-5 py-20 sm:px-6 lg:px-10 lg:py-28">
-        <header className="max-w-[760px]">
-          {/* Same eyebrow + heading treatment as "What We Offer" */}
-          <p
-            className="m-0 uppercase text-[#98A2B3]"
-            style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.3em', marginBottom: 12 }}
-          >
-            Our Capabilities
-          </p>
+    <section className="bg-white font-switzer" aria-labelledby={`${baseId}-heading`}>
+      <div className="mx-auto w-full max-w-[1240px] px-5 py-16 sm:px-6 lg:py-24">
+        <header>
           <h2
             id={`${baseId}-heading`}
-            className="m-0 text-[24px] text-[#101828] sm:text-[30px] lg:text-[38px]"
-            style={{ fontWeight: 700, lineHeight: 1.1 }}
+            className="m-0 max-w-[720px] text-[28px] text-[#202124] sm:text-[34px] lg:text-[40px]"
+            style={{ fontWeight: 700, lineHeight: 1.12, letterSpacing: '-0.015em' }}
           >
-            Engineered Your Way.
+         Engineered Your Way.
           </h2>
-          <p className="m-0 mt-5 max-w-[620px] text-[16px] leading-[1.6] text-[#646B76] sm:text-[17px]">
-            From AI strategy and intelligent automation to cloud modernization and software
-            engineering, we build technology that moves your business forward.
+          <p className="m-0 mt-4 max-w-[560px] text-[16px] leading-[1.6] text-[#202124] sm:mt-5 sm:text-[17px]">
+            From AI agents and modern applications to cloud platforms, we help you innovate,
+            modernize your systems, and accelerate delivery.
           </p>
         </header>
 
-        <div className="mt-12 grid grid-cols-1 items-start gap-4 md:grid-cols-2 md:gap-5 lg:mt-16 lg:grid-cols-3 lg:gap-6">
-          {capabilities.map(({ title, icon: Icon, description, services, cta }, i) => {
+        <div className="mt-10 grid grid-cols-1 items-start gap-4 sm:gap-5 lg:mt-12 lg:grid-cols-3">
+          {capabilities.map(({ title, icon: Icon, description, cta }, i) => {
             const isOpen = openIndex === i;
             const triggerId = `${baseId}-trigger-${i}`;
             const panelId = `${baseId}-panel-${i}`;
@@ -141,15 +117,14 @@ export default function EngineeredYourWaySection() {
             return (
               <div
                 key={title}
-                // On tablet the third card spans both columns so the grid has no orphan gap.
-                className={`flex min-h-[200px] flex-col rounded-[24px] bg-[#E9EBF0] transition-colors duration-300 md:min-h-[280px] md:rounded-[30px] lg:min-h-[320px] lg:rounded-[34px] ${
-                  i === capabilities.length - 1 ? 'md:col-span-2 lg:col-span-1' : ''
-                } ${isOpen ? '' : 'hover:bg-[#E1E4EB]'}`}
-                // Mouse users: hovering a card opens it, leaving closes it. Touch and keyboard use click below.
-                onPointerEnter={(e) => e.pointerType === 'mouse' && setOpenIndex(i)}
-                onPointerLeave={(e) => e.pointerType === 'mouse' && setOpenIndex(null)}
+                className={`rounded-[28px] bg-[#EEF1F2] transition-colors duration-300 ${
+                  isOpen ? '' : 'hover:bg-[#E7EBEC]'
+                }`}
+                // Desktop row: hovering a card opens it, leaving closes it. Elsewhere, click/tap toggles.
+                onPointerEnter={(e) => e.pointerType === 'mouse' && hoverOpens() && setOpenIndex(i)}
+                onPointerLeave={(e) => e.pointerType === 'mouse' && hoverOpens() && setOpenIndex(null)}
               >
-                <h3 className="m-0 flex flex-1 flex-col">
+                <h3 className="m-0">
                   <button
                     ref={(el) => {
                       triggers.current[i] = el;
@@ -158,34 +133,27 @@ export default function EngineeredYourWaySection() {
                     type="button"
                     aria-expanded={isOpen}
                     aria-controls={panelId}
-                    // A mouse click lands on a card hover already opened, so it keeps it open instead of toggling.
+                    // A mouse click on a card that hover already opened keeps it open instead of toggling it shut.
                     onClick={(e) => {
-                      const viaMouse = (e.nativeEvent as PointerEvent).pointerType === 'mouse';
-                      setOpenIndex(viaMouse ? i : isOpen ? null : i);
+                      const hoverOpened = (e.nativeEvent as PointerEvent).pointerType === 'mouse' && hoverOpens();
+                      setOpenIndex(hoverOpened ? i : isOpen ? null : i);
                     }}
                     onKeyDown={(e) => onTriggerKeyDown(e, i)}
-                    className="group flex flex-1 cursor-pointer flex-col justify-between gap-8 rounded-[inherit] p-7 text-left outline-none focus-visible:ring-2 focus-visible:ring-[#4F6B91] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FAFAFA] md:p-10 lg:p-12"
+                    className="flex w-full cursor-pointer items-center gap-4 rounded-[inherit] px-5 py-8 text-left outline-none focus-visible:ring-2 focus-visible:ring-[#202124] focus-visible:ring-offset-2 focus-visible:ring-offset-white sm:gap-5 sm:px-6"
                   >
-                    <span className="flex items-start justify-between gap-4">
-                      <Icon
-                        className="h-10 w-10 shrink-0 text-[#202124] md:h-14 md:w-14 lg:h-16 lg:w-16"
-                        strokeWidth={1.3}
-                        aria-hidden="true"
-                      />
-                      <span
-                        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-all duration-300 md:h-10 md:w-10 ${
-                          isOpen
-                            ? 'rotate-45 border-[#4F6B91] bg-[#4F6B91] text-white'
-                            : 'border-[#202124]/15 text-[#646B76] group-hover:border-[#4F6B91]/50 group-hover:text-[#4F6B91]'
-                        }`}
-                        aria-hidden="true"
-                      >
-                        <Plus className="h-4 w-4 md:h-5 md:w-5" strokeWidth={1.8} />
-                      </span>
-                    </span>
-                    <span className="text-[28px] font-semibold leading-none tracking-[-0.02em] text-[#202124] md:text-[34px] lg:text-[40px]">
+                    <Icon
+                      className="h-9 w-9 shrink-0 text-[#202124] min-[380px]:h-10 min-[380px]:w-10 sm:h-11 sm:w-11"
+                      strokeWidth={1.4}
+                      aria-hidden="true"
+                    />
+                    <span className="min-w-0 flex-1 text-[26px] font-semibold leading-none tracking-[-0.02em] text-[#202124] min-[380px]:text-[28px] sm:text-[32px] lg:text-[28px] xl:text-[32px]">
                       {title}
                     </span>
+                    <Plus
+                      className={`h-5 w-5 shrink-0 text-[#202124]/55 transition-transform duration-300 ${isOpen ? 'rotate-45' : ''}`}
+                      strokeWidth={1.8}
+                      aria-hidden="true"
+                    />
                   </button>
                 </h3>
 
@@ -196,34 +164,26 @@ export default function EngineeredYourWaySection() {
                       role="region"
                       aria-labelledby={triggerId}
                       key="panel"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
+                      // marginTop tucks the panel into the header's bottom padding; animating it avoids a jump.
+                      initial={{ height: 0, marginTop: 0, opacity: 0 }}
+                      animate={{ height: 'auto', marginTop: -12, opacity: 1 }}
+                      exit={{ height: 0, marginTop: 0, opacity: 0 }}
                       transition={{ duration, ease: EASE }}
                       className="overflow-hidden"
                     >
                       <motion.div
-                        initial={{ y: reduceMotion ? 0 : 8 }}
+                        initial={{ y: reduceMotion ? 0 : 6 }}
                         animate={{ y: 0 }}
-                        exit={{ y: reduceMotion ? 0 : 4 }}
+                        exit={{ y: reduceMotion ? 0 : 3 }}
                         transition={{ duration, ease: EASE }}
-                        className="px-7 pb-8 md:px-10 md:pb-10 lg:px-12 lg:pb-12"
+                        className="px-5 pb-7 sm:px-6"
                       >
-                        <p className="m-0 text-[15px] leading-[1.6] text-[#646B76]">{description}</p>
-                        <ul className="m-0 mt-5 grid list-none grid-cols-1 gap-y-2.5 p-0">
-                          {services.map((service) => (
-                            <li
-                              key={service}
-                              className="flex items-center gap-3 text-[15px] font-medium text-[#202124]"
-                            >
-                              <Check className="h-4 w-4 shrink-0 text-[#4F6B91]" strokeWidth={2.4} aria-hidden="true" />
-                              {service}
-                            </li>
-                          ))}
-                        </ul>
+                        <p className="m-0 text-[15px] leading-[1.6] text-[#202124]/75 sm:text-[16px]">
+                          {description}
+                        </p>
                         <Link
                           href={cta.href}
-                          className="group/cta mt-7 inline-flex items-center gap-2 text-[15px] font-semibold text-[#4F6B91] transition-colors hover:text-[#202124]"
+                          className="group/cta mt-4 inline-flex items-center gap-2 rounded-sm text-[15px] font-semibold text-[#202124] underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-[#202124] focus-visible:ring-offset-2 focus-visible:ring-offset-[#EEF1F2]"
                         >
                           {cta.label}
                           <ArrowRight
@@ -241,7 +201,7 @@ export default function EngineeredYourWaySection() {
           })}
         </div>
 
-        <div className="mt-20 max-w-[760px] lg:mt-28">
+        <div className="mt-16 max-w-[760px] lg:mt-24">
           <p
             className="m-0 text-[24px] text-[#101828] sm:text-[30px] lg:text-[38px]"
             style={{ fontWeight: 700, lineHeight: 1.1 }}
