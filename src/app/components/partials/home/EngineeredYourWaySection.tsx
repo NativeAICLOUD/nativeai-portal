@@ -30,6 +30,8 @@ function LaunchRocketIcon({ strokeWidth = 1.5, ...props }: LucideProps) {
 type Capability = {
   title: string;
   icon: LucideIcon | typeof LaunchRocketIcon;
+  /** Short lead line shown above the description when the card is open. */
+  tagline: string;
   description: string;
   cta: { label: string; href: string };
 };
@@ -38,19 +40,24 @@ const capabilities: Capability[] = [
   {
     title: 'Innovate',
     icon: LaunchRocketIcon,
-    description: 'Turn ideas into useful AI agents and digital products.',
+    tagline: 'Ideas into reality.',
+    description:
+      'Intelligent products. Meaningful results. Turn ideas into useful AI agents and digital products.',
     cta: { label: 'Explore AI Solutions', href: '/services/ai-agents-rag' },
   },
   {
     title: 'Modernize',
     icon: RefreshCw,
-    description: 'Upgrade legacy applications and move to reliable cloud platforms.',
+    tagline: 'Modernize what you have. Build what’s next.',
+    description: 'Transform legacy applications into modern, scalable cloud solutions.',
     cta: { label: 'Explore Cloud Services', href: Constants.PAGES.CLOUD_NATIVE_SD },
   },
   {
     title: 'Accelerate',
     icon: CircleArrowUp,
-    description: 'Improve delivery with DevOps, automation, and scalable architecture.',
+    tagline: 'Engineering, made simple.',
+    description:
+      'We build reliable systems, automate the complex, and make technology work better.',
     cta: { label: 'Explore Engineering', href: Constants.PAGES.DEVOPS_ON_AZURE },
   },
 ];
@@ -109,7 +116,7 @@ export default function EngineeredYourWaySection() {
         </header>
 
         <div className="mt-10 grid grid-cols-1 items-start gap-4 sm:gap-5 lg:mt-12 lg:grid-cols-3">
-          {capabilities.map(({ title, icon: Icon, description, cta }, i) => {
+          {capabilities.map(({ title, icon: Icon, tagline, description, cta }, i) => {
             const isOpen = openIndex === i;
             const triggerId = `${baseId}-trigger-${i}`;
             const panelId = `${baseId}-panel-${i}`;
@@ -178,6 +185,9 @@ export default function EngineeredYourWaySection() {
                         transition={{ duration, ease: EASE }}
                         className="px-5 pb-7 sm:px-6"
                       >
+                        <p className="m-0 mb-1.5 text-[17px] font-semibold leading-[1.3] text-[#202124] sm:text-[18px]">
+                          {tagline}
+                        </p>
                         <p className="m-0 text-[15px] leading-[1.6] text-[#202124]/75 sm:text-[16px]">
                           {description}
                         </p>
