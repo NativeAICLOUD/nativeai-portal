@@ -2,13 +2,34 @@
 
 import { useId, useRef, useState, type KeyboardEvent } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { ArrowRight, Check, CircleArrowUp, Plus, RefreshCw, Rocket, type LucideIcon } from 'lucide-react';
+import { ArrowRight, Check, CircleArrowUp, Plus, RefreshCw, type LucideIcon, type LucideProps } from 'lucide-react';
 import { Link } from 'react-transition-progress/next';
 import { Constants } from '@/Constants';
 
+/* The "Launching New Products" rocket (public/icons/launching-new-products.svg) redrawn as a
+   stroked line icon, so it takes the same strokeWidth and colour as the Lucide icons beside it. */
+function LaunchRocketIcon({ strokeWidth = 1.5, ...props }: LucideProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M12 16.5 7.5 12l5.38-5.38c2.72-2.72 5.5-2.93 6.65-2.86a.75.75 0 0 1 .71.71c.07 1.16-.14 3.93-2.86 6.65Z" />
+      <path d="M12.75 6.75H6.97a.75.75 0 0 0-.53.22L3.22 10.19a.75.75 0 0 0 .42 1.27L7.5 12" />
+      <path d="M17.25 11.25v5.78a.75.75 0 0 1-.22.53l-3.22 3.22a.75.75 0 0 1-1.27-.42L12 16.5" />
+      <path d="M6.75 15s-3 .75-3 5.25c4.5 0 5.25-3 5.25-3" />
+    </svg>
+  );
+}
+
 type Capability = {
   title: string;
-  icon: LucideIcon;
+  icon: LucideIcon | typeof LaunchRocketIcon;
   description: string;
   services: string[];
   cta: { label: string; href: string };
@@ -17,7 +38,7 @@ type Capability = {
 const capabilities: Capability[] = [
   {
     title: 'Innovate',
-    icon: Rocket,
+    icon: LaunchRocketIcon,
     description:
       'Turn emerging technologies into real business value. We design AI agents, intelligent applications, and enterprise AI solutions built around your business.',
     services: [
@@ -58,19 +79,25 @@ const capabilities: Capability[] = [
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-/* "Engineered Your Way." — three stacked capability cards working as a single-open accordion */
+/*
+ * "Engineered Your Way." — three capability cards in one row (2 on tablet, 1 on mobile).
+ * Each card is an accordion header: hovering (mouse) or clicking (touch/keyboard) reveals its details.
+ * items-start keeps closed cards at their own height when a neighbour in the row opens.
+ */
 export default function EngineeredYourWaySection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const reduceMotion = useReducedMotion();
   const baseId = useId();
   const triggers = useRef<(HTMLButtonElement | null)[]>([]);
 
-  // WAI-ARIA accordion keys: arrows move between headers, Home/End jump to the ends.
+  // WAI-ARIA accordion keys: arrows move between cards, Home/End jump to the ends.
   const onTriggerKeyDown = (e: KeyboardEvent<HTMLButtonElement>, i: number) => {
     const last = capabilities.length - 1;
+    const next = e.key === 'ArrowDown' || e.key === 'ArrowRight';
+    const prev = e.key === 'ArrowUp' || e.key === 'ArrowLeft';
     const target =
-      e.key === 'ArrowDown' ? (i === last ? 0 : i + 1)
-      : e.key === 'ArrowUp' ? (i === 0 ? last : i - 1)
+      next ? (i === last ? 0 : i + 1)
+      : prev ? (i === 0 ? last : i - 1)
       : e.key === 'Home' ? 0
       : e.key === 'End' ? last
       : null;
@@ -83,7 +110,7 @@ export default function EngineeredYourWaySection() {
 
   return (
     <section className="bg-[#FAFAFA] font-switzer" aria-labelledby={`${baseId}-heading`}>
-      <div className="mx-auto w-full max-w-[1240px] px-5 py-20 sm:px-6 lg:py-28">
+      <div className="mx-auto w-full max-w-[1440px] px-5 py-20 sm:px-6 lg:px-10 lg:py-28">
         <header className="max-w-[760px]">
           {/* Same eyebrow + heading treatment as "What We Offer" */}
           <p
@@ -105,7 +132,7 @@ export default function EngineeredYourWaySection() {
           </p>
         </header>
 
-        <div className="mt-12 flex flex-col gap-3 sm:gap-4 lg:mt-16">
+        <div className="mt-12 grid grid-cols-1 items-start gap-4 md:grid-cols-2 md:gap-5 lg:mt-16 lg:grid-cols-3 lg:gap-6">
           {capabilities.map(({ title, icon: Icon, description, services, cta }, i) => {
             const isOpen = openIndex === i;
             const triggerId = `${baseId}-trigger-${i}`;
@@ -114,11 +141,15 @@ export default function EngineeredYourWaySection() {
             return (
               <div
                 key={title}
-                className={`rounded-[24px] bg-[#E8EBF0] transition-colors duration-300 sm:rounded-[32px] lg:rounded-[40px] ${
-                  isOpen ? '' : 'hover:bg-[#E1E5EC]'
-                }`}
+                // On tablet the third card spans both columns so the grid has no orphan gap.
+                className={`flex min-h-[200px] flex-col rounded-[24px] bg-[#E9EBF0] transition-colors duration-300 md:min-h-[280px] md:rounded-[30px] lg:min-h-[320px] lg:rounded-[34px] ${
+                  i === capabilities.length - 1 ? 'md:col-span-2 lg:col-span-1' : ''
+                } ${isOpen ? '' : 'hover:bg-[#E1E4EB]'}`}
+                // Mouse users: hovering a card opens it, leaving closes it. Touch and keyboard use click below.
+                onPointerEnter={(e) => e.pointerType === 'mouse' && setOpenIndex(i)}
+                onPointerLeave={(e) => e.pointerType === 'mouse' && setOpenIndex(null)}
               >
-                <h3 className="m-0">
+                <h3 className="m-0 flex flex-1 flex-col">
                   <button
                     ref={(el) => {
                       triggers.current[i] = el;
@@ -127,27 +158,33 @@ export default function EngineeredYourWaySection() {
                     type="button"
                     aria-expanded={isOpen}
                     aria-controls={panelId}
-                    onClick={() => setOpenIndex(isOpen ? null : i)}
+                    // A mouse click lands on a card hover already opened, so it keeps it open instead of toggling.
+                    onClick={(e) => {
+                      const viaMouse = (e.nativeEvent as PointerEvent).pointerType === 'mouse';
+                      setOpenIndex(viaMouse ? i : isOpen ? null : i);
+                    }}
                     onKeyDown={(e) => onTriggerKeyDown(e, i)}
-                    className="group flex w-full cursor-pointer items-center gap-5 rounded-[inherit] px-6 py-6 text-left outline-none focus-visible:ring-2 focus-visible:ring-[#4F6B91] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FAFAFA] sm:gap-7 sm:px-10 sm:py-9 lg:gap-9 lg:px-14 lg:py-11"
+                    className="group flex flex-1 cursor-pointer flex-col justify-between gap-8 rounded-[inherit] p-7 text-left outline-none focus-visible:ring-2 focus-visible:ring-[#4F6B91] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FAFAFA] md:p-10 lg:p-12"
                   >
-                    <Icon
-                      className="h-9 w-9 shrink-0 text-[#202124] sm:h-12 sm:w-12 lg:h-14 lg:w-14"
-                      strokeWidth={1.4}
-                      aria-hidden="true"
-                    />
-                    <span className="flex-1 text-[26px] font-semibold leading-none tracking-[-0.02em] text-[#202124] sm:text-[34px] lg:text-[42px]">
-                      {title}
+                    <span className="flex items-start justify-between gap-4">
+                      <Icon
+                        className="h-10 w-10 shrink-0 text-[#202124] md:h-14 md:w-14 lg:h-16 lg:w-16"
+                        strokeWidth={1.3}
+                        aria-hidden="true"
+                      />
+                      <span
+                        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-all duration-300 md:h-10 md:w-10 ${
+                          isOpen
+                            ? 'rotate-45 border-[#4F6B91] bg-[#4F6B91] text-white'
+                            : 'border-[#202124]/15 text-[#646B76] group-hover:border-[#4F6B91]/50 group-hover:text-[#4F6B91]'
+                        }`}
+                        aria-hidden="true"
+                      >
+                        <Plus className="h-4 w-4 md:h-5 md:w-5" strokeWidth={1.8} />
+                      </span>
                     </span>
-                    <span
-                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-all duration-300 sm:h-11 sm:w-11 ${
-                        isOpen
-                          ? 'rotate-45 border-[#4F6B91] bg-[#4F6B91] text-white'
-                          : 'border-[#202124]/15 text-[#646B76] group-hover:border-[#4F6B91]/50 group-hover:text-[#4F6B91]'
-                      }`}
-                      aria-hidden="true"
-                    >
-                      <Plus className="h-4 w-4 sm:h-5 sm:w-5" strokeWidth={1.8} />
+                    <span className="text-[28px] font-semibold leading-none tracking-[-0.02em] text-[#202124] md:text-[34px] lg:text-[40px]">
+                      {title}
                     </span>
                   </button>
                 </h3>
@@ -170,13 +207,10 @@ export default function EngineeredYourWaySection() {
                         animate={{ y: 0 }}
                         exit={{ y: reduceMotion ? 0 : 4 }}
                         transition={{ duration, ease: EASE }}
-                        // Indent aligns content with the title, past the icon column.
-                        className="px-6 pb-7 sm:pl-[116px] sm:pr-10 sm:pb-10 lg:pl-[148px] lg:pr-14 lg:pb-12"
+                        className="px-7 pb-8 md:px-10 md:pb-10 lg:px-12 lg:pb-12"
                       >
-                        <p className="m-0 max-w-[640px] text-[15px] leading-[1.6] text-[#646B76] sm:text-[16px]">
-                          {description}
-                        </p>
-                        <ul className="m-0 mt-6 grid list-none grid-cols-1 gap-x-10 gap-y-3 p-0 md:grid-cols-2 md:max-w-[640px]">
+                        <p className="m-0 text-[15px] leading-[1.6] text-[#646B76]">{description}</p>
+                        <ul className="m-0 mt-5 grid list-none grid-cols-1 gap-y-2.5 p-0">
                           {services.map((service) => (
                             <li
                               key={service}
@@ -189,7 +223,7 @@ export default function EngineeredYourWaySection() {
                         </ul>
                         <Link
                           href={cta.href}
-                          className="group/cta mt-8 inline-flex items-center gap-2 text-[15px] font-semibold text-[#4F6B91] transition-colors hover:text-[#202124]"
+                          className="group/cta mt-7 inline-flex items-center gap-2 text-[15px] font-semibold text-[#4F6B91] transition-colors hover:text-[#202124]"
                         >
                           {cta.label}
                           <ArrowRight
