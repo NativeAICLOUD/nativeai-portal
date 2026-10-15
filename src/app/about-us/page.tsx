@@ -47,39 +47,47 @@ const collaborationModels: {
   },
 ];
 
-const coreValues: { icon: string; title: string; body: string }[] = [
+// Shown like the engagement-model icons (coloured glyph on a tinted tile), all in one shared blue.
+const coreValues: { icon: string; color: string; title: string; body: string }[] = [
   {
     icon: '/about-us/handshake.svg',
+    color: '#0369A1',
     title: 'Transparency & Honesty',
     body: "We believe in being open and honest with our clients, partners, and team members. We will always communicate openly and transparently, even when it's difficult.",
   },
   {
     icon: '/about-us/hand-heart.svg',
+    color: '#0369A1',
     title: 'Trust & Care',
     body: 'We believe that trust is the foundation of any successful relationship. We will always act with care and empathy towards our clients and team members, and we will do our best to earn and maintain their trust.',
   },
   {
     icon: '/about-us/compass.svg',
+    color: '#0369A1',
     title: 'Curiosity & Inspiration',
     body: 'We believe that the best solutions come from asking questions and exploring new ideas. We will approach every project with a curious and open mind, and we will inspire our clients and team members to do the same.',
   },
   {
     icon: '/about-us/hand-heart.svg',
+    color: '#0369A1',
     title: 'Respect',
     body: 'We believe that everyone deserves to be treated with respect and dignity. We will treat our clients, team members, and partners with the utmost respect, regardless of their background or experience.',
   },
   {
     icon: '/about-us/trophy.svg',
+    color: '#0369A1',
     title: 'Excellence',
     body: 'We believe in delivering the highest quality work possible. We will always strive for excellence in everything we do, from the code we write to the way we interact with our clients and team members.',
   },
   {
     icon: '/about-us/books-open.svg',
+    color: '#0369A1',
     title: 'Knowledge & Commitment',
     body: 'We believe in constantly learning and growing as professionals. We will invest in our own knowledge and skills, and we will be committed to helping our clients and team members do the same.',
   },
   {
     icon: '/about-us/four-users.svg',
+    color: '#0369A1',
     title: 'Inclusiveness & Opportunity',
     body: 'We believe in creating a culture of inclusiveness where everyone has the opportunity to lead, own, and take responsibility. We will actively seek out diverse perspectives and voices, and we will work to remove barriers to access and advancement for all team members.',
   },
@@ -269,10 +277,29 @@ export default function AboutUsPage() {
             </h2>
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-6">
-            {coreValues.map(({ icon, title, body }) => (
+            {coreValues.map(({ icon, color, title, body }) => (
               <div key={title} className="flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={icon} alt="" className="mb-4 h-10 w-10 object-contain" aria-hidden="true" />
+                <span
+                  className="mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
+                  style={{ background: `${color}14` }}
+                  aria-hidden="true"
+                >
+                  {/* The SVGs are drawn in blue, so they're used as a mask and filled with the value's colour. */}
+                  <span
+                    className="h-6 w-6"
+                    style={{
+                      backgroundColor: color,
+                      maskImage: `url(${icon})`,
+                      WebkitMaskImage: `url(${icon})`,
+                      maskSize: 'contain',
+                      WebkitMaskSize: 'contain',
+                      maskRepeat: 'no-repeat',
+                      WebkitMaskRepeat: 'no-repeat',
+                      maskPosition: 'center',
+                      WebkitMaskPosition: 'center',
+                    }}
+                  />
+                </span>
                 <h3 className="m-0 text-[18px] font-medium leading-[1.25] text-[#111]">{title}</h3>
                 <p className="mt-2 text-[14.5px] font-normal leading-[1.55] text-[#6b7280]">{body}</p>
               </div>
