@@ -8,7 +8,14 @@ import {
 } from 'lucide-react';
 import { CONTAINER, Eyebrow, SECTION_Y, H2, FeatureCard } from './HomeUI';
 
-const ICON_TINT = 'rgba(37,99,235,0.08)';
+/* Four colours, one per column — every 4-card row runs sky → teal → cherry → orange.
+   Sky is the About page's Project-Based Collaboration blue; orange keeps E-commerce orange. */
+const COLUMN_TINTS = [
+  { color: '#0369A1', bg: 'rgba(3,105,161,0.08)' },
+  { color: '#0F766E', bg: 'rgba(15,118,110,0.08)' },
+  { color: '#BE123C', bg: 'rgba(190,18,60,0.08)' },
+  { color: '#EA580C', bg: 'rgba(234,88,12,0.08)' },
+];
 
 type Industry = {
   title: string;
@@ -17,19 +24,23 @@ type Industry = {
   icon: LucideIcon;
 };
 
+/* Ordered so each 4-column desktop row reads as one theme:
+   financial services · physical operations · digital & services. */
 const industries: Industry[] = [
-  { title: 'Energy and Resources',       desc: 'Data platforms and automation for energy, utilities and resource operations.', href: '/industries',         icon: Lightbulb },
   { title: 'Finance and Banking',        desc: 'Secure, compliant platforms for banks and financial institutions.',            href: '/industries',         icon: Landmark },
-  { title: 'Insurance',                  desc: 'Claims automation, risk analytics and policy workflows.',                      href: '/industries',         icon: ShieldCheck },
-  { title: 'Payments',                   desc: 'Billing, reconciliation and payment automation at scale.',                     href: '/payment-automation', icon: CreditCard },
-  { title: 'Supply Chain and Logistics', desc: 'Visibility, tracking and optimisation across the whole chain.',               href: '/industries',         icon: Route },
-  { title: 'Technology',                 desc: 'Product engineering for software and SaaS companies.',                         href: '/industries',         icon: Cpu },
-  { title: 'Travel',                     desc: 'GDS-connected booking and travel platforms.',                                  href: '/airline-booking',    icon: Plane },
-  { title: 'Legal & Compliance',         desc: 'AI document and case workflows for legal teams.',                              href: '/legal-saas', icon: Scale },
   { title: 'Fintech',                    desc: 'Modern rails for lending, payments and wealth products.',                      href: '/payment-automation', icon: Wallet },
-  { title: 'E-commerce & Retail',        desc: 'Scalable storefronts, logistics and personalisation.',                         href: '/industries',         icon: ShoppingBag },
+  { title: 'Payments',                   desc: 'Billing, reconciliation and payment automation at scale.',                     href: '/payment-automation', icon: CreditCard },
+  { title: 'Insurance',                  desc: 'Claims automation, risk analytics and policy workflows.',                      href: '/industries',         icon: ShieldCheck },
+
+  { title: 'Energy and Resources',       desc: 'Data platforms and automation for energy, utilities and resource operations.', href: '/industries',         icon: Lightbulb },
   { title: 'Construction',               desc: 'Project, site and resource management systems.',                               href: '/industries',         icon: Building2 },
+  { title: 'Supply Chain and Logistics', desc: 'Visibility, tracking and optimisation across the whole chain.',               href: '/industries',         icon: Route },
+  { title: 'E-commerce & Retail',        desc: 'Scalable storefronts, logistics and personalisation.',                         href: '/industries',         icon: ShoppingBag },
+
+  { title: 'Technology',                 desc: 'Product engineering for software and SaaS companies.',                         href: '/industries',         icon: Cpu },
   { title: 'B2B Solutions',              desc: 'Portals, integrations and workflow platforms for B2B.',                        href: '/industries',         icon: Network },
+  { title: 'Legal & Compliance',         desc: 'AI document and case workflows for legal teams.',                              href: '/legal-saas',         icon: Scale },
+  { title: 'Travel',                     desc: 'GDS-connected booking and travel platforms.',                                  href: '/airline-booking',    icon: Plane },
 ];
 
 export default function IndustriesBusinessDomain() {
@@ -48,7 +59,7 @@ export default function IndustriesBusinessDomain() {
           <div className="mb-4"><Eyebrow>Industries we serve</Eyebrow></div>
           <h2 className={`m-0 max-w-[560px] ${H2}`}>
             Move your{' '}
-            <span style={{ background: 'rgba(37,99,235,0.14)', borderRadius: 0, padding: '2px 6px' }}>
+            <span style={{ background: 'rgba(3,105,161,0.14)', borderRadius: 0, padding: '2px 6px' }}>
               industry
             </span>{' '}
             forward
@@ -65,7 +76,7 @@ export default function IndustriesBusinessDomain() {
               transition={{ duration: 0.45, ease: 'easeOut', delay: (i % 4) * 0.1 }}
               viewport={{ once: true, margin: '-40px' }}
             >
-              <FeatureCard href={href} icon={icon} iconColor="#2563EB" iconBg={ICON_TINT} title={title} desc={desc} hoverTint />
+              <FeatureCard href={href} icon={icon} iconColor={COLUMN_TINTS[i % 4].color} iconBg={COLUMN_TINTS[i % 4].bg} title={title} desc={desc} cta="Explore" hoverTint revealOnHover />
             </motion.div>
           ))}
         </div>

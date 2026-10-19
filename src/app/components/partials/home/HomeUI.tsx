@@ -74,7 +74,16 @@ type FeatureCardProps = {
      instead of the default border-only hover — an opt-in, bolder
      interaction for grids where each item should feel distinct on hover. */
   hoverTint?: boolean;
+  /* Hides the description until the card is hovered or focused (fade +
+     slide in). Space is reserved so the grid never jumps. Touch devices
+     (no hover) always show the text. */
+  revealOnHover?: boolean;
 };
+
+/* Hover/focus reveal: hidden + nudged down at rest on hover-capable
+   devices only, so touch users always see the content. */
+const REVEAL =
+  'transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none [@media(hover:hover)]:translate-y-2 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:translate-y-0 [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-focus-within:translate-y-0 [@media(hover:hover)]:group-focus-within:opacity-100';
 
 function CardIcon({ Icon, iconColor, iconBg, size }: { Icon: IconComponent | string; iconColor: string; iconBg: string; size: 'md' | 'lg' }) {
   const GlyphIcon = typeof Icon === 'string' ? null : Icon;
@@ -98,11 +107,13 @@ function CardIcon({ Icon, iconColor, iconBg, size }: { Icon: IconComponent | str
 /* One shared card: icon tile, title, description, optional tags/cta.
    Icon-top layout (not icon-left+divider) — simpler, more open, matches
    the "icon + text block" pattern used for restraint across the pass. */
-export function FeatureCard({ icon: Icon, iconColor, iconBg, title, desc, href, tags, cta, iconOutside, hoverTint }: FeatureCardProps) {
+export function FeatureCard({ icon: Icon, iconColor, iconBg, title, desc, href, tags, cta, iconOutside, hoverTint, revealOnHover }: FeatureCardProps) {
   const body = (
     <>
       <h3 className={`m-0 ${H3}`}>{title}</h3>
-      <p className={`mt-2 flex-1 ${BODY}`}>{desc}</p>
+      <p className={`mt-2 flex-1 ${BODY} ${revealOnHover ? REVEAL : ''}`}>
+        {desc}
+      </p>
       {tags && tags.length > 0 && (
         <div className="mt-4 flex flex-wrap gap-1.5">
           {tags.map((tag) => (
@@ -111,7 +122,7 @@ export function FeatureCard({ icon: Icon, iconColor, iconBg, title, desc, href, 
         </div>
       )}
       {cta && (
-        <span className="mt-4 inline-flex items-center gap-1.5 text-[13px] font-medium text-[#111827]">
+        <span className={`mt-4 inline-flex items-center gap-1.5 text-[13px] font-medium text-[#111827] ${revealOnHover ? `${REVEAL} delay-75` : ''}`}>
           {cta}
           <ArrowIcon />
         </span>
@@ -127,7 +138,7 @@ export function FeatureCard({ icon: Icon, iconColor, iconBg, title, desc, href, 
 
   if (iconOutside) {
     return (
-      <div className="group flex h-full flex-col">
+      <div className="group flex h-full flex-col" tabIndex={revealOnHover && !href ? 0 : undefined}>
         <div className="mb-5">
           <CardIcon Icon={Icon} iconColor={iconColor} iconBg={iconBg} size="lg" />
         </div>

@@ -6,7 +6,12 @@ import {
   Cloud, ShieldCheck, Lock, Boxes, GitBranch, Server, type LucideIcon,
 } from "lucide-react";
 import { Constants } from "@/Constants";
-import { CONTAINER, SECTION_Y, H2, BODY } from "./HomeUI";
+import { CONTAINER, Eyebrow, SECTION_Y } from "./HomeUI";
+
+/* Crimson + tinted tile — same treatment as the About page's
+   "Extend Delivery Capacity & Team Augmentation" card. */
+const ICON_COLOR = "#BE123C";
+const ICON_TINT = "rgba(190,18,60,0.08)";
 
 type ExpertiseTag = {
   label: string;
@@ -25,14 +30,15 @@ const expertiseTags: ExpertiseTag[] = [
 
 export default function ExpertiseSection() {
   return (
-    <section className="font-switzer relative overflow-hidden bg-[#f6f7f9]">
-
-      {/* Decorative glow — top-left, mirrors Industries section */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-24 left-[6%] h-80 w-80 rounded-full"
-        style={{ background: 'radial-gradient(circle, rgba(37,99,235,0.10) 0%, transparent 70%)' }}
-      />
+    <section
+      className="font-switzer relative overflow-hidden"
+      /* NearshoreIntroSection's lavender glow, kept small in the top-right corner so the rest of the section is pure white */
+      style={{
+        background:
+          'radial-gradient(circle at 90% 0%, rgba(224,225,255,0.6), transparent 20%), ' +
+          '#ffffff',
+      }}
+    >
 
       <div className={`relative ${CONTAINER} ${SECTION_Y}`}>
 
@@ -44,13 +50,12 @@ export default function ExpertiseSection() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           viewport={{ once: true, margin: "-80px" }}
         >
-          <p className="text-[12px] font-medium uppercase tracking-[0.14em] text-[#6B7280]">
-            Areas of Expertise
-          </p>
-          <h2 className={H2}>
-            Azure &amp; cloud security, done right
+          {/* Typography mirrors NearshoreIntroSection */}
+          <div className="mb-1"><Eyebrow>Areas of Expertise</Eyebrow></div>
+          <h2 className="m-0 max-w-[620px] text-[36px] font-medium leading-[1.05] tracking-[-0.02em] text-[#111] sm:text-[46px] lg:text-[56px]">
+            Azure &amp; cloud security, done right.
           </h2>
-          <p className={`max-w-[440px] ${BODY}`}>
+          <p className="m-0 mt-1 max-w-[540px] text-[18px] font-light leading-[1.6] text-[#111]">
             NativeCloud is a certified Microsoft Azure partner focused on secure-by-default cloud architecture.
           </p>
 
@@ -58,16 +63,22 @@ export default function ExpertiseSection() {
             {expertiseTags.map((tag, i) => (
               <motion.div
                 key={tag.label}
-                className="flex items-center gap-3.5"
+                className="group flex items-center gap-3.5"
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, ease: "easeOut", delay: i * 0.06 }}
                 viewport={{ once: true, margin: "-40px" }}
               >
-                <tag.icon className="h-12 w-12 shrink-0 text-[#2563eb]" strokeWidth={1.3} aria-hidden="true" />
+                <span
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
+                  style={{ background: ICON_TINT }}
+                  aria-hidden="true"
+                >
+                  <tag.icon className="h-5 w-5" style={{ color: ICON_COLOR }} strokeWidth={1.7} />
+                </span>
                 <Link
                   href={tag.href}
-                  className="group inline-flex items-center rounded-full border border-[#E6E6E6] bg-white px-5 py-2.5 transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-0.5 hover:border-[#111827]/20 hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111827]/20"
+                  className="inline-flex items-center rounded-full border border-[#E6E6E6] bg-white px-5 py-2.5 transition-[transform,border-color,background-color] duration-200 group-hover:-translate-y-0.5 group-hover:border-[#BE123C]/25 group-hover:bg-[rgba(190,18,60,0.06)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111827]/20"
                 >
                   <span className="text-[15px] font-medium text-[#111]">{tag.label}</span>
                 </Link>

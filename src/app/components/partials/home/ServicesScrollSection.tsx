@@ -7,24 +7,28 @@ import {
 } from 'lucide-react';
 import { CONTAINER, Eyebrow, SECTION_Y, H2 } from './HomeUI';
 
-/* Icon tile tint cycle — same palette/recipe as the delivery-spectrum icons */
+/* Icon tile tints — four colours: pink (Enterprise App Development),
+   teal (UI / UX Design), orange (App Modernization) and cherry. */
 const TILE = [
-  { color: '#FF9900', bg: 'rgba(255,153,0,0.08)' },
+  { color: '#DB2777', bg: 'rgba(219,39,119,0.08)' },
+  { color: '#0F8B83', bg: 'rgba(15,139,131,0.08)' },
   { color: '#FF6A3D', bg: 'rgba(255,106,61,0.08)' },
-  { color: '#FF4F8B', bg: 'rgba(255,79,139,0.08)' },
+  { color: '#BE123C', bg: 'rgba(190,18,60,0.08)' },
 ];
 
-const services: { title: string; icon: LucideIcon }[] = [
-  { title: 'Cloud Solutions & Services',     icon: Cloud },
-  { title: 'Platform Development',           icon: Layers },
-  { title: 'SaaS App Development',           icon: Rocket },
-  { title: 'Cloud & DevOps',                 icon: Workflow },
-  { title: 'App Modernization',              icon: RefreshCw },
-  { title: 'Enterprise App Development',     icon: Building2 },
-  { title: 'Digital Transformation',         icon: Sparkles },
-  { title: 'End-to-end Business Solutions',  icon: Briefcase },
-  { title: 'UI / UX Design',                 icon: Palette },
-  { title: 'Cloud Migrations',               icon: CloudUpload },
+/* tile = index into TILE (0 pink · 1 teal · 2 orange · 3 cherry); assigned so
+   the three reference services keep their colours and neighbours never repeat. */
+const services: { title: string; icon: LucideIcon; tile: number }[] = [
+  { title: 'Cloud Solutions & Services',     icon: Cloud,       tile: 3 },
+  { title: 'Platform Development',           icon: Layers,      tile: 1 },
+  { title: 'SaaS App Development',           icon: Rocket,      tile: 0 },
+  { title: 'Cloud & DevOps',                 icon: Workflow,    tile: 3 },
+  { title: 'App Modernization',              icon: RefreshCw,   tile: 2 },
+  { title: 'Enterprise App Development',     icon: Building2,   tile: 0 },
+  { title: 'Digital Transformation',         icon: Sparkles,    tile: 3 },
+  { title: 'End-to-end Business Solutions',  icon: Briefcase,   tile: 2 },
+  { title: 'UI / UX Design',                 icon: Palette,     tile: 1 },
+  { title: 'Cloud Migrations',               icon: CloudUpload, tile: 0 },
 ];
 
 export default function ServicesScrollSection() {
@@ -48,8 +52,8 @@ export default function ServicesScrollSection() {
 
         {/* Service tabs — tinted icon tile matching the site's icon-tile system */}
         <div className="flex flex-wrap gap-x-8 gap-y-5">
-          {services.map(({ title, icon: Icon }, i) => {
-            const tile = TILE[i % TILE.length];
+          {services.map(({ title, icon: Icon, tile: t }) => {
+            const tile = TILE[t];
             return (
               <div
                 key={title}
