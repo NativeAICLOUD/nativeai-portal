@@ -3,7 +3,8 @@
 import { Briefcase } from "lucide-react";
 import { motion } from "framer-motion";
 import { Constants } from "@/Constants";
-import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from "@/app/components/partials/services/ServiceUI";
+import { Link } from "react-transition-progress/next";
+import { CONTAINER, Eyebrow } from "@/app/components/partials/services/ServiceUI";
 
 const collaborationModels: {
   icon: string | null;
@@ -159,12 +160,18 @@ export default function AboutUsPage() {
                 into working solutions.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <PrimaryButton href={Constants.PAGES.GET_IN_TOUCH}>
-                  <span className="text-[12px] font-medium uppercase tracking-[0.14em]">Let&apos;s talk</span>
-                </PrimaryButton>
-                <SecondaryButton href={Constants.PAGES.SOLUTIONS}>
-                  <span className="text-[12px] font-medium uppercase tracking-[0.14em]">See all solutions</span>
-                </SecondaryButton>
+                <Link
+                  href={Constants.PAGES.GET_IN_TOUCH}
+                  className="inline-flex h-10 cursor-pointer items-center justify-center whitespace-nowrap rounded-full px-5 text-[14px] font-semibold transition-colors duration-200 bg-[#E1F0FF] text-[#0066B3] hover:bg-[#CCE4FF] active:bg-[#B8D9FF]"
+                >
+                  Let&apos;s talk
+                </Link>
+                <Link
+                  href={Constants.PAGES.SOLUTIONS}
+                  className="inline-flex h-10 cursor-pointer items-center justify-center whitespace-nowrap rounded-full px-5 text-[14px] font-semibold transition-colors duration-200 bg-[#4A4747] text-white hover:bg-[#3B3838] active:bg-[#2E2B2B]"
+                >
+                  See all solutions
+                </Link>
               </div>
               <div className="mt-8 flex items-center gap-2">
                 {socials.map((s) => (

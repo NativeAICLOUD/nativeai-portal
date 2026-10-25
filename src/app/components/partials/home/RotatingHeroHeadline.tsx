@@ -8,6 +8,7 @@ const SLOGANS = [
   { pre: 'We make ', highlight: 'AI work', post: ' inside your business' },
   { pre: '', highlight: 'Web intelligence', post: ' for the agentic era' },
   { pre: '', highlight: 'Intelligence', post: ' for what comes next' },
+  { pre: 'Trust, intelligence and ', highlight: 'AI', post: ' in the flow of human ambition' },
 ];
 const ROTATE_INTERVAL = 4200; // ms between slogan changes
 

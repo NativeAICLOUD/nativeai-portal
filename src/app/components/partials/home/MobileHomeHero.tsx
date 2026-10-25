@@ -58,31 +58,16 @@ export default function MobileHomeHero() {
 
       <Link
         href={Constants.PAGES.GET_IN_TOUCH}
-        className="flex w-full items-center justify-center rounded-full bg-black px-11 py-4 text-center transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#2563EB] hover:shadow-[0_10px_28px_rgba(37,99,235,0.25)] active:translate-y-0 active:shadow-none"
+        className="flex w-full h-10 cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#E1F0FF] px-5 text-[14px] font-semibold text-[#0066B3] transition-colors duration-200 hover:bg-[#CCE4FF] active:bg-[#B8D9FF]"
       >
-        <span className="text-[17px] font-semibold leading-none text-white">
-          Let&apos;s talk
-        </span>
+        Let&apos;s talk
       </Link>
 
       <Link
         href={Constants.PAGES.SOLUTIONS}
-        className="group/sol mt-8 mb-16 flex items-center justify-center whitespace-nowrap text-[#111111]"
-        style={{ fontSize: 20, fontWeight: 600 }}
+        className="mt-3 mb-16 flex w-full h-10 cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#4A4747] px-5 text-[14px] font-semibold text-white transition-colors duration-200 hover:bg-[#3B3838] active:bg-[#2E2B2B]"
       >
-        Explore our solutions
-        <svg
-          className="ml-3.5 h-5 w-5 shrink-0 transition-transform duration-300 ease-out group-hover/sol:translate-x-1 group-active/sol:translate-x-1"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2.2}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M5 12h14M13 6l6 6-6 6" />
-        </svg>
+        See all solutions
       </Link>
 
       {/* Gradient divider — same as desktop */}

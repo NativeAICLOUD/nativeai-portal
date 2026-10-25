@@ -189,7 +189,7 @@ export default function MobileNavigationV2({ open, onClose, onOpenSearch }: Prop
         <Link
           href={Constants.PAGES.GET_IN_TOUCH}
           onClick={handleNavigate}
-          className="flex h-[62px] w-full items-center justify-center rounded-lg bg-black text-[17px] font-semibold text-white transition-colors duration-200 hover:bg-[#111827]"
+          className="flex w-full h-10 cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#E1F0FF] px-5 text-[14px] font-semibold text-[#0066B3] transition-colors duration-200 hover:bg-[#CCE4FF] active:bg-[#B8D9FF]"
         >
           Let&apos;s talk
         </Link>

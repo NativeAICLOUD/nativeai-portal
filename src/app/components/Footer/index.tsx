@@ -134,7 +134,7 @@ function Footer() {
         <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
           <Link
             href={Constants.PAGES.GET_IN_TOUCH}
-            className="flex h-[46px] w-full items-center justify-center rounded-full bg-white px-8 text-[15px] font-bold text-[#101419] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(255,255,255,0.15)] active:translate-y-0 sm:w-[220px]"
+            className="flex w-full h-10 cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#E1F0FF] px-5 text-[14px] font-semibold text-[#0066B3] transition-colors duration-200 hover:bg-[#CCE4FF] active:bg-[#B8D9FF] sm:w-[220px]"
           >
             Let&apos;s talk
           </Link>
