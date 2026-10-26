@@ -362,7 +362,7 @@ function Navbar() {
                 <Link
                   href={item.url}
                   onClick={() => setSlideMenu(false)}
-                  className="inline-flex h-9 cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#E1F0FF] px-4 text-[13px] font-medium text-[#0066B3] transition-colors duration-200 hover:bg-[#CCE4FF] active:bg-[#B8D9FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066B3]/40 focus-visible:ring-offset-2"
+                  className="inline-flex h-10 min-w-[160px] cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#E1F0FF] px-5 text-[14px] font-semibold text-[#0066B3] transition-colors duration-200 hover:bg-[#CCE4FF] active:bg-[#B8D9FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066B3]/40 focus-visible:ring-offset-2"
                 >
                   Let&apos;s talk
                 </Link>

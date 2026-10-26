@@ -9,7 +9,7 @@ import { Constants } from '@/Constants';
 export default function MobileHomeHero() {
   return (
     <div
-      className="px-5 pb-10"
+      className="px-5"
       style={{
         background:
           'radial-gradient(circle at 15% 100%, rgba(190,203,255,0.5), transparent 48%), ' +
@@ -65,16 +65,16 @@ export default function MobileHomeHero() {
 
       <Link
         href={Constants.PAGES.SOLUTIONS}
-        className="mt-3 mb-16 flex w-full h-10 cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#4A4747] px-5 text-[14px] font-semibold text-white transition-colors duration-200 hover:bg-[#3B3838] active:bg-[#2E2B2B]"
+        className="mt-3 mb-16 flex w-full h-10 cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#2E2B2B] px-5 text-[14px] font-semibold text-white transition-colors duration-200 hover:bg-[#242121] active:bg-[#1A1818]"
       >
         See all solutions
       </Link>
 
-      {/* Gradient divider — same as desktop */}
+      {/* hairline divider — symmetric fade in the CTA pill blues, same as About */}
       <hr
-        className="m-0 mt-6 h-1 w-full border-0"
+        className="m-0 mt-6 h-[1.5px] w-full border-0"
         style={{
-          backgroundImage: 'linear-gradient(260deg, #fff, #BECBFF 20%, #5B7CFA 50%, #2563EB 80%, #fff)',
+          backgroundImage: 'linear-gradient(90deg, #fff, #E1F0FF 15%, #0066B3 50%, #E1F0FF 85%, #fff)',
           borderRadius: 100,
         }}
       />

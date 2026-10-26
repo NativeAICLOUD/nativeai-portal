@@ -47,7 +47,7 @@ function HomeHeader() {
           <div className="mt-12 flex flex-col items-start md:flex-row md:flex-wrap md:items-center md:gap-3">
             <Link
               href={Constants.PAGES.GET_IN_TOUCH}
-              className="inline-flex h-10 cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#E1F0FF] px-5 text-[14px] font-semibold text-[#0066B3] transition-colors duration-200 hover:bg-[#CCE4FF] active:bg-[#B8D9FF]"
+              className="inline-flex h-10 min-w-[160px] cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#E1F0FF] px-5 text-[14px] font-semibold text-[#0066B3] transition-colors duration-200 hover:bg-[#CCE4FF] active:bg-[#B8D9FF]"
             >
               Let&apos;s talk
             </Link>
@@ -55,7 +55,7 @@ function HomeHeader() {
             {/* secondary — warm dark-grey pill */}
             <Link
               href={Constants.PAGES.SOLUTIONS}
-              className="mt-3 inline-flex h-10 cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#4A4747] px-5 text-[14px] font-semibold text-white transition-colors duration-200 hover:bg-[#3B3838] active:bg-[#2E2B2B] md:mt-0"
+              className="mt-3 inline-flex h-10 min-w-[160px] cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#2E2B2B] px-5 text-[14px] font-semibold text-white transition-colors duration-200 hover:bg-[#242121] active:bg-[#1A1818] md:mt-0"
             >
               See all solutions
             </Link>
