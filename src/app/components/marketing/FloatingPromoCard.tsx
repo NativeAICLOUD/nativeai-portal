@@ -37,23 +37,6 @@ export type FloatingPromoCardProps = {
   enabled?: boolean;
 };
 
-function ArrowIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-    </svg>
-  );
-}
-
 /* Default illustration — the NativeCloud logo on a soft brand-blue panel,
    toned for the light card. */
 function DefaultVisual() {
@@ -79,8 +62,8 @@ function DefaultVisual() {
 }
 
 export default function FloatingPromoCard({
-  headline = 'Is your business ready for AI?',
-  description = 'See where AI can create real value in your business — and what it takes to get there.',
+  headline = 'AI is the future. Is your business ready?',
+  description = 'Find your opportunities. Make them real.',
   imageSrc,
   ctaText = 'Discover your AI readiness',
   ctaHref = Constants.PAGES.AI_ACCELERATOR,
@@ -140,15 +123,15 @@ export default function FloatingPromoCard({
             aria-label={headline}
             className="pointer-events-auto relative overflow-hidden rounded-2xl border border-[#e6e6e6] bg-white shadow-[0_24px_60px_rgba(15,23,42,0.14),0_4px_14px_rgba(15,23,42,0.06)]"
           >
-            {/* Brand-blue glow + top rule, same gradient family as the hero divider */}
+            {/* Soft blue glow + hairline top rule, same as the About page divider */}
             <div
               className="pointer-events-none absolute inset-x-0 top-0 h-28"
-              style={{ background: 'radial-gradient(120% 100% at 100% 0%, rgba(91,124,250,0.16) 0%, rgba(255,255,255,0) 70%)' }}
+              style={{ background: 'radial-gradient(120% 100% at 100% 0%, rgba(0,102,179,0.10) 0%, rgba(255,255,255,0) 70%)' }}
               aria-hidden="true"
             />
             <div
-              className="absolute inset-x-0 top-0 h-[3px]"
-              style={{ backgroundImage: 'linear-gradient(90deg, #2563EB, #5B7CFA 50%, #BECBFF)' }}
+              className="absolute inset-x-0 top-0 h-[1.5px]"
+              style={{ backgroundImage: 'linear-gradient(90deg, #fff, #E1F0FF 15%, #0066B3 50%, #E1F0FF 85%, #fff)' }}
               aria-hidden="true"
             />
 
@@ -165,7 +148,7 @@ export default function FloatingPromoCard({
 
             <div className="relative p-6">
               <div className="mb-4">
-                <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#2563EB]">
+                <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#0066B3]">
                   AI readiness
                 </span>
               </div>
@@ -187,19 +170,18 @@ export default function FloatingPromoCard({
                 </div>
               )}
 
-              <div className="mt-6 flex items-center gap-4">
+              <div className="mt-6 flex flex-col gap-2">
                 <Link
                   href={ctaHref}
                   onClick={dismiss}
-                  className="group inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-[#111] px-5 py-3 text-[14px] font-medium text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.22)] active:translate-y-0 active:shadow-none"
+                  className="inline-flex h-10 w-full cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#E1F0FF] px-5 text-[14px] font-semibold text-[#0066B3] transition-colors duration-200 hover:bg-[#CCE4FF] active:bg-[#B8D9FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066B3]/40 focus-visible:ring-offset-2"
                 >
                   {ctaText}
-                  <ArrowIcon />
                 </Link>
                 <button
                   type="button"
                   onClick={dismiss}
-                  className="shrink-0 text-[13px] font-medium text-[#6b7280] transition-colors hover:text-[#111]"
+                  className="inline-flex h-10 w-full cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#E5E7EB] px-5 text-[14px] font-semibold text-[#374151] transition-colors duration-200 hover:bg-[#D9DCE1] active:bg-[#CBCFD5]"
                 >
                   Not now
                 </button>

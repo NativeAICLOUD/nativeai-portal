@@ -181,9 +181,9 @@ export default function AboutUsPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.name}
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-[#e6e6e6] bg-white text-[#111] transition-colors hover:border-[#111]"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F1F2F4] text-[#374151] transition-colors duration-200 hover:bg-[#E1F0FF] hover:text-[#0066B3] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066B3]/40 focus-visible:ring-offset-2"
                   >
-                    <svg width="18" height="18">
+                    <svg className="block h-[18px] w-[18px] shrink-0" aria-hidden="true">
                       <use href={`/icons/all-icons.svg#${s.icon}`} />
                     </svg>
                   </a>
@@ -194,11 +194,11 @@ export default function AboutUsPage() {
           </div>
         </div>
 
-        {/* blue divider — matches the footer's brand gradient */}
+        {/* hairline divider — symmetric fade in the CTA pill blues */}
         <hr
-          className="m-0 h-1 w-full border-0"
+          className="m-0 h-[1.5px] w-full border-0"
           style={{
-            backgroundImage: 'linear-gradient(260deg, #fff, #BECBFF 20%, #5B7CFA 50%, #2563EB 80%, #fff)',
+            backgroundImage: 'linear-gradient(90deg, #fff, #E1F0FF 15%, #0066B3 50%, #E1F0FF 85%, #fff)',
             borderRadius: 100,
           }}
         />
