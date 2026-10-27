@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 import { useContactSubjects } from '@/lib/useContactSubjects';
 import { toast } from '@/app/components/ui/notification-toast';
 
@@ -21,16 +23,46 @@ type FormState = {
 
 const EMPTY_FORM: FormState = { firstName: '', lastName: '', company: '', email: '', subject: '', message: '' };
 
+// One field per screen, in the style of the NativeInvoice login: answer, Continue, next field.
+const STEPS: { key: 'firstName' | 'lastName' | 'company' | 'email'; label: string; type: string; autoComplete: string }[] = [
+  { key: 'firstName', label: 'First Name', type: 'text', autoComplete: 'given-name' },
+  { key: 'lastName', label: 'Last Name', type: 'text', autoComplete: 'family-name' },
+  { key: 'company', label: 'Company name', type: 'text', autoComplete: 'organization' },
+  { key: 'email', label: 'Work Email', type: 'email', autoComplete: 'email' },
+];
+const FINAL_STEP = STEPS.length;
+
+// Tall white pill fields, matching the buttons; solid blue border on focus.
 const inputCls =
-  'h-12 w-full rounded-[16px] border border-[#D3D9E1] bg-[#F7F8FA] px-4 text-[15px] text-[#1A1A1A] outline-none transition-colors placeholder:text-[15px] placeholder:text-[#9AA3AF] focus:border-[#2563EB] focus:bg-white focus:ring-2 focus:ring-[#2563EB] 2xl:h-14 2xl:rounded-[20px] 2xl:px-5 2xl:text-[20px] 2xl:placeholder:text-[20px]';
+  'h-12 w-full rounded-full border border-[#D3D9E1] bg-white px-5 text-[15px] text-[#1A1A1A] outline-none transition-colors placeholder:text-[#9AA3AF] focus:border-[#3B82F6] focus:ring-1 focus:ring-[#3B82F6]';
+const primaryCls =
+  'inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#2E2B2B] px-5 text-[15px] font-semibold text-white transition-colors duration-200 hover:bg-[#242121] active:bg-[#1A1818] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066B3]/40 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60';
+
+const stepMotion = {
+  initial: { opacity: 0, x: 8 },
+  animate: { opacity: 1, x: 0 },
+  exit: { opacity: 0, x: -8 },
+  transition: { duration: 0.2 },
+};
 
 export default function ContactEngineerSection() {
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'submitted' | 'error'>('idle');
   const subjectOptions = useContactSubjects();
+  const [step, setStep] = useState(0);
 
   const updateField = (field: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm((f) => ({ ...f, [field]: e.target.value }));
+  };
+
+  // After Continue, jump to the first field still empty (matters after "Change" on an earlier one).
+  const handleContinue = (e: React.FormEvent) => {
+    e.preventDefault();
+    const key = STEPS[step].key;
+    const next = { ...form, [key]: form[key].trim() };
+    setForm(next);
+    const empty = STEPS.findIndex((s) => !next[s.key]);
+    setStep(empty === -1 ? FINAL_STEP : empty);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -51,6 +83,7 @@ export default function ContactEngineerSection() {
       if (!res.ok) throw new Error('server');
       setStatus('submitted');
       setForm(EMPTY_FORM);
+      setStep(0);
       toast.success("Thanks — we'll be in touch shortly.");
     } catch {
       setStatus('error');
@@ -119,95 +152,89 @@ export default function ContactEngineerSection() {
               Share a few details and one of our engineers will follow up directly.
             </h3>
 
-            <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4 2xl:mt-12 2xl:gap-6">
-              <div>
-                <label htmlFor="ce-firstname" className="sr-only">First Name</label>
-                <input
-                  id="ce-firstname"
-                  type="text"
-                  required
-                  placeholder="First Name*"
-                  value={form.firstName}
-                  onChange={updateField('firstName')}
-                  onInvalid={(e) => e.currentTarget.setCustomValidity('Please complete this required field.')}
-                  onInput={(e) => e.currentTarget.setCustomValidity('')}
-                  className={inputCls}
-                />
-              </div>
-              <div>
-                <label htmlFor="ce-lastname" className="sr-only">Last Name</label>
-                <input
-                  id="ce-lastname"
-                  type="text"
-                  required
-                  placeholder="Last Name*"
-                  value={form.lastName}
-                  onChange={updateField('lastName')}
-                  onInvalid={(e) => e.currentTarget.setCustomValidity('Please complete this required field.')}
-                  onInput={(e) => e.currentTarget.setCustomValidity('')}
-                  className={inputCls}
-                />
-              </div>
-              <div>
-                <label htmlFor="ce-company" className="sr-only">Company name</label>
-                <input
-                  id="ce-company"
-                  type="text"
-                  required
-                  placeholder="Company name*"
-                  value={form.company}
-                  onChange={updateField('company')}
-                  className={inputCls}
-                />
-              </div>
-              <div>
-                <label htmlFor="ce-email" className="sr-only">Work Email</label>
-                <input
-                  id="ce-email"
-                  type="email"
-                  required
-                  placeholder="Work Email*"
-                  value={form.email}
-                  onChange={updateField('email')}
-                  className={inputCls}
-                />
-              </div>
-              <div>
-                <label htmlFor="ce-subject" className="sr-only">Subject</label>
-                <select
-                  id="ce-subject"
-                  value={form.subject}
-                  onChange={updateField('subject')}
-                  className={`${inputCls} ${form.subject ? '!text-[#2563EB] font-semibold' : '!text-[#1A1A1A]'}`}
-                >
-                  <option value="">Subject</option>
-                  {subjectOptions.map((option) => (
-                    <option key={option} value={option}>{option}</option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label htmlFor="ce-message" className="sr-only">Message</label>
-                <textarea
-                  id="ce-message"
-                  rows={3}
-                  placeholder="Message"
-                  value={form.message}
-                  onChange={updateField('message')}
-                  className={`${inputCls} h-[76px] resize-none pt-3 2xl:h-[96px] 2xl:pt-[18px]`}
-                />
-              </div>
+            <div className="mt-6 max-w-[440px] 2xl:mt-12">
+              {/* answers so far — each can be reopened, like the email row on the NativeInvoice login */}
+              {STEPS.some((s, i) => i !== step && form[s.key]) && (
+                <div className="mb-3 divide-y divide-[#E5E7EB] overflow-hidden rounded-[24px] border border-[#E5E7EB] bg-white">
+                  {STEPS.map((s, i) =>
+                    i !== step && form[s.key] ? (
+                      <div key={s.key} className="flex items-center justify-between gap-3 px-5 py-2.5 text-sm">
+                        <span className="min-w-0 truncate text-[#1A1A1A]" title={form[s.key]}>
+                          <span className="text-[#6B7280]">{s.label}: </span>
+                          {form[s.key]}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => setStep(i)}
+                          className="shrink-0 cursor-pointer text-[#6B7280] underline-offset-4 hover:text-[#1A1A1A] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066B3]/40"
+                        >
+                          Change
+                        </button>
+                      </div>
+                    ) : null,
+                  )}
+                </div>
+              )}
 
-              <div className="mt-4 flex flex-col items-start gap-3 2xl:mt-6">
-                <button
-                  type="submit"
-                  disabled={status === 'submitting'}
-                  className="inline-flex h-12 w-[120px] items-center justify-center rounded-[16px] bg-black text-[15px] font-bold text-white transition-colors hover:bg-[#1A1A1A]/90 disabled:cursor-not-allowed disabled:opacity-60 2xl:h-14 2xl:w-[135px] 2xl:rounded-[19px] 2xl:text-[16px]"
-                >
-                  {status === 'submitting' ? 'Sending…' : 'Submit'}
-                </button>
-              </div>
-            </form>
+              <AnimatePresence mode="wait" initial={false}>
+                {step < FINAL_STEP ? (
+                  <motion.form key={STEPS[step].key} onSubmit={handleContinue} {...stepMotion} className="space-y-3">
+                    <label htmlFor={`ce-${STEPS[step].key}`} className="sr-only">{STEPS[step].label}</label>
+                    <input
+                      id={`ce-${STEPS[step].key}`}
+                      type={STEPS[step].type}
+                      required
+                      // only grab focus once the user has started, not on page load
+                      autoFocus={step > 0}
+                      autoComplete={STEPS[step].autoComplete}
+                      placeholder={`${STEPS[step].label}*`}
+                      value={form[STEPS[step].key]}
+                      onChange={updateField(STEPS[step].key)}
+                      onInvalid={(e) => e.currentTarget.setCustomValidity(
+                        STEPS[step].type === 'email' && e.currentTarget.value
+                          ? 'Please enter a valid email address.'
+                          : 'Please complete this required field.',
+                      )}
+                      onInput={(e) => e.currentTarget.setCustomValidity('')}
+                      className={inputCls}
+                    />
+                    <button type="submit" className={primaryCls}>Continue</button>
+                  </motion.form>
+                ) : (
+                  <motion.form key="final" onSubmit={handleSubmit} {...stepMotion} className="space-y-3">
+                    <label htmlFor="ce-subject" className="sr-only">Subject</label>
+                    {/* native arrow hidden — it hugs the pill's curve; a chevron sits inside the padding instead */}
+                    <div className="relative">
+                      <select
+                        id="ce-subject"
+                        autoFocus
+                        value={form.subject}
+                        onChange={updateField('subject')}
+                        className={`${inputCls} cursor-pointer appearance-none pr-12 ${form.subject ? '' : '!text-[#9AA3AF]'}`}
+                      >
+                        <option value="">Subject</option>
+                        {subjectOptions.map((option) => (
+                          <option key={option} value={option} className="text-[#1A1A1A]">{option}</option>
+                        ))}
+                      </select>
+                      <ChevronDown aria-hidden="true" className="pointer-events-none absolute right-5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#6B7280]" />
+                    </div>
+                    <label htmlFor="ce-message" className="sr-only">Message</label>
+                    <textarea
+                      id="ce-message"
+                      rows={3}
+                      placeholder="Message"
+                      value={form.message}
+                      onChange={updateField('message')}
+                      className={`${inputCls} h-[96px] !rounded-[24px] resize-none py-3`}
+                    />
+                    <button type="submit" disabled={status === 'submitting'} className={primaryCls}>
+                      {status === 'submitting' ? 'Sending…' : 'Submit'}
+                    </button>
+                  </motion.form>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
 
         </div>

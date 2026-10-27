@@ -58,16 +58,17 @@ export default function MobileHomeHero() {
 
       <Link
         href={Constants.PAGES.GET_IN_TOUCH}
-        className="flex w-full h-10 cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#E1F0FF] px-5 text-[14px] font-semibold text-[#0066B3] transition-colors duration-200 hover:bg-[#CCE4FF] active:bg-[#B8D9FF]"
+        className="flex w-full h-10 cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#2E2B2B] px-5 text-[14px] font-semibold text-white transition-colors duration-200 hover:bg-[#242121] active:bg-[#1A1818]"
       >
         Let&apos;s talk
       </Link>
 
       <Link
         href={Constants.PAGES.SOLUTIONS}
-        className="mt-3 mb-16 flex w-full h-10 cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#2E2B2B] px-5 text-[14px] font-semibold text-white transition-colors duration-200 hover:bg-[#242121] active:bg-[#1A1818]"
+        className="group mt-3 mb-16 flex w-full h-10 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap px-5 text-[14px] font-semibold text-[#2E2B2B] transition-colors duration-200 hover:text-[#0066B3]"
       >
         See all solutions
+        <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5">&rarr;</span>
       </Link>
 
       {/* hairline divider — symmetric fade in the CTA pill blues, same as About */}

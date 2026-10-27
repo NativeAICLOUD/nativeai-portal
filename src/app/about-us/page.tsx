@@ -145,7 +145,18 @@ export default function AboutUsPage() {
     <div className="font-switzer">
 
       {/* ── Hero ── */}
-      <div className="hero-bg-blue">
+      {/* hero-bg-blue with a white wash on top, so the glow doesn't sit behind the navbar's "Let's talk" pill */}
+      <div
+        style={{
+          background: [
+            'linear-gradient(180deg, #ffffff 0, #ffffff 96px, rgba(255,255,255,0) 260px)',
+            'radial-gradient(circle at 15% 100%, rgba(224, 225, 255, 0.75), transparent 43%)',
+            'radial-gradient(circle at 80% 100%, rgba(191, 219, 254, 0.55), transparent 48%)',
+            'radial-gradient(circle at 100% 70%, rgba(219, 234, 254, 0.5), transparent 43%)',
+            '#ffffff',
+          ].join(', '),
+        }}
+      >
         <div className={`${CONTAINER} pb-12 pt-32 lg:pt-28`}>
           <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
 
@@ -194,14 +205,8 @@ export default function AboutUsPage() {
           </div>
         </div>
 
-        {/* hairline divider — symmetric fade in the CTA pill blues */}
-        <hr
-          className="m-0 h-[1.5px] w-full border-0"
-          style={{
-            backgroundImage: 'linear-gradient(90deg, #fff, #E1F0FF 15%, #0066B3 50%, #E1F0FF 85%, #fff)',
-            borderRadius: 100,
-          }}
-        />
+        {/* blue divider — same as Careers */}
+        <hr className="divider-blue m-0 h-1 w-full border-0" />
       </div>
 
       {/* ── Vision & Mission ── */}
