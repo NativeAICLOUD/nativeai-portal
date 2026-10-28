@@ -4,9 +4,8 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Link } from 'react-transition-progress/next';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Constants } from '@/Constants';
-import { LogoBlue } from '@/ImagePath';
 
 /*
  * Floating promo card — a corner alert that pitches a single offer after
@@ -37,26 +36,26 @@ export type FloatingPromoCardProps = {
   enabled?: boolean;
 };
 
-/* Default illustration — the NativeCloud logo on a soft brand-blue panel,
-   toned for the light card. */
+/* Default illustration — the orange AI infinity ribbon on its airy blue/peach gradient (already 16:9).
+   It comes into focus just after the card lands (blur → sharp, slight zoom-out), then drifts gently. */
 function DefaultVisual() {
+  const reduce = useReducedMotion();
   return (
-    <div
-      className="relative aspect-[16/9] w-full overflow-hidden rounded-xl border border-[#e6e6e6]"
-      style={{ background: 'linear-gradient(160deg, #F5F8FF 0%, #EEF2FF 100%)' }}
-      aria-hidden="true"
-    >
-      <div
-        className="absolute -right-10 -top-10 h-40 w-40 rounded-full"
-        style={{ background: 'radial-gradient(circle, rgba(91,124,250,0.22) 0%, transparent 70%)' }}
-      />
-      <div
-        className="absolute -bottom-12 -left-8 h-36 w-36 rounded-full"
-        style={{ background: 'radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%)' }}
-      />
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-        <Image src={LogoBlue} alt="" className="h-24 w-auto object-contain" />
-      </div>
+    <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl border border-[#e6e6e6]" aria-hidden="true">
+      <motion.div
+        className="absolute inset-0"
+        initial={reduce ? false : { opacity: 0, scale: 1.12, filter: 'blur(10px)' }}
+        animate={reduce ? undefined : { opacity: 1, scale: 1, filter: 'blur(0px)' }}
+        transition={{ delay: 0.25, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <motion.div
+          className="absolute inset-0"
+          animate={reduce ? undefined : { scale: [1, 1.04, 1], rotate: [0, -1.5, 0] }}
+          transition={{ delay: 1.2, duration: 6, ease: 'easeInOut', repeat: Infinity }}
+        >
+          <Image src="/img/ai-infinity-ribbon.png" alt="" fill sizes="360px" className="object-cover" />
+        </motion.div>
+      </motion.div>
     </div>
   );
 }

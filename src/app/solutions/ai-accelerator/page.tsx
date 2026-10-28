@@ -6,6 +6,8 @@ import { Target, Code2, Zap, Boxes, ShieldCheck, LineChart, type LucideIcon } fr
 import { Constants } from '@/Constants';
 import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from '@/app/components/partials/services/ServiceUI';
 import AcceleratorCTASection from '@/app/components/partials/solutions/AcceleratorCTASection';
+import Link from 'next/link';
+import { frontierSessions } from '@/data/frontierTour';
 
 /* ── content ── */
 const benefits: { title: string; body: string; icon: LucideIcon }[] = [
@@ -25,6 +27,7 @@ const modules = [
     items: [
       'AI use case workshop & prioritisation',
       'Azure OpenAI & Cognitive Services integration',
+      'AI agents with Microsoft Agent Framework & Foundry',
       'PoC delivery with production-ready architecture',
       'Business value measurement & KPI definition',
     ],
@@ -66,7 +69,7 @@ const pillars = [
 ];
 
 const faqs = [
-  { q: 'What Azure AI services do you work with?', a: 'We work across the full Azure AI portfolio — Azure OpenAI Service, Azure AI Search, Document Intelligence, Language Service, Azure Machine Learning, and Azure Cognitive Services. We select the right service for each use case rather than defaulting to one.' },
+  { q: 'What Azure AI services do you work with?', a: 'We work across the full Azure AI portfolio — Azure OpenAI Service, Microsoft Foundry and the Microsoft Agent Framework, Azure AI Search, Azure HorizonDB for agentic Postgres apps, Document Intelligence, Language Service, Azure Machine Learning, and Azure Cognitive Services. We select the right service for each use case rather than defaulting to one.' },
   { q: 'Do we need an in-house AI team to get started?', a: 'No. The AI Accelerator is specifically designed for teams without deep in-house AI expertise. We provide the engineering, architecture, and guidance — your team focuses on the product and business outcomes.' },
   { q: 'How long does a typical PoC take to deliver?', a: 'Most proofs of concept are delivered in 3–6 weeks after the discovery phase. The timeline depends on integration complexity and data readiness — we give you a fixed estimate after the discovery workshop.' },
   { q: 'How do you handle data privacy and GDPR compliance?', a: 'All AI solutions are deployed within your own Azure tenant using private networking. We configure data residency, access controls, and audit logging to meet your compliance requirements from day one — no data is shared externally.' },
@@ -208,6 +211,74 @@ export default function AIAcceleratorPage() {
                   ))}
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Latest agentic AI capabilities (Microsoft Frontier Tour 2027) — data in src/data/frontierTour.ts ── */}
+      <section id="frontier-tour" className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-12">
+            <div className="mb-4"><Eyebrow>Microsoft Frontier Tour 2027</Eyebrow></div>
+            <h2 className="m-0 max-w-[620px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              The newest agentic AI, built into your PoC.
+            </h2>
+            <p className="mt-3 max-w-[560px] text-[16px] font-normal leading-[1.5] text-[#6b7280]">
+              We follow every Frontier Tour session and bring what&apos;s new straight into the Accelerator —
+              so your agents use the latest Azure capabilities, not last year&apos;s.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-6 xl:grid-cols-3">
+            {frontierSessions.map((s) => (
+              <article key={s.code} className="flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6">
+                <span className="text-[11px] font-medium uppercase tracking-[0.12em] text-[#9ca3af]">Session {s.code}</span>
+                <h3 className="mt-3 text-[20px] font-medium leading-[1.25] text-[#111]">{s.title}</h3>
+                <p className="mt-2 text-[15px] font-normal leading-[1.5] text-[#111]">{s.summary}</p>
+                {/* plain-language takeaway for non-technical readers */}
+                <p className="mt-4 rounded-lg bg-[#F3F8FF] px-4 py-3 text-[14px] leading-[1.5] text-[#1F2937]">
+                  <span className="font-semibold text-[#0066B3]">What it means for you: </span>
+                  {s.explainer}
+                </p>
+                <div className="mt-5 flex flex-col gap-2.5 border-t border-[#eee] pt-5">
+                  {s.capabilities.map((item) => (
+                    <div key={item} className="flex items-start gap-2.5">
+                      <svg className="mt-0.5 h-4 w-4 shrink-0 text-[#111]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                      <span className="text-[13.5px] leading-relaxed text-[#6b7280]">{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {s.tech.map((t) => (
+                    <span key={t} className="inline-flex items-center rounded-full border border-[#e6e6e6] bg-[#fafafa] px-3 py-1 text-[12px] font-medium text-[#6b7280]">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-2 pt-6">
+                  {s.detail && (
+                    <Link
+                      href={`/solutions/ai-accelerator/frontier-tour/${s.code.toLowerCase()}`}
+                      className="group inline-flex items-center gap-1.5 text-[14px] font-semibold text-[#2E2B2B] transition-colors duration-200 hover:text-[#0066B3]"
+                    >
+                      See the full session
+                      <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5">&rarr;</span>
+                    </Link>
+                  )}
+                  <a
+                    href={s.repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`group inline-flex items-center gap-1.5 text-[14px] font-semibold transition-colors duration-200 hover:text-[#0066B3] ${s.detail ? 'text-[#6b7280]' : 'text-[#2E2B2B]'}`}
+                  >
+                    View the session lab
+                    <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5">&rarr;</span>
+                  </a>
+                </div>
+              </article>
             ))}
           </div>
         </div>
