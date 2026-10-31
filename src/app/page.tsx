@@ -19,9 +19,6 @@ export default function Home() {
     <main className="min-h-screen">
       <HomeHeader />
 
-      {/* Featured innovation — Realtime Voice AI + agents */}
-      <AIInnovationSection />
-
       {/* What we do — end-to-end product development */}
       <ProductDevelopmentSection />
 
@@ -45,6 +42,9 @@ export default function Home() {
 
       {/* Practical AI & Cloud solutions — where Core Services used to be */}
       <PracticalSolutionsSection />
+
+      {/* Featured innovation — Realtime Voice AI + agents */}
+      <AIInnovationSection />
 
       {/* Dedicated nearshore teams — same design as /nearshore-teams hero */}
       <NearshoreIntroSection />

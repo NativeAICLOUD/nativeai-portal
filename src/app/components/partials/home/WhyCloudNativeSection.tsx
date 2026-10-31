@@ -12,7 +12,7 @@ const benefits = [
     desc: 'Go from idea to production in days, not months. Automated pipelines and infrastructure-as-code replace slow, manual releases.',
   },
   {
-    icon: '/img/scalability-blue-purple.svg',
+    icon: '/img/scalability-peach.svg',
     color: '#7C3AED',
     bg: 'rgba(124,58,237,0.08)',
     title: 'Scale on demand',
@@ -33,7 +33,7 @@ const benefits = [
     desc: 'Managed services and right-sized workloads cut idle infrastructure and the hours spent keeping servers alive.',
   },
   {
-    icon: '/img/improved-security-blue-purple.svg',
+    icon: '/img/improved-security.svg',
     color: '#E11D48',
     bg: 'rgba(225,29,72,0.08)',
     title: 'Secure by design',

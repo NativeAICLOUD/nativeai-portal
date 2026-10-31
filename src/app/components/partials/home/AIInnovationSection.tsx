@@ -5,13 +5,14 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { AudioLines, Bot, Cloud, Mic, Square, type LucideIcon } from 'lucide-react';
 import { Link } from 'react-transition-progress/next';
 import { Constants } from '@/Constants';
-import { CONTAINER, Eyebrow, SECTION_Y, H2 } from './HomeUI';
+import { CONTAINER, Eyebrow, SECTION_Y } from './HomeUI';
+import { EditorialGlow, SerifAccent } from '@/app/components/ui/EditorialGlow';
 
 /* The three building blocks of the Realtime AI story */
-const pillars: { label: string; desc: string; icon: LucideIcon }[] = [
-  { label: 'Realtime Voice AI', desc: 'Talk to your business systems.', icon: AudioLines },
-  { label: 'Intelligent Agents', desc: 'Turn requests into action.', icon: Bot },
-  { label: 'Enterprise Cloud', desc: 'Secure. Connected. Scalable.', icon: Cloud },
+const pillars: { label: string; desc?: string; icon: LucideIcon }[] = [
+  { label: 'Realtime Voice AI', icon: AudioLines },
+  { label: 'Intelligent Agents', icon: Bot },
+  { label: 'Enterprise Cloud', icon: Cloud },
 ];
 
 /* Waveform bar heights (%) — animated as a "listening" voice */
@@ -239,23 +240,12 @@ export function VoiceVisual() {
   }, []);
 
   const voiceActive = status === 'listening' || status === 'processing' || status === 'speaking';
-  const statusDot = status === 'error'
-    ? 'bg-[#DC2626]'
-    : status === 'speaking'
-      ? 'bg-[#16A34A]'
-      : status === 'processing'
-        ? 'bg-[#D97706]'
-        : 'bg-[#3B82F6]';
-
   return (
-    <div className="rounded-2xl border border-[#E6E6E6] bg-white p-6">
+    <div>
       <div className="flex items-center justify-between gap-4">
-        <div className="flex items-center gap-2.5" role="status" aria-live="polite">
-          <span className="relative flex h-2.5 w-2.5" aria-hidden="true">
-            {voiceActive && !reduce && <span className={`absolute inline-flex h-full w-full animate-ping rounded-full ${statusDot} opacity-60`} />}
-            <span className={`relative inline-flex h-2.5 w-2.5 rounded-full ${statusDot}`} />
-          </span>
-          <span className="text-[12px] font-medium uppercase tracking-[0.14em] text-[#6B7280]">
+        <div className="flex flex-col">
+          <span className="text-[14px] font-medium text-[#111827]">NativeCloud Voice</span>
+          <span role="status" aria-live="polite" className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#6B7280]">
             {STATUS_LABELS[status]}
           </span>
         </div>
@@ -302,25 +292,18 @@ export function VoiceVisual() {
         {voiceActive ? <Square className="h-4 w-4" aria-hidden="true" /> : <Mic className="h-4 w-4" aria-hidden="true" />}
         {voiceActive ? 'Stop voice' : status === 'error' ? 'Try again' : 'Try voice command'}
       </button>
-      <p className="mt-3 text-center text-[11px] leading-[1.45] text-[#6B7280]">
-        Your browser may ask for microphone permission. No audio is stored by this site.
-      </p>
     </div>
   );
 }
 
-/* Homepage "featured innovation" — the Realtime AI story, right below the hero */
+/* Homepage "featured innovation" — the Realtime AI story.
+   Editorial intro + glow background, same treatment as the Industries intro. */
 export default function AIInnovationSection() {
   return (
-    <section className="font-switzer">
-      <div
-        style={{
-          background:
-            'radial-gradient(circle at 85% 20%, rgba(219,234,254,0.6), transparent 45%), ' +
-            '#ffffff',
-        }}
-      >
-        <div className={`${CONTAINER} ${SECTION_Y}`}>
+    <section aria-labelledby="ai-innovation-heading" className="font-switzer relative isolate overflow-hidden bg-white">
+      <EditorialGlow />
+      <div>
+        <div className={`${CONTAINER} ${SECTION_Y} lg:px-20`}>
           {/* Section intro */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -328,40 +311,55 @@ export default function AIInnovationSection() {
             transition={{ duration: 0.5, ease: 'easeOut' }}
             viewport={{ once: true, margin: '-60px' }}
           >
-            <div className="mb-6"><Eyebrow>NativeCloud · AI Innovation</Eyebrow></div>
-            <h2 className={`m-0 max-w-[760px] ${H2}`}>
-              Less Complexity. More Intelligence. Real Business Impact.
+            <div className="mb-8"><Eyebrow>NativeCloud · AI Innovation</Eyebrow></div>
+            <h2
+              id="ai-innovation-heading"
+              className="m-0 max-w-[1100px] text-[44px] font-light leading-[1.02] tracking-[-0.035em] text-[#141414] sm:text-[64px] md:text-[80px] lg:text-[96px] xl:text-[108px]"
+            >
+              Less complexity.
+              <br />
+              More <SerifAccent>intelligence.</SerifAccent>
             </h2>
-            <p className="mt-6 max-w-[620px] text-[18px] font-light leading-[1.6] text-[#111]">
-              We turn advanced AI into practical solutions that simplify operations and help businesses move forward.
-            </p>
           </motion.div>
 
-          {/* Featured innovation card */}
+          {/* Featured innovation — open layout on the page itself: story left, live demo right */}
           <motion.div
-            className="mt-12 grid grid-cols-1 gap-10 rounded-3xl border border-[#E6E6E6] bg-[#FAFBFF] p-6 sm:p-10 lg:mt-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-14 lg:p-14"
-            initial={{ opacity: 0, y: 24 }}
+            className="mt-16 grid grid-cols-1 gap-12 lg:mt-24 lg:grid-cols-2 lg:gap-20"
+            initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
             viewport={{ once: true, margin: '-60px' }}
           >
-            <div>
-              <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#0066B3]">
+            <div className="flex flex-col">
+              <span className="w-fit rounded-full bg-[#E1F0FF] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-[#0066B3]">
                 Featured innovation · Realtime AI
               </span>
-              <h3 className="m-0 mt-4 text-[28px] font-medium leading-[1.12] tracking-[-0.02em] text-[#111827] sm:text-[34px]">
-                Beyond Chat. AI That Works With You.
+              <h3 className="m-0 mt-6 text-[32px] font-medium leading-[1.08] tracking-[-0.03em] text-[#111827] sm:text-[40px] lg:text-[44px]">
+                Beyond chat.
+                <br />
+                AI that works with you.
               </h3>
-              <p className="mt-5 text-[19px] font-medium leading-[1.45] text-[#111827]">
+              <p className="m-0 mt-5 text-[18px] leading-[1.5] text-[#4B5563]">
                 Speak naturally. Get answers. Automate workflows.
               </p>
-              <p className="mt-4 text-[16px] leading-[1.6] text-[#374151]">
-                We&apos;re bringing Realtime Voice AI and intelligent agents into business applications — making
-                everyday work simpler, faster, and smarter.
-              </p>
+
+              {/* The three building blocks — quiet hairline list */}
+              <ul role="list" className="m-0 mt-10 list-none border-t border-[#111827]/[0.08] p-0">
+                {pillars.map(({ label, desc, icon: Icon }) => (
+                  <li key={label} className="flex items-center gap-4 border-b border-[#111827]/[0.08] py-4">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[rgba(37,99,235,0.07)]">
+                      <Icon className="h-[19px] w-[19px] text-[#2563EB]" strokeWidth={1.7} aria-hidden="true" />
+                    </span>
+                    <div className="min-w-0">
+                      <p className="m-0 text-[15px] font-medium text-[#111827]">{label}</p>
+                      {desc && <p className="m-0 mt-0.5 text-[13.5px] leading-[1.45] text-[#6B7280]">{desc}</p>}
+                    </div>
+                  </li>
+                ))}
+              </ul>
 
               {/* Same CTA pair as the hero: black pill + text link */}
-              <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+              <div className="mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center lg:mt-auto lg:pt-10">
                 <Link
                   href={Constants.PAGES.GET_IN_TOUCH}
                   className="inline-flex h-10 min-w-[160px] cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#2E2B2B] px-5 text-[14px] font-semibold text-white transition-colors duration-200 hover:bg-[#242121] active:bg-[#1A1818]"
@@ -378,19 +376,11 @@ export default function AIInnovationSection() {
               </div>
             </div>
 
-            <div className="flex flex-col gap-4">
-              <VoiceVisual />
-              <ul role="list" className="m-0 grid list-none grid-cols-1 gap-3 p-0 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
-                {pillars.map(({ label, desc, icon: Icon }) => (
-                  <li key={label} className="rounded-2xl border border-[#E6E6E6] bg-white p-4">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[rgba(37,99,235,0.07)]">
-                      <Icon className="h-[18px] w-[18px] text-[#2563EB]" strokeWidth={1.7} aria-hidden="true" />
-                    </span>
-                    <p className="m-0 mt-3 text-[14px] font-medium text-[#111827]">{label}</p>
-                    <p className="m-0 mt-1 text-[13px] leading-[1.45] text-[#6B7280]">{desc}</p>
-                  </li>
-                ))}
-              </ul>
+            {/* Live voice demo — sits directly on the page */}
+            <div className="flex items-center justify-center">
+              <div className="w-full max-w-[460px]">
+                <VoiceVisual />
+              </div>
             </div>
           </motion.div>
         </div>
