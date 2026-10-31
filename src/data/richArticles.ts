@@ -1937,6 +1937,121 @@ print(message.content)`,
       ],
     },
   ],
+  11: [
+    {
+      id: 'beyond-chat',
+      heading: 'Beyond Chat: Why Voice Changes Business Software',
+      blocks: [
+        { type: 'paragraph', text: 'For the last few years, most business AI has looked the same: a chat window. You type a question, wait, read an answer, and then go and do the actual work yourself in another system. That is useful, but it is still a detour. The next step is software that understands what you say, answers in the moment, and helps get the work done.' },
+        { type: 'paragraph', text: 'Realtime Voice AI makes that possible. Instead of typing into a box, people simply talk to their business systems — ask which invoices are still open, what the status of a project is, or what a contract says about notice periods — and get a spoken answer in seconds. Combined with intelligent agents, the same conversation can turn a request into action: draft the reminder, create the task, update the record.' },
+        { type: 'quote', text: 'Technology should make business simpler. Not more complicated. Voice is the most natural interface people have — the goal is to let them use it with the systems they already work in.' },
+        {
+          type: 'list',
+          ordered: false,
+          items: [
+            'Speak naturally — no menus, no forms, no learning a new tool.',
+            'Get answers grounded in your own data, not generic internet knowledge.',
+            'Turn requests into action through agents connected to your business systems.',
+            'Keep everything secure, governed, and inside your own cloud tenant.',
+          ],
+        },
+      ],
+    },
+    {
+      id: 'how-it-works',
+      heading: 'How Realtime Voice AI Works',
+      blocks: [
+        { type: 'paragraph', text: 'Older voice assistants chained three separate steps: speech-to-text, a language model, then text-to-speech. Every hop added latency, and the result felt robotic — long pauses, no interruptions, no tone. Realtime speech models work differently: audio streams in and out continuously over a single low-latency connection, so the assistant can respond while you are still finishing your thought and you can interrupt it like a person.' },
+        { type: 'heading3', text: 'The building blocks' },
+        {
+          type: 'list',
+          ordered: true,
+          items: [
+            'Voice channel — the browser, a mobile app, or a phone line streams microphone audio over WebRTC or a WebSocket.',
+            'Realtime model — a speech-to-speech model in Microsoft Foundry / Azure OpenAI listens, reasons, and speaks back, with voice activity detection to handle turn-taking and interruptions.',
+            'Tools and agents — when the user asks for something the model cannot know on its own, it calls a tool: a search over your documents (RAG), a lookup in your ERP or CRM, or a hand-off to a specialised agent.',
+            'Business systems — the tools talk to your real data through APIs, always with the identity and permissions of the person speaking.',
+            'Governance — every tool call, answer, and action is logged, and anything that changes data asks for confirmation first.',
+          ],
+        },
+        { type: 'heading3', text: 'Giving the voice assistant a tool' },
+        { type: 'paragraph', text: 'The model decides when to use a tool based on a short description and a JSON schema of its inputs — the same function-calling pattern used by text agents. A simplified example of a tool that looks up open invoices:' },
+        {
+          type: 'code',
+          language: 'json',
+          code: `{
+  "type": "function",
+  "name": "get_open_invoices",
+  "description": "Look up unpaid invoices for a customer. Use when the user asks what is still open, overdue, or outstanding.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "customer": { "type": "string", "description": "Customer name as the user said it" },
+      "overdue_only": { "type": "boolean", "description": "Only return invoices past their due date" }
+    },
+    "required": ["customer"]
+  }
+}`,
+        },
+        { type: 'paragraph', text: 'When the user asks "Which invoices are still open for Alpine Logistics?", the model calls get_open_invoices, your backend runs the query with the user\'s permissions, and the model speaks the result: "Three, CHF 12,400 in total. Shall I send a reminder?" Sending that reminder is a second, separate action — and one the user confirms.' },
+      ],
+    },
+    {
+      id: 'architecture',
+      heading: 'Reference Architecture on Azure',
+      blocks: [
+        { type: 'paragraph', text: 'We build Realtime Voice AI the same way we build any production AI workload: inside the customer\'s own Azure tenant, on a governed AI Landing Zone, with the voice layer as a thin, replaceable front end on top of agents and data that are useful on their own.' },
+        {
+          type: 'list',
+          ordered: false,
+          items: [
+            'Front end: a web or mobile client using WebRTC for the lowest latency; a short-lived session token is issued by your backend so API keys never reach the browser.',
+            'Model: a realtime speech model deployed in Microsoft Foundry, in the region that matches your data-residency requirements.',
+            'Orchestration: a backend service that registers the tools, enforces which tools each role may use, and relays calls to agents built with the Microsoft Agent Framework.',
+            'Knowledge: Azure AI Search or Postgres with vector search for RAG over documents, policies, and contracts.',
+            'Identity: Microsoft Entra ID with on-behalf-of authentication, so the assistant can only see and do what the speaking user is allowed to.',
+            'Observability: transcripts, tool calls, latency, and cost per conversation in Application Insights, with retention rules that match your compliance policy.',
+          ],
+        },
+        { type: 'quote', text: 'The voice is the interface, not the system. If the agents, data access, and permissions underneath are solid, adding voice is the easy part — and if they are not, voice will only make the gaps more visible.' },
+      ],
+    },
+    {
+      id: 'business-applications',
+      heading: 'Where It Creates Real Business Value',
+      blocks: [
+        { type: 'paragraph', text: 'Voice is not the right interface for everything. It shines where people\'s hands and eyes are busy, where questions are short and frequent, or where typing is the bottleneck. These are the patterns we see deliver value first:' },
+        { type: 'heading3', text: 'Ask your business' },
+        { type: 'paragraph', text: 'Managers and teams ask quick questions — open invoices, project status, today\'s appointments, stock levels — and get an answer without opening three systems.' },
+        { type: 'heading3', text: 'Professional services and legal' },
+        { type: 'paragraph', text: 'Lawyers and consultants dictate notes, ask what a contract or file says, or check a deadline between meetings. The agent retrieves the relevant passages and cites its sources so the professional stays accountable for the advice.' },
+        { type: 'heading3', text: 'Service desk and first-line support' },
+        { type: 'paragraph', text: 'A voice agent answers common questions around the clock, looks up the customer\'s case, and hands over to a person with a full summary when it should — instead of making the customer repeat everything.' },
+        { type: 'heading3', text: 'Field and operations work' },
+        { type: 'paragraph', text: 'Technicians and staff on the move report work, check instructions, and log results by voice, while the agent fills in the structured record behind the scenes.' },
+      ],
+    },
+    {
+      id: 'getting-started',
+      heading: 'Getting Started — Safely',
+      blocks: [
+        { type: 'paragraph', text: 'The fastest path to value is one well-chosen use case, not a voice assistant for everything. We follow the same approach as in our AI Accelerator:' },
+        {
+          type: 'list',
+          ordered: true,
+          items: [
+            'Pick one high-frequency question or task where voice clearly beats typing.',
+            'Make the underlying data and agent work first — in text — and measure accuracy.',
+            'Add the realtime voice layer, starting read-only: answers before actions.',
+            'Introduce actions one at a time, each with confirmation, logging, and a clear owner.',
+            'Measure latency, accuracy, adoption, and cost per conversation — then expand.',
+          ],
+        },
+        { type: 'paragraph', text: 'Realtime Voice AI is not about replacing people or adding another gadget. It is about removing friction between people and the systems they depend on — less complexity, more intelligence, and real business impact.' },
+        { type: 'cta', title: 'Want to see Realtime Voice AI on your own data?', desc: 'We build a production-ready proof of concept inside your Azure tenant — one use case, measurable results, governance from day one.', buttonText: "Let's talk", buttonUrl: '/get-in-touch' },
+      ],
+    },
+  ],
 };
 
 export default richArticles;

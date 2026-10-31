@@ -1,3 +1,4 @@
+import AIInnovationSection from "./components/partials/home/AIInnovationSection";
 import DeliverySpectrumSection from "./components/partials/home/DeliverySpectrumSection";
 import EngineeredYourWaySection from "./components/partials/home/EngineeredYourWaySection";
 import ExpertiseSection from "./components/partials/home/ExpertiseSection";
@@ -17,6 +18,9 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <HomeHeader />
+
+      {/* Featured innovation — Realtime Voice AI + agents */}
+      <AIInnovationSection />
 
       {/* What we do — end-to-end product development */}
       <ProductDevelopmentSection />

@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Link } from 'react-transition-progress/next';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { Constants } from '@/Constants';
+import { motion, AnimatePresence } from 'framer-motion';
+import AIRibbonVisual from './AIRibbonVisual';
 
 /*
  * Floating promo card — a corner alert that pitches a single offer after
@@ -36,36 +36,12 @@ export type FloatingPromoCardProps = {
   enabled?: boolean;
 };
 
-/* Default illustration — the orange AI infinity ribbon on its airy blue/peach gradient (already 16:9).
-   It comes into focus just after the card lands (blur → sharp, slight zoom-out), then drifts gently. */
-function DefaultVisual() {
-  const reduce = useReducedMotion();
-  return (
-    <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl border border-[#e6e6e6]" aria-hidden="true">
-      <motion.div
-        className="absolute inset-0"
-        initial={reduce ? false : { opacity: 0, scale: 1.12, filter: 'blur(10px)' }}
-        animate={reduce ? undefined : { opacity: 1, scale: 1, filter: 'blur(0px)' }}
-        transition={{ delay: 0.25, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <motion.div
-          className="absolute inset-0"
-          animate={reduce ? undefined : { scale: [1, 1.04, 1], rotate: [0, -1.5, 0] }}
-          transition={{ delay: 1.2, duration: 6, ease: 'easeInOut', repeat: Infinity }}
-        >
-          <Image src="/img/ai-infinity-ribbon.png" alt="" fill sizes="360px" className="object-cover" />
-        </motion.div>
-      </motion.div>
-    </div>
-  );
-}
-
 export default function FloatingPromoCard({
   headline = 'AI is the future. Is your business ready?',
   description = 'Find your opportunities. Make them real.',
   imageSrc,
   ctaText = 'Discover your AI readiness',
-  ctaHref = Constants.PAGES.AI_ACCELERATOR,
+  ctaHref = '/services/ai-agents-rag',
   delay = 4000,
   enabled = true,
 }: FloatingPromoCardProps) {
@@ -165,7 +141,7 @@ export default function FloatingPromoCard({
                 </div>
               ) : (
                 <div className="mt-5">
-                  <DefaultVisual />
+                  <AIRibbonVisual />
                 </div>
               )}
 

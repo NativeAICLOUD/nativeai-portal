@@ -87,6 +87,7 @@ const CATEGORIES: Record<number, string> = {
   8: 'Security',
   9: 'Infrastructure as Code',
   10: 'Azure AI',
+  11: 'AI & Agents',
 };
 
 function buildSections(desc: string, id: number) {

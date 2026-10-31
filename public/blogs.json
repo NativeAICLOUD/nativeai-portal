@@ -61,5 +61,12 @@
     "title": "Claude Opus 5 Is Now Available in Microsoft Foundry",
     "date": "2026-07-26T09:00:00.000Z",
     "desc": "Anthropic's Claude Opus 5 — the most advanced model in the Claude 5 family — is now available directly in Microsoft Foundry, giving enterprises a new frontier option for complex reasoning and long-running agentic workloads alongside Foundry's evaluation tools, native security controls, and governed deployment. Opus 5 plans multi-step workflows, adapts when something breaks, and holds context across tools and subagents to see a task through to completion. In this article, we cover what's new in Opus 5, how to deploy and authenticate against it in Foundry, and what it means for developers already building on Microsoft's AI stack."
+  },
+  {
+    "id": 11,
+    "image": "/img/ai-infinity-ribbon.png",
+    "title": "Beyond Chat: Realtime Voice AI and Intelligent Agents for Business",
+    "date": "2026-10-30T09:00:00.000Z",
+    "desc": "Business AI has mostly meant a chat window. Realtime Voice AI changes that: people simply talk to their business systems, get answers grounded in their own data in seconds, and let intelligent agents turn requests into action. In this article, we explain how realtime speech models work, how we architect voice assistants on Azure with Microsoft Foundry, agents, and Entra ID, where voice creates real business value, and how to get started safely."
   }
 ]

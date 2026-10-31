@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Constants } from "@/Constants";
 import { Link } from "react-transition-progress/next";
 import { CONTAINER, Eyebrow } from "@/app/components/partials/services/ServiceUI";
+import GlobalPresenceSection from "@/app/components/partials/about/GlobalPresenceSection";
 
 const collaborationModels: {
   icon: string | null;
@@ -278,6 +279,9 @@ export default function AboutUsPage() {
           </div>
         </div>
       </section>
+
+      {/* ── Global presence ── */}
+      <GlobalPresenceSection />
 
       {/* ── Core Values ── */}
       <section className="bg-white">
