@@ -60,7 +60,7 @@ type VoiceWindow = Window & {
 const STATUS_LABELS: Record<VoiceStatus, string> = {
   idle: 'Ready',
   listening: 'Listening',
-  processing: 'Processing',
+  processing: 'Thinking',
   speaking: 'Speaking',
   error: 'Voice unavailable',
 };
@@ -73,34 +73,41 @@ const ERROR_MESSAGES: Record<string, string> = {
   network: 'Speech recognition could not reach its service. Check your connection and try again.',
 };
 
-function getVoiceResponse(spokenText: string) {
-  const command = spokenText.toLocaleLowerCase();
+type AgentTurn = { role: 'user' | 'assistant'; content: string };
 
-  if (command.includes('invoice') && ['open', 'outstanding', 'unpaid'].some((word) => command.includes(word))) {
-    return 'Three sample invoices are open for Alpine Logistics, totalling 12,400 Swiss francs. Shall I send a reminder?';
-  }
+const AGENT_FALLBACK =
+  "I can't reach the NativeCloud agent right now. Please try again in a moment, or book a free consultation on our website.";
+const AGENT_BUSY = "You're asking faster than I can answer. Give me a few seconds and try again.";
 
-  if (command.includes('reminder') || command.includes('send')) {
-    return 'This public demo is read-only, so it will not send a reminder. In a connected system, I would ask for confirmation before taking that action.';
-  }
-
-  if (command.includes('what can you do') || command.includes('help')) {
-    return 'Try asking which invoices are open for Alpine Logistics. A production assistant can connect the same voice flow to approved business tools.';
-  }
-
-  return `I heard: ${spokenText}. Try asking which invoices are open for Alpine Logistics.`;
+/* Sends the spoken request to the NativeCloud Voice agent (/api/voice-agent). */
+async function askAgent(message: string, history: AgentTurn[], signal: AbortSignal) {
+  const res = await fetch('/api/voice-agent', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message, history }),
+    signal,
+  });
+  if (res.status === 429) return AGENT_BUSY;
+  if (!res.ok) return AGENT_FALLBACK;
+  const data = (await res.json()) as { reply?: string };
+  return data.reply || AGENT_FALLBACK;
 }
 
 export function VoiceVisual() {
   const reduce = useReducedMotion();
   const recognitionRef = useRef<BrowserSpeechRecognition | null>(null);
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const requestRef = useRef<AbortController | null>(null);
+  const historyRef = useRef<AgentTurn[]>([]);
   const [status, setStatus] = useState<VoiceStatus>('idle');
-  const [transcript, setTranscript] = useState('Try: “Which invoices are still open for Alpine Logistics?”');
-  const [response, setResponse] = useState('Tap the microphone to try the browser voice demo.');
+  const [transcript, setTranscript] = useState('Try: “How can AI agents help my business?”');
+  const [response, setResponse] = useState('Tap the microphone and ask NativeCloud anything about AI.');
   const [errorMessage, setErrorMessage] = useState('');
 
   const stopVoice = () => {
+    requestRef.current?.abort();
+    requestRef.current = null;
+
     const recognition = recognitionRef.current;
     if (recognition) {
       recognition.onstart = null;
@@ -131,6 +138,7 @@ export function VoiceVisual() {
 
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(message);
+    utterance.lang = navigator.language || 'en-US';
     utterance.rate = 0.98;
     utterance.pitch = 1;
     utterance.onstart = () => setStatus('speaking');
@@ -180,11 +188,27 @@ export function VoiceVisual() {
       if (!spokenText) return;
 
       receivedResult = true;
-      const nextResponse = getVoiceResponse(spokenText);
       setTranscript(spokenText);
-      setResponse(nextResponse);
+      setResponse('Thinking…');
       setStatus('processing');
-      speakResponse(nextResponse);
+
+      const controller = new AbortController();
+      requestRef.current = controller;
+      askAgent(spokenText, historyRef.current, controller.signal)
+        .catch(() => (controller.signal.aborted ? null : AGENT_FALLBACK))
+        .then((reply) => {
+          if (!reply || controller.signal.aborted) return;
+          requestRef.current = null;
+          if (reply !== AGENT_FALLBACK && reply !== AGENT_BUSY) {
+            historyRef.current = [
+              ...historyRef.current,
+              { role: 'user' as const, content: spokenText },
+              { role: 'assistant' as const, content: reply },
+            ].slice(-12);
+          }
+          setResponse(reply);
+          speakResponse(reply);
+        });
     };
     recognition.onerror = (event) => {
       recognitionFailed = true;
@@ -221,6 +245,7 @@ export function VoiceVisual() {
   };
 
   useEffect(() => () => {
+    requestRef.current?.abort();
     const recognition = recognitionRef.current;
     if (recognition) {
       recognition.onstart = null;

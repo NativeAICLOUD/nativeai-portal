@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Link } from 'react-transition-progress/next';
 import { motion, AnimatePresence } from 'framer-motion';
 import AIRibbonVisual from './AIRibbonVisual';
+import { SerifAccent } from '@/app/components/ui/EditorialGlow';
 
 /*
  * Floating promo card — a corner alert that pitches a single offer after
@@ -26,6 +27,8 @@ const EXCLUDED_PREFIXES = ['/login', '/sign-up', '/dashboard'];
 
 export type FloatingPromoCardProps = {
   headline?: string;
+  /** Second headline line, set in the editorial italic serif (same treatment as the page heroes). */
+  headlineAccent?: string;
   description?: string;
   /** Optional custom illustration. Falls back to a brand-toned abstract visual when omitted. */
   imageSrc?: string;
@@ -37,7 +40,8 @@ export type FloatingPromoCardProps = {
 };
 
 export default function FloatingPromoCard({
-  headline = 'Agentic AI is here. Is your business ready?',
+  headline = "AI that doesn't just answer.",
+  headlineAccent = 'It acts.',
   description,
   imageSrc,
   ctaText = 'Explore agentic AI',
@@ -95,7 +99,7 @@ export default function FloatingPromoCard({
             exit={{ opacity: 0, y: -8, scale: 0.98 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             role="dialog"
-            aria-label={headline}
+            aria-label={headlineAccent ? `${headline} ${headlineAccent}` : headline}
             className="pointer-events-auto relative overflow-hidden rounded-[22px] border border-black/[0.06] bg-white shadow-[0_32px_80px_-12px_rgba(15,23,42,0.28),0_6px_18px_rgba(15,23,42,0.08)]"
           >
             {/* Full-bleed AI ribbon — the card opens on the visual, edge to edge */}
@@ -118,15 +122,21 @@ export default function FloatingPromoCard({
               </svg>
             </button>
 
-            <div className="relative p-6">
-              <div className="mb-4">
+            <div className="relative px-6 pb-6 pt-5">
+              <div className="mb-3">
                 <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#0066B3]">
                   Agentic AI
                 </span>
               </div>
 
-              <h3 className="m-0 text-[24px] font-medium leading-[1.12] tracking-[-0.02em] text-[#111]">
+              <h3 className="m-0 text-[28px] font-light leading-[1.05] tracking-[-0.03em] text-[#141414] [text-wrap:balance]">
                 {headline}
+                {headlineAccent && (
+                  <>
+                    <br />
+                    <SerifAccent>{headlineAccent}</SerifAccent>
+                  </>
+                )}
               </h3>
               {description && (
                 <p className="mt-2 text-[14px] leading-[1.55] text-[#6b7280]">{description}</p>
