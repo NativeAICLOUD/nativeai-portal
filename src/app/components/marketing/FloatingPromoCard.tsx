@@ -108,7 +108,7 @@ export default function FloatingPromoCard({
                 <Image src={imageSrc} alt="" fill sizes="360px" className="object-cover" />
               </div>
             ) : (
-              <AIRibbonVisual className="aspect-[16/10]" sizes="(min-width: 640px) 360px, 100vw" />
+              <AIRibbonVisual src="/img/native-agenticai.webp" contain className="aspect-[4/3] bg-[#F8F6F9]" sizes="(min-width: 640px) 360px, 100vw" />
             )}
 
             <button

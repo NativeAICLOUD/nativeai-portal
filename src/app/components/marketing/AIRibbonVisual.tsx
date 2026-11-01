@@ -18,12 +18,18 @@ export default function AIRibbonVisual({
   sizes = '360px',
   delay = 0.25,
   priority = false,
+  src = "/img/ai-infinity-ribbon.png",
+  contain = false,
 }: {
   className?: string;
   sizes?: string;
   /** Seconds before the focus-in starts. */
   delay?: number;
   priority?: boolean;
+  /** Artwork to show — defaults to the 16:9 ribbon on its blue/peach gradient. */
+  src?: string;
+  /** Show the whole artwork (letterboxed on the frame background) instead of cropping to fill. */
+  contain?: boolean;
 }) {
   const reduce = useReducedMotion();
   return (
@@ -39,7 +45,7 @@ export default function AIRibbonVisual({
           animate={reduce ? undefined : { scale: [1, 1.04, 1], rotate: [0, -1.5, 0] }}
           transition={{ delay: delay + 0.95, duration: 6, ease: 'easeInOut', repeat: Infinity }}
         >
-          <Image src="/img/ai-infinity-ribbon.png" alt="" fill sizes={sizes} priority={priority} className="object-cover" />
+          <Image src={src} alt="" fill sizes={sizes} priority={priority} className={contain ? "object-contain" : "object-cover"} />
         </motion.div>
       </motion.div>
       {/* Blue fog — soft blurred patches that slowly roll across the image's baked-in blue haze.
