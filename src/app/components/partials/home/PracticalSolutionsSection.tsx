@@ -39,9 +39,9 @@ const solutions = [
     icon: LegalIcon,
     color: '#7C3AED',
     bg: 'rgba(124,58,237,0.07)',
-    title: 'Legal AI Workspace',
-    desc:  'Automate document classification, deadline extraction, client communication, and case workflow support.',
-    tags:  ['Document AI', 'Deadline Tracking', 'Case Workflows'],
+    title: 'Agentic Legal AI',
+    desc:  'AI research assistants that search statutes, case law and doctrine — every answer backed by its source and reviewed by a lawyer.',
+    tags:  ['Legal Research', 'Sourced Answers', 'Case Workspace'],
     href:  Constants.PAGES.AI_LEGAL_WORKSPACE,
   },
   {

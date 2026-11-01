@@ -77,7 +77,7 @@ const pages: Pages[] = [
       {
         url: Constants.PAGES.SOLUTIONS, title: 'Industries', children: [
           { url: Constants.PAGES.AIRLINE_BOOKING,    title: 'Travel & Aviation',   desc: 'GDS booking & airline platforms',     icon: Plane,       color: PALETTE.blue   },
-          { url: Constants.PAGES.AI_LEGAL_WORKSPACE, title: 'Legal & Compliance',  desc: 'AI for law firms & legal teams',      icon: Scale,       color: PALETTE.purple },
+          { url: Constants.PAGES.AI_LEGAL_WORKSPACE, title: 'Legal & Compliance',  desc: 'Agentic legal research assistants',      icon: Scale,       color: PALETTE.purple },
           { url: Constants.PAGES.PAYMENT_AUTOMATION, title: 'Finance & Banking',   desc: 'Payments, billing & reconciliation',  icon: Landmark,    color: PALETTE.green  },
           { url: Constants.PAGES.SOLUTIONS,          title: 'Healthcare',          desc: 'Secure data & clinical workflows',    icon: HeartPulse,  color: PALETTE.orange },
           { url: Constants.PAGES.SOLUTIONS,          title: 'Retail & E-commerce', desc: 'Scalable storefronts & logistics',    icon: ShoppingBag, color: PALETTE.teal   },
@@ -121,7 +121,7 @@ const INDUSTRIES_MENU: SolutionEntry[] = [
     color: '#7C3AED',
     bg: 'rgba(124,58,237,0.08)',
     icon: Scale,
-    details: ['AI Document Analysis', 'Case & Matter Workflows', 'Deadline Tracking', 'Client Portals', 'Contract Intelligence', 'Compliance Reporting'],
+    details: ['Legal Research Assistants', 'AI Document Analysis', 'Case & Matter Workflows', 'Deadline Tracking', 'Client Portals', 'Contract Intelligence', 'Compliance Reporting'],
   },
   {
     title: 'Finance & Banking',

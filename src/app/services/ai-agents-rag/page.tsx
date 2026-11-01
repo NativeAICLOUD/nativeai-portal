@@ -88,7 +88,7 @@ const solutions: { label: string; items: { href: string; icon: LucideIcon; title
     label: "Products",
     items: [
       { href: "/airline-booking", icon: Plane, title: "Airline & Travel Booking", desc: "GDS-connected booking SaaS" },
-      { href: "/legal-saas", icon: Scale, title: "AI Legal Workspace", desc: "AI for law firms & legal teams" },
+      { href: "/legal-saas", icon: Scale, title: "Agentic Legal AI", desc: "Legal research assistants for law firms" },
       { href: "/payment-automation", icon: CreditCard, title: "Payment Automation", desc: "Recurring billing & reconciliation" },
     ],
   },

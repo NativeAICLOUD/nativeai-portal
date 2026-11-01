@@ -32,18 +32,13 @@ function BlueButton({ href, children }: { href: string; children: React.ReactNod
   );
 }
 
-const cases = [
-  { ref: "2026-0142", title: "Muster AG ./. Beispiel GmbH", area: "Contract law", status: "Deadline in 3 days" as const },
-  { ref: "2026-0156", title: "Estate of R. Keller", area: "Inheritance", status: "Needs review" as const },
-  { ref: "2026-0161", title: "Tenancy dispute — Bahnhofstrasse", area: "Tenancy", status: "Up to date" as const },
-  { ref: "2026-0170", title: "Dismissal claim — L. Berisha", area: "Employment", status: "Up to date" as const },
+/* Illustrative research result shown in the product visual */
+const sources = [
+  { kind: "Statute", ref: "Art. 337 OR", note: "Termination with immediate effect" },
+  { kind: "Leading case", ref: "Federal Supreme Court", note: "Prior warning required for lesser misconduct" },
+  { kind: "Commentary", ref: "Doctrine on Art. 337 OR", note: "When a single warning is sufficient" },
+  { kind: "Your file", ref: "Warning letter, 12 March", note: "Matched in the matter documents" },
 ];
-
-const statusStyle = {
-  "Deadline in 3 days": { bg: "rgba(217,119,6,0.10)", color: "#d97706" },
-  "Needs review": { bg: "rgba(37,99,235,0.10)", color: "#2563EB" },
-  "Up to date": { bg: "rgba(5,150,105,0.10)", color: "#059669" },
-};
 
 export default function LegalHero() {
   return (
@@ -61,21 +56,22 @@ export default function LegalHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <div className="mb-8"><Eyebrow>NativeCloud Legal SaaS</Eyebrow></div>
+          <div className="mb-8"><Eyebrow>NativeCloud Legal AI · Agentic research</Eyebrow></div>
           <h1
             id="legal-hero-heading"
             className="m-0 max-w-[1100px] text-[44px] font-light leading-[1.02] tracking-[-0.035em] text-[#141414] sm:text-[64px] md:text-[80px] lg:text-[96px] xl:text-[108px]"
           >
-            See what matters.
+            Research the law.
             <br />
-            Act with <SerifAccent>confidence.</SerifAccent>
+            Answer with <SerifAccent>confidence.</SerifAccent>
           </h1>
           <p className="mt-8 max-w-[520px] text-[17px] font-light leading-[1.6] text-[#4B5563] sm:text-[18px] md:mt-10">
-            One AI workspace for cases, documents, mail, deadlines and billing.
+            Agentic AI research assistants for lawyers — statutes, case law, doctrine and your own
+            files, with every answer backed by its source.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <BlueButton href="/schedule-call">Book a demo</BlueButton>
-            <SecondaryButton href="#modules">See how it works</SecondaryButton>
+            <SecondaryButton href="#research">See how it works</SecondaryButton>
           </div>
         </motion.div>
 
@@ -97,38 +93,37 @@ export default function LegalHero() {
               <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
               <span className="h-3 w-3 rounded-full bg-[#28c840]" />
               <div className="ml-2 flex h-6 flex-1 items-center rounded-full border border-[#eee] bg-[#f7f8fa] px-3">
-                <span className="text-[10px] font-medium text-[#9ca3af]">app.nativeai.cloud / legal-saas / cases</span>
+                <span className="text-[10px] font-medium text-[#9ca3af]">app.nativeai.cloud / legal-saas / research</span>
               </div>
             </div>
 
-            {/* toolbar */}
-            <div className="flex h-11 items-center gap-3 rounded-xl border border-[#eee] bg-[#fafafa] px-4">
-              <span className="text-[13px] font-semibold text-[#111]">Case Cockpit</span>
-              <div className="flex-1" />
-              <span className="hidden rounded-full border border-[#e6e6e6] bg-white px-3 py-1 text-[11px] font-medium text-[#6b7280] sm:inline">3 agent proposals</span>
-              <span className="rounded-full bg-[#2563EB] px-3.5 py-1.5 text-[11px] font-semibold text-white">+ New case</span>
+            {/* research question */}
+            <div className="flex items-start gap-3 rounded-xl border border-[#eee] bg-[#fafafa] px-4 py-3">
+              <span className="mt-0.5 text-[10px] font-semibold uppercase tracking-wide text-[#9ca3af]">Question</span>
+              <span className="flex-1 text-[13px] font-medium leading-[1.45] text-[#111]">
+                Can the employer dismiss with immediate effect after a single written warning?
+              </span>
             </div>
 
-            {/* case table */}
-            <div className="overflow-hidden rounded-xl border border-[#eee]">
-              <div className="flex items-center gap-3 bg-[#fafafa] px-4 py-2 text-[10px] font-semibold uppercase tracking-wide text-[#9ca3af]">
-                <span className="w-[62px]">Ref.</span>
-                <span className="flex-1">Case</span>
-                <span className="hidden w-[90px] sm:block">Area</span>
-                <span>Status</span>
+            {/* agent answer */}
+            <div className="flex flex-col gap-3 rounded-xl border border-[#2563EB]/20 bg-white px-4 py-4">
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-[13px] font-semibold text-[#111]">Research memo</span>
+                <span className="rounded-full bg-[rgba(5,150,105,0.10)] px-2.5 py-0.5 text-[10.5px] font-semibold text-[#059669]">
+                  4 sources checked
+                </span>
               </div>
-              <div className="flex flex-col divide-y divide-[#f0f0f0]">
-                {cases.map((c) => (
-                  <div key={c.ref} className="flex items-center gap-3 bg-white px-4 py-2.5">
-                    <span className="w-[62px] shrink-0 text-[11.5px] font-medium text-[#9ca3af]">{c.ref}</span>
-                    <span className="flex-1 truncate text-[12px] font-semibold text-[#111]">{c.title}</span>
-                    <span className="hidden w-[90px] shrink-0 truncate text-[12px] text-[#6b7280] sm:block">{c.area}</span>
-                    <span
-                      className="shrink-0 rounded-full px-2.5 py-0.5 text-[10.5px] font-semibold"
-                      style={{ background: statusStyle[c.status].bg, color: statusStyle[c.status].color }}
-                    >
-                      {c.status}
-                    </span>
+              <div className="flex flex-col gap-1.5">
+                <span className="h-2 w-[92%] rounded-full bg-[#111]/10" />
+                <span className="h-2 w-[84%] rounded-full bg-[#111]/10" />
+                <span className="h-2 w-[60%] rounded-full bg-[#111]/10" />
+              </div>
+              <div className="mt-1 overflow-hidden rounded-lg border border-[#eee]">
+                {sources.map((src) => (
+                  <div key={src.ref} className="flex items-center gap-3 border-b border-[#f0f0f0] bg-white px-3 py-2 last:border-b-0">
+                    <span className="w-[86px] shrink-0 text-[10px] font-semibold uppercase tracking-wide text-[#2563EB]">{src.kind}</span>
+                    <span className="shrink-0 text-[12px] font-semibold text-[#111]">{src.ref}</span>
+                    <span className="hidden flex-1 truncate text-[12px] text-[#6b7280] sm:block">{src.note}</span>
                   </div>
                 ))}
               </div>

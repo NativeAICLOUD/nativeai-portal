@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import {
   Briefcase, FileSearch, Mail, CalendarClock, MessageSquareText, Timer,
   CheckCircle2, BarChart3, ShieldCheck, ScanLine, Upload, Users2, Receipt,
-  FolderOpen, Scale, ChevronDown, Check,
+  FolderOpen, Scale, ChevronDown, Check, Landmark, BookOpen, Library, FileText, ShieldQuestion,
   type LucideIcon,
 } from "lucide-react";
 import { CONTAINER, Eyebrow } from "@/app/components/partials/services/ServiceUI";
@@ -12,12 +12,22 @@ import LegalRolloutSection from "./LegalRolloutSection";
 import LegalCTASection from "./LegalCTASection";
 
 export const metadata: Metadata = {
-  title: "AI Legal Workspace — Legal SaaS for Law Firms",
+  title: "Agentic Legal AI — Legal Research Assistants for Law Firms",
   description:
-    "The workspace behind every case. Case management, document intelligence, email filing, deadlines, time recording and billing — with AI agents that propose and lawyers who approve.",
+    "Agentic AI research assistants for lawyers: statutes, case law, doctrine and your own files — every answer backed by its source, every result reviewed by a lawyer.",
 };
 
 /* ── content ── */
+
+/* Research assistants — the core of the platform */
+const research: { title: string; body: string; icon: LucideIcon }[] = [
+  { title: "Case law research", body: "Searches federal and cantonal decisions and brings the leading cases forward first.", icon: Landmark },
+  { title: "Statutes & materials", body: "Federal and cantonal law, with the legislative materials behind each provision.", icon: BookOpen },
+  { title: "Doctrine & commentary", body: "Brings in the commentary and literature that shape how a norm is applied.", icon: Library },
+  { title: "Every source checked", body: "Each citation is retrieved and linked — no invented references, nothing you can't verify.", icon: ShieldQuestion },
+  { title: "Research memo", body: "Norm, leading case, doctrine and application — structured and ready for the file.", icon: FileText },
+  { title: "Your own files", body: "Connects the research to the facts in the matter's documents and correspondence.", icon: FolderOpen },
+];
 
 const modules: { title: string; body: string; icon: LucideIcon }[] = [
   { title: "Case Cockpit", body: "Every matter in one place — parties, documents, emails, deadlines, time and notes.", icon: Briefcase },
@@ -52,8 +62,9 @@ const partnerControls = [
 const controlCenterItems = ["My Day", "Cases", "Documents", "Mail", "Deadlines", "Time", "Invoices", "Approvals", "Reports"];
 
 const valueStatements = [
+  "Hours of research, done in minutes.",
+  "Every citation retrieved and checkable.",
   "Less time filing. More time advising.",
-  "No missed deadlines.",
   "Every billable hour captured.",
   "A lawyer signs off on every AI action.",
 ];
@@ -105,15 +116,15 @@ export default function LegalSaasPage() {
                 <div className="mb-6"><Eyebrow>The Challenge</Eyebrow></div>
                 <div className="flex flex-col gap-5 text-[16px] font-normal leading-[1.7] text-[#374151] sm:text-[17px]">
                   <p className="m-0 text-[19px] font-medium leading-[1.4] text-[#111] sm:text-[21px]">
-                    Lawyers spend hours on work that isn&apos;t law.
+                    Good research takes hours a client rarely sees.
                   </p>
                   <p className="m-0">
-                    Sorting mail. Filing documents. Copying deadlines into calendars.
-                    Reconstructing time sheets at the end of the month. Every case lives
-                    across inboxes, folders and spreadsheets.
+                    Searching decisions. Checking the statute and its materials. Reading the
+                    commentary. Matching it all to the facts in the file — and then
+                    double-checking every citation before it goes out.
                   </p>
                   <p className="m-0 font-medium text-[#111]">
-                    The work gets done — but the hours go to admin, not advice.
+                    The answer matters — but the hours go to searching, not advising.
                   </p>
                 </div>
               </div>
@@ -125,20 +136,48 @@ export default function LegalSaasPage() {
                 <div className="mb-6"><Eyebrow>Our Approach</Eyebrow></div>
                 <div className="flex flex-col gap-5 text-[16px] font-normal leading-[1.7] text-[#374151] sm:text-[17px]">
                   <p className="m-0 text-[19px] font-medium leading-[1.4] text-[#111] sm:text-[21px]">
-                    We built it inside a working law firm.
+                    Research assistants built inside a working law firm.
                   </p>
                   <p className="m-0">
-                    One workspace for cases, documents, mail, deadlines, time and billing —
-                    with AI agents that do the reading, sorting and drafting in the
-                    background.
+                    Agents that search the law, retrieve every source, and return a
+                    structured research memo — connected to the matter, its documents and
+                    its deadlines.
                   </p>
                   <p className="m-0 font-medium text-[#111]">
-                    The AI proposes. A lawyer approves. Nothing happens on its own.
+                    The AI researches. A lawyer reviews. Nothing leaves the firm unchecked.
                   </p>
                 </div>
               </div>
 
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Research assistants ── */}
+      <section id="research" className="bg-white scroll-mt-24">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-12">
+            <div className="mb-4"><Eyebrow>Legal Research Assistants</Eyebrow></div>
+            <h2 className="m-0 max-w-[620px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              From question to sourced answer.
+            </h2>
+            <p className="mt-4 max-w-[560px] text-[16px] font-normal leading-[1.5] text-[#6b7280]">
+              Ask in plain language. The agents search, retrieve and check — then hand you a
+              memo you can rely on.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+            {research.map(({ title, body, icon: Icon }) => (
+              <article key={title} className="flex h-full flex-col rounded-2xl border border-[#e6e6e6] bg-white p-6">
+                <span className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-[rgba(37,99,235,0.07)]">
+                  <Icon className="h-[22px] w-[22px] text-[#2563EB]" strokeWidth={1.7} aria-hidden="true" />
+                </span>
+                <h3 className="m-0 text-[17px] font-medium leading-[1.3] text-[#111]">{title}</h3>
+                <p className="mt-2 text-[15px] font-normal leading-[1.5] text-[#6b7280]">{body}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -149,10 +188,11 @@ export default function LegalSaasPage() {
           <div className="mb-12">
             <div className="mb-4"><Eyebrow>The Workspace</Eyebrow></div>
             <h2 className="m-0 max-w-[560px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
-              Everything a case needs.
+              Research, connected to every case.
             </h2>
             <p className="mt-4 max-w-[520px] text-[16px] font-normal leading-[1.5] text-[#6b7280]">
-              From the first letter to the final invoice, every matter stays connected.
+              The research assistants live inside the workspace — so every answer sits with the
+              matter, its documents, deadlines and time.
             </p>
           </div>
 
@@ -315,12 +355,12 @@ export default function LegalSaasPage() {
               Ask Legal AI
             </span>
             <h2 className="mx-auto mt-6 max-w-[560px] text-[30px] font-medium leading-[1.15] text-white md:text-[42px]">
-              Ask your case files anything.
+              Ask the law. Ask your files.
             </h2>
             <p className="mx-auto mt-4 max-w-[520px] text-[16px] font-normal leading-[1.6] text-white/60">
-              &ldquo;What did the other side propose in their last letter?&rdquo; &ldquo;Which deadlines
-              are due this week?&rdquo; Answers come from your own documents — with the source
-              to check.
+              &ldquo;Which leading cases apply to a dismissal after a single warning?&rdquo;
+              &ldquo;What did the other side propose in their last letter?&rdquo; Every answer
+              comes with the source to check.
             </p>
           </div>
         </div>
