@@ -5,6 +5,7 @@ import { Link } from 'react-transition-progress/next';
 import RotatingHeroHeadline from './RotatingHeroHeadline';
 import HeroSearch from './HeroSearch';
 import MobileHomeHero from './MobileHomeHero';
+import HeroFog from './HeroFog';
 
 /* Minimal editorial hero — typography-led, content-first.
    Same content and behaviour as before; decorative card, background
@@ -20,14 +21,9 @@ function HomeHeader() {
       </div>
 
       {/* Desktop hero — unchanged */}
-      <div className="relative hidden overflow-hidden md:block hero-gradient-bg">
-        <style>{`
-          .hero-gradient-bg {
-            background:
-              radial-gradient(circle at 15% 100%, rgba(190,203,255,0.5), transparent 48%),
-              #ffffff;
-          }
-        `}</style>
+      <div className="relative isolate hidden overflow-hidden bg-white md:block">
+        {/* Blue glow drifting like fog along the bottom, down to the gradient divider */}
+        <HeroFog />
 
         <div className="relative z-10 mx-auto w-full max-w-[1240px] px-5 pb-[88px] pt-[162px] sm:px-6 md:pb-[130px] md:pt-[182px]">
 

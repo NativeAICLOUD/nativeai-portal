@@ -37,10 +37,10 @@ export type FloatingPromoCardProps = {
 };
 
 export default function FloatingPromoCard({
-  headline = 'AI is the future. Is your business ready?',
-  description = 'Find your opportunities. Make them real.',
+  headline = 'Agentic AI is here. Is your business ready?',
+  description,
   imageSrc,
-  ctaText = 'Discover your AI readiness',
+  ctaText = 'Explore agentic AI',
   ctaHref = '/services/ai-agents-rag',
   delay = 4000,
   enabled = true,
@@ -96,25 +96,22 @@ export default function FloatingPromoCard({
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             role="dialog"
             aria-label={headline}
-            className="pointer-events-auto relative overflow-hidden rounded-2xl border border-[#e6e6e6] bg-white shadow-[0_24px_60px_rgba(15,23,42,0.14),0_4px_14px_rgba(15,23,42,0.06)]"
+            className="pointer-events-auto relative overflow-hidden rounded-[22px] border border-black/[0.06] bg-white shadow-[0_32px_80px_-12px_rgba(15,23,42,0.28),0_6px_18px_rgba(15,23,42,0.08)]"
           >
-            {/* Soft blue glow + hairline top rule, same as the About page divider */}
-            <div
-              className="pointer-events-none absolute inset-x-0 top-0 h-28"
-              style={{ background: 'radial-gradient(120% 100% at 100% 0%, rgba(0,102,179,0.10) 0%, rgba(255,255,255,0) 70%)' }}
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-x-0 top-0 h-[1.5px]"
-              style={{ backgroundImage: 'linear-gradient(90deg, #fff, #E1F0FF 15%, #0066B3 50%, #E1F0FF 85%, #fff)' }}
-              aria-hidden="true"
-            />
+            {/* Full-bleed AI ribbon — the card opens on the visual, edge to edge */}
+            {imageSrc ? (
+              <div className="relative aspect-[16/10] w-full overflow-hidden">
+                <Image src={imageSrc} alt="" fill sizes="360px" className="object-cover" />
+              </div>
+            ) : (
+              <AIRibbonVisual className="aspect-[16/10]" sizes="(min-width: 640px) 360px, 100vw" />
+            )}
 
             <button
               type="button"
               onClick={dismiss}
               aria-label="Close"
-              className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full text-[#9ca3af] transition-colors hover:bg-[#111]/[0.05] hover:text-[#111]"
+              className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/75 text-[#374151] shadow-[0_2px_8px_rgba(15,23,42,0.12)] backdrop-blur-sm transition-colors hover:bg-white hover:text-[#111]"
             >
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M18 6 6 18M6 6l12 12" />
@@ -124,25 +121,15 @@ export default function FloatingPromoCard({
             <div className="relative p-6">
               <div className="mb-4">
                 <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#0066B3]">
-                  AI readiness
+                  Agentic AI
                 </span>
               </div>
 
-              <h3 className="m-0 pr-8 text-[22px] font-medium leading-[1.15] tracking-[-0.01em] text-[#111]">
+              <h3 className="m-0 text-[24px] font-medium leading-[1.12] tracking-[-0.02em] text-[#111]">
                 {headline}
               </h3>
               {description && (
                 <p className="mt-2 text-[14px] leading-[1.55] text-[#6b7280]">{description}</p>
-              )}
-
-              {imageSrc ? (
-                <div className="relative mt-5 aspect-[16/9] w-full overflow-hidden rounded-xl border border-[#eee]">
-                  <Image src={imageSrc} alt="" fill sizes="360px" className="object-cover" />
-                </div>
-              ) : (
-                <div className="mt-5">
-                  <AIRibbonVisual />
-                </div>
               )}
 
               <div className="mt-6 flex flex-col gap-2">

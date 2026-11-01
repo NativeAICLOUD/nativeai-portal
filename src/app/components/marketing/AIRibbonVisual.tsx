@@ -14,7 +14,7 @@ const FOG = [
    It comes into focus on mount (blur → sharp, slight zoom-out), then drifts gently
    while blue fog rolls across it. Shared by the AI readiness promo card and AI pages. */
 export default function AIRibbonVisual({
-  className = 'rounded-xl',
+  className = 'aspect-[16/9] rounded-xl border border-[#e6e6e6]',
   sizes = '360px',
   delay = 0.25,
   priority = false,
@@ -27,7 +27,7 @@ export default function AIRibbonVisual({
 }) {
   const reduce = useReducedMotion();
   return (
-    <div className={`relative aspect-[16/9] w-full overflow-hidden border border-[#e6e6e6] ${className}`} aria-hidden="true">
+    <div className={`relative w-full overflow-hidden ${className}`} aria-hidden="true">
       <motion.div
         className="absolute inset-0"
         initial={reduce ? false : { opacity: 0, scale: 1.12, filter: 'blur(10px)' }}

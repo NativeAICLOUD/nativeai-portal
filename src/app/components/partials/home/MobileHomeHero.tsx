@@ -2,6 +2,7 @@
 
 import { Link } from 'react-transition-progress/next';
 import { Constants } from '@/Constants';
+import HeroFog from './HeroFog';
 
 /* Editorial mobile-only hero — eyebrow, static headline (no blur/rotation),
    supporting paragraph, full-width CTA, secondary CTA.
@@ -9,14 +10,12 @@ import { Constants } from '@/Constants';
 export default function MobileHomeHero() {
   return (
     <div
-      className="px-5"
-      style={{
-        background:
-          'radial-gradient(circle at 15% 100%, rgba(190,203,255,0.5), transparent 48%), ' +
-          '#ffffff',
-        paddingTop: 124,
-      }}
+      className="relative isolate overflow-hidden bg-white px-5"
+      style={{ paddingTop: 124 }}
     >
+      {/* Blue glow drifting like fog, same as the desktop hero */}
+      <HeroFog />
+
       <p
         className="m-0 uppercase tracking-[0.2em] text-[#1e1e1e]"
         style={{ marginBottom: 8, fontSize: 12, lineHeight: '18px', fontWeight: 500 }}

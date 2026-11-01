@@ -147,7 +147,7 @@ export default function AIAgentsRAGPage() {
             </Reveal>
 
             <AIRibbonVisual
-              className="rounded-3xl shadow-[0_24px_60px_rgba(15,23,42,0.08)]"
+              className="aspect-[16/9] rounded-3xl border border-[#e6e6e6] shadow-[0_24px_60px_rgba(15,23,42,0.08)]"
               sizes="(min-width: 1024px) 50vw, 100vw"
               delay={0.1}
               priority
