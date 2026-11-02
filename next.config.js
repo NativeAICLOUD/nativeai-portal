@@ -46,6 +46,10 @@ const nextConfig = {
     ];
   },
   images: {
+      // Default list ends at 3840w, which full-width (sizes="100vw") images request on
+      // 2x screens — an upscale of our ≤3k-wide photos that the optimizer is very slow
+      // to produce, leaving the scene blank meanwhile. 2560w is plenty sharp.
+      deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 2560],
       remotePatterns: [
           { hostname: 'res.cloudinary.com', protocol: 'https', port: '' }
       ]

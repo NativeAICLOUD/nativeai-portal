@@ -6,6 +6,7 @@ import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } f
 import { CONTAINER, Eyebrow } from '@/app/components/partials/services/ServiceUI';
 import { Constants } from '@/Constants';
 import { PinMarkerBlue } from '@/ImagePath';
+import { editorialSerif } from '@/app/components/ui/EditorialGlow';
 
 /*
  * About page — Global Presence.
@@ -121,7 +122,7 @@ function LocationScene({ location, index }: { location: Location; index: number 
             </p>
             <h3
               id={`presence-${location.city}`}
-              className="m-0 mt-3 text-[56px] font-medium leading-[0.95] tracking-[-0.04em] text-white sm:text-[80px] lg:text-[120px]"
+              className={`${editorialSerif.className} m-0 mt-2 text-[68px] font-normal italic leading-[0.9] tracking-[-0.02em] text-white drop-shadow-[0_2px_24px_rgba(5,10,20,0.35)] sm:text-[100px] lg:text-[148px]`}
             >
               {location.city}
             </h3>
