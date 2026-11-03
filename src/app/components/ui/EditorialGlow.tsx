@@ -25,7 +25,7 @@ export function SerifAccent({ children }: { children: React.ReactNode }) {
    left/bottom. Place inside a `relative isolate overflow-hidden` section. */
 export function EditorialGlow() {
   return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
       {/* base wash */}
       <div
         className="absolute inset-0"

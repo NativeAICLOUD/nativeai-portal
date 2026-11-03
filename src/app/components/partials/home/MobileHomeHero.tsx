@@ -72,7 +72,7 @@ export default function MobileHomeHero() {
 
       {/* hairline divider — symmetric fade in the CTA pill blues, same as About */}
       <hr
-        className="m-0 mt-6 h-[1.5px] w-full border-0"
+        className="m-0 mt-6 h-[3px] w-full border-0"
         style={{
           backgroundImage: 'linear-gradient(90deg, #fff, #E1F0FF 15%, #0066B3 50%, #E1F0FF 85%, #fff)',
           borderRadius: 100,

@@ -45,7 +45,11 @@ export default function MobileDrawer({ open, onClose, children, footer }: Props)
       aria-label="Main menu"
       aria-hidden={!open}
       initial={false}
-      animate={{ x: open ? 0 : '100%', opacity: open ? 1 : 0 }}
+      /* Closed drawer is fully removed (display: none) once it has slid out — a fixed
+         panel parked at translateX(100%) lets mobile browsers pan the page sideways. */
+      animate={open
+        ? { x: 0, opacity: 1, display: 'flex' }
+        : { x: '100%', opacity: 0, transitionEnd: { display: 'none' } }}
       transition={prefersReducedMotion ? { duration: 0.01 } : { duration: 0.28, ease: DRAWER_EASE }}
       style={{ background: '#FCF9FA', pointerEvents: open ? 'auto' : 'none' }}
       className="fixed inset-0 z-[100] flex h-screen flex-col lg:hidden"
