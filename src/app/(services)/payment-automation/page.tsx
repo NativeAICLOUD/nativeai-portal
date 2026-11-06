@@ -1,63 +1,51 @@
-import { Fragment } from "react";
-import { Link } from "react-transition-progress/next";
-import ProcessTimeline from "@/app/components/partials/services/ProcessTimeline";
+import type { Metadata } from "next";
 import {
   Repeat, QrCode, BellRing, Bot, LayoutDashboard, BarChart3,
   ShieldCheck, Lock, CreditCard, KeyRound, Landmark, Fingerprint, FileCheck, Globe,
-  ScanLine, CheckCircle2, ChevronRight, Zap,
-  Layers, Eye, Languages, ArrowLeftRight, Network,
+  ScanLine, CheckCircle2, ChevronRight, Building2, School, HeartPulse, Zap, Home, Briefcase,
+  TrendingDown, Receipt, Plug, Send, Wallet, Mail, MessageSquare, MessageCircle,
   type LucideIcon,
 } from "lucide-react";
+import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from "@/app/components/partials/services/ServiceUI";
 
-const outcomes: { title: string; body: string; icon: LucideIcon }[] = [
-  { title: "Get paid faster", body: "One-scan checkout and timely reminders shorten the time to cash.", icon: Zap },
-  { title: "Chase less", body: "AI recovery works your overdue book so your team doesn't have to.", icon: Bot },
-  { title: "Stay compliant", body: "Secure rails, full audit trails, and e-invoicing built in.", icon: ShieldCheck },
+export const metadata: Metadata = {
+  title: "Payment Automation",
+  description:
+    "Secure invoice payments for companies and institutions that still bill by invoice — QR and pay-by-link checkout, automatic reconciliation, reminders, and AI recovery. Volume-based pricing from €0.40 per transfer.",
+};
+
+const howItWorks: { n: string; t: string; d: string; icon: LucideIcon }[] = [
+  { n: "01", t: "Connect", icon: Plug, d: "Plug in your billing system once — by integration or bulk import. No per-bank or per-channel setup." },
+  { n: "02", t: "Send", icon: Send, d: "Every invoice goes out with a QR code and a secure pay-link, over the channel each payer prefers." },
+  { n: "03", t: "Collect", icon: Wallet, d: "We route the payment over the right rail, confirm it instantly, and reconcile it to the invoice." },
 ];
 
-const features: { title: string; body: string; icon: LucideIcon; decoration?: "top-left" | "bottom-right" }[] = [
-  {
-    title: "Recurring Invoices",
-    icon: Repeat,
-    body: "Auto-generate and send invoices on any schedule — your branding, zero manual effort.",
-    decoration: "top-left",
-  },
-  {
-    title: "QR & Pay-by-Link",
-    icon: QrCode,
-    body: "Every invoice ships with a QR code and payment link. No login, no app.",
-  },
-  {
-    title: "Smart Reminders",
-    icon: BellRing,
-    body: "Automated nudges across email, SMS, and WhatsApp — before and after due.",
-  },
-  {
-    title: "AI Arrears Recovery",
-    icon: Bot,
-    body: "AI prioritises your overdue book and runs tailored recovery journeys.",
-  },
-  {
-    title: "Payer Dashboard",
-    icon: LayoutDashboard,
-    body: "Real-time balances — issued, paid, and outstanding — in one place.",
-  },
-  {
-    title: "Reporting & Month-Close",
-    icon: BarChart3,
-    body: "Live dashboards and automated reports. Close the books, fast.",
-    decoration: "bottom-right",
-  },
+const channels: { title: string; body: string; icon: LucideIcon; color: string; bg: string }[] = [
+  { title: "QR on the invoice", body: "Printed or electronic — payers scan and pay in seconds.", icon: QrCode, color: "#2563EB", bg: "rgba(37,99,235,0.08)" },
+  { title: "Email pay-link", body: "Invoice and secure payment link delivered together.", icon: Mail, color: "#7C3AED", bg: "rgba(124,58,237,0.08)" },
+  { title: "SMS pay-link", body: "Reach payers on any phone, with a one-tap link.", icon: MessageSquare, color: "#0F8B83", bg: "rgba(15,139,131,0.08)" },
+  { title: "WhatsApp pay-link", body: "Payment requests and reminders where people already chat.", icon: MessageCircle, color: "#16A34A", bg: "rgba(22,163,74,0.08)" },
+  { title: "Card payments", body: "Tokenized, PCI DSS-compliant card checkout.", icon: CreditCard, color: "#D97706", bg: "rgba(217,119,6,0.08)" },
+  { title: "Bank transfer", body: "Secure transfers matched automatically to the invoice.", icon: Landmark, color: "#DB2777", bg: "rgba(219,39,119,0.08)" },
+];
+
+const features: { title: string; body: string; icon: LucideIcon; color: string; bg: string }[] = [
+  { title: "Recurring Invoices", body: "Auto-generate and send invoices on any schedule — your branding, zero manual effort.", icon: Repeat, color: "#2563EB", bg: "rgba(37,99,235,0.08)" },
+  { title: "QR & Pay-by-Link", body: "Every invoice ships with a QR code and secure payment link. No login, no app.", icon: QrCode, color: "#7C3AED", bg: "rgba(124,58,237,0.08)" },
+  { title: "Smart Reminders", body: "Automated nudges across email, SMS, and WhatsApp — before and after the due date.", icon: BellRing, color: "#0F8B83", bg: "rgba(15,139,131,0.08)" },
+  { title: "AI Arrears Recovery", body: "AI prioritises your overdue book and runs tailored recovery journeys.", icon: Bot, color: "#D97706", bg: "rgba(217,119,6,0.08)" },
+  { title: "Payer Dashboard", body: "Real-time balances — issued, paid, and outstanding — in one place.", icon: LayoutDashboard, color: "#DB2777", bg: "rgba(219,39,119,0.08)" },
+  { title: "Reporting & Month-Close", body: "Live dashboards and automated reports. Close the books, fast.", icon: BarChart3, color: "#0EA5E9", bg: "rgba(14,165,233,0.08)" },
 ];
 
 const payerFlow: { n: string; t: string; d: string; icon: LucideIcon }[] = [
-  { n: "01", t: "Invoice with QR", icon: QrCode, d: "Every invoice carries a QR code and pay-link." },
+  { n: "01", t: "Invoice with QR", icon: QrCode, d: "Every invoice carries a QR code and secure pay-link." },
   { n: "02", t: "Scan or tap", icon: ScanLine, d: "No account, no app. Pay in one scan." },
-  { n: "03", t: "Card or Open Banking", icon: CreditCard, d: "Secure payment in seconds, instant confirmation." },
-  { n: "04", t: "Auto-reconciled", icon: CheckCircle2, d: "Matched and posted to your ledger automatically." },
+  { n: "03", t: "Card or bank transfer", icon: CreditCard, d: "Encrypted payment in seconds, instant confirmation." },
+  { n: "04", t: "Auto-reconciled", icon: CheckCircle2, d: "Matched to the invoice and posted to your ledger." },
 ];
 
-const paymentCapabilities = [
+const capabilities = [
   "Bulk invoice import from your existing billing system",
   "QR codes on both paper and electronic invoices",
   "Pay with no account — optional payer portal, 24/7",
@@ -65,126 +53,126 @@ const paymentCapabilities = [
   "Multilingual SMS & email reminders",
   "AI arrears recovery for chronic non-payers",
   "Full audit trail & financial reporting",
-  "Open Banking + card rails, encrypted",
+  "Works alongside NativeInvoice and UJP e-invoicing",
 ];
 
-const markets: { title: string; body: string; icon: LucideIcon }[] = [
-  { title: "Integrate once, add markets without limits", icon: Layers, body: "A single standard data model standardizes inputs and lets you expand into new markets with minimal effort." },
-  { title: "Full visibility across every submission", icon: Eye, body: "Track every invoice in one place. Errors flagged, rejections logged, resolutions triggered automatically." },
-  { title: "One input handles every local format", icon: Languages, body: "Submit transaction data once — the platform translates and delivers it in the format each jurisdiction requires." },
-  { title: "Accredited connections to tax authorities", icon: Landmark, body: "Direct government connections in every mandated market, built for high throughput with automated retries." },
-  { title: "AR and AP e-invoicing both covered", icon: ArrowLeftRight, body: "Submit outgoing invoices automatically; receive, validate, and share incoming invoices from suppliers." },
-  { title: "Connects to the rest of your stack", icon: Network, body: "One shared data model, so invoice data flows straight into reporting and returns." },
+const builtFor: { title: string; body: string; icon: LucideIcon; color: string; bg: string }[] = [
+  { title: "Public Institutions & Municipalities", body: "Municipal fees, taxes, and public charges collected securely — with a full audit trail.", icon: Landmark, color: "#2563EB", bg: "rgba(37,99,235,0.08)" },
+  { title: "Utilities & Telecom", body: "High-volume recurring bills settled in one scan, reconciled automatically.", icon: Zap, color: "#7C3AED", bg: "rgba(124,58,237,0.08)" },
+  { title: "Schools & Universities", body: "Tuition and fees paid online, with reminders sent to parents and students.", icon: School, color: "#0F8B83", bg: "rgba(15,139,131,0.08)" },
+  { title: "Clinics & Healthcare", body: "Patient invoices and co-pays collected without front-desk chasing.", icon: HeartPulse, color: "#D97706", bg: "rgba(217,119,6,0.08)" },
+  { title: "Property & Rent", body: "Rent runs, service charges, and arrears recovery on autopilot.", icon: Home, color: "#DB2777", bg: "rgba(219,39,119,0.08)" },
+  { title: "B2B Companies", body: "Milestones, monthly fees, and supplier invoices paid faster.", icon: Briefcase, color: "#0EA5E9", bg: "rgba(14,165,233,0.08)" },
 ];
 
-const verticals = [
-  { name: "Property & Rent", note: "Rent runs & arrears recovery" },
-  { name: "Utilities & Telecom", note: "High-volume recurring bills" },
-  { name: "Clinics & Healthcare", note: "Patient invoices & co-pays" },
-  { name: "Memberships & Gyms", note: "Subscriptions & renewals" },
-  { name: "B2B Services", note: "Milestones & monthly fees" },
-  { name: "Schools & Public Fees", note: "Tuition & municipal charges" },
+const security: { title: string; body: string; icon: LucideIcon; color: string; bg: string }[] = [
+  { title: "End-to-end encryption", body: "Encrypted in transit and at rest.", icon: Lock, color: "#2563EB", bg: "rgba(37,99,235,0.08)" },
+  { title: "PCI DSS compliant", body: "Card processing to the highest standard.", icon: ShieldCheck, color: "#7C3AED", bg: "rgba(124,58,237,0.08)" },
+  { title: "Tokenized cards", body: "Card data never touches your systems.", icon: CreditCard, color: "#0F8B83", bg: "rgba(15,139,131,0.08)" },
+  { title: "2FA & access control", body: "Role-based access on every account.", icon: KeyRound, color: "#D97706", bg: "rgba(217,119,6,0.08)" },
+  { title: "Bank-grade rails", body: "Regulated bank transfers with strong authentication.", icon: Building2, color: "#DB2777", bg: "rgba(219,39,119,0.08)" },
+  { title: "Fraud monitoring", body: "Anomalies flagged in real time.", icon: Fingerprint, color: "#0EA5E9", bg: "rgba(14,165,233,0.08)" },
+  { title: "Full audit trail", body: "Every action logged for compliance.", icon: FileCheck, color: "#2563EB", bg: "rgba(37,99,235,0.08)" },
+  { title: "GDPR & data residency", body: "Data stays where it must.", icon: Globe, color: "#7C3AED", bg: "rgba(124,58,237,0.08)" },
 ];
 
-const security: { title: string; body: string; icon: LucideIcon }[] = [
-  { title: "End-to-end encryption", icon: Lock, body: "Encrypted in transit and at rest." },
-  { title: "PCI DSS compliant", icon: ShieldCheck, body: "Card processing to the highest standard." },
-  { title: "Tokenized cards", icon: CreditCard, body: "Card data never touches your systems." },
-  { title: "2FA & access control", icon: KeyRound, body: "Role-based access on every account." },
-  { title: "Regulated Open Banking", icon: Landmark, body: "Bank-grade rails with strong auth." },
-  { title: "Fraud monitoring", icon: Fingerprint, body: "Anomalies flagged in real time." },
-  { title: "Full audit trail", icon: FileCheck, body: "Every action logged for compliance." },
-  { title: "GDPR & data residency", icon: Globe, body: "Data stays where it must." },
+const pricingPoints: { title: string; body: string; icon: LucideIcon; color: string; bg: string }[] = [
+  { title: "Pay per transfer", body: "Pricing tied to the payments you actually process — not to seats or licences.", icon: Receipt, color: "#2563EB", bg: "rgba(37,99,235,0.08)" },
+  { title: "Lower rate as you grow", body: "The more invoices you process each month, the lower your per-transfer rate.", icon: TrendingDown, color: "#0F8B83", bg: "rgba(15,139,131,0.08)" },
+  { title: "Tailored for institutions", body: "High-volume billers and public institutions get a rate built around their volume.", icon: Landmark, color: "#7C3AED", bg: "rgba(124,58,237,0.08)" },
 ];
 
-const processSteps = [
-  { step: "01", heading: "Account Setup & Import", icon: "setup", body: "We onboard your payers and schedules, migrated and validated." },
-  { step: "02", heading: "Payment Rail Connection", icon: "connect", body: "Card, bank transfer, direct debit, and Open Banking — connected." },
-  { step: "03", heading: "Invoice Configuration", icon: "template", body: "Templates set with your branding, tax, and terms." },
-  { step: "04", heading: "Reminder & Recovery Setup", icon: "reminder", body: "Reminder cadences and AI recovery journeys, tuned." },
-  { step: "05", heading: "Parallel Run & Validation", icon: "validate", body: "One cycle alongside your process to validate before cutover." },
-  { step: "06", heading: "Go-Live & Training", icon: "launch", body: "Your team is trained and live, with minimal manual work." },
+const deliverySteps = [
+  { step: "01", title: "Account Setup & Import", body: "We onboard your payers and schedules, migrated and validated." },
+  { step: "02", title: "Payment Rail Connection", body: "Card, bank transfer, and direct debit — connected securely." },
+  { step: "03", title: "Invoice Configuration", body: "Templates set with your branding, tax, and payment terms." },
+  { step: "04", title: "Reminder & Recovery Setup", body: "Reminder cadences and AI recovery journeys, tuned." },
+  { step: "05", title: "Parallel Run & Validation", body: "One cycle alongside your process to validate before cutover." },
+  { step: "06", title: "Go-Live & Training", body: "Your team is trained and live, with minimal manual work." },
 ];
 
-const ACCENT = "#2563EB";
-const ACCENT_DARK = "#d4836a";
-const iconTile = { background: "rgba(37,99,235,0.14)", color: ACCENT_DARK } as const;
-
-function SectionLabel({ children }: { children: React.ReactNode }) {
+function IconCard({ title, body, icon: Icon, color, bg }: { title: string; body: string; icon: LucideIcon; color: string; bg: string }) {
   return (
-    <div className="flex items-center gap-2.5 mb-6">
-      <span className="w-6 h-px bg-[#2563EB]" />
-      <p className="text-xs uppercase tracking-[0.14em] text-[#6b6b6b] font-semibold">{children}</p>
+    <div className="flex flex-col gap-4 rounded-2xl border border-[#ECECEC] bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
+      <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl" style={{ background: bg }}>
+        <Icon size={22} strokeWidth={1.8} style={{ color }} aria-hidden="true" />
+      </span>
+      <h3 className="text-lg font-semibold leading-snug text-[#111]">{title}</h3>
+      <p className="text-sm leading-relaxed text-[#6b7280]">{body}</p>
     </div>
   );
 }
 
 export default function PaymentAutomationPage() {
   return (
-    <div className="relative min-h-screen overflow-x-hidden" style={{ background: "#ffffff" }}>
-      {/* ambient glows */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div style={{ position: "absolute", top: "-10%", right: "-5%", width: 700, height: 700, borderRadius: "50%", background: "radial-gradient(ellipse, rgba(37,99,235,0.10) 0%, transparent 65%)" }} />
-        <div style={{ position: "absolute", top: "40%", left: "-8%", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(ellipse, rgba(91,124,250,0.06) 0%, transparent 65%)" }} />
-        <div className="absolute inset-0" style={{ backgroundImage: "url('/img/noise-background.jpg')", backgroundSize: "280px 280px", opacity: 0.03 }} />
-      </div>
+    <div className="font-switzer">
 
       {/* ── Hero ── */}
-      <section className="relative">
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pt-36 pb-20">
-          <p className="text-sm font-semibold uppercase tracking-widest text-[#2563EB] mb-5">
-            NativeCloud Product
-          </p>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-[#0a0e1a] leading-[1.03] max-w-4xl">
-            Payment Automation Platform
+      <div className="hero-bg-blue">
+        <div className={`${CONTAINER} pb-16 pt-32 lg:pt-28`}>
+          <div className="mb-6"><Eyebrow>NativeCloud Product</Eyebrow></div>
+          <div className="flex items-center gap-4">
+            <svg width="52" height="52" viewBox="0 0 32 32" fill="none" aria-hidden="true" className="shrink-0">
+              <rect x="5" y="3" width="18" height="26" rx="3" fill="#2563EB" />
+              <path d="M23 3h2a3 3 0 0 1 3 3v2l-5-5Z" fill="#1e4fd6" />
+              <path d="M9.5 11h9M9.5 15h5.5" stroke="white" strokeWidth="1.6" strokeLinecap="round" />
+              <rect x="9.5" y="18.5" width="5" height="5" rx="1" stroke="white" strokeWidth="1.4" />
+              <circle cx="22" cy="22" r="6" fill="#34d399" />
+              <path d="M22 18.8v6.4M24 20.2c-.4-.6-1.1-.9-2-.9-1.1 0-1.9.6-1.9 1.4 0 1.9 4 .9 4 2.8 0 .8-.8 1.4-2 1.4-.9 0-1.7-.4-2.1-1" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
+            </svg>
+            <p className="m-0 text-[18px] font-medium text-[#111]">
+              Payment <span className="text-[#2563EB]">Automation</span>
+            </p>
+          </div>
+          <h1 className="mt-6 max-w-4xl text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
+            One secure payment channel for <span className="text-[#2563EB]">every invoice</span>.
           </h1>
-          <p className="mt-7 text-lg md:text-xl text-[#0a0e1a]/70 max-w-[600px] font-normal leading-relaxed">
-            The whole bill-to-cash cycle in one platform — invoicing, QR &amp; pay-by-link checkout, reminders, AI recovery, and reporting.
+          <p className="mt-6 max-w-[620px] text-[18px] font-light leading-[1.6] text-[#111]">
+            For companies and institutions that still bill by invoice. Connect once — we handle payment rails, delivery over QR, email, SMS, and WhatsApp, and reconciliation. You pay per transfer.
           </p>
+          <p className="mt-4 max-w-[620px] text-[15px] font-medium text-[#2563EB]">
+            Вашиот нов партнер за безбедна и брза наплата
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <PrimaryButton href="/schedule-call">Book a demo</PrimaryButton>
+            <SecondaryButton href="#pricing">See pricing</SecondaryButton>
+          </div>
+        </div>
 
-          {/* Macedonian tagline pill */}
-          <div className="mt-7 inline-flex items-center gap-2.5 rounded-full pl-2 pr-5 py-2" style={{ background: "rgba(37,99,235,0.10)", border: "1px solid rgba(37,99,235,0.30)" }}>
-            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full" style={iconTile}>
-              <ShieldCheck size={16} strokeWidth={2} aria-hidden />
-            </span>
-            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full -ml-4" style={{ ...iconTile, background: "rgba(37,99,235,0.20)" }}>
-              <Zap size={16} strokeWidth={2} aria-hidden />
-            </span>
-            <span className="text-sm md:text-base font-medium text-[#1a1d2e]">
-              Вашиот нов партнер за безбедна и брза наплата
-            </span>
+        {/* blue divider — full viewport width */}
+        <hr className="divider-blue m-0 h-1 w-full border-0" />
+      </div>
+
+      {/* ── How it works ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} py-20 lg:py-24`}>
+          <div className="mb-12">
+            <div className="mb-4"><Eyebrow>How it works</Eyebrow></div>
+            <h2 className="m-0 max-w-[720px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              We handle the payment plumbing, so you just collect.
+            </h2>
           </div>
 
-          <div className="mt-10 flex flex-wrap items-center gap-3">
-            <Link
-              href="/schedule-call"
-              className="inline-flex items-center gap-2 bg-[#2563EB] hover:bg-[#d4836a] text-white px-7 py-3.5 rounded-full text-base font-medium transition-colors"
-            >
-              Book a demo
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </Link>
-            <Link
-              href="/schedule-call"
-              className="inline-flex items-center bg-white hover:bg-[#f7f6f3] text-[#1a1d2e] text-base font-medium px-7 py-3.5 rounded-full transition-colors"
-              style={{ border: "1px solid rgba(10,14,26,0.12)" }}
-            >
-              See the platform
-            </Link>
-          </div>
-
-          {/* outcomes strip */}
-          <div className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl">
-            {outcomes.map((o, i) => {
-              const Icon = o.icon;
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-stretch lg:gap-2">
+            {howItWorks.map((s, i) => {
+              const Icon = s.icon;
               return (
-                <div key={i} className="flex flex-col gap-3">
-                  <span className="inline-flex items-center justify-center w-11 h-11 rounded-xl" style={iconTile}>
-                    <Icon size={20} strokeWidth={1.9} aria-hidden />
-                  </span>
-                  <h3 className="text-base font-semibold text-[#1a1d2e]">{o.title}</h3>
-                  <p className="text-[#6b6b6b] text-sm leading-relaxed">{o.body}</p>
+                <div key={s.n} className="flex flex-1 items-stretch gap-2">
+                  <div className="group relative flex-1 rounded-2xl border border-[#ECECEC] bg-[#FAFAF8] p-7 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
+                    <div className="flex items-center justify-between">
+                      <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-105" style={{ background: "rgba(37,99,235,0.08)" }}>
+                        <Icon size={22} strokeWidth={1.9} className="text-[#2563EB]" aria-hidden="true" />
+                      </span>
+                      <span className="select-none text-4xl font-bold leading-none text-[#111]/[0.06]">{s.n}</span>
+                    </div>
+                    <h3 className="text-xl font-semibold leading-snug text-[#111]">{s.t}</h3>
+                    <p className="text-sm leading-relaxed text-[#6b7280]">{s.d}</p>
+                  </div>
+                  {i < howItWorks.length - 1 && (
+                    <div className="hidden shrink-0 items-center justify-center text-[#2563EB]/40 lg:flex" aria-hidden="true">
+                      <ChevronRight size={24} strokeWidth={2.2} />
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -192,93 +180,47 @@ export default function PaymentAutomationPage() {
         </div>
       </section>
 
-      {/* ── Core capabilities ── */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 pt-12 pb-20 md:pb-28">
-        <SectionLabel>What&apos;s included</SectionLabel>
-        <h2 className="text-3xl md:text-4xl font-normal text-[#1a1d2e] max-w-[640px] leading-tight mb-12">
-          Everything to bill, collect, and reconcile — automated.
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {features.map((feature, i) => {
-            const Icon = feature.icon;
-            return (
-              <div
-                key={i}
-                className="relative rounded-2xl overflow-hidden p-8 min-h-[260px] flex flex-col gap-4 transition-all duration-300 hover:-translate-y-1"
-                style={{ background: "#f0ede8" }}
-              >
-                {feature.decoration === "top-left" && (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src="/decorations/blob-orange-corner.svg" width={220} height={220} alt="" aria-hidden="true" className="absolute top-0 left-0 pointer-events-none select-none" />
-                )}
-                {feature.decoration === "bottom-right" && (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src="/decorations/blob-sage-corner.svg" width={220} height={220} alt="" aria-hidden="true" className="absolute bottom-0 right-0 pointer-events-none select-none" />
-                )}
-                <span className="relative z-10 inline-flex items-center justify-center w-12 h-12 rounded-xl" style={iconTile}>
-                  <Icon size={22} strokeWidth={1.8} aria-hidden />
-                </span>
-                <h3 className="relative z-10 text-xl font-semibold text-[#1a1d2e] leading-snug">{feature.title}</h3>
-                <p className="relative z-10 text-[#6b6b6b] text-sm leading-relaxed">{feature.body}</p>
-              </div>
-            );
-          })}
+      {/* ── Channels ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-12">
+            <div className="mb-4"><Eyebrow>Payment channels</Eyebrow></div>
+            <h2 className="m-0 max-w-[720px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              Every way your payers want to pay — one integration.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {channels.map((c) => <IconCard key={c.title} {...c} />)}
+          </div>
         </div>
       </section>
 
-      {/* ── Spotlight: frictionless checkout ── */}
-      <section className="relative max-w-7xl mx-auto px-6 md:px-12 pb-20 md:pb-28">
-        <div className="relative rounded-3xl overflow-hidden p-8 md:p-14" style={{ background: "#0a0e1a" }}>
-          <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 80% at 85% 10%, rgba(37,99,235,0.16) 0%, transparent 60%)" }} />
-          <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 50% 70% at 0% 100%, rgba(91,124,250,0.12) 0%, transparent 60%)" }} />
-
-          <div className="relative z-10">
-            <p className="text-xs uppercase tracking-widest text-[#2563EB] font-semibold mb-4">
-              Frictionless Checkout
-            </p>
-            <h2 className="text-3xl md:text-5xl font-bold text-white leading-[1.08] max-w-[820px]">
-              Get paid in one scan, end to end
+      {/* ── What's included ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-12">
+            <div className="mb-4"><Eyebrow>What&apos;s included</Eyebrow></div>
+            <h2 className="m-0 max-w-[640px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              Everything to bill, collect, and reconcile — automated.
             </h2>
-            <p className="mt-6 text-base md:text-lg text-white/70 max-w-[600px] leading-relaxed">
-              A QR code on every invoice. Payers settle in seconds — and it reconciles itself.
-            </p>
+          </div>
 
-            <div className="mt-12 flex flex-col lg:flex-row lg:items-stretch gap-4 lg:gap-2">
-              {payerFlow.map((s, i) => {
-                const Icon = s.icon;
-                return (
-                  <Fragment key={i}>
-                    <div
-                      className="group relative flex-1 rounded-2xl p-6 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-1"
-                      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.10)" }}
-                    >
-                      <div className="flex items-center justify-between">
-                        <span
-                          className="inline-flex items-center justify-center w-12 h-12 rounded-full text-white transition-transform duration-300 group-hover:scale-105"
-                          style={{ background: "linear-gradient(135deg, #3b82f6 0%, #2563EB 55%, #d4836a 100%)", boxShadow: "0 8px 22px rgba(37,99,235,0.35)" }}
-                        >
-                          <Icon size={22} strokeWidth={1.9} aria-hidden />
-                        </span>
-                        <span className="text-4xl font-bold leading-none select-none text-white/10">{s.n}</span>
-                      </div>
-                      <h3 className="text-white font-semibold text-base leading-snug">{s.t}</h3>
-                      <p className="text-white/55 text-sm leading-relaxed">{s.d}</p>
-                    </div>
-                    {i < payerFlow.length - 1 && (
-                      <div className="hidden lg:flex items-center justify-center shrink-0 text-[#2563EB]/45" aria-hidden>
-                        <ChevronRight size={24} strokeWidth={2.2} />
-                      </div>
-                    )}
-                  </Fragment>
-                );
-              })}
-            </div>
-
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3.5 max-w-[920px]">
-              {paymentCapabilities.map((c, i) => (
-                <div key={i} className="flex items-start gap-3">
-                  <CheckCircle2 size={20} strokeWidth={2} className="shrink-0 mt-0.5 text-[#2563EB]" aria-hidden />
-                  <p className="text-white/80 text-sm leading-relaxed">{c}</p>
+          <div className="rounded-2xl bg-[#FAFAF8] p-3 sm:p-5">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {features.map(({ title, body, icon: Icon, color, bg }) => (
+                <div
+                  key={title}
+                  className="flex h-full flex-col rounded-[10px] border border-[#ECECEC] bg-white p-[18px] shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(15,23,42,0.08)]"
+                >
+                  <div className="flex min-h-[56px] items-center gap-3.5">
+                    <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[12px]" style={{ background: bg }}>
+                      <Icon className="h-8 w-8" style={{ color }} strokeWidth={1.7} aria-hidden="true" />
+                    </span>
+                    <h3 className="m-0 text-[15.5px] font-semibold leading-[1.25] text-[#111827]">{title}</h3>
+                  </div>
+                  <div className="my-3 h-px w-full bg-[#EAEAEA]" />
+                  <p className="m-0 flex-1 text-[14px] font-normal leading-[1.5] text-[#6B7280]">{body}</p>
                 </div>
               ))}
             </div>
@@ -286,123 +228,173 @@ export default function PaymentAutomationPage() {
         </div>
       </section>
 
-      {/* ── E-invoicing & compliance ── */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 pb-20 md:pb-28">
-        <SectionLabel>E-invoicing &amp; compliance</SectionLabel>
-        <h2 className="text-3xl md:text-5xl font-normal text-[#1a1d2e] max-w-[720px] leading-tight mb-12">
-          Increase your markets, not your workload.
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {markets.map((m, i) => {
-            const Icon = m.icon;
-            return (
-              <div
-                key={i}
-                className="rounded-2xl p-7 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-1"
-                style={{ background: "#ffffff", border: "1px solid rgba(10,14,26,0.08)" }}
-              >
-                <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl" style={iconTile}>
-                  <Icon size={22} strokeWidth={1.8} aria-hidden />
-                </span>
-                <h3 className="text-lg font-semibold text-[#1a1d2e] leading-snug">{m.title}</h3>
-                <p className="text-[#6b6b6b] text-sm leading-relaxed">{m.body}</p>
+      {/* ── Spotlight: one-scan checkout ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-4"><Eyebrow>Frictionless Checkout</Eyebrow></div>
+          <h2 className="max-w-[820px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+            Get paid in one scan, end to end
+          </h2>
+          <p className="mt-6 max-w-[620px] text-base leading-relaxed text-[#6b7280] md:text-lg">
+            A QR code on every invoice. Payers settle in seconds over secure rails — and every transfer reconciles itself.
+          </p>
+
+          <div className="mt-12 flex flex-col gap-4 lg:flex-row lg:items-stretch lg:gap-2">
+            {payerFlow.map((s, i) => {
+              const Icon = s.icon;
+              return (
+                <div key={i} className="flex flex-1 items-stretch gap-2">
+                  <div className="group relative flex-1 rounded-2xl border border-[#ECECEC] bg-[#FAFAF8] p-6 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
+                    <div className="flex items-center justify-between">
+                      <span
+                        className="inline-flex h-12 w-12 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-105"
+                        style={{ background: "rgba(37,99,235,0.08)" }}
+                      >
+                        <Icon size={22} strokeWidth={1.9} className="text-[#2563EB]" aria-hidden="true" />
+                      </span>
+                      <span className="select-none text-4xl font-bold leading-none text-[#111]/[0.06]">{s.n}</span>
+                    </div>
+                    <h3 className="text-base font-semibold leading-snug text-[#111]">{s.t}</h3>
+                    <p className="text-sm leading-relaxed text-[#6b7280]">{s.d}</p>
+                  </div>
+                  {i < payerFlow.length - 1 && (
+                    <div className="hidden shrink-0 items-center justify-center text-[#2563EB]/40 lg:flex" aria-hidden="true">
+                      <ChevronRight size={24} strokeWidth={2.2} />
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="mt-12 grid max-w-[920px] grid-cols-1 gap-x-10 gap-y-3.5 md:grid-cols-2">
+            {capabilities.map((c, i) => (
+              <div key={i} className="flex items-start gap-3">
+                <CheckCircle2 size={20} strokeWidth={2} className="mt-0.5 shrink-0 text-[#2563EB]" aria-hidden="true" />
+                <p className="text-sm leading-relaxed text-[#374151]">{c}</p>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ── One engine, every vertical ── */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 pb-20 md:pb-28">
-        <SectionLabel>One engine, every vertical</SectionLabel>
-        <h2 className="text-3xl md:text-4xl font-normal text-[#1a1d2e] max-w-[640px] leading-tight mb-12">
-          One core, dressed for your industry.
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {verticals.map((v, i) => (
-            <div
-              key={i}
-              className="rounded-2xl p-6 flex flex-col gap-2 transition-all duration-300 hover:-translate-y-1"
-              style={{ background: "#ffffff", border: "1px solid rgba(10,14,26,0.08)" }}
-            >
-              <div className="flex items-center gap-2.5">
-                <span className="w-2 h-2 rounded-full bg-[#2563EB] shrink-0" />
-                <h3 className="text-base font-semibold text-[#1a1d2e]">{v.name}</h3>
+      {/* ── Built for ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-12">
+            <div className="mb-4"><Eyebrow>Built for</Eyebrow></div>
+            <h2 className="m-0 max-w-[720px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              For every organisation that still bills by invoice.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {builtFor.map((b) => <IconCard key={b.title} {...b} />)}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Pricing ── */}
+      <section id="pricing" className="bg-white scroll-mt-24">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-12">
+            <div className="mb-4"><Eyebrow>Pricing</Eyebrow></div>
+            <h2 className="m-0 max-w-[720px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              Simple, volume-based pricing.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1.1fr_2fr]">
+            <div className="flex flex-col justify-between gap-8 rounded-2xl border border-[#2563EB]/20 bg-[rgba(37,99,235,0.05)] p-8">
+              <div>
+                <p className="m-0 text-sm font-semibold uppercase tracking-[0.12em] text-[#2563EB]">Per transfer</p>
+                <p className="m-0 mt-4 flex items-baseline gap-2 text-[#111]">
+                  <span className="text-[15px] font-medium text-[#6b7280]">from</span>
+                  <span className="text-[56px] font-medium leading-none tabular-nums">€0.40</span>
+                </p>
+                <p className="m-0 mt-4 text-[15px] leading-relaxed text-[#374151]">
+                  Pay as you go. Your rate depends on the volume of invoices you process each month — higher volume, lower rate per transfer.
+                </p>
               </div>
-              <p className="text-[#6b6b6b] text-sm leading-relaxed pl-[18px]">{v.note}</p>
+              <div>
+                <PrimaryButton href="/schedule-call">Get your rate</PrimaryButton>
+              </div>
             </div>
-          ))}
+
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+              {pricingPoints.map((p) => <IconCard key={p.title} {...p} />)}
+            </div>
+          </div>
         </div>
       </section>
 
       {/* ── Security ── */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 pb-20 md:pb-28">
-        <SectionLabel>Security</SectionLabel>
-        <h2 className="text-3xl md:text-4xl font-normal text-[#1a1d2e] max-w-[620px] leading-tight mb-12">
-          Secure, end to end.
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {security.map((s, i) => {
-            const Icon = s.icon;
-            return (
-              <div
-                key={i}
-                className="rounded-2xl p-6 flex flex-col gap-3 transition-all duration-300 hover:-translate-y-1"
-                style={{ background: "#ffffff", border: "1px solid rgba(10,14,26,0.08)" }}
-              >
-                <span className="inline-flex items-center justify-center w-11 h-11 rounded-xl" style={iconTile}>
-                  <Icon size={20} strokeWidth={1.8} aria-hidden />
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-12">
+            <div className="mb-4"><Eyebrow>Security</Eyebrow></div>
+            <h2 className="m-0 max-w-[620px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              Secure, end to end.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {security.map(({ title, body, icon: Icon, color, bg }) => (
+              <div key={title} className="flex flex-col gap-3 rounded-2xl border border-[#ECECEC] bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl" style={{ background: bg }}>
+                  <Icon size={20} strokeWidth={1.8} style={{ color }} aria-hidden="true" />
                 </span>
-                <h3 className="text-base font-semibold text-[#1a1d2e] leading-snug">{s.title}</h3>
-                <p className="text-[#6b6b6b] text-sm leading-relaxed">{s.body}</p>
+                <h3 className="text-base font-semibold leading-snug text-[#111]">{title}</h3>
+                <p className="text-sm leading-relaxed text-[#6b7280]">{body}</p>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ── How we deliver ── */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 pt-4 pb-12">
-        <SectionLabel>How we deliver</SectionLabel>
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
-          <h2 className="text-4xl md:text-5xl font-normal text-[#1a1d2e] max-w-[680px] leading-tight">
-            Live in one billing cycle.
-          </h2>
-          <Link
-            href="/schedule-call"
-            className="shrink-0 self-start lg:self-end inline-flex items-center bg-[#2563EB] hover:bg-[#d4836a] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors"
-          >
-            Book a demo
-          </Link>
-        </div>
-        <ProcessTimeline steps={processSteps} />
-      </section>
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div>
+              <div className="mb-4"><Eyebrow>How we deliver</Eyebrow></div>
+              <h2 className="m-0 max-w-[600px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+                Live in one billing cycle.
+              </h2>
+            </div>
+            <PrimaryButton href="/schedule-call">Book a demo</PrimaryButton>
+          </div>
 
-      {/* ── Final CTA ── */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 pb-24">
-        <div
-          className="relative overflow-hidden rounded-3xl px-8 py-16 md:px-16 md:py-20 text-center"
-          style={{ background: `linear-gradient(120deg, #3b82f6 0%, ${ACCENT} 55%, ${ACCENT_DARK} 100%)` }}
-        >
-          <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight max-w-[680px] mx-auto">
-            Stop chasing. Start collecting.
-          </h2>
-          <p className="mt-5 text-base md:text-lg text-white/85 max-w-[520px] mx-auto">
-            One platform for invoicing, payments, reminders, and AI recovery — for any business.
-          </p>
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-            <Link
-              href="/schedule-call"
-              className="inline-flex items-center gap-2 bg-white hover:bg-[#f7f6f3] text-[#1a1d2e] px-7 py-3.5 rounded-full text-base font-semibold transition-colors"
-            >
-              Book a demo
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </Link>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {deliverySteps.map((s) => (
+              <div key={s.step} className="flex flex-col gap-3 rounded-2xl border border-[#ECECEC] bg-[#FAFAF8] p-6">
+                <span className="text-sm font-semibold tabular-nums text-[#2563EB]">{s.step}</span>
+                <h3 className="text-base font-semibold leading-snug text-[#111]">{s.title}</h3>
+                <p className="text-sm leading-relaxed text-[#6b7280]">{s.body}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
+
+      {/* ── Final CTA ── */}
+      <section className="bg-[#FAFAF8] border-t border-[#eee]">
+        <div className={`${CONTAINER} flex flex-col gap-10 py-20 md:flex-row md:items-center md:justify-between`}>
+          <div className="flex max-w-xl flex-col gap-4">
+            <h2 className="m-0 text-[28px] font-medium leading-[1.1] text-[#111] md:text-[44px]">
+              Stop chasing. Start collecting.
+            </h2>
+            <p className="m-0 text-[18px] font-light leading-[1.6] text-[#6b7280]">
+              Secure invoice payments, reminders, and AI recovery — from €0.40 per transfer, priced to your volume.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <PrimaryButton href="/schedule-call">Book a demo</PrimaryButton>
+            <SecondaryButton href="/native-invoice">Explore NativeInvoice</SecondaryButton>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }
