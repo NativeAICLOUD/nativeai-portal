@@ -3,7 +3,7 @@ import {
   Repeat, QrCode, BellRing, Bot, LayoutDashboard, BarChart3,
   ShieldCheck, Lock, CreditCard, KeyRound, Landmark, Fingerprint, FileCheck, Globe,
   ScanLine, CheckCircle2, ChevronRight, Building2, School, HeartPulse, Zap, Home, Briefcase,
-  TrendingDown, Receipt, Plug, Send, Wallet, Mail, MessageSquare, MessageCircle,
+  TrendingDown, Receipt, Plug, Send, Wallet, Mail, MessageSquare, MessageCircle, Eye, Handshake,
   type LucideIcon,
 } from "lucide-react";
 import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from "@/app/components/partials/services/ServiceUI";
@@ -80,6 +80,42 @@ const pricingPoints: { title: string; body: string; icon: LucideIcon; color: str
   { title: "Pay per transfer", body: "Pricing tied to the payments you actually process — not to seats or licences.", icon: Receipt, color: "#2563EB", bg: "rgba(37,99,235,0.08)" },
   { title: "Lower rate as you grow", body: "The more invoices you process each month, the lower your per-transfer rate.", icon: TrendingDown, color: "#0F8B83", bg: "rgba(15,139,131,0.08)" },
   { title: "Tailored for institutions", body: "High-volume billers and public institutions get a rate built around their volume.", icon: Landmark, color: "#7C3AED", bg: "rgba(124,58,237,0.08)" },
+];
+
+// Same card schema as the About page's engagement models: tinted icon, summary, three checked points.
+const trustPillars: { title: string; body: string; icon: LucideIcon; color: string; checkbox: string; points: string[] }[] = [
+  {
+    title: "Secure by Design",
+    body: "Every payment travels over encrypted, bank-grade rails.",
+    icon: ShieldCheck,
+    color: "#0F8B83",
+    checkbox: "/collaborate/checkbox-green.svg",
+    points: ["End-to-end encryption", "Tokenized, PCI DSS-compliant card processing", "2FA & role-based access control"],
+  },
+  {
+    title: "Transparent Pricing",
+    body: "One clear per-transfer rate, agreed upfront and based on your volume.",
+    icon: Receipt,
+    color: "#7C3AED",
+    checkbox: "/collaborate/checkbox-purple.svg",
+    points: ["Rate agreed before you go live", "Every transfer itemised on your statement", "Lower rate as your volume grows"],
+  },
+  {
+    title: "Full Visibility & Control",
+    body: "See every invoice and every payment, the moment it happens.",
+    icon: Eye,
+    color: "#2563EB",
+    checkbox: "/collaborate/checkbox-blue.svg",
+    points: ["Real-time payment dashboard", "Automatic reconciliation to each invoice", "Full audit trail on every action"],
+  },
+  {
+    title: "A Partner, Not Just Software",
+    body: "Our team sets you up, runs alongside you, and stays on call.",
+    icon: Handshake,
+    color: "#DB2777",
+    checkbox: "/collaborate/checkbox-red.svg",
+    points: ["Guided onboarding & data migration", "Parallel run before full cutover", "Support in English, Macedonian, and Albanian"],
+  },
 ];
 
 const deliverySteps = [
@@ -324,6 +360,38 @@ export default function PaymentAutomationPage() {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
               {pricingPoints.map((p) => <IconCard key={p.title} {...p} />)}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Why trust us ── */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-12">
+            <div className="mb-4"><Eyebrow>Why trust us</Eyebrow></div>
+            <h2 className="m-0 max-w-[680px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              Built to earn your trust with every payment.
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-6">
+            {trustPillars.map(({ title, body, icon: Icon, color, checkbox, points }) => (
+              <div key={title} className="flex h-full flex-col rounded-lg border border-[#e6e6e6] bg-white p-6">
+                <span className="mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style={{ background: `${color}14` }}>
+                  <Icon size={20} strokeWidth={1.6} style={{ color }} aria-hidden="true" />
+                </span>
+                <h3 className="m-0 text-[18px] font-medium leading-[1.25] text-[#111]">{title}</h3>
+                <p className="mt-2 text-[14.5px] font-normal leading-[1.55] text-[#6b7280]">{body}</p>
+                <ul className="mt-5 flex flex-col gap-2.5">
+                  {points.map((point) => (
+                    <li key={point} className="flex items-start gap-2.5">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={checkbox} alt="" className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+                      <span className="text-[14px] font-normal leading-[1.5] text-[#374151]">{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
       </section>

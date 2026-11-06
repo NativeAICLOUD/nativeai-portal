@@ -34,7 +34,7 @@ const SOLUTION_CARDS: CardEntry[] = [
 const INDUSTRY_CARDS: CardEntry[] = [
   { title: 'Travel & Aviation', href: Constants.PAGES.AIRLINE_BOOKING, icon: Plane },
   { title: 'Legal & Compliance', href: Constants.PAGES.AI_LEGAL_WORKSPACE, icon: Scale },
-  { title: 'Finance & Banking', href: Constants.PAGES.PAYMENT_AUTOMATION, icon: Landmark },
+  { title: 'Finance', href: Constants.PAGES.PAYMENT_AUTOMATION, icon: Landmark },
   { title: 'Healthcare', href: '/industries', icon: HeartPulse },
   { title: 'Retail & E-commerce', href: '/industries', icon: ShoppingBag },
   { title: 'Manufacturing', href: '/industries', icon: Factory },

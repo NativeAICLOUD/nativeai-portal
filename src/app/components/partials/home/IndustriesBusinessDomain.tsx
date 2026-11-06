@@ -32,7 +32,7 @@ const groups: IndustryGroup[] = [
     color: '#0369A1',
     bg: 'rgba(3,105,161,0.08)',
     items: [
-      { title: 'Finance and Banking', desc: 'Secure, compliant platforms for banks and financial institutions.', href: '/industries',         icon: Landmark },
+      { title: 'Finance',             desc: 'Secure, compliant platforms for finance teams and financial services.', href: '/industries',         icon: Landmark },
       { title: 'Fintech',             desc: 'Modern rails for lending, payments and wealth products.',           href: '/payment-automation', icon: Wallet },
       { title: 'Payments',            desc: 'Billing, reconciliation and payment automation at scale.',          href: '/payment-automation', icon: CreditCard },
       { title: 'Insurance',           desc: 'Claims automation, risk analytics and policy workflows.',           href: '/industries',         icon: ShieldCheck },
