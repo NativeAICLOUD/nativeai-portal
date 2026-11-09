@@ -56,7 +56,7 @@ const groups: IndustryGroup[] = [
     items: [
       { title: 'Technology',         desc: 'Product engineering for software and SaaS companies.',  href: '/industries',      icon: Cpu },
       { title: 'B2B Solutions',      desc: 'Portals, integrations and workflow platforms for B2B.', href: '/industries',      icon: Network },
-      { title: 'Legal & Compliance', desc: 'AI document and case workflows for legal teams.',       href: '/legal-saas',      icon: Scale },
+      { title: 'Legal AI',           desc: 'AI document and case workflows for legal teams.',       href: '/legal-saas',      icon: Scale },
       { title: 'Travel',             desc: 'GDS-connected booking and travel platforms.',           href: '/airline-booking', icon: Plane },
     ],
   },

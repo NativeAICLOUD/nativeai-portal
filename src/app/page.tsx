@@ -34,10 +34,10 @@ export default function Home() {
       {/* Industries Section */}
       <IndustriesBusinessDomain />
 
-      {/* What We Deliver — pinned scroll card experience */}
+      {/* Services — minimalist numbered accordion */}
       <ServicesScrollSection />
 
-      {/* Why go cloud-native — moved here from the cloud-native-sd service page */}
+      {/* Engineering Your Way with Agentic AI — benefits of agentic AI */}
       <WhyCloudNativeSection />
 
       {/* Practical AI & Cloud solutions — where Core Services used to be */}

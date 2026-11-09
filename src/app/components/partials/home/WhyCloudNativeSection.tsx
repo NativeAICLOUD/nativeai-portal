@@ -8,36 +8,36 @@ const benefits = [
     icon: '/img/faster-development.svg',
     color: '#2563EB',
     bg: 'rgba(37,99,235,0.08)',
-    title: 'Ship faster',
-    desc: 'Go from idea to production in days, not months. Automated pipelines and infrastructure-as-code replace slow, manual releases.',
+    title: 'Agents that do the work',
+    desc: 'AI agents read, decide and act across your systems — triaging requests, drafting documents and running workflows end to end.',
   },
   {
     icon: '/img/scalability-peach.svg',
     color: '#7C3AED',
     bg: 'rgba(124,58,237,0.08)',
-    title: 'Scale on demand',
-    desc: 'Capacity grows and shrinks with real usage — peak traffic, new users or new markets never mean a re-architecture.',
+    title: 'Grounded in your data',
+    desc: 'Retrieval over your own documents, databases and APIs, so every answer is specific to your business and traceable to its source.',
   },
   {
     icon: '/img/continue-integratie-en-delivery.svg',
     color: '#0F8B83',
     bg: 'rgba(15,139,131,0.08)',
-    title: 'Release continuously',
-    desc: 'Every change is tested, versioned and deployed the same way. Smaller releases, fewer surprises.',
+    title: 'Humans stay in control',
+    desc: 'Approval steps, guardrails and full audit trails keep people in charge of every decision that matters.',
   },
   {
     icon: '/img/cost-effectiveness.svg',
     color: '#F59E0B',
     bg: 'rgba(245,158,11,0.08)',
-    title: 'Pay for what you use',
-    desc: 'Managed services and right-sized workloads cut idle infrastructure and the hours spent keeping servers alive.',
+    title: 'Ship AI faster',
+    desc: 'AI-assisted engineering and proven agent patterns take you from use case to production in weeks, not quarters.',
   },
   {
     icon: '/img/improved-security.svg',
     color: '#E11D48',
     bg: 'rgba(225,29,72,0.08)',
     title: 'Secure by design',
-    desc: 'Identity, encryption, policy and monitoring are built in from day one — not bolted on before go-live.',
+    desc: 'Private models, identity, encryption and monitoring are built in from day one — your data never trains someone else’s model.',
   },
 ];
 
@@ -63,13 +63,13 @@ export default function WhyCloudNativeSection() {
         viewport={{ once: true, margin: '-60px' }}
       >
         <div>
-          <div className="mb-4"><Eyebrow>Why go cloud-native</Eyebrow></div>
+          <div className="mb-4"><Eyebrow>Built for the AI era</Eyebrow></div>
           <h2 className={`max-w-xl ${H2}`}>
-            Designed for today. Ready for tomorrow.
+            Engineering Your Way with Agentic AI
           </h2>
           <p className={`mt-4 max-w-xl ${BODY}`}>
-            Great software is simple, powerful, and made to evolve. Cloud-native from day one.
-            Fast, scalable, and ready for what&apos;s next.
+            Software that doesn&apos;t just run your processes — it takes them on. We design and build
+            agentic AI that works inside your systems, alongside your team.
           </p>
         </div>
       </motion.div>

@@ -1,78 +1,102 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import {
-  Cloud, Layers, Rocket, Workflow, RefreshCw, Building2,
-  Sparkles, Briefcase, Palette, CloudUpload, type LucideIcon,
-} from 'lucide-react';
-import { CONTAINER, Eyebrow, SECTION_Y, H2 } from './HomeUI';
+import { Fragment } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { Constants } from '@/Constants';
+import { CONTAINER, Eyebrow, SECTION_PB, H2, BODY } from './HomeUI';
+import ServicesAccordion, { type AccordionService } from './ServicesAccordion';
 
-/* Icon tile tints — four colours: pink (Enterprise App Development),
-   teal (UI / UX Design), orange (App Modernization) and cherry. */
-const TILE = [
-  { color: '#DB2777', bg: 'rgba(219,39,119,0.08)' },
-  { color: '#0F8B83', bg: 'rgba(15,139,131,0.08)' },
-  { color: '#FF6A3D', bg: 'rgba(255,106,61,0.08)' },
-  { color: '#BE123C', bg: 'rgba(190,18,60,0.08)' },
+const services: AccordionService[] = [
+  {
+    title: 'Applications',
+    heading: 'Software built around your business.',
+    description:
+      'From custom platforms to enterprise applications, we build reliable software designed to scale with your business.',
+    capabilities: ['Custom Software Development', 'SaaS Platform Engineering', 'Web & Mobile Applications', 'API Development & Integration'],
+    cta: { label: 'Explore Applications', href: '/services/custom-development' },
+  },
+  {
+    title: 'Data',
+    heading: 'Turn your data into intelligence.',
+    description:
+      'We connect, structure, and transform business data into reliable foundations for analytics, automation, and AI.',
+    capabilities: ['Data Engineering & Integration', 'Intelligent Document Processing', 'Enterprise Search & RAG', 'Analytics & Data Platforms'],
+    cta: { label: 'Explore Data Solutions', href: Constants.PAGES.DATA_LIFECYCLE_MANAGEMENT },
+  },
+  {
+    title: 'Process',
+    heading: 'Make complex work simple.',
+    description:
+      'We automate repetitive operations, connect existing systems, and streamline workflows to help teams accomplish more with less manual effort.',
+    capabilities: ['Business Process Automation', 'Intelligent Workflow Orchestration', 'Document & Invoice Automation', 'Enterprise System Integration'],
+    cta: { label: 'Explore Automation', href: Constants.PAGES.PAYMENT_AUTOMATION },
+  },
+  {
+    title: 'Agents',
+    heading: 'AI that doesn’t just answer. It acts.',
+    description:
+      'We design intelligent AI agents that understand business context, work with enterprise systems, and execute real tasks under human supervision.',
+    capabilities: ['Agentic AI Development', 'Multi-Agent Orchestration', 'Microsoft Foundry & Agent Framework', 'Enterprise RAG & Tool Integration', 'Human-in-the-Loop Workflows'],
+    cta: { label: 'Explore AI Agents', href: '/services/ai-agents-rag' },
+  },
+  {
+    title: 'Migration',
+    heading: 'Modernize without slowing down.',
+    description:
+      'Move from legacy infrastructure to secure, scalable cloud platforms with a clear modernization strategy and minimal disruption.',
+    capabilities: ['Azure & AWS Cloud Migration', 'Legacy Application Modernization', 'Cloud Architecture', 'DevOps & Infrastructure Automation', 'Kubernetes & Containerization'],
+    cta: { label: 'Explore Cloud Migration', href: Constants.PAGES.MIGRATE_TO_AZURE },
+  },
 ];
 
-/* tile = index into TILE (0 pink · 1 teal · 2 orange · 3 cherry); assigned so
-   the three reference services keep their colours and neighbours never repeat. */
-const services: { title: string; icon: LucideIcon; tile: number }[] = [
-  { title: 'Cloud Solutions & Services',     icon: Cloud,       tile: 3 },
-  { title: 'Platform Development',           icon: Layers,      tile: 1 },
-  { title: 'SaaS App Development',           icon: Rocket,      tile: 0 },
-  { title: 'Cloud & DevOps',                 icon: Workflow,    tile: 3 },
-  { title: 'App Modernization',              icon: RefreshCw,   tile: 2 },
-  { title: 'Enterprise App Development',     icon: Building2,   tile: 0 },
-  { title: 'Digital Transformation',         icon: Sparkles,    tile: 3 },
-  { title: 'End-to-end Business Solutions',  icon: Briefcase,   tile: 2 },
-  { title: 'UI / UX Design',                 icon: Palette,     tile: 1 },
-  { title: 'Cloud Migrations',               icon: CloudUpload, tile: 0 },
-];
+const EASE = [0.16, 1, 0.3, 1] as const;
+const VIEWPORT = { once: true, margin: '-15% 0px' } as const;
+const HEADING = ['What', 'we', 'deliver'];
+const HIGHLIGHT = 'deliver';
 
 export default function ServicesScrollSection() {
+  const reduce = useReducedMotion();
+
   return (
-    <section className="font-switzer bg-white">
-      <div className={`${CONTAINER} ${SECTION_Y}`}>
+    <section aria-labelledby="services-heading" className="font-switzer bg-white">
+      <div className={`${CONTAINER} ${SECTION_PB}`}>
 
-        {/* Header */}
-        <motion.div
-          className="mb-14"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
-          viewport={{ once: true, margin: '-60px' }}
-        >
-          <div className="mb-4"><Eyebrow>What we deliver</Eyebrow></div>
-          <h2 className={`m-0 max-w-[620px] ${H2}`}>
-            Everything your business needs. In one place.
-          </h2>
-        </motion.div>
-
-        {/* Service tabs — tinted icon tile matching the site's icon-tile system */}
-        <div className="flex flex-wrap gap-x-8 gap-y-5">
-          {services.map(({ title, icon: Icon, tile: t }) => {
-            const tile = TILE[t];
-            return (
-              <div
-                key={title}
-                className="group flex items-center gap-3.5"
-                style={{ '--hover-tint': tile.bg } as React.CSSProperties}
-              >
-                <span
-                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
-                  style={{ background: tile.bg }}
-                >
-                  <Icon className="h-5 w-5" style={{ color: tile.color }} strokeWidth={1.7} aria-hidden="true" />
-                </span>
-                <span className="inline-flex items-center rounded-full border border-[#E6E6E6] bg-white px-5 py-2.5 transition-[transform,border-color,background-color] duration-200 group-hover:-translate-y-0.5 group-hover:border-[#111827]/20 group-hover:bg-[var(--hover-tint)]">
-                  <span className="text-[15px] font-medium text-[#111]">{title}</span>
-                </span>
-              </div>
-            );
-          })}
+        {/* Header — same treatment as "Move your industry forward" (IndustriesBusinessDomain) */}
+        <div className="mb-12 flex flex-col gap-6 lg:mb-16 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <div className="mb-4"><Eyebrow>Services</Eyebrow></div>
+            <h2 id="services-heading" className={`m-0 max-w-[560px] ${H2}`} aria-label={HEADING.join(' ')}>
+              {HEADING.map((word, i) => (
+                <Fragment key={word}>
+                  {i > 0 && ' '}
+                  <motion.span
+                    className="inline-block"
+                    aria-hidden="true"
+                    initial={reduce ? false : { opacity: 0, y: '0.45em', filter: 'blur(8px)' }}
+                    whileInView={reduce ? undefined : { opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    viewport={VIEWPORT}
+                    transition={{ duration: 0.9, ease: EASE, delay: i * 0.08 }}
+                  >
+                    {word === HIGHLIGHT ? (
+                      <span style={{ background: 'rgba(37,99,235,0.12)', borderRadius: 0, padding: '2px 6px' }}>{word}</span>
+                    ) : word}
+                  </motion.span>
+                </Fragment>
+              ))}
+            </h2>
+          </div>
+          <motion.p
+            className={`m-0 max-w-[440px] ${BODY} lg:text-right`}
+            initial={reduce ? false : { opacity: 0, y: 12 }}
+            whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+            viewport={VIEWPORT}
+            transition={{ duration: 0.9, ease: EASE, delay: HEADING.length * 0.08 }}
+          >
+            From intelligent applications to autonomous agents, we build technology that makes your business work better.
+          </motion.p>
         </div>
+
+        <ServicesAccordion services={services} />
 
       </div>
     </section>

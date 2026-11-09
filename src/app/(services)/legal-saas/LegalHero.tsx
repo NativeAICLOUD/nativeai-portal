@@ -48,7 +48,7 @@ export default function LegalHero() {
     >
       <EditorialGlow />
 
-      <div className={`${CONTAINER} pb-20 pt-[18vh] md:pt-[22vh] lg:px-20 lg:pb-28`}>
+      <div className={`${CONTAINER} pb-20 pt-[24vh] md:pt-[30vh] lg:px-20 lg:pb-28`}>
 
         {/* Text block */}
         <motion.div

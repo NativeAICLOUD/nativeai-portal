@@ -77,7 +77,7 @@ const pages: Pages[] = [
       {
         url: Constants.PAGES.SOLUTIONS, title: 'Industries', children: [
           { url: Constants.PAGES.AIRLINE_BOOKING,    title: 'Travel & Aviation',   desc: 'GDS booking & airline platforms',     icon: Plane,       color: PALETTE.blue   },
-          { url: Constants.PAGES.AI_LEGAL_WORKSPACE, title: 'Legal & Compliance',  desc: 'Agentic legal research assistants',      icon: Scale,       color: PALETTE.purple },
+          { url: Constants.PAGES.AI_LEGAL_WORKSPACE, title: 'Legal AI',            desc: 'Agentic legal research assistants',      icon: Scale,       color: PALETTE.purple },
           { url: Constants.PAGES.PAYMENT_AUTOMATION, title: 'Finance',   desc: 'Payments, billing & reconciliation',  icon: Landmark,    color: PALETTE.green  },
           { url: Constants.PAGES.SOLUTIONS,          title: 'Healthcare',          desc: 'Secure data & clinical workflows',    icon: HeartPulse,  color: PALETTE.orange },
           { url: Constants.PAGES.SOLUTIONS,          title: 'Retail & E-commerce', desc: 'Scalable storefronts & logistics',    icon: ShoppingBag, color: PALETTE.teal   },
@@ -116,7 +116,7 @@ const INDUSTRIES_MENU: SolutionEntry[] = [
     details: ['GDS Booking Platforms', 'Airline Reservation Systems', 'Fare & Ancillary Management', 'Loyalty Programmes', 'Operations Dashboards', 'NDC Integrations'],
   },
   {
-    title: 'Legal & Compliance',
+    title: 'Legal AI',
     href: Constants.PAGES.AI_LEGAL_WORKSPACE,
     color: '#7C3AED',
     bg: 'rgba(124,58,237,0.08)',
@@ -365,7 +365,7 @@ function Navbar() {
                 <Link
                   href={item.url}
                   onClick={() => setSlideMenu(false)}
-                  className="inline-flex h-10 min-w-[160px] cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#E1F0FF] px-5 text-[14px] font-semibold text-[#0066B3] transition-colors duration-200 hover:bg-[#CCE4FF] active:bg-[#B8D9FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066B3]/40 focus-visible:ring-offset-2"
+                  className="inline-flex h-10 min-w-[160px] cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#2563EB] px-5 text-[14px] font-semibold text-white transition-colors duration-200 hover:bg-[#1D4ED8] active:bg-[#1E40AF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]/40 focus-visible:ring-offset-2"
                 >
                   Let&apos;s talk
                 </Link>

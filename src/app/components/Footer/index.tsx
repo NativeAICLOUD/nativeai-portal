@@ -38,7 +38,7 @@ const footerSections: { title: string; links: { title: string; url: string }[] }
     links: [
       { title: 'Industries Overview', url: '/industries' },
       { title: 'Travel & Aviation', url: Constants.PAGES.AIRLINE_BOOKING },
-      { title: 'Legal & Compliance', url: Constants.PAGES.AI_LEGAL_WORKSPACE },
+      { title: 'Legal AI', url: Constants.PAGES.AI_LEGAL_WORKSPACE },
       { title: 'Finance', url: Constants.PAGES.PAYMENT_AUTOMATION },
       { title: 'Nearshore Teams', url: Constants.PAGES.NEARSHORE_TEAMS },
     ],
