@@ -12,35 +12,30 @@ const benefits = [
     color: '#7C3AED',
     bg: '#F3EEFD',
     title: 'Grounded in your data',
-    desc: 'Retrieval over your own documents, databases and APIs, so every answer is specific to your business and traceable to its source.',
   },
   {
     icon: Bot,
     color: '#2563EB',
     bg: '#EEF3FE',
     title: 'Agents that do the work',
-    desc: 'AI agents read, decide and act across your systems — triaging requests, drafting documents and running workflows end to end.',
   },
   {
     icon: UserCheck,
     color: '#0F8B83',
     bg: '#EEF8F6',
     title: 'Humans stay in control',
-    desc: 'Approval steps, guardrails and full audit trails keep people in charge of every decision that matters.',
   },
   {
     icon: ShieldCheck,
     color: '#E11D48',
     bg: '#FDEEF1',
     title: 'Secure by design',
-    desc: 'Private models, identity, encryption and monitoring are built in from day one — your data never trains someone else’s model.',
   },
   {
     icon: Rocket,
     color: '#D97706',
     bg: '#FBF7E8',
     title: 'Ship AI faster',
-    desc: 'AI-assisted engineering and proven agent patterns take you from use case to production in weeks, not quarters.',
   },
 ];
 
@@ -81,34 +76,44 @@ export default function WhyCloudNativeSection() {
 
             {/* Columns */}
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6 lg:grid-cols-5 lg:gap-8">
-              {benefits.map(({ title, desc, icon: Icon, color, bg }, i) => (
+              {benefits.map(({ title, icon: Icon, color, bg }, i) => (
                 <motion.div
                   key={title}
-                  className="group transition-transform duration-[250ms] ease-out hover:-translate-y-[6px]"
-                  initial={{ opacity: 0, y: 28 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.45, ease: 'easeOut', delay: i * 0.1 }}
+                  className="group relative flex h-full flex-col overflow-hidden rounded-[16px] border border-[#EEF0F3] bg-white p-5 transition-[transform,background-color,border-color,box-shadow] duration-300 ease-out hover:-translate-y-[6px] hover:border-transparent hover:bg-[var(--tint)] hover:shadow-[0_18px_40px_rgba(15,23,42,.08)] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+                  style={{ '--tint': bg, '--accent': color } as React.CSSProperties}
+                  initial={{ opacity: 0, y: 28, scale: 0.96 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
                   viewport={{ once: true, margin: '-40px' }}
                 >
-                  <span
-                    className="grid h-12 w-12 place-items-center rounded-[14px] transition-[filter] duration-[250ms] ease-out group-hover:brightness-[0.97]"
-                    style={{ background: bg }}
-                  >
-                    <Icon style={{ color, height: 24, width: 24 }} strokeWidth={1.7} aria-hidden="true" />
+                  {/* Icon tile — fills with the accent colour and the glyph turns white on hover */}
+                  <span className="relative grid h-12 w-12 place-items-center rounded-[14px]" style={{ background: bg }}>
+                    <span
+                      className="absolute inset-0 scale-50 rounded-[14px] opacity-0 transition-[transform,opacity] duration-300 ease-out group-hover:scale-100 group-hover:opacity-100 motion-reduce:transition-none"
+                      style={{ background: color }}
+                      aria-hidden="true"
+                    />
+                    <Icon
+                      className="relative transition-[color,transform] duration-300 ease-out group-hover:rotate-[-8deg] group-hover:scale-110 group-hover:!text-white motion-reduce:transition-none"
+                      style={{ color, height: 24, width: 24 }}
+                      strokeWidth={1.7}
+                      aria-hidden="true"
+                    />
                   </span>
 
                   <h3
-                    className="text-[#101828] transition-colors duration-[250ms] ease-out group-hover:text-black"
+                    className="text-[#101828] transition-colors duration-300 ease-out group-hover:text-[var(--accent)]"
                     style={{ fontSize: 19, fontWeight: 600, lineHeight: 1.25, marginTop: 18, marginBottom: 0 }}
                   >
                     {title}
                   </h3>
 
-                  <div style={{ height: 1, background: 'rgba(15,23,42,.08)', marginTop: 18, marginBottom: 18 }} />
-
-                  <p className="m-0 text-[#475467]" style={{ fontSize: 14.5, fontWeight: 400, lineHeight: 1.55 }}>
-                    {desc}
-                  </p>
+                  {/* Accent bar grows along the bottom edge on hover */}
+                  <span
+                    className="absolute bottom-0 left-0 h-[3px] w-0 transition-[width] duration-500 ease-out group-hover:w-full motion-reduce:transition-none"
+                    style={{ background: color }}
+                    aria-hidden="true"
+                  />
                 </motion.div>
               ))}
             </div>
