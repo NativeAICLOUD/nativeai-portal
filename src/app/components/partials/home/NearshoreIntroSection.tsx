@@ -1,17 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Cloud, Boxes, Bot, Code2, type LucideIcon } from 'lucide-react';
 import { Constants } from '@/Constants';
 import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton, SECTION_Y } from './HomeUI';
-
-/* Grouped from the live roles on /careers (public/jobs.json) */
-const profiles: { label: string; icon: LucideIcon }[] = [
-  { label: 'Cloud Solutions Architects', icon: Boxes },
-  { label: 'Azure & DevOps Engineers', icon: Cloud },
-  { label: 'AI & LLM Engineers', icon: Bot },
-  { label: 'Full-Stack Developers', icon: Code2 },
-];
 
 /* Same design as the /nearshore-teams hero, embedded as a homepage section */
 export default function NearshoreIntroSection() {
@@ -47,23 +38,6 @@ export default function NearshoreIntroSection() {
                 <SecondaryButton href={Constants.PAGES.NEARSHORE_TEAMS}>Explore nearshore teams</SecondaryButton>
               </div>
             </motion.div>
-
-            {/* Right — Team profiles card */}
-            <div className="w-full lg:max-w-[380px] lg:flex-1">
-              <div className="rounded-2xl border border-[#E6E6E6] bg-white p-6">
-                <div className="mb-1 pl-[50px]"><Eyebrow>Team profiles</Eyebrow></div>
-                <ul role="list" className="mt-3 divide-y divide-[#EAEAEA]">
-                  {profiles.map(({ label, icon: Icon }) => (
-                    <li key={label} className="flex items-center gap-3.5 py-3 first:pt-0 last:pb-0">
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[rgba(37,99,235,0.07)]">
-                        <Icon className="h-[18px] w-[18px] text-[#2563EB]" strokeWidth={1.7} aria-hidden="true" />
-                      </span>
-                      <span className="text-[14.5px] font-medium text-[#111827]">{label}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
 
           </div>
         </div>

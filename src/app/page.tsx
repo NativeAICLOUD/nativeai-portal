@@ -43,7 +43,7 @@ export default function Home() {
       {/* Practical AI & Cloud solutions — where Core Services used to be */}
       <PracticalSolutionsSection />
 
-      {/* Featured innovation — Realtime Voice AI + agents */}
+      {/* Featured innovation — Realtime AI */}
       <AIInnovationSection />
 
       {/* Dedicated nearshore teams — same design as /nearshore-teams hero */}

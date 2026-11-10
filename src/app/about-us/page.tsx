@@ -6,6 +6,7 @@ import { Constants } from "@/Constants";
 import { Link } from "react-transition-progress/next";
 import { CONTAINER, Eyebrow } from "@/app/components/partials/services/ServiceUI";
 import GlobalPresenceSection from "@/app/components/partials/about/GlobalPresenceSection";
+import HeroFog from "@/app/components/partials/home/HeroFog";
 
 const collaborationModels: {
   icon: string | null;
@@ -147,17 +148,10 @@ export default function AboutUsPage() {
 
       {/* ── Hero ── */}
       {/* hero-bg-blue with a white wash on top, so the glow doesn't sit behind the navbar's "Let's talk" pill */}
-      <div
-        style={{
-          background: [
-            'linear-gradient(180deg, #ffffff 0, #ffffff 96px, rgba(255,255,255,0) 260px)',
-            'radial-gradient(circle at 15% 100%, rgba(224, 225, 255, 0.75), transparent 43%)',
-            'radial-gradient(circle at 80% 100%, rgba(191, 219, 254, 0.55), transparent 48%)',
-            'radial-gradient(circle at 100% 70%, rgba(219, 234, 254, 0.5), transparent 43%)',
-            '#ffffff',
-          ].join(', '),
-        }}
-      >
+      <div className="relative isolate overflow-hidden bg-white">
+        {/* Blue glow drifting like fog along the bottom — same as the home hero */}
+        <HeroFog />
+
         <div className={`${CONTAINER} pb-12 pt-32 lg:pt-28`}>
           <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
 

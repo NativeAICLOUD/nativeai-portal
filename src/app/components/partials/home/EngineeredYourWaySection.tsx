@@ -2,7 +2,8 @@
 
 import { useId, useRef, useState, type KeyboardEvent } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { ArrowRight, CircleArrowUp, Plus, RefreshCw, type LucideIcon, type LucideProps } from 'lucide-react';
+import { ArrowRight, CircleArrowUp, RefreshCw, type LucideIcon, type LucideProps } from 'lucide-react';
+import Image from 'next/image';
 import { Link } from 'react-transition-progress/next';
 import { Constants } from '@/Constants';
 
@@ -32,7 +33,9 @@ type Capability = {
   icon: LucideIcon | typeof LaunchRocketIcon;
   /** Short lead line shown above the description when the card is open. */
   tagline: string;
-  description: string;
+  description?: string;
+  /** Illustration shown at the top of the open card. */
+  image: { src: string; alt: string };
   cta: { label: string; href: string };
 };
 
@@ -41,23 +44,21 @@ const capabilities: Capability[] = [
     title: 'Innovate',
     icon: LaunchRocketIcon,
     tagline: 'Ideas into reality.',
-    description:
-      'Intelligent products. Meaningful results. Turn ideas into useful AI agents and digital products.',
+    image: { src: '/img/native-agenticai.webp', alt: 'NativeCloud agentic AI ribbon' },
     cta: { label: 'Explore AI Solutions', href: '/services/ai-agents-rag' },
   },
   {
     title: 'Modernize',
     icon: RefreshCw,
     tagline: 'Modernize what you have. Build what’s next.',
-    description: 'Transform legacy applications into modern, scalable cloud solutions.',
+    image: { src: '/img/Soft%20Orange%20Loop%20Logo%20on%20Airy%20Gradient.png', alt: 'NativeCloud agentic AI loop on an airy gradient' },
     cta: { label: 'Explore Cloud Services', href: Constants.PAGES.CLOUD_NATIVE_SD },
   },
   {
     title: 'Accelerate',
     icon: CircleArrowUp,
     tagline: 'Engineering, made simple.',
-    description:
-      'We build reliable systems, automate the complex, and make technology work better.',
+    image: { src: '/img/ai-infinity-ribbon-cutout.webp', alt: 'NativeCloud agentic AI ribbon' },
     cta: { label: 'Explore Engineering', href: Constants.PAGES.DEVOPS_ON_AZURE },
   },
 ];
@@ -116,7 +117,7 @@ export default function EngineeredYourWaySection() {
         </header>
 
         <div className="mt-10 grid grid-cols-1 items-start gap-4 sm:gap-5 lg:mt-12 lg:grid-cols-3">
-          {capabilities.map(({ title, icon: Icon, tagline, description, cta }, i) => {
+          {capabilities.map(({ title, icon: Icon, tagline, description, image, cta }, i) => {
             const isOpen = openIndex === i;
             const triggerId = `${baseId}-trigger-${i}`;
             const panelId = `${baseId}-panel-${i}`;
@@ -156,11 +157,6 @@ export default function EngineeredYourWaySection() {
                     <span className="min-w-0 flex-1 text-[26px] font-semibold leading-none tracking-[-0.02em] text-[#202124] min-[380px]:text-[28px] sm:text-[32px] lg:text-[28px] xl:text-[32px]">
                       {title}
                     </span>
-                    <Plus
-                      className={`h-5 w-5 shrink-0 text-[#202124]/55 transition-transform duration-300 ${isOpen ? 'rotate-45' : ''}`}
-                      strokeWidth={1.8}
-                      aria-hidden="true"
-                    />
                   </button>
                 </h3>
 
@@ -185,12 +181,23 @@ export default function EngineeredYourWaySection() {
                         transition={{ duration, ease: EASE }}
                         className="px-5 pb-7 sm:px-6"
                       >
+                        <div className="relative mb-5 aspect-[16/10] w-full overflow-hidden rounded-xl bg-white">
+                          <Image
+                            src={image.src}
+                            alt={image.alt}
+                            fill
+                            sizes="(min-width: 1024px) 30vw, 90vw"
+                            className="object-cover"
+                          />
+                        </div>
                         <p className="m-0 mb-1.5 text-[17px] font-semibold leading-[1.3] text-[#202124] sm:text-[18px]">
                           {tagline}
                         </p>
-                        <p className="m-0 text-[15px] leading-[1.6] text-[#202124]/75 sm:text-[16px]">
-                          {description}
-                        </p>
+                        {description && (
+                          <p className="m-0 text-[15px] leading-[1.6] text-[#202124]/75 sm:text-[16px]">
+                            {description}
+                          </p>
+                        )}
                         <Link
                           href={cta.href}
                           className="group/cta mt-4 inline-flex items-center gap-2 rounded-sm text-[15px] font-semibold text-[#202124] underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-[#202124] focus-visible:ring-offset-2 focus-visible:ring-offset-[#EEF1F2]"

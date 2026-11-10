@@ -70,11 +70,11 @@ export default function MobileHomeHero() {
         <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5">&rarr;</span>
       </Link>
 
-      {/* hairline divider — symmetric fade in the CTA pill blues, same as About */}
+      {/* Gradient divider — same as the desktop hero (Header.tsx) */}
       <hr
-        className="m-0 mt-6 h-[3px] w-full border-0"
+        className="m-0 mt-6 h-1 w-full border-0"
         style={{
-          backgroundImage: 'linear-gradient(90deg, #fff, #E1F0FF 15%, #0066B3 50%, #E1F0FF 85%, #fff)',
+          backgroundImage: 'linear-gradient(260deg, #fff, #BECBFF 20%, #5B7CFA 50%, #2563EB 80%, #fff)',
           borderRadius: 100,
         }}
       />

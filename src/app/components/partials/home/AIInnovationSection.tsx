@@ -2,18 +2,11 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { AudioLines, Bot, Cloud, Mic, Square, type LucideIcon } from 'lucide-react';
+import { Mic, Square } from 'lucide-react';
 import { Link } from 'react-transition-progress/next';
 import { Constants } from '@/Constants';
 import { CONTAINER, Eyebrow, SECTION_Y } from './HomeUI';
 import { EditorialGlow, SerifAccent } from '@/app/components/ui/EditorialGlow';
-
-/* The three building blocks of the Realtime AI story */
-const pillars: { label: string; desc?: string; icon: LucideIcon }[] = [
-  { label: 'Realtime Voice AI', icon: AudioLines },
-  { label: 'Intelligent Agents', icon: Bot },
-  { label: 'Enterprise Cloud', icon: Cloud },
-];
 
 /* Waveform bar heights (%) — animated as a "listening" voice */
 const BARS = [30, 55, 80, 45, 95, 60, 35, 75, 50, 85, 40, 65, 28, 70, 48];
@@ -367,21 +360,6 @@ export default function AIInnovationSection() {
               <p className="m-0 mt-5 text-[18px] leading-[1.5] text-[#4B5563]">
                 Speak naturally. Get answers. Automate workflows.
               </p>
-
-              {/* The three building blocks — quiet hairline list */}
-              <ul role="list" className="m-0 mt-10 list-none border-t border-[#111827]/[0.08] p-0">
-                {pillars.map(({ label, desc, icon: Icon }) => (
-                  <li key={label} className="flex items-center gap-4 border-b border-[#111827]/[0.08] py-4">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[rgba(37,99,235,0.07)]">
-                      <Icon className="h-[19px] w-[19px] text-[#2563EB]" strokeWidth={1.7} aria-hidden="true" />
-                    </span>
-                    <div className="min-w-0">
-                      <p className="m-0 text-[15px] font-medium text-[#111827]">{label}</p>
-                      {desc && <p className="m-0 mt-0.5 text-[13.5px] leading-[1.45] text-[#6B7280]">{desc}</p>}
-                    </div>
-                  </li>
-                ))}
-              </ul>
 
               {/* Same CTA pair as the hero: black pill + text link */}
               <div className="mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center lg:mt-auto lg:pt-10">
