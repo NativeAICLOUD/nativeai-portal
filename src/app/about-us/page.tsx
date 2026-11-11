@@ -7,6 +7,10 @@ import { Link } from "react-transition-progress/next";
 import { CONTAINER, Eyebrow } from "@/app/components/partials/services/ServiceUI";
 import GlobalPresenceSection from "@/app/components/partials/about/GlobalPresenceSection";
 import HeroFog from "@/app/components/partials/home/HeroFog";
+import FounderLetterSection from "@/app/components/partials/about/FounderLetterSection";
+
+// Founder's letter is hidden for now — set to true to show it again.
+const SHOW_FOUNDER_LETTER = false;
 
 const collaborationModels: {
   icon: string | null;
@@ -150,7 +154,7 @@ export default function AboutUsPage() {
       {/* hero-bg-blue with a white wash on top, so the glow doesn't sit behind the navbar's "Let's talk" pill */}
       <div className="relative isolate overflow-hidden bg-white">
         {/* Blue glow drifting like fog along the bottom — same as the home hero */}
-        <HeroFog />
+        <HeroFog cover />
 
         <div className={`${CONTAINER} pb-12 pt-32 lg:pt-28`}>
           <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
@@ -161,6 +165,10 @@ export default function AboutUsPage() {
               <h1 className="m-0 text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
                 We make AI work for you.
               </h1>
+              <p className="mt-6 max-w-[560px] text-[19px] font-normal leading-[1.6] text-[#4B5563]">
+                We work closely with our clients, use the right technology, and stay focused on
+                what matters most: delivering real results.
+              </p>
               <p className="mt-6 max-w-[520px] text-[12px] font-medium uppercase tracking-[0.14em] leading-[1.6] text-[#6b7280]">
                 NativeCloud is an AI and cloud engineering company that helps businesses turn ideas
                 into working solutions.
@@ -203,6 +211,9 @@ export default function AboutUsPage() {
         {/* blue divider — same as Careers */}
         <hr className="divider-blue m-0 h-1 w-full border-0" />
       </div>
+
+      {/* ── Founder's letter ── */}
+      {SHOW_FOUNDER_LETTER && <FounderLetterSection />}
 
       {/* ── Vision & Mission ── */}
       <section className="bg-white">

@@ -196,6 +196,8 @@ html {
   scroll-behavior: smooth;
   overflow-x: clip;
   max-width: 100%;
+  /* iOS Safari: stop the sideways rubber-band drift while scrolling vertically */
+  overscroll-behavior-x: none;
 }
 
 body {
@@ -203,6 +205,7 @@ body {
   overflow-x: clip;
   width: 100%;
   max-width: 100%;
+  overscroll-behavior-x: none;
 }
 
 

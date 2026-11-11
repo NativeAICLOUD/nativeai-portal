@@ -6,9 +6,10 @@ import { useEffect, useState } from 'react';
 // Each slogan is split so the middle phrase keeps the shimmer + underline accent.
 const SLOGANS = [
   { pre: 'We make ', highlight: 'AI work', post: ' inside your business' },
+  { pre: 'Your ', highlight: 'Azure AI-native', post: ' software & AI development partner' },
+  { pre: 'Modernize & scale with ', highlight: 'Azure Certified', post: ' experts' },
   { pre: '', highlight: 'Web intelligence', post: ' for the agentic era' },
   { pre: '', highlight: 'Intelligence', post: ' for what comes next' },
-  { pre: 'Trust, intelligence and ', highlight: 'AI', post: ' in the flow of human ambition' },
 ];
 const ROTATE_INTERVAL = 4200; // ms between slogan changes
 
@@ -18,7 +19,7 @@ const VARIANTS = {
   desktop: {
     h1Style: {
       fontFamily: "'Switzer', sans-serif",
-      fontSize: 'clamp(2.75rem, 6.5vw, 5.25rem)',
+      fontSize: 'clamp(2.75rem, 4.4vw, 5.25rem)', // ~84px at 1920, ~60px at 1366, 44px floor
       fontWeight: 500,
       lineHeight: 1.0,
       letterSpacing: '-0.04em',
@@ -45,6 +46,9 @@ const HIGHLIGHT_STYLE: React.CSSProperties = {
   color: '#171717',
   padding: '0 6px 3px',
   borderRadius: 2,
+  // keep the tint hugging each line when the highlight wraps
+  boxDecorationBreak: 'clone',
+  WebkitBoxDecorationBreak: 'clone',
 };
 
 export default function RotatingHeroHeadline({

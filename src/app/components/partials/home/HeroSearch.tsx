@@ -71,12 +71,12 @@ export default function HeroSearch() {
   };
 
   return (
-    <div ref={wrapRef} className="relative mt-[52px] max-md:mt-9 w-full max-w-[680px]">
+    <div ref={wrapRef} className="relative mt-11 max-md:mt-9 w-full max-w-[720px]">
       {/* Clean pill — no outline ring */}
       <div className="w-full">
         <form
           onSubmit={submit}
-          className="flex w-full items-center gap-3 rounded-full bg-white px-5 py-1 shadow-[0_2px_12px_rgba(15,23,42,0.06)] max-md:min-h-[70px] max-md:px-4 max-md:py-2 max-md:border max-md:border-black/[0.08]"
+          className="flex w-full items-center gap-3 rounded-full bg-white px-5 py-1 shadow-[0_2px_12px_rgba(15,23,42,0.06)] transition-shadow duration-200 md:h-[62px] md:py-0 md:pr-[13px] md:hover:shadow-[0_4px_20px_rgba(15,23,42,0.09)] md:focus-within:shadow-[0_4px_20px_rgba(15,23,42,0.09),0_0_0_3px_rgba(37,99,235,0.14)] max-md:min-h-[70px] max-md:px-4 max-md:py-2 max-md:border max-md:border-black/[0.08]"
         >
           <svg
             width="17" height="17" viewBox="0 0 24 24" fill="none"

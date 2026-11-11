@@ -3,6 +3,7 @@
 import { Link } from 'react-transition-progress/next';
 import { Constants } from '@/Constants';
 import HeroFog from './HeroFog';
+import PartnerHoverCard from '@/app/components/PartnerHoverCard';
 
 /* Editorial mobile-only hero — eyebrow, static headline (no blur/rotation),
    supporting paragraph, full-width CTA, secondary CTA.
@@ -30,7 +31,7 @@ export default function MobileHomeHero() {
           lineHeight: '40px',
           fontWeight: 600,
           letterSpacing: '-0.019em',
-          marginBottom: 16,
+          marginBottom: 32,
           maxWidth: '100%',
         }}
       >
@@ -41,20 +42,6 @@ export default function MobileHomeHero() {
         inside your business.
       </h1>
 
-      <p
-        className="m-0 text-[#343434]"
-        style={{
-          fontSize: 20,
-          fontWeight: 400,
-          lineHeight: 1.5,
-          letterSpacing: '-0.015em',
-          marginBottom: 32,
-        }}
-      >
-        We work closely with our clients, use the right technology, and stay focused on
-        what matters most: delivering real results.
-      </p>
-
       <Link
         href={Constants.PAGES.GET_IN_TOUCH}
         className="flex w-full h-10 cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#2E2B2B] px-5 text-[14px] font-semibold text-white transition-colors duration-200 hover:bg-[#242121] active:bg-[#1A1818]"
@@ -64,11 +51,16 @@ export default function MobileHomeHero() {
 
       <Link
         href={Constants.PAGES.SOLUTIONS}
-        className="group mt-3 mb-16 flex w-full h-10 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap px-5 text-[14px] font-semibold text-[#2E2B2B] transition-colors duration-200 hover:text-[#0066B3]"
+        className="group mt-3 flex w-full h-10 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap px-5 text-[14px] font-semibold text-[#2E2B2B] transition-colors duration-200 hover:text-[#0066B3]"
       >
         See all solutions
         <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5">&rarr;</span>
       </Link>
+
+      {/* Claude partner badge — tap to open the partnership card */}
+      <div className="mt-3 mb-16 flex justify-center">
+        <PartnerHoverCard official />
+      </div>
 
       {/* Gradient divider — same as the desktop hero (Header.tsx) */}
       <hr

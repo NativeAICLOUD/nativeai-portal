@@ -212,7 +212,7 @@ export default function MobileNavigationV2({ open, onClose, onOpenSearch }: Prop
               </defs>
               <path fill="url(#ai-mode-grad-mobile)" d="M12 0c0 6.627-5.373 12-12 12 6.627 0 12 5.373 12 12 0-6.627 5.373-12 12-12-6.627 0-12-5.373-12-12Z" />
             </svg>
-            AI Mode
+            Search
           </button>
         </li>
 

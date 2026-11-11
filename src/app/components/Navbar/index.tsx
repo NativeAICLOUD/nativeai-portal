@@ -454,7 +454,7 @@ function Navbar() {
               </defs>
               <path fill="url(#ai-mode-grad)" d="M12 0c0 6.627-5.373 12-12 12 6.627 0 12 5.373 12 12 0-6.627 5.373-12 12-12-6.627 0-12-5.373-12-12Z" />
             </svg>
-            <span className="text-[14px] font-medium text-[#111827]">AI Mode</span>
+            <span className="text-[14px] font-medium text-[#111827]">Search</span>
           </button>
 
           <a
