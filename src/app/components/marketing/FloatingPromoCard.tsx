@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Link } from 'react-transition-progress/next';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion, type Variants } from 'framer-motion';
 import AIRibbonVisual from './AIRibbonVisual';
 import { SerifAccent } from '@/app/components/ui/EditorialGlow';
 
@@ -24,6 +24,33 @@ const DISMISS_KEY = 'nc_promo_dismissed';
 
 // Routes where the marketing chrome (Footer, etc.) already opts out — skip the popup there too.
 const EXCLUDED_PREFIXES = ['/login', '/sign-up', '/dashboard'];
+
+const BORDER_GRADIENT =
+  'conic-gradient(from 0deg, #E5E7EB 0deg, #2563EB 50deg, #E5E7EB 110deg, #E5E7EB 180deg, #7FB2FF 230deg, #E5E7EB 290deg, #E5E7EB 360deg)';
+
+/* Card springs in from its corner (scale + blur), then its rows cascade in. */
+const CARD: Variants = {
+  hidden: { opacity: 0, y: -14, scale: 0.92, filter: 'blur(8px)' },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: 'blur(0px)',
+    transition: { type: 'spring', stiffness: 300, damping: 24, staggerChildren: 0.08, delayChildren: 0.15 },
+  },
+  exit: { opacity: 0, y: -8, scale: 0.96, filter: 'blur(4px)', transition: { duration: 0.2, ease: 'easeIn' } },
+};
+
+const REDUCED_CARD: Variants = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { duration: 0.15 } },
+  exit: { opacity: 0, transition: { duration: 0.15 } },
+};
+
+const ITEM: Variants = {
+  hidden: { opacity: 0, y: 8 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] } },
+};
 
 export type FloatingPromoCardProps = {
   headline?: string;
@@ -51,6 +78,14 @@ export default function FloatingPromoCard({
 }: FloatingPromoCardProps) {
   const pathname = usePathname();
   const [visible, setVisible] = useState(false);
+  const reduce = useReducedMotion();
+
+  const onSpotlightMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = e.currentTarget;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+    el.style.setProperty('--my', `${e.clientY - r.top}px`);
+  };
 
   // Timer starts once, independent of route changes — the card should
   // appear a few seconds into the session, not reset on every navigation.
@@ -94,14 +129,24 @@ export default function FloatingPromoCard({
       <AnimatePresence>
         {shown && (
           <motion.div
-            initial={{ opacity: 0, y: -12, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.98 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            variants={reduce ? REDUCED_CARD : CARD}
+            initial="hidden"
+            animate="show"
+            exit="exit"
             role="dialog"
             aria-label={headlineAccent ? `${headline} ${headlineAccent}` : headline}
-            className="pointer-events-auto relative overflow-hidden rounded-[22px] border border-black/[0.06] bg-white shadow-[0_32px_80px_-12px_rgba(15,23,42,0.28),0_6px_18px_rgba(15,23,42,0.08)]"
+            className="pointer-events-auto relative origin-top-right overflow-hidden rounded-[22px] p-[1.5px] shadow-[0_32px_80px_-12px_rgba(37,99,235,0.32),0_12px_30px_rgba(15,23,42,0.14),0_2px_6px_rgba(15,23,42,0.06)]"
           >
+            {/* Orbiting border light — two blue comets circling the card edge */}
+            <motion.div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-[-60%]"
+              style={{ backgroundImage: BORDER_GRADIENT }}
+              animate={reduce ? undefined : { rotate: 360 }}
+              transition={{ duration: 7, ease: 'linear', repeat: Infinity }}
+            />
+
+            <div className="relative overflow-hidden rounded-[20.5px] bg-white">
             {/* Full-bleed AI ribbon — the card opens on the visual, edge to edge */}
             {imageSrc ? (
               <div className="relative aspect-[16/10] w-full overflow-hidden">
@@ -122,33 +167,86 @@ export default function FloatingPromoCard({
               </svg>
             </button>
 
-            <div className="relative px-6 pb-6 pt-5">
-              <div className="mb-3">
+            <div onMouseMove={onSpotlightMove} className="group/body relative px-6 pb-6 pt-5">
+              {/* Glow that follows the cursor across the text area */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover/body:opacity-100"
+                style={{
+                  backgroundImage:
+                    'radial-gradient(240px circle at var(--mx, 50%) var(--my, 0%), rgba(37,99,235,0.11), transparent 70%)',
+                }}
+              />
+
+              <motion.div variants={ITEM} className="relative mb-3 flex items-center gap-2">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#0066B3] opacity-60 motion-reduce:animate-none" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#0066B3]" />
+                </span>
                 <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#0066B3]">
                   Agentic AI
                 </span>
-              </div>
+              </motion.div>
 
-              <h3 className="m-0 text-[28px] font-light leading-[1.05] tracking-[-0.03em] text-[#141414] [text-wrap:balance]">
-                {headline}
+              <motion.h3
+                variants={ITEM}
+                className="relative m-0 text-[28px] font-light leading-[1.05] tracking-[-0.03em] text-[#141414] [text-wrap:balance]"
+              >
+                {reduce ? (
+                  headline
+                ) : (
+                  /* One-shot light sweep across the first line as the card lands */
+                  <motion.span
+                    className="bg-clip-text text-transparent"
+                    style={{
+                      backgroundImage: 'linear-gradient(110deg, #141414 40%, #2563EB 50%, #141414 60%)',
+                      backgroundSize: '300% 100%',
+                    }}
+                    initial={{ backgroundPosition: '100% 0%' }}
+                    animate={{ backgroundPosition: '0% 0%' }}
+                    transition={{ duration: 1.3, ease: 'easeInOut', delay: 0.35 }}
+                  >
+                    {headline}
+                  </motion.span>
+                )}
                 {headlineAccent && (
                   <>
                     <br />
-                    <SerifAccent>{headlineAccent}</SerifAccent>
+                    {/* The punchline arrives a beat after the first line */}
+                    <motion.span
+                      className="inline-block"
+                      initial={reduce ? false : { opacity: 0, y: 10, filter: 'blur(6px)' }}
+                      animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                      transition={{ type: 'spring', stiffness: 260, damping: 20, delay: 0.9 }}
+                    >
+                      <SerifAccent>{headlineAccent}</SerifAccent>
+                    </motion.span>
                   </>
                 )}
-              </h3>
+              </motion.h3>
               {description && (
-                <p className="mt-2 text-[14px] leading-[1.55] text-[#6b7280]">{description}</p>
+                <motion.p variants={ITEM} className="relative mt-2 text-[14px] leading-[1.55] text-[#6b7280]">
+                  {description}
+                </motion.p>
               )}
 
-              <div className="mt-6 flex flex-col gap-2">
+              <motion.div variants={ITEM} className="relative mt-6 flex flex-col gap-2">
                 <Link
                   href={ctaHref}
                   onClick={dismiss}
-                  className="inline-flex h-10 w-full cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#E1F0FF] px-5 text-[14px] font-semibold text-[#0066B3] transition-colors duration-200 hover:bg-[#CCE4FF] active:bg-[#B8D9FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066B3]/40 focus-visible:ring-offset-2"
+                  className="relative inline-flex h-10 w-full cursor-pointer items-center justify-center overflow-hidden whitespace-nowrap rounded-full bg-[#E1F0FF] px-5 text-[14px] font-semibold text-[#0066B3] transition-colors duration-200 hover:bg-[#CCE4FF] active:bg-[#B8D9FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066B3]/40 focus-visible:ring-offset-2"
                 >
-                  {ctaText}
+                  {/* Periodic shine across the primary action */}
+                  {!reduce && (
+                    <motion.span
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-y-0 left-0 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/80 to-transparent"
+                      initial={{ x: '-150%' }}
+                      animate={{ x: '450%' }}
+                      transition={{ duration: 1.1, ease: 'easeInOut', delay: 1.4, repeat: Infinity, repeatDelay: 3.2 }}
+                    />
+                  )}
+                  <span className="relative">{ctaText}</span>
                 </Link>
                 <button
                   type="button"
@@ -157,7 +255,8 @@ export default function FloatingPromoCard({
                 >
                   Not now
                 </button>
-              </div>
+              </motion.div>
+            </div>
             </div>
           </motion.div>
         )}

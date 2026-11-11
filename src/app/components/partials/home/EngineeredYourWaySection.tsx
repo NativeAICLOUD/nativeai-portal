@@ -1,6 +1,6 @@
 'use client';
 
-import { useId, useRef, useState, type KeyboardEvent } from 'react';
+import { useId, useRef, useState, type KeyboardEvent, type PointerEvent as ReactPointerEvent } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, CircleArrowUp, RefreshCw, type LucideIcon, type LucideProps } from 'lucide-react';
 import Image from 'next/image';
@@ -65,6 +65,21 @@ const capabilities: Capability[] = [
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
+// Fog banks inside each card — one colour, the hero fog's periwinkle (see HeroFog).
+const FOG_BANKS = [
+  { left: '-30%', top: '-25%', w: '95%', h: '85%', color: 'rgba(190,203,255,0.60)', x: ['0%', '30%', '10%', '0%'], y: ['0%', '18%', '-6%', '0%'], duration: 11 },
+  { left: '35%', top: '30%', w: '95%', h: '90%', color: 'rgba(190,203,255,0.75)', x: ['0%', '-28%', '-8%', '0%'], y: ['0%', '-16%', '8%', '0%'], duration: 14 },
+  { left: '10%', top: '55%', w: '80%', h: '70%', color: 'rgba(190,203,255,0.55)', x: ['0%', '22%', '-18%', '0%'], y: ['0%', '-12%', '-4%', '0%'], duration: 17 },
+];
+
+// Feeds the cursor position to the card's glow layer.
+const onFogMove = (e: ReactPointerEvent<HTMLDivElement>) => {
+  const el = e.currentTarget;
+  const r = el.getBoundingClientRect();
+  el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+  el.style.setProperty('--my', `${e.clientY - r.top}px`);
+};
+
 // Hover-to-open only when the cards sit in one row with a real mouse. In the stacked layout an
 // opening card pushes the next card under the cursor, which would open/close in a loop.
 const hoverOpens = () => window.matchMedia('(min-width: 1024px) and (hover: hover)').matches;
@@ -125,13 +140,51 @@ export default function EngineeredYourWaySection() {
             return (
               <div
                 key={title}
-                className={`rounded-[28px] bg-[#EEF1F2] transition-colors duration-300 ${
+                className={`group/card relative isolate overflow-hidden rounded-[28px] bg-[#EEF1F2] transition-colors duration-300 ${
                   isOpen ? '' : 'hover:bg-[#E7EBEC]'
                 }`}
                 // Desktop row: hovering a card opens it, leaving closes it. Elsewhere, click/tap toggles.
                 onPointerEnter={(e) => e.pointerType === 'mouse' && hoverOpens() && setOpenIndex(i)}
                 onPointerLeave={(e) => e.pointerType === 'mouse' && hoverOpens() && setOpenIndex(null)}
+                onPointerMove={onFogMove}
               >
+                {/* Fog — periwinkle banks (the hero fog colour) drifting
+                    behind the content, plus a glow that follows the cursor. Fades in on hover/open. */}
+                <div
+                  aria-hidden="true"
+                  className={`pointer-events-none absolute inset-0 -z-10 transition-opacity duration-500 group-hover/card:opacity-100 ${
+                    isOpen ? 'opacity-100' : 'opacity-0'
+                  }`}
+                >
+                  {FOG_BANKS.map((b) => (
+                    <motion.div
+                      key={b.left}
+                      className="absolute rounded-full"
+                      style={{
+                        left: b.left,
+                        top: b.top,
+                        width: b.w,
+                        height: b.h,
+                        background: `radial-gradient(closest-side, ${b.color} 0%, transparent 100%)`,
+                        filter: 'blur(36px)',
+                      }}
+                      animate={isOpen && !reduceMotion ? { x: b.x, y: b.y, scale: [1, 1.15, 0.92, 1] } : { x: '0%', y: '0%', scale: 1 }}
+                      transition={
+                        isOpen && !reduceMotion
+                          ? { duration: b.duration, ease: 'easeInOut', repeat: Infinity }
+                          : { duration: 0.6 }
+                      }
+                    />
+                  ))}
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      backgroundImage:
+                        'radial-gradient(300px circle at var(--mx, 50%) var(--my, 0%), rgba(190,203,255,0.55), transparent 70%)',
+                    }}
+                  />
+                </div>
+
                 <h3 className="m-0">
                   <button
                     ref={(el) => {
