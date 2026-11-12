@@ -8,6 +8,7 @@ import { CONTAINER, Eyebrow } from "@/app/components/partials/services/ServiceUI
 import GlobalPresenceSection from "@/app/components/partials/about/GlobalPresenceSection";
 import HeroFog from "@/app/components/partials/home/HeroFog";
 import FounderLetterSection from "@/app/components/partials/about/FounderLetterSection";
+import FounderProfileSection from "@/app/components/partials/about/FounderProfileSection";
 
 // Founder's letter is hidden for now — set to true to show it again.
 const SHOW_FOUNDER_LETTER = false;
@@ -214,6 +215,9 @@ export default function AboutUsPage() {
 
       {/* ── Founder's letter ── */}
       {SHOW_FOUNDER_LETTER && <FounderLetterSection />}
+
+      {/* ── Founder profile ── */}
+      <FounderProfileSection />
 
       {/* ── Vision & Mission ── */}
       <section className="bg-white">
