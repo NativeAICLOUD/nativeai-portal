@@ -21,7 +21,7 @@ export default function MobileHomeHero() {
         className="m-0 uppercase tracking-[0.2em] text-[#1e1e1e]"
         style={{ marginBottom: 8, fontSize: 12, lineHeight: '18px', fontWeight: 500 }}
       >
-        About NativeCloud
+        AI · Cloud · Web · Agentic
       </p>
 
       <h1

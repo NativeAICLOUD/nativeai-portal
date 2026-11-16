@@ -1,10 +1,12 @@
 import Image from 'next/image';
+import Link from 'next/link';
+import { Constants } from '@/Constants';
 import { CONTAINER, Eyebrow } from '@/app/components/partials/services/ServiceUI';
 
 /* ── Founder profile ──
    Portrait and identity on the left (sticky on desktop), first-person bio and
    focus areas on the right. Sits on the About page directly under the hero. */
-const PROFILE = {
+export const FOUNDER_PROFILE = {
   name: 'Artan Ajredini',
   role: 'Co-Founder & CTO at NativeCloud',
   email: 'artan@nativeai.cloud',
@@ -41,8 +43,8 @@ export default function FounderProfileSection() {
           {/* Identity */}
           <div className="lg:sticky lg:top-28 lg:self-start">
             <Image
-              src={PROFILE.portrait}
-              alt={`Portrait of ${PROFILE.name}`}
+              src={FOUNDER_PROFILE.portrait}
+              alt={`Portrait of ${FOUNDER_PROFILE.name}`}
               width={600}
               height={600}
               sizes="(min-width: 1024px) 300px, 160px"
@@ -52,15 +54,22 @@ export default function FounderProfileSection() {
               id="founder-profile-heading"
               className="m-0 mt-5 text-[22px] font-medium leading-[1.2] text-[#111] lg:text-[24px]"
             >
-              {PROFILE.name}
+              {FOUNDER_PROFILE.name}
             </h2>
-            <p className="m-0 mt-1 text-[15px] leading-[1.4] text-[#6b7280]">{PROFILE.role}</p>
+            <p className="m-0 mt-1 text-[15px] leading-[1.4] text-[#6b7280]">{FOUNDER_PROFILE.role}</p>
             <a
-              href={`mailto:${PROFILE.email}`}
+              href={`mailto:${FOUNDER_PROFILE.email}`}
               className="mt-2 inline-block break-all text-[15px] font-medium text-[#2563EB] transition-colors hover:text-[#1D4ED8]"
             >
-              {PROFILE.email}
+              {FOUNDER_PROFILE.email}
             </a>
+            <Link
+              href={Constants.PAGES.CONTRIBUTIONS}
+              className="group mt-4 flex w-fit items-center gap-1.5 text-[15px] font-medium text-[#111] transition-colors hover:text-[#2563EB]"
+            >
+              Community contributions
+              <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5">&rarr;</span>
+            </Link>
           </div>
 
           {/* Bio */}

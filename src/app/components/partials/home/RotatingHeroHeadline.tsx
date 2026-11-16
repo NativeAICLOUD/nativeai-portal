@@ -6,10 +6,10 @@ import { useEffect, useState } from 'react';
 // Each slogan is split so the middle phrase keeps the shimmer + underline accent.
 const SLOGANS = [
   { pre: 'We make ', highlight: 'AI work', post: ' inside your business' },
-  { pre: 'Your ', highlight: 'Azure AI-native', post: ' software & AI development partner' },
+  { pre: '', highlight: 'Agentic AI', post: ' that acts, not just answers' },
   { pre: 'Modernize & scale with ', highlight: 'Azure Certified', post: ' experts' },
   { pre: '', highlight: 'Web intelligence', post: ' for the agentic era' },
-  { pre: '', highlight: 'Intelligence', post: ' for what comes next' },
+  { pre: 'Your ', highlight: 'AI & Digital Transformation', post: ' partner' },
 ];
 const ROTATE_INTERVAL = 4200; // ms between slogan changes
 

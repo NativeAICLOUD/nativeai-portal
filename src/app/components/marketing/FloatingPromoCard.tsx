@@ -28,9 +28,23 @@ const EXCLUDED_PREFIXES = ['/login', '/sign-up', '/dashboard'];
 const BORDER_GRADIENT =
   'conic-gradient(from 0deg, #E5E7EB 0deg, #2563EB 50deg, #E5E7EB 110deg, #E5E7EB 180deg, #7FB2FF 230deg, #E5E7EB 290deg, #E5E7EB 360deg)';
 
-/* Card springs in from its corner (scale + blur), then its rows cascade in. */
-const CARD: Variants = {
-  hidden: { opacity: 0, y: -14, scale: 0.92, filter: 'blur(8px)' },
+// The cookie banner sits bottom-centre; the card waits until consent is stored so the two never overlap.
+const COOKIE_KEY = 'nc_cookie_consent';
+
+// ── Change the default `position` prop below to move the card to another corner ──
+export type PromoPosition = 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left';
+
+const POSITION_CLASSES: Record<PromoPosition, { wrapper: string; origin: string }> = {
+  'bottom-right': { wrapper: 'right-4 bottom-4 sm:right-6 sm:bottom-6', origin: 'origin-bottom-right' },
+  'bottom-left': { wrapper: 'left-4 bottom-4 sm:left-6 sm:bottom-6', origin: 'origin-bottom-left' },
+  'top-right': { wrapper: 'right-4 top-[88px] sm:right-6 sm:top-[104px]', origin: 'origin-top-right' },
+  'top-left': { wrapper: 'left-4 top-[88px] sm:left-6 sm:top-[104px]', origin: 'origin-top-left' },
+};
+
+/* Card springs in from its corner (scale + blur), then its rows cascade in.
+   `dir` is 1 when anchored to the bottom (rises in), -1 when anchored to the top (drops in). */
+const cardVariants = (dir: 1 | -1): Variants => ({
+  hidden: { opacity: 0, y: 14 * dir, scale: 0.92, filter: 'blur(8px)' },
   show: {
     opacity: 1,
     y: 0,
@@ -38,8 +52,8 @@ const CARD: Variants = {
     filter: 'blur(0px)',
     transition: { type: 'spring', stiffness: 300, damping: 24, staggerChildren: 0.08, delayChildren: 0.15 },
   },
-  exit: { opacity: 0, y: -8, scale: 0.96, filter: 'blur(4px)', transition: { duration: 0.2, ease: 'easeIn' } },
-};
+  exit: { opacity: 0, y: 8 * dir, scale: 0.96, filter: 'blur(4px)', transition: { duration: 0.2, ease: 'easeIn' } },
+});
 
 const REDUCED_CARD: Variants = {
   hidden: { opacity: 0 },
@@ -64,6 +78,8 @@ export type FloatingPromoCardProps = {
   /** Milliseconds to wait before the card slides in. */
   delay?: number;
   enabled?: boolean;
+  /** Screen corner the card is pinned to. */
+  position?: PromoPosition;
 };
 
 export default function FloatingPromoCard({
@@ -75,7 +91,10 @@ export default function FloatingPromoCard({
   ctaHref = '/services/ai-agents-rag',
   delay = 4000,
   enabled = true,
+  position = 'bottom-right',
 }: FloatingPromoCardProps) {
+  const pos = POSITION_CLASSES[position];
+  const atBottom = position.startsWith('bottom');
   const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const reduce = useReducedMotion();
@@ -96,9 +115,29 @@ export default function FloatingPromoCard({
     } catch {
       // sessionStorage unavailable (e.g. privacy mode) — fall through and show anyway.
     }
-    const timer = setTimeout(() => setVisible(true), delay);
-    return () => clearTimeout(timer);
-  }, [enabled, delay]);
+    // A bottom-anchored card would sit under the cookie banner — hold it until consent is stored.
+    const cookiePending = () => {
+      if (!atBottom) return false;
+      try {
+        return !localStorage.getItem(COOKIE_KEY);
+      } catch {
+        return false;
+      }
+    };
+    let poll: ReturnType<typeof setInterval> | undefined;
+    const timer = setTimeout(() => {
+      if (!cookiePending()) return setVisible(true);
+      poll = setInterval(() => {
+        if (cookiePending()) return;
+        clearInterval(poll);
+        setVisible(true);
+      }, 1000);
+    }, delay);
+    return () => {
+      clearTimeout(timer);
+      clearInterval(poll);
+    };
+  }, [enabled, delay, atBottom]);
 
   const isExcludedRoute = EXCLUDED_PREFIXES.some(
     (prefix) => pathname === prefix || pathname?.startsWith(`${prefix}/`)
@@ -125,17 +164,17 @@ export default function FloatingPromoCard({
   }, [shown]);
 
   return (
-    <div className="pointer-events-none fixed right-4 top-[88px] z-[950] w-[calc(100%-2rem)] font-switzer sm:right-6 sm:top-[104px] sm:w-[360px]">
+    <div className={`pointer-events-none fixed z-[950] w-[calc(100%-2rem)] font-switzer sm:w-[360px] ${pos.wrapper}`}>
       <AnimatePresence>
         {shown && (
           <motion.div
-            variants={reduce ? REDUCED_CARD : CARD}
+            variants={reduce ? REDUCED_CARD : cardVariants(atBottom ? 1 : -1)}
             initial="hidden"
             animate="show"
             exit="exit"
             role="dialog"
             aria-label={headlineAccent ? `${headline} ${headlineAccent}` : headline}
-            className="pointer-events-auto relative origin-top-right overflow-hidden rounded-[22px] p-[1.5px] shadow-[0_32px_80px_-12px_rgba(37,99,235,0.32),0_12px_30px_rgba(15,23,42,0.14),0_2px_6px_rgba(15,23,42,0.06)]"
+            className={`pointer-events-auto relative ${pos.origin} overflow-hidden rounded-[22px] p-[1.5px] shadow-[0_32px_80px_-12px_rgba(37,99,235,0.32),0_12px_30px_rgba(15,23,42,0.14),0_2px_6px_rgba(15,23,42,0.06)]`}
           >
             {/* Orbiting border light — two blue comets circling the card edge */}
             <motion.div
@@ -178,11 +217,7 @@ export default function FloatingPromoCard({
                 }}
               />
 
-              <motion.div variants={ITEM} className="relative mb-3 flex items-center gap-2">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#0066B3] opacity-60 motion-reduce:animate-none" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#0066B3]" />
-                </span>
+              <motion.div variants={ITEM} className="relative mb-3 flex items-center">
                 <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#0066B3]">
                   Agentic AI
                 </span>

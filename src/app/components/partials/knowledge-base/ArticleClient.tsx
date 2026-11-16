@@ -111,6 +111,13 @@ export default function ArticleClient({ post, sections, related, readingTime, pu
                     {publishDate}
                   </div>
                 </div>
+                <Link
+                  href="/contributions"
+                  className="group border-t border-black/[0.07] pt-3 flex items-center gap-1.5 text-[12px] font-semibold text-[#1d4ed8] hover:text-[#1e40af] transition-colors"
+                >
+                  All community contributions
+                  <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5">&rarr;</span>
+                </Link>
               </div>
             </div>
           </div>

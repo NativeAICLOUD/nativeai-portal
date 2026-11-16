@@ -1,5 +1,6 @@
 ﻿import type { Metadata } from 'next';
 import KnowledgeBasePosts from '../components/partials/knowledge-base';
+import MicrosoftUpdatesSection from '../components/partials/home/MicrosoftUpdatesSection';
 import { getBlogPosts } from '@/lib/blogsPosts';
 import { CONTAINER, Eyebrow, PrimaryButton } from '@/app/components/partials/services/ServiceUI';
 import { Constants } from '@/Constants';
@@ -72,6 +73,9 @@ const KnowledgeBasePage = async () => {
           <KnowledgeBasePosts posts={posts} categories={CATEGORIES} />
         </div>
       </section>
+
+      {/* ── News — live Microsoft headlines, refreshed hourly ── */}
+      <MicrosoftUpdatesSection />
 
     </div>
   );
