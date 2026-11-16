@@ -38,7 +38,7 @@ export default function FounderProfileSection() {
   return (
     <section aria-labelledby="founder-profile-heading" className="bg-white">
       <div className={`${CONTAINER} pt-20 lg:pt-24`}>
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-16">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-16">
 
           {/* Identity */}
           <div className="lg:sticky lg:top-28 lg:self-start">
@@ -47,8 +47,8 @@ export default function FounderProfileSection() {
               alt={`Portrait of ${FOUNDER_PROFILE.name}`}
               width={600}
               height={600}
-              sizes="(min-width: 1024px) 300px, 160px"
-              className="h-40 w-40 rounded-2xl object-cover lg:h-[300px] lg:w-[300px]"
+              sizes="(min-width: 1024px) 160px, 96px"
+              className="h-24 w-24 rounded-2xl object-cover lg:h-40 lg:w-40"
             />
             <h2
               id="founder-profile-heading"

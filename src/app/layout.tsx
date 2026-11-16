@@ -15,6 +15,7 @@ import AppProviders from "./components/AppProviders";
 import CookieBanner from "./components/ui/CookieBanner";
 import OfflineBanner from "./components/ui/OfflineBanner";
 import FloatingPromoCard from "./components/marketing/FloatingPromoCard";
+import BackToTopButton from "./components/ui/BackToTopButton";
 
 const montserrat = Montserrat({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -58,6 +59,7 @@ export default function RootLayout({
               </div>
               <CookieBanner />
               <FloatingPromoCard />
+              <BackToTopButton />
             </AppProviders>
           </ProgressBarProvider>
           <NotificationToaster />
