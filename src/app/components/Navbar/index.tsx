@@ -1,6 +1,7 @@
 ﻿'use client';
 
-import { Link } from 'react-transition-progress/next';
+import { Link } from 'react-transition-progress/next';
+import { EditorialGlow } from '@/app/components/ui/EditorialGlow';
 import { Constants } from '@/Constants';
 import { CaretDownIcon } from '@radix-ui/react-icons';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -195,6 +196,13 @@ const SOLUTIONS_MENU: SolutionEntry[] = [
     desc: 'Modernize and innovate on critical business applications.',
   },
 ];
+
+// ── Search panel empty state ── edit these to change what shows before the visitor types
+const SEARCH_SUGGESTIONS = ['AI agents', 'Azure migration', 'RAG', 'DevOps', 'Kubernetes', 'Nearshore teams'];
+const POPULAR_PAGE_URLS: string[] = ['/services/ai-agents-rag', '/migrate-to-azure', '/nearshore-teams', Constants.PAGES.CASE_STUDIES];
+const POPULAR_PAGES = POPULAR_PAGE_URLS
+  .map((url) => SITE_PAGES.find((page) => page.url === url))
+  .filter((page): page is (typeof SITE_PAGES)[number] => Boolean(page));
 
 function Navbar() {
   const pathname = usePathname();
@@ -442,7 +450,7 @@ function Navbar() {
             onClick={() => { setSearchOpen(!searchOpen); setSlideMenu(false); setOpenSide(false); }}
             aria-label="Search"
             aria-expanded={searchOpen}
-            className="hidden md:flex h-10 items-center gap-2 rounded-full border border-[#2563EB] bg-white px-[18px] transition-colors duration-200 hover:bg-[#F8FAFF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]/40"
+            className="hidden md:flex h-10 items-center gap-2 rounded-full border border-[#E6E6E6] bg-white px-[18px] transition-colors duration-200 hover:border-[#111827]/15 hover:bg-[#FAFAFA] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111827]/20"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" className="shrink-0">
               <defs>
@@ -565,15 +573,14 @@ function Navbar() {
             transition={{ type: 'spring', stiffness: 320, damping: 30, mass: 0.85 }}
           >
           <div
-            className="w-full py-12 px-5 sm:px-8 relative overflow-hidden"
+            className="w-full py-12 px-5 sm:px-8 relative isolate overflow-hidden bg-white"
             style={{
-              background: 'linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 40%, #edfaf4 100%)',
               borderBottom: '1px solid rgba(0,0,0,0.06)',
               boxShadow: '0 8px 40px rgba(0,0,0,0.08)',
             }}
           >
-            {/* Right green glow */}
-            <div className="absolute top-0 right-0 w-[500px] h-full pointer-events-none" style={{ background: 'radial-gradient(ellipse at 80% 50%, rgba(52,211,153,0.18) 0%, transparent 65%)' }} />
+            {/* Same sky glow as the homepage's "Move your business forward." section */}
+            <EditorialGlow />
 
             <div className="relative max-w-[1200px] mx-auto flex flex-col gap-4">
               {/* Input row — Google "AI Mode" animated gradient ring */}
@@ -590,7 +597,8 @@ function Navbar() {
                         setSearchOpen(false);
                       }
                     }}
-                    placeholder="Add your search term"
+                    placeholder="Ask about AI agents, Azure, migration…"
+                    aria-label="Search the site"
                     className="w-full bg-transparent py-5 pl-8 pr-[84px] outline-none text-[16px] text-[#0a0e1a] placeholder:text-[#aaaaaa] sm:pr-[200px]"
                     style={{ border: 'none' }}
                   />
@@ -612,6 +620,46 @@ function Navbar() {
                 </div>
               </div>
 
+              {/* Empty state — suggested searches and popular pages, so the panel is useful before typing */}
+              {searchQuery.trim().length === 0 && (
+                <div className="flex flex-col gap-5 px-2 pt-2">
+                  <div>
+                    <p className="m-0 mb-2.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#0a0e1a]/45">Try searching for</p>
+                    <div className="flex flex-wrap gap-2">
+                      {SEARCH_SUGGESTIONS.map((term) => (
+                        <button
+                          key={term}
+                          type="button"
+                          onClick={() => { setSearchQuery(term); searchInputRef.current?.focus(); }}
+                          className="rounded-full border border-[#E6E6E6] bg-white/80 px-3.5 py-1.5 text-[13px] font-medium text-[#111827] transition-colors duration-200 hover:border-[#111827]/20 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111827]/20"
+                        >
+                          {term}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <p className="m-0 mb-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#0a0e1a]/45">Popular pages</p>
+                    <div className="grid grid-cols-1 gap-x-8 sm:grid-cols-2 lg:grid-cols-4">
+                      {POPULAR_PAGES.map((page) => (
+                        <button
+                          key={page.url}
+                          type="button"
+                          onClick={() => { router.push(page.url); setSearchOpen(false); }}
+                          className="group flex items-center justify-between gap-3 border-b border-black/[0.07] py-2.5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111827]/20"
+                        >
+                          <span className="min-w-0">
+                            <span className="block truncate text-[13.5px] font-semibold text-[#0a0e1a] transition-colors duration-200 group-hover:text-[#0066B3]">{page.title}</span>
+                            <span className="block truncate text-[11.5px] text-[#0a0e1a]/45">{page.desc}</span>
+                          </span>
+                          <span aria-hidden="true" className="shrink-0 text-[#0a0e1a]/35 transition-transform duration-200 group-hover:translate-x-0.5">&rarr;</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {/* Live results */}
               {searchQuery.trim().length > 0 && (() => {
                 const q = searchQuery.toLowerCase();
@@ -621,7 +669,8 @@ function Navbar() {
                 const hits = allPosts.filter(p =>
                   p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)
                 ).slice(0, 5);
-                return (pageHits.length > 0 || hits.length > 0) ? (
+                const noHits = pageHits.length === 0 && hits.length === 0;
+                return (
                   <motion.div
                     initial={{ opacity: 0, y: -6, scale: 0.99 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -633,14 +682,14 @@ function Navbar() {
                     <button
                       onClick={() => { router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`); setSearchOpen(false); }}
                       className="w-full flex items-center gap-4 px-5 py-3.5 text-left transition-colors border-b border-black/[0.05]"
-                      style={{ background: 'linear-gradient(90deg, rgba(66,133,244,0.05) 0%, rgba(155,114,203,0.05) 50%, rgba(37,99,235,0.05) 100%)' }}
+                      style={{ background: 'linear-gradient(90deg, rgba(96,165,250,0.07) 0%, rgba(37,99,235,0.05) 100%)' }}
                     >
                       <svg width="18" height="18" viewBox="0 0 24 24" className="shrink-0" aria-hidden>
                         <defs>
                           <linearGradient id="nav-ai-star" x1="0" y1="0" x2="24" y2="24">
-                            <stop offset="0%" stopColor="#4285f4" />
-                            <stop offset="55%" stopColor="#9b72cb" />
-                            <stop offset="100%" stopColor="#2563EB" />
+                            <stop offset="0%" stopColor="#60a5fa" />
+                            <stop offset="55%" stopColor="#3b82f6" />
+                            <stop offset="100%" stopColor="#1e4fd6" />
                           </linearGradient>
                         </defs>
                         <path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2z" fill="url(#nav-ai-star)" />
@@ -649,7 +698,7 @@ function Navbar() {
                         <p
                           className="text-[13.5px] font-semibold leading-snug"
                           style={{
-                            background: 'linear-gradient(100deg, #4285f4 0%, #9b72cb 45%, #2563EB 100%)',
+                            background: 'linear-gradient(100deg, #3b82f6 0%, #1e4fd6 100%)',
                             WebkitBackgroundClip: 'text',
                             backgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
@@ -660,10 +709,15 @@ function Navbar() {
                         </p>
                         <p className="text-[11.5px] text-[#0a0e1a]/45 mt-0.5 leading-snug">Get an AI-generated answer with sources</p>
                       </div>
-                      <svg className="shrink-0 ml-auto w-3.5 h-3.5 text-[#9b72cb]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <svg className="shrink-0 ml-auto w-3.5 h-3.5 text-[#2563EB]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M9 18l6-6-6-6"/>
                       </svg>
                     </button>
+                    {noHits && (
+                      <p className="m-0 px-5 py-4 text-[13px] text-[#0a0e1a]/55">
+                        No page or article matches &ldquo;{searchQuery.trim()}&rdquo; directly. Try the AI Overview above, or a shorter term.
+                      </p>
+                    )}
                     {pageHits.length > 0 && (
                       <>
                         <p className="px-5 pt-3 pb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#0a0e1a]/35">Pages</p>
@@ -712,17 +766,17 @@ function Navbar() {
                         </svg>
                       </button>
                     ))}
-                    <div className="px-5 py-3 border-t border-black/[0.05]" style={{ background: 'rgba(248,249,255,0.80)' }}>
-                      <button
-                        onClick={() => { router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`); setSearchOpen(false); }}
-                        className="text-[12px] font-medium text-[#0a0e1a] hover:opacity-75 transition-opacity"
-                      >
-                        See all results for &ldquo;{searchQuery}&rdquo; →
-                      </button>
-                    </div>
+                    {!noHits && (
+                      <div className="px-5 py-3 border-t border-black/[0.05]" style={{ background: 'rgba(248,249,255,0.80)' }}>
+                        <button
+                          onClick={() => { router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`); setSearchOpen(false); }}
+                          className="text-[12px] font-medium text-[#0a0e1a] hover:opacity-75 transition-opacity"
+                        >
+                          See all results for &ldquo;{searchQuery}&rdquo; →
+                        </button>
+                      </div>
+                    )}
                   </motion.div>
-                ) : (
-                  <p className="text-sm text-[#0a0e1a]/40 px-2">No results for &ldquo;{searchQuery}&rdquo;</p>
                 );
               })()}
             </div>

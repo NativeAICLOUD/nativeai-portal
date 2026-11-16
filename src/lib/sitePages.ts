@@ -24,5 +24,6 @@ export const SITE_PAGES: { title: string; desc: string; url: string }[] = [
   { title: 'Workshops',                 desc: 'Azure, Kubernetes and AI training',                                url: Constants.PAGES.WORKSHOPS },
   { title: 'Knowledge Base',            desc: 'Guides, tutorials and articles',                                   url: Constants.PAGES.KNOWLEDGE_BASE },
   { title: 'Careers',                   desc: 'Open positions and jobs',                                          url: Constants.PAGES.CAREERS },
+  { title: 'Community Contributions',   desc: 'Articles, community leadership, events and certifications of our founder', url: Constants.PAGES.CONTRIBUTIONS },
   { title: 'About Us',                  desc: 'Our team, mission and partners',                                   url: Constants.PAGES.ABOUT_US },
 ];

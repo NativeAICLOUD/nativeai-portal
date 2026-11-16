@@ -3,7 +3,8 @@
 import { motion } from 'framer-motion';
 import { Constants } from '@/Constants';
 import { EditorialGlow, SerifAccent } from '@/app/components/ui/EditorialGlow';
-import { CONTAINER, Eyebrow, PrimaryButton, SecondaryButton } from './HomeUI';
+import FogButton from '@/app/components/ui/FogButton';
+import { CONTAINER, Eyebrow, PrimaryButton } from './HomeUI';
 
 /* Industries intro — minimal editorial hero with a soft cyan glow
    rising from the upper-right (same treatment as /airline-booking). */
@@ -35,7 +36,7 @@ export default function IndustriesIntroSection() {
           </h2>
           <div className="mt-10 flex flex-wrap gap-3 md:mt-12">
             <PrimaryButton href="/industries">Explore our industries</PrimaryButton>
-            <SecondaryButton href={Constants.PAGES.SCHEDULE_CALL}>Book a discovery call</SecondaryButton>
+            <FogButton href={Constants.PAGES.SCHEDULE_CALL}>Book a discovery call</FogButton>
           </div>
         </motion.div>
       </div>

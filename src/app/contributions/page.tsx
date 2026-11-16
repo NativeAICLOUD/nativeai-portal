@@ -31,12 +31,17 @@ export const metadata: Metadata = {
   },
 };
 
+const MONTH_DATE = new Intl.DateTimeFormat('en-GB', { month: 'short', year: 'numeric', timeZone: 'UTC' });
 const FULL_DATE = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
 
-/** Accepts an ISO date or a bare year; returns display text and a sortable number. */
+/** Accepts an ISO date, a year-month or a bare year; returns display text and a sortable number. */
 function readDate(raw?: string): { label: string; sort: number } {
   if (!raw) return { label: '', sort: 0 };
   if (/^\d{4}$/.test(raw)) return { label: raw, sort: Date.UTC(Number(raw), 0, 1) };
+  if (/^\d{4}-\d{2}$/.test(raw)) {
+    const time = Date.parse(`${raw}-01`);
+    return Number.isNaN(time) ? { label: raw, sort: 0 } : { label: MONTH_DATE.format(new Date(time)), sort: time };
+  }
   const time = Date.parse(raw);
   return Number.isNaN(time) ? { label: raw, sort: 0 } : { label: FULL_DATE.format(new Date(time)), sort: time };
 }

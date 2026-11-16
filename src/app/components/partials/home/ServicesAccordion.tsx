@@ -16,6 +16,17 @@ export type AccordionService = {
    so it lines up under the service title, not under the index. */
 const INDEX_COL = 'w-10 sm:w-[52px] lg:w-16';
 
+// Fog inside the open row — the hero fog's periwinkle, same treatment as the
+// Innovate / Modernize / Accelerate cards (EngineeredYourWaySection).
+const FOG_BANKS = [
+  { left: '-10%', top: '-40%', w: '55%', h: '150%', color: 'rgba(190,203,255,0.60)', x: ['0%', '30%', '10%', '0%'], y: ['0%', '18%', '-6%', '0%'], duration: 11 },
+  { left: '35%', top: '10%', w: '55%', h: '150%', color: 'rgba(190,203,255,0.75)', x: ['0%', '-28%', '-8%', '0%'], y: ['0%', '-16%', '8%', '0%'], duration: 14 },
+  { left: '15%', top: '40%', w: '50%', h: '120%', color: 'rgba(190,203,255,0.55)', x: ['0%', '22%', '-18%', '0%'], y: ['0%', '-12%', '-4%', '0%'], duration: 17 },
+];
+
+// Fades the fog out toward the left and right so it never ends in a hard edge.
+const FOG_MASK = 'linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%)';
+
 function ChevronDown({ open }: { open: boolean }) {
   return (
     <svg
@@ -49,7 +60,36 @@ export default function ServicesAccordion({ services }: { services: AccordionSer
         const index = String(i + 1).padStart(2, '0');
 
         return (
-          <li key={service.title} className="border-t border-[#E6E6E6]">
+          <li
+            key={service.title}
+            className="relative isolate overflow-hidden border-t border-[#E6E6E6]"
+          >
+            {/* Fog — drifting periwinkle banks. Only while the row is open; it does not react to the cursor. */}
+            <div
+              aria-hidden="true"
+              className={`pointer-events-none absolute inset-0 -z-10 transition-opacity duration-500 motion-reduce:transition-none ${
+                open ? 'opacity-100' : 'opacity-0'
+              }`}
+              style={{ maskImage: FOG_MASK, WebkitMaskImage: FOG_MASK }}
+            >
+              {open && FOG_BANKS.map((b) => (
+                <motion.div
+                  key={b.left}
+                  className="absolute rounded-full"
+                  style={{
+                    left: b.left,
+                    top: b.top,
+                    width: b.w,
+                    height: b.h,
+                    background: `radial-gradient(closest-side, ${b.color} 0%, transparent 100%)`,
+                    filter: 'blur(48px)',
+                  }}
+                  animate={reduceMotion ? undefined : { x: b.x, y: b.y, scale: [1, 1.15, 0.92, 1] }}
+                  transition={{ duration: b.duration, ease: 'easeInOut', repeat: Infinity }}
+                />
+              ))}
+            </div>
+
             <h3 className="m-0">
               <button
                 type="button"
@@ -57,7 +97,7 @@ export default function ServicesAccordion({ services }: { services: AccordionSer
                 aria-expanded={open}
                 aria-controls={panelId}
                 onClick={() => setOpenIndex(open ? null : i)}
-                className="group grid min-h-[64px] w-full cursor-pointer grid-cols-[40px_minmax(0,1fr)_28px] items-center py-3 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]/40 focus-visible:ring-offset-4 sm:min-h-[76px] sm:grid-cols-[52px_minmax(0,1fr)_36px] lg:min-h-[88px] lg:grid-cols-[64px_minmax(0,1fr)_40px]"
+                className="group grid min-h-[64px] w-full cursor-pointer grid-cols-[40px_minmax(0,1fr)_28px] items-center py-3 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#111827]/15 sm:min-h-[76px] sm:grid-cols-[52px_minmax(0,1fr)_36px] lg:min-h-[88px] lg:grid-cols-[64px_minmax(0,1fr)_40px]"
               >
                 <span className={`text-[12px] font-normal tabular-nums tracking-[0.04em] text-[#6B7280] sm:text-[13px]`}>
                   {index}
@@ -107,7 +147,7 @@ export default function ServicesAccordion({ services }: { services: AccordionSer
                         </ul>
                         <Link
                           href={service.cta.href}
-                          className="group/cta mt-7 inline-flex min-h-[44px] items-center gap-2 text-[14px] font-medium text-[#111827] transition-colors duration-200 hover:text-[#2563EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]/40 focus-visible:ring-offset-2"
+                          className="group/cta mt-7 inline-flex min-h-[44px] items-center gap-2 text-[14px] font-medium text-[#111827] transition-colors duration-200 hover:text-[#2563EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111827]/15 focus-visible:ring-offset-2"
                         >
                           {service.cta.label}
                           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="h-4 w-4 transition-transform duration-200 group-hover/cta:translate-x-1 motion-reduce:transition-none">

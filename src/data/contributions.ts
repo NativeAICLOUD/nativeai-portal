@@ -14,7 +14,7 @@ export type Contribution = {
   title: string;
   /** Event, organisation, publication or repository it belongs to. */
   where?: string;
-  /** ISO date (YYYY-MM-DD) or just a year ("2025"). Used for sorting and display. */
+  /** ISO date (YYYY-MM-DD), a month ("2025-03") or just a year ("2025"). Used for sorting and display. */
   date?: string;
   /** One sentence on what you did. */
   summary?: string;
@@ -112,6 +112,23 @@ export const CONTRIBUTION_GROUPS: ContributionGroup[] = [
         where: 'University of Tetova',
         summary: 'Selected by the university as one of its Computer Science success stories, on International Programmers’ Day.',
       },
+    ],
+  },
+  {
+    // Certifications, not contributions: shown after the articles and left out of the contribution count.
+    key: 'certifications',
+    label: 'Microsoft certifications',
+    blurb: 'Exams and certifications earned from Microsoft.',
+    notCounted: true,
+    items: [
+      { title: 'Microsoft Certified: DevOps Engineer Expert', where: 'Microsoft', date: '2023-08' },
+      { title: 'Microsoft Certified: Azure Developer Associate', where: 'Microsoft', date: '2023-05' },
+      { title: 'Microsoft Certified: Azure DevOps Engineer (AZ-400)', where: 'Microsoft', date: '2021-01' },
+      { title: 'MCSD: Microsoft Certified Solutions Developer for Microsoft .NET', where: 'Microsoft', date: '2017-09' },
+      { title: 'MCSD: Microsoft Certified Solutions Developer, App Builder', where: 'Microsoft', date: '2017-09' },
+      { title: 'Developing Microsoft Azure and Web Services', where: 'Microsoft', date: '2017-07' },
+      { title: 'MCSA: Developing ASP.NET MVC Web Applications', where: 'Microsoft', date: '2017-03' },
+      { title: 'MCPS: Microsoft Certified Professional', where: 'Microsoft', date: '2016-08' },
     ],
   },
   {
