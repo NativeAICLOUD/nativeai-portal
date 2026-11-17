@@ -7,6 +7,7 @@ import { Link } from "react-transition-progress/next";
 import { CONTAINER, Eyebrow } from "@/app/components/partials/services/ServiceUI";
 import GlobalPresenceSection from "@/app/components/partials/about/GlobalPresenceSection";
 import HeroFog from "@/app/components/partials/home/HeroFog";
+import EditorialHeadline from "@/app/components/ui/EditorialHeadline";
 import FounderLetterSection from "@/app/components/partials/about/FounderLetterSection";
 import FounderProfileSection from "@/app/components/partials/about/FounderProfileSection";
 
@@ -163,9 +164,13 @@ export default function AboutUsPage() {
             {/* Left */}
             <div className="flex-1">
               <div className="mb-6"><Eyebrow>About NativeCloud</Eyebrow></div>
-              <h1 className="m-0 text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
-                We make AI work for you.
-              </h1>
+              <EditorialHeadline
+                as="h1"
+                leadText="We make"
+                highlightText="AI work"
+                headlineLines={['for you.']}
+                fontSize="clamp(2.75rem, 5.6vw, 6rem)"
+              />
               <p className="mt-6 max-w-[560px] text-[19px] font-normal leading-[1.6] text-[#4B5563]">
                 We work closely with our clients, use the right technology, and stay focused on
                 what matters most: delivering real results.

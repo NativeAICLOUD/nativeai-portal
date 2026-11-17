@@ -44,8 +44,12 @@ const LINE: Variants = {
 };
 
 export type EditorialHeadlineProps = {
-  /** The keyword shown inside the pill, on its own first line. */
+  /** The keyword shown inside the pill, on the first line. */
   highlightText: string;
+  /** Optional plain text before the pill, on the same line ("We make" + pill). */
+  leadText?: string;
+  /** CSS font-size. Defaults to the full-width display size. */
+  fontSize?: string;
   /** The rest of the headline, one entry per line. */
   headlineLines: string[];
   className?: string;
@@ -56,6 +60,8 @@ export type EditorialHeadlineProps = {
 
 export default function EditorialHeadline({
   highlightText,
+  leadText,
+  fontSize = 'clamp(2.75rem, 9vw, 9rem)',
   headlineLines,
   className = '',
   alignment = 'left',
@@ -63,14 +69,14 @@ export default function EditorialHeadline({
 }: EditorialHeadlineProps) {
   const reduce = useReducedMotion();
   const Heading = motion[as];
-  const sentence = `${highlightText} ${headlineLines.join(' ')}`;
+  const sentence = [leadText, highlightText, ...headlineLines].filter(Boolean).join(' ');
 
   return (
     <Heading
       aria-label={sentence}
       className={`${serif.className} m-0 font-normal text-[#141414] ${alignment === 'center' ? 'text-center' : 'text-left'} ${className}`}
       style={{
-        fontSize: 'clamp(2.75rem, 9vw, 9rem)',
+        fontSize,
         lineHeight: 1,
         letterSpacing: '-0.02em',
       }}
@@ -81,6 +87,7 @@ export default function EditorialHeadline({
     >
       {/* Highlighted keyword */}
       <motion.span aria-hidden="true" className="block" variants={LINE}>
+        {leadText ? `${leadText} ` : null}
         <span
           className="inline-block bg-[#BECBFF] italic transition-[transform,background-color] duration-500 ease-out hover:scale-[1.02] hover:bg-[#CCE4FF] motion-reduce:transition-none motion-reduce:hover:scale-100"
           style={{
