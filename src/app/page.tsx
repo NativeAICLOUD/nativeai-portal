@@ -1,3 +1,5 @@
+import EditorialHeadline from "./components/ui/EditorialHeadline";
+import { CONTAINER } from "./components/partials/services/ServiceUI";
 import AIInnovationSection from "./components/partials/home/AIInnovationSection";
 import DeliverySpectrumSection from "./components/partials/home/DeliverySpectrumSection";
 import EngineeredYourWaySection from "./components/partials/home/EngineeredYourWaySection";
@@ -57,6 +59,13 @@ export default function Home() {
 
       {/* Interactive Tech Stack */}
       <TechStackSection />
+
+      {/* Editorial statement — keyword in a serif pill above an oversized serif headline */}
+      <section className="bg-white">
+        <div className={`${CONTAINER} pb-18 sm:pb-24 lg:pb-36`}>
+          <EditorialHeadline highlightText="Intelligence" headlineLines={['at every layer', 'of your business.']} />
+        </div>
+      </section>
 
       {/* Home Partner Section */}
       <HomePartner />

@@ -4,6 +4,7 @@ import { Link } from 'react-transition-progress/next';
 import { Constants } from '@/Constants';
 import HeroFog from './HeroFog';
 import PartnerHoverCard from '@/app/components/PartnerHoverCard';
+import { SerifAccent } from '@/app/components/ui/EditorialGlow';
 
 /* Editorial mobile-only hero — eyebrow, static headline (no blur/rotation),
    supporting paragraph, full-width CTA, secondary CTA.
@@ -27,19 +28,15 @@ export default function MobileHomeHero() {
       <h1
         className="m-0 text-[#1e1e1e]"
         style={{
-          fontSize: 32,
-          lineHeight: '40px',
-          fontWeight: 600,
-          letterSpacing: '-0.019em',
+          fontSize: 44,
+          lineHeight: 1.02,
+          fontWeight: 300,
+          letterSpacing: '-0.035em',
           marginBottom: 32,
           maxWidth: '100%',
         }}
       >
-        We make{' '}
-        <span style={{ background: 'rgba(37,99,235,0.14)', borderRadius: 0, padding: '2px 6px' }}>
-          AI work
-        </span>{' '}
-        inside your business.
+        We make <SerifAccent>AI work</SerifAccent> inside your business.
       </h1>
 
       <Link
