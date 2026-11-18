@@ -20,7 +20,7 @@ const pillSerif = Instrument_Serif({
 // slogan in the serif, with the highlight in an italic periwinkle pill on its own line.
 const SLOGANS: { pre: string; highlight: string; post: string; editorial?: boolean; pill?: boolean }[] = [
   { pre: '', highlight: 'Web intelligence', post: ' for the agentic era', pill: true },
-  { pre: 'We make ', highlight: 'AI work', post: ' inside your business', editorial: true },
+  { pre: 'We make ', highlight: 'AI work', post: ' inside your business', pill: true },
   { pre: '', highlight: 'Agentic AI', post: ' that acts, not just answers' },
   { pre: 'Modernize & scale with ', highlight: 'Azure Certified', post: ' experts' },
   { pre: 'Your ', highlight: 'AI & Digital Transformation', post: ' partner' },
