@@ -85,7 +85,7 @@ export type FloatingPromoCardProps = {
 export default function FloatingPromoCard({
   headline = "AI that doesn't just answer.",
   headlineAccent = 'It acts.',
-  description,
+  description = 'Agents that plan, use your tools and finish the job, with human approval where it matters.',
   imageSrc,
   ctaText = 'Explore agentic AI',
   ctaHref = '/services/ai-agents-rag',
@@ -153,6 +153,13 @@ export default function FloatingPromoCard({
     }
   };
 
+  // Flag the open card on <body> so other floating UI can step aside
+  // (FloatingTalkButton hides on phones while the card is up).
+  useEffect(() => {
+    document.body.toggleAttribute('data-promo-open', shown);
+    return () => document.body.removeAttribute('data-promo-open');
+  }, [shown]);
+
   // Escape closes the card, like any other dismissible overlay.
   useEffect(() => {
     if (!shown) return;
@@ -164,7 +171,7 @@ export default function FloatingPromoCard({
   }, [shown]);
 
   return (
-    <div className={`pointer-events-none fixed z-[950] w-[calc(100%-2rem)] font-switzer sm:w-[360px] ${pos.wrapper}`}>
+    <div className={`pointer-events-none fixed z-[950] w-[calc(100%-2rem)] max-w-[360px] font-switzer sm:w-[340px] ${pos.wrapper}`}>
       <AnimatePresence>
         {shown && (
           <motion.div
@@ -188,11 +195,11 @@ export default function FloatingPromoCard({
             <div className="relative overflow-hidden rounded-[20.5px] bg-white">
             {/* Full-bleed AI ribbon — the card opens on the visual, edge to edge */}
             {imageSrc ? (
-              <div className="relative aspect-[16/10] w-full overflow-hidden">
+              <div className="relative aspect-[16/7] w-full overflow-hidden sm:aspect-[16/9]">
                 <Image src={imageSrc} alt="" fill sizes="360px" className="object-cover" />
               </div>
             ) : (
-              <AIRibbonVisual src="/img/ai-infinity-ribbon-cutout.webp" className="aspect-[16/10] bg-[#EEF3FF]" sizes="(min-width: 640px) 360px, 100vw" />
+              <AIRibbonVisual src="/img/ai-infinity-ribbon-cutout.webp" className="aspect-[16/7] bg-[#EEF3FF] sm:aspect-[16/9]" sizes="(min-width: 640px) 360px, 100vw" />
             )}
 
             <button
@@ -206,7 +213,7 @@ export default function FloatingPromoCard({
               </svg>
             </button>
 
-            <div onMouseMove={onSpotlightMove} className="group/body relative px-6 pb-6 pt-5">
+            <div onMouseMove={onSpotlightMove} className="group/body relative px-5 pb-5 pt-4 sm:px-6 sm:pb-6 sm:pt-5">
               {/* Glow that follows the cursor across the text area */}
               <div
                 aria-hidden="true"
@@ -218,32 +225,19 @@ export default function FloatingPromoCard({
               />
 
               <motion.div variants={ITEM} className="relative mb-3 flex items-center">
-                <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#0066B3]">
+                <span
+                  className="bg-[#BECBFF] px-3 py-1.5 text-[11px] font-semibold uppercase leading-none tracking-[0.14em] text-[#141414]"
+                  style={{ borderRadius: '0.9em 1.05em 0.85em 1em / 1em 0.9em 1.05em 0.9em' }}
+                >
                   Agentic AI
                 </span>
               </motion.div>
 
               <motion.h3
                 variants={ITEM}
-                className="relative m-0 text-[28px] font-light leading-[1.05] tracking-[-0.03em] text-[#141414] [text-wrap:balance]"
+                className="relative m-0 text-[24px] font-light leading-[1.05] sm:text-[28px] tracking-[-0.03em] text-[#141414] [text-wrap:balance]"
               >
-                {reduce ? (
-                  headline
-                ) : (
-                  /* One-shot light sweep across the first line as the card lands */
-                  <motion.span
-                    className="bg-clip-text text-transparent"
-                    style={{
-                      backgroundImage: 'linear-gradient(110deg, #141414 40%, #2563EB 50%, #141414 60%)',
-                      backgroundSize: '300% 100%',
-                    }}
-                    initial={{ backgroundPosition: '100% 0%' }}
-                    animate={{ backgroundPosition: '0% 0%' }}
-                    transition={{ duration: 1.3, ease: 'easeInOut', delay: 0.35 }}
-                  >
-                    {headline}
-                  </motion.span>
-                )}
+                {headline}
                 {headlineAccent && (
                   <>
                     <br />
@@ -265,28 +259,24 @@ export default function FloatingPromoCard({
                 </motion.p>
               )}
 
-              <motion.div variants={ITEM} className="relative mt-6 flex flex-col gap-2">
+              <motion.div variants={ITEM} className="relative mt-5 flex items-center gap-2">
                 <Link
                   href={ctaHref}
                   onClick={dismiss}
-                  className="relative inline-flex h-10 w-full cursor-pointer items-center justify-center overflow-hidden whitespace-nowrap rounded-full bg-[#E1F0FF] px-5 text-[14px] font-semibold text-[#0066B3] transition-colors duration-200 hover:bg-[#CCE4FF] active:bg-[#B8D9FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066B3]/40 focus-visible:ring-offset-2"
+                  className="group/cta inline-flex h-11 flex-1 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-md bg-black px-5 text-[14px] font-semibold text-white transition-colors duration-200 hover:bg-[#1A1818] active:bg-[#2E2B2B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] focus-visible:ring-offset-2"
                 >
-                  {/* Periodic shine across the primary action */}
-                  {!reduce && (
-                    <motion.span
-                      aria-hidden="true"
-                      className="pointer-events-none absolute inset-y-0 left-0 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/80 to-transparent"
-                      initial={{ x: '-150%' }}
-                      animate={{ x: '450%' }}
-                      transition={{ duration: 1.1, ease: 'easeInOut', delay: 1.4, repeat: Infinity, repeatDelay: 3.2 }}
-                    />
-                  )}
-                  <span className="relative">{ctaText}</span>
+                  {ctaText}
+                  <span
+                    aria-hidden="true"
+                    className="transition-transform duration-200 group-hover/cta:translate-x-0.5 motion-reduce:transition-none"
+                  >
+                    &rarr;
+                  </span>
                 </Link>
                 <button
                   type="button"
                   onClick={dismiss}
-                  className="inline-flex h-10 w-full cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#E5E7EB] px-5 text-[14px] font-semibold text-[#374151] transition-colors duration-200 hover:bg-[#D9DCE1] active:bg-[#CBCFD5]"
+                  className="inline-flex h-11 shrink-0 cursor-pointer items-center justify-center whitespace-nowrap rounded-md px-3 text-[14px] font-semibold text-[#6B7280] transition-colors duration-200 hover:bg-[#F1F2F4] hover:text-[#111] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
                 >
                   Not now
                 </button>
