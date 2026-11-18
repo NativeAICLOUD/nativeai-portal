@@ -25,6 +25,7 @@ const SLOGANS: { pre: string; highlight: string; post: string; editorial?: boole
   { pre: 'Modernize & scale with ', highlight: 'Azure Certified', post: ' experts' },
   { pre: 'Your ', highlight: 'AI & Digital Transformation', post: ' partner' },
 ];
+const PILL_SLOGANS = SLOGANS.filter((s) => s.pill);
 const ROTATE_INTERVAL = 4200; // ms between slogan changes
 
 /* Default typography: large, tight, typography-led. The highlight is a
@@ -84,7 +85,7 @@ const PILL_OVERRIDES = {
     maxWidth: 1100,
   } as React.CSSProperties,
   mobile: {
-    fontSize: 'clamp(2.75rem, 11vw, 3.5rem)',
+    fontSize: 'clamp(2.25rem, 11vw, 3.5rem)', // 36px at 320 wide, ~43px at 390
     fontWeight: 400,
     lineHeight: 1,
     letterSpacing: '-0.02em',
@@ -114,20 +115,24 @@ const HIGHLIGHT_STYLE: React.CSSProperties = {
 
 export default function RotatingHeroHeadline({
   variant,
+  pillOnly = false,
 }: {
   variant: 'desktop' | 'mobile';
+  /** Rotate only through the slogans flagged `pill` (used by the mobile home hero). */
+  pillOnly?: boolean;
 }) {
   const [index, setIndex] = useState(0);
+  const slogans = pillOnly ? PILL_SLOGANS : SLOGANS;
 
   useEffect(() => {
     const id = setInterval(() => {
-      setIndex((i) => (i + 1) % SLOGANS.length);
+      setIndex((i) => (i + 1) % slogans.length);
     }, ROTATE_INTERVAL);
     return () => clearInterval(id);
-  }, []);
+  }, [slogans]);
 
   const cfg = VARIANTS[variant];
-  const slogan = SLOGANS[index];
+  const slogan = slogans[index];
 
   if (slogan.pill) {
     return (

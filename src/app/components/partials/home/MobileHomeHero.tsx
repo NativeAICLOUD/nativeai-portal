@@ -4,9 +4,9 @@ import { Link } from 'react-transition-progress/next';
 import { Constants } from '@/Constants';
 import HeroFog from './HeroFog';
 import PartnerHoverCard from '@/app/components/PartnerHoverCard';
-import { SerifAccent } from '@/app/components/ui/EditorialGlow';
+import RotatingHeroHeadline from './RotatingHeroHeadline';
 
-/* Editorial mobile-only hero — eyebrow, static headline (no blur/rotation),
+/* Editorial mobile-only hero — eyebrow, headline rotating through the pill slogans,
    supporting paragraph, full-width CTA, secondary CTA.
    Rendered only below the md breakpoint; desktop keeps the existing hero. */
 export default function MobileHomeHero() {
@@ -16,57 +16,36 @@ export default function MobileHomeHero() {
       style={{ paddingTop: 124 }}
     >
       {/* Blue glow drifting like fog, same as the desktop hero */}
-      <HeroFog />
+      <HeroFog cover lively />
 
-      <p
-        className="m-0 uppercase tracking-[0.2em] text-[#1e1e1e]"
-        style={{ marginBottom: 8, fontSize: 12, lineHeight: '18px', fontWeight: 500 }}
-      >
-        AI · Cloud · Web · Agentic
-      </p>
-
-      <h1
-        className="m-0 text-[#1e1e1e]"
-        style={{
-          fontSize: 44,
-          lineHeight: 1.02,
-          fontWeight: 300,
-          letterSpacing: '-0.035em',
-          marginBottom: 32,
-          maxWidth: '100%',
-        }}
-      >
-        We make <SerifAccent>AI work</SerifAccent> inside your business.
-      </h1>
-
-      <Link
-        href={Constants.PAGES.GET_IN_TOUCH}
-        className="flex w-full h-10 cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#2E2B2B] px-5 text-[14px] font-semibold text-white transition-colors duration-200 hover:bg-[#242121] active:bg-[#1A1818]"
-      >
-        Let&apos;s talk
-      </Link>
-
-      <Link
-        href={Constants.PAGES.SOLUTIONS}
-        className="group mt-3 flex w-full h-10 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap px-5 text-[14px] font-semibold text-[#2E2B2B] transition-colors duration-200 hover:text-[#0066B3]"
-      >
-        See all solutions
-        <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5">&rarr;</span>
-      </Link>
-
-      {/* Claude partner badge — tap to open the partnership card */}
-      <div className="mt-3 mb-16 flex justify-center">
-        <PartnerHoverCard official />
+      {/* Fixed-height slot so the buttons below don't jump when the slogan changes */}
+      <div style={{ minHeight: '11.5rem', marginBottom: 24 }}>
+        <RotatingHeroHeadline variant="mobile" pillOnly />
       </div>
 
-      {/* Gradient divider — same as the desktop hero (Header.tsx) */}
-      <hr
-        className="m-0 mt-6 h-1 w-full border-0"
-        style={{
-          backgroundImage: 'linear-gradient(260deg, #fff, #BECBFF 20%, #5B7CFA 50%, #2563EB 80%, #fff)',
-          borderRadius: 100,
-        }}
-      />
+      {/* Actions — side by side, 48px tall so both are comfortable tap targets */}
+      <div className="flex gap-2.5">
+        <Link
+          href={Constants.PAGES.GET_IN_TOUCH}
+          className="group flex h-12 flex-1 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-[#2E2B2B] px-4 text-[15px] font-semibold text-white shadow-[0_10px_24px_-12px_rgba(37,99,235,0.55)] transition-colors duration-200 hover:bg-[#242121] active:bg-[#1A1818]"
+        >
+          Let&apos;s talk
+          <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5 group-active:translate-x-0.5">&rarr;</span>
+        </Link>
+
+        <Link
+          href={Constants.PAGES.SOLUTIONS}
+          className="flex h-12 flex-1 cursor-pointer items-center justify-center whitespace-nowrap rounded-full border border-[#BECBFF] bg-white/70 px-4 text-[15px] font-semibold text-[#2E2B2B] backdrop-blur-md transition-colors duration-200 hover:bg-[#E1F0FF] hover:text-[#0066B3] active:bg-[#CCE4FF]"
+        >
+          See all solutions
+        </Link>
+      </div>
+
+      {/* Claude partner badge — tap to open the partnership card.
+          Sits under a hairline as a quiet trust line, aligned with the text. */}
+      <div className="mt-7 mb-12 flex items-center border-t border-[#2563EB]/15 pt-5">
+        <PartnerHoverCard official />
+      </div>
     </div>
   );
 }

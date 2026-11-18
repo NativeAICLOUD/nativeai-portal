@@ -1,4 +1,5 @@
 import EditorialHeadline from "./components/ui/EditorialHeadline";
+import CyclingWordPill from "./components/ui/CyclingWordPill";
 import { CONTAINER } from "./components/partials/services/ServiceUI";
 import AIInnovationSection from "./components/partials/home/AIInnovationSection";
 import DeliverySpectrumSection from "./components/partials/home/DeliverySpectrumSection";
@@ -63,6 +64,7 @@ export default function Home() {
       {/* Editorial statement — keyword in a serif pill above an oversized serif headline */}
       <section className="bg-white">
         <div className={`${CONTAINER} pb-18 sm:pb-24 lg:pb-36`}>
+          <CyclingWordPill words={['AI', 'Cloud', 'Web', 'Agentic']} className="mb-6 lg:mb-8" />
           <EditorialHeadline highlightText="Intelligence" headlineLines={['at every layer', 'of your business.']} />
         </div>
       </section>
