@@ -3,7 +3,6 @@
 import { Constants } from "@/Constants";
 import { Link } from 'react-transition-progress/next';
 import RotatingHeroHeadline from './RotatingHeroHeadline';
-import HeroSearch from './HeroSearch';
 import MobileHomeHero from './MobileHomeHero';
 import HeroFog from './HeroFog';
 import PartnerHoverCard from '@/app/components/PartnerHoverCard';
@@ -35,9 +34,6 @@ function HomeHeader() {
           {/* headline (rotates between slogans) */}
           <RotatingHeroHeadline variant="desktop" />
 
-          {/* site search — same field, placeholder and behaviour */}
-          <HeroSearch />
-
           {/* CTA row */}
           <div className="mt-9 flex flex-wrap items-center gap-x-5 gap-y-3">
             <Link
@@ -61,15 +57,6 @@ function HomeHeader() {
           </div>
 
         </div>
-
-        {/* Gradient divider — same as the nearshore intro */}
-        <hr
-          className="m-0 h-1 w-full border-0"
-          style={{
-            backgroundImage: 'linear-gradient(260deg, #fff, #BECBFF 20%, #5B7CFA 50%, #2563EB 80%, #fff)',
-            borderRadius: 100,
-          }}
-        />
       </div>
     </main>
   );
