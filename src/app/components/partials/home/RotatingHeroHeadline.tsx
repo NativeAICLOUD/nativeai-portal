@@ -18,14 +18,15 @@ const pillSerif = Instrument_Serif({
 // larger, with the highlight in the italic serif instead of the blue marker tint.
 // `pill: true` uses the "Intelligence at every layer" design instead: the whole
 // slogan in the serif, with the highlight in an italic periwinkle pill on its own line.
-const SLOGANS: { pre: string; highlight: string; post: string; editorial?: boolean; pill?: boolean }[] = [
-  { pre: '', highlight: 'Web intelligence', post: ' for the agentic era', pill: true },
-  { pre: 'We make ', highlight: 'AI work', post: ' inside your business', pill: true },
-  { pre: '', highlight: 'Agentic AI', post: ' that acts, not just answers' },
+const SLOGANS: { pre: string; highlight: string; post: string; editorial?: boolean; pill?: boolean; mobile?: boolean }[] = [
+  { pre: '', highlight: 'Web intelligence', post: ' for the agentic era', pill: true, mobile: true },
+  { pre: 'We make ', highlight: 'AI work', post: ' inside your business', editorial: true, mobile: true },
+  { pre: '', highlight: 'Agentic AI', post: ' that acts, not just answers', mobile: true },
   { pre: 'Modernize & scale with ', highlight: 'Azure Certified', post: ' experts' },
   { pre: 'Your ', highlight: 'AI & Digital Transformation', post: ' partner' },
 ];
-const PILL_SLOGANS = SLOGANS.filter((s) => s.pill);
+// `mobile: true` — the slogans the mobile home hero rotates through.
+const FEATURED_SLOGANS = SLOGANS.filter((s) => s.mobile);
 const ROTATE_INTERVAL = 4200; // ms between slogan changes
 
 /* Default typography: large, tight, typography-led. The highlight is a
@@ -68,9 +69,11 @@ const EDITORIAL_OVERRIDES = {
     maxWidth: 1100,
   } as React.CSSProperties,
   mobile: {
+    fontSize: 44,
     fontWeight: 300,
+    lineHeight: 1.02,
     letterSpacing: '-0.035em',
-    color: '#141414',
+    color: '#1e1e1e',
   } as React.CSSProperties,
 } as const;
 
@@ -115,14 +118,14 @@ const HIGHLIGHT_STYLE: React.CSSProperties = {
 
 export default function RotatingHeroHeadline({
   variant,
-  pillOnly = false,
+  featuredOnly = false,
 }: {
   variant: 'desktop' | 'mobile';
-  /** Rotate only through the slogans flagged `pill` (used by the mobile home hero). */
-  pillOnly?: boolean;
+  /** Rotate only through the slogans flagged `mobile` (used by the mobile home hero). */
+  featuredOnly?: boolean;
 }) {
   const [index, setIndex] = useState(0);
-  const slogans = pillOnly ? PILL_SLOGANS : SLOGANS;
+  const slogans = featuredOnly ? FEATURED_SLOGANS : SLOGANS;
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -133,8 +136,12 @@ export default function RotatingHeroHeadline({
 
   const cfg = VARIANTS[variant];
   const slogan = slogans[index];
+  // On mobile every slogan uses the same default design (bold sans + blue marker
+  // highlight); the pill and editorial designs are desktop-only.
+  const usePill = variant === 'desktop' && !!slogan.pill;
+  const useEditorial = variant === 'desktop' && !!slogan.editorial;
 
-  if (slogan.pill) {
+  if (usePill) {
     return (
       <>
         <h1
@@ -164,10 +171,10 @@ export default function RotatingHeroHeadline({
       <h1
         key={index}
         className="hdr-rot-headline"
-        style={slogan.editorial ? { ...cfg.h1Style, ...EDITORIAL_OVERRIDES[variant] } : cfg.h1Style}
+        style={useEditorial ? { ...cfg.h1Style, ...EDITORIAL_OVERRIDES[variant] } : cfg.h1Style}
       >
         {slogan.pre}
-        {slogan.editorial ? (
+        {useEditorial ? (
           <SerifAccent>{slogan.highlight}</SerifAccent>
         ) : (
           <span className="hdr-highlight" style={HIGHLIGHT_STYLE}>{slogan.highlight}</span>

@@ -6,9 +6,7 @@ import { motion, useReducedMotion } from 'framer-motion';
    still at the bottom-left, now as slow fog banks rolling along the bottom of the
    hero down to the gradient divider. Place inside a `relative overflow-hidden` hero,
    behind the content (content uses z-10). Static under prefers-reduced-motion.
-   `cover` spreads the fog over the whole hero instead of just the bottom edge.
-   `lively` makes the drift clearly visible on a narrow (phone) hero: the banks
-   travel about 2.5x further and complete a loop in half the time. */
+   `cover` spreads the fog over the whole hero instead of just the bottom edge. */
 type Bank = { left: string; bottom: string; w: string; h: string; color: string; x: string[]; y: string[]; duration: number };
 
 const BANKS: Bank[] = [
@@ -27,23 +25,9 @@ const COVER_BANKS: Bank[] = [
   { left: '65%', bottom: '10%', w: '50%', h: '90%', color: 'rgba(190,203,255,0.42)', x: ['0%', '-24%', '-8%', '0%'], y: ['0%', '12%', '-4%', '0%'], duration: 29 },
 ];
 
-// '28%' -> '70%' — widen a keyframe list by a factor
-const widen = (steps: string[], by: number) => steps.map((v) => `${parseFloat(v) * by}%`);
-
-export default function HeroFog({
-  cover = false,
-  lively = false,
-  className = '',
-}: {
-  cover?: boolean;
-  lively?: boolean;
-  className?: string;
-}) {
+export default function HeroFog({ cover = false, className = '' }: { cover?: boolean; className?: string }) {
   const reduce = useReducedMotion();
-  const base = cover ? [...BANKS, ...COVER_BANKS] : BANKS;
-  const banks = lively
-    ? base.map((b) => ({ ...b, x: widen(b.x, 2.5), y: widen(b.y, 2), duration: b.duration / 2 }))
-    : base;
+  const banks = cover ? [...BANKS, ...COVER_BANKS] : BANKS;
   return (
     <div aria-hidden="true" className={`pointer-events-none absolute inset-0 -z-10 overflow-hidden ${className}`}>
       {banks.map((b, i) => (

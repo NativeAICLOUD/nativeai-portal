@@ -6,7 +6,7 @@ import HeroFog from './HeroFog';
 import PartnerHoverCard from '@/app/components/PartnerHoverCard';
 import RotatingHeroHeadline from './RotatingHeroHeadline';
 
-/* Editorial mobile-only hero — eyebrow, headline rotating through the pill slogans,
+/* Editorial mobile-only hero — eyebrow, headline rotating through the two featured slogans,
    supporting paragraph, full-width CTA, secondary CTA.
    Rendered only below the md breakpoint; desktop keeps the existing hero. */
 export default function MobileHomeHero() {
@@ -16,28 +16,50 @@ export default function MobileHomeHero() {
       style={{ paddingTop: 124 }}
     >
       {/* Blue glow drifting like fog, same as the desktop hero */}
-      <HeroFog cover lively />
+      <HeroFog />
+
+      {/* Eyebrow — same type as the "What we do" label further down; links to the About page */}
+      <p className="m-0 mb-4 text-[14px] font-medium uppercase tracking-[0.18em] text-[#1e1e1e]">
+        <Link
+          href={Constants.PAGES.ABOUT_US}
+          className="rounded-sm transition-colors duration-200 hover:text-[#2563EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] focus-visible:ring-offset-2"
+        >
+          About us
+        </Link>
+      </p>
 
       {/* Fixed-height slot so the buttons below don't jump when the slogan changes */}
-      <div style={{ minHeight: '11.5rem', marginBottom: 24 }}>
-        <RotatingHeroHeadline variant="mobile" pillOnly />
+      <div style={{ minHeight: '7.5rem', marginBottom: 24 }}>
+        <RotatingHeroHeadline variant="mobile" featuredOnly />
       </div>
 
-      {/* Actions — side by side, 48px tall so both are comfortable tap targets */}
-      <div className="flex gap-2.5">
+      {/* Actions — stacked: a white pill matching the Claude partner badge,
+          then a quiet text link ~30px below it. */}
+      <div className="flex flex-col items-center">
+        {/* Same pill as the Claude partner badge below: white, hairline border, 40px tall */}
         <Link
           href={Constants.PAGES.GET_IN_TOUCH}
-          className="group flex h-12 flex-1 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-[#2E2B2B] px-4 text-[15px] font-semibold text-white shadow-[0_10px_24px_-12px_rgba(37,99,235,0.55)] transition-colors duration-200 hover:bg-[#242121] active:bg-[#1A1818]"
+          className="flex w-full h-10 cursor-pointer items-center justify-center whitespace-nowrap rounded-md bg-black px-5 text-[14px] font-semibold text-white transition-colors duration-200 hover:bg-[#1A1818] active:bg-[#2E2B2B]"
         >
           Let&apos;s talk
-          <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5 group-active:translate-x-0.5">&rarr;</span>
         </Link>
 
         <Link
           href={Constants.PAGES.SOLUTIONS}
-          className="flex h-12 flex-1 cursor-pointer items-center justify-center whitespace-nowrap rounded-full border border-[#BECBFF] bg-white/70 px-4 text-[15px] font-semibold text-[#2E2B2B] backdrop-blur-md transition-colors duration-200 hover:bg-[#E1F0FF] hover:text-[#0066B3] active:bg-[#CCE4FF]"
+          className="group relative mt-[30px] inline-flex cursor-pointer items-center gap-2 whitespace-nowrap rounded-sm py-1 text-[15px] font-semibold text-[#2E2B2B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] focus-visible:ring-offset-4"
         >
-          See all solutions
+          Hesitant? Let&apos;s explore
+          <span
+            aria-hidden="true"
+            className="transition-transform duration-300 ease-out group-hover:translate-x-1 group-active:translate-x-1 motion-reduce:transition-none"
+          >
+            &rarr;
+          </span>
+          {/* underline that draws in from the left on hover */}
+          <span
+            aria-hidden="true"
+            className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-[#2E2B2B] transition-transform duration-300 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100 motion-reduce:transition-none"
+          />
         </Link>
       </div>
 

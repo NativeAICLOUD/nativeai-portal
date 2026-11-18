@@ -140,8 +140,12 @@ export default function EngineeredYourWaySection() {
             return (
               <div
                 key={title}
-                className={`group/card relative isolate overflow-hidden rounded-[28px] bg-[#EEF1F2] transition-colors duration-300 ${
-                  isOpen ? '' : 'hover:bg-[#E7EBEC]'
+                // Closed: the silver-grey tile. Open or hovered (when the fog shows): the grey is
+                // dropped so the fog sits on clean white, with a faint periwinkle edge to hold the shape.
+                className={`group/card relative isolate overflow-hidden rounded-[28px] ring-1 ring-inset transition-[background-color,box-shadow] duration-300 ${
+                  isOpen
+                    ? 'bg-white ring-[#BECBFF]/70'
+                    : 'bg-[#EEF1F2] ring-transparent hover:bg-white hover:ring-[#BECBFF]/70'
                 }`}
                 // Desktop row: hovering a card opens it, leaving closes it. Elsewhere, click/tap toggles.
                 onPointerEnter={(e) => e.pointerType === 'mouse' && hoverOpens() && setOpenIndex(i)}
