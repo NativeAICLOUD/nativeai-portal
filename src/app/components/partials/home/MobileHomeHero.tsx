@@ -65,7 +65,7 @@ export default function MobileHomeHero() {
 
       {/* Claude partner badge — tap to open the partnership card.
           Sits under a hairline as a quiet trust line, aligned with the text. */}
-      <div className="mt-7 mb-12 flex items-center border-t border-[#2563EB]/15 pt-5">
+      <div className="mt-6 mb-12 flex items-center">
         <PartnerHoverCard official />
       </div>
     </div>
