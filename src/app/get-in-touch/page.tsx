@@ -35,35 +35,71 @@ const GetInTouchPage = () => {
 
         {/* Map */}
         <div className="pb-16 sm:pb-20 lg:pb-28">
-          <div className="relative w-full h-[420px] sm:h-[520px] lg:h-[580px]">
-            <Image
-              src={Location}
-              alt="Location Image"
-              priority
-              className={'relative w-full h-full rounded-20 object-cover shadow-[0_24px_60px_-12px_rgba(15,23,42,0.35)]'}
-            />
-            <div className="info absolute inset-0 top-[4.5rem] left-[38%] sm:top-[27.5%] sm:left-[38%] md:top-[29.5%] md:left-[40%] lg:top-[30%] lg:left-[40.4%] xl:top-[31%]">
-              <div className="content absolute flex flex-col gap-2.5 rounded-2xl border border-[#e6e6e6] bg-white px-5 py-4 text-[#1A1A1A] shadow-[0_16px_40px_-8px_rgba(15,23,42,0.28)] -translate-x-[3rem] -translate-y-[5.5rem] transition-all duration-300 hover:scale-105 hover:shadow-[0_20px_50px_-8px_rgba(15,23,42,0.32)] sm:-translate-y-[8.5rem]">
-                <a href={Constants.MAPS} target='_blank' className='flex items-center gap-2.5 text-[13.5px] font-medium tracking-tight transition-colors hover:text-primary'>
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#2563EB]/10 transition-all duration-200 hover:scale-125 hover:bg-[#2563EB]/20">
-                    <Image src={PinMarkerBlue} alt="" className='size-3.5' />
-                  </span>
-                  {Constants.ADDRESS}
-                </a>
-                <a href={`tel:${Constants.PHONE}`} target='_blank' className='flex items-center gap-2.5 text-[13.5px] font-medium tracking-tight transition-colors hover:text-primary'>
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#2563EB]/10 transition-all duration-200 hover:scale-125 hover:bg-[#2563EB]/20">
-                    <Image src={PhoneBlue} alt="" className='size-3.5' />
-                  </span>
-                  {Constants.PHONE}
+          <div className="relative">
+            <div className="relative w-full h-[360px] sm:h-[520px] lg:h-[580px]">
+              <Image
+                src={Location}
+                alt="NativeCloud office at East Gate Skopje"
+                priority
+                className={'relative w-full h-full rounded-20 object-cover shadow-[0_24px_60px_-12px_rgba(15,23,42,0.35)]'}
+              />
+              {/* soft shade so the office card reads on any part of the photo */}
+              <div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden rounded-20 bg-gradient-to-tr from-[#0a0e1a]/45 via-transparent to-transparent sm:block" />
+
+              {/* pin on the building */}
+              <div className="info absolute inset-0 top-[4.5rem] left-[38%] sm:top-[27.5%] sm:left-[38%] md:top-[29.5%] md:left-[40%] lg:top-[30%] lg:left-[40.4%] xl:top-[31%]">
+                <a
+                  href={Constants.MAPS}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View on map"
+                  className="absolute flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#e6e6e6] bg-white shadow-[0_4px_12px_rgba(15,23,42,0.18)] transition-transform duration-300 hover:scale-110 motion-reduce:transition-none"
+                >
+                  <span aria-hidden="true" className="absolute inset-0 rounded-full bg-white/70 motion-safe:animate-ping" />
+                  <Image src={PinMarkerBlue} alt="" className="relative size-6" />
                 </a>
               </div>
+            </div>
+
+            {/* Office card — overlaps the photo on phones, sits bottom-left from sm up */}
+            <div className="relative z-10 mx-3 -mt-16 rounded-[24px] border border-[#E5E7EB] bg-white p-5 text-[#141414] shadow-[0_16px_40px_-12px_rgba(15,23,42,0.28)] sm:absolute sm:bottom-6 sm:left-6 sm:mx-0 sm:mt-0 sm:w-[360px] sm:p-6 lg:bottom-8 lg:left-8">
+              <span
+                className="inline-block bg-[#BECBFF] px-3 py-1.5 text-[11px] font-semibold uppercase leading-none tracking-[0.14em] text-[#141414]"
+                style={{ borderRadius: '0.9em 1.05em 0.85em 1em / 1em 0.9em 1.05em 0.9em' }}
+              >
+                Our office
+              </span>
+              <h2 className="m-0 mt-4 text-[24px] font-medium leading-[1.1] tracking-tight text-[#141414]">Skopje, North Macedonia</h2>
+
+              <div className="mt-4 divide-y divide-[#EEF1F2] border-y border-[#EEF1F2]">
+                <a href={Constants.MAPS} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 py-3 transition-colors hover:text-[#2563EB]">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#EEF3FF]">
+                    <Image src={PinMarkerBlue} alt="" className="size-4" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-[11px] font-medium uppercase tracking-[0.14em] text-[#6B7280]">Address</span>
+                    <span className="block text-[15px] font-medium leading-snug">{Constants.ADDRESS}</span>
+                  </span>
+                </a>
+                <a href={`tel:${Constants.PHONE.replace(/\s/g, '')}`} className="group flex items-center gap-3 py-3 transition-colors hover:text-[#2563EB]">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#EEF3FF]">
+                    <Image src={PhoneBlue} alt="" className="size-4" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-[11px] font-medium uppercase tracking-[0.14em] text-[#6B7280]">Phone</span>
+                    <span className="block text-[15px] font-medium leading-snug">{Constants.PHONE}</span>
+                  </span>
+                </a>
+              </div>
+
               <a
                 href={Constants.MAPS}
                 target="_blank"
-                aria-label="View on map"
-                className="absolute flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#e6e6e6] bg-white shadow-[0_4px_12px_rgba(15,23,42,0.18)] transition-all duration-300 hover:scale-150 hover:border-transparent hover:bg-[#0a0e1a] hover:shadow-[0_8px_24px_rgba(0,0,0,0.45)]"
+                rel="noopener noreferrer"
+                className="group/dir mt-5 inline-flex h-10 w-full cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-md bg-black px-5 text-[14px] font-semibold text-white transition-colors duration-200 hover:bg-[#1A1818] active:bg-[#2E2B2B]"
               >
-                <Image src={PinMarkerBlue} alt="" className="size-6 drop-shadow-[0_4px_8px_rgba(0,0,0,0.35)]" />
+                Get directions
+                <span aria-hidden="true" className="transition-transform duration-200 group-hover/dir:translate-x-0.5 motion-reduce:transition-none">&rarr;</span>
               </a>
             </div>
           </div>

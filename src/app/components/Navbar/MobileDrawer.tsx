@@ -3,6 +3,7 @@
 import { useEffect, useRef, type ReactNode } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import Logo from '../ui/Logo';
+import CloseIcon, { NAV_CLOSE_BUTTON_CLASS, NAV_CLOSE_ICON_SIZE } from '@/app/components/ui/CloseIcon';
 
 const DRAWER_EASE = [0.22, 0.61, 0.36, 1] as const;
 
@@ -62,12 +63,10 @@ export default function MobileDrawer({ open, onClose, children, footer }: Props)
         <button
           type="button"
           onClick={onClose}
-          aria-label="Close menu"
-          className="flex h-11 w-11 items-center justify-center rounded-full bg-transparent text-[#111827] transition-colors duration-200 hover:bg-black/[0.05]"
+          aria-label="Close"
+          className={NAV_CLOSE_BUTTON_CLASS}
         >
-          <svg viewBox="0 0 24 24" fill="none" width="24" height="24" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-            <path d="M18 6 6 18M6 6l12 12" />
-          </svg>
+          <CloseIcon sizeClass={NAV_CLOSE_ICON_SIZE} />
         </button>
       </div>
 

@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Link } from 'react-transition-progress/next';
 import { motion, AnimatePresence, useReducedMotion, type Variants } from 'framer-motion';
 import AIRibbonVisual from './AIRibbonVisual';
+import CloseIcon, { CLOSE_BUTTON_CLASS } from '@/app/components/ui/CloseIcon';
 import { SerifAccent } from '@/app/components/ui/EditorialGlow';
 
 /*
@@ -206,11 +207,9 @@ export default function FloatingPromoCard({
               type="button"
               onClick={dismiss}
               aria-label="Close"
-              className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/75 text-[#374151] shadow-[0_2px_8px_rgba(15,23,42,0.12)] backdrop-blur-sm transition-colors hover:bg-white hover:text-[#111]"
+              className={`absolute right-1 top-1 z-10 ${CLOSE_BUTTON_CLASS}`}
             >
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M18 6 6 18M6 6l12 12" />
-              </svg>
+              <CloseIcon />
             </button>
 
             <div onMouseMove={onSpotlightMove} className="group/body relative px-5 pb-5 pt-4 sm:px-6 sm:pb-6 sm:pt-5">

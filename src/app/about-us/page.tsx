@@ -164,7 +164,10 @@ export default function AboutUsPage() {
             <div className="flex-1">
               <div className="mb-6"><Eyebrow>About NativeCloud</Eyebrow></div>
               <h1 className="m-0 text-[40px] font-medium leading-[1.05] text-[#111] sm:text-[52px] lg:text-[64px]">
-                We make AI work for you.
+                We make{' '}
+                {/* same blue marker tint as the homepage hero highlight */}
+                <span className="rounded-[2px] bg-[#2563EB]/10 px-1.5 pb-[3px] text-[#171717]">AI</span>{' '}
+                work for you.
               </h1>
               <p className="mt-6 max-w-[560px] text-[19px] font-normal leading-[1.6] text-[#4B5563]">
                 We work closely with our clients, use the right technology, and stay focused on

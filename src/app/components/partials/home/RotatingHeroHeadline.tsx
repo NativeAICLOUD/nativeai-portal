@@ -25,7 +25,7 @@ const SLOGANS: { pre: string; highlight: string; post: string; editorial?: boole
   { pre: 'Modernize & scale with ', highlight: 'Azure Certified', post: ' experts' },
   { pre: 'Your ', highlight: 'AI & Digital Transformation', post: ' partner' },
 ];
-// `mobile: true` — the slogans the mobile home hero rotates through.
+// `mobile: true` — the slogans the mobile home hero rotates through.
 const FEATURED_SLOGANS = SLOGANS.filter((s) => s.mobile);
 const ROTATE_INTERVAL = 4200; // ms between slogan changes
 
@@ -156,7 +156,21 @@ export default function RotatingHeroHeadline({
           <span className="hdr-pill-line" style={{ display: 'block' }}>
             <span className="hdr-pill" style={PILL_STYLE}>{slogan.highlight}</span>
           </span>
-          <span className="hdr-pill-line" style={{ display: 'block', marginTop: '0.1em', animationDelay: '0.12s' }}>
+          {/* Second line in the light sans of "inside your business" (editorial slogans),
+              scaled to the same optical size — the serif around it is set a step larger. */}
+          <span
+            className="hdr-pill-line"
+            style={{
+              display: 'block',
+              marginTop: '0.14em',
+              animationDelay: '0.12s',
+              fontFamily: "'Switzer', sans-serif",
+              fontWeight: 300,
+              fontSize: '0.87em',
+              lineHeight: 1.02,
+              letterSpacing: '-0.035em',
+            }}
+          >
             {slogan.post.trim()}
           </span>
         </h1>

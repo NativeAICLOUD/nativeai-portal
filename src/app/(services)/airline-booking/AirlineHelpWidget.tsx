@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { MessageCircle, X, Send } from 'lucide-react';
+import CloseIcon, { CLOSE_BUTTON_CLASS } from '@/app/components/ui/CloseIcon';
 
 const suggestions = [
   'Change my booking',
@@ -33,9 +34,9 @@ export default function AirlineHelpWidget() {
               type="button"
               onClick={() => setOpen(false)}
               aria-label="Close"
-              className="shrink-0 rounded-full p-1.5 text-white/60 transition-colors hover:bg-white/10 hover:text-white"
+              className={`-mr-2 -mt-2 shrink-0 ${CLOSE_BUTTON_CLASS} !text-white`}
             >
-              <X className="h-4 w-4" strokeWidth={2} aria-hidden="true" />
+              <CloseIcon />
             </button>
           </div>
 

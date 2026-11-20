@@ -1,7 +1,8 @@
 ﻿'use client';
 
-import { Link } from 'react-transition-progress/next';
+import { Link } from 'react-transition-progress/next';
 import { EditorialGlow } from '@/app/components/ui/EditorialGlow';
+import CustomSearchIcon from '@/app/components/ui/CustomSearchIcon';
 import { Constants } from '@/Constants';
 import { CaretDownIcon } from '@radix-ui/react-icons';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -373,7 +374,7 @@ function Navbar() {
                 <Link
                   href={item.url}
                   onClick={() => setSlideMenu(false)}
-                  className="inline-flex h-10 min-w-[160px] cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#2563EB] px-5 text-[14px] font-semibold text-white transition-colors duration-200 hover:bg-[#1D4ED8] active:bg-[#1E40AF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]/40 focus-visible:ring-offset-2"
+                  className="inline-flex h-11 min-w-[160px] cursor-pointer items-center justify-center whitespace-nowrap rounded-md border-0 bg-[#ECEEF2] px-5 text-[14px] font-semibold text-[#141414] transition-colors duration-200 hover:bg-[#DFE2E9] hover:text-[#0a0e1a] active:bg-[#D2D6DF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] focus-visible:ring-offset-2"
                 >
                   Let&apos;s talk
                 </Link>
@@ -450,19 +451,9 @@ function Navbar() {
             onClick={() => { setSearchOpen(!searchOpen); setSlideMenu(false); setOpenSide(false); }}
             aria-label="Search"
             aria-expanded={searchOpen}
-            className="hidden md:flex h-10 items-center gap-2 rounded-full border border-[#E6E6E6] bg-white px-[18px] transition-colors duration-200 hover:border-[#111827]/15 hover:bg-[#FAFAFA] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111827]/20"
+            className="group hidden md:flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border-0 bg-transparent p-0 shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111827]/20"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" className="shrink-0">
-              <defs>
-                <linearGradient id="ai-mode-grad" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#60a5fa" />
-                  <stop offset="50%" stopColor="#3b82f6" />
-                  <stop offset="100%" stopColor="#1e4fd6" />
-                </linearGradient>
-              </defs>
-              <path fill="url(#ai-mode-grad)" d="M12 0c0 6.627-5.373 12-12 12 6.627 0 12 5.373 12 12 0-6.627 5.373-12 12-12-6.627 0-12-5.373-12-12Z" />
-            </svg>
-            <span className="text-[14px] font-medium text-[#111827]">Search</span>
+            <CustomSearchIcon sizeClass="h-6 w-6" className="transition-opacity duration-200 ease-[ease] group-hover:opacity-70 motion-reduce:transition-none" />
           </button>
 
           <a
