@@ -374,7 +374,7 @@ function Navbar() {
                 <Link
                   href={item.url}
                   onClick={() => setSlideMenu(false)}
-                  className="inline-flex h-11 min-w-[160px] cursor-pointer items-center justify-center whitespace-nowrap rounded-md border-0 bg-[#ECEEF2] px-5 text-[14px] font-semibold text-[#141414] transition-colors duration-200 hover:bg-[#DFE2E9] hover:text-[#0a0e1a] active:bg-[#D2D6DF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] focus-visible:ring-offset-2"
+                  className="inline-flex h-9 min-w-[116px] cursor-pointer items-center justify-center whitespace-nowrap rounded-md border-0 bg-[#ECEEF2] px-4 text-[13px] 2xl:h-10 2xl:min-w-[132px] 2xl:px-5 2xl:text-[14px] font-semibold text-[#141414] transition-colors duration-200 hover:bg-[#DFE2E9] hover:text-[#0a0e1a] active:bg-[#D2D6DF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] focus-visible:ring-offset-2"
                 >
                   Let&apos;s talk
                 </Link>
@@ -446,7 +446,7 @@ function Navbar() {
 
         {/* Right: Search + Login + Hamburger */}
         <div className="flex items-center gap-3 max-md:gap-2 shrink-0">
-          {/* AI Mode search toggle — Google-style gradient pill. Hidden on mobile; lives inside the mobile menu instead. */}
+          {/* Search toggle — the custom search mark. Hidden on mobile; it lives inside the mobile menu instead. */}
           <button
             onClick={() => { setSearchOpen(!searchOpen); setSlideMenu(false); setOpenSide(false); }}
             aria-label="Search"

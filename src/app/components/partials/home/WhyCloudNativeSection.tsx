@@ -79,13 +79,29 @@ export default function WhyCloudNativeSection() {
               {benefits.map(({ title, icon: Icon, color, bg }, i) => (
                 <motion.div
                   key={title}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-[16px] border border-[#EEF0F3] bg-white p-5 transition-[transform,background-color,border-color,box-shadow] duration-300 ease-out hover:-translate-y-[6px] hover:border-transparent hover:bg-[var(--tint)] hover:shadow-[0_18px_40px_rgba(15,23,42,.08)] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+                  className="group relative isolate flex h-full flex-col overflow-hidden rounded-[16px] border border-[#EEF0F3] bg-white p-5 transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-[6px] hover:border-[#BECBFF]/70 hover:shadow-[0_18px_40px_rgba(15,23,42,.08)] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
                   style={{ '--tint': bg, '--accent': color } as React.CSSProperties}
                   initial={{ opacity: 0, y: 28, scale: 0.96 }}
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
                   viewport={{ once: true, margin: '-40px' }}
                 >
+                  {/* Fog — the same periwinkle fog as the Innovate / Modernize / Accelerate
+                      cards: soft blurred banks that fade in and drift apart on hover. */}
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 motion-reduce:transition-none"
+                  >
+                    <span
+                      className="absolute left-[-30%] top-[-25%] h-[85%] w-[95%] rounded-full transition-transform duration-[1400ms] ease-out group-hover:translate-x-[18%] group-hover:translate-y-[10%] motion-reduce:transition-none"
+                      style={{ background: 'radial-gradient(closest-side, rgba(190,203,255,0.60) 0%, transparent 100%)', filter: 'blur(28px)' }}
+                    />
+                    <span
+                      className="absolute left-[35%] top-[35%] h-[90%] w-[95%] rounded-full transition-transform duration-[1400ms] ease-out group-hover:-translate-x-[16%] group-hover:-translate-y-[10%] motion-reduce:transition-none"
+                      style={{ background: 'radial-gradient(closest-side, rgba(190,203,255,0.75) 0%, transparent 100%)', filter: 'blur(28px)' }}
+                    />
+                  </span>
+
                   {/* Icon tile — fills with the accent colour and the glyph turns white on hover */}
                   <span className="relative grid h-12 w-12 place-items-center rounded-[14px]" style={{ background: bg }}>
                     <span

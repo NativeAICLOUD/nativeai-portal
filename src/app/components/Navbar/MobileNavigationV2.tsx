@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import CustomSearchIcon from '@/app/components/ui/CustomSearchIcon';
 import { Link } from 'react-transition-progress/next';
 import { motion, useReducedMotion } from 'framer-motion';
 import {
@@ -202,16 +203,7 @@ export default function MobileNavigationV2({ open, onClose, onOpenSearch }: Prop
             onClick={onOpenSearch}
             className="flex min-h-[96px] w-full items-center gap-3 py-6 text-left text-[18px] font-semibold text-[#111827] transition-colors duration-200 hover:text-[#2563EB]"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" className="shrink-0">
-              <defs>
-                <linearGradient id="ai-mode-grad-mobile" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#60a5fa" />
-                  <stop offset="50%" stopColor="#3b82f6" />
-                  <stop offset="100%" stopColor="#1e4fd6" />
-                </linearGradient>
-              </defs>
-              <path fill="url(#ai-mode-grad-mobile)" d="M12 0c0 6.627-5.373 12-12 12 6.627 0 12 5.373 12 12 0-6.627 5.373-12 12-12-6.627 0-12-5.373-12-12Z" />
-            </svg>
+            <CustomSearchIcon sizeClass="h-5 w-5" />
             Search
           </button>
         </li>
