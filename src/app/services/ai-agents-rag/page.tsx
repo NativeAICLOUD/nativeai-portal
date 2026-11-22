@@ -22,21 +22,21 @@ export const metadata: Metadata = {
 
 /* ── content ── */
 const pillars: { num: string; title: string; body: string; icon: LucideIcon }[] = [
-  { num: "01", title: "Custom AI Agents", body: "We build autonomous AI agents tailored to your business — agents that research, decide, and act across your tools, APIs, and data without manual intervention.", icon: Bot },
-  { num: "02", title: "LLM Integration & RAG", body: "We embed large language models into your products and internal tools — connected to your own data via RAG so every answer is accurate, private, and on-brand.", icon: Sparkles },
-  { num: "03", title: "AI Workflow Automation", body: "We replace manual processes with multi-agent pipelines — from document processing and approvals to reporting and customer interactions, fully automated end-to-end.", icon: Workflow },
-  { num: "04", title: "Realtime Voice AI", body: "We let people talk to their business systems — ask a question out loud, get an answer in seconds, and have the agent look things up or take the next step, securely inside your cloud.", icon: AudioLines },
+  { num: "01", title: "Custom AI Agents", body: "Agents that research, decide and act across your tools.", icon: Bot },
+  { num: "02", title: "LLM Integration & RAG", body: "Answers grounded in your own data. Accurate and private.", icon: Sparkles },
+  { num: "03", title: "AI Workflow Automation", body: "Manual processes, automated end to end.", icon: Workflow },
+  { num: "04", title: "Realtime Voice AI", body: "Ask out loud. Get an answer in seconds.", icon: AudioLines },
 ];
 
 const capabilities = [
-  { tag: "Agents", title: "Custom AI Agents", body: "Autonomous agents that monitor, decide, and act — integrated with your tools via MCP, Microsoft Agent Framework or LangGraph, deployed on Microsoft Foundry or AWS Bedrock." },
-  { tag: "RAG", title: "Retrieval-Augmented Generation", body: "RAG pipelines over your documents, SharePoint, or Confluence — accurate, cited answers with hallucination dramatically reduced." },
-  { tag: "LLMs", title: "LLM Integration & Fine-Tuning", body: "Claude, GPT, Gemini, Mistral or open-weight Llama — we select, fine-tune, and integrate the right model for your use case and data-residency requirements." },
-  { tag: "Automation", title: "AI Workflow Automation", body: "Multi-agent pipelines that trigger on events, process with AI, and push results where your team already works — email, Slack, ERP, CRM." },
-  { tag: "Knowledge", title: "Knowledge Base AI", body: "Turn internal documentation, support tickets, and tribal knowledge into a searchable, AI-powered source of truth for every team member." },
-  { tag: "Voice", title: "Realtime Voice AI", body: "Low-latency speech-to-speech assistants connected to your agents and data — for hands-free lookups, service desks, and daily workflows, with every action logged." },
-  { tag: "Ops", title: "Evaluation & Observability", body: "Every deployment includes accuracy benchmarks, multi-turn conversation evaluation, latency monitoring, and feedback loops so your AI keeps performing in production." },
-  { tag: "Governance", title: "Agent Governance & Cost Control", body: "Every agent gets an identity, an owner, and a budget — inventoried, secured and monitored in one control plane, so spend stays tied to the value it creates." },
+  { tag: "Agents", title: "Custom AI Agents", body: "Agents that monitor, decide and act, connected to your tools." },
+  { tag: "RAG", title: "Retrieval-Augmented Generation", body: "Accurate, cited answers from your own documents." },
+  { tag: "LLMs", title: "LLM Integration & Fine-Tuning", body: "The right model for your use case and your data rules." },
+  { tag: "Automation", title: "AI Workflow Automation", body: "Triggered by events. Delivered where your team works." },
+  { tag: "Knowledge", title: "Knowledge Base AI", body: "Everything your company knows, one question away." },
+  { tag: "Voice", title: "Realtime Voice AI", body: "Speech-to-speech assistants, with every action logged." },
+  { tag: "Ops", title: "Evaluation & Observability", body: "Measured before launch. Monitored after." },
+  { tag: "Governance", title: "Agent Governance & Cost Control", body: "Every agent has an identity, an owner and a budget." },
 ];
 
 const processSteps = [
@@ -106,6 +106,37 @@ const igniteUpdates: { status: IgniteStatus; area: string; title: string; body: 
   { status: "Generally available", area: "Microsoft Foundry", title: "Quality you can measure.", body: "Whole conversations scored, before and after launch." },
   { status: "Preview", area: "Agent 365", title: "Every cost in view.", body: "Budgets, limits and alerts for every agent." },
   { status: "Preview", area: "Microsoft Foundry", title: "Runs where you need it.", body: "Models and agents inside your own Kubernetes." },
+];
+
+/* ── Data services for generative AI ── two groups, same minimal copy as the cards above. */
+const dataServices: { label: string; heading: string; items: { title: string; body: string }[] }[] = [
+  {
+    label: "Data Engineering",
+    heading: "Our Data Engineering for Generative AI Services",
+    items: [
+      { title: "Every source, one pipeline.", body: "Files, databases, APIs and SharePoint, flowing in." },
+      { title: "Clean data in. Good answers out.", body: "Parsed, chunked and enriched for retrieval." },
+      { title: "Searchable by meaning.", body: "Embeddings and indexes, always up to date." },
+      { title: "Fresh, tested, monitored.", body: "Pipelines that tell you when something breaks." },
+    ],
+  },
+  {
+    label: "Data Architecture",
+    heading: "Our Data Architecture for Generative AI Services",
+    items: [
+      { title: "One home for your data.", body: "A governed lakehouse your agents can trust." },
+      { title: "Built for retrieval.", body: "Vector, keyword and graph search, combined." },
+      { title: "Private by design.", body: "Permissions follow the data into every answer." },
+      { title: "Ready to grow.", body: "Scales with demand, and with your budget." },
+    ],
+  },
+];
+
+/* ── Agent Factory ── */
+const factoryPoints: { title: string; body: string }[] = [
+  { title: "Built for you.", body: "Your data. Your tools. Your rules." },
+  { title: "Ready for production.", body: "Tested, secured and monitored from the first release." },
+  { title: "Live in weeks.", body: "One agent first. Then the next." },
 ];
 
 const STATUS_STYLE: Record<IgniteStatus, string> = {
@@ -345,8 +376,118 @@ export default function AIAgentsRAGPage() {
         </div>
       </section>
 
+      {/* ── Data Engineering & Data Architecture for Generative AI ── */}
+      <section aria-labelledby="data-services-heading" className="bg-white">
+        <div className={`${CONTAINER} ${SECTION_Y}`}>
+          <Reveal className="mb-12 grid grid-cols-1 gap-6 lg:mb-16 lg:grid-cols-2 lg:items-end lg:gap-16">
+            <div>
+              <div className="mb-6"><Eyebrow>Data for generative AI</Eyebrow></div>
+              <h2 id="data-services-heading" className={`m-0 max-w-[560px] ${H2}`}>Great AI starts with great data.</h2>
+            </div>
+            <p className="m-0 max-w-[520px] text-[17px] leading-[1.6] text-[#4B5563]">
+              We build the pipelines. We design the foundation. Your agents get the rest right.
+            </p>
+          </Reveal>
+
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-6">
+            {dataServices.map(({ label, heading, items }, i) => (
+              <Reveal key={label} delay={i * 0.06} className="h-full">
+                <article className="group relative isolate flex h-full flex-col overflow-hidden rounded-[28px] border border-[#E6E6E6] bg-white p-7 transition-[border-color] duration-300 hover:border-[#BECBFF] motion-reduce:transition-none lg:p-10">
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 motion-reduce:transition-none"
+                  >
+                    <span
+                      className="absolute left-[-30%] top-[-25%] h-[85%] w-[95%] rounded-full"
+                      style={{ background: "radial-gradient(closest-side, rgba(190,203,255,0.45) 0%, transparent 100%)", filter: "blur(40px)" }}
+                    />
+                    <span
+                      className="absolute left-[35%] top-[35%] h-[90%] w-[95%] rounded-full"
+                      style={{ background: "radial-gradient(closest-side, rgba(190,203,255,0.55) 0%, transparent 100%)", filter: "blur(40px)" }}
+                    />
+                  </span>
+
+                  <span
+                    className="w-fit bg-[#BECBFF] px-3 py-1.5 text-[11px] font-semibold uppercase leading-none tracking-[0.14em] text-[#141414]"
+                    style={{ borderRadius: PILL_RADIUS }}
+                  >
+                    {label}
+                  </span>
+                  <h3 className="m-0 mt-6 max-w-[440px] text-[26px] font-medium leading-[1.15] tracking-[-0.02em] text-[#111827] sm:text-[30px]">
+                    {heading}
+                  </h3>
+
+                  <ol role="list" className="m-0 mt-8 list-none border-b border-[#E6E6E6] p-0">
+                    {items.map(({ title, body }, n) => (
+                      <li key={title} className="grid grid-cols-[36px_minmax(0,1fr)] gap-3 border-t border-[#E6E6E6] py-5">
+                        <span className="pt-0.5 text-[13px] font-medium text-[#9ca3af]">{String(n + 1).padStart(2, "0")}</span>
+                        <div>
+                          <p className="m-0 text-[18px] font-medium leading-[1.3] text-[#111827]">{title}</p>
+                          <p className="m-0 mt-1 text-[15px] leading-[1.55] text-[#4B5563]">{body}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Agent Factory ── light card with the periwinkle fog, like the rest of the page */}
+      <section aria-labelledby="agent-factory-heading" className="bg-white">
+        <div className={`${CONTAINER} ${SECTION_PB}`}>
+          <Reveal>
+            <div className="relative isolate overflow-hidden rounded-[28px] border border-[#E6E6E6] bg-white p-7 sm:p-10 lg:p-14">
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute -right-[10%] -top-[40%] -z-10 h-[120%] w-[60%] rounded-full"
+                style={{ background: "radial-gradient(closest-side, rgba(190,203,255,0.70) 0%, transparent 100%)", filter: "blur(48px)" }}
+              />
+              <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end lg:gap-16">
+                <div>
+                  <span
+                    className="inline-block bg-[#BECBFF] px-3 py-1.5 text-[11px] font-semibold uppercase leading-none tracking-[0.14em] text-[#141414]"
+                    style={{ borderRadius: PILL_RADIUS }}
+                  >
+                    Agent Factory
+                  </span>
+                  <h2
+                    id="agent-factory-heading"
+                    className="m-0 mt-6 max-w-[620px] text-[32px] font-medium leading-[1.08] tracking-[-0.02em] text-[#111827] sm:text-[42px] lg:text-[52px]"
+                  >
+                    Customized, Production-Ready GenAI From Day One
+                  </h2>
+                  <div className="mt-9">
+                    <Link
+                      href="/schedule-call"
+                      className={CTA_DARK}
+                    >
+                      Start your first agent
+                    </Link>
+                  </div>
+                </div>
+
+                <ol role="list" className="m-0 list-none border-b border-[#E6E6E6] p-0">
+                  {factoryPoints.map(({ title, body }, n) => (
+                    <li key={title} className="grid grid-cols-[36px_minmax(0,1fr)] gap-3 border-t border-[#E6E6E6] py-5">
+                      <span className="pt-0.5 text-[13px] font-medium text-[#9ca3af]">{String(n + 1).padStart(2, "0")}</span>
+                      <div>
+                        <p className="m-0 text-[18px] font-medium leading-[1.3] text-[#111827]">{title}</p>
+                        <p className="m-0 mt-1 text-[15px] leading-[1.55] text-[#4B5563]">{body}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ── Four pillars ── */}
-      <section className="bg-white">
+      <section className="border-t border-[#E6E6E6] bg-white">
         <div className={`${CONTAINER} ${SECTION_Y}`}>
           <Reveal className="mb-12 lg:mb-16">
             <div className="mb-6"><Eyebrow>What we build</Eyebrow></div>
@@ -538,7 +679,7 @@ export default function AIAgentsRAGPage() {
 
       {/* ── Get in touch — same light-blue CTA as Careers / Solutions ── */}
       <GetInTouchCTASection
-        heading="Ready to become a Frontier Firm?"
+        heading="Start leveraging GenAI in your business, today."
         body="Book a free consultation. We'll pinpoint your highest-value automation and outline a path to production — no obligation."
         topic="AI Agents & RAG"
       />
