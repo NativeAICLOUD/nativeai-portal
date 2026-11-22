@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   Code2, Palette, CloudCog, CloudUpload,
-  Bot, Database, Boxes, Workflow, Sparkles, AudioLines,
+  Bot, Database, Boxes, Workflow, Sparkles, AudioLines, BrainCircuit, ShieldCheck,
   Plane, Scale, CreditCard,
   BookOpen, GraduationCap, Library, Building2,
   type LucideIcon,
@@ -17,7 +17,7 @@ import { VoiceVisual } from "@/app/components/partials/home/AIInnovationSection"
 export const metadata: Metadata = {
   title: "AI Agents & RAG",
   description:
-    "We implement AI Agents & LLMs that automate decisions, workflows, and operations — connected to your own data and tools.",
+    "AI agents, RAG and voice assistants grounded in your own data and governed end to end — built on Microsoft Foundry, Microsoft IQ and Agent 365.",
 };
 
 /* ── content ── */
@@ -29,13 +29,14 @@ const pillars: { num: string; title: string; body: string; icon: LucideIcon }[] 
 ];
 
 const capabilities = [
-  { tag: "Agents", title: "Custom AI Agents", body: "Autonomous agents that monitor, decide, and act — integrated with your tools via MCP, Semantic Kernel or LangGraph, deployed on Azure AI Foundry or AWS Bedrock." },
+  { tag: "Agents", title: "Custom AI Agents", body: "Autonomous agents that monitor, decide, and act — integrated with your tools via MCP, Microsoft Agent Framework or LangGraph, deployed on Microsoft Foundry or AWS Bedrock." },
   { tag: "RAG", title: "Retrieval-Augmented Generation", body: "RAG pipelines over your documents, SharePoint, or Confluence — accurate, cited answers with hallucination dramatically reduced." },
   { tag: "LLMs", title: "LLM Integration & Fine-Tuning", body: "Claude, GPT, Gemini, Mistral or open-weight Llama — we select, fine-tune, and integrate the right model for your use case and data-residency requirements." },
   { tag: "Automation", title: "AI Workflow Automation", body: "Multi-agent pipelines that trigger on events, process with AI, and push results where your team already works — email, Slack, ERP, CRM." },
   { tag: "Knowledge", title: "Knowledge Base AI", body: "Turn internal documentation, support tickets, and tribal knowledge into a searchable, AI-powered source of truth for every team member." },
   { tag: "Voice", title: "Realtime Voice AI", body: "Low-latency speech-to-speech assistants connected to your agents and data — for hands-free lookups, service desks, and daily workflows, with every action logged." },
-  { tag: "Ops", title: "Evaluation & Observability", body: "Every deployment includes accuracy benchmarks, latency monitoring, and feedback loops so your AI keeps performing in production." },
+  { tag: "Ops", title: "Evaluation & Observability", body: "Every deployment includes accuracy benchmarks, multi-turn conversation evaluation, latency monitoring, and feedback loops so your AI keeps performing in production." },
+  { tag: "Governance", title: "Agent Governance & Cost Control", body: "Every agent gets an identity, an owner, and a budget — inventoried, secured and monitored in one control plane, so spend stays tied to the value it creates." },
 ];
 
 const processSteps = [
@@ -53,15 +54,69 @@ const techStack: { name: string; kind: "Model" | "Platform" | "Agents" | "Retrie
   { name: "Google Gemini", kind: "Model" },
   { name: "Mistral", kind: "Model" },
   { name: "Meta Llama", kind: "Model" },
-  { name: "Azure AI Foundry", kind: "Platform" },
+  { name: "Microsoft Foundry", kind: "Platform" },
+  { name: "Microsoft IQ", kind: "Platform" },
+  { name: "Agent 365", kind: "Platform" },
+  { name: "Copilot Studio", kind: "Platform" },
   { name: "AWS Bedrock", kind: "Platform" },
-  { name: "Azure OpenAI", kind: "Platform" },
   { name: "Model Context Protocol", kind: "Agents" },
-  { name: "Semantic Kernel", kind: "Agents" },
+  { name: "Microsoft Agent Framework", kind: "Agents" },
   { name: "LangGraph", kind: "Agents" },
+  { name: "Foundry IQ", kind: "Retrieval" },
   { name: "Azure AI Search", kind: "Retrieval" },
   { name: "Pinecone", kind: "Retrieval" },
 ];
+
+/* ── The Frontier Firm ── Microsoft's name for a human-led organisation where agents
+   carry a growing share of the execution. Three layers make it practical. */
+const frontierLayers: { num: string; layer: string; title: string; body: string; built: string; icon: LucideIcon }[] = [
+  {
+    num: "01",
+    layer: "Intelligence",
+    title: "It knows your business.",
+    body: "Your data. Your documents. Your context.",
+    built: "Microsoft IQ",
+    icon: BrainCircuit,
+  },
+  {
+    num: "02",
+    layer: "Agents",
+    title: "It finishes the work.",
+    body: "Plans, acts, and asks you first when it matters.",
+    built: "Microsoft Foundry",
+    icon: Bot,
+  },
+  {
+    num: "03",
+    layer: "Control",
+    title: "You stay in charge.",
+    body: "See what every agent does, reaches and costs.",
+    built: "Agent 365",
+    icon: ShieldCheck,
+  },
+];
+
+/* ── What's new on the Microsoft AI platform ── status as published in the Ignite 2026 Book of News (Nov 2026).
+   Edit here when a preview reaches general availability. */
+type IgniteStatus = "Generally available" | "Preview" | "Frontier";
+const igniteUpdates: { status: IgniteStatus; area: string; title: string; body: string }[] = [
+  { status: "Generally available", area: "Microsoft IQ", title: "One context for every agent.", body: "Work, business, documents and web. Connected once." },
+  { status: "Generally available", area: "Foundry IQ", title: "SharePoint, ready to answer.", body: "Your documents, with their permissions intact." },
+  { status: "Preview", area: "Foundry IQ", title: "Answers that connect the dots.", body: "Knowledge graphs link what your documents share." },
+  { status: "Generally available", area: "Microsoft Foundry", title: "Quality you can measure.", body: "Whole conversations scored, before and after launch." },
+  { status: "Preview", area: "Agent 365", title: "Every cost in view.", body: "Budgets, limits and alerts for every agent." },
+  { status: "Preview", area: "Microsoft Foundry", title: "Runs where you need it.", body: "Models and agents inside your own Kubernetes." },
+];
+
+const STATUS_STYLE: Record<IgniteStatus, string> = {
+  "Generally available": "bg-[#E1F0FF] text-[#0066B3]",
+  Preview: "bg-[#F3F4F6] text-[#4B5563]",
+  Frontier: "bg-[#BECBFF] text-[#141414]",
+};
+
+// Same organic pill as the editorial headlines on the homepage.
+const PILL_RADIUS = "0.9em 1.05em 0.85em 1em / 1em 0.9em 1.05em 0.9em";
+const IGNITE_SOURCE = "https://news.microsoft.com/events/ignite/2026/book-of-news/";
 
 const voicePoints = ["Low-latency speech-to-speech", "Connected to your agents & RAG", "Confirmation before any action"];
 
@@ -103,9 +158,9 @@ const solutions: { label: string; items: { href: string; icon: LucideIcon; title
   },
 ];
 
-/* CTA styles — same pills as the homepage hero and Realtime AI section */
+/* CTA styles — the squared black button and text link of the homepage hero */
 const CTA_DARK =
-  "inline-flex h-10 min-w-[160px] cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-[#2E2B2B] px-5 text-[14px] font-semibold text-white transition-colors duration-200 hover:bg-[#242121] active:bg-[#1A1818]";
+  "inline-flex h-11 min-w-[160px] cursor-pointer items-center justify-center whitespace-nowrap rounded-md bg-black px-5 text-[14px] font-semibold text-white transition-colors duration-200 hover:bg-[#1A1818] active:bg-[#2E2B2B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] focus-visible:ring-offset-2";
 const CTA_LINK =
   "group inline-flex h-10 cursor-pointer items-center gap-1.5 whitespace-nowrap px-2 text-[14px] font-semibold text-[#2E2B2B] transition-colors duration-200 hover:text-[#0066B3]";
 
@@ -132,17 +187,18 @@ export default function AIAgentsRAGPage() {
         <div className={`${CONTAINER} pb-16 pt-32 lg:pb-24 lg:pt-36`}>
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
             <Reveal>
-              <div className="mb-6"><Eyebrow>AI Agents · LLMs · Azure &amp; AWS</Eyebrow></div>
               <h1 className="m-0 text-[40px] font-medium leading-[1.05] tracking-[-0.03em] text-[#111] sm:text-[52px] lg:text-[64px]">
-                AI that works inside your business.
+                Agents that work{" "}
+                <span className="rounded-[2px] bg-[#2563EB]/10 px-1.5 pb-[3px] text-[#171717]">inside</span>{" "}
+                your business.
               </h1>
               <p className="mt-6 max-w-[520px] text-[19px] font-normal leading-[1.6] text-[#4B5563]">
-                Agents, LLMs and voice assistants connected to your own data and tools — built to
-                automate real decisions, workflows and operations.
+                Agents, RAG and voice assistants grounded in your own data, connected to your tools
+                and governed end to end. Built on Microsoft Foundry, Microsoft IQ and Agent 365.
               </p>
               <div className="mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
                 <Link href="/schedule-call" className={CTA_DARK}>Book an AI consultation</Link>
-                <Link href="/solutions" className={CTA_LINK}>See all solutions <Arrow /></Link>
+                <Link href="#whats-new" className={CTA_LINK}>See what&apos;s new <Arrow /></Link>
               </div>
             </Reveal>
 
@@ -155,7 +211,6 @@ export default function AIAgentsRAGPage() {
           </div>
         </div>
 
-        <hr className="divider-blue m-0 h-1 w-full border-0" />
       </div>
 
       {/* ── Built on — frontier models & platforms, slow seamless marquee (pauses for reduced motion) ── */}
@@ -197,6 +252,99 @@ export default function AIAgentsRAGPage() {
         </div>
       </div>
 
+      {/* ── The Frontier Firm — three layers, fog on hover like the homepage cards ── */}
+      <section aria-labelledby="frontier-heading" className="bg-white">
+        <div className={`${CONTAINER} ${SECTION_Y}`}>
+          <Reveal className="mb-12 grid grid-cols-1 gap-6 lg:mb-16 lg:grid-cols-2 lg:items-end lg:gap-16">
+            <div>
+              <div className="mb-6"><Eyebrow>The Frontier Firm</Eyebrow></div>
+              <h2 id="frontier-heading" className={`m-0 max-w-[560px] ${H2}`}>Human-led. Agent-operated.</h2>
+            </div>
+            <p className="m-0 max-w-[520px] text-[17px] leading-[1.6] text-[#4B5563]">
+              People set the direction. Agents do the work. It takes three things.
+            </p>
+          </Reveal>
+
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-6">
+            {frontierLayers.map(({ num, layer, title, body, built, icon: Icon }, i) => (
+              <Reveal key={num} delay={i * 0.06} className="h-full">
+                <article className="group relative isolate flex h-full flex-col overflow-hidden rounded-[28px] border border-[#E6E6E6] bg-white p-7 transition-[border-color,transform] duration-300 hover:-translate-y-1 hover:border-[#BECBFF] motion-reduce:transition-none motion-reduce:hover:translate-y-0 lg:p-8">
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 motion-reduce:transition-none"
+                  >
+                    <span
+                      className="absolute left-[-30%] top-[-25%] h-[85%] w-[95%] rounded-full"
+                      style={{ background: "radial-gradient(closest-side, rgba(190,203,255,0.60) 0%, transparent 100%)", filter: "blur(36px)" }}
+                    />
+                    <span
+                      className="absolute left-[35%] top-[35%] h-[90%] w-[95%] rounded-full"
+                      style={{ background: "radial-gradient(closest-side, rgba(190,203,255,0.75) 0%, transparent 100%)", filter: "blur(36px)" }}
+                    />
+                  </span>
+
+                  <div className="mb-8 flex items-center justify-between">
+                    <span
+                      className="bg-[#BECBFF] px-3 py-1.5 text-[11px] font-semibold uppercase leading-none tracking-[0.14em] text-[#141414]"
+                      style={{ borderRadius: PILL_RADIUS }}
+                    >
+                      {layer}
+                    </span>
+                    <span className="text-[13px] font-medium text-[#9ca3af]">{num}</span>
+                  </div>
+                  <Icon className="h-7 w-7 text-[#141414]" strokeWidth={1.5} aria-hidden="true" />
+                  <h3 className="m-0 mt-5 text-[24px] font-medium leading-[1.2] tracking-[-0.01em] text-[#111827]">{title}</h3>
+                  <p className={`mt-3 ${BODY}`}>{body}</p>
+                  <p className="m-0 mt-auto pt-8 text-[12px] font-medium uppercase tracking-[0.12em] text-[#6B7280]">{built}</p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── What's new on the platform ── */}
+      <section id="whats-new" aria-labelledby="ignite-heading" className="scroll-mt-24 border-y border-[#E6E6E6] bg-[#FAFAFA]">
+        <div className={`${CONTAINER} ${SECTION_Y}`}>
+          <Reveal className="mb-12 flex flex-col gap-6 lg:mb-16 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <div className="mb-6"><Eyebrow>What&apos;s new</Eyebrow></div>
+              <h2 id="ignite-heading" className={`m-0 max-w-[680px] ${H2}`}>The latest, and what it means for you.</h2>
+            </div>
+            <p className="m-0 max-w-[400px] text-[15px] leading-[1.6] text-[#4B5563]">
+              We build on what is ready. We pilot what is next.
+            </p>
+          </Reveal>
+
+          <ul role="list" className="m-0 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+            {igniteUpdates.map(({ status, area, title, body }, i) => (
+              <li key={title} className="h-full">
+                <Reveal delay={(i % 3) * 0.06} className="h-full">
+                  <article className="flex h-full flex-col rounded-[24px] border border-[#E6E6E6] bg-white p-6 transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-[#BECBFF] motion-reduce:transition-none motion-reduce:hover:translate-y-0">
+                    <div className="mb-5 flex items-center justify-between gap-3">
+                      <span className="text-[12px] font-medium uppercase tracking-[0.12em] text-[#6B7280]">{area}</span>
+                      <span className={`rounded-md px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.1em] ${STATUS_STYLE[status]}`}>
+                        {status}
+                      </span>
+                    </div>
+                    <h3 className="m-0 text-[22px] font-medium leading-[1.2] tracking-[-0.01em] text-[#111827]">{title}</h3>
+                    <p className={`mt-2 ${BODY}`}>{body}</p>
+                  </article>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+
+          <p className="m-0 mt-8 text-[13px] leading-[1.6] text-[#6B7280]">
+            Availability as published by{" "}
+            <a href={IGNITE_SOURCE} target="_blank" rel="noopener noreferrer" className="font-medium text-[#2563EB] underline underline-offset-2 hover:text-[#1D4ED8]">
+              Microsoft
+            </a>
+            . Preview features can change before general availability.
+          </p>
+        </div>
+      </section>
+
       {/* ── Four pillars ── */}
       <section className="bg-white">
         <div className={`${CONTAINER} ${SECTION_Y}`}>
@@ -208,7 +356,7 @@ export default function AIAgentsRAGPage() {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6 xl:grid-cols-4">
             {pillars.map(({ num, title, body, icon: Icon }, i) => (
               <Reveal key={num} delay={i * 0.06} className="h-full">
-                <article className={`flex h-full flex-col ${RADIUS_MD} ${CARD_SURFACE} p-6 transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-[#2563EB]/30`}>
+                <article className={`flex h-full flex-col ${RADIUS_MD} ${CARD_SURFACE} p-6 transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-[#BECBFF]`}>
                   <div className="mb-6 flex items-center justify-between">
                     <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[rgba(37,99,235,0.07)]">
                       <Icon className="h-[22px] w-[22px] text-[#2563EB]" strokeWidth={1.7} aria-hidden="true" />
@@ -390,7 +538,7 @@ export default function AIAgentsRAGPage() {
 
       {/* ── Get in touch — same light-blue CTA as Careers / Solutions ── */}
       <GetInTouchCTASection
-        heading="Ready to put AI to work?"
+        heading="Ready to become a Frontier Firm?"
         body="Book a free consultation. We'll pinpoint your highest-value automation and outline a path to production — no obligation."
         topic="AI Agents & RAG"
       />
