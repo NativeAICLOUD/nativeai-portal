@@ -29,6 +29,83 @@ const research: { title: string; body: string; icon: LucideIcon }[] = [
   { title: "Your own files", body: "Connects the research to the facts in the matter's documents and correspondence.", icon: FolderOpen },
 ];
 
+/* The wider suite — specialised agents beyond research, grouped by the work they do.
+   One short line each; edit here to add or remove a feature. */
+const suite: { label: string; heading: string; items: { title: string; body: string }[] }[] = [
+  {
+    label: "Drafting",
+    heading: "From blank page to first draft.",
+    items: [
+      { title: "Court submissions", body: "Claims, answers, appeals and applications." },
+      { title: "Correspondence", body: "Client letters, opposing counsel, reminders." },
+      { title: "Contracts", body: "Drafted from your clause library. Reviewed with redlines." },
+      { title: "Playbook review", body: "Every clause checked against your firm's positions." },
+      { title: "Firm format", body: "Finished Word documents in your own layout." },
+      { title: "Exhibits", body: "Numbered, stamped and checked against the text." },
+    ],
+  },
+  {
+    label: "Strategy",
+    heading: "Know the case before the other side does.",
+    items: [
+      { title: "Fact-finding", body: "A sourced chronology, built from the file." },
+      { title: "Case strategy", body: "Your theory of the case, tested from three sides." },
+      { title: "Litigation risk", body: "Chances, costs and a settlement range in numbers." },
+      { title: "Deadlines", body: "Procedural and limitation periods, court holidays included." },
+      { title: "Due diligence", body: "A data room turned into a red-flag report." },
+      { title: "Document matrix", body: "The same questions asked of every contract." },
+    ],
+  },
+  {
+    label: "Practice areas",
+    heading: "An agent that knows the field.",
+    items: [
+      { title: "Employment", body: "Dismissal, pay and references." },
+      { title: "Tenancy", body: "Termination, rent and defects." },
+      { title: "Family", body: "Divorce, children and maintenance calculations." },
+      { title: "Inheritance", body: "Wills, forced shares and estates." },
+      { title: "Debt enforcement", body: "Collection, bankruptcy and attachment." },
+      { title: "And more", body: "Construction, criminal, administrative, sports and company law." },
+    ],
+  },
+  {
+    label: "The firm",
+    heading: "Everything around the mandate.",
+    items: [
+      { title: "Conflict check", body: "Before a new matter is opened." },
+      { title: "Matter files", body: "Records and deadlines from Microsoft 365." },
+      { title: "Billing", body: "Fee notes, final invoices and reminders." },
+      { title: "Legal expenses insurers", body: "Cover requests and objections." },
+      { title: "Firm knowledge", body: "Your clauses, templates and precedents, searchable." },
+      { title: "Quality gate", body: "Citations, facts and risk checked before anything goes out." },
+    ],
+  },
+];
+
+/* Grid View mock — documents down the side, questions across the top. Placeholder cells only. */
+const gridColumns = ["Parties", "Term", "Notice period", "Liability cap"];
+const gridRows = ["Supply agreement", "Lease", "Service contract", "NDA"];
+
+/* Agent mock — the steps of one task; the last one waits for the lawyer. */
+const agentSteps: { text: string; state: "done" | "waiting" }[] = [
+  { text: "Read the file", state: "done" },
+  { text: "Built the chronology", state: "done" },
+  { text: "Researched the law", state: "done" },
+  { text: "Drafted the submission", state: "done" },
+  { text: "Checked every citation", state: "done" },
+  { text: "Waiting for your approval", state: "waiting" },
+];
+
+const agentPoints: { title: string; body: string }[] = [
+  { title: "You assign.", body: "Hand it a case, like you would a colleague." },
+  { title: "It plans.", body: "One goal becomes clear steps." },
+  { title: "It works.", body: "Reads, researches, drafts and checks." },
+  { title: "It asks.", body: "Nothing goes out without a lawyer." },
+];
+
+// Same organic pill as the editorial headlines on the homepage.
+const PILL_RADIUS = "0.9em 1.05em 0.85em 1em / 1em 0.9em 1.05em 0.9em";
+
 const modules: { title: string; body: string; icon: LucideIcon }[] = [
   { title: "Case Cockpit", body: "Every matter in one place — parties, documents, emails, deadlines, time and notes.", icon: Briefcase },
   { title: "Document Intelligence", body: "OCR, classification and case matching for every upload and scan.", icon: FileSearch },
@@ -176,6 +253,174 @@ export default function LegalSaasPage() {
                 </span>
                 <h3 className="m-0 text-[17px] font-medium leading-[1.3] text-[#111]">{title}</h3>
                 <p className="mt-2 text-[15px] font-normal leading-[1.5] text-[#6b7280]">{body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── The wider suite — specialised agents ── */}
+      <section id="suite" className="scroll-mt-24 bg-white">
+        <div className={`${CONTAINER} pb-20 lg:pb-24`}>
+          <div className="mb-12">
+            <div className="mb-4"><Eyebrow>The Legal Suite</Eyebrow></div>
+            <h2 className="m-0 max-w-[620px] text-[30px] font-medium leading-[1.1] text-[#111] md:text-[40px]">
+              More than research. An agent.
+            </h2>
+            <p className="mt-4 max-w-[560px] text-[16px] font-normal leading-[1.5] text-[#6b7280]">
+              Assign it a case. It takes the work from start to finish. A lawyer approves the result.
+            </p>
+          </div>
+
+          {/* Two headline features: the Agent leads, Grid View follows */}
+          <div className="mb-4 grid grid-cols-1 gap-4 lg:mb-6 lg:grid-cols-2 lg:gap-6">
+
+            {/* Agent — the lead feature: full width, on white with the periwinkle fog */}
+            <article className="relative isolate grid grid-cols-1 gap-10 overflow-hidden rounded-[28px] border border-[#BECBFF] bg-white p-7 lg:col-span-2 lg:grid-cols-2 lg:items-center lg:gap-14 lg:p-12">
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute -left-[15%] -top-[35%] -z-10 h-[110%] w-[60%] rounded-full"
+                style={{ background: "radial-gradient(closest-side, rgba(190,203,255,0.60) 0%, transparent 100%)", filter: "blur(48px)" }}
+              />
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute -bottom-[45%] right-[-10%] -z-10 h-[110%] w-[55%] rounded-full"
+                style={{ background: "radial-gradient(closest-side, rgba(190,203,255,0.50) 0%, transparent 100%)", filter: "blur(48px)" }}
+              />
+
+              <div>
+                <span
+                  className="inline-block bg-[#BECBFF] px-3 py-1.5 text-[11px] font-semibold uppercase leading-none tracking-[0.14em] text-[#141414]"
+                  style={{ borderRadius: PILL_RADIUS }}
+                >
+                  Agent
+                </span>
+                <h3 className="m-0 mt-6 text-[32px] font-medium leading-[1.08] tracking-[-0.02em] text-[#111] sm:text-[42px] lg:text-[48px]">
+                  Assign the case. It does the work.
+                </h3>
+                <ul role="list" className="m-0 mt-8 list-none border-b border-[#e6e6e6] p-0">
+                  {agentPoints.map(({ title, body }) => (
+                    <li key={title} className="grid grid-cols-[110px_minmax(0,1fr)] items-baseline gap-4 border-t border-[#e6e6e6] py-4">
+                      <span className="text-[17px] font-medium text-[#111]">{title}</span>
+                      <span className="text-[15px] leading-[1.5] text-[#6b7280]">{body}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div aria-hidden="true" className="flex flex-col gap-2 rounded-2xl border border-[#e6e6e6] bg-white p-5 shadow-[0_24px_60px_-20px_rgba(15,23,42,0.18)]">
+                {/* the case, assigned to the agent */}
+                <div className="flex items-center justify-between gap-3 border-b border-[#EEF1F2] pb-3">
+                  <div className="min-w-0">
+                    <p className="m-0 text-[10px] font-semibold uppercase tracking-[0.1em] text-[#9ca3af]">Case</p>
+                    <p className="m-0 truncate text-[14px] font-medium text-[#111]">Dismissal dispute</p>
+                  </div>
+                  <span className="flex shrink-0 items-center gap-1.5 rounded-md bg-[#EEF1FF] px-2.5 py-1.5 text-[11px] font-semibold text-[#141414]">
+                    Assigned to Agent
+                  </span>
+                </div>
+                <div className="mb-1 mt-1 rounded-xl bg-[#F4F5F7] px-4 py-3.5 text-[14px] font-medium text-[#111]">
+                  Prepare the answer to the claim.
+                </div>
+                {agentSteps.map(({ text, state }) => (
+                  <div key={text} className="flex items-center gap-3 px-1 py-1.5">
+                    {state === "done" ? (
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#141414]">
+                        <Check className="h-3 w-3 text-white" strokeWidth={3} />
+                      </span>
+                    ) : (
+                      <span className="h-5 w-5 shrink-0 rounded-full border-2 border-[#BECBFF] bg-[#EEF1FF]" />
+                    )}
+                    <span className={`text-[14px] ${state === "done" ? "text-[#4B5563]" : "font-medium text-[#111]"}`}>{text}</span>
+                    {state === "waiting" && (
+                      <span className="ml-auto rounded-md bg-black px-3 py-1.5 text-[12px] font-semibold text-white">Approve</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </article>
+
+            {/* Grid View */}
+            <article className="grid grid-cols-1 gap-8 rounded-[28px] border border-[#e6e6e6] bg-[#FAFAF8] p-7 lg:col-span-2 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-center lg:gap-14 lg:p-10">
+              <div>
+              <span
+                className="w-fit bg-[#BECBFF] px-3 py-1.5 text-[11px] font-semibold uppercase leading-none tracking-[0.14em] text-[#141414]"
+                style={{ borderRadius: PILL_RADIUS }}
+              >
+                Grid View
+              </span>
+              <h3 className="m-0 mt-6 text-[24px] font-medium leading-[1.15] tracking-[-0.01em] text-[#111] sm:text-[28px]">
+                Many documents. One table.
+              </h3>
+              <p className="m-0 mt-3 max-w-[420px] text-[16px] leading-[1.5] text-[#6b7280]">
+                Ask every document the same questions. Every cell shows its source.
+              </p>
+              </div>
+
+              <div aria-hidden="true" className="overflow-hidden rounded-2xl border border-[#e6e6e6] bg-white">
+                <div className="grid grid-cols-[1.3fr_repeat(4,1fr)] border-b border-[#e6e6e6] bg-[#FAFAFA]">
+                  <span className="px-3 py-2.5 text-[10px] font-semibold uppercase tracking-[0.1em] text-[#9ca3af]">Document</span>
+                  {gridColumns.map((c) => (
+                    <span key={c} className="truncate border-l border-[#e6e6e6] px-3 py-2.5 text-[10px] font-semibold uppercase tracking-[0.1em] text-[#9ca3af]">
+                      {c}
+                    </span>
+                  ))}
+                </div>
+                {gridRows.map((row, ri) => (
+                  <div key={row} className={`grid grid-cols-[1.3fr_repeat(4,1fr)] ${ri !== 0 ? "border-t border-[#EEF1F2]" : ""}`}>
+                    <span className="truncate px-3 py-3 text-[12px] font-medium text-[#111]">{row}</span>
+                    {gridColumns.map((c, ci) => (
+                      <span key={c} className="flex items-center border-l border-[#EEF1F2] px-3 py-3">
+                        <span
+                          className={`h-2 rounded-full ${(ri + ci) % 4 === 3 ? "bg-[#BECBFF]" : "bg-[#111]/12"}`}
+                          style={{ width: `${45 + ((ri * 3 + ci * 5) % 4) * 14}%` }}
+                        />
+                      </span>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </article>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-6">
+            {suite.map(({ label, heading, items }) => (
+              <article
+                key={label}
+                className="group relative isolate flex h-full flex-col overflow-hidden rounded-[28px] border border-[#e6e6e6] bg-white p-7 transition-[border-color] duration-300 hover:border-[#BECBFF] motion-reduce:transition-none lg:p-10"
+              >
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 motion-reduce:transition-none"
+                >
+                  <span
+                    className="absolute left-[-30%] top-[-25%] h-[85%] w-[95%] rounded-full"
+                    style={{ background: "radial-gradient(closest-side, rgba(190,203,255,0.45) 0%, transparent 100%)", filter: "blur(40px)" }}
+                  />
+                  <span
+                    className="absolute left-[35%] top-[35%] h-[90%] w-[95%] rounded-full"
+                    style={{ background: "radial-gradient(closest-side, rgba(190,203,255,0.55) 0%, transparent 100%)", filter: "blur(40px)" }}
+                  />
+                </span>
+
+                <span
+                  className="w-fit bg-[#BECBFF] px-3 py-1.5 text-[11px] font-semibold uppercase leading-none tracking-[0.14em] text-[#141414]"
+                  style={{ borderRadius: PILL_RADIUS }}
+                >
+                  {label}
+                </span>
+                <h3 className="m-0 mt-6 max-w-[420px] text-[24px] font-medium leading-[1.15] tracking-[-0.01em] text-[#111] sm:text-[28px]">
+                  {heading}
+                </h3>
+
+                <ul role="list" className="m-0 mt-8 grid list-none grid-cols-1 gap-x-8 border-b border-[#e6e6e6] p-0 sm:grid-cols-2">
+                  {items.map(({ title, body }) => (
+                    <li key={title} className="border-t border-[#e6e6e6] py-4">
+                      <p className="m-0 text-[16px] font-medium leading-[1.3] text-[#111]">{title}</p>
+                      <p className="m-0 mt-1 text-[14px] leading-[1.5] text-[#6b7280]">{body}</p>
+                    </li>
+                  ))}
+                </ul>
               </article>
             ))}
           </div>

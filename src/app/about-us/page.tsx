@@ -180,13 +180,13 @@ export default function AboutUsPage() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   href={Constants.PAGES.GET_IN_TOUCH}
-                  className="inline-flex h-10 cursor-pointer items-center justify-center whitespace-nowrap rounded-full px-5 text-[14px] font-semibold transition-colors duration-200 bg-[#E1F0FF] text-[#0066B3] hover:bg-[#CCE4FF] active:bg-[#B8D9FF]"
+                  className="inline-flex h-10 cursor-pointer items-center justify-center whitespace-nowrap rounded-full px-5 text-[14px] font-semibold transition-colors duration-200 bg-black text-white hover:bg-[#1A1818] active:bg-[#2E2B2B]"
                 >
                   Let&apos;s talk
                 </Link>
                 <Link
                   href={Constants.PAGES.SOLUTIONS}
-                  className="inline-flex h-10 cursor-pointer items-center justify-center whitespace-nowrap rounded-full px-5 text-[14px] font-semibold transition-colors duration-200 bg-[#4A4747] text-white hover:bg-[#3B3838] active:bg-[#2E2B2B]"
+                  className="inline-flex h-10 cursor-pointer items-center justify-center whitespace-nowrap rounded-full px-5 text-[14px] font-semibold transition-colors duration-200 bg-[#ECEEF2] text-[#141414] hover:bg-[#DFE2E9] active:bg-[#D2D6DF]"
                 >
                   See all solutions
                 </Link>

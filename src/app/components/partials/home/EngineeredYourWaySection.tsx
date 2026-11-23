@@ -80,6 +80,43 @@ const onFogMove = (e: ReactPointerEvent<HTMLDivElement>) => {
   el.style.setProperty('--my', `${e.clientY - r.top}px`);
 };
 
+/*
+ * Touch "press for more fog": every tap adds colour, and holding a finger down keeps
+ * adding it until the fog is at full strength. It fades back slowly after release.
+ * The level (0–1) lives in a CSS variable on the card (--fog-boost), so nothing re-renders.
+ */
+const fogBoost = new WeakMap<HTMLElement, { level: number; hold?: number; decay?: number }>();
+
+const onFogPress = (e: ReactPointerEvent<HTMLDivElement>) => {
+  if (e.pointerType === 'mouse') return;
+  onFogMove(e); // the extra colour blooms from under the finger
+  const el = e.currentTarget;
+  const st = fogBoost.get(el) ?? { level: 0 };
+  fogBoost.set(el, st);
+  window.clearInterval(st.hold);
+  window.clearInterval(st.decay);
+  const set = (v: number) => {
+    st.level = Math.max(0, Math.min(1, v));
+    el.style.setProperty('--fog-boost', st.level.toFixed(2));
+  };
+  set(st.level + 0.25); // one tap = one step
+  st.hold = window.setInterval(() => set(st.level + 0.06), 100); // holding keeps building
+};
+
+const onFogRelease = (e: ReactPointerEvent<HTMLDivElement>) => {
+  if (e.pointerType === 'mouse') return;
+  const el = e.currentTarget;
+  const st = fogBoost.get(el);
+  if (!st) return;
+  window.clearInterval(st.hold);
+  window.clearInterval(st.decay);
+  st.decay = window.setInterval(() => {
+    st.level = Math.max(0, st.level - 0.015);
+    el.style.setProperty('--fog-boost', st.level.toFixed(2));
+    if (st.level === 0) window.clearInterval(st.decay);
+  }, 180);
+};
+
 // Hover-to-open only when the cards sit in one row with a real mouse. In the stacked layout an
 // opening card pushes the next card under the cursor, which would open/close in a loop.
 const hoverOpens = () => window.matchMedia('(min-width: 1024px) and (hover: hover)').matches;
@@ -151,6 +188,9 @@ export default function EngineeredYourWaySection() {
                 onPointerEnter={(e) => e.pointerType === 'mouse' && hoverOpens() && setOpenIndex(i)}
                 onPointerLeave={(e) => e.pointerType === 'mouse' && hoverOpens() && setOpenIndex(null)}
                 onPointerMove={onFogMove}
+                onPointerDown={onFogPress}
+                onPointerUp={onFogRelease}
+                onPointerCancel={onFogRelease}
               >
                 {/* Fog — periwinkle banks (the hero fog colour) drifting
                     behind the content, plus a glow that follows the cursor. Fades in on hover/open. */}
@@ -187,6 +227,20 @@ export default function EngineeredYourWaySection() {
                         'radial-gradient(300px circle at var(--mx, 50%) var(--my, 0%), rgba(190,203,255,0.55), transparent 70%)',
                     }}
                   />
+                  {/* Press boost (touch): deeper periwinkle-to-blue colour that builds with each tap
+                      or while a finger is held down. Strength comes from --fog-boost (see onFogPress). */}
+                  <div
+                    className="absolute inset-0 transition-opacity duration-200 ease-out motion-reduce:transition-none"
+                    style={{
+                      opacity: 'var(--fog-boost, 0)',
+                      backgroundImage: [
+                        'radial-gradient(420px circle at var(--mx, 50%) var(--my, 30%), rgba(79,104,255,0.95), transparent 72%)',
+                        'radial-gradient(120% 90% at 85% 100%, rgba(37,99,235,0.65), transparent 70%)',
+                        'radial-gradient(110% 80% at 0% 0%, rgba(140,120,255,0.75), transparent 70%)',
+                      ].join(', '),
+                      filter: 'blur(18px)',
+                    }}
+                  />
                 </div>
 
                 <h3 className="m-0">
@@ -199,9 +253,13 @@ export default function EngineeredYourWaySection() {
                     aria-expanded={isOpen}
                     aria-controls={panelId}
                     // A mouse click on a card that hover already opened keeps it open instead of toggling it shut.
+                    // A finger tap on an open card also keeps it open: repeated taps build the fog colour
+                    // (see onFogPress) instead of closing it. Tapping another card switches to that one.
                     onClick={(e) => {
-                      const hoverOpened = (e.nativeEvent as PointerEvent).pointerType === 'mouse' && hoverOpens();
-                      setOpenIndex(hoverOpened ? i : isOpen ? null : i);
+                      const type = (e.nativeEvent as PointerEvent).pointerType;
+                      const hoverOpened = type === 'mouse' && hoverOpens();
+                      const fingerOnOpen = (type === 'touch' || type === 'pen') && isOpen;
+                      setOpenIndex(hoverOpened || fingerOnOpen ? i : isOpen ? null : i);
                     }}
                     onKeyDown={(e) => onTriggerKeyDown(e, i)}
                     className="flex w-full cursor-pointer items-center gap-4 rounded-[inherit] px-5 py-8 text-left outline-none focus-visible:ring-2 focus-visible:ring-[#202124] focus-visible:ring-offset-2 focus-visible:ring-offset-white sm:gap-5 sm:px-6"
