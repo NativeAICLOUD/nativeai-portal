@@ -97,14 +97,7 @@ export default function LegalCTASection() {
               {/* Heading + checklist */}
               <div className="w-full max-w-[640px] text-center">
                 <h2
-                  className="m-0 text-[32px] font-bold leading-[1.08] sm:text-[42px] lg:text-[52px]"
-                  style={{
-                    background: 'linear-gradient(90deg, #1e4fd6 0%, #60a5fa 55%, #dbeafe 100%)',
-                    WebkitBackgroundClip: 'text',
-                    backgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    color: 'transparent',
-                  }}
+                  className="m-0 text-[32px] font-bold leading-[1.08] text-white sm:text-[42px] lg:text-[52px]"
                 >
                   Ready to give your lawyers their time back?
                 </h2>
@@ -112,20 +105,20 @@ export default function LegalCTASection() {
                 <div className="mt-10 grid grid-cols-1 gap-6 text-left sm:grid-cols-2">
                   {checklist.map(({ title, body }) => (
                     <div key={title} className="flex items-start gap-3.5">
-                      <span className="mt-0.5 flex h-[27px] w-[27px] shrink-0 items-center justify-center rounded-full" style={{ background: '#60a5fa' }}>
+                      <span className="mt-0.5 flex h-[27px] w-[27px] shrink-0 items-center justify-center rounded-full" style={{ background: '#BECBFF' }}>
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0a0e1a" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round">
                           <polyline points="20 6 9 17 4 12" />
                         </svg>
                       </span>
                       <div>
                         <p className="m-0 text-[16px] font-semibold leading-snug text-white">{title}</p>
-                        <p className="m-0 mt-0.5 text-[14px] leading-snug text-white/60">{body}</p>
+                        <p className="m-0 mt-0.5 text-[14px] leading-snug text-white/75">{body}</p>
                       </div>
                     </div>
                   ))}
                 </div>
 
-                <p className="mt-6 text-[15px] font-medium text-white/50">
+                <p className="mt-6 text-[15px] font-medium text-[#BECBFF]">
                   One conversation can be the first step.
                 </p>
               </div>
@@ -133,7 +126,7 @@ export default function LegalCTASection() {
               {/* Form */}
               <div className="-mt-4 w-full max-w-[480px]">
                 {status === 'submitted' ? (
-                  <p className="text-center text-[15px] text-[#60a5fa]">Thanks — we&apos;ll be in touch shortly.</p>
+                  <p className="text-center text-[15px] text-[#BECBFF]">Thanks — we&apos;ll be in touch shortly.</p>
                 ) : (
                   <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <div>
